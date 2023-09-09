@@ -47,22 +47,23 @@ namespace NEALibrarySystem.SearchList
             {
                 string genres = "";
                 string themes = "";
-                foreach (string genre in book.Genres)
+
+                foreach (string genre in book.GetGenres())
                     genres += genres + ", ";
                 if (genres.Length == 2)
                     genres.Remove(genres.Length - 3, 2);
-                foreach (string theme in book.Themes)
-                    themes += theme;
+                foreach (string theme in book.GetThemes())
+                    themes += theme + ", ";
                 if (themes.Length == 2)
                     themes.Remove(themes.Length - 3, 2);
 
                 string[] data = new string[9]
                 {
-                    book.Title,
+                    book.GetTitle(),
                     book.ISBN,
-                    book.MediaType,
-                    book.Author,
-                    book.Publisher,
+                    book.GetMediaType(),
+                    book.GetAuthor(),
+                    book.GetPublisher(),
                     genres,
                     themes,
                     book.Price.ToString(),

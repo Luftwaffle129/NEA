@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,34 +12,34 @@ namespace NEALibrarySystem
 {
     public class Book
     {
+        public string SeriesTitle { get; set; }
+        public int SeriesNumber { get; set; }
+        public string ISBN { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        // single key
         #region Title
         private int titleID;
-        public int TitleID 
+        public int TitleID
         {
-            get 
+            get
             {
                 return titleID;
-            } 
+            }
             set
             {
                 titleID = value;
             }
         }
-        public string Title
+        public string GetTitle()
         {
-            get
-            {
-                return GetNameFromID(DataLibrary.titles, titleID, "title");
-            }
-            set
-            {
-                titleID = SetIDFromName(ref DataLibrary.titles, value);
-            }
+            return GetNameFromID(DataLibrary.titles, TitleID);
+        }
+        public void SetTitle(string title)
+        {
+            publisherID = SetIDFromName(ref DataLibrary.titles, title);
         }
         #endregion
-        public string SeriesTitle { get; set; }
-        public int SeriesNumber { get; set; }
-        public string ISBN { get; set; }
         #region MediaType
         private int mediaTypeID { get; set; }
         public int MediaTypeID
@@ -52,16 +53,13 @@ namespace NEALibrarySystem
                 mediaTypeID = value;
             }
         }
-        public string MediaType
+        public string GetMediaType()
         {
-            get
-            {
-                return GetNameFromID(DataLibrary.mediaTypes, mediaTypeID, "media type");
-            }
-            set
-            {
-                mediaTypeID = SetIDFromName(ref DataLibrary.mediaTypes, value);
-            }
+            return GetNameFromID(DataLibrary.mediaTypes, MediaTypeID);
+        }
+        public void SetMediaType(string mediaType)
+        {
+            publisherID = SetIDFromName(ref DataLibrary.mediaTypes, mediaType);
         }
         #endregion
         #region Author
@@ -77,16 +75,13 @@ namespace NEALibrarySystem
                 authorID = value;
             }
         }
-        public string Author
+        public string GetAuthor()
         {
-            get
-            {
-                return GetNameFromID(DataLibrary.authors, authorID, "Author");
-            }
-            set
-            {
-                publisherID = SetIDFromName(ref DataLibrary.authors, value);
-            }
+            return GetNameFromID(DataLibrary.authors, AuthorID);
+        }
+        public void SetAuthor(string author)
+        {
+            publisherID = SetIDFromName(ref DataLibrary.authors, author);
         }
         #endregion
         #region Publisher
@@ -102,24 +97,20 @@ namespace NEALibrarySystem
                 publisherID = value;
             }
         }
-        public string Publisher
+        public string GetPublisher()
         {
-            get
-            {
-                return GetNameFromID(DataLibrary.publishers, publisherID, "publisher");
-            }
-            set
-            {
-                publisherID = SetIDFromName(ref DataLibrary.publishers, value);
-            }
+            return GetNameFromID(DataLibrary.publishers, publisherID);
+        }
+        public void SetPublisher(string publisher)
+        {
+            publisherID = SetIDFromName(ref DataLibrary.publishers, publisher);
         }
         #endregion
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        // list of keys
         #region Genres
         private List<int> genresID = new List<int>();
-        public List<int> GenresID 
-        { 
+        public List<int> GenresID
+        {
             get
             {
                 return genresID;
@@ -129,28 +120,13 @@ namespace NEALibrarySystem
                 genresID = value;
             }
         }
-        public List<string> Genres
+        public List<string> GetGenres()
         {
-            get 
-            {
-                List<string> output = new List<string>();
-                foreach (int ID in genresID)
-                {
-                    string temp = GetNameFromID(DataLibrary.genres, ID, "genre");
-                    if (temp != "")
-                        output.Add(temp);
-                }
-                return output;
-            }
-            set
-            {
-                List<int> output = new List<int>();
-
-                foreach (string genre in value)
-                {
-                    SetIDFromName(ref DataLibrary.genres, genre);
-                }
-            }
+            return GetItemIDList(GenresID, DataLibrary.genres);
+        }
+        public void SetGenres(List<string> input)
+        {
+            GenresID = SetItemIDList(input, ref DataLibrary.genres);
         }
         #endregion
         #region Themes
@@ -166,57 +142,54 @@ namespace NEALibrarySystem
                 themesID = value;
             }
         }
-        public List<string> Themes
+        public List<string> GetThemes()
         {
-            get
-            {
-                List<string> output = new List<string>();
-                foreach (int ID in themesID)
-                {
-                    string temp = GetNameFromID(DataLibrary.themes, ID, "theme");
-                    if (temp != "")
-                        output.Add(temp);
-                }
-                return output;
-            }
-            set
-            {
-                List<int> output = new List<int>();
-
-                foreach (string theme in value)
-                {
-                    SetIDFromName(ref DataLibrary.themes, theme);
-                }
-            }
+            return GetItemIDList(ThemesID, DataLibrary.themes);
+        }
+        public void SetThemes(List<string> input)
+        {
+            ThemesID = SetItemIDList(input, ref DataLibrary.themes);
         }
         #endregion
-        /// <summary>
-        /// Outputs a messagebox declaring the missing data item and it's ID
-        /// </summary>
-        /// <param name="item">missing data item</param>
-        /// <param name="ID">ID of the missing data item</param>
-        private void MissingItemID(string item, int ID)
+
+        private List<string> GetItemIDList(List<int> IDList, List<ItemID> ItemIDList)
         {
-            item = item[0].ToString().ToUpper() + item.Substring(1);
-            MessageBox.Show($"{item} not found. ID: {ID}");
+            List<string> output = new List<string>();
+            foreach (int ID in IDList)
+            {
+                string temp = GetNameFromID(ItemIDList, ID);
+                if (temp != "")
+                    output.Add(temp);
+            }
+            return output;
         }
+        private List<int> SetItemIDList(List<string> itemList, ref List<ItemID> ItemIDList)
+        {
+            List<int> output = new List<int>();
+
+            foreach (string item in itemList)
+            {
+                output.Add(SetIDFromName(ref ItemIDList, item));
+            }
+            return output;
+        }
+
         /// <summary>
-        /// Returns the string linked to the ID inputted
+        /// Retrieves the name of the item with the inputted ID
         /// </summary>
         /// <param name="list">The list containing the items</param>
         /// <param name="ID">The ID to search for in list</param>
         /// <param name="name">the name of the datatype. Used for error messages</param>
-        /// <returns></returns>
-        private string GetNameFromID(List<ItemID> list, int ID, string name = "item")
+        /// <returns>Returns the string linked to the ID inputted</returns>
+        private string GetNameFromID(List<ItemID> list, int ID)
         {
             foreach (ItemID item in list)
             {
-                if (item.ID ==ID)
+                if (item.ID == ID)
                 {
                     return item.Name;
                 }
             }
-            MissingItemID(name, ID);
             return "";
         }
         /// <summary>
