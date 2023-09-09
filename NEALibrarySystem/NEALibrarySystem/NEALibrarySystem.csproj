@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CBC54C97-5D69-4468-85B9-ABEF0A7563E6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NEALibrarySystem</RootNamespace>
+    <AssemblyName>NEALibrarySystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data Structures\Book.cs" />
+    <Compile Include="Data Structures\Book2.cs" />
+    <Compile Include="Data Structures\BookCopy.cs" />
+    <Compile Include="Data Structures\ItemID.cs" />
+    <Compile Include="Data Structures\Member.cs" />
+    <Compile Include="Data Structures\DataLibrary.cs" />
+    <Compile Include="Data Structures\Settings.cs" />
+    <Compile Include="Data Structures\Staff.cs" />
+    <Compile Include="frmAddBookCopies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddBookCopies.Designer.cs">
+      <DependentUpon>frmAddBookCopies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomTransaction.Designer.cs">
+      <DependentUpon>frmCustomTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectDate.Designer.cs">
+      <DependentUpon>frmSelectDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmation.Designer.cs">
+      <DependentUpon>frmConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDesigner.Designer.cs">
+      <DependentUpon>frmDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmForgottenPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmForgottenPassword.Designer.cs">
+      <DependentUpon>frmForgottenPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainSystem.Designer.cs">
+      <DependentUpon>frmMainSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogIn.Designer.cs">
+      <DependentUpon>frmLogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLibrarySystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLibrarySystem.Designer.cs">
+      <DependentUpon>frmLibrarySystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResetPassword.Designer.cs">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchList\columnDetails.cs" />
+    <Compile Include="SearchList\SearchedItemsLoader.cs" />
+    <EmbeddedResource Include="frmAddBookCopies.resx">
+      <DependentUpon>frmAddBookCopies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomTransaction.resx">
+      <DependentUpon>frmCustomTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectDate.resx">
+      <DependentUpon>frmSelectDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmation.resx">
+      <DependentUpon>frmConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDesigner.resx">
+      <DependentUpon>frmDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmForgottenPassword.resx">
+      <DependentUpon>frmForgottenPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainSystem.resx">
+      <DependentUpon>frmMainSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogIn.resx">
+      <DependentUpon>frmLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResetPassword.resx">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLibrarySystem.resx">
+      <DependentUpon>frmLibrarySystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\61-612417_open-book-icon-symbol-vector-silhouette-of-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\983470-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\30-300784_welcome-to-the-team-users-icon-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\30-300784_welcome-to-the-team-users-icon-png1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\61-612417_open-book-icon-symbol-vector-silhouette-of-open1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_377192.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\15640410c0522cc793c6a4b671fde516.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ToDoList.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

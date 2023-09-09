@@ -1,0 +1,20 @@
++ reservation book form
++ book copy form
++ field filter search
++ show barcode
++ select by barcode
++ present price of books in sales
++ custom transactions
++ overdue fines
++ book sale form
++ time statistics, difference intervals, total / change
++ dateTimePicker
++ Hide/show password staff form
++ panels (pain)
++ delete records
+
++ update book, stat 13, add book copy
++ create book copy form
++ task 12 confirmation form
+- list view fields
++ timesvariable -> chk

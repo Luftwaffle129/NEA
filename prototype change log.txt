@@ -1,0 +1,24 @@
+26.8.23
+Created book, member and bookcopy data structures
+27.8.23
+amended book and member data structures
+Created CheckForMissingFiles()
+created LoadRecordsFromFiles()
+4.9.23
+Move Data structures to class
+Talked to Jacob
+5.9.23
+Changed data structures
+lsvSearch initialising
+6.9.23
+Added string and int properties to DataLibraries
+7.9.23
+cleaning properties into methods
+https://stackoverflow.com/questions/9951704/add-item-to-listview-control
+lsv search
+https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.listviewitem?view=windowsdesktop-7.0
+
+
+IMMEDIATE TO DO
+-writing to files
+-lsv search
