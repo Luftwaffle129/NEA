@@ -16,7 +16,7 @@ namespace NEALibrarySystem
         public int SeriesNumber { get; set; }
         public string ISBN { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         // single key
         #region Title
         private int titleID;
@@ -31,13 +31,22 @@ namespace NEALibrarySystem
                 titleID = value;
             }
         }
+        
+        /// <summary>
+        /// Gets string title from title data structure
+        /// </summary>
+        /// <returns>Returns string title</returns>
         public string GetTitle()
         {
-            return GetNameFromID(DataLibrary.titles, TitleID);
+            return GetNameFromID(DataLibrary.Titles, TitleID);
         }
+        /// <summary>
+        /// Sets ID from the inputted string title
+        /// </summary>
+        /// <param name="title">name of the title</param>
         public void SetTitle(string title)
         {
-            publisherID = SetIDFromName(ref DataLibrary.titles, title);
+            publisherID = SetIDFromName(ref DataLibrary.Titles, title);
         }
         #endregion
         #region MediaType
@@ -53,13 +62,21 @@ namespace NEALibrarySystem
                 mediaTypeID = value;
             }
         }
+        /// <summary>
+        /// Gets string media type from media type data structure
+        /// </summary>
+        /// <returns>Returns string media type</returns>
         public string GetMediaType()
         {
-            return GetNameFromID(DataLibrary.mediaTypes, MediaTypeID);
+            return GetNameFromID(DataLibrary.MediaTypes, MediaTypeID);
         }
+        /// <summary>
+        /// Sets ID from the inputted string media type
+        /// </summary>
+        /// <param name="mediaType">name of media type</param>
         public void SetMediaType(string mediaType)
         {
-            publisherID = SetIDFromName(ref DataLibrary.mediaTypes, mediaType);
+            publisherID = SetIDFromName(ref DataLibrary.MediaTypes, mediaType);
         }
         #endregion
         #region Author
@@ -75,13 +92,21 @@ namespace NEALibrarySystem
                 authorID = value;
             }
         }
+        /// <summary>
+        /// Gets string author name from author data structure
+        /// </summary>
+        /// <returns>Returns string of author name</returns>
         public string GetAuthor()
         {
-            return GetNameFromID(DataLibrary.authors, AuthorID);
+            return GetNameFromID(DataLibrary.Authors, AuthorID);
         }
+        /// <summary>
+        /// Sets the ID for the inputted author name
+        /// </summary>
+        /// <param name="author">string of author name</param>
         public void SetAuthor(string author)
         {
-            publisherID = SetIDFromName(ref DataLibrary.authors, author);
+            publisherID = SetIDFromName(ref DataLibrary.Authors, author);
         }
         #endregion
         #region Publisher
@@ -97,13 +122,21 @@ namespace NEALibrarySystem
                 publisherID = value;
             }
         }
+        /// <summary>
+        /// Gets string of publisher name from publisher data structure
+        /// </summary>
+        /// <returns>Returns string publisher name</returns>
         public string GetPublisher()
         {
-            return GetNameFromID(DataLibrary.publishers, publisherID);
+            return GetNameFromID(DataLibrary.Publishers, publisherID);
         }
+        /// <summary>
+        /// Sets Id of the inputted publisher name
+        /// </summary>
+        /// <param name="publisher">name of the publisher</param>
         public void SetPublisher(string publisher)
         {
-            publisherID = SetIDFromName(ref DataLibrary.publishers, publisher);
+            publisherID = SetIDFromName(ref DataLibrary.Publishers, publisher);
         }
         #endregion
         // list of keys
@@ -120,13 +153,21 @@ namespace NEALibrarySystem
                 genresID = value;
             }
         }
+        /// <summary>
+        /// Gets the list of genre names from the IDs
+        /// </summary>
+        /// <returns>List of genre names</returns>
         public List<string> GetGenres()
         {
-            return GetItemIDList(GenresID, DataLibrary.genres);
+            return GetItemIDList(GenresID, DataLibrary.Genres);
         }
+        /// <summary>
+        /// Sets a the List of IDs from the inputted list of genre names
+        /// </summary>
+        /// <param name="input">List of genre names</param>
         public void SetGenres(List<string> input)
         {
-            GenresID = SetItemIDList(input, ref DataLibrary.genres);
+            GenresID = SetItemIDList(input, ref DataLibrary.Genres);
         }
         #endregion
         #region Themes
@@ -142,16 +183,29 @@ namespace NEALibrarySystem
                 themesID = value;
             }
         }
+        /// <summary>
+        /// Gets the list of theme names from the IDs
+        /// </summary>
+        /// <returns>List of theme names</returns>
         public List<string> GetThemes()
         {
-            return GetItemIDList(ThemesID, DataLibrary.themes);
+            return GetItemIDList(ThemesID, DataLibrary.Themes);
         }
+        /// <summary>
+        /// Sets a the List of IDs from the inputted list of theme names
+        /// </summary>
+        /// <param name="input">List of theme names</param>
         public void SetThemes(List<string> input)
         {
-            ThemesID = SetItemIDList(input, ref DataLibrary.themes);
+            ThemesID = SetItemIDList(input, ref DataLibrary.Themes);
         }
         #endregion
-
+        /// <summary>
+        /// Outputs a list of strings from a ItemID list using the inputted IDs
+        /// </summary>
+        /// <param name="IDList">List of IDs</param>
+        /// <param name="ItemIDList">List of ItemIDs</param>
+        /// <returns>List of item names</returns>
         private List<string> GetItemIDList(List<int> IDList, List<ItemID> ItemIDList)
         {
             List<string> output = new List<string>();
@@ -163,6 +217,12 @@ namespace NEALibrarySystem
             }
             return output;
         }
+        /// <summary>
+        /// Outputs a list of IDs from a ItemID list using the inputted strings
+        /// </summary>
+        /// <param name="itemList">list of names to set the IDs of</param>
+        /// <param name="ItemIDList">List of ItemIDs</param>
+        /// <returns>List of item IDs</returns>
         private List<int> SetItemIDList(List<string> itemList, ref List<ItemID> ItemIDList)
         {
             List<int> output = new List<int>();
@@ -238,5 +298,25 @@ namespace NEALibrarySystem
             list.Add(temp);
             return ID;
         }
+        #region Constructors
+        public Book() { }
+        /// <summary>
+        /// Constructor for getting records from the binary files
+        /// </summary>
+        /// <param name="bookSaver">record to load</param>
+        public Book(BookSaver bookSaver)
+        {
+            titleID = bookSaver.TitleID;
+            SeriesNumber = bookSaver.SeriesNumber;
+            SeriesTitle = bookSaver.SeriesTitle;
+            Description = bookSaver.Description;
+            Price = bookSaver.Price;
+            MediaTypeID = bookSaver.MediaTypeID;
+            AuthorID = bookSaver.authorID;
+            publisherID = bookSaver.publisherID;
+            GenresID = bookSaver.genresID.ToList();
+            themesID = bookSaver.themesID.ToList();
+        }
+        #endregion
     }
 }

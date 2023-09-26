@@ -31,8 +31,7 @@ namespace NEALibrarySystem
         {
             bool leftPanelVisible = true; 
             bool topPanelVisible = true;
-
-            DataLibrary.LoadDataFromFiles();
+            DataLibrary.LoadAllFiles();
 
             //overdue books
         }
@@ -43,8 +42,22 @@ namespace NEALibrarySystem
 
         private void btnMembers_Click(object sender, EventArgs e)
         {
-
+            Book temp = new Book();
+            temp.TitleID = 0;
+            temp.SeriesTitle = "Test";
+            temp.SeriesNumber = 1;
+            temp.ISBN = "0123456789012";
+            temp.Description = "Test";
+            temp.Price = 12.99;
+            temp.GenresID = new List<int> { 0 };
+            temp.ThemesID = new List<int> { 0 };
+            temp.AuthorID = 0;
+            temp.PublisherID = 0;
+            temp.MediaTypeID = 0;
+            DataLibrary.Books.Add(temp);
+            DataLibrary.SaveBookFiles();
         }
+       
 
         private void btnTransactions_Click(object sender, EventArgs e)
         {
@@ -160,7 +173,6 @@ namespace NEALibrarySystem
         {
 
         }
-
         #region Navigation
 
         private Panel[] Panels;
@@ -234,6 +246,4 @@ namespace NEALibrarySystem
         }
         #endregion
     }
-
-
 }

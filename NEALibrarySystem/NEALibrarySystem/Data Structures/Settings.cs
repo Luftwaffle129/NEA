@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures
 {
-    public class Settings
+    public static class Settings
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string GmailKey { get; set; }
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+        public static string GmailKey { get; set; }
 
     }
 }

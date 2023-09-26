@@ -2672,9 +2672,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlCheckOut);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlCheckIn);

@@ -48,8 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data Structures\Book.cs" />
-    <Compile Include="Data Structures\Book2.cs" />
     <Compile Include="Data Structures\BookCopy.cs" />
+    <Compile Include="Data Structures\BookCopySaver.cs" />
+    <Compile Include="Data Structures\BookSaver.cs" />
+    <Compile Include="Data Structures\BookSaverCollection.cs" />
+    <Compile Include="Data Structures\FileHandler.cs" />
     <Compile Include="Data Structures\ItemID.cs" />
     <Compile Include="Data Structures\Member.cs" />
     <Compile Include="Data Structures\DataLibrary.cs" />

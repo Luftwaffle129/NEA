@@ -8,24 +8,102 @@ using System.IO;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Stores the records and methods to access their data
+    /// </summary>
     public static class DataLibrary
     {
-        public static List<Book> books = new List<Book>();
-        public static List<BookCopy> bookCopies = new List<BookCopy>();
-        public static List<Member> members = new List<Member>();
-        public static List<ItemID> titles = new List<ItemID>();
-        public static List<ItemID> mediaTypes = new List<ItemID>();
-        public static List<ItemID> authors = new List<ItemID>();
-        public static List<ItemID> publishers = new List<ItemID>();
-        public static List<ItemID> genres = new List<ItemID>();
-        public static List<ItemID> themes = new List<ItemID>();
-        public static List<Staff> staff = new List<Staff>();
+        #region data structures
+        private static List<Book> books = new List<Book>();
+        public static List<Book> Books
+        {
+            get { return books; }
+            set { books = value ?? new List<Book>(); }
+        }
+        // stackoverflow.com/questions/55135892/static-list-showing-as-null
+        private static List<BookCopy> bookCopies = new List<BookCopy>();
+        public static List<BookCopy> BookCopies
+        {
+            get { return bookCopies; }
+            set { bookCopies = value ?? new List<BookCopy>(); }
+        }
+        private static List<Member> members = new List<Member>();
+        public static List<Member> Members
+        {
+            get { return members; }
+            set { members = value ?? new List<Member>(); }
+        }
+        private static List<ItemID> titles = new List<ItemID>();
+        public static List<ItemID> Titles
+        { 
+            get { return titles; } 
+            set { titles = value ?? new List<ItemID>(); }
+        }
+        private static List<ItemID> mediaTypes = new List<ItemID>();
+        public static List<ItemID> MediaTypes
+        {
+            get { return mediaTypes; }
+            set { mediaTypes = value ?? new List<ItemID>(); }
+        }
+        private static List<ItemID> authors = new List<ItemID>();
+        public static List<ItemID> Authors
+        {
+            get { return authors; }
+            set { authors = value ?? new List<ItemID>(); }
+        }
+        private static List<ItemID> publishers = new List<ItemID>();
+        public static List<ItemID> Publishers
+        {
+            get { return publishers; }
+            set { publishers = value ?? new List<ItemID>(); }
+        }
+        private static List<ItemID> genres = new List<ItemID>();
+        public static List<ItemID> Genres
+        {
+            get { return genres; }
+            set { genres = value ?? new List<ItemID>(); }
+        }
+        private static List<ItemID> themes = new List<ItemID>();
+        public static List<ItemID> Themes
+        {
+            get { return themes; }
+            set { themes = value ?? new List<ItemID>(); }
+        }
+        private static List<Staff> staff = new List<Staff>();
+        public static List<Staff> Staff
+        {
+            get { return staff; }
+            set { staff = value ?? new List<Staff>(); }
+        }
+        #endregion
+
+        /// <summary>
+        /// creates the directory to save the data fields to
+        /// </summary>
+        public static void CreateDataDirectory()
+        {
+            Directory.CreateDirectory(Application.StartupPath + "\\data");
+        }
 
         #region Load Files
+        private static string DataFilePath = Application.StartupPath + "\\data\\";
         /// <summary>
         /// Reads all files and load data into the appropiate data structures
         /// </summary>
-        public static void LoadDataFromFiles()
+        public static void LoadAllFiles()
+        {
+            LoadBooksFile();
+        }
+        public static void LoadBooksFile()
+        {
+            BookSaverCollection bookSaverCollection = FileHandler.LoadFile<BookSaverCollection>(DataFilePath, "books.bin");
+            foreach (BookSaver bookSaver in bookSaverCollection.Books)
+            {
+                Book temp = new Book(bookSaver); 
+                Books.Add(temp);
+            }
+        }
+        /*public static void LoadDataFromFiles()
         {
             string filePath = Application.StartupPath + "\\data\\";
 
@@ -213,6 +291,18 @@ namespace NEALibrarySystem.Data_Structures
                 tempStaff.EmailAddress = StaffFileContents[recordIndex + offset++];
                 tempStaff.IsAdministrator = Convert.ToBoolean(StaffFileContents[recordIndex + offset++]);
             }
+        }
+        */
+        #endregion
+        #region Save Files
+        public static void SaveAllFiles()
+        {
+            SaveBooksFile();
+        }
+        public static void SaveBooksFile()
+        {
+            BookSaverCollection bookSaverCollection = new BookSaverCollection(DataLibrary.Books);
+            FileHandler.SaveFile<BookSaverCollection>(bookSaverCollection, DataFilePath, "books.bin");
         }
         #endregion
     }

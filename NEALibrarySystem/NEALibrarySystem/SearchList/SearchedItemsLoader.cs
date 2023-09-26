@@ -19,10 +19,10 @@ namespace NEALibrarySystem.SearchList
             lsvSearch.LabelEdit = false;
             lsvSearch.AllowColumnReorder = false;
             lsvSearch.CheckBoxes = true;
+            lsvSearch.MultiSelect = true;
             lsvSearch.FullRowSelect = true;
             lsvSearch.GridLines = false;
             lsvSearch.Sorting = SortOrder.None;
-            lsvSearch.MultiSelect = false;
             lsvSearch.HeaderStyle = ColumnHeaderStyle.Nonclickable;
         }
         public void ToBook()
@@ -43,7 +43,7 @@ namespace NEALibrarySystem.SearchList
 
             AddColumns(columns);
 
-            foreach (Book book in DataLibrary.books)
+            foreach (Book book in DataLibrary.Books)
             {
                 string genres = "";
                 string themes = "";
