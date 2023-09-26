@@ -55,25 +55,20 @@ namespace NEALibrarySystem
             temp.PublisherID = 0;
             temp.MediaTypeID = 0;
             DataLibrary.Books.Add(temp);
-            DataLibrary.SaveBookFiles();
+            DataLibrary.SaveAllFiles();
         }
-       
-
         private void btnTransactions_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnStaffMembers_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnStatistics_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnBackups_Click(object sender, EventArgs e)
         {
 

@@ -46,7 +46,9 @@ namespace NEALibrarySystem
         /// <param name="title">name of the title</param>
         public void SetTitle(string title)
         {
-            publisherID = SetIDFromName(ref DataLibrary.Titles, title);
+            List<ItemID> titles = new List<ItemID>();
+            publisherID = SetIDFromName(ref titles, title);
+            DataLibrary.Titles = titles;
         }
         #endregion
         #region MediaType
@@ -76,7 +78,9 @@ namespace NEALibrarySystem
         /// <param name="mediaType">name of media type</param>
         public void SetMediaType(string mediaType)
         {
-            publisherID = SetIDFromName(ref DataLibrary.MediaTypes, mediaType);
+            List<ItemID> mediaTypes = DataLibrary.MediaTypes;
+            publisherID = SetIDFromName(ref mediaTypes, mediaType);
+            DataLibrary.MediaTypes = mediaTypes;
         }
         #endregion
         #region Author
@@ -106,7 +110,9 @@ namespace NEALibrarySystem
         /// <param name="author">string of author name</param>
         public void SetAuthor(string author)
         {
-            publisherID = SetIDFromName(ref DataLibrary.Authors, author);
+            List<ItemID> authors = DataLibrary.Authors;
+            publisherID = SetIDFromName(ref authors, author);
+            DataLibrary.Authors = authors;
         }
         #endregion
         #region Publisher
@@ -136,7 +142,9 @@ namespace NEALibrarySystem
         /// <param name="publisher">name of the publisher</param>
         public void SetPublisher(string publisher)
         {
-            publisherID = SetIDFromName(ref DataLibrary.Publishers, publisher);
+            List<ItemID> publishers = DataLibrary.Publishers;
+            publisherID = SetIDFromName(ref publishers, publisher);
+            DataLibrary.Publishers = publishers;
         }
         #endregion
         // list of keys
@@ -167,7 +175,9 @@ namespace NEALibrarySystem
         /// <param name="input">List of genre names</param>
         public void SetGenres(List<string> input)
         {
-            GenresID = SetItemIDList(input, ref DataLibrary.Genres);
+            List<ItemID> genres = DataLibrary.Genres;
+            GenresID = SetItemIDList(input, ref genres);
+            DataLibrary.Genres = genres;
         }
         #endregion
         #region Themes
@@ -197,7 +207,9 @@ namespace NEALibrarySystem
         /// <param name="input">List of theme names</param>
         public void SetThemes(List<string> input)
         {
-            ThemesID = SetItemIDList(input, ref DataLibrary.Themes);
+            List<ItemID> themes = DataLibrary.Themes;
+            ThemesID = SetItemIDList(input, ref themes);
+            DataLibrary.Themes = themes;
         }
         #endregion
         /// <summary>
