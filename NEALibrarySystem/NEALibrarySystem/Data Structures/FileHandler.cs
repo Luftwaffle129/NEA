@@ -24,7 +24,7 @@ namespace NEALibrarySystem.Data_Structures
         public static void SaveFile<FileType>(FileType data, string filePath, string fileName)
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(filePath + "/" + fileName, FileMode.Create);
+            FileStream stream = new FileStream(filePath + fileName + ".bin", FileMode.Create);
 
             formatter.Serialize(stream, data);
             stream.Close();
@@ -38,13 +38,13 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>Returns the contents of the file</returns>
         public static FileType LoadFile<FileType>(string filePath, string fileName)
         {
-            if (File.Exists(filePath + "/" + fileName)) 
+            if (File.Exists(filePath + fileName + ".bin")) 
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(filePath + "/" + fileName, FileMode.Open);
+                FileStream stream = new FileStream(filePath + fileName + ".bin", FileMode.Open);
                 FileType data = default(FileType);
 
-                if (stream == null)
+                if (stream.Length != 0)
                     data = (FileType)formatter.Deserialize(stream);
                 stream.Close();
 

@@ -93,15 +93,38 @@ namespace NEALibrarySystem.Data_Structures
         public static void LoadAllFiles()
         {
             LoadBooksFile();
+            Titles = LoadItemIDFile("titles");
+            MediaTypes = LoadItemIDFile("mediaTypes");
+            Authors = LoadItemIDFile("authors");
+            Publishers = LoadItemIDFile("publishers");
+            Genres = LoadItemIDFile("genres");
+            Themes = LoadItemIDFile("themes");
         }
         public static void LoadBooksFile()
         {
-            BookSaverCollection bookSaverCollection = FileHandler.LoadFile<BookSaverCollection>(DataFilePath, "books.bin");
-            foreach (BookSaver bookSaver in bookSaverCollection.Books)
+            BookSaverCollection bookSaverCollection = FileHandler.LoadFile<BookSaverCollection>(DataFilePath, "books");
+            if (bookSaverCollection != null)
             {
-                Book temp = new Book(bookSaver); 
-                Books.Add(temp);
+                foreach (BookSaver bookSaver in bookSaverCollection.Collection)
+                {
+                    Book temp = new Book(bookSaver);
+                    Books.Add(temp);
+                }
             }
+        }
+        private static List<ItemID> LoadItemIDFile(string fileName)
+        {
+            List<ItemID> Output = new List<ItemID>();
+            ItemIDSaverCollection itemIDSaverCollection = FileHandler.LoadFile<ItemIDSaverCollection>(DataFilePath, fileName);
+            if (itemIDSaverCollection != null)
+            {
+                foreach (ItemIDSaver itemIDSaver in itemIDSaverCollection.Collection)
+                {
+                    ItemID temp = new ItemID(itemIDSaver);
+                    Output.Add(temp);
+                }
+            }
+            return Output;
         }
         /*public static void LoadDataFromFiles()
         {
@@ -295,14 +318,66 @@ namespace NEALibrarySystem.Data_Structures
         */
         #endregion
         #region Save Files
-        public static void SaveAllFiles()
+        public static void SaveAllFiles(string filePath = null)
         {
-            SaveBooksFile();
+            SaveBooksFile(filePath);
+            SaveItemIDFile(Titles, "titles", filePath);
+            SaveItemIDFile(MediaTypes, "mediaTypes", filePath);
+            SaveItemIDFile(Authors, "authors", filePath);
+            SaveItemIDFile(Publishers, "publishers", filePath);
+            SaveItemIDFile(Genres, "genres", filePath);
+            SaveItemIDFile(Themes, "themes", filePath);
         }
-        public static void SaveBooksFile()
+        public static void SaveBooksFile(string filePath = null)
         {
+            if (filePath == null)
+                filePath = DataFilePath;
             BookSaverCollection bookSaverCollection = new BookSaverCollection(DataLibrary.Books);
-            FileHandler.SaveFile<BookSaverCollection>(bookSaverCollection, DataFilePath, "books.bin");
+            FileHandler.SaveFile<BookSaverCollection>(bookSaverCollection, filePath, "books");
+        }
+        private static void SaveItemIDFile(List<ItemID> itemIDs, string name = null, string filePath = null)
+        {
+            if (filePath == null)
+                filePath = DataFilePath;
+            ItemIDSaverCollection itemIDSaverCollection = new ItemIDSaverCollection(itemIDs);
+            FileHandler.SaveFile<ItemIDSaverCollection>(itemIDSaverCollection, filePath, name);
+        }
+        #endregion
+        #region Test data insertions
+        public static void LoadTestData1()
+        {
+            {
+                Book tempBook = new Book();
+                tempBook.TitleID = 0;
+                tempBook.SeriesTitle = "Test";
+                tempBook.SeriesNumber = 1;
+                tempBook.ISBN = "0123456789012";
+                tempBook.Description = "Test";
+                tempBook.Price = 12.99;
+                tempBook.GenresID = new List<int> { 0, 0 };
+                tempBook.ThemesID = new List<int> { 0, 0 };
+                tempBook.AuthorID = 0;
+                tempBook.PublisherID = 0;
+                tempBook.MediaTypeID = 0;
+                DataLibrary.Books.Clear();
+                DataLibrary.Books.Add(tempBook);
+                ItemID tempItemID = new ItemID();
+                tempItemID.ID = 0;
+                tempItemID.Name = "Test";
+                DataLibrary.Titles.Clear();
+                DataLibrary.Titles.Add(tempItemID);
+                DataLibrary.MediaTypes.Clear();
+                DataLibrary.MediaTypes.Add(tempItemID);
+                DataLibrary.Authors.Clear();
+                DataLibrary.Authors.Add(tempItemID);
+                DataLibrary.Publishers.Clear();
+                DataLibrary.Publishers.Add(tempItemID);
+                DataLibrary.Genres.Clear();
+                DataLibrary.Genres.Add(tempItemID);
+                DataLibrary.Themes.Clear();
+                DataLibrary.Themes.Add(tempItemID);
+                DataLibrary.SaveAllFiles();
+            }
         }
         #endregion
     }

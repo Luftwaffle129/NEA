@@ -11,12 +11,18 @@ namespace NEALibrarySystem.Data_Structures
     {
         public BookSaverCollection(List<Book> books)
         {
-            Books = new BookSaver[books.Count];
+            Collection = new BookSaver[books.Count];
             for (int i = 0; i < books.Count; i++) 
             {
                 BookSaver temp = new BookSaver(books[i]);
+                Collection[i] = temp;
             }
         }
-        public BookSaver[] Books { get; set; }
+        private BookSaver[] collection = new BookSaver[0];
+        public BookSaver[] Collection 
+        {
+            get { return collection; }
+            set { collection = value ?? new BookSaver[0]; } 
+        }
     }
 }

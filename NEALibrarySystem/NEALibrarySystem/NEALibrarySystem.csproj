@@ -54,6 +54,8 @@
     <Compile Include="Data Structures\BookSaverCollection.cs" />
     <Compile Include="Data Structures\FileHandler.cs" />
     <Compile Include="Data Structures\ItemID.cs" />
+    <Compile Include="Data Structures\ItemIDSaver.cs" />
+    <Compile Include="Data Structures\ItemIDSaverCollection.cs" />
     <Compile Include="Data Structures\Member.cs" />
     <Compile Include="Data Structures\DataLibrary.cs" />
     <Compile Include="Data Structures\Settings.cs" />

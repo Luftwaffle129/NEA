@@ -49,13 +49,13 @@ namespace NEALibrarySystem.SearchList
                 string themes = "";
 
                 foreach (string genre in book.GetGenres())
-                    genres += genres + ", ";
-                if (genres.Length == 2)
-                    genres.Remove(genres.Length - 3, 2);
+                    genres += genre + ", ";
+                if (genres.Length != 2)
+                    genres = genres.Remove(genres.Length - 2, 2);
                 foreach (string theme in book.GetThemes())
                     themes += theme + ", ";
-                if (themes.Length == 2)
-                    themes.Remove(themes.Length - 3, 2);
+                if (themes.Length != 2)
+                    themes = themes.Remove(themes.Length - 2, 2);
 
                 string[] data = new string[9]
                 {
