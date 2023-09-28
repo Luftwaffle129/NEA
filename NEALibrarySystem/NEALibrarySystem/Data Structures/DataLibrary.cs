@@ -20,7 +20,6 @@ namespace NEALibrarySystem.Data_Structures
             get { return books; }
             set { books = value ?? new List<Book>(); }
         }
-        // stackoverflow.com/questions/55135892/static-list-showing-as-null
         private static List<BookCopy> bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
         {
@@ -85,6 +84,28 @@ namespace NEALibrarySystem.Data_Structures
             Directory.CreateDirectory(Application.StartupPath + "\\data");
         }
 
+        #region Searching
+
+        #endregion
+        #region Sorting
+        public static void SortBooks()
+        {
+
+        }
+        enum BookFields
+        {
+            Title,
+            ISBN,
+            MediaType,
+            Author,
+            Publisher,
+            Genres,
+            Themes
+        }
+        #endregion
+        #region filtering
+
+        #endregion 
         #region Load Files
         private static string DataFilePath = Application.StartupPath + "\\data\\";
         /// <summary>
