@@ -212,12 +212,21 @@ namespace NEALibrarySystem
             DataLibrary.Themes = themes;
         }
         #endregion
+        // list of classes
+        private List<BookCopy> bookCopies = new List<BookCopy>();
+        public List<BookCopy> BookCopies
+        {
+            get { return bookCopies; }
+            set { bookCopies = value ?? new List<BookCopy>(); }
+        }
+
         /// <summary>
         /// Outputs a list of strings from a ItemID list using the inputted IDs
         /// </summary>
         /// <param name="IDList">List of IDs</param>
         /// <param name="ItemIDList">List of ItemIDs</param>
         /// <returns>List of item names</returns>
+        /// 
         private List<string> GetItemIDList(List<int> IDList, List<ItemID> ItemIDList)
         {
             List<string> output = new List<string>();
@@ -328,6 +337,10 @@ namespace NEALibrarySystem
             publisherID = bookSaver.publisherID;
             GenresID = bookSaver.genresID.ToList();
             themesID = bookSaver.themesID.ToList();
+            foreach (BookCopySaver bookCopySaver in bookSaver.bookCopies)
+            {
+                bookCopies.Add(new BookCopy(bookCopySaver));
+            }
         }
         #endregion
     }

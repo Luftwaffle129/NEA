@@ -23,6 +23,11 @@ namespace NEALibrarySystem.Data_Structures
             publisherID = book.PublisherID;
             genresID = book.GenresID.ToArray();
             themesID = book.ThemesID.ToArray();
+            bookCopies = new BookCopySaver[book.BookCopies.Count];
+            for (int i = 0;  i < bookCopies.Length; i++)
+            {
+                bookCopies[i] = new BookCopySaver(book.BookCopies[i]);
+            }
         }
         public string SeriesTitle { get; set; }
         public int SeriesNumber { get; set; }
@@ -35,5 +40,6 @@ namespace NEALibrarySystem.Data_Structures
         public int publisherID {  get; set; }
         public int[] genresID { get; set; }
         public int[] themesID { get; set; }
+        public BookCopySaver[] bookCopies { get; set;}
     }
 }
