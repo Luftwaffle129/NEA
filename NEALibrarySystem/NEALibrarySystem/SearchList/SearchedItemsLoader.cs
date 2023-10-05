@@ -45,18 +45,6 @@ namespace NEALibrarySystem.SearchList
 
             foreach (Book book in DataLibrary.Books)
             {
-                string genres = "";
-                string themes = "";
-
-                foreach (string genre in book.GetGenres())
-                    genres += genre + ", ";
-                if (genres.Length != 2)
-                    genres = genres.Remove(genres.Length - 2, 2);
-                foreach (string theme in book.GetThemes())
-                    themes += theme + ", ";
-                if (themes.Length != 2)
-                    themes = themes.Remove(themes.Length - 2, 2);
-
                 string[] data = new string[9]
                 {
                     book.GetTitle(),
@@ -64,8 +52,8 @@ namespace NEALibrarySystem.SearchList
                     book.GetMediaType(),
                     book.GetAuthor(),
                     book.GetPublisher(),
-                    genres,
-                    themes,
+                    DataFormatter.ListToString(book.GetGenres()),
+                    DataFormatter.ListToString(book.GetThemes()),
                     book.Price.ToString(),
                     book.Description
                 };
