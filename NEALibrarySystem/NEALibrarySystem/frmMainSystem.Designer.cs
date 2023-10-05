@@ -204,10 +204,10 @@
             this.btnBookSave = new System.Windows.Forms.Button();
             this.btnBookCancel = new System.Windows.Forms.Button();
             this.grpBooksBookStatus = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtLoaned = new System.Windows.Forms.TextBox();
             this.lblBooksInStock = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtBooksReserved = new System.Windows.Forms.TextBox();
+            this.txtBooksInStock = new System.Windows.Forms.TextBox();
             this.lblBooksLoaned = new System.Windows.Forms.Label();
             this.lblBooksReserved = new System.Windows.Forms.Label();
             this.grpBookDetails = new System.Windows.Forms.GroupBox();
@@ -2135,10 +2135,10 @@
             // 
             // grpBooksBookStatus
             // 
-            this.grpBooksBookStatus.Controls.Add(this.textBox2);
+            this.grpBooksBookStatus.Controls.Add(this.txtLoaned);
             this.grpBooksBookStatus.Controls.Add(this.lblBooksInStock);
-            this.grpBooksBookStatus.Controls.Add(this.textBox3);
-            this.grpBooksBookStatus.Controls.Add(this.textBox4);
+            this.grpBooksBookStatus.Controls.Add(this.txtBooksReserved);
+            this.grpBooksBookStatus.Controls.Add(this.txtBooksInStock);
             this.grpBooksBookStatus.Controls.Add(this.lblBooksLoaned);
             this.grpBooksBookStatus.Controls.Add(this.lblBooksReserved);
             this.grpBooksBookStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2149,14 +2149,14 @@
             this.grpBooksBookStatus.TabStop = false;
             this.grpBooksBookStatus.Text = "Book Status";
             // 
-            // textBox2
+            // txtLoaned
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(151, 157);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(89, 38);
-            this.textBox2.TabIndex = 49;
+            this.txtLoaned.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoaned.Location = new System.Drawing.Point(151, 157);
+            this.txtLoaned.Name = "txtLoaned";
+            this.txtLoaned.ReadOnly = true;
+            this.txtLoaned.Size = new System.Drawing.Size(89, 38);
+            this.txtLoaned.TabIndex = 49;
             // 
             // lblBooksInStock
             // 
@@ -2168,23 +2168,23 @@
             this.lblBooksInStock.TabIndex = 45;
             this.lblBooksInStock.Text = "In Stock:";
             // 
-            // textBox3
+            // txtBooksReserved
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(151, 97);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(89, 38);
-            this.textBox3.TabIndex = 48;
+            this.txtBooksReserved.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBooksReserved.Location = new System.Drawing.Point(151, 97);
+            this.txtBooksReserved.Name = "txtBooksReserved";
+            this.txtBooksReserved.ReadOnly = true;
+            this.txtBooksReserved.Size = new System.Drawing.Size(89, 38);
+            this.txtBooksReserved.TabIndex = 48;
             // 
-            // textBox4
+            // txtBooksInStock
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(151, 37);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(89, 38);
-            this.textBox4.TabIndex = 44;
+            this.txtBooksInStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBooksInStock.Location = new System.Drawing.Point(151, 37);
+            this.txtBooksInStock.Name = "txtBooksInStock";
+            this.txtBooksInStock.ReadOnly = true;
+            this.txtBooksInStock.Size = new System.Drawing.Size(89, 38);
+            this.txtBooksInStock.TabIndex = 44;
             // 
             // lblBooksLoaned
             // 
@@ -2672,8 +2672,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlBookDetails);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlCheckOut);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlSell);
@@ -2912,10 +2912,10 @@
         private System.Windows.Forms.Button btnBookSave;
         private System.Windows.Forms.Button btnBookCancel;
         private System.Windows.Forms.GroupBox grpBooksBookStatus;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtLoaned;
         private System.Windows.Forms.Label lblBooksInStock;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtBooksReserved;
+        private System.Windows.Forms.TextBox txtBooksInStock;
         private System.Windows.Forms.Label lblBooksLoaned;
         private System.Windows.Forms.Label lblBooksReserved;
         private System.Windows.Forms.GroupBox grpBookDetails;

@@ -20,6 +20,12 @@ namespace NEALibrarySystem.Data_Structures
             get { return books; }
             set { books = value ?? new List<Book>(); }
         }
+        private static List<string> bookSearchResults = new List<string>();
+        public static List<string> BookSearchResults
+        {
+            get { return bookSearchResults; }
+            set { bookSearchResults = value ?? new List<string>();}
+        }
         private static List<BookCopy> bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
         {
