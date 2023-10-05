@@ -26,6 +26,7 @@ namespace NEALibrarySystem.PanelHandlers
         }
         public void loadBookDetails()
         {
+            //book details
             objects.Title.Text = bookData.GetTitle();
             objects.SeriesTitle.Text = bookData.SeriesTitle;
             objects.SeriesNumber.Text = bookData.SeriesNumber.ToString();
@@ -37,6 +38,7 @@ namespace NEALibrarySystem.PanelHandlers
             objects.Themes.Text = DataFormatter.ListToString(bookData.GetThemes());
             objects.Description.Text = bookData.Description;
             objects.Price.Text = bookData.Price.ToString();
+            // book copies
 
         }
         /// <summary>
