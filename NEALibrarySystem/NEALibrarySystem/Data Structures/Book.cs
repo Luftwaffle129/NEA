@@ -337,9 +337,12 @@ namespace NEALibrarySystem
             publisherID = bookSaver.publisherID;
             GenresID = bookSaver.genresID.ToList();
             themesID = bookSaver.themesID.ToList();
-            foreach (BookCopySaver bookCopySaver in bookSaver.bookCopies)
+            if (bookSaver.bookCopies != null)
             {
-                bookCopies.Add(new BookCopy(bookCopySaver));
+                foreach (BookCopySaver bookCopySaver in bookSaver.bookCopies)
+                {
+                    bookCopies.Add(new BookCopy(bookCopySaver));
+                }
             }
         }
         #endregion

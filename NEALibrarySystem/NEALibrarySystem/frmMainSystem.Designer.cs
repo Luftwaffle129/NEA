@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -254,6 +254,7 @@
             this.pctIcon = new System.Windows.Forms.PictureBox();
             this.pctMainTabs = new System.Windows.Forms.PictureBox();
             this.pctSecondaryTabs = new System.Windows.Forms.PictureBox();
+            this.btnBookDeleteCopies = new System.Windows.Forms.Button();
             this.pnlReservation.SuspendLayout();
             this.pnlMember.SuspendLayout();
             this.grpMemberBookLinks.SuspendLayout();
@@ -1126,7 +1127,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(93, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 16);
+            this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 31;
             this.label2.Text = "Date:";
             // 
@@ -1144,7 +1145,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(93, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 16);
+            this.label1.Size = new System.Drawing.Size(42, 16);
             this.label1.TabIndex = 30;
             this.label1.Text = "Time:";
             // 
@@ -1236,7 +1237,7 @@
             // 
             // btnresetFilters
             // 
-            this.btnresetFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnresetFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnresetFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnresetFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnresetFilters.Location = new System.Drawing.Point(504, 125);
@@ -2439,6 +2440,7 @@
             // 
             // grpBookCopyDetails
             // 
+            this.grpBookCopyDetails.Controls.Add(this.btnBookDeleteCopies);
             this.grpBookCopyDetails.Controls.Add(this.btnBookAddCopies);
             this.grpBookCopyDetails.Controls.Add(this.lsvBookCopyDetails);
             this.grpBookCopyDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2456,10 +2458,11 @@
             this.btnBookAddCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookAddCopies.Location = new System.Drawing.Point(6, 622);
             this.btnBookAddCopies.Name = "btnBookAddCopies";
-            this.btnBookAddCopies.Size = new System.Drawing.Size(315, 41);
+            this.btnBookAddCopies.Size = new System.Drawing.Size(150, 41);
             this.btnBookAddCopies.TabIndex = 46;
             this.btnBookAddCopies.Text = "Add copies";
             this.btnBookAddCopies.UseVisualStyleBackColor = false;
+            this.btnBookAddCopies.Click += new System.EventHandler(this.btnBookAddCopies_Click);
             // 
             // lsvBookCopyDetails
             // 
@@ -2481,16 +2484,16 @@
             // 
             // chtStatisticsChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend3);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series3);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2666,6 +2669,18 @@
             this.pctSecondaryTabs.TabIndex = 10;
             this.pctSecondaryTabs.TabStop = false;
             // 
+            // btnBookDeleteCopies
+            // 
+            this.btnBookDeleteCopies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnBookDeleteCopies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBookDeleteCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBookDeleteCopies.Location = new System.Drawing.Point(171, 622);
+            this.btnBookDeleteCopies.Name = "btnBookDeleteCopies";
+            this.btnBookDeleteCopies.Size = new System.Drawing.Size(150, 41);
+            this.btnBookDeleteCopies.TabIndex = 47;
+            this.btnBookDeleteCopies.Text = "Add copies";
+            this.btnBookDeleteCopies.UseVisualStyleBackColor = false;
+            // 
             // frmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2673,9 +2688,9 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlBookDetails);
+            this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlCheckOut);
-            this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlCheckIn);
             this.Controls.Add(this.pnlMember);
@@ -2971,5 +2986,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnStaffMemberRecord;
+        private System.Windows.Forms.Button btnBookDeleteCopies;
     }
 }

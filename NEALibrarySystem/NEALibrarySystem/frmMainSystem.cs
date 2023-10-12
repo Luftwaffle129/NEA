@@ -227,5 +227,10 @@ namespace NEALibrarySystem
             Staff = 3
         }
         #endregion
+
+        private void btnBookAddCopies_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

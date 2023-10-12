@@ -21,13 +21,15 @@ namespace NEALibrarySystem.PanelHandlers
         public TextBox Description;
         public TextBox Price;
         // book copies
-        public ListView CopyBooksDetails;
+        public ListView CopyDetails;
         public TextBox InStock;
         public TextBox Reserved;
         public TextBox Loaned;
-        // buttons
+        /* buttons
         public Button AddBookCopies;
+        public Button DeleteBookCopies;
         public Button Save;
         public Button Cancel;
+        */
     }
 }

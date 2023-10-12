@@ -21,5 +21,10 @@ namespace NEALibrarySystem
         {
 
         }
+
+        private void btnMemberCancel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -23,6 +23,15 @@ namespace NEALibrarySystem.PanelHandlers
                 bookData = book;
                 loadBookDetails();
             }
+            objects.CopyDetails.View = View.Details;
+            objects.CopyDetails.LabelEdit = false;
+            objects.CopyDetails.AllowColumnReorder = false;
+            objects.CopyDetails.CheckBoxes = true;
+            objects.CopyDetails.MultiSelect = true;
+            objects.CopyDetails.FullRowSelect = true;
+            objects.CopyDetails.GridLines = false;
+            objects.CopyDetails.Sorting = SortOrder.None;
+            objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
         }
         public void loadBookDetails()
         {
@@ -63,6 +72,10 @@ namespace NEALibrarySystem.PanelHandlers
                     bookData.BookCopies.Add(temp);
                 }
             }
+        }
+        public void DeleteBookCopies()
+        {
+
         }
         public void Cancel()
         {

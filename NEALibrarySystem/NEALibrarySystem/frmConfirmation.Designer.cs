@@ -35,7 +35,7 @@
             // 
             // btnMemberCancel
             // 
-            this.btnMemberCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnMemberCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMemberCancel.Location = new System.Drawing.Point(668, 205);
@@ -43,7 +43,8 @@
             this.btnMemberCancel.Size = new System.Drawing.Size(120, 50);
             this.btnMemberCancel.TabIndex = 3;
             this.btnMemberCancel.Text = "Cancel";
-            this.btnMemberCancel.UseVisualStyleBackColor = true;
+            this.btnMemberCancel.UseVisualStyleBackColor = false;
+            this.btnMemberCancel.Click += new System.EventHandler(this.btnMemberCancel_Click);
             // 
             // btnYes
             // 

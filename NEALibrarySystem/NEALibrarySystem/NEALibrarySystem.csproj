@@ -114,7 +114,7 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel Handlers\BookDetailsObjects.cs" />
+    <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\DataFormatter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="frmResetPassword.Designer.cs">
       <DependentUpon>frmResetPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel Handlers\BookDetailsHandler.cs" />
+    <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
     <Compile Include="SearchList\columnDetails.cs" />
     <Compile Include="SearchList\SearchedItemsLoader.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
