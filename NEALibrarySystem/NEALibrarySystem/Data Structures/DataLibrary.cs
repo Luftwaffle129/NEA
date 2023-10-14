@@ -388,8 +388,20 @@ namespace NEALibrarySystem.Data_Structures
                 tempBook.AuthorID = 0;
                 tempBook.PublisherID = 0;
                 tempBook.MediaTypeID = 0;
+
+                BookCopy bookCopy = new BookCopy()
+                {
+                    Barcode = "0123456789",
+                    Status = status.Loaned,
+                    OverdueEmailLastSent = DateTime.Now.Date,
+                    DueDate = DateTime.Now.Date,
+                    MemberID = "0123456789"
+                };
+                tempBook.BookCopies.Add(bookCopy);
+
                 DataLibrary.Books.Clear();
                 DataLibrary.Books.Add(tempBook);
+
                 ItemID tempItemID = new ItemID();
                 tempItemID.ID = 0;
                 tempItemID.Name = "Test";
@@ -405,6 +417,7 @@ namespace NEALibrarySystem.Data_Structures
                 DataLibrary.Genres.Add(tempItemID);
                 DataLibrary.Themes.Clear();
                 DataLibrary.Themes.Add(tempItemID);
+
                 DataLibrary.SaveAllFiles();
             }
         }

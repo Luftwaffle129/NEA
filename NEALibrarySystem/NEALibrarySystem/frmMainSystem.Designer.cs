@@ -317,7 +317,6 @@
             this.btnTransactions.TabIndex = 3;
             this.btnTransactions.Text = "SALE HISTORY";
             this.btnTransactions.UseVisualStyleBackColor = false;
-            this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
             // btnStaffMembers
             // 
@@ -330,7 +329,6 @@
             this.btnStaffMembers.TabIndex = 4;
             this.btnStaffMembers.Text = "STAFF";
             this.btnStaffMembers.UseVisualStyleBackColor = false;
-            this.btnStaffMembers.Click += new System.EventHandler(this.btnStaffMembers_Click);
             // 
             // btnStatistics
             // 
@@ -343,7 +341,6 @@
             this.btnStatistics.TabIndex = 5;
             this.btnStatistics.Text = "STATISTICS";
             this.btnStatistics.UseVisualStyleBackColor = false;
-            this.btnStatistics.Click += new System.EventHandler(this.btnStatistics_Click);
             // 
             // btnBackups
             // 
@@ -356,7 +353,6 @@
             this.btnBackups.TabIndex = 6;
             this.btnBackups.Text = "BACKUPS";
             this.btnBackups.UseVisualStyleBackColor = false;
-            this.btnBackups.Click += new System.EventHandler(this.btnBackups_Click);
             // 
             // btnSettings
             // 
@@ -369,7 +365,6 @@
             this.btnSettings.TabIndex = 8;
             this.btnSettings.Text = "SETTINGS";
             this.btnSettings.UseVisualStyleBackColor = false;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnLogOut
             // 
@@ -382,7 +377,6 @@
             this.btnLogOut.TabIndex = 9;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = false;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnSecondaryTab1
             // 

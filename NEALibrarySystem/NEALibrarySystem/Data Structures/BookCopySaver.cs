@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    [System.Serializable]
     public class BookCopySaver
     {
         public BookCopySaver(BookCopy bookCopy)

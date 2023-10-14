@@ -23,16 +23,12 @@ namespace NEALibrarySystem.PanelHandlers
                 bookData = book;
                 loadBookDetails();
             }
-            objects.CopyDetails.View = View.Details;
-            objects.CopyDetails.LabelEdit = false;
-            objects.CopyDetails.AllowColumnReorder = false;
-            objects.CopyDetails.CheckBoxes = true;
-            objects.CopyDetails.MultiSelect = true;
-            objects.CopyDetails.FullRowSelect = true;
-            objects.CopyDetails.GridLines = false;
-            objects.CopyDetails.Sorting = SortOrder.None;
-            objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            InitialiseCopyDetails();
+
         }
+        /// <summary>
+        /// Loads the book details into the input boxes
+        /// </summary>
         public void loadBookDetails()
         {
             //book details
@@ -80,6 +76,54 @@ namespace NEALibrarySystem.PanelHandlers
         public void Cancel()
         {
 
+        }
+        /// <summary>
+        /// Loads book copies into the book copy details listview
+        /// </summary>
+        private void LoadBookCopies()
+        {
+            objects.CopyDetails.Items.Clear();
+            if (bookData.BookCopies == null)
+            {
+                foreach (BookCopy bookCopy in bookData.BookCopies)
+                {
+                    string[] data = new string[3]
+                    {
+                    bookCopy.Barcode,
+                    bookCopy.Status.ToString(),
+                    bookCopy.DueDate.ToString()
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    objects.CopyDetails.Items.Add(row);
+                }
+            }
+        }
+        private void InitialiseCopyDetails()
+        {
+            objects.CopyDetails.View = View.Details;
+            objects.CopyDetails.LabelEdit = false;
+            objects.CopyDetails.AllowColumnReorder = false;
+            objects.CopyDetails.CheckBoxes = true;
+            objects.CopyDetails.MultiSelect = true;
+            objects.CopyDetails.FullRowSelect = true;
+            objects.CopyDetails.GridLines = false;
+            objects.CopyDetails.Sorting = SortOrder.None;
+            objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+            string[] columns = new string[3]
+            {
+                "Barcode",
+                "Status",
+                "Due date"
+            };
+            AddColumns(columns);
+        }
+        private void AddColumns(string[] columns)
+        {
+            foreach (string column in columns)
+            {
+                objects.CopyDetails.Columns.Add(column);
+            }
         }
     }
 }

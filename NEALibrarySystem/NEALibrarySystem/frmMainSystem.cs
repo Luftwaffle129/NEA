@@ -27,6 +27,80 @@ namespace NEALibrarySystem
 
         public bool isAdministrator;
 
+        #region Navigation
+
+        private Panel[] Panels;
+        private Button[] MainTabs;
+        private Button[] SubTabs;
+        private void InitializePanels()
+        {
+            Panels = new Panel[]
+            {
+                pnlBackup,
+                pnlBookDetails,
+                pnlCheckIn,
+                pnlCheckOut,
+                pnlDelete,
+                pnlMember,
+                pnlReservation,
+                pnlSatistics,
+                pnlSearch,
+                pnlSell,
+                pnlSetting,
+                pnlStaff
+            };
+        }
+        private void InitializeMainTabs()
+        {
+            MainTabs = new Button[]
+            {
+
+            };
+        }
+        private void CloseAllPanels()
+        {
+            foreach (Panel panel in Panels)
+            {
+                panel.Visible = false;
+            }
+        }
+        private void OpenBookTab()
+        {
+            CloseAllPanels();
+            OpenSearchViewTab(Feature.Book);
+        }
+        private void OpenSearchViewTab(Feature feature)
+        {
+            pnlSearch.Visible = true;
+            switch (feature)
+            {
+                case Feature.Book:
+                    searchedItemsLoader.ToBook();
+                    break;
+                case Feature.Member:
+
+                    break;
+                case Feature.Transaction:
+
+                    break;
+                case Feature.Staff:
+
+                    break;
+
+            }
+        }
+
+
+        enum Feature
+        {
+            Book = 0,
+            Member = 1,
+            Transaction = 2,
+            Staff = 3
+        }
+        #endregion
+
+
         private void frmMainSystem_Load(object sender, EventArgs e)
         {
             bool leftPanelVisible = true; 
@@ -44,48 +118,6 @@ namespace NEALibrarySystem
         {
             DataLibrary.LoadTestData1();
         }
-        private void btnTransactions_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void btnStaffMembers_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void btnStatistics_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void btnBackups_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogOut_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblFilter1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void grpDataGrid_Enter(object sender, EventArgs e)
         {
 
@@ -155,79 +187,6 @@ namespace NEALibrarySystem
         {
 
         }
-        #region Navigation
-
-        private Panel[] Panels;
-        private Button[] MainTabs;
-        private Button[] SubTabs;
-        private void InitializePanels()
-        {
-            Panels = new Panel[]
-            {
-                pnlBackup,
-                pnlBookDetails,
-                pnlCheckIn,
-                pnlCheckOut,
-                pnlDelete,
-                pnlMember,
-                pnlReservation,
-                pnlSatistics,
-                pnlSearch,
-                pnlSell,
-                pnlSetting,
-                pnlStaff
-            };
-        }
-        private void InitializeMainTabs()
-        {
-            MainTabs = new Button[]
-            {
-                
-            };
-        }
-        private void CloseAllPanels()
-        {
-            foreach (Panel panel in Panels)
-            {
-                panel.Visible = false;
-            }
-        }
-        private void OpenBookTab()
-        {
-            CloseAllPanels();
-            OpenSearchViewTab(Feature.Book);
-        }
-        private void OpenSearchViewTab(Feature feature) 
-        {
-            pnlSearch.Visible = true;
-            switch (feature)
-            {
-                case Feature.Book:
-                    searchedItemsLoader.ToBook();
-                    break;
-                case Feature.Member:
-
-                    break;
-                case Feature.Transaction:
-
-                    break;
-                case Feature.Staff:
-
-                    break;
-
-            }
-        }
-
-
-        enum Feature
-        {
-            Book = 0,
-            Member = 1,
-            Transaction = 2,
-            Staff = 3
-        }
-        #endregion
-
         private void btnBookAddCopies_Click(object sender, EventArgs e)
         {
 
