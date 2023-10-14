@@ -114,6 +114,8 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panel Handlers\BookCheckIn\BookCheckInHandler.cs" />
+    <Compile Include="Panel Handlers\BookCheckIn\BookCheckInObjects.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\DataFormatter.cs" />
     <Compile Include="Program.cs" />

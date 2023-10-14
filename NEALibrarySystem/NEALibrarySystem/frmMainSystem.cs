@@ -22,16 +22,18 @@ namespace NEALibrarySystem
         {
             InitializeComponent();
             InitializePanels();
+            InitializeTabs();
+            SetSubTabs(new string[0]);
             searchedItemsLoader = new SearchedItemsLoader(lsvSearchItems);
         }
 
         public bool isAdministrator;
 
         #region Navigation
-
         private Panel[] Panels;
         private Button[] MainTabs;
         private Button[] SubTabs;
+        #region initialisation
         private void InitializePanels()
         {
             Panels = new Panel[]
@@ -50,24 +52,38 @@ namespace NEALibrarySystem
                 pnlStaff
             };
         }
-        private void InitializeMainTabs()
+        private void InitializeTabs()
         {
             MainTabs = new Button[]
             {
-
+                btnBooks,
+                btnMembers,
+                btnTransactions,
+                btnStaff,
+                btnStatistics,
+                btnBackups,
+                btnSettings,
+                btnLogOut
+            };
+            SubTabs = new Button[]
+            {
+                btnSubTab1,
+                btnSubTab2,
+                btnSubTab3,
+                btnSubTab4,
+                btnSubTab5,
+                btnSubTab6,
+                btnSubTab7
             };
         }
+        #endregion
+        #region opening panels and tabs
         private void CloseAllPanels()
         {
             foreach (Panel panel in Panels)
             {
                 panel.Visible = false;
             }
-        }
-        private void OpenBookTab()
-        {
-            CloseAllPanels();
-            OpenSearchViewTab(Feature.Book);
         }
         private void OpenSearchViewTab(Feature feature)
         {
@@ -76,6 +92,7 @@ namespace NEALibrarySystem
             {
                 case Feature.Book:
                     searchedItemsLoader.ToBook();
+                    pnlSearch.Visible = true;
                     break;
                 case Feature.Member:
 
@@ -89,18 +106,77 @@ namespace NEALibrarySystem
 
             }
         }
+        private void OpenBookTab()
+        {
+            CloseAllPanels();
+            OpenSearchViewTab(Feature.Book);
+            string[] bookTabs =
+{
+                "Check In",
+                "Check Out",
+                "Create reservation",
+                "Sell books",
+                "Search Books",
+                "Search Reservations",
+                "Add Book",
+                "Remove Books"
+            };
+            SetSubTabNames(bookTabs);
+        }
+        #endregion
+        #region sub tab handling
+        private void SetSubTabNames(string[] tabs)
+        {
+            for (int i = 0; i < SubTabs.Length; i++)
+            {
+                if (i < tabs.Length)
+                {
+                    SubTabs[i].Visible = true;
+                    SubTabs[i].Text = tabs[i];
+                }
+                else
+                {
+                    SubTabs[i].Visible = false;
+                }
+            }
+        }
+        private void RedirectorSubTab1(Feature currentFeature)
+        {
+            switch (currentFeature)
+            {
+                case Feature.Book:
+                    CloseAllPanels();
+                    pnlCheckIn.Visible = true;
+                    // init check in panel
+                    break;
+            }
+        }
+        private void RedirectorSubTab2(Feature currentFeature)
+        {
+            switch (currentFeature)
+            {
+                case Feature.Book:
 
-
+                    break;
+            }
+        }
+        #endregion
         enum Feature
         {
             Book = 0,
             Member = 1,
             Transaction = 2,
-            Staff = 3
+            Staff = 3,
+            Statistics = 4,
+            Backups = 5,
+            Settings = 6,
         }
         #endregion
 
-
+        public void DisplayProcessMessage(string message)
+        {
+            lblMessageOutput.Text = message;
+        }
         private void frmMainSystem_Load(object sender, EventArgs e)
         {
             bool leftPanelVisible = true; 
