@@ -9,18 +9,7 @@ namespace NEALibrarySystem.PanelHandlers
     public class BookDetailsObjects
     {
         // book details
-        public TextBox Title;
-        public TextBox SeriesTitle;
-        public TextBox SeriesNumber;
-        public TextBox ISBN;
-        public TextBox MediaType;
-        public TextBox Author;
-        public TextBox Publisher;
-        public TextBox Genres;
-        public TextBox Themes;
-        public TextBox Description;
-        public TextBox Price;
-        // book copies
+        public TextBox[] Fields;
         public ListView CopyDetails;
         public TextBox InStock;
         public TextBox Reserved;
@@ -31,5 +20,19 @@ namespace NEALibrarySystem.PanelHandlers
         public Button Save;
         public Button Cancel;
         */
+        public enum FieldName
+        {
+            Title = 0,
+            SeriesTitle = 1,
+            SeriesNumber = 2,
+            ISBN = 3,
+            MediaType = 4,
+            Author = 5,
+            Publisher = 6,
+            Genres = 7,
+            Themes = 8,
+            Description = 9,
+            Price = 10
+        }
     }
 }

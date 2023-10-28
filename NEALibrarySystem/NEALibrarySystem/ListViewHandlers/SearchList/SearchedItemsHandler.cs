@@ -1,4 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
+using NEALibrarySystem.ListViewHandlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.SearchList
 {
-    public class SearchedItemsLoader
+    public class SearchedItemsHandler
     {
         private ListView lsvSearch;
-        public SearchedItemsLoader(ListView lsv)
+        public SearchedItemsHandler(ListView lsv)
         {
             lsvSearch = lsv;
             lsvSearch.View = View.Details;
@@ -24,6 +25,7 @@ namespace NEALibrarySystem.SearchList
             lsvSearch.GridLines = false;
             lsvSearch.Sorting = SortOrder.None;
             lsvSearch.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lsvSearch.Scrollable = true;
         }
         public void ToBook()
         {
@@ -41,7 +43,7 @@ namespace NEALibrarySystem.SearchList
                 "description"
             };
 
-            AddColumns(columns);
+            ListViewHandler.AddColumns(columns, ref lsvSearch);
 
             foreach (Book book in DataLibrary.Books)
             {
@@ -63,12 +65,9 @@ namespace NEALibrarySystem.SearchList
 
             lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        private void AddColumns(string[] columns)
+        public void updatedSelectedItems()
         {
-            foreach (string column in columns)
-            {
-                lsvSearch.Columns.Add(column);
-            }
+
         }
     }
 }

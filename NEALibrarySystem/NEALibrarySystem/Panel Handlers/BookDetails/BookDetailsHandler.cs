@@ -12,19 +12,26 @@ namespace NEALibrarySystem.PanelHandlers
 {
     public class BookDetailsHandler
     {
-        private BookDetailsObjects objects;
-        private Book bookData;
+        private BookDetailsObjects _objects;
+        private Book _bookData;
         public BookDetailsHandler(BookDetailsObjects objs, Book book = null) 
         {
-            objects = objs;
-            bookData = new Book();
+            _objects = objs;
+            _bookData = new Book();
+
             if (book != null) 
             {
-                bookData = book;
+                _bookData = book;
                 loadBookDetails();
             }
+            else
+            {
+                foreach (TextBox textBox in _objects.Fields)
+                {
+                    textBox.Text = "";
+                }
+            }
             InitialiseCopyDetails();
-
         }
         /// <summary>
         /// Loads the book details into the input boxes
@@ -32,17 +39,17 @@ namespace NEALibrarySystem.PanelHandlers
         public void loadBookDetails()
         {
             //book details
-            objects.Title.Text = bookData.GetTitle();
-            objects.SeriesTitle.Text = bookData.SeriesTitle;
-            objects.SeriesNumber.Text = bookData.SeriesNumber.ToString();
-            objects.ISBN.Text = bookData.ISBN;
-            objects.MediaType.Text = bookData.GetMediaType();
-            objects.Author.Text = bookData.GetAuthor();
-            objects.Publisher.Text = bookData.GetPublisher();
-            objects.Genres.Text = DataFormatter.ListToString(bookData.GetGenres());
-            objects.Themes.Text = DataFormatter.ListToString(bookData.GetThemes());
-            objects.Description.Text = bookData.Description;
-            objects.Price.Text = bookData.Price.ToString();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Title].Text = _bookData.GetTitle();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.SeriesTitle].Text = _bookData.SeriesTitle;
+            _objects.Fields[(int)BookDetailsObjects.FieldName.SeriesNumber].Text = _bookData.SeriesNumber.ToString();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.ISBN].Text = _bookData.ISBN;
+            _objects.Fields[(int)BookDetailsObjects.FieldName.MediaType].Text = _bookData.GetMediaType();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Author].Text = _bookData.GetAuthor();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Publisher].Text = _bookData.GetPublisher();
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Genres].Text = DataFormatter.ListToString(_bookData.GetGenres());
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Themes].Text = DataFormatter.ListToString(_bookData.GetThemes());
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Description].Text = _bookData.Description;
+            _objects.Fields[(int)BookDetailsObjects.FieldName.Price].Text = _bookData.Price.ToString();
             // book copies
 
         }
@@ -65,7 +72,7 @@ namespace NEALibrarySystem.PanelHandlers
                         OverdueEmailLastSent = DateTime.Now,
                         MemberID = barcode,
                     };
-                    bookData.BookCopies.Add(temp);
+                    _bookData.BookCopies.Add(temp);
                 }
             }
         }
@@ -82,10 +89,10 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         private void LoadBookCopies()
         {
-            objects.CopyDetails.Items.Clear();
-            if (bookData.BookCopies == null)
+            _objects.CopyDetails.Items.Clear();
+            if (_bookData.BookCopies == null)
             {
-                foreach (BookCopy bookCopy in bookData.BookCopies)
+                foreach (BookCopy bookCopy in _bookData.BookCopies)
                 {
                     string[] data = new string[3]
                     {
@@ -94,21 +101,21 @@ namespace NEALibrarySystem.PanelHandlers
                     bookCopy.DueDate.ToString()
                     };
                     ListViewItem row = new ListViewItem(data);
-                    objects.CopyDetails.Items.Add(row);
+                    _objects.CopyDetails.Items.Add(row);
                 }
             }
         }
         private void InitialiseCopyDetails()
         {
-            objects.CopyDetails.View = View.Details;
-            objects.CopyDetails.LabelEdit = false;
-            objects.CopyDetails.AllowColumnReorder = false;
-            objects.CopyDetails.CheckBoxes = true;
-            objects.CopyDetails.MultiSelect = true;
-            objects.CopyDetails.FullRowSelect = true;
-            objects.CopyDetails.GridLines = false;
-            objects.CopyDetails.Sorting = SortOrder.None;
-            objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            _objects.CopyDetails.View = View.Details;
+            _objects.CopyDetails.LabelEdit = false;
+            _objects.CopyDetails.AllowColumnReorder = false;
+            _objects.CopyDetails.CheckBoxes = true;
+            _objects.CopyDetails.MultiSelect = true;
+            _objects.CopyDetails.FullRowSelect = true;
+            _objects.CopyDetails.GridLines = false;
+            _objects.CopyDetails.Sorting = SortOrder.None;
+            _objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
             string[] columns = new string[3]
             {
@@ -122,7 +129,7 @@ namespace NEALibrarySystem.PanelHandlers
         {
             foreach (string column in columns)
             {
-                objects.CopyDetails.Columns.Add(column);
+                _objects.CopyDetails.Columns.Add(column);
             }
         }
     }

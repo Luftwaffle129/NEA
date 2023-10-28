@@ -15,7 +15,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         public TextBox Loans;
         public TextBox Overdue;
         public TextBox LateFees;
-        public TextBox BookBarcodes;
+        public TextBox EnterBookBarcodes;
         public ListView SelectedBooks;
 
     }

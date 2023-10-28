@@ -114,10 +114,14 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel Handlers\BookCheckIn\BookCheckInHandler.cs" />
-    <Compile Include="Panel Handlers\BookCheckIn\BookCheckInObjects.cs" />
+    <Compile Include="Data Structures\CirculatedBook.cs" />
+    <Compile Include="ListViewHandlers\CirculatedBooks\CirculatedBooksLsvHandler.cs" />
+    <Compile Include="ListViewHandlers\ListViewHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInObjects.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\DataFormatter.cs" />
+    <Compile Include="Panel Handlers\Circulation\CirculationHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmResetPassword.cs">
@@ -127,8 +131,7 @@
       <DependentUpon>frmResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
-    <Compile Include="SearchList\columnDetails.cs" />
-    <Compile Include="SearchList\SearchedItemsLoader.cs" />
+    <Compile Include="ListViewHandlers\SearchList\SearchedItemsHandler.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,5 +212,6 @@
   <ItemGroup>
     <Content Include="ToDoList.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

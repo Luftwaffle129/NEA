@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -162,18 +162,18 @@
             this.pnlSell = new System.Windows.Forms.Panel();
             this.txtCheckOutPrice = new System.Windows.Forms.TextBox();
             this.lblCheckOutPrice = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtSellOverdueBooks = new System.Windows.Forms.TextBox();
             this.lblSellBooksOverdueBooks = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.lsvSellSelectedBooks = new System.Windows.Forms.ListView();
+            this.lblSellSelectedBooks = new System.Windows.Forms.Label();
+            this.txtSellLoans = new System.Windows.Forms.TextBox();
+            this.lblSellLoans = new System.Windows.Forms.Label();
+            this.txtSellMemberBarcode = new System.Windows.Forms.TextBox();
+            this.lblSellMemberBarcode = new System.Windows.Forms.Label();
+            this.txtSellMemberName = new System.Windows.Forms.TextBox();
+            this.lblSellMemberName = new System.Windows.Forms.Label();
+            this.btnSellCancel = new System.Windows.Forms.Button();
+            this.btnSellSave = new System.Windows.Forms.Button();
             this.pnlSetting = new System.Windows.Forms.Panel();
             this.lblDefaultSettings = new System.Windows.Forms.Label();
             this.txtSettingDefault = new System.Windows.Forms.TextBox();
@@ -186,6 +186,8 @@
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.pnlCheckIn = new System.Windows.Forms.Panel();
+            this.lblCheckInEnterBarcode = new System.Windows.Forms.Label();
+            this.txtCheckInEnterBarcode = new System.Windows.Forms.TextBox();
             this.lblCheckInLateFees = new System.Windows.Forms.Label();
             this.txtCheckInOverdue = new System.Windows.Forms.TextBox();
             this.lblCheckInOverdue = new System.Windows.Forms.Label();
@@ -253,10 +255,8 @@
             this.btnRestoreBackup = new System.Windows.Forms.Button();
             this.btnCreateBackup = new System.Windows.Forms.Button();
             this.pctIcon = new System.Windows.Forms.PictureBox();
-            this.pctMainTabs = new System.Windows.Forms.PictureBox();
-            this.pctSecondaryTabs = new System.Windows.Forms.PictureBox();
-            this.lblCheckInEnterBarcode = new System.Windows.Forms.Label();
-            this.txtCheckInEnterBarcode = new System.Windows.Forms.TextBox();
+            this.pnlMainTabs = new System.Windows.Forms.Panel();
+            this.pnlSubTabs = new System.Windows.Forms.Panel();
             this.pnlReservation.SuspendLayout();
             this.pnlMember.SuspendLayout();
             this.grpMemberBookLinks.SuspendLayout();
@@ -277,19 +277,21 @@
             this.grpStatisticsInputs.SuspendLayout();
             this.pnlBackup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctMainTabs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctSecondaryTabs)).BeginInit();
+            this.pnlMainTabs.SuspendLayout();
+            this.pnlSubTabs.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBooks
             // 
+            this.btnBooks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBooks.BackColor = System.Drawing.Color.Silver;
             this.btnBooks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBooks.Location = new System.Drawing.Point(0, 150);
             this.btnBooks.Name = "btnBooks";
-            this.btnBooks.Size = new System.Drawing.Size(150, 110);
+            this.btnBooks.Size = new System.Drawing.Size(150, 75);
             this.btnBooks.TabIndex = 1;
             this.btnBooks.Text = "BOOKS";
             this.btnBooks.UseVisualStyleBackColor = false;
@@ -297,12 +299,14 @@
             // 
             // btnMembers
             // 
+            this.btnMembers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMembers.BackColor = System.Drawing.Color.Silver;
             this.btnMembers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMembers.Location = new System.Drawing.Point(0, 260);
+            this.btnMembers.Location = new System.Drawing.Point(0, 225);
             this.btnMembers.Name = "btnMembers";
-            this.btnMembers.Size = new System.Drawing.Size(150, 110);
+            this.btnMembers.Size = new System.Drawing.Size(150, 75);
             this.btnMembers.TabIndex = 2;
             this.btnMembers.Text = "MEMBERS";
             this.btnMembers.UseVisualStyleBackColor = false;
@@ -310,83 +314,98 @@
             // 
             // btnTransactions
             // 
+            this.btnTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTransactions.BackColor = System.Drawing.Color.Silver;
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransactions.Location = new System.Drawing.Point(0, 370);
+            this.btnTransactions.Location = new System.Drawing.Point(0, 300);
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(150, 110);
+            this.btnTransactions.Size = new System.Drawing.Size(150, 75);
             this.btnTransactions.TabIndex = 3;
             this.btnTransactions.Text = "SALE HISTORY";
             this.btnTransactions.UseVisualStyleBackColor = false;
             // 
             // btnStaff
             // 
+            this.btnStaff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStaff.BackColor = System.Drawing.Color.Silver;
             this.btnStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStaff.Location = new System.Drawing.Point(0, 480);
+            this.btnStaff.Location = new System.Drawing.Point(0, 375);
             this.btnStaff.Name = "btnStaff";
-            this.btnStaff.Size = new System.Drawing.Size(150, 110);
+            this.btnStaff.Size = new System.Drawing.Size(150, 75);
             this.btnStaff.TabIndex = 4;
             this.btnStaff.Text = "STAFF";
             this.btnStaff.UseVisualStyleBackColor = false;
             // 
             // btnStatistics
             // 
+            this.btnStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStatistics.BackColor = System.Drawing.Color.Silver;
             this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistics.Location = new System.Drawing.Point(0, 590);
+            this.btnStatistics.Location = new System.Drawing.Point(0, 450);
             this.btnStatistics.Name = "btnStatistics";
-            this.btnStatistics.Size = new System.Drawing.Size(150, 110);
+            this.btnStatistics.Size = new System.Drawing.Size(150, 75);
             this.btnStatistics.TabIndex = 5;
             this.btnStatistics.Text = "STATISTICS";
             this.btnStatistics.UseVisualStyleBackColor = false;
             // 
             // btnBackups
             // 
+            this.btnBackups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBackups.BackColor = System.Drawing.Color.Silver;
             this.btnBackups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBackups.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackups.Location = new System.Drawing.Point(0, 700);
+            this.btnBackups.Location = new System.Drawing.Point(0, 525);
             this.btnBackups.Name = "btnBackups";
-            this.btnBackups.Size = new System.Drawing.Size(150, 110);
+            this.btnBackups.Size = new System.Drawing.Size(150, 75);
             this.btnBackups.TabIndex = 6;
             this.btnBackups.Text = "BACKUPS";
             this.btnBackups.UseVisualStyleBackColor = false;
             // 
             // btnSettings
             // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.BackColor = System.Drawing.Color.Silver;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettings.Location = new System.Drawing.Point(0, 810);
+            this.btnSettings.Location = new System.Drawing.Point(0, 600);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(150, 110);
+            this.btnSettings.Size = new System.Drawing.Size(150, 75);
             this.btnSettings.TabIndex = 8;
             this.btnSettings.Text = "SETTINGS";
             this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnLogOut
             // 
+            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogOut.BackColor = System.Drawing.Color.Silver;
             this.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogOut.Location = new System.Drawing.Point(0, 970);
+            this.btnLogOut.Location = new System.Drawing.Point(0, 1005);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(150, 110);
+            this.btnLogOut.Size = new System.Drawing.Size(150, 75);
             this.btnLogOut.TabIndex = 9;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = false;
             // 
             // btnSubTab1
             // 
+            this.btnSubTab1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab1.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab1.Location = new System.Drawing.Point(150, 0);
+            this.btnSubTab1.Location = new System.Drawing.Point(0, 0);
             this.btnSubTab1.Name = "btnSubTab1";
             this.btnSubTab1.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab1.TabIndex = 10;
@@ -396,11 +415,13 @@
             // 
             // btnSubTab2
             // 
+            this.btnSubTab2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab2.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab2.Location = new System.Drawing.Point(300, 0);
+            this.btnSubTab2.Location = new System.Drawing.Point(150, 0);
             this.btnSubTab2.Name = "btnSubTab2";
             this.btnSubTab2.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab2.TabIndex = 11;
@@ -410,11 +431,13 @@
             // 
             // btnSubTab3
             // 
+            this.btnSubTab3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab3.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab3.Location = new System.Drawing.Point(450, 0);
+            this.btnSubTab3.Location = new System.Drawing.Point(300, 0);
             this.btnSubTab3.Name = "btnSubTab3";
             this.btnSubTab3.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab3.TabIndex = 12;
@@ -424,11 +447,13 @@
             // 
             // btnSubTab4
             // 
+            this.btnSubTab4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab4.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab4.Location = new System.Drawing.Point(600, 0);
+            this.btnSubTab4.Location = new System.Drawing.Point(450, 0);
             this.btnSubTab4.Name = "btnSubTab4";
             this.btnSubTab4.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab4.TabIndex = 13;
@@ -438,11 +463,13 @@
             // 
             // btnSubTab5
             // 
+            this.btnSubTab5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab5.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab5.Location = new System.Drawing.Point(750, 0);
+            this.btnSubTab5.Location = new System.Drawing.Point(600, 0);
             this.btnSubTab5.Name = "btnSubTab5";
             this.btnSubTab5.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab5.TabIndex = 14;
@@ -452,11 +479,13 @@
             // 
             // btnSubTab6
             // 
+            this.btnSubTab6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab6.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab6.Location = new System.Drawing.Point(900, 0);
+            this.btnSubTab6.Location = new System.Drawing.Point(750, 0);
             this.btnSubTab6.Name = "btnSubTab6";
             this.btnSubTab6.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab6.TabIndex = 15;
@@ -466,11 +495,13 @@
             // 
             // btnSubTab7
             // 
+            this.btnSubTab7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubTab7.BackColor = System.Drawing.Color.Silver;
             this.btnSubTab7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSubTab7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubTab7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab7.Location = new System.Drawing.Point(1050, 0);
+            this.btnSubTab7.Location = new System.Drawing.Point(900, 0);
             this.btnSubTab7.Name = "btnSubTab7";
             this.btnSubTab7.Size = new System.Drawing.Size(150, 100);
             this.btnSubTab7.TabIndex = 16;
@@ -479,9 +510,12 @@
             // 
             // lblMessageOutput
             // 
+            this.lblMessageOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMessageOutput.BackColor = System.Drawing.Color.White;
             this.lblMessageOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMessageOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageOutput.Location = new System.Drawing.Point(1720, 0);
+            this.lblMessageOutput.Location = new System.Drawing.Point(1570, 0);
             this.lblMessageOutput.Name = "lblMessageOutput";
             this.lblMessageOutput.Size = new System.Drawing.Size(200, 100);
             this.lblMessageOutput.TabIndex = 43;
@@ -1666,18 +1700,18 @@
             // 
             this.pnlSell.Controls.Add(this.txtCheckOutPrice);
             this.pnlSell.Controls.Add(this.lblCheckOutPrice);
-            this.pnlSell.Controls.Add(this.textBox5);
+            this.pnlSell.Controls.Add(this.txtSellOverdueBooks);
             this.pnlSell.Controls.Add(this.lblSellBooksOverdueBooks);
-            this.pnlSell.Controls.Add(this.listView2);
-            this.pnlSell.Controls.Add(this.label5);
-            this.pnlSell.Controls.Add(this.textBox6);
-            this.pnlSell.Controls.Add(this.label6);
-            this.pnlSell.Controls.Add(this.textBox7);
-            this.pnlSell.Controls.Add(this.label7);
-            this.pnlSell.Controls.Add(this.textBox8);
-            this.pnlSell.Controls.Add(this.label8);
-            this.pnlSell.Controls.Add(this.button2);
-            this.pnlSell.Controls.Add(this.button3);
+            this.pnlSell.Controls.Add(this.lsvSellSelectedBooks);
+            this.pnlSell.Controls.Add(this.lblSellSelectedBooks);
+            this.pnlSell.Controls.Add(this.txtSellLoans);
+            this.pnlSell.Controls.Add(this.lblSellLoans);
+            this.pnlSell.Controls.Add(this.txtSellMemberBarcode);
+            this.pnlSell.Controls.Add(this.lblSellMemberBarcode);
+            this.pnlSell.Controls.Add(this.txtSellMemberName);
+            this.pnlSell.Controls.Add(this.lblSellMemberName);
+            this.pnlSell.Controls.Add(this.btnSellCancel);
+            this.pnlSell.Controls.Add(this.btnSellSave);
             this.pnlSell.Location = new System.Drawing.Point(150, 100);
             this.pnlSell.Name = "pnlSell";
             this.pnlSell.Size = new System.Drawing.Size(1770, 980);
@@ -1702,14 +1736,14 @@
             this.lblCheckOutPrice.TabIndex = 27;
             this.lblCheckOutPrice.Text = "Check Out Price:";
             // 
-            // textBox5
+            // txtSellOverdueBooks
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(291, 227);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(150, 38);
-            this.textBox5.TabIndex = 26;
+            this.txtSellOverdueBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellOverdueBooks.Location = new System.Drawing.Point(291, 227);
+            this.txtSellOverdueBooks.Name = "txtSellOverdueBooks";
+            this.txtSellOverdueBooks.ReadOnly = true;
+            this.txtSellOverdueBooks.Size = new System.Drawing.Size(150, 38);
+            this.txtSellOverdueBooks.TabIndex = 26;
             // 
             // lblSellBooksOverdueBooks
             // 
@@ -1721,104 +1755,104 @@
             this.lblSellBooksOverdueBooks.TabIndex = 25;
             this.lblSellBooksOverdueBooks.Text = "Overdue Books:";
             // 
-            // listView2
+            // lsvSellSelectedBooks
             // 
-            this.listView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(291, 347);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(1179, 627);
-            this.listView2.TabIndex = 24;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.lsvSellSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvSellSelectedBooks.HideSelection = false;
+            this.lsvSellSelectedBooks.Location = new System.Drawing.Point(291, 347);
+            this.lsvSellSelectedBooks.Name = "lsvSellSelectedBooks";
+            this.lsvSellSelectedBooks.Size = new System.Drawing.Size(1179, 627);
+            this.lsvSellSelectedBooks.TabIndex = 24;
+            this.lsvSellSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
-            // label5
+            // lblSellSelectedBooks
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(15, 350);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(211, 31);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Selected Books:";
+            this.lblSellSelectedBooks.AutoSize = true;
+            this.lblSellSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSellSelectedBooks.Location = new System.Drawing.Point(15, 350);
+            this.lblSellSelectedBooks.Name = "lblSellSelectedBooks";
+            this.lblSellSelectedBooks.Size = new System.Drawing.Size(211, 31);
+            this.lblSellSelectedBooks.TabIndex = 23;
+            this.lblSellSelectedBooks.Text = "Selected Books:";
             // 
-            // textBox6
+            // txtSellLoans
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(291, 167);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(150, 38);
-            this.textBox6.TabIndex = 22;
+            this.txtSellLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellLoans.Location = new System.Drawing.Point(249, 167);
+            this.txtSellLoans.Name = "txtSellLoans";
+            this.txtSellLoans.ReadOnly = true;
+            this.txtSellLoans.Size = new System.Drawing.Size(212, 38);
+            this.txtSellLoans.TabIndex = 22;
             // 
-            // label6
+            // lblSellLoans
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 170);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(194, 31);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Current Loans:";
+            this.lblSellLoans.AutoSize = true;
+            this.lblSellLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSellLoans.Location = new System.Drawing.Point(15, 170);
+            this.lblSellLoans.Name = "lblSellLoans";
+            this.lblSellLoans.Size = new System.Drawing.Size(194, 31);
+            this.lblSellLoans.TabIndex = 21;
+            this.lblSellLoans.Text = "Current Loans:";
             // 
-            // textBox7
+            // txtSellMemberBarcode
             // 
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(291, 47);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(1179, 38);
-            this.textBox7.TabIndex = 20;
+            this.txtSellMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellMemberBarcode.Location = new System.Drawing.Point(249, 47);
+            this.txtSellMemberBarcode.Name = "txtSellMemberBarcode";
+            this.txtSellMemberBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtSellMemberBarcode.TabIndex = 20;
             // 
-            // label7
+            // lblSellMemberBarcode
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(228, 31);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Member Barcode:";
+            this.lblSellMemberBarcode.AutoSize = true;
+            this.lblSellMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSellMemberBarcode.Location = new System.Drawing.Point(15, 50);
+            this.lblSellMemberBarcode.Name = "lblSellMemberBarcode";
+            this.lblSellMemberBarcode.Size = new System.Drawing.Size(228, 31);
+            this.lblSellMemberBarcode.TabIndex = 19;
+            this.lblSellMemberBarcode.Text = "Member Barcode:";
             // 
-            // textBox8
+            // txtSellMemberName
             // 
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.Location = new System.Drawing.Point(291, 107);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(1179, 38);
-            this.textBox8.TabIndex = 18;
+            this.txtSellMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellMemberName.Location = new System.Drawing.Point(249, 107);
+            this.txtSellMemberName.Name = "txtSellMemberName";
+            this.txtSellMemberName.Size = new System.Drawing.Size(1241, 38);
+            this.txtSellMemberName.TabIndex = 18;
             // 
-            // label8
+            // lblSellMemberName
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(15, 110);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(199, 31);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Member Name:";
+            this.lblSellMemberName.AutoSize = true;
+            this.lblSellMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSellMemberName.Location = new System.Drawing.Point(15, 110);
+            this.lblSellMemberName.Name = "lblSellMemberName";
+            this.lblSellMemberName.Size = new System.Drawing.Size(199, 31);
+            this.lblSellMemberName.TabIndex = 17;
+            this.lblSellMemberName.Text = "Member Name:";
             // 
-            // button2
+            // btnSellCancel
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(1644, 924);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 50);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnSellCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSellCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSellCancel.Location = new System.Drawing.Point(1644, 924);
+            this.btnSellCancel.Name = "btnSellCancel";
+            this.btnSellCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnSellCancel.TabIndex = 14;
+            this.btnSellCancel.Text = "Cancel";
+            this.btnSellCancel.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnSellSave
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(1518, 924);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 50);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnSellSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSellSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSellSave.Location = new System.Drawing.Point(1518, 924);
+            this.btnSellSave.Name = "btnSellSave";
+            this.btnSellSave.Size = new System.Drawing.Size(120, 50);
+            this.btnSellSave.TabIndex = 13;
+            this.btnSellSave.Text = "Save";
+            this.btnSellSave.UseVisualStyleBackColor = false;
             // 
             // pnlSetting
             // 
@@ -1938,6 +1972,9 @@
             // 
             // pnlCheckIn
             // 
+            this.pnlCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheckIn.Controls.Add(this.lblCheckInEnterBarcode);
             this.pnlCheckIn.Controls.Add(this.txtCheckInEnterBarcode);
             this.pnlCheckIn.Controls.Add(this.lblCheckInLateFees);
@@ -1959,6 +1996,26 @@
             this.pnlCheckIn.Size = new System.Drawing.Size(1770, 980);
             this.pnlCheckIn.TabIndex = 52;
             // 
+            // lblCheckInEnterBarcode
+            // 
+            this.lblCheckInEnterBarcode.AutoSize = true;
+            this.lblCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheckInEnterBarcode.Location = new System.Drawing.Point(15, 350);
+            this.lblCheckInEnterBarcode.Name = "lblCheckInEnterBarcode";
+            this.lblCheckInEnterBarcode.Size = new System.Drawing.Size(206, 31);
+            this.lblCheckInEnterBarcode.TabIndex = 29;
+            this.lblCheckInEnterBarcode.Text = "Enter barcodes:";
+            // 
+            // txtCheckInEnterBarcode
+            // 
+            this.txtCheckInEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCheckInEnterBarcode.Location = new System.Drawing.Point(249, 347);
+            this.txtCheckInEnterBarcode.Name = "txtCheckInEnterBarcode";
+            this.txtCheckInEnterBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtCheckInEnterBarcode.TabIndex = 30;
+            // 
             // lblCheckInLateFees
             // 
             this.lblCheckInLateFees.AutoSize = true;
@@ -1972,10 +2029,10 @@
             // txtCheckInOverdue
             // 
             this.txtCheckInOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInOverdue.Location = new System.Drawing.Point(311, 227);
+            this.txtCheckInOverdue.Location = new System.Drawing.Point(249, 227);
             this.txtCheckInOverdue.Name = "txtCheckInOverdue";
             this.txtCheckInOverdue.ReadOnly = true;
-            this.txtCheckInOverdue.Size = new System.Drawing.Size(150, 38);
+            this.txtCheckInOverdue.Size = new System.Drawing.Size(212, 38);
             this.txtCheckInOverdue.TabIndex = 26;
             // 
             // lblCheckInOverdue
@@ -1990,11 +2047,14 @@
             // 
             // lsvCheckInSelectedBooks
             // 
+            this.lsvCheckInSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvCheckInSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckInSelectedBooks.HideSelection = false;
-            this.lsvCheckInSelectedBooks.Location = new System.Drawing.Point(311, 407);
+            this.lsvCheckInSelectedBooks.Location = new System.Drawing.Point(249, 407);
             this.lsvCheckInSelectedBooks.Name = "lsvCheckInSelectedBooks";
-            this.lsvCheckInSelectedBooks.Size = new System.Drawing.Size(1179, 567);
+            this.lsvCheckInSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvCheckInSelectedBooks.TabIndex = 24;
             this.lsvCheckInSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
@@ -2011,10 +2071,10 @@
             // txtCheckInLoans
             // 
             this.txtCheckInLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInLoans.Location = new System.Drawing.Point(311, 167);
+            this.txtCheckInLoans.Location = new System.Drawing.Point(249, 167);
             this.txtCheckInLoans.Name = "txtCheckInLoans";
             this.txtCheckInLoans.ReadOnly = true;
-            this.txtCheckInLoans.Size = new System.Drawing.Size(150, 38);
+            this.txtCheckInLoans.Size = new System.Drawing.Size(212, 38);
             this.txtCheckInLoans.TabIndex = 22;
             // 
             // lblCheckInLoans
@@ -2029,10 +2089,12 @@
             // 
             // txtCheckInMemberBarcode
             // 
+            this.txtCheckInMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheckInMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInMemberBarcode.Location = new System.Drawing.Point(311, 47);
+            this.txtCheckInMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtCheckInMemberBarcode.Name = "txtCheckInMemberBarcode";
-            this.txtCheckInMemberBarcode.Size = new System.Drawing.Size(1179, 38);
+            this.txtCheckInMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtCheckInMemberBarcode.TabIndex = 20;
             // 
             // lblCheckInMemberBarcode
@@ -2047,11 +2109,13 @@
             // 
             // txtCheckInMemberName
             // 
+            this.txtCheckInMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCheckInMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInMemberName.Location = new System.Drawing.Point(311, 107);
+            this.txtCheckInMemberName.Location = new System.Drawing.Point(249, 107);
             this.txtCheckInMemberName.Name = "txtCheckInMemberName";
             this.txtCheckInMemberName.ReadOnly = true;
-            this.txtCheckInMemberName.Size = new System.Drawing.Size(1179, 38);
+            this.txtCheckInMemberName.Size = new System.Drawing.Size(1241, 38);
             this.txtCheckInMemberName.TabIndex = 18;
             // 
             // lblCheckInMemberName
@@ -2066,6 +2130,7 @@
             // 
             // btnCheckInCancel
             // 
+            this.btnCheckInCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckInCancel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCheckInCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckInCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2079,14 +2144,15 @@
             // txtCheckInLateFees
             // 
             this.txtCheckInLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInLateFees.Location = new System.Drawing.Point(311, 287);
+            this.txtCheckInLateFees.Location = new System.Drawing.Point(249, 287);
             this.txtCheckInLateFees.Name = "txtCheckInLateFees";
             this.txtCheckInLateFees.ReadOnly = true;
-            this.txtCheckInLateFees.Size = new System.Drawing.Size(150, 38);
+            this.txtCheckInLateFees.Size = new System.Drawing.Size(212, 38);
             this.txtCheckInLateFees.TabIndex = 28;
             // 
             // btnCheckInSave
             // 
+            this.btnCheckInSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckInSave.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCheckInSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckInSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2495,16 +2561,16 @@
             // 
             // chtStatisticsChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend2);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series3);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series2);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2650,6 +2716,8 @@
             // 
             // pctIcon
             // 
+            this.pctIcon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pctIcon.BackColor = System.Drawing.Color.White;
             this.pctIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pctIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -2660,44 +2728,43 @@
             this.pctIcon.TabStop = false;
             this.pctIcon.Click += new System.EventHandler(this.pctIcon_Click);
             // 
-            // pctMainTabs
+            // pnlMainTabs
             // 
-            this.pctMainTabs.BackColor = System.Drawing.Color.LightBlue;
-            this.pctMainTabs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pctMainTabs.Location = new System.Drawing.Point(0, 150);
-            this.pctMainTabs.Name = "pctMainTabs";
-            this.pctMainTabs.Size = new System.Drawing.Size(150, 930);
-            this.pctMainTabs.TabIndex = 0;
-            this.pctMainTabs.TabStop = false;
+            this.pnlMainTabs.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlMainTabs.Controls.Add(this.pctIcon);
+            this.pnlMainTabs.Controls.Add(this.btnBooks);
+            this.pnlMainTabs.Controls.Add(this.btnMembers);
+            this.pnlMainTabs.Controls.Add(this.btnTransactions);
+            this.pnlMainTabs.Controls.Add(this.btnStaff);
+            this.pnlMainTabs.Controls.Add(this.btnStatistics);
+            this.pnlMainTabs.Controls.Add(this.btnBackups);
+            this.pnlMainTabs.Controls.Add(this.btnSettings);
+            this.pnlMainTabs.Controls.Add(this.btnLogOut);
+            this.pnlMainTabs.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlMainTabs.Location = new System.Drawing.Point(0, 0);
+            this.pnlMainTabs.Name = "pnlMainTabs";
+            this.pnlMainTabs.Size = new System.Drawing.Size(150, 1080);
+            this.pnlMainTabs.TabIndex = 31;
             // 
-            // pctSecondaryTabs
+            // pnlSubTabs
             // 
-            this.pctSecondaryTabs.BackColor = System.Drawing.Color.PowderBlue;
-            this.pctSecondaryTabs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pctSecondaryTabs.Location = new System.Drawing.Point(150, 0);
-            this.pctSecondaryTabs.Name = "pctSecondaryTabs";
-            this.pctSecondaryTabs.Size = new System.Drawing.Size(1770, 100);
-            this.pctSecondaryTabs.TabIndex = 10;
-            this.pctSecondaryTabs.TabStop = false;
-            // 
-            // lblCheckInEnterBarcode
-            // 
-            this.lblCheckInEnterBarcode.AutoSize = true;
-            this.lblCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInEnterBarcode.Location = new System.Drawing.Point(15, 350);
-            this.lblCheckInEnterBarcode.Name = "lblCheckInEnterBarcode";
-            this.lblCheckInEnterBarcode.Size = new System.Drawing.Size(206, 31);
-            this.lblCheckInEnterBarcode.TabIndex = 29;
-            this.lblCheckInEnterBarcode.Text = "Enter barcodes:";
-            // 
-            // txtCheckInEnterBarcode
-            // 
-            this.txtCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInEnterBarcode.Location = new System.Drawing.Point(311, 347);
-            this.txtCheckInEnterBarcode.Name = "txtCheckInEnterBarcode";
-            this.txtCheckInEnterBarcode.ReadOnly = true;
-            this.txtCheckInEnterBarcode.Size = new System.Drawing.Size(150, 38);
-            this.txtCheckInEnterBarcode.TabIndex = 30;
+            this.pnlSubTabs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSubTabs.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlSubTabs.Controls.Add(this.btnSubTab1);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab2);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab3);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab4);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab5);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab6);
+            this.pnlSubTabs.Controls.Add(this.btnSubTab7);
+            this.pnlSubTabs.Controls.Add(this.lblMessageOutput);
+            this.pnlSubTabs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSubTabs.Location = new System.Drawing.Point(150, 0);
+            this.pnlSubTabs.Margin = new System.Windows.Forms.Padding(150, 0, 0, 0);
+            this.pnlSubTabs.Name = "pnlSubTabs";
+            this.pnlSubTabs.Padding = new System.Windows.Forms.Padding(150, 0, 0, 0);
+            this.pnlSubTabs.Size = new System.Drawing.Size(1770, 100);
+            this.pnlSubTabs.TabIndex = 31;
             // 
             // frmMainSystem
             // 
@@ -2705,37 +2772,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlSubTabs);
+            this.Controls.Add(this.pnlMainTabs);
+            this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlCheckIn);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlCheckOut);
-            this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlMember);
             this.Controls.Add(this.pnlSatistics);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlSetting);
             this.Controls.Add(this.pnlStaff);
-            this.Controls.Add(this.lblMessageOutput);
-            this.Controls.Add(this.btnSubTab7);
-            this.Controls.Add(this.btnSubTab6);
-            this.Controls.Add(this.btnSubTab5);
-            this.Controls.Add(this.btnSubTab4);
-            this.Controls.Add(this.btnSubTab3);
-            this.Controls.Add(this.btnSubTab2);
-            this.Controls.Add(this.btnSubTab1);
-            this.Controls.Add(this.btnLogOut);
-            this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.btnBackups);
-            this.Controls.Add(this.btnStatistics);
-            this.Controls.Add(this.btnStaff);
-            this.Controls.Add(this.btnTransactions);
-            this.Controls.Add(this.btnMembers);
-            this.Controls.Add(this.btnBooks);
-            this.Controls.Add(this.pctIcon);
-            this.Controls.Add(this.pctMainTabs);
-            this.Controls.Add(this.pctSecondaryTabs);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(1366, 768);
             this.Name = "frmMainSystem";
             this.Text = "Main System";
@@ -2773,15 +2824,13 @@
             this.grpStatisticsInputs.PerformLayout();
             this.pnlBackup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctMainTabs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctSecondaryTabs)).EndInit();
+            this.pnlMainTabs.ResumeLayout(false);
+            this.pnlSubTabs.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pctMainTabs;
         private System.Windows.Forms.PictureBox pctIcon;
         private System.Windows.Forms.Button btnBooks;
         private System.Windows.Forms.Button btnMembers;
@@ -2791,7 +2840,6 @@
         private System.Windows.Forms.Button btnBackups;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnLogOut;
-        private System.Windows.Forms.PictureBox pctSecondaryTabs;
         private System.Windows.Forms.Button btnSubTab1;
         private System.Windows.Forms.Button btnSubTab2;
         private System.Windows.Forms.Button btnSubTab3;
@@ -2903,18 +2951,18 @@
         private System.Windows.Forms.Panel pnlSell;
         private System.Windows.Forms.TextBox txtCheckOutPrice;
         private System.Windows.Forms.Label lblCheckOutPrice;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtSellOverdueBooks;
         private System.Windows.Forms.Label lblSellBooksOverdueBooks;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListView lsvSellSelectedBooks;
+        private System.Windows.Forms.Label lblSellSelectedBooks;
+        private System.Windows.Forms.TextBox txtSellLoans;
+        private System.Windows.Forms.Label lblSellLoans;
+        private System.Windows.Forms.TextBox txtSellMemberBarcode;
+        private System.Windows.Forms.Label lblSellMemberBarcode;
+        private System.Windows.Forms.TextBox txtSellMemberName;
+        private System.Windows.Forms.Label lblSellMemberName;
+        private System.Windows.Forms.Button btnSellCancel;
+        private System.Windows.Forms.Button btnSellSave;
         private System.Windows.Forms.Panel pnlSetting;
         private System.Windows.Forms.Label lblDefaultSettings;
         private System.Windows.Forms.TextBox txtSettingDefault;
@@ -3007,5 +3055,7 @@
         private System.Windows.Forms.Label lblCheckInEnterBarcode;
         private System.Windows.Forms.TextBox txtCheckInEnterBarcode;
         private System.Windows.Forms.Panel pnlCheckIn;
+        private System.Windows.Forms.Panel pnlMainTabs;
+        private System.Windows.Forms.Panel pnlSubTabs;
     }
 }

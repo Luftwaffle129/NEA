@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -14,76 +11,107 @@ namespace NEALibrarySystem.Data_Structures
     public static class DataLibrary
     {
         #region data structures
-        private static List<Book> books = new List<Book>();
+        #region books
+        private static List<Book> _books = new List<Book>();
         public static List<Book> Books
         {
-            get { return books; }
-            set { books = value ?? new List<Book>(); }
-        }
-        private static List<string> bookSearchResults = new List<string>();
-        public static List<string> BookSearchResults
-        {
-            get { return bookSearchResults; }
-            set { bookSearchResults = value ?? new List<string>();}
-        }
-        /*
-        private static List<BookCopy> bookCopies = new List<BookCopy>();
-        public static List<BookCopy> BookCopies
-        {
-            get { return bookCopies; }
-            set { bookCopies = value ?? new List<BookCopy>(); }
-        }
-        */
-        private static List<Member> members = new List<Member>();
-        public static List<Member> Members
-        {
-            get { return members; }
-            set { members = value ?? new List<Member>(); }
-        }
-        private static List<ItemID> titles = new List<ItemID>();
-        public static List<ItemID> Titles
-        { 
-            get { return titles; } 
-            set { titles = value ?? new List<ItemID>(); }
-        }
-        private static List<ItemID> mediaTypes = new List<ItemID>();
-        public static List<ItemID> MediaTypes
-        {
-            get { return mediaTypes; }
-            set { mediaTypes = value ?? new List<ItemID>(); }
-        }
-        private static List<ItemID> authors = new List<ItemID>();
-        public static List<ItemID> Authors
-        {
-            get { return authors; }
-            set { authors = value ?? new List<ItemID>(); }
-        }
-        private static List<ItemID> publishers = new List<ItemID>();
-        public static List<ItemID> Publishers
-        {
-            get { return publishers; }
-            set { publishers = value ?? new List<ItemID>(); }
-        }
-        private static List<ItemID> genres = new List<ItemID>();
-        public static List<ItemID> Genres
-        {
-            get { return genres; }
-            set { genres = value ?? new List<ItemID>(); }
-        }
-        private static List<ItemID> themes = new List<ItemID>();
-        public static List<ItemID> Themes
-        {
-            get { return themes; }
-            set { themes = value ?? new List<ItemID>(); }
-        }
-        private static List<Staff> staff = new List<Staff>();
-        public static List<Staff> Staff
-        {
-            get { return staff; }
-            set { staff = value ?? new List<Staff>(); }
+            get { return _books; }
+            set { _books = value ?? new List<Book>(); }
         }
         #endregion
-
+        #region bookSearchResults
+        private static List<string> _bookSearchResults = new List<string>();
+        public static List<string> BookSearchResults
+        {
+            get { return _bookSearchResults; }
+            set { _bookSearchResults = value ?? new List<string>();}
+        }
+        #endregion
+        #region members
+        private static List<Member> _members = new List<Member>();
+        public static List<Member> Members
+        {
+            get { return _members; }
+            set { _members = value ?? new List<Member>(); }
+        }
+        #endregion
+        #region titles
+        private static List<ItemID> _titles = new List<ItemID>();
+        public static List<ItemID> Titles
+        { 
+            get { return _titles; } 
+            set { _titles = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region mediaTypes
+        private static List<ItemID> _mediaTypes = new List<ItemID>();
+        public static List<ItemID> MediaTypes
+        {
+            get { return _mediaTypes; }
+            set { _mediaTypes = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region author
+        private static List<ItemID> _authors = new List<ItemID>();
+        public static List<ItemID> Authors
+        {
+            get { return _authors; }
+            set { _authors = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region publishers
+        private static List<ItemID> _publishers = new List<ItemID>();
+        public static List<ItemID> Publishers
+        {
+            get { return _publishers; }
+            set { _publishers = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region genres
+        private static List<ItemID> _genres = new List<ItemID>();
+        public static List<ItemID> Genres
+        {
+            get { return _genres; }
+            set { _genres = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region themes
+        private static List<ItemID> _themes = new List<ItemID>();
+        public static List<ItemID> Themes
+        {
+            get { return _themes; }
+            set { _themes = value ?? new List<ItemID>(); }
+        }
+        #endregion
+        #region staff
+        private static List<Staff> _staff = new List<Staff>();
+        public static List<Staff> Staff
+        {
+            get { return _staff; }
+            set { _staff = value ?? new List<Staff>(); }
+        }
+        #endregion
+        #region selectedBooks
+        private static List<Book> _selectedBooks = new List<Book>();
+        public static List<Book> SelectedBooks
+        {
+            get { return _selectedBooks; }
+            set { _selectedBooks = value ?? new List<Book>(); }
+        }
+        #endregion
+        #endregion
+        #region enums
+        public enum Feature
+        {
+            Book = 0,
+            Member = 1,
+            Transaction = 2,
+            Staff = 3,
+            Statistics = 4,
+            Backups = 5,
+            Settings = 6,
+        }
+        #endregion
         /// <summary>
         /// creates the directory to save the data fields to
         /// </summary>
