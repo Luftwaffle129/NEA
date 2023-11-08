@@ -47,7 +47,7 @@ namespace NEALibrarySystem
         public void SetTitle(string title)
         {
             List<ItemID> titles = new List<ItemID>();
-            publisherID = SetIDFromName(ref titles, title);
+            titleID = SetIDFromName(ref titles, title);
             DataLibrary.Titles = titles;
         }
         #endregion
@@ -79,7 +79,7 @@ namespace NEALibrarySystem
         public void SetMediaType(string mediaType)
         {
             List<ItemID> mediaTypes = DataLibrary.MediaTypes;
-            publisherID = SetIDFromName(ref mediaTypes, mediaType);
+            mediaTypeID = SetIDFromName(ref mediaTypes, mediaType);
             DataLibrary.MediaTypes = mediaTypes;
         }
         #endregion
@@ -111,7 +111,7 @@ namespace NEALibrarySystem
         public void SetAuthor(string author)
         {
             List<ItemID> authors = DataLibrary.Authors;
-            publisherID = SetIDFromName(ref authors, author);
+            authorID = SetIDFromName(ref authors, author);
             DataLibrary.Authors = authors;
         }
         #endregion

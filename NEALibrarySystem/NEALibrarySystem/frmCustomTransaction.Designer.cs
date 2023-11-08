@@ -1,6 +1,6 @@
 ﻿namespace NEALibrarySystem
 {
-    partial class frmCustomTransaction
+    partial class FrmCustomTransaction
     {
         /// <summary>
         /// Required designer variable.

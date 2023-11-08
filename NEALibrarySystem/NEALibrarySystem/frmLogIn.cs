@@ -12,7 +12,7 @@ namespace NEALibrarySystem
 {
     public partial class frmLogIn : Form
     {
-        frmMainSystem frmMainSystem;
+        FrmMainSystem frmMainSystem;
         frmForgottenPassword frmForgottenPassword;
         public frmLogIn()
         {
@@ -21,7 +21,7 @@ namespace NEALibrarySystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            frmMainSystem = new frmMainSystem();
+            frmMainSystem = new FrmMainSystem();
             frmMainSystem.Show();
             this.Hide();
         }

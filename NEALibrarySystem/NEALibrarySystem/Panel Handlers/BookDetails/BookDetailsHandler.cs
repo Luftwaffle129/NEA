@@ -14,45 +14,55 @@ namespace NEALibrarySystem.PanelHandlers
     {
         private BookDetailsObjects _objects;
         private Book _bookData;
-        public BookDetailsHandler(BookDetailsObjects objs, Book book = null) 
+        private bool _IsNewRecord = false;
+        public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
             _bookData = new Book();
-
-            if (book != null) 
-            {
-                _bookData = book;
-                loadBookDetails();
-            }
-            else
-            {
-                foreach (TextBox textBox in _objects.Fields)
-                {
-                    textBox.Text = "";
-                }
-            }
             InitialiseCopyDetails();
         }
         /// <summary>
         /// Loads the book details into the input boxes
         /// </summary>
-        public void loadBookDetails()
+        public void loadBookDetails(Book book = null)
         {
             //book details
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Title].Text = _bookData.GetTitle();
-            _objects.Fields[(int)BookDetailsObjects.FieldName.SeriesTitle].Text = _bookData.SeriesTitle;
-            _objects.Fields[(int)BookDetailsObjects.FieldName.SeriesNumber].Text = _bookData.SeriesNumber.ToString();
-            _objects.Fields[(int)BookDetailsObjects.FieldName.ISBN].Text = _bookData.ISBN;
-            _objects.Fields[(int)BookDetailsObjects.FieldName.MediaType].Text = _bookData.GetMediaType();
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Author].Text = _bookData.GetAuthor();
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Publisher].Text = _bookData.GetPublisher();
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Genres].Text = DataFormatter.ListToString(_bookData.GetGenres());
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Themes].Text = DataFormatter.ListToString(_bookData.GetThemes());
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Description].Text = _bookData.Description;
-            _objects.Fields[(int)BookDetailsObjects.FieldName.Price].Text = _bookData.Price.ToString();
-            // book copies
+            if (book != null)
+            {
+                _bookData = book;
+                _objects.Title.Text = _bookData.GetTitle();
+                _objects.SeriesTitle.Text = _bookData.SeriesTitle;
+                _objects.SeriesNumber.Text = _bookData.SeriesNumber.ToString();
+                _objects.ISBN.Text = _bookData.ISBN;
+                _objects.MediaType.Text = _bookData.GetMediaType();
+                _objects.Author.Text = _bookData.GetAuthor();
+                _objects.Publisher.Text = _bookData.GetPublisher();
+                _objects.Genres.Text = DataFormatter.ListToString(_bookData.GetGenres());
+                _objects.Themes.Text = DataFormatter.ListToString(_bookData.GetThemes());
+                _objects.Description.Text = _bookData.Description;
+                _objects.Price.Text = _bookData.Price.ToString();
+            }
+            else 
+            {
+                _objects.Title.Text = "";
+                _objects.SeriesTitle.Text = "";
+                _objects.SeriesNumber.Text = "";
+                _objects.ISBN.Text = "";
+                _objects.MediaType.Text = "";
+                _objects.Author.Text = "";
+                _objects.Publisher.Text = "";
+                _objects.Genres.Text = "";
+                _objects.Themes.Text = "";
+                _objects.Description.Text = "";
+                _objects.Price.Text = "";
 
+                _objects.CopyDetails.Items.Clear();
+                _IsNewRecord = true;
+            }
+
+            UpdateBookCopies();
         }
+        #region Book Copies
         /// <summary>
         /// Opens a form to retrieve new books and adds the inputted values into the bookcopyies list
         /// </summary>
@@ -76,21 +86,30 @@ namespace NEALibrarySystem.PanelHandlers
                 }
             }
         }
+        /// <summary>
+        /// deletes the selected book copies
+        /// </summary>
         public void DeleteBookCopies()
         {
-
-        }
-        public void Cancel()
-        {
-
+            foreach(ListViewItem item in _objects.CopyDetails.SelectedItems)
+            {
+                for (int i = 0; i < _bookData.BookCopies.Count; i++)
+                {
+                    if (item.SubItems[0].Text == _bookData.BookCopies[i].Barcode)
+                    {
+                        _bookData.BookCopies.RemoveAt(i);
+                    }
+                }
+            }
+            UpdateBookCopies();
         }
         /// <summary>
-        /// Loads book copies into the book copy details listview
+        /// Updates book copies into the book copy details listview
         /// </summary>
-        private void LoadBookCopies()
+        private void UpdateBookCopies()
         {
             _objects.CopyDetails.Items.Clear();
-            if (_bookData.BookCopies == null)
+            if (_bookData.BookCopies != null)
             {
                 foreach (BookCopy bookCopy in _bookData.BookCopies)
                 {
@@ -124,6 +143,7 @@ namespace NEALibrarySystem.PanelHandlers
                 "Due date"
             };
             AddColumns(columns);
+            _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         private void AddColumns(string[] columns)
         {
@@ -131,6 +151,26 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 _objects.CopyDetails.Columns.Add(column);
             }
+        }
+        #endregion
+        public void Save()
+        {
+            Book temp = new Book();
+            temp.SetTitle(_objects.Title.Text);
+            temp.SeriesTitle = _objects.SeriesTitle.Text;
+            temp.SeriesNumber = Convert.ToInt32(_objects.SeriesNumber.Text);
+            temp.SetMediaType(_objects.MediaType.Text);
+            temp.SetAuthor(_objects.Author.Text);
+            temp.SetPublisher(_objects.Publisher.Text);
+            temp.SetGenres(_objects.Genres.Text.Split(',').ToList<string>());
+            temp.SetThemes(_objects.Themes.Text.Split(',').ToList<string>());
+            temp.Description = _objects.Description.Text;
+            temp.BookCopies = _bookData.BookCopies; 
+            DataLibrary.Books.Add(temp);
+        }
+        public void Cancel()
+        {
+            loadBookDetails();
         }
     }
 }

@@ -13,48 +13,49 @@ using NEALibrarySystem.Data_Structures;
 using System.Drawing.Printing;
 using NEALibrarySystem.SearchList;
 using NEALibrarySystem.Panel_Handlers.BookCheckIn;
+using NEALibrarySystem.PanelHandlers;
 
 namespace NEALibrarySystem
 {
-    public partial class frmMainSystem : Form
+    public partial class FrmMainSystem : Form
     {
-        public frmMainSystem()
+        public FrmMainSystem()
         {
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
             _searchedItemsHandler = new SearchedItemsHandler(lsvSearchItems);
+            NavigatorOpenBookTab();
         }
 
-        public bool isAdministrator;
+        public bool _isAdministrator;
 
-        #region object manager
-        private Panel[] _panels;
+        #region Navigator
+        private Panel[][] _panels;
         private Button[] _mainTabs;
         private Button[] _subTabs;
-        private DataLibrary.Feature _currentFeature;
+        public DataLibrary.Feature _currentFeature;
 
         private SearchedItemsHandler _searchedItemsHandler;
         private BookCheckInHandler _bookCheckInHandler;
+        private BookDetailsHandler _bookDetailsHandler;
 
         #region initialisation
-        private void InitializePanels()
+        public void InitializePanels()
         {
-            _panels = new Panel[]
+            _panels = new Panel[][] 
             {
-                pnlBackup,
-                pnlBookDetails,
-                pnlCheckIn,
-                pnlCheckOut,
-                pnlDelete,
-                pnlMember,
-                pnlReservation,
-                pnlSatistics,
-                pnlSearch,
-                pnlSell,
-                pnlSetting,
-                pnlStaff
+            new Panel[] { pnlCheckIn, pnlCheckOut, pnlSell, pnlReservation, pnlSearch, pnlBookDetails, pnlDelete },
+            new Panel[] { pnlSearch, pnlMember, pnlDelete },
+            new Panel[] { pnlSearch },
+            new Panel[] { pnlSearch, pnlStaff },
+            new Panel[] { pnlStatistics },
+            new Panel[] { pnlBackup },
+            new Panel[] { pnlSetting }
             };
+
+            InitialiseCheckIn();
+            InitialiseBookDetails();
         }
         private void InitializeTabs()
         {
@@ -94,19 +95,45 @@ namespace NEALibrarySystem
             };
             _bookCheckInHandler = new BookCheckInHandler(bookCheckInObjects);
         }
+        private void InitialiseBookDetails()
+        {
+            BookDetailsObjects bookDetailsObjects = new BookDetailsObjects()
+            {
+                CopyDetails = lsvBookCopyDetails,
+                InStock = txtBooksInStock,
+                Reserved = txtBooksReserved,
+                Loaned = txtBookLoaned,
+
+                Title = txtBookTitle,
+                SeriesTitle = txtBookSeriesTitle,
+                SeriesNumber = txtBookSeriesNumber,
+                ISBN = txtBookISBN,
+                MediaType = txtBookMediaType,
+                Author = txtBookAuthor,
+                Publisher = txtBookPublisher,
+                Genres = txtBookGenres,
+                Themes = txtBookThemes,
+                Description = txtBookDescription,
+                Price = txtBookPrice,
+            };
+            _bookDetailsHandler = new BookDetailsHandler(bookDetailsObjects);
+        }
         #endregion
         #region opening panels and tabs
-        private void CloseAllPanels()
+        private void NavigatorCloseAllPanels()
         {
-            foreach (Panel panel in _panels)
+            foreach (Panel[] panelArr in _panels)
             {
-                panel.Visible = false;
+                foreach (Panel panel in panelArr)
+                {
+                    panel.Visible = false;
+                }
             }
         }
-        private void OpenSearchViewTab(DataLibrary.Feature feature)
+        private void NavigatorOpenSearchViewTab()
         {
             pnlSearch.Visible = true;
-            switch (feature)
+            switch (_currentFeature)
             {
                 case DataLibrary.Feature.Book:
                     _searchedItemsHandler.ToBook();
@@ -124,27 +151,43 @@ namespace NEALibrarySystem
 
             }
         }
-        private void OpenBookTab()
+        private void NavigatorOpenBookTab()
         {
-            CloseAllPanels();
             _currentFeature = DataLibrary.Feature.Book;
-            OpenSearchViewTab(_currentFeature);
+
             string[] bookTabs =
-{
+            {
                 "Check In",
                 "Check Out",
-                "Create reservation",
-                "Sell books",
+                "Sell",
+                "Create Reservation",
                 "Search Books",
-                "Search Reservations",
-                "Add Book",
+                "Create New Book",
                 "Remove Books"
             };
-            SetSubTabNames(bookTabs);
+            NavigatorSetSubTabNames(bookTabs);
+
+            NavigatorCloseAllPanels();
+            NavigatorOpenSearchViewTab();
+        }
+        private void NavigatorOpenMemberTab()
+        {
+            _currentFeature = DataLibrary.Feature.Member;
+
+            string[] memberTabs =
+            {
+                "Search Members",
+                "Add Member",
+                "Delete Member"
+            };
+            NavigatorSetSubTabNames(memberTabs);
+
+            NavigatorCloseAllPanels();
+            NavigatorOpenSearchViewTab();
         }
         #endregion
         #region sub tab handling
-        private void SetSubTabNames(string[] tabs)
+        private void NavigatorSetSubTabNames(string[] tabs)
         {
             for (int i = 0; i < _subTabs.Length; i++)
             {
@@ -159,30 +202,40 @@ namespace NEALibrarySystem
                 }
             }
         }
-        private void RedirectorSubTab1()
+        private void NavigatorSubTab(int index)
         {
+            NavigatorCloseAllPanels();
+            int feature = 0;
             switch (_currentFeature)
             {
                 case DataLibrary.Feature.Book:
-                    CloseAllPanels();
-                    pnlCheckIn.Visible = true;
-                    _bookCheckInHandler.LoadCheckInPanel();
+                    feature = 0;
+                    break;
+                case DataLibrary.Feature.Member:
+                    feature = 1;
+                    break;
+                case DataLibrary.Feature.Transaction: 
+                    feature = 2; 
+                    break;
+                case DataLibrary.Feature.Staff: 
+                    feature = 3; 
+                    break;
+                case DataLibrary.Feature.Statistics: 
+                    feature = 4;
+                    break;
+                case DataLibrary.Feature.Backups: 
+                    feature = 5; 
+                    break;
+                case DataLibrary.Feature.Settings: 
+                    feature = 6; 
                     break;
             }
-        }
-        private void RedirectorSubTab2()
-        {
-            switch (_currentFeature)
-            {
-                case DataLibrary.Feature.Book:
-
-                    break;
-            }
+            _panels[feature][index].Visible = true;
         }
         #endregion
         private void ChangeIcon()
         {
-            switch(_currentFeature)
+            switch (_currentFeature)
             {
                 case DataLibrary.Feature.Book:
                     //set pic icon
@@ -202,11 +255,12 @@ namespace NEALibrarySystem
         #region main tabs
         private void btnBooks_Click(object sender, EventArgs e)
         {
-            OpenBookTab();
+            NavigatorOpenBookTab();
         }
         private void btnMembers_Click(object sender, EventArgs e)
         {
-            DataLibrary.LoadTestData1();
+            //DataLibrary.LoadTestData1();
+            NavigatorOpenMemberTab();
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -217,60 +271,106 @@ namespace NEALibrarySystem
         }
         #endregion
         #region sub tabs
-        private void btnSecondaryTab1_Click(object sender, EventArgs e)
+        private void btnSubTab1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            NavigatorSubTab(0);
+        }
+        private void btnSubTab2_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(1);
+        }
+        private void btnSubTab3_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(2);
+        }
+        private void btnSubTab4_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(3);
+        }
+        private void btnSubTab5_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(4);
+        }
+        private void btnSubTab6_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(5);
+        }
+        private void btnSubTab7_Click(object sender, EventArgs e)
+        {
+            NavigatorSubTab(6);
+        }
+        #endregion
+        #region panel visibility
+        private void pnlCheckOut_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlCheckOut.Visible)
             {
-
+                
             }
         }
-        frmDesigner frmDesigner;
-        private void btnSecondaryTab2_Click(object sender, EventArgs e)
+        private void pnlCheckIn_VisibleChanged(object sender, EventArgs e)
         {
-            frmDesigner = new frmDesigner();
-            frmDesigner.ShowDialog();
+            if (pnlCheckIn.Visible)
+            {
+                _bookCheckInHandler.LoadCheckInPanel();
+            }
         }
+        private void pnlSell_VisibleChanged(object sender, EventArgs e)
+        {
+            
+        }
+        private void pnlBookDetails_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlBookDetails.Visible)
+            {
+                _bookDetailsHandler.loadBookDetails();
+            }
+        }
+        private void pnlSearch_VisibleChanged(object sender, EventArgs e)
+        {
 
+        }
+        private void pnlMember_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlStatistics_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlDelete_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlBackup_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlSetting_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlStaff_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void pnlReservation_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        private void pnlCheckOut_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void btnBookAddCopies_Click(object sender, EventArgs e)
+        {
+
+        }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        frmCustomTransaction frmCustomTransaction;
-        private void btnSecondaryTab3_Click(object sender, EventArgs e)
-        {
-            frmCustomTransaction = new frmCustomTransaction();
-            frmCustomTransaction.ShowDialog();
-        }
-        bool runT = false;
-        private void btnSecondaryTab4_Click(object sender, EventArgs e)
-        {
-            if (runT)
-            { grpRunningTotal.Visible = false; runT = false; }
-            else
-            { grpRunningTotal.Visible = true; runT = true; }
-        }
-        bool CBar = false;
-        private void btnSecondaryTab5_Click(object sender, EventArgs e)
-        {
-            if (CBar)
-            { chkSearchCopyBarcodes.Visible = false; CBar = false; }
-            else
-            { chkSearchCopyBarcodes.Visible = true; CBar = true; }
-        }
-        frmAddBookCopies frmAddBookCopies;
-        private void btnSecondaryTab6_Click(object sender, EventArgs e)
-        {
-            frmAddBookCopies = new frmAddBookCopies();
-            frmAddBookCopies.ShowDialog();
-        }
-        #endregion
         public void DisplayProcessMessage(string message)
         {
             lblMessageOutput.Text = message;
@@ -281,15 +381,18 @@ namespace NEALibrarySystem
             frmConfirmation = new frmConfirmation();
             frmConfirmation.ShowDialog();
         }
-
-        private void pnlCheckOut_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void btnBookAddCopies_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
+        /*
+         *  OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+         */
     }
 }

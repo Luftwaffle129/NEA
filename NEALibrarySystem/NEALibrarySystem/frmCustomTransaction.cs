@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem
 {
-    public partial class frmCustomTransaction : Form
+    public partial class FrmCustomTransaction : Form
     {
-        public frmCustomTransaction()
+        public FrmCustomTransaction()
         {
             InitializeComponent();
         }

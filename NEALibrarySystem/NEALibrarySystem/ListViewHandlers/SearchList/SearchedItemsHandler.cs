@@ -63,6 +63,34 @@ namespace NEALibrarySystem.SearchList
                 lsvSearch.Items.Add(row);
             }
 
+            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+        public void ToMember()
+        {
+            lsvSearch.Clear();
+            string[] columns =
+{
+                "Barcode",
+                "First Name",
+                "Last Name",
+                "Member Type"
+            };
+
+            ListViewHandler.AddColumns(columns, ref lsvSearch);
+
+            foreach (Member member in DataLibrary.Members)
+            {
+                string[] data = new string[4]
+                {
+                    member.Barcode,
+                    member.FirstName,
+                    member.LastName,
+                    member.CustomerType.ToString()
+                };
+                ListViewItem row = new ListViewItem(data);
+                lsvSearch.Items.Add(row);
+            }
+
             lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         public void updatedSelectedItems()
