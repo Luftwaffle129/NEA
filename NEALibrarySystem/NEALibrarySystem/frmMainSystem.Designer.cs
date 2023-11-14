@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             this.lblMessageOutput = new System.Windows.Forms.Label();
             this.dtpReservationSetDueDate = new System.Windows.Forms.DateTimePicker();
             this.lblReservationSetDueDate = new System.Windows.Forms.Label();
-            this.pnlMember = new System.Windows.Forms.Panel();
+            this.pnlMemberDetails = new System.Windows.Forms.Panel();
             this.grpMemberBookLinks = new System.Windows.Forms.GroupBox();
             this.lsvMemberBookLinks = new System.Windows.Forms.ListView();
             this.txtMemberJoinDate = new System.Windows.Forms.TextBox();
@@ -58,7 +58,7 @@
             this.txtMemberAddressLine4 = new System.Windows.Forms.TextBox();
             this.txtMemberAddressLine5 = new System.Windows.Forms.TextBox();
             this.lblMemberPostcode = new System.Windows.Forms.Label();
-            this.lblMemberAssociatedMemberBarcodes = new System.Windows.Forms.Label();
+            this.lblLinkedMembers = new System.Windows.Forms.Label();
             this.txtMemberAddressLine1 = new System.Windows.Forms.TextBox();
             this.lblMemberAddressLine3 = new System.Windows.Forms.Label();
             this.btnMemberCancel = new System.Windows.Forms.Button();
@@ -113,8 +113,8 @@
             this.cmbFilter2 = new System.Windows.Forms.ComboBox();
             this.cmbFilter1 = new System.Windows.Forms.ComboBox();
             this.pnlStaff = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.txtStaffUsername = new System.Windows.Forms.TextBox();
+            this.lblStaffUsername = new System.Windows.Forms.Label();
             this.btnStaffMemberRecord = new System.Windows.Forms.Button();
             this.cmbStaffAccessLevel = new System.Windows.Forms.ComboBox();
             this.btnStaffPasswordVisibility = new System.Windows.Forms.Button();
@@ -125,25 +125,28 @@
             this.txtStaffName = new System.Windows.Forms.TextBox();
             this.btnStaffCancel = new System.Windows.Forms.Button();
             this.btnStaffSave = new System.Windows.Forms.Button();
-            this.pnlCheckOut = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.lblCheckOutSetDueDate = new System.Windows.Forms.Label();
-            this.txtCheckOutLateBooks = new System.Windows.Forms.TextBox();
-            this.lblCheckOutOverdueBooks = new System.Windows.Forms.Label();
-            this.lsvCheckOutSelectedBooks = new System.Windows.Forms.ListView();
-            this.txtCheckOutSelectedBooks = new System.Windows.Forms.Label();
-            this.txtCheckOutCurrentMemberCheckOuts = new System.Windows.Forms.TextBox();
-            this.lblCheckOutCurrentMemberLoans = new System.Windows.Forms.Label();
-            this.txtCheckOutMemberBarcode = new System.Windows.Forms.TextBox();
-            this.lblCheckOutMemberBarcode = new System.Windows.Forms.Label();
-            this.txtCheckOutMemberName = new System.Windows.Forms.TextBox();
-            this.lblCheckOutMemberName = new System.Windows.Forms.Label();
-            this.btnCheckOutSave = new System.Windows.Forms.Button();
-            this.btnCheckOutCancel = new System.Windows.Forms.Button();
+            this.pnlLoan = new System.Windows.Forms.Panel();
+            this.lblLoanEnterBarcode = new System.Windows.Forms.Label();
+            this.lblLoanOutMemberName = new System.Windows.Forms.Label();
+            this.txtLoanMemberName = new System.Windows.Forms.TextBox();
+            this.txtLoanEnterBarcode = new System.Windows.Forms.TextBox();
+            this.lblLoanLateFees = new System.Windows.Forms.Label();
+            this.txtLoanLateFees = new System.Windows.Forms.TextBox();
+            this.dtpLoanReturnDate = new System.Windows.Forms.DateTimePicker();
+            this.lblLoanSetDueDate = new System.Windows.Forms.Label();
+            this.txtLoanLateBooks = new System.Windows.Forms.TextBox();
+            this.lblLoanOverdueBooks = new System.Windows.Forms.Label();
+            this.txtLoanSelectedBooks = new System.Windows.Forms.Label();
+            this.txtLoanCurrentMemberCheckOuts = new System.Windows.Forms.TextBox();
+            this.lblLoanCurrentMemberLoans = new System.Windows.Forms.Label();
+            this.txtLoanMemberBarcode = new System.Windows.Forms.TextBox();
+            this.lblLoanMemberBarcode = new System.Windows.Forms.Label();
+            this.lsvLoanSelectedBooks = new System.Windows.Forms.ListView();
+            this.btnLoanSave = new System.Windows.Forms.Button();
+            this.btnLoanCancel = new System.Windows.Forms.Button();
             this.pnlDelete = new System.Windows.Forms.Panel();
             this.lsvDelete = new System.Windows.Forms.ListView();
             this.lblDeleteSelectedRecords = new System.Windows.Forms.Label();
-            this.lblDeleteTitle = new System.Windows.Forms.Label();
             this.btnDeleteCancel = new System.Windows.Forms.Button();
             this.btnDeleteDelete = new System.Windows.Forms.Button();
             this.pnlSetting = new System.Windows.Forms.Panel();
@@ -157,23 +160,23 @@
             this.lblSettingGmailKey = new System.Windows.Forms.Label();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.btnSettingSave = new System.Windows.Forms.Button();
-            this.pnlCheckIn = new System.Windows.Forms.Panel();
-            this.lblCheckInEnterBarcode = new System.Windows.Forms.Label();
-            this.txtCheckInEnterBarcode = new System.Windows.Forms.TextBox();
-            this.lblCheckInLateFees = new System.Windows.Forms.Label();
-            this.txtCheckInOverdue = new System.Windows.Forms.TextBox();
-            this.lblCheckInOverdue = new System.Windows.Forms.Label();
-            this.lsvCheckInSelectedBooks = new System.Windows.Forms.ListView();
-            this.lblCheckInSelectedBooks = new System.Windows.Forms.Label();
-            this.txtCheckInLoans = new System.Windows.Forms.TextBox();
-            this.lblCheckInLoans = new System.Windows.Forms.Label();
-            this.txtCheckInMemberBarcode = new System.Windows.Forms.TextBox();
-            this.lblCheckInMemberBarcode = new System.Windows.Forms.Label();
-            this.txtCheckInMemberName = new System.Windows.Forms.TextBox();
-            this.lblCheckInMemberName = new System.Windows.Forms.Label();
-            this.btnCheckInCancel = new System.Windows.Forms.Button();
-            this.txtCheckInLateFees = new System.Windows.Forms.TextBox();
-            this.btnCheckInSave = new System.Windows.Forms.Button();
+            this.pnlReturn = new System.Windows.Forms.Panel();
+            this.lblReturnEnterBarcode = new System.Windows.Forms.Label();
+            this.txtReturnEnterBarcode = new System.Windows.Forms.TextBox();
+            this.lblReturnLateFees = new System.Windows.Forms.Label();
+            this.txtReturnOverdue = new System.Windows.Forms.TextBox();
+            this.lblReturnOverdue = new System.Windows.Forms.Label();
+            this.lsvReturnSelectedBooks = new System.Windows.Forms.ListView();
+            this.lblReturnSelectedBooks = new System.Windows.Forms.Label();
+            this.txtReturnLoans = new System.Windows.Forms.TextBox();
+            this.lblReturnLoans = new System.Windows.Forms.Label();
+            this.txtReturnMemberBarcode = new System.Windows.Forms.TextBox();
+            this.lblReturnMemberBarcode = new System.Windows.Forms.Label();
+            this.txtReturnMemberName = new System.Windows.Forms.TextBox();
+            this.lblReturnMemberName = new System.Windows.Forms.Label();
+            this.btnReturnCancel = new System.Windows.Forms.Button();
+            this.txtReturnLateFees = new System.Windows.Forms.TextBox();
+            this.btnReturnSave = new System.Windows.Forms.Button();
             this.pnlBookDetails = new System.Windows.Forms.Panel();
             this.btnBookSave = new System.Windows.Forms.Button();
             this.btnBookCancel = new System.Windows.Forms.Button();
@@ -235,9 +238,9 @@
             this.lblSellEnterBarcodes = new System.Windows.Forms.Label();
             this.txtSellEnterBarcodes = new System.Windows.Forms.TextBox();
             this.lblSellLateFees = new System.Windows.Forms.Label();
+            this.txtSellLateFees = new System.Windows.Forms.TextBox();
             this.txtSellOverdue = new System.Windows.Forms.TextBox();
             this.lblSellOverdue = new System.Windows.Forms.Label();
-            this.lsvSellSelectedBooks = new System.Windows.Forms.ListView();
             this.lblSellSelectedBooks = new System.Windows.Forms.Label();
             this.txtSellLoans = new System.Windows.Forms.TextBox();
             this.lblSellLoans = new System.Windows.Forms.Label();
@@ -245,9 +248,9 @@
             this.lblSellMemberBarcode = new System.Windows.Forms.Label();
             this.txtSellMemberName = new System.Windows.Forms.TextBox();
             this.lblSellMemberName = new System.Windows.Forms.Label();
-            this.btnSellCancel = new System.Windows.Forms.Button();
-            this.txtSellLateFees = new System.Windows.Forms.TextBox();
+            this.lsvSellSelectedBooks = new System.Windows.Forms.ListView();
             this.btnSellSave = new System.Windows.Forms.Button();
+            this.btnSellCancel = new System.Windows.Forms.Button();
             this.pnlReservation = new System.Windows.Forms.Panel();
             this.lblreserveEnterBarcode = new System.Windows.Forms.Label();
             this.lblReserveLateFees = new System.Windows.Forms.Label();
@@ -265,15 +268,34 @@
             this.btnReserveCancel = new System.Windows.Forms.Button();
             this.txtReserveLateFee = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
-            this.pnlMember.SuspendLayout();
+            this.pnlTransactionDetails = new System.Windows.Forms.Panel();
+            this.lsvTransactionBooks = new System.Windows.Forms.ListView();
+            this.lblTransactionPrice = new System.Windows.Forms.Label();
+            this.btnTransactionBack = new System.Windows.Forms.Button();
+            this.txtTransactionType = new System.Windows.Forms.TextBox();
+            this.btnTransactionDelete = new System.Windows.Forms.Button();
+            this.lblTransactionMemberBarode = new System.Windows.Forms.Label();
+            this.txtTransactionPrice = new System.Windows.Forms.TextBox();
+            this.txtTransactionDueDate = new System.Windows.Forms.TextBox();
+            this.txtTransactionMemberBarcode = new System.Windows.Forms.TextBox();
+            this.txtTransactionDate = new System.Windows.Forms.TextBox();
+            this.lblTransactionMemberName = new System.Windows.Forms.Label();
+            this.lblTransactionDate = new System.Windows.Forms.Label();
+            this.lblTransactionDueDate = new System.Windows.Forms.Label();
+            this.lblTransactionBooks = new System.Windows.Forms.Label();
+            this.lblTransactionType = new System.Windows.Forms.Label();
+            this.txtTransactionMemberName = new System.Windows.Forms.TextBox();
+            this.txtTransactionDescription = new System.Windows.Forms.TextBox();
+            this.lblTransactionDescription = new System.Windows.Forms.Label();
+            this.pnlMemberDetails.SuspendLayout();
             this.grpMemberBookLinks.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.grpRunningTotal.SuspendLayout();
             this.pnlStaff.SuspendLayout();
-            this.pnlCheckOut.SuspendLayout();
+            this.pnlLoan.SuspendLayout();
             this.pnlDelete.SuspendLayout();
             this.pnlSetting.SuspendLayout();
-            this.pnlCheckIn.SuspendLayout();
+            this.pnlReturn.SuspendLayout();
             this.pnlBookDetails.SuspendLayout();
             this.grpBooksBookStatus.SuspendLayout();
             this.grpBookDetails.SuspendLayout();
@@ -287,6 +309,7 @@
             this.pnlSubTabs.SuspendLayout();
             this.pnlSell.SuspendLayout();
             this.pnlReservation.SuspendLayout();
+            this.pnlTransactionDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBooks
@@ -331,7 +354,7 @@
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Size = new System.Drawing.Size(150, 75);
             this.btnTransactions.TabIndex = 3;
-            this.btnTransactions.Text = "SALE HISTORY";
+            this.btnTransactions.Text = "HISTORY";
             this.btnTransactions.UseVisualStyleBackColor = false;
             // 
             // btnStaff
@@ -404,6 +427,7 @@
             this.btnLogOut.TabIndex = 9;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnSubTab1
             // 
@@ -534,7 +558,7 @@
             // 
             this.dtpReservationSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpReservationSetDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReservationSetDueDate.Location = new System.Drawing.Point(249, 287);
+            this.dtpReservationSetDueDate.Location = new System.Drawing.Point(249, 870);
             this.dtpReservationSetDueDate.Name = "dtpReservationSetDueDate";
             this.dtpReservationSetDueDate.Size = new System.Drawing.Size(212, 38);
             this.dtpReservationSetDueDate.TabIndex = 15;
@@ -544,52 +568,52 @@
             // 
             this.lblReservationSetDueDate.AutoSize = true;
             this.lblReservationSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReservationSetDueDate.Location = new System.Drawing.Point(15, 290);
+            this.lblReservationSetDueDate.Location = new System.Drawing.Point(15, 873);
             this.lblReservationSetDueDate.Name = "lblReservationSetDueDate";
             this.lblReservationSetDueDate.Size = new System.Drawing.Size(155, 31);
             this.lblReservationSetDueDate.TabIndex = 10;
             this.lblReservationSetDueDate.Text = "Pick Up By:";
             // 
-            // pnlMember
+            // pnlMemberDetails
             // 
-            this.pnlMember.Controls.Add(this.grpMemberBookLinks);
-            this.pnlMember.Controls.Add(this.txtMemberJoinDate);
-            this.pnlMember.Controls.Add(this.lblMemberJoinDate);
-            this.pnlMember.Controls.Add(this.txtMemberPostcode);
-            this.pnlMember.Controls.Add(this.txtMemberAddressLine4);
-            this.pnlMember.Controls.Add(this.txtMemberAddressLine5);
-            this.pnlMember.Controls.Add(this.lblMemberPostcode);
-            this.pnlMember.Controls.Add(this.lblMemberAssociatedMemberBarcodes);
-            this.pnlMember.Controls.Add(this.txtMemberAddressLine1);
-            this.pnlMember.Controls.Add(this.lblMemberAddressLine3);
-            this.pnlMember.Controls.Add(this.btnMemberCancel);
-            this.pnlMember.Controls.Add(this.txtMemberBarcode);
-            this.pnlMember.Controls.Add(this.btnMemberSave);
-            this.pnlMember.Controls.Add(this.lblMemberName);
-            this.pnlMember.Controls.Add(this.txtMemberAssociatedMemberBarcodes);
-            this.pnlMember.Controls.Add(this.txtMemberCustomerType);
-            this.pnlMember.Controls.Add(this.txtMemberName);
-            this.pnlMember.Controls.Add(this.lblMemberAddressLine2);
-            this.pnlMember.Controls.Add(this.txtMemberDateOfBirth);
-            this.pnlMember.Controls.Add(this.lblMemberAddressLine5);
-            this.pnlMember.Controls.Add(this.txtMemberAddressLine3);
-            this.pnlMember.Controls.Add(this.txtMemberAddressLine2);
-            this.pnlMember.Controls.Add(this.lblMemberSurname);
-            this.pnlMember.Controls.Add(this.lblMemberAddressLine4);
-            this.pnlMember.Controls.Add(this.lblMemberAddressLine1);
-            this.pnlMember.Controls.Add(this.txtMemberEmailAddress);
-            this.pnlMember.Controls.Add(this.txtMemberPhoneNumber);
-            this.pnlMember.Controls.Add(this.lblMemberDateOfBirth);
-            this.pnlMember.Controls.Add(this.lblMemberCustomerType);
-            this.pnlMember.Controls.Add(this.lblMemberEmailAddress);
-            this.pnlMember.Controls.Add(this.lblMemberBarcode);
-            this.pnlMember.Controls.Add(this.txtMemberSurname);
-            this.pnlMember.Controls.Add(this.lblMemberPhoneNumber);
-            this.pnlMember.Location = new System.Drawing.Point(150, 100);
-            this.pnlMember.Name = "pnlMember";
-            this.pnlMember.Size = new System.Drawing.Size(1770, 980);
-            this.pnlMember.TabIndex = 54;
-            this.pnlMember.VisibleChanged += new System.EventHandler(this.pnlMember_VisibleChanged);
+            this.pnlMemberDetails.Controls.Add(this.grpMemberBookLinks);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberJoinDate);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberJoinDate);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberPostcode);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine4);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine5);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberPostcode);
+            this.pnlMemberDetails.Controls.Add(this.lblLinkedMembers);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine1);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine3);
+            this.pnlMemberDetails.Controls.Add(this.btnMemberCancel);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberBarcode);
+            this.pnlMemberDetails.Controls.Add(this.btnMemberSave);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberName);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAssociatedMemberBarcodes);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberCustomerType);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberName);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine2);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberDateOfBirth);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine5);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine3);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine2);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberSurname);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine4);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine1);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberEmailAddress);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberPhoneNumber);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberDateOfBirth);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberCustomerType);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberEmailAddress);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberBarcode);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberSurname);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberPhoneNumber);
+            this.pnlMemberDetails.Location = new System.Drawing.Point(150, 100);
+            this.pnlMemberDetails.Name = "pnlMemberDetails";
+            this.pnlMemberDetails.Size = new System.Drawing.Size(1770, 980);
+            this.pnlMemberDetails.TabIndex = 54;
+            this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMember_VisibleChanged);
             // 
             // grpMemberBookLinks
             // 
@@ -664,15 +688,15 @@
             this.lblMemberPostcode.TabIndex = 69;
             this.lblMemberPostcode.Text = "Postcode:";
             // 
-            // lblMemberAssociatedMemberBarcodes
+            // lblLinkedMembers
             // 
-            this.lblMemberAssociatedMemberBarcodes.AutoSize = true;
-            this.lblMemberAssociatedMemberBarcodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberAssociatedMemberBarcodes.Location = new System.Drawing.Point(15, 335);
-            this.lblMemberAssociatedMemberBarcodes.Name = "lblMemberAssociatedMemberBarcodes";
-            this.lblMemberAssociatedMemberBarcodes.Size = new System.Drawing.Size(239, 62);
-            this.lblMemberAssociatedMemberBarcodes.TabIndex = 68;
-            this.lblMemberAssociatedMemberBarcodes.Text = "Associated \r\nmember barcodes:";
+            this.lblLinkedMembers.AutoSize = true;
+            this.lblLinkedMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinkedMembers.Location = new System.Drawing.Point(15, 350);
+            this.lblLinkedMembers.Name = "lblLinkedMembers";
+            this.lblLinkedMembers.Size = new System.Drawing.Size(221, 31);
+            this.lblLinkedMembers.TabIndex = 68;
+            this.lblLinkedMembers.Text = "Linked Members:";
             // 
             // txtMemberAddressLine1
             // 
@@ -694,7 +718,7 @@
             // 
             // btnMemberCancel
             // 
-            this.btnMemberCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnMemberCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMemberCancel.Location = new System.Drawing.Point(1644, 924);
@@ -714,7 +738,7 @@
             // 
             // btnMemberSave
             // 
-            this.btnMemberSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnMemberSave.BackColor = System.Drawing.Color.LightGray;
             this.btnMemberSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMemberSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMemberSave.Location = new System.Drawing.Point(1518, 924);
@@ -982,7 +1006,7 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button1.BackColor = System.Drawing.Color.LightGray;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(227, 22);
@@ -1013,7 +1037,7 @@
             // 
             // btnSetRunningTotalDate
             // 
-            this.btnSetRunningTotalDate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSetRunningTotalDate.BackColor = System.Drawing.Color.LightGray;
             this.btnSetRunningTotalDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetRunningTotalDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSetRunningTotalDate.Location = new System.Drawing.Point(6, 39);
@@ -1061,7 +1085,7 @@
             // 
             // btnResetRunningTotal
             // 
-            this.btnResetRunningTotal.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnResetRunningTotal.BackColor = System.Drawing.Color.LightGray;
             this.btnResetRunningTotal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetRunningTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnResetRunningTotal.Location = new System.Drawing.Point(6, 129);
@@ -1076,12 +1100,14 @@
             this.lsvSearchItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Title,
             this.SeriesTitle});
+            this.lsvSearchItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvSearchItems.HideSelection = false;
             this.lsvSearchItems.Location = new System.Drawing.Point(10, 170);
             this.lsvSearchItems.Name = "lsvSearchItems";
             this.lsvSearchItems.Size = new System.Drawing.Size(1750, 800);
             this.lsvSearchItems.TabIndex = 38;
             this.lsvSearchItems.UseCompatibleStateImageBehavior = false;
+            this.lsvSearchItems.SelectedIndexChanged += new System.EventHandler(this.lsvSearchItems_SelectedIndexChanged);
             // 
             // Title
             // 
@@ -1127,7 +1153,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSearch.BackColor = System.Drawing.Color.LightGray;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(10, 125);
@@ -1201,8 +1227,8 @@
             // 
             // pnlStaff
             // 
-            this.pnlStaff.Controls.Add(this.textBox1);
-            this.pnlStaff.Controls.Add(this.label13);
+            this.pnlStaff.Controls.Add(this.txtStaffUsername);
+            this.pnlStaff.Controls.Add(this.lblStaffUsername);
             this.pnlStaff.Controls.Add(this.btnStaffMemberRecord);
             this.pnlStaff.Controls.Add(this.cmbStaffAccessLevel);
             this.pnlStaff.Controls.Add(this.btnStaffPasswordVisibility);
@@ -1219,27 +1245,27 @@
             this.pnlStaff.TabIndex = 56;
             this.pnlStaff.VisibleChanged += new System.EventHandler(this.pnlStaff_VisibleChanged);
             // 
-            // textBox1
+            // txtStaffUsername
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(255, 157);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1230, 38);
-            this.textBox1.TabIndex = 114;
+            this.txtStaffUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffUsername.Location = new System.Drawing.Point(255, 157);
+            this.txtStaffUsername.Name = "txtStaffUsername";
+            this.txtStaffUsername.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffUsername.TabIndex = 114;
             // 
-            // label13
+            // lblStaffUsername
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(15, 170);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(147, 31);
-            this.label13.TabIndex = 113;
-            this.label13.Text = "Username:";
+            this.lblStaffUsername.AutoSize = true;
+            this.lblStaffUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffUsername.Location = new System.Drawing.Point(15, 170);
+            this.lblStaffUsername.Name = "lblStaffUsername";
+            this.lblStaffUsername.Size = new System.Drawing.Size(147, 31);
+            this.lblStaffUsername.TabIndex = 113;
+            this.lblStaffUsername.Text = "Username:";
             // 
             // btnStaffMemberRecord
             // 
-            this.btnStaffMemberRecord.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnStaffMemberRecord.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffMemberRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffMemberRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffMemberRecord.Location = new System.Drawing.Point(1235, 107);
@@ -1260,7 +1286,7 @@
             // 
             // btnStaffPasswordVisibility
             // 
-            this.btnStaffPasswordVisibility.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnStaffPasswordVisibility.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffPasswordVisibility.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffPasswordVisibility.Location = new System.Drawing.Point(1235, 217);
@@ -1318,7 +1344,7 @@
             // 
             // btnStaffCancel
             // 
-            this.btnStaffCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnStaffCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffCancel.Location = new System.Drawing.Point(1644, 924);
@@ -1330,7 +1356,7 @@
             // 
             // btnStaffSave
             // 
-            this.btnStaffSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnStaffSave.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffSave.Location = new System.Drawing.Point(1518, 924);
@@ -1340,180 +1366,223 @@
             this.btnStaffSave.Text = "Save";
             this.btnStaffSave.UseVisualStyleBackColor = false;
             // 
-            // pnlCheckOut
+            // pnlLoan
             // 
-            this.pnlCheckOut.Controls.Add(this.dateTimePicker1);
-            this.pnlCheckOut.Controls.Add(this.lblCheckOutSetDueDate);
-            this.pnlCheckOut.Controls.Add(this.txtCheckOutLateBooks);
-            this.pnlCheckOut.Controls.Add(this.lblCheckOutOverdueBooks);
-            this.pnlCheckOut.Controls.Add(this.lsvCheckOutSelectedBooks);
-            this.pnlCheckOut.Controls.Add(this.txtCheckOutSelectedBooks);
-            this.pnlCheckOut.Controls.Add(this.txtCheckOutCurrentMemberCheckOuts);
-            this.pnlCheckOut.Controls.Add(this.lblCheckOutCurrentMemberLoans);
-            this.pnlCheckOut.Controls.Add(this.txtCheckOutMemberBarcode);
-            this.pnlCheckOut.Controls.Add(this.lblCheckOutMemberBarcode);
-            this.pnlCheckOut.Controls.Add(this.txtCheckOutMemberName);
-            this.pnlCheckOut.Controls.Add(this.lblCheckOutMemberName);
-            this.pnlCheckOut.Controls.Add(this.btnCheckOutSave);
-            this.pnlCheckOut.Controls.Add(this.btnCheckOutCancel);
-            this.pnlCheckOut.Location = new System.Drawing.Point(150, 100);
-            this.pnlCheckOut.Name = "pnlCheckOut";
-            this.pnlCheckOut.Size = new System.Drawing.Size(1770, 980);
-            this.pnlCheckOut.TabIndex = 17;
-            this.pnlCheckOut.VisibleChanged += new System.EventHandler(this.pnlCheckOut_VisibleChanged);
-            this.pnlCheckOut.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCheckOut_Paint);
+            this.pnlLoan.Controls.Add(this.lblLoanEnterBarcode);
+            this.pnlLoan.Controls.Add(this.lblLoanOutMemberName);
+            this.pnlLoan.Controls.Add(this.txtLoanMemberName);
+            this.pnlLoan.Controls.Add(this.txtLoanEnterBarcode);
+            this.pnlLoan.Controls.Add(this.lblLoanLateFees);
+            this.pnlLoan.Controls.Add(this.txtLoanLateFees);
+            this.pnlLoan.Controls.Add(this.dtpLoanReturnDate);
+            this.pnlLoan.Controls.Add(this.lblLoanSetDueDate);
+            this.pnlLoan.Controls.Add(this.txtLoanLateBooks);
+            this.pnlLoan.Controls.Add(this.lblLoanOverdueBooks);
+            this.pnlLoan.Controls.Add(this.txtLoanSelectedBooks);
+            this.pnlLoan.Controls.Add(this.txtLoanCurrentMemberCheckOuts);
+            this.pnlLoan.Controls.Add(this.lblLoanCurrentMemberLoans);
+            this.pnlLoan.Controls.Add(this.txtLoanMemberBarcode);
+            this.pnlLoan.Controls.Add(this.lblLoanMemberBarcode);
+            this.pnlLoan.Controls.Add(this.lsvLoanSelectedBooks);
+            this.pnlLoan.Controls.Add(this.btnLoanSave);
+            this.pnlLoan.Controls.Add(this.btnLoanCancel);
+            this.pnlLoan.Location = new System.Drawing.Point(150, 100);
+            this.pnlLoan.Name = "pnlLoan";
+            this.pnlLoan.Size = new System.Drawing.Size(1770, 980);
+            this.pnlLoan.TabIndex = 17;
+            this.pnlLoan.VisibleChanged += new System.EventHandler(this.pnlLoan_VisibleChanged);
+            this.pnlLoan.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCheckOut_Paint);
             // 
-            // dateTimePicker1
+            // lblLoanEnterBarcode
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(249, 287);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 7, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(212, 38);
-            this.dateTimePicker1.TabIndex = 23;
-            this.dateTimePicker1.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.lblLoanEnterBarcode.AutoSize = true;
+            this.lblLoanEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanEnterBarcode.Location = new System.Drawing.Point(15, 290);
+            this.lblLoanEnterBarcode.Name = "lblLoanEnterBarcode";
+            this.lblLoanEnterBarcode.Size = new System.Drawing.Size(206, 31);
+            this.lblLoanEnterBarcode.TabIndex = 31;
+            this.lblLoanEnterBarcode.Text = "Enter barcodes:";
             // 
-            // lblCheckOutSetDueDate
+            // lblLoanOutMemberName
             // 
-            this.lblCheckOutSetDueDate.AutoSize = true;
-            this.lblCheckOutSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOutSetDueDate.Location = new System.Drawing.Point(15, 290);
-            this.lblCheckOutSetDueDate.Name = "lblCheckOutSetDueDate";
-            this.lblCheckOutSetDueDate.Size = new System.Drawing.Size(137, 31);
-            this.lblCheckOutSetDueDate.TabIndex = 22;
-            this.lblCheckOutSetDueDate.Text = "Due Date:";
+            this.lblLoanOutMemberName.AutoSize = true;
+            this.lblLoanOutMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanOutMemberName.Location = new System.Drawing.Point(15, 110);
+            this.lblLoanOutMemberName.Name = "lblLoanOutMemberName";
+            this.lblLoanOutMemberName.Size = new System.Drawing.Size(199, 31);
+            this.lblLoanOutMemberName.TabIndex = 12;
+            this.lblLoanOutMemberName.Text = "Member Name:";
             // 
-            // txtCheckOutLateBooks
+            // txtLoanMemberName
             // 
-            this.txtCheckOutLateBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckOutLateBooks.Location = new System.Drawing.Point(249, 227);
-            this.txtCheckOutLateBooks.Name = "txtCheckOutLateBooks";
-            this.txtCheckOutLateBooks.ReadOnly = true;
-            this.txtCheckOutLateBooks.Size = new System.Drawing.Size(212, 38);
-            this.txtCheckOutLateBooks.TabIndex = 21;
+            this.txtLoanMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanMemberName.Location = new System.Drawing.Point(249, 107);
+            this.txtLoanMemberName.Name = "txtLoanMemberName";
+            this.txtLoanMemberName.ReadOnly = true;
+            this.txtLoanMemberName.Size = new System.Drawing.Size(1241, 38);
+            this.txtLoanMemberName.TabIndex = 13;
             // 
-            // lblCheckOutOverdueBooks
+            // txtLoanEnterBarcode
             // 
-            this.lblCheckOutOverdueBooks.AutoSize = true;
-            this.lblCheckOutOverdueBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOutOverdueBooks.Location = new System.Drawing.Point(15, 230);
-            this.lblCheckOutOverdueBooks.Name = "lblCheckOutOverdueBooks";
-            this.lblCheckOutOverdueBooks.Size = new System.Drawing.Size(209, 31);
-            this.lblCheckOutOverdueBooks.TabIndex = 20;
-            this.lblCheckOutOverdueBooks.Text = "Overdue Books:";
+            this.txtLoanEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLoanEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanEnterBarcode.Location = new System.Drawing.Point(249, 287);
+            this.txtLoanEnterBarcode.Name = "txtLoanEnterBarcode";
+            this.txtLoanEnterBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtLoanEnterBarcode.TabIndex = 32;
             // 
-            // lsvCheckOutSelectedBooks
+            // lblLoanLateFees
             // 
-            this.lsvCheckOutSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblLoanLateFees.AutoSize = true;
+            this.lblLoanLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanLateFees.Location = new System.Drawing.Point(476, 233);
+            this.lblLoanLateFees.Name = "lblLoanLateFees";
+            this.lblLoanLateFees.Size = new System.Drawing.Size(215, 31);
+            this.lblLoanLateFees.TabIndex = 29;
+            this.lblLoanLateFees.Text = "Late Fees owed:";
+            // 
+            // txtLoanLateFees
+            // 
+            this.txtLoanLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanLateFees.Location = new System.Drawing.Point(710, 230);
+            this.txtLoanLateFees.Name = "txtLoanLateFees";
+            this.txtLoanLateFees.ReadOnly = true;
+            this.txtLoanLateFees.Size = new System.Drawing.Size(212, 38);
+            this.txtLoanLateFees.TabIndex = 30;
+            // 
+            // dtpLoanReturnDate
+            // 
+            this.dtpLoanReturnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpLoanReturnDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpLoanReturnDate.Location = new System.Drawing.Point(249, 870);
+            this.dtpLoanReturnDate.MaxDate = new System.DateTime(2024, 7, 1, 0, 0, 0, 0);
+            this.dtpLoanReturnDate.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            this.dtpLoanReturnDate.Name = "dtpLoanReturnDate";
+            this.dtpLoanReturnDate.Size = new System.Drawing.Size(212, 38);
+            this.dtpLoanReturnDate.TabIndex = 23;
+            this.dtpLoanReturnDate.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            this.dtpLoanReturnDate.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // lblLoanSetDueDate
+            // 
+            this.lblLoanSetDueDate.AutoSize = true;
+            this.lblLoanSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanSetDueDate.Location = new System.Drawing.Point(15, 873);
+            this.lblLoanSetDueDate.Name = "lblLoanSetDueDate";
+            this.lblLoanSetDueDate.Size = new System.Drawing.Size(137, 31);
+            this.lblLoanSetDueDate.TabIndex = 22;
+            this.lblLoanSetDueDate.Text = "Due Date:";
+            // 
+            // txtLoanLateBooks
+            // 
+            this.txtLoanLateBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanLateBooks.Location = new System.Drawing.Point(249, 227);
+            this.txtLoanLateBooks.Name = "txtLoanLateBooks";
+            this.txtLoanLateBooks.ReadOnly = true;
+            this.txtLoanLateBooks.Size = new System.Drawing.Size(212, 38);
+            this.txtLoanLateBooks.TabIndex = 21;
+            // 
+            // lblLoanOverdueBooks
+            // 
+            this.lblLoanOverdueBooks.AutoSize = true;
+            this.lblLoanOverdueBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanOverdueBooks.Location = new System.Drawing.Point(15, 230);
+            this.lblLoanOverdueBooks.Name = "lblLoanOverdueBooks";
+            this.lblLoanOverdueBooks.Size = new System.Drawing.Size(209, 31);
+            this.lblLoanOverdueBooks.TabIndex = 20;
+            this.lblLoanOverdueBooks.Text = "Overdue Books:";
+            // 
+            // txtLoanSelectedBooks
+            // 
+            this.txtLoanSelectedBooks.AutoSize = true;
+            this.txtLoanSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanSelectedBooks.Location = new System.Drawing.Point(15, 350);
+            this.txtLoanSelectedBooks.Name = "txtLoanSelectedBooks";
+            this.txtLoanSelectedBooks.Size = new System.Drawing.Size(211, 31);
+            this.txtLoanSelectedBooks.TabIndex = 18;
+            this.txtLoanSelectedBooks.Text = "Selected Books:";
+            // 
+            // txtLoanCurrentMemberCheckOuts
+            // 
+            this.txtLoanCurrentMemberCheckOuts.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanCurrentMemberCheckOuts.Location = new System.Drawing.Point(249, 167);
+            this.txtLoanCurrentMemberCheckOuts.Name = "txtLoanCurrentMemberCheckOuts";
+            this.txtLoanCurrentMemberCheckOuts.ReadOnly = true;
+            this.txtLoanCurrentMemberCheckOuts.Size = new System.Drawing.Size(212, 38);
+            this.txtLoanCurrentMemberCheckOuts.TabIndex = 17;
+            // 
+            // lblLoanCurrentMemberLoans
+            // 
+            this.lblLoanCurrentMemberLoans.AutoSize = true;
+            this.lblLoanCurrentMemberLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanCurrentMemberLoans.Location = new System.Drawing.Point(15, 170);
+            this.lblLoanCurrentMemberLoans.Name = "lblLoanCurrentMemberLoans";
+            this.lblLoanCurrentMemberLoans.Size = new System.Drawing.Size(194, 31);
+            this.lblLoanCurrentMemberLoans.TabIndex = 16;
+            this.lblLoanCurrentMemberLoans.Text = "Current Loans:";
+            // 
+            // txtLoanMemberBarcode
+            // 
+            this.txtLoanMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanMemberBarcode.Location = new System.Drawing.Point(249, 47);
+            this.txtLoanMemberBarcode.Name = "txtLoanMemberBarcode";
+            this.txtLoanMemberBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtLoanMemberBarcode.TabIndex = 15;
+            // 
+            // lblLoanMemberBarcode
+            // 
+            this.lblLoanMemberBarcode.AutoSize = true;
+            this.lblLoanMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoanMemberBarcode.Location = new System.Drawing.Point(15, 50);
+            this.lblLoanMemberBarcode.Name = "lblLoanMemberBarcode";
+            this.lblLoanMemberBarcode.Size = new System.Drawing.Size(228, 31);
+            this.lblLoanMemberBarcode.TabIndex = 14;
+            this.lblLoanMemberBarcode.Text = "Member Barcode:";
+            // 
+            // lsvLoanSelectedBooks
+            // 
+            this.lsvLoanSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsvCheckOutSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsvCheckOutSelectedBooks.HideSelection = false;
-            this.lsvCheckOutSelectedBooks.Location = new System.Drawing.Point(249, 347);
-            this.lsvCheckOutSelectedBooks.Name = "lsvCheckOutSelectedBooks";
-            this.lsvCheckOutSelectedBooks.Size = new System.Drawing.Size(1241, 561);
-            this.lsvCheckOutSelectedBooks.TabIndex = 19;
-            this.lsvCheckOutSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvLoanSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvLoanSelectedBooks.HideSelection = false;
+            this.lsvLoanSelectedBooks.Location = new System.Drawing.Point(249, 347);
+            this.lsvLoanSelectedBooks.Name = "lsvLoanSelectedBooks";
+            this.lsvLoanSelectedBooks.Size = new System.Drawing.Size(1241, 501);
+            this.lsvLoanSelectedBooks.TabIndex = 19;
+            this.lsvLoanSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
-            // txtCheckOutSelectedBooks
+            // btnLoanSave
             // 
-            this.txtCheckOutSelectedBooks.AutoSize = true;
-            this.txtCheckOutSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckOutSelectedBooks.Location = new System.Drawing.Point(15, 350);
-            this.txtCheckOutSelectedBooks.Name = "txtCheckOutSelectedBooks";
-            this.txtCheckOutSelectedBooks.Size = new System.Drawing.Size(211, 31);
-            this.txtCheckOutSelectedBooks.TabIndex = 18;
-            this.txtCheckOutSelectedBooks.Text = "Selected Books:";
+            this.btnLoanSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoanSave.BackColor = System.Drawing.Color.LightGray;
+            this.btnLoanSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoanSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoanSave.Location = new System.Drawing.Point(1518, 924);
+            this.btnLoanSave.Name = "btnLoanSave";
+            this.btnLoanSave.Size = new System.Drawing.Size(120, 50);
+            this.btnLoanSave.TabIndex = 13;
+            this.btnLoanSave.Text = "Save";
+            this.btnLoanSave.UseVisualStyleBackColor = false;
             // 
-            // txtCheckOutCurrentMemberCheckOuts
+            // btnLoanCancel
             // 
-            this.txtCheckOutCurrentMemberCheckOuts.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckOutCurrentMemberCheckOuts.Location = new System.Drawing.Point(249, 167);
-            this.txtCheckOutCurrentMemberCheckOuts.Name = "txtCheckOutCurrentMemberCheckOuts";
-            this.txtCheckOutCurrentMemberCheckOuts.ReadOnly = true;
-            this.txtCheckOutCurrentMemberCheckOuts.Size = new System.Drawing.Size(212, 38);
-            this.txtCheckOutCurrentMemberCheckOuts.TabIndex = 17;
-            // 
-            // lblCheckOutCurrentMemberLoans
-            // 
-            this.lblCheckOutCurrentMemberLoans.AutoSize = true;
-            this.lblCheckOutCurrentMemberLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOutCurrentMemberLoans.Location = new System.Drawing.Point(15, 170);
-            this.lblCheckOutCurrentMemberLoans.Name = "lblCheckOutCurrentMemberLoans";
-            this.lblCheckOutCurrentMemberLoans.Size = new System.Drawing.Size(194, 31);
-            this.lblCheckOutCurrentMemberLoans.TabIndex = 16;
-            this.lblCheckOutCurrentMemberLoans.Text = "Current Loans:";
-            // 
-            // txtCheckOutMemberBarcode
-            // 
-            this.txtCheckOutMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckOutMemberBarcode.Location = new System.Drawing.Point(249, 47);
-            this.txtCheckOutMemberBarcode.Name = "txtCheckOutMemberBarcode";
-            this.txtCheckOutMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtCheckOutMemberBarcode.TabIndex = 15;
-            // 
-            // lblCheckOutMemberBarcode
-            // 
-            this.lblCheckOutMemberBarcode.AutoSize = true;
-            this.lblCheckOutMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOutMemberBarcode.Location = new System.Drawing.Point(15, 50);
-            this.lblCheckOutMemberBarcode.Name = "lblCheckOutMemberBarcode";
-            this.lblCheckOutMemberBarcode.Size = new System.Drawing.Size(228, 31);
-            this.lblCheckOutMemberBarcode.TabIndex = 14;
-            this.lblCheckOutMemberBarcode.Text = "Member Barcode:";
-            // 
-            // txtCheckOutMemberName
-            // 
-            this.txtCheckOutMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckOutMemberName.Location = new System.Drawing.Point(249, 107);
-            this.txtCheckOutMemberName.Name = "txtCheckOutMemberName";
-            this.txtCheckOutMemberName.Size = new System.Drawing.Size(1241, 38);
-            this.txtCheckOutMemberName.TabIndex = 13;
-            // 
-            // lblCheckOutMemberName
-            // 
-            this.lblCheckOutMemberName.AutoSize = true;
-            this.lblCheckOutMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOutMemberName.Location = new System.Drawing.Point(15, 110);
-            this.lblCheckOutMemberName.Name = "lblCheckOutMemberName";
-            this.lblCheckOutMemberName.Size = new System.Drawing.Size(199, 31);
-            this.lblCheckOutMemberName.TabIndex = 12;
-            this.lblCheckOutMemberName.Text = "Member Name:";
-            // 
-            // btnCheckOutSave
-            // 
-            this.btnCheckOutSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckOutSave.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCheckOutSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckOutSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckOutSave.Location = new System.Drawing.Point(1518, 924);
-            this.btnCheckOutSave.Name = "btnCheckOutSave";
-            this.btnCheckOutSave.Size = new System.Drawing.Size(120, 50);
-            this.btnCheckOutSave.TabIndex = 13;
-            this.btnCheckOutSave.Text = "Save";
-            this.btnCheckOutSave.UseVisualStyleBackColor = false;
-            // 
-            // btnCheckOutCancel
-            // 
-            this.btnCheckOutCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckOutCancel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCheckOutCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckOutCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckOutCancel.Location = new System.Drawing.Point(1644, 924);
-            this.btnCheckOutCancel.Name = "btnCheckOutCancel";
-            this.btnCheckOutCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnCheckOutCancel.TabIndex = 14;
-            this.btnCheckOutCancel.Text = "Cancel";
-            this.btnCheckOutCancel.UseVisualStyleBackColor = false;
+            this.btnLoanCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoanCancel.BackColor = System.Drawing.Color.LightGray;
+            this.btnLoanCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoanCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoanCancel.Location = new System.Drawing.Point(1644, 924);
+            this.btnLoanCancel.Name = "btnLoanCancel";
+            this.btnLoanCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnLoanCancel.TabIndex = 14;
+            this.btnLoanCancel.Text = "Cancel";
+            this.btnLoanCancel.UseVisualStyleBackColor = false;
             // 
             // pnlDelete
             // 
             this.pnlDelete.Controls.Add(this.lsvDelete);
             this.pnlDelete.Controls.Add(this.lblDeleteSelectedRecords);
-            this.pnlDelete.Controls.Add(this.lblDeleteTitle);
             this.pnlDelete.Controls.Add(this.btnDeleteCancel);
             this.pnlDelete.Controls.Add(this.btnDeleteDelete);
             this.pnlDelete.Location = new System.Drawing.Point(150, 100);
@@ -1526,7 +1595,7 @@
             // 
             this.lsvDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvDelete.HideSelection = false;
-            this.lsvDelete.Location = new System.Drawing.Point(311, 107);
+            this.lsvDelete.Location = new System.Drawing.Point(311, 47);
             this.lsvDelete.Name = "lsvDelete";
             this.lsvDelete.Size = new System.Drawing.Size(1179, 867);
             this.lsvDelete.TabIndex = 24;
@@ -1536,25 +1605,15 @@
             // 
             this.lblDeleteSelectedRecords.AutoSize = true;
             this.lblDeleteSelectedRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeleteSelectedRecords.Location = new System.Drawing.Point(15, 110);
+            this.lblDeleteSelectedRecords.Location = new System.Drawing.Point(15, 50);
             this.lblDeleteSelectedRecords.Name = "lblDeleteSelectedRecords";
             this.lblDeleteSelectedRecords.Size = new System.Drawing.Size(237, 31);
             this.lblDeleteSelectedRecords.TabIndex = 23;
             this.lblDeleteSelectedRecords.Text = "Selected Records:";
             // 
-            // lblDeleteTitle
-            // 
-            this.lblDeleteTitle.AutoSize = true;
-            this.lblDeleteTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeleteTitle.Location = new System.Drawing.Point(15, 50);
-            this.lblDeleteTitle.Name = "lblDeleteTitle";
-            this.lblDeleteTitle.Size = new System.Drawing.Size(134, 39);
-            this.lblDeleteTitle.TabIndex = 19;
-            this.lblDeleteTitle.Text = "Delete:";
-            // 
             // btnDeleteCancel
             // 
-            this.btnDeleteCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDeleteCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnDeleteCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteCancel.Location = new System.Drawing.Point(1644, 924);
@@ -1641,7 +1700,7 @@
             // 
             // btnGmailKeyIsVisible
             // 
-            this.btnGmailKeyIsVisible.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnGmailKeyIsVisible.BackColor = System.Drawing.Color.LightGray;
             this.btnGmailKeyIsVisible.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGmailKeyIsVisible.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGmailKeyIsVisible.Location = new System.Drawing.Point(1058, 317);
@@ -1671,7 +1730,7 @@
             // 
             // btnSettingCancel
             // 
-            this.btnSettingCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSettingCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettingCancel.Location = new System.Drawing.Point(1644, 924);
@@ -1683,7 +1742,7 @@
             // 
             // btnSettingSave
             // 
-            this.btnSettingSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSettingSave.BackColor = System.Drawing.Color.LightGray;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettingSave.Location = new System.Drawing.Point(1518, 924);
@@ -1693,199 +1752,199 @@
             this.btnSettingSave.Text = "Save";
             this.btnSettingSave.UseVisualStyleBackColor = false;
             // 
-            // pnlCheckIn
+            // pnlReturn
             // 
-            this.pnlCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlCheckIn.Controls.Add(this.lblCheckInEnterBarcode);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInEnterBarcode);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInLateFees);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInOverdue);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInOverdue);
-            this.pnlCheckIn.Controls.Add(this.lsvCheckInSelectedBooks);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInSelectedBooks);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInLoans);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInLoans);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInMemberBarcode);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInMemberBarcode);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInMemberName);
-            this.pnlCheckIn.Controls.Add(this.lblCheckInMemberName);
-            this.pnlCheckIn.Controls.Add(this.btnCheckInCancel);
-            this.pnlCheckIn.Controls.Add(this.txtCheckInLateFees);
-            this.pnlCheckIn.Controls.Add(this.btnCheckInSave);
-            this.pnlCheckIn.Location = new System.Drawing.Point(150, 100);
-            this.pnlCheckIn.Name = "pnlCheckIn";
-            this.pnlCheckIn.Size = new System.Drawing.Size(1770, 980);
-            this.pnlCheckIn.TabIndex = 52;
-            this.pnlCheckIn.VisibleChanged += new System.EventHandler(this.pnlCheckIn_VisibleChanged);
+            this.pnlReturn.Controls.Add(this.lblReturnEnterBarcode);
+            this.pnlReturn.Controls.Add(this.txtReturnEnterBarcode);
+            this.pnlReturn.Controls.Add(this.lblReturnLateFees);
+            this.pnlReturn.Controls.Add(this.txtReturnOverdue);
+            this.pnlReturn.Controls.Add(this.lblReturnOverdue);
+            this.pnlReturn.Controls.Add(this.lsvReturnSelectedBooks);
+            this.pnlReturn.Controls.Add(this.lblReturnSelectedBooks);
+            this.pnlReturn.Controls.Add(this.txtReturnLoans);
+            this.pnlReturn.Controls.Add(this.lblReturnLoans);
+            this.pnlReturn.Controls.Add(this.txtReturnMemberBarcode);
+            this.pnlReturn.Controls.Add(this.lblReturnMemberBarcode);
+            this.pnlReturn.Controls.Add(this.txtReturnMemberName);
+            this.pnlReturn.Controls.Add(this.lblReturnMemberName);
+            this.pnlReturn.Controls.Add(this.btnReturnCancel);
+            this.pnlReturn.Controls.Add(this.txtReturnLateFees);
+            this.pnlReturn.Controls.Add(this.btnReturnSave);
+            this.pnlReturn.Location = new System.Drawing.Point(150, 100);
+            this.pnlReturn.Name = "pnlReturn";
+            this.pnlReturn.Size = new System.Drawing.Size(1770, 980);
+            this.pnlReturn.TabIndex = 52;
+            this.pnlReturn.VisibleChanged += new System.EventHandler(this.pnlCheckIn_VisibleChanged);
             // 
-            // lblCheckInEnterBarcode
+            // lblReturnEnterBarcode
             // 
-            this.lblCheckInEnterBarcode.AutoSize = true;
-            this.lblCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInEnterBarcode.Location = new System.Drawing.Point(15, 290);
-            this.lblCheckInEnterBarcode.Name = "lblCheckInEnterBarcode";
-            this.lblCheckInEnterBarcode.Size = new System.Drawing.Size(206, 31);
-            this.lblCheckInEnterBarcode.TabIndex = 29;
-            this.lblCheckInEnterBarcode.Text = "Enter barcodes:";
+            this.lblReturnEnterBarcode.AutoSize = true;
+            this.lblReturnEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnEnterBarcode.Location = new System.Drawing.Point(15, 290);
+            this.lblReturnEnterBarcode.Name = "lblReturnEnterBarcode";
+            this.lblReturnEnterBarcode.Size = new System.Drawing.Size(206, 31);
+            this.lblReturnEnterBarcode.TabIndex = 29;
+            this.lblReturnEnterBarcode.Text = "Enter barcodes:";
             // 
-            // txtCheckInEnterBarcode
+            // txtReturnEnterBarcode
             // 
-            this.txtCheckInEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtReturnEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheckInEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInEnterBarcode.Location = new System.Drawing.Point(249, 287);
-            this.txtCheckInEnterBarcode.Name = "txtCheckInEnterBarcode";
-            this.txtCheckInEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtCheckInEnterBarcode.TabIndex = 30;
+            this.txtReturnEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnEnterBarcode.Location = new System.Drawing.Point(249, 287);
+            this.txtReturnEnterBarcode.Name = "txtReturnEnterBarcode";
+            this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtReturnEnterBarcode.TabIndex = 30;
             // 
-            // lblCheckInLateFees
+            // lblReturnLateFees
             // 
-            this.lblCheckInLateFees.AutoSize = true;
-            this.lblCheckInLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInLateFees.Location = new System.Drawing.Point(476, 233);
-            this.lblCheckInLateFees.Name = "lblCheckInLateFees";
-            this.lblCheckInLateFees.Size = new System.Drawing.Size(215, 31);
-            this.lblCheckInLateFees.TabIndex = 27;
-            this.lblCheckInLateFees.Text = "Late Fees owed:";
+            this.lblReturnLateFees.AutoSize = true;
+            this.lblReturnLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnLateFees.Location = new System.Drawing.Point(476, 233);
+            this.lblReturnLateFees.Name = "lblReturnLateFees";
+            this.lblReturnLateFees.Size = new System.Drawing.Size(215, 31);
+            this.lblReturnLateFees.TabIndex = 27;
+            this.lblReturnLateFees.Text = "Late Fees owed:";
             // 
-            // txtCheckInOverdue
+            // txtReturnOverdue
             // 
-            this.txtCheckInOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInOverdue.Location = new System.Drawing.Point(249, 227);
-            this.txtCheckInOverdue.Name = "txtCheckInOverdue";
-            this.txtCheckInOverdue.ReadOnly = true;
-            this.txtCheckInOverdue.Size = new System.Drawing.Size(212, 38);
-            this.txtCheckInOverdue.TabIndex = 26;
+            this.txtReturnOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnOverdue.Location = new System.Drawing.Point(249, 227);
+            this.txtReturnOverdue.Name = "txtReturnOverdue";
+            this.txtReturnOverdue.ReadOnly = true;
+            this.txtReturnOverdue.Size = new System.Drawing.Size(212, 38);
+            this.txtReturnOverdue.TabIndex = 26;
             // 
-            // lblCheckInOverdue
+            // lblReturnOverdue
             // 
-            this.lblCheckInOverdue.AutoSize = true;
-            this.lblCheckInOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInOverdue.Location = new System.Drawing.Point(15, 230);
-            this.lblCheckInOverdue.Name = "lblCheckInOverdue";
-            this.lblCheckInOverdue.Size = new System.Drawing.Size(209, 31);
-            this.lblCheckInOverdue.TabIndex = 25;
-            this.lblCheckInOverdue.Text = "Overdue Books:";
+            this.lblReturnOverdue.AutoSize = true;
+            this.lblReturnOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnOverdue.Location = new System.Drawing.Point(15, 230);
+            this.lblReturnOverdue.Name = "lblReturnOverdue";
+            this.lblReturnOverdue.Size = new System.Drawing.Size(209, 31);
+            this.lblReturnOverdue.TabIndex = 25;
+            this.lblReturnOverdue.Text = "Overdue Books:";
             // 
-            // lsvCheckInSelectedBooks
+            // lsvReturnSelectedBooks
             // 
-            this.lsvCheckInSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lsvReturnSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsvCheckInSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsvCheckInSelectedBooks.HideSelection = false;
-            this.lsvCheckInSelectedBooks.Location = new System.Drawing.Point(249, 347);
-            this.lsvCheckInSelectedBooks.Name = "lsvCheckInSelectedBooks";
-            this.lsvCheckInSelectedBooks.Size = new System.Drawing.Size(1241, 561);
-            this.lsvCheckInSelectedBooks.TabIndex = 24;
-            this.lsvCheckInSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvReturnSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvReturnSelectedBooks.HideSelection = false;
+            this.lsvReturnSelectedBooks.Location = new System.Drawing.Point(249, 347);
+            this.lsvReturnSelectedBooks.Name = "lsvReturnSelectedBooks";
+            this.lsvReturnSelectedBooks.Size = new System.Drawing.Size(1241, 561);
+            this.lsvReturnSelectedBooks.TabIndex = 24;
+            this.lsvReturnSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
-            // lblCheckInSelectedBooks
+            // lblReturnSelectedBooks
             // 
-            this.lblCheckInSelectedBooks.AutoSize = true;
-            this.lblCheckInSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInSelectedBooks.Location = new System.Drawing.Point(15, 350);
-            this.lblCheckInSelectedBooks.Name = "lblCheckInSelectedBooks";
-            this.lblCheckInSelectedBooks.Size = new System.Drawing.Size(211, 31);
-            this.lblCheckInSelectedBooks.TabIndex = 23;
-            this.lblCheckInSelectedBooks.Text = "Selected Books:";
+            this.lblReturnSelectedBooks.AutoSize = true;
+            this.lblReturnSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnSelectedBooks.Location = new System.Drawing.Point(15, 350);
+            this.lblReturnSelectedBooks.Name = "lblReturnSelectedBooks";
+            this.lblReturnSelectedBooks.Size = new System.Drawing.Size(211, 31);
+            this.lblReturnSelectedBooks.TabIndex = 23;
+            this.lblReturnSelectedBooks.Text = "Selected Books:";
             // 
-            // txtCheckInLoans
+            // txtReturnLoans
             // 
-            this.txtCheckInLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInLoans.Location = new System.Drawing.Point(249, 167);
-            this.txtCheckInLoans.Name = "txtCheckInLoans";
-            this.txtCheckInLoans.ReadOnly = true;
-            this.txtCheckInLoans.Size = new System.Drawing.Size(212, 38);
-            this.txtCheckInLoans.TabIndex = 22;
+            this.txtReturnLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnLoans.Location = new System.Drawing.Point(249, 167);
+            this.txtReturnLoans.Name = "txtReturnLoans";
+            this.txtReturnLoans.ReadOnly = true;
+            this.txtReturnLoans.Size = new System.Drawing.Size(212, 38);
+            this.txtReturnLoans.TabIndex = 22;
             // 
-            // lblCheckInLoans
+            // lblReturnLoans
             // 
-            this.lblCheckInLoans.AutoSize = true;
-            this.lblCheckInLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInLoans.Location = new System.Drawing.Point(15, 170);
-            this.lblCheckInLoans.Name = "lblCheckInLoans";
-            this.lblCheckInLoans.Size = new System.Drawing.Size(194, 31);
-            this.lblCheckInLoans.TabIndex = 21;
-            this.lblCheckInLoans.Text = "Current Loans:";
+            this.lblReturnLoans.AutoSize = true;
+            this.lblReturnLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnLoans.Location = new System.Drawing.Point(15, 170);
+            this.lblReturnLoans.Name = "lblReturnLoans";
+            this.lblReturnLoans.Size = new System.Drawing.Size(194, 31);
+            this.lblReturnLoans.TabIndex = 21;
+            this.lblReturnLoans.Text = "Current Loans:";
             // 
-            // txtCheckInMemberBarcode
+            // txtReturnMemberBarcode
             // 
-            this.txtCheckInMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtReturnMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheckInMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInMemberBarcode.Location = new System.Drawing.Point(249, 47);
-            this.txtCheckInMemberBarcode.Name = "txtCheckInMemberBarcode";
-            this.txtCheckInMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtCheckInMemberBarcode.TabIndex = 20;
+            this.txtReturnMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnMemberBarcode.Location = new System.Drawing.Point(249, 47);
+            this.txtReturnMemberBarcode.Name = "txtReturnMemberBarcode";
+            this.txtReturnMemberBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtReturnMemberBarcode.TabIndex = 20;
             // 
-            // lblCheckInMemberBarcode
+            // lblReturnMemberBarcode
             // 
-            this.lblCheckInMemberBarcode.AutoSize = true;
-            this.lblCheckInMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInMemberBarcode.Location = new System.Drawing.Point(15, 50);
-            this.lblCheckInMemberBarcode.Name = "lblCheckInMemberBarcode";
-            this.lblCheckInMemberBarcode.Size = new System.Drawing.Size(228, 31);
-            this.lblCheckInMemberBarcode.TabIndex = 19;
-            this.lblCheckInMemberBarcode.Text = "Member Barcode:";
+            this.lblReturnMemberBarcode.AutoSize = true;
+            this.lblReturnMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnMemberBarcode.Location = new System.Drawing.Point(15, 50);
+            this.lblReturnMemberBarcode.Name = "lblReturnMemberBarcode";
+            this.lblReturnMemberBarcode.Size = new System.Drawing.Size(228, 31);
+            this.lblReturnMemberBarcode.TabIndex = 19;
+            this.lblReturnMemberBarcode.Text = "Member Barcode:";
             // 
-            // txtCheckInMemberName
+            // txtReturnMemberName
             // 
-            this.txtCheckInMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtReturnMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheckInMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInMemberName.Location = new System.Drawing.Point(249, 107);
-            this.txtCheckInMemberName.Name = "txtCheckInMemberName";
-            this.txtCheckInMemberName.ReadOnly = true;
-            this.txtCheckInMemberName.Size = new System.Drawing.Size(1241, 38);
-            this.txtCheckInMemberName.TabIndex = 18;
+            this.txtReturnMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnMemberName.Location = new System.Drawing.Point(249, 107);
+            this.txtReturnMemberName.Name = "txtReturnMemberName";
+            this.txtReturnMemberName.ReadOnly = true;
+            this.txtReturnMemberName.Size = new System.Drawing.Size(1241, 38);
+            this.txtReturnMemberName.TabIndex = 18;
             // 
-            // lblCheckInMemberName
+            // lblReturnMemberName
             // 
-            this.lblCheckInMemberName.AutoSize = true;
-            this.lblCheckInMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckInMemberName.Location = new System.Drawing.Point(15, 110);
-            this.lblCheckInMemberName.Name = "lblCheckInMemberName";
-            this.lblCheckInMemberName.Size = new System.Drawing.Size(199, 31);
-            this.lblCheckInMemberName.TabIndex = 17;
-            this.lblCheckInMemberName.Text = "Member Name:";
+            this.lblReturnMemberName.AutoSize = true;
+            this.lblReturnMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReturnMemberName.Location = new System.Drawing.Point(15, 110);
+            this.lblReturnMemberName.Name = "lblReturnMemberName";
+            this.lblReturnMemberName.Size = new System.Drawing.Size(199, 31);
+            this.lblReturnMemberName.TabIndex = 17;
+            this.lblReturnMemberName.Text = "Member Name:";
             // 
-            // btnCheckInCancel
+            // btnReturnCancel
             // 
-            this.btnCheckInCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckInCancel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCheckInCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckInCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckInCancel.Location = new System.Drawing.Point(1644, 924);
-            this.btnCheckInCancel.Name = "btnCheckInCancel";
-            this.btnCheckInCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnCheckInCancel.TabIndex = 14;
-            this.btnCheckInCancel.Text = "Cancel";
-            this.btnCheckInCancel.UseVisualStyleBackColor = false;
+            this.btnReturnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReturnCancel.BackColor = System.Drawing.Color.LightGray;
+            this.btnReturnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnCancel.Location = new System.Drawing.Point(1644, 924);
+            this.btnReturnCancel.Name = "btnReturnCancel";
+            this.btnReturnCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnReturnCancel.TabIndex = 14;
+            this.btnReturnCancel.Text = "Cancel";
+            this.btnReturnCancel.UseVisualStyleBackColor = false;
             // 
-            // txtCheckInLateFees
+            // txtReturnLateFees
             // 
-            this.txtCheckInLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheckInLateFees.Location = new System.Drawing.Point(710, 230);
-            this.txtCheckInLateFees.Name = "txtCheckInLateFees";
-            this.txtCheckInLateFees.ReadOnly = true;
-            this.txtCheckInLateFees.Size = new System.Drawing.Size(212, 38);
-            this.txtCheckInLateFees.TabIndex = 28;
+            this.txtReturnLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReturnLateFees.Location = new System.Drawing.Point(710, 230);
+            this.txtReturnLateFees.Name = "txtReturnLateFees";
+            this.txtReturnLateFees.ReadOnly = true;
+            this.txtReturnLateFees.Size = new System.Drawing.Size(212, 38);
+            this.txtReturnLateFees.TabIndex = 28;
             // 
-            // btnCheckInSave
+            // btnReturnSave
             // 
-            this.btnCheckInSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckInSave.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCheckInSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckInSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckInSave.Location = new System.Drawing.Point(1518, 924);
-            this.btnCheckInSave.Name = "btnCheckInSave";
-            this.btnCheckInSave.Size = new System.Drawing.Size(120, 50);
-            this.btnCheckInSave.TabIndex = 13;
-            this.btnCheckInSave.Text = "Save";
-            this.btnCheckInSave.UseVisualStyleBackColor = false;
+            this.btnReturnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReturnSave.BackColor = System.Drawing.Color.LightGray;
+            this.btnReturnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnSave.Location = new System.Drawing.Point(1518, 924);
+            this.btnReturnSave.Name = "btnReturnSave";
+            this.btnReturnSave.Size = new System.Drawing.Size(120, 50);
+            this.btnReturnSave.TabIndex = 13;
+            this.btnReturnSave.Text = "Save";
+            this.btnReturnSave.UseVisualStyleBackColor = false;
             // 
             // pnlBookDetails
             // 
@@ -1902,7 +1961,7 @@
             // 
             // btnBookSave
             // 
-            this.btnBookSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBookSave.BackColor = System.Drawing.Color.LightGray;
             this.btnBookSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookSave.Location = new System.Drawing.Point(1518, 924);
@@ -1911,10 +1970,11 @@
             this.btnBookSave.TabIndex = 0;
             this.btnBookSave.Text = "Save";
             this.btnBookSave.UseVisualStyleBackColor = false;
+            this.btnBookSave.Click += new System.EventHandler(this.btnBookSave_Click);
             // 
             // btnBookCancel
             // 
-            this.btnBookCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBookCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnBookCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookCancel.Location = new System.Drawing.Point(1644, 924);
@@ -1923,6 +1983,7 @@
             this.btnBookCancel.TabIndex = 1;
             this.btnBookCancel.Text = "Cancel";
             this.btnBookCancel.UseVisualStyleBackColor = false;
+            this.btnBookCancel.Click += new System.EventHandler(this.btnBookCancel_Click);
             // 
             // grpBooksBookStatus
             // 
@@ -2255,7 +2316,7 @@
             // 
             // btnBookAddCopies
             // 
-            this.btnBookAddCopies.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBookAddCopies.BackColor = System.Drawing.Color.LightGray;
             this.btnBookAddCopies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookAddCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookAddCopies.Location = new System.Drawing.Point(6, 622);
@@ -2288,16 +2349,17 @@
             // 
             // chtStatisticsChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend2);
+            this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
+            chartArea7.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend7);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series2);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series7);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2350,7 +2412,7 @@
             // 
             // btnStatisticsEnter
             // 
-            this.btnStatisticsEnter.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnStatisticsEnter.BackColor = System.Drawing.Color.LightGray;
             this.btnStatisticsEnter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStatisticsEnter.Location = new System.Drawing.Point(6, 855);
             this.btnStatisticsEnter.Name = "btnStatisticsEnter";
@@ -2420,7 +2482,7 @@
             // 
             // btnRestoreBackup
             // 
-            this.btnRestoreBackup.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnRestoreBackup.BackColor = System.Drawing.Color.LightGray;
             this.btnRestoreBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestoreBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRestoreBackup.Location = new System.Drawing.Point(735, 540);
@@ -2432,7 +2494,7 @@
             // 
             // btnCreateBackup
             // 
-            this.btnCreateBackup.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCreateBackup.BackColor = System.Drawing.Color.LightGray;
             this.btnCreateBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateBackup.Location = new System.Drawing.Point(735, 423);
@@ -2504,9 +2566,9 @@
             this.pnlSell.Controls.Add(this.lblSellEnterBarcodes);
             this.pnlSell.Controls.Add(this.txtSellEnterBarcodes);
             this.pnlSell.Controls.Add(this.lblSellLateFees);
+            this.pnlSell.Controls.Add(this.txtSellLateFees);
             this.pnlSell.Controls.Add(this.txtSellOverdue);
             this.pnlSell.Controls.Add(this.lblSellOverdue);
-            this.pnlSell.Controls.Add(this.lsvSellSelectedBooks);
             this.pnlSell.Controls.Add(this.lblSellSelectedBooks);
             this.pnlSell.Controls.Add(this.txtSellLoans);
             this.pnlSell.Controls.Add(this.lblSellLoans);
@@ -2514,9 +2576,9 @@
             this.pnlSell.Controls.Add(this.lblSellMemberBarcode);
             this.pnlSell.Controls.Add(this.txtSellMemberName);
             this.pnlSell.Controls.Add(this.lblSellMemberName);
-            this.pnlSell.Controls.Add(this.btnSellCancel);
-            this.pnlSell.Controls.Add(this.txtSellLateFees);
+            this.pnlSell.Controls.Add(this.lsvSellSelectedBooks);
             this.pnlSell.Controls.Add(this.btnSellSave);
+            this.pnlSell.Controls.Add(this.btnSellCancel);
             this.pnlSell.Location = new System.Drawing.Point(150, 100);
             this.pnlSell.Name = "pnlSell";
             this.pnlSell.Size = new System.Drawing.Size(1770, 980);
@@ -2574,6 +2636,15 @@
             this.lblSellLateFees.TabIndex = 27;
             this.lblSellLateFees.Text = "Late Fees owed:";
             // 
+            // txtSellLateFees
+            // 
+            this.txtSellLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellLateFees.Location = new System.Drawing.Point(710, 230);
+            this.txtSellLateFees.Name = "txtSellLateFees";
+            this.txtSellLateFees.ReadOnly = true;
+            this.txtSellLateFees.Size = new System.Drawing.Size(212, 38);
+            this.txtSellLateFees.TabIndex = 28;
+            // 
             // txtSellOverdue
             // 
             this.txtSellOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2593,24 +2664,11 @@
             this.lblSellOverdue.TabIndex = 25;
             this.lblSellOverdue.Text = "Overdue Books:";
             // 
-            // lsvSellSelectedBooks
-            // 
-            this.lsvSellSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsvSellSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsvSellSelectedBooks.HideSelection = false;
-            this.lsvSellSelectedBooks.Location = new System.Drawing.Point(249, 347);
-            this.lsvSellSelectedBooks.Name = "lsvSellSelectedBooks";
-            this.lsvSellSelectedBooks.Size = new System.Drawing.Size(1241, 501);
-            this.lsvSellSelectedBooks.TabIndex = 24;
-            this.lsvSellSelectedBooks.UseCompatibleStateImageBehavior = false;
-            // 
             // lblSellSelectedBooks
             // 
             this.lblSellSelectedBooks.AutoSize = true;
             this.lblSellSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSellSelectedBooks.Location = new System.Drawing.Point(15, 360);
+            this.lblSellSelectedBooks.Location = new System.Drawing.Point(15, 350);
             this.lblSellSelectedBooks.Name = "lblSellSelectedBooks";
             this.lblSellSelectedBooks.Size = new System.Drawing.Size(211, 31);
             this.lblSellSelectedBooks.TabIndex = 23;
@@ -2676,32 +2734,23 @@
             this.lblSellMemberName.TabIndex = 17;
             this.lblSellMemberName.Text = "Member Name:";
             // 
-            // btnSellCancel
+            // lsvSellSelectedBooks
             // 
-            this.btnSellCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSellCancel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnSellCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSellCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSellCancel.Location = new System.Drawing.Point(1644, 924);
-            this.btnSellCancel.Name = "btnSellCancel";
-            this.btnSellCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnSellCancel.TabIndex = 14;
-            this.btnSellCancel.Text = "Cancel";
-            this.btnSellCancel.UseVisualStyleBackColor = false;
-            // 
-            // txtSellLateFees
-            // 
-            this.txtSellLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSellLateFees.Location = new System.Drawing.Point(710, 230);
-            this.txtSellLateFees.Name = "txtSellLateFees";
-            this.txtSellLateFees.ReadOnly = true;
-            this.txtSellLateFees.Size = new System.Drawing.Size(212, 38);
-            this.txtSellLateFees.TabIndex = 28;
+            this.lsvSellSelectedBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvSellSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvSellSelectedBooks.HideSelection = false;
+            this.lsvSellSelectedBooks.Location = new System.Drawing.Point(249, 347);
+            this.lsvSellSelectedBooks.Name = "lsvSellSelectedBooks";
+            this.lsvSellSelectedBooks.Size = new System.Drawing.Size(1241, 501);
+            this.lsvSellSelectedBooks.TabIndex = 24;
+            this.lsvSellSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
             // btnSellSave
             // 
             this.btnSellSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSellSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSellSave.BackColor = System.Drawing.Color.LightGray;
             this.btnSellSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSellSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSellSave.Location = new System.Drawing.Point(1518, 924);
@@ -2710,6 +2759,19 @@
             this.btnSellSave.TabIndex = 13;
             this.btnSellSave.Text = "Save";
             this.btnSellSave.UseVisualStyleBackColor = false;
+            // 
+            // btnSellCancel
+            // 
+            this.btnSellCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSellCancel.BackColor = System.Drawing.Color.LightGray;
+            this.btnSellCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSellCancel.Location = new System.Drawing.Point(1644, 924);
+            this.btnSellCancel.Name = "btnSellCancel";
+            this.btnSellCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnSellCancel.TabIndex = 14;
+            this.btnSellCancel.Text = "Cancel";
+            this.btnSellCancel.UseVisualStyleBackColor = false;
             // 
             // pnlReservation
             // 
@@ -2744,7 +2806,7 @@
             // 
             this.lblreserveEnterBarcode.AutoSize = true;
             this.lblreserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblreserveEnterBarcode.Location = new System.Drawing.Point(15, 350);
+            this.lblreserveEnterBarcode.Location = new System.Drawing.Point(15, 290);
             this.lblreserveEnterBarcode.Name = "lblreserveEnterBarcode";
             this.lblreserveEnterBarcode.Size = new System.Drawing.Size(206, 31);
             this.lblreserveEnterBarcode.TabIndex = 29;
@@ -2765,7 +2827,7 @@
             this.txtRserveEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRserveEnterBarcode.Location = new System.Drawing.Point(249, 347);
+            this.txtRserveEnterBarcode.Location = new System.Drawing.Point(249, 287);
             this.txtRserveEnterBarcode.Name = "txtRserveEnterBarcode";
             this.txtRserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtRserveEnterBarcode.TabIndex = 30;
@@ -2796,7 +2858,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvReserveSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvReserveSelectedBooks.HideSelection = false;
-            this.lsvReserveSelectedBooks.Location = new System.Drawing.Point(249, 407);
+            this.lsvReserveSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvReserveSelectedBooks.Name = "lsvReserveSelectedBooks";
             this.lsvReserveSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvReserveSelectedBooks.TabIndex = 24;
@@ -2806,7 +2868,7 @@
             // 
             this.lblReserveSelectedBooks.AutoSize = true;
             this.lblReserveSelectedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReserveSelectedBooks.Location = new System.Drawing.Point(15, 410);
+            this.lblReserveSelectedBooks.Location = new System.Drawing.Point(15, 350);
             this.lblReserveSelectedBooks.Name = "lblReserveSelectedBooks";
             this.lblReserveSelectedBooks.Size = new System.Drawing.Size(211, 31);
             this.lblReserveSelectedBooks.TabIndex = 23;
@@ -2875,7 +2937,7 @@
             // btnReserveCancel
             // 
             this.btnReserveCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReserveCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnReserveCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnReserveCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReserveCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReserveCancel.Location = new System.Drawing.Point(1644, 924);
@@ -2897,7 +2959,7 @@
             // btnReserveSave
             // 
             this.btnReserveSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReserveSave.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnReserveSave.BackColor = System.Drawing.Color.LightGray;
             this.btnReserveSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReserveSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReserveSave.Location = new System.Drawing.Point(1518, 924);
@@ -2907,6 +2969,209 @@
             this.btnReserveSave.Text = "Save";
             this.btnReserveSave.UseVisualStyleBackColor = false;
             // 
+            // pnlTransactionDetails
+            // 
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDescription);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDescription);
+            this.pnlTransactionDetails.Controls.Add(this.lsvTransactionBooks);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionPrice);
+            this.pnlTransactionDetails.Controls.Add(this.btnTransactionBack);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionType);
+            this.pnlTransactionDetails.Controls.Add(this.btnTransactionDelete);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionMemberBarode);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionPrice);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDueDate);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionMemberBarcode);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDate);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionMemberName);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDate);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDueDate);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionBooks);
+            this.pnlTransactionDetails.Controls.Add(this.lblTransactionType);
+            this.pnlTransactionDetails.Controls.Add(this.txtTransactionMemberName);
+            this.pnlTransactionDetails.Location = new System.Drawing.Point(150, 100);
+            this.pnlTransactionDetails.Name = "pnlTransactionDetails";
+            this.pnlTransactionDetails.Size = new System.Drawing.Size(1770, 980);
+            this.pnlTransactionDetails.TabIndex = 75;
+            // 
+            // lsvTransactionBooks
+            // 
+            this.lsvTransactionBooks.HideSelection = false;
+            this.lsvTransactionBooks.Location = new System.Drawing.Point(255, 410);
+            this.lsvTransactionBooks.Name = "lsvTransactionBooks";
+            this.lsvTransactionBooks.Size = new System.Drawing.Size(1159, 389);
+            this.lsvTransactionBooks.TabIndex = 69;
+            this.lsvTransactionBooks.UseCompatibleStateImageBehavior = false;
+            // 
+            // lblTransactionPrice
+            // 
+            this.lblTransactionPrice.AutoSize = true;
+            this.lblTransactionPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionPrice.Location = new System.Drawing.Point(15, 350);
+            this.lblTransactionPrice.Name = "lblTransactionPrice";
+            this.lblTransactionPrice.Size = new System.Drawing.Size(84, 31);
+            this.lblTransactionPrice.TabIndex = 68;
+            this.lblTransactionPrice.Text = "Price:";
+            // 
+            // btnTransactionBack
+            // 
+            this.btnTransactionBack.BackColor = System.Drawing.Color.LightGray;
+            this.btnTransactionBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransactionBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransactionBack.Location = new System.Drawing.Point(1644, 924);
+            this.btnTransactionBack.Name = "btnTransactionBack";
+            this.btnTransactionBack.Size = new System.Drawing.Size(120, 50);
+            this.btnTransactionBack.TabIndex = 1;
+            this.btnTransactionBack.Text = "Back";
+            this.btnTransactionBack.UseVisualStyleBackColor = false;
+            // 
+            // txtTransactionType
+            // 
+            this.txtTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionType.Location = new System.Drawing.Point(255, 47);
+            this.txtTransactionType.Name = "txtTransactionType";
+            this.txtTransactionType.ReadOnly = true;
+            this.txtTransactionType.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionType.TabIndex = 65;
+            // 
+            // btnTransactionDelete
+            // 
+            this.btnTransactionDelete.BackColor = System.Drawing.Color.Red;
+            this.btnTransactionDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransactionDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransactionDelete.Location = new System.Drawing.Point(1518, 924);
+            this.btnTransactionDelete.Name = "btnTransactionDelete";
+            this.btnTransactionDelete.Size = new System.Drawing.Size(120, 50);
+            this.btnTransactionDelete.TabIndex = 0;
+            this.btnTransactionDelete.Text = "Delete";
+            this.btnTransactionDelete.UseVisualStyleBackColor = false;
+            // 
+            // lblTransactionMemberBarode
+            // 
+            this.lblTransactionMemberBarode.AutoSize = true;
+            this.lblTransactionMemberBarode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionMemberBarode.Location = new System.Drawing.Point(15, 110);
+            this.lblTransactionMemberBarode.Name = "lblTransactionMemberBarode";
+            this.lblTransactionMemberBarode.Size = new System.Drawing.Size(228, 31);
+            this.lblTransactionMemberBarode.TabIndex = 45;
+            this.lblTransactionMemberBarode.Text = "Member Barcode:";
+            // 
+            // txtTransactionPrice
+            // 
+            this.txtTransactionPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionPrice.Location = new System.Drawing.Point(255, 347);
+            this.txtTransactionPrice.Name = "txtTransactionPrice";
+            this.txtTransactionPrice.ReadOnly = true;
+            this.txtTransactionPrice.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionPrice.TabIndex = 63;
+            // 
+            // txtTransactionDueDate
+            // 
+            this.txtTransactionDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionDueDate.Location = new System.Drawing.Point(255, 287);
+            this.txtTransactionDueDate.Name = "txtTransactionDueDate";
+            this.txtTransactionDueDate.ReadOnly = true;
+            this.txtTransactionDueDate.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionDueDate.TabIndex = 62;
+            // 
+            // txtTransactionMemberBarcode
+            // 
+            this.txtTransactionMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionMemberBarcode.Location = new System.Drawing.Point(255, 107);
+            this.txtTransactionMemberBarcode.Name = "txtTransactionMemberBarcode";
+            this.txtTransactionMemberBarcode.ReadOnly = true;
+            this.txtTransactionMemberBarcode.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionMemberBarcode.TabIndex = 44;
+            // 
+            // txtTransactionDate
+            // 
+            this.txtTransactionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionDate.Location = new System.Drawing.Point(255, 227);
+            this.txtTransactionDate.Name = "txtTransactionDate";
+            this.txtTransactionDate.ReadOnly = true;
+            this.txtTransactionDate.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionDate.TabIndex = 61;
+            // 
+            // lblTransactionMemberName
+            // 
+            this.lblTransactionMemberName.AutoSize = true;
+            this.lblTransactionMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionMemberName.Location = new System.Drawing.Point(15, 170);
+            this.lblTransactionMemberName.Name = "lblTransactionMemberName";
+            this.lblTransactionMemberName.Size = new System.Drawing.Size(199, 31);
+            this.lblTransactionMemberName.TabIndex = 49;
+            this.lblTransactionMemberName.Text = "Member Name:";
+            // 
+            // lblTransactionDate
+            // 
+            this.lblTransactionDate.AutoSize = true;
+            this.lblTransactionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionDate.Location = new System.Drawing.Point(15, 230);
+            this.lblTransactionDate.Name = "lblTransactionDate";
+            this.lblTransactionDate.Size = new System.Drawing.Size(80, 31);
+            this.lblTransactionDate.TabIndex = 51;
+            this.lblTransactionDate.Text = "Date:";
+            // 
+            // lblTransactionDueDate
+            // 
+            this.lblTransactionDueDate.AutoSize = true;
+            this.lblTransactionDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionDueDate.Location = new System.Drawing.Point(15, 290);
+            this.lblTransactionDueDate.Name = "lblTransactionDueDate";
+            this.lblTransactionDueDate.Size = new System.Drawing.Size(132, 31);
+            this.lblTransactionDueDate.TabIndex = 52;
+            this.lblTransactionDueDate.Text = "Due date:";
+            // 
+            // lblTransactionBooks
+            // 
+            this.lblTransactionBooks.AutoSize = true;
+            this.lblTransactionBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionBooks.Location = new System.Drawing.Point(15, 410);
+            this.lblTransactionBooks.Name = "lblTransactionBooks";
+            this.lblTransactionBooks.Size = new System.Drawing.Size(98, 31);
+            this.lblTransactionBooks.TabIndex = 53;
+            this.lblTransactionBooks.Text = "Books:";
+            // 
+            // lblTransactionType
+            // 
+            this.lblTransactionType.AutoSize = true;
+            this.lblTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionType.Location = new System.Drawing.Point(15, 50);
+            this.lblTransactionType.Name = "lblTransactionType";
+            this.lblTransactionType.Size = new System.Drawing.Size(233, 31);
+            this.lblTransactionType.TabIndex = 55;
+            this.lblTransactionType.Text = "Transaction Type:";
+            // 
+            // txtTransactionMemberName
+            // 
+            this.txtTransactionMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactionMemberName.Location = new System.Drawing.Point(255, 167);
+            this.txtTransactionMemberName.Name = "txtTransactionMemberName";
+            this.txtTransactionMemberName.ReadOnly = true;
+            this.txtTransactionMemberName.Size = new System.Drawing.Size(1159, 38);
+            this.txtTransactionMemberName.TabIndex = 56;
+            // 
+            // txtTransactionDescription
+            // 
+            this.txtTransactionDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTransactionDescription.Location = new System.Drawing.Point(255, 821);
+            this.txtTransactionDescription.Multiline = true;
+            this.txtTransactionDescription.Name = "txtTransactionDescription";
+            this.txtTransactionDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtTransactionDescription.Size = new System.Drawing.Size(1159, 100);
+            this.txtTransactionDescription.TabIndex = 70;
+            // 
+            // lblTransactionDescription
+            // 
+            this.lblTransactionDescription.AutoSize = true;
+            this.lblTransactionDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactionDescription.Location = new System.Drawing.Point(15, 830);
+            this.lblTransactionDescription.Name = "lblTransactionDescription";
+            this.lblTransactionDescription.Size = new System.Drawing.Size(159, 31);
+            this.lblTransactionDescription.TabIndex = 71;
+            this.lblTransactionDescription.Text = "Description:";
+            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2914,17 +3179,18 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlCheckOut);
-            this.Controls.Add(this.pnlCheckIn);
-            this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlMember);
+            this.Controls.Add(this.pnlMemberDetails);
+            this.Controls.Add(this.pnlTransactionDetails);
+            this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlBackup);
-            this.Controls.Add(this.pnlSetting);
             this.Controls.Add(this.pnlStaff);
             this.Controls.Add(this.pnlReservation);
+            this.Controls.Add(this.pnlReturn);
+            this.Controls.Add(this.pnlLoan);
+            this.Controls.Add(this.pnlSetting);
             this.Controls.Add(this.pnlSubTabs);
             this.Controls.Add(this.pnlMainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -2932,8 +3198,8 @@
             this.Name = "FrmMainSystem";
             this.Text = "Main System";
             this.Load += new System.EventHandler(this.frmMainSystem_Load);
-            this.pnlMember.ResumeLayout(false);
-            this.pnlMember.PerformLayout();
+            this.pnlMemberDetails.ResumeLayout(false);
+            this.pnlMemberDetails.PerformLayout();
             this.grpMemberBookLinks.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
@@ -2941,14 +3207,14 @@
             this.grpRunningTotal.PerformLayout();
             this.pnlStaff.ResumeLayout(false);
             this.pnlStaff.PerformLayout();
-            this.pnlCheckOut.ResumeLayout(false);
-            this.pnlCheckOut.PerformLayout();
+            this.pnlLoan.ResumeLayout(false);
+            this.pnlLoan.PerformLayout();
             this.pnlDelete.ResumeLayout(false);
             this.pnlDelete.PerformLayout();
             this.pnlSetting.ResumeLayout(false);
             this.pnlSetting.PerformLayout();
-            this.pnlCheckIn.ResumeLayout(false);
-            this.pnlCheckIn.PerformLayout();
+            this.pnlReturn.ResumeLayout(false);
+            this.pnlReturn.PerformLayout();
             this.pnlBookDetails.ResumeLayout(false);
             this.grpBooksBookStatus.ResumeLayout(false);
             this.grpBooksBookStatus.PerformLayout();
@@ -2967,6 +3233,8 @@
             this.pnlSell.PerformLayout();
             this.pnlReservation.ResumeLayout(false);
             this.pnlReservation.PerformLayout();
+            this.pnlTransactionDetails.ResumeLayout(false);
+            this.pnlTransactionDetails.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2991,7 +3259,7 @@
         private System.Windows.Forms.Label lblMessageOutput;
         private System.Windows.Forms.DateTimePicker dtpReservationSetDueDate;
         private System.Windows.Forms.Label lblReservationSetDueDate;
-        private System.Windows.Forms.Panel pnlMember;
+        private System.Windows.Forms.Panel pnlMemberDetails;
         private System.Windows.Forms.GroupBox grpMemberBookLinks;
         private System.Windows.Forms.ListView lsvMemberBookLinks;
         private System.Windows.Forms.TextBox txtMemberJoinDate;
@@ -3000,7 +3268,7 @@
         private System.Windows.Forms.TextBox txtMemberAddressLine4;
         private System.Windows.Forms.TextBox txtMemberAddressLine5;
         private System.Windows.Forms.Label lblMemberPostcode;
-        private System.Windows.Forms.Label lblMemberAssociatedMemberBarcodes;
+        private System.Windows.Forms.Label lblLinkedMembers;
         private System.Windows.Forms.TextBox txtMemberAddressLine1;
         private System.Windows.Forms.Label lblMemberAddressLine3;
         private System.Windows.Forms.Button btnMemberCancel;
@@ -3062,20 +3330,20 @@
         private System.Windows.Forms.TextBox txtStaffName;
         private System.Windows.Forms.Button btnStaffCancel;
         private System.Windows.Forms.Button btnStaffSave;
-        private System.Windows.Forms.Panel pnlCheckOut;
-        private System.Windows.Forms.Label lblCheckOutSetDueDate;
-        private System.Windows.Forms.TextBox txtCheckOutLateBooks;
-        private System.Windows.Forms.Label lblCheckOutOverdueBooks;
-        private System.Windows.Forms.ListView lsvCheckOutSelectedBooks;
-        private System.Windows.Forms.Label txtCheckOutSelectedBooks;
-        private System.Windows.Forms.TextBox txtCheckOutCurrentMemberCheckOuts;
-        private System.Windows.Forms.Label lblCheckOutCurrentMemberLoans;
-        private System.Windows.Forms.TextBox txtCheckOutMemberBarcode;
-        private System.Windows.Forms.Label lblCheckOutMemberBarcode;
-        private System.Windows.Forms.TextBox txtCheckOutMemberName;
-        private System.Windows.Forms.Label lblCheckOutMemberName;
-        private System.Windows.Forms.Button btnCheckOutSave;
-        private System.Windows.Forms.Button btnCheckOutCancel;
+        private System.Windows.Forms.Panel pnlLoan;
+        private System.Windows.Forms.Label lblLoanSetDueDate;
+        private System.Windows.Forms.TextBox txtLoanLateBooks;
+        private System.Windows.Forms.Label lblLoanOverdueBooks;
+        private System.Windows.Forms.ListView lsvLoanSelectedBooks;
+        private System.Windows.Forms.Label txtLoanSelectedBooks;
+        private System.Windows.Forms.TextBox txtLoanCurrentMemberCheckOuts;
+        private System.Windows.Forms.Label lblLoanCurrentMemberLoans;
+        private System.Windows.Forms.TextBox txtLoanMemberBarcode;
+        private System.Windows.Forms.Label lblLoanMemberBarcode;
+        private System.Windows.Forms.TextBox txtLoanMemberName;
+        private System.Windows.Forms.Label lblLoanOutMemberName;
+        private System.Windows.Forms.Button btnLoanSave;
+        private System.Windows.Forms.Button btnLoanCancel;
         private System.Windows.Forms.Panel pnlSetting;
         private System.Windows.Forms.Label lblDefaultSettings;
         private System.Windows.Forms.TextBox txtSettingDefault;
@@ -3087,20 +3355,20 @@
         private System.Windows.Forms.Label lblSettingGmailKey;
         private System.Windows.Forms.Button btnSettingCancel;
         private System.Windows.Forms.Button btnSettingSave;
-        private System.Windows.Forms.TextBox txtCheckInLateFees;
-        private System.Windows.Forms.Label lblCheckInLateFees;
-        private System.Windows.Forms.TextBox txtCheckInOverdue;
-        private System.Windows.Forms.Label lblCheckInOverdue;
-        private System.Windows.Forms.ListView lsvCheckInSelectedBooks;
-        private System.Windows.Forms.Label lblCheckInSelectedBooks;
-        private System.Windows.Forms.TextBox txtCheckInLoans;
-        private System.Windows.Forms.Label lblCheckInLoans;
-        private System.Windows.Forms.TextBox txtCheckInMemberBarcode;
-        private System.Windows.Forms.Label lblCheckInMemberBarcode;
-        private System.Windows.Forms.TextBox txtCheckInMemberName;
-        private System.Windows.Forms.Label lblCheckInMemberName;
-        private System.Windows.Forms.Button btnCheckInCancel;
-        private System.Windows.Forms.Button btnCheckInSave;
+        private System.Windows.Forms.TextBox txtReturnLateFees;
+        private System.Windows.Forms.Label lblReturnLateFees;
+        private System.Windows.Forms.TextBox txtReturnOverdue;
+        private System.Windows.Forms.Label lblReturnOverdue;
+        private System.Windows.Forms.ListView lsvReturnSelectedBooks;
+        private System.Windows.Forms.Label lblReturnSelectedBooks;
+        private System.Windows.Forms.TextBox txtReturnLoans;
+        private System.Windows.Forms.Label lblReturnLoans;
+        private System.Windows.Forms.TextBox txtReturnMemberBarcode;
+        private System.Windows.Forms.Label lblReturnMemberBarcode;
+        private System.Windows.Forms.TextBox txtReturnMemberName;
+        private System.Windows.Forms.Label lblReturnMemberName;
+        private System.Windows.Forms.Button btnReturnCancel;
+        private System.Windows.Forms.Button btnReturnSave;
         private System.Windows.Forms.Panel pnlBookDetails;
         private System.Windows.Forms.Button btnBookSave;
         private System.Windows.Forms.Button btnBookCancel;
@@ -3150,24 +3418,23 @@
         private System.Windows.Forms.Label lblLastBackupDate;
         private System.Windows.Forms.Button btnRestoreBackup;
         private System.Windows.Forms.Button btnCreateBackup;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpLoanReturnDate;
         private System.Windows.Forms.ComboBox cmbStaffAccessLevel;
         private System.Windows.Forms.CheckBox chkSearchCopyBarcodes;
         private System.Windows.Forms.Panel pnlDelete;
         private System.Windows.Forms.ListView lsvDelete;
         private System.Windows.Forms.Label lblDeleteSelectedRecords;
-        private System.Windows.Forms.Label lblDeleteTitle;
         private System.Windows.Forms.Button btnDeleteCancel;
         private System.Windows.Forms.Button btnDeleteDelete;
         private System.Windows.Forms.Button btnBookAddCopies;
         private System.Windows.Forms.CheckBox chkStatisticsTimeAsVariable;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtStaffUsername;
+        private System.Windows.Forms.Label lblStaffUsername;
         private System.Windows.Forms.Button btnStaffMemberRecord;
         private System.Windows.Forms.Button btnBookDeleteCopies;
-        private System.Windows.Forms.Label lblCheckInEnterBarcode;
-        private System.Windows.Forms.TextBox txtCheckInEnterBarcode;
-        private System.Windows.Forms.Panel pnlCheckIn;
+        private System.Windows.Forms.Label lblReturnEnterBarcode;
+        private System.Windows.Forms.TextBox txtReturnEnterBarcode;
+        private System.Windows.Forms.Panel pnlReturn;
         private System.Windows.Forms.Panel pnlMainTabs;
         private System.Windows.Forms.Panel pnlSubTabs;
         private System.Windows.Forms.Panel pnlSell;
@@ -3206,5 +3473,28 @@
         private System.Windows.Forms.Button btnReserveCancel;
         private System.Windows.Forms.TextBox txtReserveLateFee;
         private System.Windows.Forms.Button btnReserveSave;
+        private System.Windows.Forms.Label lblLoanLateFees;
+        private System.Windows.Forms.TextBox txtLoanLateFees;
+        private System.Windows.Forms.Label lblLoanEnterBarcode;
+        private System.Windows.Forms.TextBox txtLoanEnterBarcode;
+        private System.Windows.Forms.Panel pnlTransactionDetails;
+        private System.Windows.Forms.Label lblTransactionPrice;
+        private System.Windows.Forms.Button btnTransactionBack;
+        private System.Windows.Forms.TextBox txtTransactionType;
+        private System.Windows.Forms.Button btnTransactionDelete;
+        private System.Windows.Forms.Label lblTransactionMemberBarode;
+        private System.Windows.Forms.TextBox txtTransactionPrice;
+        private System.Windows.Forms.TextBox txtTransactionDueDate;
+        private System.Windows.Forms.TextBox txtTransactionMemberBarcode;
+        private System.Windows.Forms.TextBox txtTransactionDate;
+        private System.Windows.Forms.Label lblTransactionMemberName;
+        private System.Windows.Forms.Label lblTransactionDate;
+        private System.Windows.Forms.Label lblTransactionDueDate;
+        private System.Windows.Forms.Label lblTransactionBooks;
+        private System.Windows.Forms.Label lblTransactionType;
+        private System.Windows.Forms.TextBox txtTransactionMemberName;
+        private System.Windows.Forms.ListView lsvTransactionBooks;
+        private System.Windows.Forms.TextBox txtTransactionDescription;
+        private System.Windows.Forms.Label lblTransactionDescription;
     }
 }

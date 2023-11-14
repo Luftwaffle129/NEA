@@ -99,6 +99,14 @@ namespace NEALibrarySystem.Data_Structures
             set { _selectedBooks = value ?? new List<Book>(); }
         }
         #endregion
+        #region transactions
+        private static List<Transaction> _transactions = new List<Transaction>();
+        public static List<Transaction> Transactions
+        {
+            get { return _transactions; }
+            set { _transactions = value ?? new List<Transaction>(); }
+        }
+        #endregion
         #endregion
         #region enums
         public enum Feature
@@ -112,6 +120,7 @@ namespace NEALibrarySystem.Data_Structures
             Settings = 6,
         }
         #endregion
+        #region file handling
         /// <summary>
         /// creates the directory to save the data fields to
         /// </summary>
@@ -119,29 +128,6 @@ namespace NEALibrarySystem.Data_Structures
         {
             Directory.CreateDirectory(Application.StartupPath + "\\data");
         }
-
-        #region Searching
-
-        #endregion
-        #region Sorting
-        public static void SortBooks()
-        {
-
-        }
-        enum BookFields
-        {
-            Title,
-            ISBN,
-            MediaType,
-            Author,
-            Publisher,
-            Genres,
-            Themes
-        }
-        #endregion
-        #region filtering
-
-        #endregion 
         #region Load Files
         private static string DataFilePath = Application.StartupPath + "\\data\\";
         /// <summary>
@@ -400,55 +386,30 @@ namespace NEALibrarySystem.Data_Structures
             FileHandler.SaveFile<ItemIDSaverCollection>(itemIDSaverCollection, filePath, name);
         }
         #endregion
-        #region Test data insertions
-        public static void LoadTestData1()
+        #endregion
+        #region data handling
+        #region Searching
+
+        #endregion
+        #region Sorting
+        public static void SortBooks()
         {
-            {
-                Book tempBook = new Book();
-                tempBook.TitleID = 0;
-                tempBook.SeriesTitle = "Test";
-                tempBook.SeriesNumber = 1;
-                tempBook.ISBN = "0123456789012";
-                tempBook.Description = "Test";
-                tempBook.Price = 12.99;
-                tempBook.GenresID = new List<int> { 0, 0 };
-                tempBook.ThemesID = new List<int> { 0, 0 };
-                tempBook.AuthorID = 0;
-                tempBook.PublisherID = 0;
-                tempBook.MediaTypeID = 0;
 
-                BookCopy bookCopy = new BookCopy()
-                {
-                    Barcode = "0123456789",
-                    Status = status.Loaned,
-                    OverdueEmailLastSent = DateTime.Now.Date,
-                    DueDate = DateTime.Now.Date,
-                    MemberID = "0123456789"
-                };
-                tempBook.BookCopies.Add(bookCopy);
-
-                DataLibrary.Books.Clear();
-                DataLibrary.Books.Add(tempBook);
-
-                ItemID tempItemID = new ItemID();
-                tempItemID.ID = 0;
-                tempItemID.Name = "Test";
-                DataLibrary.Titles.Clear();
-                DataLibrary.Titles.Add(tempItemID);
-                DataLibrary.MediaTypes.Clear();
-                DataLibrary.MediaTypes.Add(tempItemID);
-                DataLibrary.Authors.Clear();
-                DataLibrary.Authors.Add(tempItemID);
-                DataLibrary.Publishers.Clear();
-                DataLibrary.Publishers.Add(tempItemID);
-                DataLibrary.Genres.Clear();
-                DataLibrary.Genres.Add(tempItemID);
-                DataLibrary.Themes.Clear();
-                DataLibrary.Themes.Add(tempItemID);
-
-                DataLibrary.SaveAllFiles();
-            }
         }
+        enum BookFields
+        {
+            Title,
+            ISBN,
+            MediaType,
+            Author,
+            Publisher,
+            Genres,
+            Themes
+        }
+        #endregion
+        #region filtering
+
+        #endregion
         #endregion
     }
 }

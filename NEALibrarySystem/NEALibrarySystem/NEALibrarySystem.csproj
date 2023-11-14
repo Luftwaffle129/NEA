@@ -60,6 +60,8 @@
     <Compile Include="Data Structures\DataLibrary.cs" />
     <Compile Include="Data Structures\Settings.cs" />
     <Compile Include="Data Structures\Staff.cs" />
+    <Compile Include="Data Structures\TestData.cs" />
+    <Compile Include="Data Structures\Transaction.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
     </Compile>

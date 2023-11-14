@@ -34,7 +34,7 @@
             this.lblMemberBarcode = new System.Windows.Forms.Label();
             this.txtMemberName = new System.Windows.Forms.TextBox();
             this.lblMemberName = new System.Windows.Forms.Label();
-            this.lblCashGain = new System.Windows.Forms.Label();
+            this.lblPrice = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtCashGain = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -100,15 +100,15 @@
             this.lblMemberName.TabIndex = 17;
             this.lblMemberName.Text = "Member Name:";
             // 
-            // lblCashGain
+            // lblPrice
             // 
-            this.lblCashGain.AutoSize = true;
-            this.lblCashGain.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCashGain.Location = new System.Drawing.Point(12, 115);
-            this.lblCashGain.Name = "lblCashGain";
-            this.lblCashGain.Size = new System.Drawing.Size(196, 62);
-            this.lblCashGain.TabIndex = 21;
-            this.lblCashGain.Text = "Cash gain\r\n(add - for loss):";
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrice.Location = new System.Drawing.Point(12, 115);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(84, 31);
+            this.lblPrice.TabIndex = 21;
+            this.lblPrice.Text = "Price:";
             // 
             // lblDescription
             // 
@@ -137,7 +137,7 @@
             this.txtDescription.Size = new System.Drawing.Size(517, 189);
             this.txtDescription.TabIndex = 24;
             // 
-            // frmCustomTransaction
+            // FrmCustomTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,14 +145,14 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtCashGain);
             this.Controls.Add(this.lblDescription);
-            this.Controls.Add(this.lblCashGain);
+            this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.txtMemberBarcode);
             this.Controls.Add(this.lblMemberBarcode);
             this.Controls.Add(this.txtMemberName);
             this.Controls.Add(this.lblMemberName);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Name = "frmCustomTransaction";
+            this.Name = "FrmCustomTransaction";
             this.Text = "frmCustomTransaction";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +167,7 @@
         private System.Windows.Forms.Label lblMemberBarcode;
         private System.Windows.Forms.TextBox txtMemberName;
         private System.Windows.Forms.Label lblMemberName;
-        private System.Windows.Forms.Label lblCashGain;
+        private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.TextBox txtCashGain;
         private System.Windows.Forms.TextBox txtDescription;

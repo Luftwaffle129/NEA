@@ -281,43 +281,50 @@ namespace NEALibrarySystem
         private int SetIDFromName(ref List<ItemID> list, string name)
         {
             int index = 0;
-            do
+            if (list.Count > 0)
             {
-                if (list[index].Name == name)
-                {
-                    return list[index].ID;
-                }
-            } while (++index < list.Count);
-            // if an existing item is not found
-            index = 0;
-            int ID = 0;
-            ItemID temp = new ItemID();
-            // insert new item in the ID if there is a gap
-            do
-            {
-                index = 0;
-                bool isGap = true;
                 do
                 {
-                    if (list[index].ID == ID)
+                    if (list[index].Name == name)
                     {
-                        isGap = false;
+                        return list[index].ID;
                     }
-                }
-                while (++index < list.Count);
-                temp.ID = ID;
-                if (isGap)
+                } while (++index < list.Count);
+            }
+            // if an existing item is not found
+            int ID = 0;
+            ItemID temp = new ItemID();
+            temp.Name = name;
+            // insert new item in the ID if there is a gap
+            if (list.Count > 0)
+            {
+                // loops through each ID
+                do
                 {
-                    temp.Name = name;
-                    list.Add(temp);
-                    return ID;
-                }
-            } while (++ID < list.Count);
+                    index = 0;
+                    bool isGap = true;
+                    //loops through each element in the list
+                    do
+                    {
+                        if (list[index].ID == ID)
+                        {
+                            isGap = false;
+                        }
+                        index++;
+                    }
+                    while (index < list.Count && isGap);
+                    temp.ID = ID;
+                    if (isGap)
+                    {
+                        list.Add(temp);
+                        return temp.ID;
+                    }
+                } while (++ID < list.Count);
+            }
             // if no gaps, append new item
             temp.ID = ID;
-            temp.Name = name;
             list.Add(temp);
-            return ID;
+            return temp.ID;
         }
         #region Constructors
         public Book() { }

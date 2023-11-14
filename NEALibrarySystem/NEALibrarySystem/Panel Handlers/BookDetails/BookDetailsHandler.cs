@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -104,7 +105,7 @@ namespace NEALibrarySystem.PanelHandlers
             UpdateBookCopies();
         }
         /// <summary>
-        /// Updates book copies into the book copy details listview
+        /// Updates book copies shown in the book copy details listview
         /// </summary>
         private void UpdateBookCopies()
         {
@@ -124,6 +125,9 @@ namespace NEALibrarySystem.PanelHandlers
                 }
             }
         }
+        /// <summary>
+        /// initialises the list view used to display book copies
+        /// </summary>
         private void InitialiseCopyDetails()
         {
             _objects.CopyDetails.View = View.Details;
@@ -135,7 +139,7 @@ namespace NEALibrarySystem.PanelHandlers
             _objects.CopyDetails.GridLines = false;
             _objects.CopyDetails.Sorting = SortOrder.None;
             _objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-
+            //add columns
             string[] columns = new string[3]
             {
                 "Barcode",
@@ -153,7 +157,40 @@ namespace NEALibrarySystem.PanelHandlers
             }
         }
         #endregion
+        /// <summary>
+        /// Saves the inputted book data into the list of books
+        /// </summary>
         public void Save()
+        {
+            if (_IsNewRecord)
+            {
+                //add the new record and empty the input fields
+                DataLibrary.Books.Add(GetBookInput());
+                loadBookDetails();
+            }
+            else
+            {
+                //remove old record of the book
+                if (DataLibrary.Books.Count !=0)
+                {
+                    bool isReplaced = false;
+                    int index = 0;
+                    do
+                    {
+                        if (DataLibrary.Books[index] == _bookData)
+                        {
+                            DataLibrary.Books[index] = GetBookInput();
+                            isReplaced = true;
+                        }
+                    } while (!isReplaced || ++index >= DataLibrary.Books.Count);
+                }
+            }
+        }
+        /// <summary>
+        /// retrieves the book record created from the inputted data
+        /// </summary>
+        /// <returns>inputted book data</returns>
+        private Book GetBookInput() 
         {
             Book temp = new Book();
             temp.SetTitle(_objects.Title.Text);
@@ -165,12 +202,22 @@ namespace NEALibrarySystem.PanelHandlers
             temp.SetGenres(_objects.Genres.Text.Split(',').ToList<string>());
             temp.SetThemes(_objects.Themes.Text.Split(',').ToList<string>());
             temp.Description = _objects.Description.Text;
-            temp.BookCopies = _bookData.BookCopies; 
-            DataLibrary.Books.Add(temp);
+            temp.BookCopies = _bookData.BookCopies;
+            return temp;
         }
+        /// <summary>
+        /// Cancels the update or insertion of a new book record
+        /// </summary>
         public void Cancel()
         {
-            loadBookDetails();
+            if (_IsNewRecord)
+            { 
+                loadBookDetails();
+            }
+            else
+            {
+                FrmMainSystem.main.NavigatorOpenSearchViewTab();
+            }
         }
     }
 }

@@ -24,6 +24,5 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             _objects.EnterBookBarcodes.Text = "";
             _objects.SelectedBooks.Clear();
         }
-
     }
 }

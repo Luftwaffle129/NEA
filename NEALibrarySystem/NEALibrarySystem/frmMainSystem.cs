@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Windows.Forms.DataVisualization.Charting;
 using NEALibrarySystem.Data_Structures;
-using System.Drawing.Printing;
 using NEALibrarySystem.SearchList;
 using NEALibrarySystem.Panel_Handlers.BookCheckIn;
 using NEALibrarySystem.PanelHandlers;
@@ -19,8 +18,11 @@ namespace NEALibrarySystem
 {
     public partial class FrmMainSystem : Form
     {
+        public static FrmMainSystem main;
+
         public FrmMainSystem()
         {
+            main = this;
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
@@ -45,9 +47,9 @@ namespace NEALibrarySystem
         {
             _panels = new Panel[][] 
             {
-            new Panel[] { pnlCheckIn, pnlCheckOut, pnlSell, pnlReservation, pnlSearch, pnlBookDetails, pnlDelete },
-            new Panel[] { pnlSearch, pnlMember, pnlDelete },
-            new Panel[] { pnlSearch },
+            new Panel[] { pnlReturn, pnlLoan, pnlSell, pnlReservation, pnlSearch, pnlBookDetails, pnlDelete },
+            new Panel[] { pnlSearch, pnlMemberDetails, pnlDelete },
+            new Panel[] { pnlSearch, pnlTransactionDetails },
             new Panel[] { pnlSearch, pnlStaff },
             new Panel[] { pnlStatistics },
             new Panel[] { pnlBackup },
@@ -85,13 +87,13 @@ namespace NEALibrarySystem
         {
             BookCheckInObjects bookCheckInObjects = new BookCheckInObjects()
             {
-                MemberBarcode = txtCheckInMemberBarcode,
-                MemberName = txtCheckInMemberName,
-                EnterBookBarcodes = txtCheckInEnterBarcode,
-                Loans = txtCheckInLoans,
-                Overdue = txtCheckInOverdue,
-                LateFees = txtCheckInLateFees,
-                SelectedBooks = lsvCheckInSelectedBooks
+                MemberBarcode = txtReturnMemberBarcode,
+                MemberName = txtReturnMemberName,
+                EnterBookBarcodes = txtReturnEnterBarcode,
+                Loans = txtReturnLoans,
+                Overdue = txtReturnOverdue,
+                LateFees = txtReturnLateFees,
+                SelectedBooks = lsvReturnSelectedBooks
             };
             _bookCheckInHandler = new BookCheckInHandler(bookCheckInObjects);
         }
@@ -130,7 +132,7 @@ namespace NEALibrarySystem
                 }
             }
         }
-        private void NavigatorOpenSearchViewTab()
+        public void NavigatorOpenSearchViewTab()
         {
             pnlSearch.Visible = true;
             switch (_currentFeature)
@@ -140,7 +142,7 @@ namespace NEALibrarySystem
                     pnlSearch.Visible = true;
                     break;
                 case DataLibrary.Feature.Member:
-
+                    _searchedItemsHandler.ToMember();
                     break;
                 case DataLibrary.Feature.Transaction:
 
@@ -301,16 +303,16 @@ namespace NEALibrarySystem
         }
         #endregion
         #region panel visibility
-        private void pnlCheckOut_VisibleChanged(object sender, EventArgs e)
+        private void pnlLoan_VisibleChanged(object sender, EventArgs e)
         {
-            if (pnlCheckOut.Visible)
+            if (pnlLoan.Visible)
             {
                 
             }
         }
         private void pnlCheckIn_VisibleChanged(object sender, EventArgs e)
         {
-            if (pnlCheckIn.Visible)
+            if (pnlReturn.Visible)
             {
                 _bookCheckInHandler.LoadCheckInPanel();
             }
@@ -328,7 +330,10 @@ namespace NEALibrarySystem
         }
         private void pnlSearch_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlSearch.Visible)
+            {
+                NavigatorOpenSearchViewTab();
+            }
         }
         private void pnlMember_VisibleChanged(object sender, EventArgs e)
         {
@@ -378,9 +383,32 @@ namespace NEALibrarySystem
         frmConfirmation frmConfirmation;
         private void pctIcon_Click(object sender, EventArgs e)
         {
-            frmConfirmation = new frmConfirmation();
-            frmConfirmation.ShowDialog();
+            TestData testData = new TestData();
+            testData.GenerateTestData();
         }
+        private void lsvSearchItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        #region objects
+        #region book details
+        private void btnBookSave_Click(object sender, EventArgs e)
+        {
+            _bookDetailsHandler.Save();
+        }
+        private void btnBookCancel_Click(object sender, EventArgs e)
+        {
+            _bookDetailsHandler.Cancel();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #endregion
+
         #endregion
         /*
          *  OpenFileDialog openFileDialog = new OpenFileDialog();

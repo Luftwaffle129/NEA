@@ -8,6 +8,9 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// stores the data of the members in the library
+    /// </summary>
     public class Member
     {
         public string Barcode { get; set; }
@@ -25,6 +28,11 @@ namespace NEALibrarySystem.Data_Structures
         public DateTime JoinDate { get; set; }
         public List<string> AssociatedMembers { get; set; }
         public customerType CustomerType { get; set; }
+
+        public Member()
+        {
+            JoinDate = DateTime.Now;
+        }
     }
     public enum customerType
     {
