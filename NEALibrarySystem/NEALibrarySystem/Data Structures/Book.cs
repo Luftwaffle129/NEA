@@ -46,7 +46,7 @@ namespace NEALibrarySystem
         /// <param name="title">name of the title</param>
         public void SetTitle(string title)
         {
-            List<ItemID> titles = new List<ItemID>();
+            List<ItemID> titles = DataLibrary.Titles;
             titleID = SetIDFromName(ref titles, title);
             DataLibrary.Titles = titles;
         }

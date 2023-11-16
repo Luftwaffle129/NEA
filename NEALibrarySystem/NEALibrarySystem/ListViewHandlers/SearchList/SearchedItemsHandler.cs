@@ -13,9 +13,13 @@ namespace NEALibrarySystem.SearchList
     public class SearchedItemsHandler
     {
         private ListView lsvSearch;
-        public SearchedItemsHandler(ListView lsv)
+        /// <summary>
+        /// Current feature that the search tab is set to
+        /// </summary>
+        private DataLibrary.Feature _currentFeature = DataLibrary.Feature.None;
+        public SearchedItemsHandler(ListView listview)
         {
-            lsvSearch = lsv;
+            lsvSearch = listview;
             lsvSearch.View = View.Details;
             lsvSearch.LabelEdit = false;
             lsvSearch.AllowColumnReorder = false;
@@ -27,71 +31,102 @@ namespace NEALibrarySystem.SearchList
             lsvSearch.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lsvSearch.Scrollable = true;
         }
+        public void SetUpSearchTab()
+        {
+            switch (FrmMainSystem.Main.CurrentFeature)
+            {
+                case DataLibrary.Feature.Book:
+                    ToBook();
+                    break;
+                case DataLibrary.Feature.Member:
+                    ToMember();
+                    break;
+                case DataLibrary.Feature.Transaction:
+
+                    break;
+                case DataLibrary.Feature.Staff:
+
+                    break;
+            }
+        }
         public void ToBook()
         {
-            lsvSearch.Clear();
-            string[] columns =
-            {
-                "Title",
-                "ISBN",
-                "Media Type",
-                "Author",
-                "Publisher",
-                "Genres",
-                "Themes",
-                "price",
-                "description"
-            };
+            //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
+            //{
+                LoadProperties(ref lsvSearch, DataLibrary.Feature.Book);
 
-            ListViewHandler.AddColumns(columns, ref lsvSearch);
-
-            foreach (Book book in DataLibrary.Books)
-            {
-                string[] data = new string[9]
+                foreach (Book book in DataLibrary.Books)
                 {
-                    book.GetTitle(),
-                    book.ISBN,
-                    book.GetMediaType(),
-                    book.GetAuthor(),
-                    book.GetPublisher(),
-                    DataFormatter.ListToString(book.GetGenres()),
-                    DataFormatter.ListToString(book.GetThemes()),
-                    book.Price.ToString(),
-                    book.Description
-                };
-                ListViewItem row = new ListViewItem(data);
-                lsvSearch.Items.Add(row);
-            }
-
-            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    string[] data =
+                    {
+                        book.GetTitle(),
+                        book.ISBN,
+                        book.GetMediaType(),
+                        book.GetAuthor(),
+                        book.GetPublisher(),
+                        DataFormatter.ListToString(book.GetGenres()),
+                        DataFormatter.ListToString(book.GetThemes())
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    lsvSearch.Items.Add(row);
+                }
+                lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                _currentFeature = DataLibrary.Feature.Book;
+            //}
         }
         public void ToMember()
         {
-            lsvSearch.Clear();
-            string[] columns =
-{
-                "Barcode",
-                "First Name",
-                "Last Name",
-                "Member Type"
-            };
+           //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
+            //{
+                LoadProperties(ref lsvSearch, DataLibrary.Feature.Member);
 
-            ListViewHandler.AddColumns(columns, ref lsvSearch);
-
-            foreach (Member member in DataLibrary.Members)
-            {
-                string[] data = new string[4]
+                foreach (Member member in DataLibrary.Members)
                 {
+                    string[] data = new string[4]
+                    {
                     member.Barcode,
                     member.FirstName,
                     member.LastName,
                     member.CustomerType.ToString()
-                };
-                ListViewItem row = new ListViewItem(data);
-                lsvSearch.Items.Add(row);
-            }
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    lsvSearch.Items.Add(row);
+                }
 
-            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                _currentFeature = DataLibrary.Feature.Member;
+            //}
+        }
+        public static void LoadProperties(ref ListView lsv, DataLibrary.Feature feature)
+        {
+            lsv.Clear();
+
+            string[] columns = new string[0];
+            switch (feature)
+            {
+                case (DataLibrary.Feature.Member):
+                    columns = new string[4]
+                    {
+                        "Barcode",
+                        "First Name",
+                        "Last Name",
+                        "Member Type"
+                    };
+                    break;
+                case (DataLibrary.Feature.Book):
+                    columns = new string[7]
+                    {
+                        "Title",
+                        "ISBN",
+                        "Media Type",
+                        "Author",
+                        "Publisher",
+                        "Genres",
+                        "Themes"
+                    };
+                    break;
+            }
+            ListViewHandler.AddColumns(columns, ref lsv);
         }
         public void updatedSelectedItems()
         {

@@ -14,7 +14,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         { 
             _objects = objs;
         }
-        public void LoadCheckInPanel()
+        public void Load()
         {
             _objects.MemberName.Text = "";
             _objects.MemberBarcode.Text = "";

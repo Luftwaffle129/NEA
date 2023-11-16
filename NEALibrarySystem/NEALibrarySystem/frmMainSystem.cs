@@ -13,16 +13,17 @@ using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.SearchList;
 using NEALibrarySystem.Panel_Handlers.BookCheckIn;
 using NEALibrarySystem.PanelHandlers;
+using NEALibrarySystem.ListViewHandlers.SelectedItems;
 
 namespace NEALibrarySystem
 {
     public partial class FrmMainSystem : Form
     {
-        public static FrmMainSystem main;
+        public static FrmMainSystem Main;
 
         public FrmMainSystem()
         {
-            main = this;
+            Main = this;
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
@@ -36,11 +37,12 @@ namespace NEALibrarySystem
         private Panel[][] _panels;
         private Button[] _mainTabs;
         private Button[] _subTabs;
-        public DataLibrary.Feature _currentFeature;
+        public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
 
         private SearchedItemsHandler _searchedItemsHandler;
         private BookCheckInHandler _bookCheckInHandler;
         private BookDetailsHandler _bookDetailsHandler;
+        private DeleteHandler _deleteHandler;
 
         #region initialisation
         public void InitializePanels()
@@ -58,6 +60,7 @@ namespace NEALibrarySystem
 
             InitialiseCheckIn();
             InitialiseBookDetails();
+            InitialiseDelete();
         }
         private void InitializeTabs()
         {
@@ -120,9 +123,13 @@ namespace NEALibrarySystem
             };
             _bookDetailsHandler = new BookDetailsHandler(bookDetailsObjects);
         }
+        private void InitialiseDelete()
+        {
+            _deleteHandler = new DeleteHandler(lsvDelete);
+        }
         #endregion
         #region opening panels and tabs
-        private void NavigatorCloseAllPanels()
+        public void NavigatorCloseAllPanels()
         {
             foreach (Panel[] panelArr in _panels)
             {
@@ -134,28 +141,13 @@ namespace NEALibrarySystem
         }
         public void NavigatorOpenSearchViewTab()
         {
+            NavigatorCloseAllPanels();
             pnlSearch.Visible = true;
-            switch (_currentFeature)
-            {
-                case DataLibrary.Feature.Book:
-                    _searchedItemsHandler.ToBook();
-                    pnlSearch.Visible = true;
-                    break;
-                case DataLibrary.Feature.Member:
-                    _searchedItemsHandler.ToMember();
-                    break;
-                case DataLibrary.Feature.Transaction:
 
-                    break;
-                case DataLibrary.Feature.Staff:
-
-                    break;
-
-            }
         }
         private void NavigatorOpenBookTab()
         {
-            _currentFeature = DataLibrary.Feature.Book;
+            CurrentFeature = DataLibrary.Feature.Book;
 
             string[] bookTabs =
             {
@@ -169,12 +161,11 @@ namespace NEALibrarySystem
             };
             NavigatorSetSubTabNames(bookTabs);
 
-            NavigatorCloseAllPanels();
             NavigatorOpenSearchViewTab();
         }
         private void NavigatorOpenMemberTab()
         {
-            _currentFeature = DataLibrary.Feature.Member;
+            CurrentFeature = DataLibrary.Feature.Member;
 
             string[] memberTabs =
             {
@@ -208,7 +199,7 @@ namespace NEALibrarySystem
         {
             NavigatorCloseAllPanels();
             int feature = 0;
-            switch (_currentFeature)
+            switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
                     feature = 0;
@@ -237,7 +228,7 @@ namespace NEALibrarySystem
         #endregion
         private void ChangeIcon()
         {
-            switch (_currentFeature)
+            switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
                     //set pic icon
@@ -314,7 +305,7 @@ namespace NEALibrarySystem
         {
             if (pnlReturn.Visible)
             {
-                _bookCheckInHandler.LoadCheckInPanel();
+                _bookCheckInHandler.Load();
             }
         }
         private void pnlSell_VisibleChanged(object sender, EventArgs e)
@@ -325,14 +316,14 @@ namespace NEALibrarySystem
         {
             if (pnlBookDetails.Visible)
             {
-                _bookDetailsHandler.loadBookDetails();
+                _bookDetailsHandler.Load();
             }
         }
         private void pnlSearch_VisibleChanged(object sender, EventArgs e)
         {
             if (pnlSearch.Visible)
             {
-                NavigatorOpenSearchViewTab();
+                _searchedItemsHandler.SetUpSearchTab();
             }
         }
         private void pnlMember_VisibleChanged(object sender, EventArgs e)
@@ -345,7 +336,10 @@ namespace NEALibrarySystem
         }
         private void pnlDelete_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlDelete.Visible)
+            {
+                _deleteHandler.Load(lsvSearchItems.CheckedItems);
+            }
         }
         private void pnlBackup_VisibleChanged(object sender, EventArgs e)
         {
@@ -370,7 +364,7 @@ namespace NEALibrarySystem
         }
         private void btnBookAddCopies_Click(object sender, EventArgs e)
         {
-
+            
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -404,6 +398,11 @@ namespace NEALibrarySystem
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void btnDeleteDelete_Click(object sender, EventArgs e)
+        {
+            _deleteHandler.Delete();
         }
         #endregion
 

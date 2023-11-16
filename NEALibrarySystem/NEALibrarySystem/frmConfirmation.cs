@@ -12,19 +12,22 @@ namespace NEALibrarySystem
 {
     public partial class frmConfirmation : Form
     {
-        public frmConfirmation()
+        public frmConfirmation(string message)
         {
             InitializeComponent();
+            lblOutput.Text = message;
         }
 
         private void btnYes_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.Yes; 
+            this.Close();
         }
 
         private void btnMemberCancel_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.No; 
+            this.Close();
         }
     }
 }

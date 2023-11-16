@@ -62,6 +62,7 @@
     <Compile Include="Data Structures\Staff.cs" />
     <Compile Include="Data Structures\TestData.cs" />
     <Compile Include="Data Structures\Transaction.cs" />
+    <Compile Include="Panel Handlers\Delete\DeleteHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
     </Compile>

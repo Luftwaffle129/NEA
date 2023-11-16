@@ -118,6 +118,7 @@ namespace NEALibrarySystem.Data_Structures
             Statistics = 4,
             Backups = 5,
             Settings = 6,
+            None = -1
         }
         #endregion
         #region file handling

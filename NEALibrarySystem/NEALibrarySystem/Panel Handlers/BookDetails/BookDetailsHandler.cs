@@ -25,7 +25,7 @@ namespace NEALibrarySystem.PanelHandlers
         /// <summary>
         /// Loads the book details into the input boxes
         /// </summary>
-        public void loadBookDetails(Book book = null)
+        public void Load(Book book = null)
         {
             //book details
             if (book != null)
@@ -166,7 +166,7 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 //add the new record and empty the input fields
                 DataLibrary.Books.Add(GetBookInput());
-                loadBookDetails();
+                Load();
             }
             else
             {
@@ -212,11 +212,12 @@ namespace NEALibrarySystem.PanelHandlers
         {
             if (_IsNewRecord)
             { 
-                loadBookDetails();
+                Load();
             }
             else
             {
-                FrmMainSystem.main.NavigatorOpenSearchViewTab();
+                FrmMainSystem.Main.NavigatorCloseAllPanels();
+                FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             }
         }
     }
