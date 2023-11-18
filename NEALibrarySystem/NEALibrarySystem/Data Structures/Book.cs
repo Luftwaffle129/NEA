@@ -150,7 +150,7 @@ namespace NEALibrarySystem
         // list of keys
         #region Genres
         private List<int> genresID = new List<int>();
-        public List<int> GenresID
+        public List<int> GenreIDs
         {
             get
             {
@@ -167,7 +167,7 @@ namespace NEALibrarySystem
         /// <returns>List of genre names</returns>
         public List<string> GetGenres()
         {
-            return GetItemIDList(GenresID, DataLibrary.Genres);
+            return GetItemIDList(GenreIDs, DataLibrary.Genres);
         }
         /// <summary>
         /// Sets a the List of IDs from the inputted list of genre names
@@ -176,13 +176,13 @@ namespace NEALibrarySystem
         public void SetGenres(List<string> input)
         {
             List<ItemID> genres = DataLibrary.Genres;
-            GenresID = SetItemIDList(input, ref genres);
+            GenreIDs = SetItemIDList(input, ref genres);
             DataLibrary.Genres = genres;
         }
         #endregion
         #region Themes
         private List<int> themesID = new List<int>();
-        public List<int> ThemesID
+        public List<int> ThemeIDs
         {
             get
             {
@@ -199,7 +199,7 @@ namespace NEALibrarySystem
         /// <returns>List of theme names</returns>
         public List<string> GetThemes()
         {
-            return GetItemIDList(ThemesID, DataLibrary.Themes);
+            return GetItemIDList(ThemeIDs, DataLibrary.Themes);
         }
         /// <summary>
         /// Sets a the List of IDs from the inputted list of theme names
@@ -208,7 +208,7 @@ namespace NEALibrarySystem
         public void SetThemes(List<string> input)
         {
             List<ItemID> themes = DataLibrary.Themes;
-            ThemesID = SetItemIDList(input, ref themes);
+            ThemeIDs = SetItemIDList(input, ref themes);
             DataLibrary.Themes = themes;
         }
         #endregion
@@ -280,6 +280,7 @@ namespace NEALibrarySystem
         /// <param name="name">The name to find ID of or create an ID for</param>
         private int SetIDFromName(ref List<ItemID> list, string name)
         {
+            // finds if the name is already stored. Returns the name's ID if it is
             int index = 0;
             if (list.Count > 0)
             {
@@ -291,14 +292,14 @@ namespace NEALibrarySystem
                     }
                 } while (++index < list.Count);
             }
-            // if an existing item is not found
+            // if an existing item is not found:
             int ID = 0;
             ItemID temp = new ItemID();
             temp.Name = name;
             // insert new item in the ID if there is a gap
             if (list.Count > 0)
             {
-                // loops through each ID
+                // increments through each ID starting from 0
                 do
                 {
                     index = 0;
@@ -342,7 +343,7 @@ namespace NEALibrarySystem
             MediaTypeID = bookSaver.MediaTypeID;
             AuthorID = bookSaver.authorID;
             publisherID = bookSaver.publisherID;
-            GenresID = bookSaver.genresID.ToList();
+            GenreIDs = bookSaver.genresID.ToList();
             themesID = bookSaver.themesID.ToList();
             if (bookSaver.bookCopies != null)
             {

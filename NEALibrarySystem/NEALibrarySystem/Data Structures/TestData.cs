@@ -10,6 +10,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Used to create and load test data into the project
+    /// </summary>
     public class TestData
     {
         private List<Book> books = new List<Book>();
@@ -74,12 +77,18 @@ namespace NEALibrarySystem.Data_Structures
             "Gone with the Wind",
             "A Tale of Two Cities"
         };
+        /// <summary>
+        /// Clears data structures and inserts test data
+        /// </summary>
         public void GenerateTestData()
         {
             ClearAllData();
             GenerateBooks();
             GenerateMembers();
         }
+        /// <summary>
+        /// create 10 random book records with no copies attached to them
+        /// </summary>
         private void GenerateBooks()
         {
             for (int i = 0; i < 10; i++)
@@ -105,6 +114,9 @@ namespace NEALibrarySystem.Data_Structures
             }
             DataLibrary.Books = books;
         }
+        /// <summary>
+        /// generates 10 random members
+        /// </summary>
         private void GenerateMembers()
         {
             for (int i = 0; i < 10; i++)
@@ -155,6 +167,9 @@ namespace NEALibrarySystem.Data_Structures
             }
             return output;
         }
+        /// <summary>
+        /// clears all records
+        /// </summary>
         private void ClearAllData()
         {
             DataLibrary.Books.Clear();

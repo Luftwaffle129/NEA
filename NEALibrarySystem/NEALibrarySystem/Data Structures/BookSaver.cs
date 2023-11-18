@@ -21,8 +21,8 @@ namespace NEALibrarySystem.Data_Structures
             MediaTypeID = book.MediaTypeID;
             authorID = book.AuthorID;
             publisherID = book.PublisherID;
-            genresID = book.GenresID.ToArray();
-            themesID = book.ThemesID.ToArray();
+            genresID = book.GenreIDs.ToArray();
+            themesID = book.ThemeIDs.ToArray();
             bookCopies = new BookCopySaver[book.BookCopies.Count];
             for (int i = 0;  i < bookCopies.Length; i++)
             {

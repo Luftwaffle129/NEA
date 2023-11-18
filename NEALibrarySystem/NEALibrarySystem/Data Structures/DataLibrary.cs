@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem.Data_Structures
@@ -108,6 +109,181 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #endregion
+        #region Deleting records
+        /// <summary>
+        /// Deletes the book record with the inputted ISBN
+        /// </summary>
+        /// <param name="ISBN">ISBN of book to be deleted</param>
+        public static void DeleteBook(string ISBN)
+        {
+            int index = 0;
+            bool isBookRemoved = false;
+            Book removedBook = new Book();
+            // find the record and remove it
+            do
+            {
+                if (DataLibrary.Books[index].ISBN == ISBN)
+                {
+                    removedBook = DataLibrary.Books[index];
+                    DataLibrary.Books.RemoveAt(index);
+                    isBookRemoved = true;
+                }
+            } while (++index < DataLibrary.Books.Count && !isBookRemoved);
+
+            // removes the removed book's Title from DataLibrary.Titles if it is no longer used
+            List<int> usedTitleIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    usedTitleIDs.Add(book.TitleID);
+                }
+            }
+            List<ItemID> tempTitles = DataLibrary.Titles;
+            RemoveUnnecessaryItemID(ref tempTitles, usedTitleIDs, removedBook.TitleID);
+            DataLibrary.Titles = tempTitles;
+
+            // removes the removed book's media type from DataLibrary.MediaTypes if it is no longer used
+            List<int> usedMediaTypeIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    usedMediaTypeIDs.Add(book.MediaTypeID);
+                }
+            }
+            List<ItemID> tempMediaTypes = DataLibrary.MediaTypes;
+            RemoveUnnecessaryItemID(ref tempMediaTypes, usedMediaTypeIDs, removedBook.MediaTypeID);
+            DataLibrary.MediaTypes = tempMediaTypes;
+
+            // removes the removed book's author from DataLibrary.Authors if it is no longer used
+            List<int> usedAuthorIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    usedAuthorIDs.Add(book.AuthorID);
+                }
+            }
+            List<ItemID> tempAuthors = DataLibrary.Authors;
+            RemoveUnnecessaryItemID(ref tempAuthors, usedAuthorIDs, removedBook.AuthorID);
+            DataLibrary.Authors = tempAuthors;
+
+            // removes the removed book's publishers from DataLibrary.Publishers if it is no longer used
+            List<int> usedPublisherIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    usedPublisherIDs.Add(book.PublisherID);
+                }
+            }
+            List<ItemID> tempPublishers = DataLibrary.Publishers;
+            RemoveUnnecessaryItemID(ref tempPublishers, usedPublisherIDs, removedBook.PublisherID);
+            DataLibrary.Publishers = tempPublishers;
+
+            // removes the removed book's genres from DataLibrary.Genres if it they no longer used
+            List<int> usedGenreIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    foreach (int ID in book.GenreIDs)
+                    {
+                        usedGenreIDs.Add(ID);
+                    }
+                }
+            }
+            List<ItemID> tempGenres = DataLibrary.Genres;
+            foreach (int ID in removedBook.GenreIDs)
+            {
+                RemoveUnnecessaryItemID(ref tempGenres, usedGenreIDs, ID);
+            }
+            DataLibrary.Genres = tempGenres;
+
+            // removes the removed book's themes from DataLibrary.Themes if it they no longer used
+            List<int> usedThemeIDs = new List<int>();
+            if (DataLibrary.Books.Count > 0)
+            {
+                foreach (Book book in DataLibrary.Books)
+                {
+                    foreach (int ID in book.ThemeIDs)
+                    {
+                        usedThemeIDs.Add(ID);
+                    }
+                }
+            }
+            List<ItemID> tempThemes = DataLibrary.Themes;
+            foreach (int ID in removedBook.ThemeIDs)
+            {
+                RemoveUnnecessaryItemID(ref tempThemes, usedThemeIDs, ID);
+            }
+            DataLibrary.Themes = tempThemes;
+        }
+        /// <summary>
+        /// Deletes the member record with the inputted member barcode
+        /// </summary>
+        /// <param name="barcode">member barcode of member to be deleted</param>
+        public static void DeleteMember(string barcode)
+        {
+            if (DataLibrary.Members.Count > 0)
+            {
+                // locates the member by their barcode and deletes the record
+                for (int index = 0; index < DataLibrary.Members.Count; index++)
+                {
+                    if (DataLibrary.Members[index].Barcode == barcode)
+                    {
+                        DataLibrary.Members.RemoveAt(index);
+                    }
+                    else
+                    {
+                        // removes the removed member from any associations to other members
+                        if (DataLibrary.Members[index].AssociatedMembers.Count > 0)
+                        {
+                            for (int index2 = 0; index2 < DataLibrary.Members[index].AssociatedMembers.Count; index2++)
+                            {
+                                if (DataLibrary.Members[index].AssociatedMembers[index2] == barcode)
+                                {
+                                    DataLibrary.Members[index].AssociatedMembers.RemoveAt(index2);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Removes the itemID from the list if it is not linked to any other records
+        /// </summary>
+        /// <param name="itemIDList">List containing the ItemID that might be removed</param>
+        /// <param name="usedIDs">List of IDs that are being used by records</param>
+        /// <param name="ID">The ID of the ItemID that might be removed</param>
+        public static void RemoveUnnecessaryItemID(ref List<ItemID> itemIDList, List<int> usedIDs, int ID)
+        {
+            int index = 0;
+            bool used = false;
+            do
+            {
+                if (ID == usedIDs[index])
+                {
+                    used = true;
+                }
+            } while (++index < usedIDs.Count && !used);
+            if (!used)
+            {
+                // find and delete the itemID record
+                index = 0;
+                bool isRemoved = false;
+                do
+                {
+                    if (ID == itemIDList[index].ID)
+                    {
+                        itemIDList.RemoveAt(index);
+                    }
+                } while (++index < itemIDList.Count && !isRemoved);
+            }
+        }
+        #endregion
         #region enums
         public enum Feature
         {
@@ -170,196 +346,6 @@ namespace NEALibrarySystem.Data_Structures
             }
             return Output;
         }
-        /*public static void LoadDataFromFiles()
-        {
-            string filePath = Application.StartupPath + "\\data\\";
-
-            LoadMemberFile(File.ReadAllText(filePath + "members.txt").Split(','));
-            LoadAssociatedMemberFile(File.ReadAllText(filePath + "associatedMembers.txt").Split(','));
-            LoadBooksFile(File.ReadAllText(filePath + "books.txt").Split(','));
-            LoadTitleFile(File.ReadAllText(filePath + "titles.txt").Split(','));
-            LoadMediaTypeFile(File.ReadAllText(filePath + "mediaTypes.txt").Split(','));
-            LoadAuthorsFile(File.ReadAllText(filePath + "authors.txt").Split(','));
-            LoadPublisherFile(File.ReadAllText(filePath + "publishers.txt").Split(','));
-            LoadGenreFile(File.ReadAllText(filePath + "genres.txt").Split(','));
-            LoadThemeFile(File.ReadAllText(filePath + "themes.txt").Split(','));
-            LoadBookGenresFile(File.ReadAllText(filePath + "bookGenres.txt").Split(','));
-            LoadBookThemesFile(File.ReadAllText(filePath + "bookThemes.txt").Split(','));
-            LoadBookCopiesFile(File.ReadAllText(filePath + "bookCopies.txt").Split(','));
-            LoadSettingsFile(File.ReadAllText(filePath + "settings.txt").Split(','));
-            LoadStaffFile(File.ReadAllText(filePath + "settings.txt").Split(','));
-        }
-        private static void LoadMemberFile(string[] membersFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < membersFileContents.Length / 14; recordIndex += 14)
-            {
-                Member tempMember = new Member();
-                int offset = 0;
-                tempMember.Barcode = membersFileContents[recordIndex + offset++];
-                tempMember.FirstName = membersFileContents[recordIndex + offset++];
-                tempMember.LastName = membersFileContents[recordIndex + offset++];
-                tempMember.DateOfBirth = membersFileContents[recordIndex + offset++];
-                tempMember.CustomerType = (customerType)Convert.ToInt32(membersFileContents[recordIndex + offset++]);
-                tempMember.EmailAddress = membersFileContents[recordIndex + offset++];
-                tempMember.PhoneNumber = membersFileContents[recordIndex + offset++];
-                tempMember.AddressLine1 = membersFileContents[recordIndex + offset++];
-                tempMember.AddressLine2 = membersFileContents[recordIndex + offset++];
-                tempMember.AddressLine3 = membersFileContents[recordIndex + offset++];
-                tempMember.AddressLine4 = membersFileContents[recordIndex + offset++];
-                tempMember.AddressLine5 = membersFileContents[recordIndex + offset++];
-                tempMember.Postcode = membersFileContents[recordIndex + offset++];
-                tempMember.JoinDate = Convert.ToDateTime(membersFileContents[recordIndex + offset++]);
-                members.Add(tempMember);
-            }
-        }
-        private static void LoadAssociatedMemberFile(string[] associatedMembersFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < associatedMembersFileContents.Length / 2; recordIndex += 2)
-            {
-                foreach (Member memberID in members)
-                {
-                    if (memberID.Barcode == associatedMembersFileContents[recordIndex])
-                        memberID.AssociatedMembers.Add(associatedMembersFileContents[recordIndex + 1]);
-                    if (memberID.Barcode == associatedMembersFileContents[recordIndex + 1])
-                        memberID.AssociatedMembers.Add(associatedMembersFileContents[recordIndex]);
-                }
-            }
-        }
-        private static void LoadBooksFile(string[] booksFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < booksFileContents.Length / 5; recordIndex += 5)
-            {
-                Book tempBook = new Book();
-                int offset = 0;
-                tempBook.ISBN = booksFileContents[recordIndex + offset++];
-                tempBook.TitleID = Convert.ToInt32(booksFileContents[recordIndex + offset++]);
-                tempBook.SeriesTitle = booksFileContents[recordIndex + offset++];
-                tempBook.SeriesNumber = Convert.ToInt32(booksFileContents[recordIndex + offset++]);
-                tempBook.MediaTypeID = Convert.ToInt32(booksFileContents[recordIndex + offset++]);
-                tempBook.AuthorID = Convert.ToInt32(booksFileContents[recordIndex + offset++]);
-                tempBook.PublisherID = Convert.ToInt32(booksFileContents[recordIndex + offset++]);
-                tempBook.Description = booksFileContents[recordIndex + offset++];
-                tempBook.Price = Convert.ToDecimal(booksFileContents[recordIndex + offset++]);
-                books.Add(tempBook);
-            }
-        }
-        private static void LoadTitleFile(string[] titleFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < titleFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempTitle = new ItemID();
-                tempTitle.ID = Convert.ToInt32(titleFileContents[recordIndex]);
-                tempTitle.Name = titleFileContents[recordIndex + 1];
-                titles.Add(tempTitle);
-            }
-        }
-        private static void LoadMediaTypeFile(string[] mediaTypeFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < mediaTypeFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempMediaType = new ItemID();
-                tempMediaType.ID = Convert.ToInt32(mediaTypeFileContents[recordIndex]);
-                tempMediaType.Name = mediaTypeFileContents[recordIndex + 1];
-                mediaTypes.Add(tempMediaType);
-            }
-        }
-        private static void LoadAuthorsFile(string[] authorFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < authorFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempAuthor = new ItemID();
-                tempAuthor.ID = Convert.ToInt32(authorFileContents[recordIndex]);
-                tempAuthor.Name = authorFileContents[recordIndex + 1];
-                authors.Add(tempAuthor);
-            }
-        }
-        private static void LoadPublisherFile(string[] publisherFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < publisherFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempPublisher = new ItemID();
-                tempPublisher.ID = Convert.ToInt32(publisherFileContents[recordIndex]);
-                tempPublisher.Name = publisherFileContents[recordIndex + 1];
-                publishers.Add(tempPublisher);
-            }
-        }
-        private static void LoadGenreFile(string[] genreFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < genreFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempGenre = new ItemID();
-                tempGenre.ID = Convert.ToInt32(genreFileContents[recordIndex]);
-                tempGenre.Name = genreFileContents[recordIndex + 1];
-                genres.Add(tempGenre);
-            }
-        }
-        private static void LoadThemeFile(string[] themeFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < themeFileContents.Length / 2; recordIndex += 2)
-            {
-                ItemID tempTheme = new ItemID();
-                tempTheme.ID = Convert.ToInt32(themeFileContents[recordIndex]);
-                tempTheme.Name = themeFileContents[recordIndex + 1];
-                themes.Add(tempTheme);
-            }
-        }
-        private static void LoadBookGenresFile(string[] bookGenresFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < bookGenresFileContents.Length / 2; recordIndex += 2)
-            {
-                foreach (Book item in books)
-                {
-                    if (item.ISBN == bookGenresFileContents[recordIndex])
-                    {
-                        item.GenresID.Add(Convert.ToInt32(bookGenresFileContents[recordIndex + 1]));
-                    }
-                }
-            }
-        }
-        private static void LoadBookThemesFile(string[] bookThemesFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < bookThemesFileContents.Length / 2; recordIndex += 2)
-            {
-                foreach (Book item in books)
-                {
-                    if (item.ISBN == bookThemesFileContents[recordIndex])
-                    {
-                        item.ThemesID.Add(Convert.ToInt32(bookThemesFileContents[recordIndex + 1]));
-                    }
-                }
-            }
-        }
-        private static void LoadBookCopiesFile(string[] bookCopiesFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < bookCopiesFileContents.Length / 6; recordIndex += 6)
-            {
-                BookCopy tempBookCopy = new BookCopy();
-                int offset = 0;
-                tempBookCopy.Barcode = bookCopiesFileContents[recordIndex + offset++];
-                tempBookCopy.ISBN = bookCopiesFileContents[recordIndex + offset++];
-                tempBookCopy.Status = (status)Convert.ToInt32(bookCopiesFileContents[recordIndex + offset++]);
-                tempBookCopy.MemberID = bookCopiesFileContents[recordIndex + offset++];
-                tempBookCopy.DueDate = Convert.ToDateTime(bookCopiesFileContents[recordIndex + offset++]);
-                tempBookCopy.OverdueEmailSent = Convert.ToBoolean(bookCopiesFileContents[recordIndex + offset++]);
-            }
-        }
-        private static void LoadSettingsFile(string[] SettingsFileContents)
-        {
-
-        }
-        private static void LoadStaffFile(string[] StaffFileContents)
-        {
-            for (int recordIndex = 0; recordIndex < StaffFileContents.Length / 4; recordIndex += 4)
-            {
-                Staff tempStaff = new Staff();
-                int offset = 0;
-                tempStaff.Username = StaffFileContents[recordIndex + offset++];
-                tempStaff.Password = StaffFileContents[recordIndex + offset++];
-                tempStaff.EmailAddress = StaffFileContents[recordIndex + offset++];
-                tempStaff.IsAdministrator = Convert.ToBoolean(StaffFileContents[recordIndex + offset++]);
-            }
-        }
-        */
         #endregion
         #region Save Files
         public static void SaveAllFiles(string filePath = null)
@@ -397,7 +383,7 @@ namespace NEALibrarySystem.Data_Structures
         {
 
         }
-        enum BookFields
+        private enum BookFields
         {
             Title,
             ISBN,

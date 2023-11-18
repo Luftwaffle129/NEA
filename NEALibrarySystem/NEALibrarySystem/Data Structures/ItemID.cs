@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Item containing a integer ID and a string name
+    /// </summary>
     public class ItemID
     {
         public int ID { get; set; }

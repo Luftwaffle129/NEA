@@ -30,65 +30,51 @@ namespace NEALibrarySystem
             listview.Scrollable = true;
             _listViewSelectedItems = listview;
         }
+        /// <summary>
+        /// Sets up the list view
+        /// </summary>
+        /// <param name="selectedItems">Collection of the items to be displayed in the listview</param>
         public void Load(ListView.CheckedListViewItemCollection selectedItems)
         {
-            SearchedItemsHandler.LoadProperties(ref _listViewSelectedItems, FrmMainSystem.Main.CurrentFeature);
+            // loads the correct columns for the selected record type
+            SearchedItemsHandler.LoadColumns(ref _listViewSelectedItems, FrmMainSystem.Main.CurrentFeature);
             if (selectedItems.Count > 0)
             {
                 foreach (ListViewItem item in selectedItems)
                 {
-                    string[] newItem = new string[item.SubItems.Count];
-                    for (int i = 0; i < item.SubItems.Count; i++)
+                    string[] newItem = new string[item.SubItems.Count]; // create an array to store the new subitems
+                    for (int i = 0; i < item.SubItems.Count; i++)       // add each subitem into the new array
                     {
                         newItem[i] = item.SubItems[i].Text;
                     }
-                    ListViewItem row = new ListViewItem(newItem);
+                    ListViewItem row = new ListViewItem(newItem);       // convert the array to the correct format for the listview
                     _listViewSelectedItems.Items.Add(row);
                 }
             }
             _listViewSelectedItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
+        /// <summary>
+        /// Deletes the selected items in the list view
+        /// </summary>
         public void Delete()
         {
-            frmConfirmation confirmation = new frmConfirmation("Are you sure you want to delete these items?");
-            confirmation.ShowDialog();
             if (_listViewSelectedItems.Items.Count > 0)
             {
+                // use a confirmation box to ensure the user wants to delete the items
+                frmConfirmation confirmation = new frmConfirmation("Are you sure you want to delete these items?");
+                confirmation.ShowDialog();
                 if (confirmation.DialogResult == DialogResult.Yes)
                 {
                     foreach (ListViewItem item in _listViewSelectedItems.Items)
                     {
+                        // identifies what type of record is being deleted
                         switch (FrmMainSystem.Main.CurrentFeature)
                         {
                             case (DataLibrary.Feature.Book):
-                                if (DataLibrary.Books.Count > 0)
-                                {
-                                    int i = 0;
-                                    bool removed = false;
-                                    do
-                                    {
-                                        if (DataLibrary.Books[i].ISBN == item.SubItems[1].Text)
-                                        {
-                                            DataLibrary.Books.RemoveAt(i);
-                                            removed = true;
-                                        }
-                                    } while (++i < DataLibrary.Books.Count && !removed);
-                                }
+                                DataLibrary.DeleteBook(item.SubItems[1].Text);
                                 break;
                             case (DataLibrary.Feature.Member):
-                                if (DataLibrary.Members.Count > 0)
-                                {
-                                    int i = 0;
-                                    bool removed = false;
-                                    do
-                                    {
-                                        if (DataLibrary.Members[i].Barcode == item.SubItems[0].Text)
-                                        {
-                                            DataLibrary.Members.RemoveAt(i);
-                                            removed = true;
-                                        }
-                                    } while (++i < DataLibrary.Members.Count && !removed);
-                                }
+                                DataLibrary.DeleteMember(item.SubItems[0].Text);
                                 break;
                         }
                     }
@@ -96,6 +82,9 @@ namespace NEALibrarySystem
                 _listViewSelectedItems.Items.Clear();
             }
         }
+        /// <summary>
+        /// closes the delete panel
+        /// </summary>
         public void Cancel()
         {
             FrmMainSystem.Main.NavigatorCloseAllPanels();

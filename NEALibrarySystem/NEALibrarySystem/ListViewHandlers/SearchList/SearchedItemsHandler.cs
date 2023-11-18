@@ -53,7 +53,7 @@ namespace NEALibrarySystem.SearchList
         {
             //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
             //{
-                LoadProperties(ref lsvSearch, DataLibrary.Feature.Book);
+                LoadColumns(ref lsvSearch, DataLibrary.Feature.Book);
 
                 foreach (Book book in DataLibrary.Books)
                 {
@@ -78,7 +78,7 @@ namespace NEALibrarySystem.SearchList
         {
            //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
             //{
-                LoadProperties(ref lsvSearch, DataLibrary.Feature.Member);
+                LoadColumns(ref lsvSearch, DataLibrary.Feature.Member);
 
                 foreach (Member member in DataLibrary.Members)
                 {
@@ -97,7 +97,7 @@ namespace NEALibrarySystem.SearchList
                 _currentFeature = DataLibrary.Feature.Member;
             //}
         }
-        public static void LoadProperties(ref ListView lsv, DataLibrary.Feature feature)
+        public static void LoadColumns(ref ListView lsv, DataLibrary.Feature feature)
         {
             lsv.Clear();
 
