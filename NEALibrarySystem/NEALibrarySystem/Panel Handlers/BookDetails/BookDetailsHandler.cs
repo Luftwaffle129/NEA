@@ -86,13 +86,14 @@ namespace NEALibrarySystem.PanelHandlers
                     _bookData.BookCopies.Add(temp);
                 }
             }
+            UpdateBookCopies();
         }
         /// <summary>
         /// deletes the selected book copies
         /// </summary>
         public void DeleteBookCopies()
         {
-            foreach(ListViewItem item in _objects.CopyDetails.SelectedItems)
+            foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
             {
                 for (int i = 0; i < _bookData.BookCopies.Count; i++)
                 {

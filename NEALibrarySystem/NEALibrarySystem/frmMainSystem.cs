@@ -362,10 +362,6 @@ namespace NEALibrarySystem
         {
 
         }
-        private void btnBookAddCopies_Click(object sender, EventArgs e)
-        {
-            
-        }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
@@ -394,15 +390,29 @@ namespace NEALibrarySystem
         {
             _bookDetailsHandler.Cancel();
         }
+        private void btnBookAddCopies_Click(object sender, EventArgs e)
+        {
+            _bookDetailsHandler.AddBookCopies();
+        }
+        private void btnBookDeleteCopies_Click(object sender, EventArgs e)
+        {
+            _bookDetailsHandler.DeleteBookCopies();
+        }
+        #endregion
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
-
+        #region delete handler
         private void btnDeleteDelete_Click(object sender, EventArgs e)
         {
             _deleteHandler.Delete();
+        }
+
+        private void btnLoanSave_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 

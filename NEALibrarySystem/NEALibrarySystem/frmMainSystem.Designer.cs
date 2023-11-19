@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -1571,6 +1571,7 @@
             this.btnLoanSave.TabIndex = 13;
             this.btnLoanSave.Text = "Save";
             this.btnLoanSave.UseVisualStyleBackColor = false;
+            this.btnLoanSave.Click += new System.EventHandler(this.btnLoanSave_Click);
             // 
             // btnLoanCancel
             // 
@@ -2320,6 +2321,7 @@
             this.btnBookDeleteCopies.TabIndex = 47;
             this.btnBookDeleteCopies.Text = "Delete copies";
             this.btnBookDeleteCopies.UseVisualStyleBackColor = false;
+            this.btnBookDeleteCopies.Click += new System.EventHandler(this.btnBookDeleteCopies_Click);
             // 
             // btnBookAddCopies
             // 
@@ -2357,16 +2359,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend3);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series3);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3186,12 +3188,12 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlLoan);
+            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlTransactionDetails);
             this.Controls.Add(this.pnlStatistics);

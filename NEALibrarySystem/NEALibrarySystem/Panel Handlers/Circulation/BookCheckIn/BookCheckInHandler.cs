@@ -1,9 +1,11 @@
 ﻿using NEALibrarySystem.Data_Structures;
+using NEALibrarySystem.Panel_Handlers.Circulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
 {
@@ -14,6 +16,9 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         { 
             _objects = objs;
         }
+        /// <summary>
+        /// empties all fields in the panel
+        /// </summary>
         public void Load()
         {
             _objects.MemberName.Text = "";
@@ -23,6 +28,10 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             _objects.Overdue.Text = "";
             _objects.EnterBookBarcodes.Text = "";
             _objects.SelectedBooks.Clear();
+        }
+        public void Save()
+        {
+            
         }
     }
 }
