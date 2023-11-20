@@ -126,11 +126,7 @@ namespace NEALibrarySystem.SearchList
                     };
                     break;
             }
-            ListViewHandler.AddColumns(columns, ref lsv);
-        }
-        public void updatedSelectedItems()
-        {
-
+            ListViewHandler.SetColumns(columns, ref lsv);
         }
     }
 }

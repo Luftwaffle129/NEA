@@ -62,7 +62,6 @@
     <Compile Include="Data Structures\Staff.cs" />
     <Compile Include="Data Structures\TestData.cs" />
     <Compile Include="Data Structures\Transaction.cs" />
-    <Compile Include="Panel Handlers\Circulation\CirculationMemberDetails.cs" />
     <Compile Include="Panel Handlers\Delete\DeleteHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
@@ -119,13 +118,12 @@
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
     <Compile Include="Data Structures\CirculatedBook.cs" />
-    <Compile Include="ListViewHandlers\CirculatedBooks\CirculatedBooksLsvHandler.cs" />
+    <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInObjects.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\DataFormatter.cs" />
-    <Compile Include="Panel Handlers\Circulation\CirculationHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmResetPassword.cs">

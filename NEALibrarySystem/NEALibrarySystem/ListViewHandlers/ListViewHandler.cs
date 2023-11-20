@@ -9,7 +9,12 @@ namespace NEALibrarySystem.ListViewHandlers
 {
     public static class ListViewHandler
     {
-        public static void AddColumns(string[] columns, ref ListView listView)
+        /// <summary>
+        /// Sets the inputted columns into the listview
+        /// </summary>
+        /// <param name="columns"></param>
+        /// <param name="listView"></param>
+        public static void SetColumns(string[] columns, ref ListView listView)
         {
             foreach (string column in columns)
             {
