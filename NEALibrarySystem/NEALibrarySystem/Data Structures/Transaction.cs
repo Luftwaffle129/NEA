@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.ListViewHandlers.CirculatedItems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,8 +33,8 @@ namespace NEALibrarySystem.Data_Structures
             get { return _dueDate; }
             set { _dueDate = value; }
         }
-        private string _price;
-        public string Price
+        private double _price;
+        public double Price
         {
             get { return _price; }
             set { _price = value; }
@@ -49,6 +50,21 @@ namespace NEALibrarySystem.Data_Structures
         {
             get { return _description; }
             set { _description = value; }
+        }
+        public Transaction(){}
+        public Transaction(Member member, double price, string description)
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="circulatedBooks"></param>
+        /// <param name="member"></param>
+        /// <param name="type"></param>
+        public Transaction(List<CirculatedBook> circulatedBooks, Member member, TransactionType type, double price, DateTime dueDate)
+        {
+
         }
     }
     public enum TransactionType

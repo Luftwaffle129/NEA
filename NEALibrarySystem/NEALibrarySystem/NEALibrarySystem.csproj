@@ -120,8 +120,7 @@
     <Compile Include="Data Structures\CirculatedBook.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInHandler.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookCheckInObjects.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookLoanHandler.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\DataFormatter.cs" />
     <Compile Include="Program.cs" />

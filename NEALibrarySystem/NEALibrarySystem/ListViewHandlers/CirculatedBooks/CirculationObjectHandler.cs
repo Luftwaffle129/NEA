@@ -1,11 +1,13 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.ListViewHandlers.CirculatedItems;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace NEALibrarySystem.ListViewHandlers.SelectedItems
 {
@@ -25,39 +27,64 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                 UpdateListView();
             }
         }
-
-        private ListView _listView;
-        private TextBox _name;
+        private Member _selectedMember;
+        public Member SelectedMember { get; set; }
+        private ListView _selectedBooks;
+        public TextBox MemberBarcode;
+        private TextBox _memberName;
         private TextBox _currentLoans;
         private TextBox _overdueBooks;
         private TextBox _lateFees;
-        private TextBox _enterBarcode;
+        private TextBox _enterBarcodes;
         /// <summary>
-        /// Used to set up the listview in the circulatino handler upon initialisation
+        /// Initials ciruclation objects
         /// </summary>
+        /// <param name="memberBarcode"></param>
+        /// <param name="memberName"></param>
+        /// <param name="loans"></param>
+        /// <param name="overdue"></param>
+        /// <param name="lateFees"></param>
+        /// <param name="enterBarcode"></param>
         /// <param name="lsv"></param>
         /// <param name="priceNeeded"></param>
-        public CirculationObjectHandler(TextBox name, TextBox loans, TextBox overdue, TextBox lateFees,TextBox enterBarcode, ListView lsv, bool priceNeeded)
+        public CirculationObjectHandler(TextBox memberBarcode, TextBox memberName, TextBox loans, TextBox overdue, TextBox lateFees,TextBox enterBarcode, ListView lsv, bool priceNeeded)
         {
             // set up listview
-            _listView = lsv;
-            _name = name;
+            _selectedBooks = lsv;
+            MemberBarcode = memberBarcode;
+            _memberName = memberName;
             _currentLoans = loans;
             _overdueBooks = overdue;
             _lateFees = lateFees;
-            _enterBarcode = enterBarcode;
+            _enterBarcodes = enterBarcode;
             _priceNeeded = priceNeeded;
             InitialiseListView(priceNeeded);
         }
-        public void UpdateMemberDetails(string barcode)
+        public void ResetFields()
+        {
+            _memberName.Text = "";
+            MemberBarcode.Text = "";
+            _currentLoans.Text = "0";
+            _lateFees.Text = "0";
+            _overdueBooks.Text = "0";
+            _enterBarcodes.Text = "";
+            _selectedBooks.Clear();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="barcode">Barcode on the member</param>
+        public void UpdateMemberDetails()
         {
             // set up textboxes
             int currentLoans = 0;
             int overdueBooks = 0;
             int lateFees = 0;
+            string barcode = MemberBarcode.Text;
 
-            if (DataLibrary.Members.Count > 0)
+            if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength)
             {
+                SelectedMember = null;
                 // find the member's name from the barcode
                 int index = 0;
                 bool memberFound = false;
@@ -66,10 +93,11 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                     if (DataLibrary.Members[index].Barcode == barcode)
                     {
                         memberFound = true;
-                        _name.Text = $"{DataLibrary.Members[index].FirstName} {DataLibrary.Members[index].LastName}";
+                        SelectedMember = DataLibrary.Members[index];
+                        _memberName.Text = $"{SelectedMember.FirstName} {SelectedMember.LastName}";
                     }
                 } while (++index < DataLibrary.Members.Count && !memberFound);
-                if (DataLibrary.Books.Count > 0)
+                if (DataLibrary.Books.Count > 0 && memberFound)
                 {
                     // get total of the number of loans, overdue books and the late fees of the member
                     foreach (Book book in DataLibrary.Books)
@@ -83,7 +111,7 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                                     if (bookCopy.Status == status.Loaned) // if the book is loaned
                                     {
                                         currentLoans++;
-                                        if (bookCopy.DueDate <= DateTime.Now) //check if the book is overdue
+                                        if (bookCopy.ReturnDate < DateTime.Today) //check if the book is overdue
                                         {
                                             overdueBooks++;
                                             lateFees += 0;
@@ -106,16 +134,16 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
         private void InitialiseListView(bool PriceNeeded)
         {
             // sets properties
-            _listView.View = View.Details;
-            _listView.LabelEdit = false;
-            _listView.AllowColumnReorder = false;
-            _listView.CheckBoxes = true;
-            _listView.MultiSelect = true;
-            _listView.FullRowSelect = true;
-            _listView.GridLines = false;
-            _listView.Sorting = SortOrder.None;
-            _listView.HeaderStyle = ColumnHeaderStyle.Clickable;
-            _listView.Scrollable = true;
+            _selectedBooks.View = View.Details;
+            _selectedBooks.LabelEdit = false;
+            _selectedBooks.AllowColumnReorder = false;
+            _selectedBooks.CheckBoxes = true;
+            _selectedBooks.MultiSelect = true;
+            _selectedBooks.FullRowSelect = true;
+            _selectedBooks.GridLines = false;
+            _selectedBooks.Sorting = SortOrder.None;
+            _selectedBooks.HeaderStyle = ColumnHeaderStyle.Clickable;
+            _selectedBooks.Scrollable = true;
 
             // sets columns
             string[] columns =
@@ -135,14 +163,14 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                 }
                 columns = tempColumns;
             }
-            ListViewHandler.SetColumns(columns, ref _listView);
+            ListViewHandler.SetColumns(columns, ref _selectedBooks);
         }
         /// <summary>
         /// Updates the ListView with the stored circulated books
         /// </summary>
         public void UpdateListView()
         {
-            _listView.Items.Clear();
+            _selectedBooks.Items.Clear();
             foreach (var circulatedBook in _circulatedBooks)
             {
                 string[] data = Array.Empty<string>();
@@ -168,7 +196,30 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                     };
                 }
                 ListViewItem row = new ListViewItem(data);
-                _listView.Items.Add(row);
+                _selectedBooks.Items.Add(row);
+            }
+        }
+        /// <summary>
+        /// removes the checked items from the list view of selected books
+        /// </summary>
+        public void DeleteCheckedListView()
+        {
+            if (_selectedBooks.CheckedItems.Count > 0)
+            {
+                foreach (ListViewItem item in _selectedBooks.CheckedItems)
+                {
+                    if (_circulatedBooks.Count > 0)
+                    {
+                        for (int index = 0; index < _circulatedBooks.Count; index++)
+                        {
+                            if (_circulatedBooks[index].Barcode == item.SubItems[0].Text)
+                            {
+                                _circulatedBooks.RemoveAt(index);
+                            }
+                        }
+                    }
+                }
+                UpdateListView();
             }
         }
     }

@@ -85,6 +85,9 @@ namespace NEALibrarySystem.Data_Structures
             ClearAllData();
             GenerateBooks();
             GenerateMembers();
+            // set up settings details
+            Settings.MemberBarcodeLength = 10;
+            Settings.LoanDurations = new int[3]{ 14, 7, 5 };
         }
         /// <summary>
         /// create 10 random book records with no copies attached to them
@@ -144,7 +147,7 @@ namespace NEALibrarySystem.Data_Structures
                 member.AddressLine4 = "ApartmentName";
                 member.AddressLine5 = "Apartment Number";
                 member.DateOfBirth = "11/07/2006";
-                member.CustomerType = customerType.Adult;
+                member.Type = MemberType.Adult;
                 members.Add(member);
             }
             DataLibrary.Members = members;

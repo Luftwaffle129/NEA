@@ -14,7 +14,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             Barcode = bookCopy.Barcode;
             Status = bookCopy.Status;
-            DueDate = bookCopy.DueDate;
+            DueDate = bookCopy.ReturnDate;
             MemberID = bookCopy.MemberID;
             //ISBN = bookCopy.ISBN;
             //OverdueEmailSent = bookCopy.OverdueEmailSent;

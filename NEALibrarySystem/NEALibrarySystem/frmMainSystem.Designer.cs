@@ -287,6 +287,7 @@
             this.lblTransactionBooks = new System.Windows.Forms.Label();
             this.lblTransactionType = new System.Windows.Forms.Label();
             this.txtTransactionMemberName = new System.Windows.Forms.TextBox();
+            this.btnLoanDelete = new System.Windows.Forms.Button();
             this.pnlMemberDetails.SuspendLayout();
             this.grpMemberBookLinks.SuspendLayout();
             this.pnlSearch.SuspendLayout();
@@ -1374,6 +1375,10 @@
             // 
             // pnlLoan
             // 
+            this.pnlLoan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlLoan.Controls.Add(this.btnLoanDelete);
             this.pnlLoan.Controls.Add(this.lblLoanEnterBarcode);
             this.pnlLoan.Controls.Add(this.lblLoanOutMemberName);
             this.pnlLoan.Controls.Add(this.txtLoanMemberName);
@@ -1421,6 +1426,8 @@
             // 
             // txtLoanMemberName
             // 
+            this.txtLoanMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLoanMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoanMemberName.Location = new System.Drawing.Point(249, 107);
             this.txtLoanMemberName.Name = "txtLoanMemberName";
@@ -1459,6 +1466,7 @@
             // 
             // dtpLoanReturnDate
             // 
+            this.dtpLoanReturnDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpLoanReturnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpLoanReturnDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpLoanReturnDate.Location = new System.Drawing.Point(249, 870);
@@ -1472,6 +1480,7 @@
             // 
             // lblLoanSetDueDate
             // 
+            this.lblLoanSetDueDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLoanSetDueDate.AutoSize = true;
             this.lblLoanSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoanSetDueDate.Location = new System.Drawing.Point(15, 873);
@@ -1530,6 +1539,8 @@
             // 
             // txtLoanMemberBarcode
             // 
+            this.txtLoanMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLoanMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoanMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtLoanMemberBarcode.Name = "txtLoanMemberBarcode";
@@ -3181,6 +3192,19 @@
             this.txtTransactionMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtTransactionMemberName.TabIndex = 56;
             // 
+            // btnLoanDelete
+            // 
+            this.btnLoanDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoanDelete.BackColor = System.Drawing.Color.Red;
+            this.btnLoanDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoanDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoanDelete.Location = new System.Drawing.Point(1278, 870);
+            this.btnLoanDelete.Name = "btnLoanDelete";
+            this.btnLoanDelete.Size = new System.Drawing.Size(212, 38);
+            this.btnLoanDelete.TabIndex = 33;
+            this.btnLoanDelete.Text = "Delete";
+            this.btnLoanDelete.UseVisualStyleBackColor = false;
+            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3505,5 +3529,6 @@
         private System.Windows.Forms.ListView lsvTransactionBooks;
         private System.Windows.Forms.TextBox txtTransactionDescription;
         private System.Windows.Forms.Label lblTransactionDescription;
+        private System.Windows.Forms.Button btnLoanDelete;
     }
 }

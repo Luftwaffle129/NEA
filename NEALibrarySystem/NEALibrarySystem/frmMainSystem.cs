@@ -40,7 +40,7 @@ namespace NEALibrarySystem
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
 
         private SearchedItemsHandler _searchedItemsHandler;
-        private BookCheckInHandler _bookCheckInHandler;
+        private BookLoanHandler _loanHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private DeleteHandler _deleteHandler;
 
@@ -88,17 +88,18 @@ namespace NEALibrarySystem
         }
         private void InitialiseCheckIn()
         {
-            BookCheckInObjects bookCheckInObjects = new BookCheckInObjects()
-            {
-                MemberBarcode = txtReturnMemberBarcode,
-                MemberName = txtReturnMemberName,
-                EnterBookBarcodes = txtReturnEnterBarcode,
-                Loans = txtReturnLoans,
-                Overdue = txtReturnOverdue,
-                LateFees = txtReturnLateFees,
-                SelectedBooks = lsvReturnSelectedBooks
-            };
-            _bookCheckInHandler = new BookCheckInHandler(bookCheckInObjects);
+            CirculationObjectHandler circulationObjectHandler = new CirculationObjectHandler
+            (
+                txtReturnMemberBarcode,
+                txtReturnMemberName,
+                txtReturnLoans,
+                txtReturnOverdue,
+                txtReturnLateFees,
+                txtReturnEnterBarcode,
+                lsvReturnSelectedBooks,
+                false
+            );
+            _loanHandler = new BookLoanHandler(circulationObjectHandler, dtpLoanReturnDate);
         }
         private void InitialiseBookDetails()
         {
@@ -305,7 +306,7 @@ namespace NEALibrarySystem
         {
             if (pnlReturn.Visible)
             {
-                _bookCheckInHandler.Load();
+                _loanHandler.Load();
             }
         }
         private void pnlSell_VisibleChanged(object sender, EventArgs e)

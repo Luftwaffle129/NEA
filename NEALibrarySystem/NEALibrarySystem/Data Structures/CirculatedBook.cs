@@ -22,7 +22,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedItems
         public string ISBN
         {
             get { return _ISBN; }
-            private set { _ISBN = value; }
+            set { _ISBN = value; }
         }
         #endregion
         #region Title
@@ -59,7 +59,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedItems
         #endregion
         public CirculatedBook(Book book, string copyBarcode)
         {
-            _barcode = copyBarcode;
+            Barcode = copyBarcode;
             ISBN = book.ISBN;
             Title = book.GetTitle();
             SeriesTitle = book.SeriesTitle;

@@ -87,7 +87,7 @@ namespace NEALibrarySystem.SearchList
                     member.Barcode,
                     member.FirstName,
                     member.LastName,
-                    member.CustomerType.ToString()
+                    member.Type.ToString()
                     };
                     ListViewItem row = new ListViewItem(data);
                     lsvSearch.Items.Add(row);

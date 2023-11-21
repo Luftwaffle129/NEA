@@ -79,8 +79,8 @@ namespace NEALibrarySystem.PanelHandlers
                     {
                         Barcode = barcode,
                         Status = status.InStock,
-                        DueDate = DateTime.Now,
-                        OverdueEmailLastSent = DateTime.Now,
+                        ReturnDate = DateTime.Today,
+                        OverdueEmailLastSent = DateTime.Today,
                         MemberID = barcode,
                     };
                     _bookData.BookCopies.Add(temp);
@@ -119,7 +119,7 @@ namespace NEALibrarySystem.PanelHandlers
                     {
                     bookCopy.Barcode,
                     bookCopy.Status.ToString(),
-                    bookCopy.DueDate.ToString()
+                    bookCopy.ReturnDate.ToString()
                     };
                     ListViewItem row = new ListViewItem(data);
                     _objects.CopyDetails.Items.Add(row);

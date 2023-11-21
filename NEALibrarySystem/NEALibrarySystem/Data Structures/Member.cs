@@ -27,14 +27,14 @@ namespace NEALibrarySystem.Data_Structures
         public string Postcode { get; set; }
         public DateTime JoinDate { get; set; }
         public List<string> AssociatedMembers { get; set; }
-        public customerType CustomerType { get; set; }
+        public MemberType Type { get; set; }
 
         public Member()
         {
-            JoinDate = DateTime.Now;
+            JoinDate = DateTime.Today;
         }
     }
-    public enum customerType
+    public enum MemberType
     {
         Adult,
         Child,
