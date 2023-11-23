@@ -293,7 +293,7 @@ namespace NEALibrarySystem
                 } while (++index < list.Count);
             }
             // if an existing item is not found:
-            int ID = 0;
+            int lowestID = 0;
             ItemID temp = new ItemID();
             temp.Name = name;
             // insert new item in the ID if there is a gap
@@ -307,23 +307,23 @@ namespace NEALibrarySystem
                     //loops through each element in the list
                     do
                     {
-                        if (list[index].ID == ID)
+                        if (list[index].ID == lowestID)
                         {
                             isGap = false;
                         }
                         index++;
                     }
                     while (index < list.Count && isGap);
-                    temp.ID = ID;
+                    temp.ID = lowestID;
                     if (isGap)
                     {
                         list.Add(temp);
                         return temp.ID;
                     }
-                } while (++ID < list.Count);
+                } while (++lowestID < list.Count);
             }
             // if no gaps, append new item
-            temp.ID = ID;
+            temp.ID = lowestID;
             list.Add(temp);
             return temp.ID;
         }

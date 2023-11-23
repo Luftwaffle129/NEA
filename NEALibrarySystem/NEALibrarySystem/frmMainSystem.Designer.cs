@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -126,6 +126,7 @@
             this.btnStaffCancel = new System.Windows.Forms.Button();
             this.btnStaffSave = new System.Windows.Forms.Button();
             this.pnlLoan = new System.Windows.Forms.Panel();
+            this.btnLoanDelete = new System.Windows.Forms.Button();
             this.lblLoanEnterBarcode = new System.Windows.Forms.Label();
             this.lblLoanOutMemberName = new System.Windows.Forms.Label();
             this.txtLoanMemberName = new System.Windows.Forms.TextBox();
@@ -287,7 +288,6 @@
             this.lblTransactionBooks = new System.Windows.Forms.Label();
             this.lblTransactionType = new System.Windows.Forms.Label();
             this.txtTransactionMemberName = new System.Windows.Forms.TextBox();
-            this.btnLoanDelete = new System.Windows.Forms.Button();
             this.pnlMemberDetails.SuspendLayout();
             this.grpMemberBookLinks.SuspendLayout();
             this.pnlSearch.SuspendLayout();
@@ -1404,6 +1404,20 @@
             this.pnlLoan.VisibleChanged += new System.EventHandler(this.pnlLoan_VisibleChanged);
             this.pnlLoan.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCheckOut_Paint);
             // 
+            // btnLoanDelete
+            // 
+            this.btnLoanDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoanDelete.BackColor = System.Drawing.Color.Red;
+            this.btnLoanDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoanDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoanDelete.Location = new System.Drawing.Point(1278, 870);
+            this.btnLoanDelete.Name = "btnLoanDelete";
+            this.btnLoanDelete.Size = new System.Drawing.Size(212, 38);
+            this.btnLoanDelete.TabIndex = 33;
+            this.btnLoanDelete.Text = "Delete";
+            this.btnLoanDelete.UseVisualStyleBackColor = false;
+            this.btnLoanDelete.Click += new System.EventHandler(this.btnLoanDelete_Click);
+            // 
             // lblLoanEnterBarcode
             // 
             this.lblLoanEnterBarcode.AutoSize = true;
@@ -1546,6 +1560,7 @@
             this.txtLoanMemberBarcode.Name = "txtLoanMemberBarcode";
             this.txtLoanMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtLoanMemberBarcode.TabIndex = 15;
+            this.txtLoanMemberBarcode.TextChanged += new System.EventHandler(this.txtLoanMemberBarcode_TextChanged);
             // 
             // lblLoanMemberBarcode
             // 
@@ -1596,6 +1611,7 @@
             this.btnLoanCancel.TabIndex = 14;
             this.btnLoanCancel.Text = "Cancel";
             this.btnLoanCancel.UseVisualStyleBackColor = false;
+            this.btnLoanCancel.Click += new System.EventHandler(this.btnLoanCancel_Click);
             // 
             // pnlDelete
             // 
@@ -1640,6 +1656,7 @@
             this.btnDeleteCancel.TabIndex = 14;
             this.btnDeleteCancel.Text = "Cancel";
             this.btnDeleteCancel.UseVisualStyleBackColor = false;
+            this.btnDeleteCancel.Click += new System.EventHandler(this.btnDeleteCancel_Click);
             // 
             // btnDeleteDelete
             // 
@@ -2370,16 +2387,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea3.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend3);
+            chartArea5.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend5);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series3);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series5);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3192,34 +3209,21 @@
             this.txtTransactionMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtTransactionMemberName.TabIndex = 56;
             // 
-            // btnLoanDelete
-            // 
-            this.btnLoanDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoanDelete.BackColor = System.Drawing.Color.Red;
-            this.btnLoanDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoanDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoanDelete.Location = new System.Drawing.Point(1278, 870);
-            this.btnLoanDelete.Name = "btnLoanDelete";
-            this.btnLoanDelete.Size = new System.Drawing.Size(212, 38);
-            this.btnLoanDelete.TabIndex = 33;
-            this.btnLoanDelete.Text = "Delete";
-            this.btnLoanDelete.UseVisualStyleBackColor = false;
-            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlMemberDetails);
+            this.Controls.Add(this.pnlTransactionDetails);
+            this.Controls.Add(this.pnlDelete);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlReturn);
-            this.Controls.Add(this.pnlDelete);
-            this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlTransactionDetails);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlStaff);

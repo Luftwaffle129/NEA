@@ -9,6 +9,12 @@ namespace NEALibrarySystem.Data_Structures
 {
     public class Transaction
     {
+        private int _ID;
+        public int ID
+        {
+            get { return ID; }
+            private set { ID = value; }
+        }
         private TransactionType _type;
         public TransactionType Type
         {
@@ -16,7 +22,7 @@ namespace NEALibrarySystem.Data_Structures
             set { _type = value; }
         }
         private string _memberBarcode;
-        public string Memberbarcode
+        public string MemberBarcode
         {
             get { return _memberBarcode; }
             set { _memberBarcode = value; }
@@ -39,11 +45,11 @@ namespace NEALibrarySystem.Data_Structures
             get { return _price; }
             set { _price = value; }
         }
-        private List<string> _ISBN;
-        public List<string> ISBN 
+        private List<string> _barcodes;
+        public List<string> Barcodes 
         { 
-            get { return _ISBN; } 
-            set { _ISBN = value ?? new List<string>(); }
+            get { return _barcodes; } 
+            set { _barcodes = value ?? new List<string>(); }
         }
         private string _description;
         public string Description
@@ -51,20 +57,57 @@ namespace NEALibrarySystem.Data_Structures
             get { return _description; }
             set { _description = value; }
         }
-        public Transaction(){}
-        public Transaction(Member member, double price, string description)
+        public Transaction()
         {
 
         }
         /// <summary>
-        /// 
+        /// Custom transaction constructor
         /// </summary>
-        /// <param name="circulatedBooks"></param>
-        /// <param name="member"></param>
-        /// <param name="type"></param>
-        public Transaction(List<CirculatedBook> circulatedBooks, Member member, TransactionType type, double price, DateTime dueDate)
+        /// <param name="memberBarcode"></param>
+        /// <param name="price"></param>
+        /// <param name="description"></param>
+        public Transaction(string memberBarcode, double price, string description)
         {
+            _memberBarcode = memberBarcode;
+            _type = TransactionType.Custom;
+            _price = price;
+            _description = description;
+            Date = DateTime.Now;
+        }
+        /// <summary>
+        /// Book circulation constructor for loans and Reservations
+        /// </summary>
+        /// <param name="circulatedBooks">List of books involved in the transaction</param>
+        /// <param name="memberBarcode"></param>
+        /// <param name="type">Type of transaction or circulation</param>
+        /// <param name="dueDate">Date of a book return or reservation pick up date</param>
+        /// <param name="price"></param>
+        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, TransactionType type, DateTime dueDate)
+        {
+            _memberBarcode = memberBarcode;
+            _type = type;
+            Date = dueDate;
+        }
+        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, TransactionType type)
+        {
+            _memberBarcode = memberBarcode;
+            _type = type;
+        }
 
+        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, double price)
+        {
+            _memberBarcode = memberBarcode;
+            _type = TransactionType.Sale;
+            _price = price;
+        }
+        private void CreateID()
+        {
+            if (DataLibrary.Transactions.Count > 0)
+            {
+                int lowestID = 0;
+                
+            }
         }
     }
     public enum TransactionType
@@ -72,7 +115,8 @@ namespace NEALibrarySystem.Data_Structures
         Reservation = 0,
         Loan = 1,
         Return = 2,
-        Sale = 3
+        Sale = 3,
+        Custom = 4
     }
 }
 

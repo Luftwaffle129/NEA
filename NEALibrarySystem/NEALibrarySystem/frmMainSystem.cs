@@ -403,17 +403,36 @@ namespace NEALibrarySystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            throw new Exception("womp womp");
         }
         #region delete handler
         private void btnDeleteDelete_Click(object sender, EventArgs e)
         {
             _deleteHandler.Delete();
         }
-
+        private void btnDeleteCancel_Click(object sender, EventArgs e)
+        {
+            _deleteHandler.ClosePanel();
+        }
+        #endregion
+        #region loan handler
         private void btnLoanSave_Click(object sender, EventArgs e)
         {
+            _loanHandler.Save();
+        }
 
+        private void btnLoanCancel_Click(object sender, EventArgs e)
+        {
+            _loanHandler.Load();
+        }
+
+        private void btnLoanDelete_Click(object sender, EventArgs e)
+        {
+            _loanHandler.CirculationManager.DeleteCheckedListView();
+        }
+        private void txtLoanMemberBarcode_TextChanged(object sender, EventArgs e)
+        {
+            _loanHandler.CirculationManager.UpdateMemberDetails();
         }
         #endregion
 

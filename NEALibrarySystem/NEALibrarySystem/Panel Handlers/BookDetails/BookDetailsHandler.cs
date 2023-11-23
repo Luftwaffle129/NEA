@@ -217,7 +217,6 @@ namespace NEALibrarySystem.PanelHandlers
             }
             else
             {
-                FrmMainSystem.Main.NavigatorCloseAllPanels();
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             }
         }

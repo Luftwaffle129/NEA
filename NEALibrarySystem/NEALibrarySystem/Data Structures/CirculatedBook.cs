@@ -57,6 +57,9 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedItems
             private set { _price = value; }
         }
         #endregion
+        #region DueDate
+
+        #endregion
         public CirculatedBook(Book book, string copyBarcode)
         {
             Barcode = copyBarcode;

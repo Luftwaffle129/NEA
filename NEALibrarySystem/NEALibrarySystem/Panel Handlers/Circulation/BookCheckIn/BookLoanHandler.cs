@@ -14,7 +14,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
     public class BookLoanHandler
     {
         private DateTimePicker _returnDate;
-        private CirculationObjectHandler CirculationManager;
+        public CirculationObjectHandler CirculationManager;
         public BookLoanHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker ReturnDate) 
         { 
             CirculationManager = circulationObjectHandler;
@@ -29,10 +29,15 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             _returnDate.Value = DateTime.Today;
             _returnDate.MinDate = DateTime.Today;
         }
+        /// <summary>
+        /// updates the book copies being loaned and creates a transaction record
+        /// </summary>
         public void Save()
         {
+            // check if necessary inputs exist
             if (CirculationManager.SelectedMember != null && CirculationManager.CirculatedBooks.Count > 0)
             {
+                // update book copies
                 foreach (CirculatedBook loanBook in CirculationManager.CirculatedBooks)
                 {
                     int indexBook = 0;
@@ -53,6 +58,8 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                         }
                     } while (++indexBook < DataLibrary.Books.Count && !loaned);
                 }
+                // create a transaction record
+
                 Load();
             }
         }
