@@ -406,6 +406,7 @@ namespace NEALibrarySystem
             throw new Exception("womp womp");
         }
         #region delete handler
+
         private void btnDeleteDelete_Click(object sender, EventArgs e)
         {
             _deleteHandler.Delete();
