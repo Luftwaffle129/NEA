@@ -10,7 +10,7 @@ namespace NEALibrarySystem.Data_Structures
     [System.Serializable]
     public class BookSaver
     {
-        public BookSaver(Book book) 
+        public BookSaver(zBook book) 
         {
             SeriesTitle = book.SeriesTitle;
             SeriesNumber = book.SeriesNumber;
@@ -23,10 +23,10 @@ namespace NEALibrarySystem.Data_Structures
             publisherID = book.PublisherID;
             genresID = book.GenreIDs.ToArray();
             themesID = book.ThemeIDs.ToArray();
-            bookCopies = new BookCopySaver[book.BookCopies.Count];
+            bookCopies = new zBookCopySaver[book.BookCopies.Count];
             for (int i = 0;  i < bookCopies.Length; i++)
             {
-                bookCopies[i] = new BookCopySaver(book.BookCopies[i]);
+                bookCopies[i] = new zBookCopySaver(book.BookCopies[i]);
             }
         }
         public string SeriesTitle { get; set; }
@@ -40,6 +40,6 @@ namespace NEALibrarySystem.Data_Structures
         public int publisherID {  get; set; }
         public int[] genresID { get; set; }
         public int[] themesID { get; set; }
-        public BookCopySaver[] bookCopies { get; set;}
+        public zBookCopySaver[] bookCopies { get; set;}
     }
 }

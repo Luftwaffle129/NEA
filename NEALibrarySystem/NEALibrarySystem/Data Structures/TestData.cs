@@ -15,7 +15,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class TestData
     {
-        private List<Book> books = new List<Book>();
+        private List<zBook> books = new List<zBook>();
         private List<Member> members = new List<Member>();
         private Random rand = new Random();
 
@@ -96,7 +96,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             for (int i = 0; i < 10; i++)
             {
-                Book book = new Book();
+                zBook book = new zBook();
                 book.SetTitle(titles[rand.Next(0, titles.Length)]);
                 string ISBN = "";
                 for (int j = 0; j < 13; j++)

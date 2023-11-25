@@ -51,7 +51,7 @@ namespace NEALibrarySystem
             {
             new Panel[] { pnlReturn, pnlLoan, pnlSell, pnlReservation, pnlSearch, pnlBookDetails, pnlDelete },
             new Panel[] { pnlSearch, pnlMemberDetails, pnlDelete },
-            new Panel[] { pnlSearch, pnlTransactionDetails },
+            new Panel[] { pnlSearch, pnlCirculationDetails },
             new Panel[] { pnlSearch, pnlStaff },
             new Panel[] { pnlStatistics },
             new Panel[] { pnlBackup },

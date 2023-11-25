@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.Data_Structures
@@ -26,7 +27,6 @@ namespace NEALibrarySystem.Data_Structures
         public string AddressLine5 { get; set; }
         public string Postcode { get; set; }
         public DateTime JoinDate { get; set; }
-        public List<string> AssociatedMembers { get; set; }
         public MemberType Type { get; set; }
 
         public Member()

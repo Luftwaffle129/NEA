@@ -8,7 +8,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.Data_Structures
 {
-    public class BookCopy
+    public class zBookCopy
     {
         public string Barcode { get; set; }
         public status Status { get; set; }
@@ -17,12 +17,12 @@ namespace NEALibrarySystem.Data_Structures
         //public string ISBN { get; set; }
         public DateTime OverdueEmailLastSent { get; set; }
         #region constructors
-        public BookCopy() { }
+        public zBookCopy() { }
         /// <summary>
         /// Used to load book copies from files
         /// </summary>
         /// <param name="bookCopySaver">record to be loaded from files</param>
-        public BookCopy(BookCopySaver bookCopySaver)
+        public zBookCopy(zBookCopySaver bookCopySaver)
         {
             Barcode = bookCopySaver.Barcode;
             Status = bookCopySaver.Status;

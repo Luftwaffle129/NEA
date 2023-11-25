@@ -9,7 +9,7 @@ namespace NEALibrarySystem.Data_Structures
     [System.Serializable]
     public class BookSaverCollection
     {
-        public BookSaverCollection(List<Book> books)
+        public BookSaverCollection(List<zBook> books)
         {
             Collection = new BookSaver[books.Count];
             for (int i = 0; i < books.Count; i++) 

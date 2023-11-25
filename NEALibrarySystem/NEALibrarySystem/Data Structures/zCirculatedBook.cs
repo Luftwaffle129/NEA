@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.ListViewHandlers.CirculatedItems
 {
-    public class CirculatedBook
+    public class zCirculatedBook
     {
         #region barcode
         private string _barcode;
@@ -60,7 +60,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedItems
         #region DueDate
 
         #endregion
-        public CirculatedBook(Book book, string copyBarcode)
+        public zCirculatedBook(zBook book, string copyBarcode)
         {
             Barcode = copyBarcode;
             ISBN = book.ISBN;

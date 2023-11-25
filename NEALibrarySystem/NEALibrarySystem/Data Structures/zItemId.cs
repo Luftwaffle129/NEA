@@ -9,20 +9,20 @@ namespace NEALibrarySystem.Data_Structures
     /// <summary>
     /// Item containing a integer ID and a string name
     /// </summary>
-    public class ItemID
+    public class ItemId
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         #region Constructors
-        public ItemID() { }
+        public ItemId() { }
         /// <summary>
         /// Constructor for getting records from the binary files
         /// </summary>
         /// <param name="itemIDSaver">record to load</param>
-        public ItemID(ItemIDSaver itemIDSaver)
+        public ItemId(ItemIDSaver itemIDSaver)
         {
-            ID = itemIDSaver.ID;
+            Id = itemIDSaver.ID;
             Name = itemIDSaver.Name;
         }
         #endregion

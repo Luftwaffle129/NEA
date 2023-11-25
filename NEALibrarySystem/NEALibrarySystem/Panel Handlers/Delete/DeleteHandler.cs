@@ -89,55 +89,5 @@ namespace NEALibrarySystem
         {
             FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
-        #region removing transaction relations
-        /// <summary>
-        /// Removes the book copy barcode references of the list of books from the list of transactions
-        /// </summary>
-        /// <param name="books">List of book records being deleted</param>
-        public static void RemoveTransactionLinks(List<Book> books)
-        {
-            if (books.Count > 0)
-            {
-                foreach (Book book in books)
-                {
-                    RemoveTransactionLinks(book);
-                }
-            }
-        }
-        /// <summary>
-        /// Removes the book copy barcode references of a book from the list of transactions
-        /// </summary>
-        /// <param name="book">Book record being deleted</param>
-        public static void RemoveTransactionLinks(Book book)
-        {
-            if (book.BookCopies.Count > 0)
-            {
-                foreach (BookCopy bookCopy in book.BookCopies)
-                {
-                    RemoveTransactionLinks(bookCopy);
-                }
-            }
-        }
-        /// <summary>
-        /// Removes the book copy barcode reference of a book copy from the list of transactions
-        /// </summary>
-        /// <param name="bookCopy">book copy being deleted</param>
-        public static void RemoveTransactionLinks(BookCopy bookCopy)
-        {
-            if (DataLibrary.Transactions.Count > 0)
-            {
-                foreach (Transaction transaction in DataLibrary.Transactions)
-                {
-                    for (int index = 0; index < transaction.Barcodes.Count; index++)
-                    {
-                        if (transaction.Barcodes[index] == bookCopy.Barcode)
-                        {
-                            transaction.Barcodes[index] = "-1";
-                        }
-                    }
-                }
-            }
-        }
-        #endregion
     }
 }

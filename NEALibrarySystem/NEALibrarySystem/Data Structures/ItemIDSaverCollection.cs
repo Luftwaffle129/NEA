@@ -9,7 +9,7 @@ namespace NEALibrarySystem.Data_Structures
     [System.Serializable]
     public class ItemIDSaverCollection
     {
-        public ItemIDSaverCollection(List<ItemID> itemIDs)
+        public ItemIDSaverCollection(List<ItemBook> itemIDs)
         {
             Collection = new ItemIDSaver[itemIDs.Count];
             for (int i = 0; i < itemIDs.Count; i++)

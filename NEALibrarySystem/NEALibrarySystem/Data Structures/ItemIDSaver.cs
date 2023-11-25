@@ -9,9 +9,9 @@ namespace NEALibrarySystem.Data_Structures
     [System.Serializable]
     public class ItemIDSaver
     {
-        public ItemIDSaver(ItemID itemID) 
+        public ItemIDSaver(ItemBook itemID) 
         {
-            ID = itemID.ID;
+            ID = itemID.Id;
             Name = itemID.Name;
         }
         public int ID { get; set; }

@@ -10,7 +10,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace NEALibrarySystem
 {
-    public class Book
+    public class zBook
     {
         public string SeriesTitle { get; set; }
         public int SeriesNumber { get; set; }
@@ -46,7 +46,7 @@ namespace NEALibrarySystem
         /// <param name="title">name of the title</param>
         public void SetTitle(string title)
         {
-            List<ItemID> titles = DataLibrary.Titles;
+            List<ItemBook> titles = DataLibrary.Titles;
             titleID = SetIDFromName(ref titles, title);
             DataLibrary.Titles = titles;
         }
@@ -78,7 +78,7 @@ namespace NEALibrarySystem
         /// <param name="mediaType">name of media type</param>
         public void SetMediaType(string mediaType)
         {
-            List<ItemID> mediaTypes = DataLibrary.MediaTypes;
+            List<ItemBook> mediaTypes = DataLibrary.MediaTypes;
             mediaTypeID = SetIDFromName(ref mediaTypes, mediaType);
             DataLibrary.MediaTypes = mediaTypes;
         }
@@ -110,7 +110,7 @@ namespace NEALibrarySystem
         /// <param name="author">string of author name</param>
         public void SetAuthor(string author)
         {
-            List<ItemID> authors = DataLibrary.Authors;
+            List<ItemBook> authors = DataLibrary.Authors;
             authorID = SetIDFromName(ref authors, author);
             DataLibrary.Authors = authors;
         }
@@ -142,7 +142,7 @@ namespace NEALibrarySystem
         /// <param name="publisher">name of the publisher</param>
         public void SetPublisher(string publisher)
         {
-            List<ItemID> publishers = DataLibrary.Publishers;
+            List<ItemBook> publishers = DataLibrary.Publishers;
             publisherID = SetIDFromName(ref publishers, publisher);
             DataLibrary.Publishers = publishers;
         }
@@ -175,7 +175,7 @@ namespace NEALibrarySystem
         /// <param name="input">List of genre names</param>
         public void SetGenres(List<string> input)
         {
-            List<ItemID> genres = DataLibrary.Genres;
+            List<ItemBook> genres = DataLibrary.Genres;
             GenreIDs = SetItemIDList(input, ref genres);
             DataLibrary.Genres = genres;
         }
@@ -207,17 +207,17 @@ namespace NEALibrarySystem
         /// <param name="input">List of theme names</param>
         public void SetThemes(List<string> input)
         {
-            List<ItemID> themes = DataLibrary.Themes;
+            List<ItemBook> themes = DataLibrary.Themes;
             ThemeIDs = SetItemIDList(input, ref themes);
             DataLibrary.Themes = themes;
         }
         #endregion
         // list of classes
-        private List<BookCopy> bookCopies = new List<BookCopy>();
-        public List<BookCopy> BookCopies
+        private List<zBookCopy> bookCopies = new List<zBookCopy>();
+        public List<zBookCopy> BookCopies
         {
             get { return bookCopies; }
-            set { bookCopies = value ?? new List<BookCopy>(); }
+            set { bookCopies = value ?? new List<zBookCopy>(); }
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace NEALibrarySystem
         /// <param name="ItemIDList">List of ItemIDs</param>
         /// <returns>List of item names</returns>
         /// 
-        private List<string> GetItemIDList(List<int> IDList, List<ItemID> ItemIDList)
+        private List<string> GetItemIDList(List<int> IDList, List<ItemBook> ItemIDList)
         {
             List<string> output = new List<string>();
             foreach (int ID in IDList)
@@ -244,7 +244,7 @@ namespace NEALibrarySystem
         /// <param name="itemList">list of names to set the IDs of</param>
         /// <param name="ItemIDList">List of ItemIDs</param>
         /// <returns>List of item IDs</returns>
-        private List<int> SetItemIDList(List<string> itemList, ref List<ItemID> ItemIDList)
+        private List<int> SetItemIDList(List<string> itemList, ref List<ItemBook> ItemIDList)
         {
             List<int> output = new List<int>();
 
@@ -262,11 +262,11 @@ namespace NEALibrarySystem
         /// <param name="ID">The ID to search for in list</param>
         /// <param name="name">the name of the datatype. Used for error messages</param>
         /// <returns>Returns the string linked to the ID inputted</returns>
-        private string GetNameFromID(List<ItemID> list, int ID)
+        private string GetNameFromID(List<ItemBook> list, int ID)
         {
-            foreach (ItemID item in list)
+            foreach (ItemBook item in list)
             {
-                if (item.ID == ID)
+                if (item.Id == ID)
                 {
                     return item.Name;
                 }
@@ -278,7 +278,7 @@ namespace NEALibrarySystem
         /// </summary>
         /// <param name="list">The list containing the items</param>
         /// <param name="name">The name to find ID of or create an ID for</param>
-        private int SetIDFromName(ref List<ItemID> list, string name)
+        private int SetIDFromName(ref List<ItemBook> list, string name)
         {
             // finds if the name is already stored. Returns the name's ID if it is
             int index = 0;
@@ -288,13 +288,13 @@ namespace NEALibrarySystem
                 {
                     if (list[index].Name == name)
                     {
-                        return list[index].ID;
+                        return list[index].Id;
                     }
                 } while (++index < list.Count);
             }
             // if an existing item is not found:
             int lowestID = 0;
-            ItemID temp = new ItemID();
+            ItemBook temp = new ItemBook();
             temp.Name = name;
             // insert new item in the ID if there is a gap
             if (list.Count > 0)
@@ -307,33 +307,33 @@ namespace NEALibrarySystem
                     //loops through each element in the list
                     do
                     {
-                        if (list[index].ID == lowestID)
+                        if (list[index].Id == lowestID)
                         {
                             isGap = false;
                         }
                         index++;
                     }
                     while (index < list.Count && isGap);
-                    temp.ID = lowestID;
+                    temp.Id = lowestID;
                     if (isGap)
                     {
                         list.Add(temp);
-                        return temp.ID;
+                        return temp.Id;
                     }
                 } while (++lowestID < list.Count);
             }
             // if no gaps, append new item
-            temp.ID = lowestID;
+            temp.Id = lowestID;
             list.Add(temp);
-            return temp.ID;
+            return temp.Id;
         }
         #region Constructors
-        public Book() { }
+        public zBook() { }
         /// <summary>
         /// Constructor for getting records from the binary files
         /// </summary>
         /// <param name="bookSaver">record to load</param>
-        public Book(BookSaver bookSaver)
+        public zBook(BookSaver bookSaver)
         {
             titleID = bookSaver.TitleID;
             SeriesNumber = bookSaver.SeriesNumber;
@@ -347,9 +347,9 @@ namespace NEALibrarySystem
             themesID = bookSaver.themesID.ToList();
             if (bookSaver.bookCopies != null)
             {
-                foreach (BookCopySaver bookCopySaver in bookSaver.bookCopies)
+                foreach (zBookCopySaver bookCopySaver in bookSaver.bookCopies)
                 {
-                    bookCopies.Add(new BookCopy(bookCopySaver));
+                    bookCopies.Add(new zBookCopy(bookCopySaver));
                 }
             }
         }

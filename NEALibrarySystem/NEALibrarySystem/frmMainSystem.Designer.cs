@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -269,7 +269,7 @@
             this.btnReserveCancel = new System.Windows.Forms.Button();
             this.txtReserveLateFee = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
-            this.pnlTransactionDetails = new System.Windows.Forms.Panel();
+            this.pnlCirculationDetails = new System.Windows.Forms.Panel();
             this.lblTransactionDescription = new System.Windows.Forms.Label();
             this.txtTransactionDescription = new System.Windows.Forms.TextBox();
             this.lsvTransactionBooks = new System.Windows.Forms.ListView();
@@ -310,7 +310,7 @@
             this.pnlSubTabs.SuspendLayout();
             this.pnlSell.SuspendLayout();
             this.pnlReservation.SuspendLayout();
-            this.pnlTransactionDetails.SuspendLayout();
+            this.pnlCirculationDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBooks
@@ -2387,16 +2387,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea5.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend2);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series5);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series2);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3006,30 +3006,30 @@
             this.btnReserveSave.Text = "Save";
             this.btnReserveSave.UseVisualStyleBackColor = false;
             // 
-            // pnlTransactionDetails
+            // pnlCirculationDetails
             // 
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDescription);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDescription);
-            this.pnlTransactionDetails.Controls.Add(this.lsvTransactionBooks);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionPrice);
-            this.pnlTransactionDetails.Controls.Add(this.btnTransactionBack);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionType);
-            this.pnlTransactionDetails.Controls.Add(this.btnTransactionDelete);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionMemberBarode);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionPrice);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDueDate);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionMemberBarcode);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionDate);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionMemberName);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDate);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionDueDate);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionBooks);
-            this.pnlTransactionDetails.Controls.Add(this.lblTransactionType);
-            this.pnlTransactionDetails.Controls.Add(this.txtTransactionMemberName);
-            this.pnlTransactionDetails.Location = new System.Drawing.Point(150, 100);
-            this.pnlTransactionDetails.Name = "pnlTransactionDetails";
-            this.pnlTransactionDetails.Size = new System.Drawing.Size(1770, 980);
-            this.pnlTransactionDetails.TabIndex = 75;
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDescription);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDescription);
+            this.pnlCirculationDetails.Controls.Add(this.lsvTransactionBooks);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionPrice);
+            this.pnlCirculationDetails.Controls.Add(this.btnTransactionBack);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionType);
+            this.pnlCirculationDetails.Controls.Add(this.btnTransactionDelete);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionMemberBarode);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionPrice);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDueDate);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionMemberBarcode);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionMemberName);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDueDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionBooks);
+            this.pnlCirculationDetails.Controls.Add(this.lblTransactionType);
+            this.pnlCirculationDetails.Controls.Add(this.txtTransactionMemberName);
+            this.pnlCirculationDetails.Location = new System.Drawing.Point(150, 100);
+            this.pnlCirculationDetails.Name = "pnlCirculationDetails";
+            this.pnlCirculationDetails.Size = new System.Drawing.Size(1770, 980);
+            this.pnlCirculationDetails.TabIndex = 75;
             // 
             // lblTransactionDescription
             // 
@@ -3196,9 +3196,9 @@
             this.lblTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransactionType.Location = new System.Drawing.Point(15, 50);
             this.lblTransactionType.Name = "lblTransactionType";
-            this.lblTransactionType.Size = new System.Drawing.Size(233, 31);
+            this.lblTransactionType.Size = new System.Drawing.Size(219, 31);
             this.lblTransactionType.TabIndex = 55;
-            this.lblTransactionType.Text = "Transaction Type:";
+            this.lblTransactionType.Text = "Circulation Type:";
             // 
             // txtTransactionMemberName
             // 
@@ -3215,9 +3215,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlTransactionDetails);
             this.Controls.Add(this.pnlDelete);
+            this.Controls.Add(this.pnlCirculationDetails);
+            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlBookDetails);
@@ -3270,8 +3270,8 @@
             this.pnlSell.PerformLayout();
             this.pnlReservation.ResumeLayout(false);
             this.pnlReservation.PerformLayout();
-            this.pnlTransactionDetails.ResumeLayout(false);
-            this.pnlTransactionDetails.PerformLayout();
+            this.pnlCirculationDetails.ResumeLayout(false);
+            this.pnlCirculationDetails.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3514,7 +3514,7 @@
         private System.Windows.Forms.TextBox txtLoanLateFees;
         private System.Windows.Forms.Label lblLoanEnterBarcode;
         private System.Windows.Forms.TextBox txtLoanEnterBarcode;
-        private System.Windows.Forms.Panel pnlTransactionDetails;
+        private System.Windows.Forms.Panel pnlCirculationDetails;
         private System.Windows.Forms.Label lblTransactionPrice;
         private System.Windows.Forms.Button btnTransactionBack;
         private System.Windows.Forms.TextBox txtTransactionType;

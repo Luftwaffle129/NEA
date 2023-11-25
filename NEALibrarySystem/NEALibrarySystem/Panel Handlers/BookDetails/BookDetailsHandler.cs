@@ -14,18 +14,18 @@ namespace NEALibrarySystem.PanelHandlers
     public class BookDetailsHandler
     {
         private BookDetailsObjects _objects;
-        private Book _bookData;
+        private zBook _bookData;
         private bool _IsNewRecord = false;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
-            _bookData = new Book();
+            _bookData = new zBook();
             InitialiseCopyDetails();
         }
         /// <summary>
         /// Loads the book details into the input boxes
         /// </summary>
-        public void Load(Book book = null)
+        public void Load(zBook book = null)
         {
             //book details
             if (book != null)
@@ -75,7 +75,7 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 foreach(string barcode in frmAddBookCopies.barcodes)
                 {
-                    BookCopy temp = new BookCopy()
+                    zBookCopy temp = new zBookCopy()
                     {
                         Barcode = barcode,
                         Status = status.InStock,
@@ -113,7 +113,7 @@ namespace NEALibrarySystem.PanelHandlers
             _objects.CopyDetails.Items.Clear();
             if (_bookData.BookCopies != null)
             {
-                foreach (BookCopy bookCopy in _bookData.BookCopies)
+                foreach (zBookCopy bookCopy in _bookData.BookCopies)
                 {
                     string[] data = new string[3]
                     {
@@ -191,9 +191,9 @@ namespace NEALibrarySystem.PanelHandlers
         /// retrieves the book record created from the inputted data
         /// </summary>
         /// <returns>inputted book data</returns>
-        private Book GetBookInput() 
+        private zBook GetBookInput() 
         {
-            Book temp = new Book();
+            zBook temp = new zBook();
             temp.SetTitle(_objects.Title.Text);
             temp.SeriesTitle = _objects.SeriesTitle.Text;
             temp.SeriesNumber = Convert.ToInt32(_objects.SeriesNumber.Text);

@@ -8,9 +8,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace NEALibrarySystem.Data_Structures
 {
     [System.Serializable]
-    public class BookCopySaver
+    public class zBookCopySaver
     {
-        public BookCopySaver(BookCopy bookCopy)
+        public zBookCopySaver(zBookCopy bookCopy)
         {
             Barcode = bookCopy.Barcode;
             Status = bookCopy.Status;

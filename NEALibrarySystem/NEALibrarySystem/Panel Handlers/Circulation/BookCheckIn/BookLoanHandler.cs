@@ -38,7 +38,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             if (CirculationManager.SelectedMember != null && CirculationManager.CirculatedBooks.Count > 0)
             {
                 // update book copies
-                foreach (CirculatedBook loanBook in CirculationManager.CirculatedBooks)
+                foreach (zCirculatedBook loanBook in CirculationManager.CirculatedBooks)
                 {
                     int indexBook = 0;
                     bool loaned = false;

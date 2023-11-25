@@ -47,21 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data Structures\Book.cs" />
-    <Compile Include="Data Structures\BookCopy.cs" />
-    <Compile Include="Data Structures\BookCopySaver.cs" />
+    <Compile Include="Comparison.cs" />
+    <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
+    <Compile Include="Data Structures\Records\Book.cs" />
+    <Compile Include="Data Structures\Records\BookCopy.cs" />
+    <Compile Include="Data Structures\Records\BookCreator.cs" />
+    <Compile Include="Data Structures\Records\BookItemID.cs" />
+    <Compile Include="Data Structures\Records\CirculationCopy.cs" />
+    <Compile Include="Data Structures\Records\Item.cs" />
+    <Compile Include="Data Structures\Records\ItemBook.cs" />
+    <Compile Include="Data Structures\Records\ItemBookRef.cs" />
+    <Compile Include="Data Structures\zBook.cs" />
+    <Compile Include="Data Structures\zBookCopy.cs" />
+    <Compile Include="Data Structures\zBookCopySaver.cs" />
     <Compile Include="Data Structures\BookSaver.cs" />
     <Compile Include="Data Structures\BookSaverCollection.cs" />
     <Compile Include="Data Structures\FileHandler.cs" />
-    <Compile Include="Data Structures\ItemID.cs" />
+    <Compile Include="Data Structures\zItemId.cs" />
     <Compile Include="Data Structures\ItemIDSaver.cs" />
     <Compile Include="Data Structures\ItemIDSaverCollection.cs" />
-    <Compile Include="Data Structures\Member.cs" />
+    <Compile Include="Data Structures\Records\Member.cs" />
     <Compile Include="Data Structures\DataLibrary.cs" />
     <Compile Include="Data Structures\Settings.cs" />
-    <Compile Include="Data Structures\Staff.cs" />
+    <Compile Include="Data Structures\Records\Staff.cs" />
     <Compile Include="Data Structures\TestData.cs" />
-    <Compile Include="Data Structures\Transaction.cs" />
+    <Compile Include="Data Structures\zTransaction.cs" />
     <Compile Include="Panel Handlers\Delete\DeleteHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
@@ -117,7 +127,7 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data Structures\CirculatedBook.cs" />
+    <Compile Include="Data Structures\zCirculatedBook.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookLoanHandler.cs" />
@@ -133,6 +143,7 @@
     </Compile>
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchedItemsHandler.cs" />
+    <Compile Include="Search.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +224,8 @@
   <ItemGroup>
     <Content Include="ToDoList.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data Structures\RecordSavers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

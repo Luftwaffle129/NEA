@@ -55,7 +55,7 @@ namespace NEALibrarySystem.SearchList
             //{
                 LoadColumns(ref lsvSearch, DataLibrary.Feature.Book);
 
-                foreach (Book book in DataLibrary.Books)
+                foreach (zBook book in DataLibrary.Books)
                 {
                     string[] data =
                     {

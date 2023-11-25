@@ -17,13 +17,13 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
     public class CirculationObjectHandler
     {
         private bool _priceNeeded;
-        private List<CirculatedBook> _circulatedBooks;
-        public List<CirculatedBook> CirculatedBooks
+        private List<zCirculatedBook> _circulatedBooks;
+        public List<zCirculatedBook> CirculatedBooks
         {
             get { return _circulatedBooks; }
             set 
             { 
-                _circulatedBooks = value ?? new List<CirculatedBook>();
+                _circulatedBooks = value ?? new List<zCirculatedBook>();
                 UpdateListView();
             }
         }
@@ -100,11 +100,11 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                 if (DataLibrary.Books.Count > 0 && memberFound)
                 {
                     // get total of the number of loans, overdue books and the late fees of the member
-                    foreach (Book book in DataLibrary.Books)
+                    foreach (zBook book in DataLibrary.Books)
                     {
                         if (book.BookCopies.Count > 0)
                         {
-                            foreach (BookCopy bookCopy in book.BookCopies)
+                            foreach (zBookCopy bookCopy in book.BookCopies)
                             {
                                 if (bookCopy.MemberID == barcode) // if book is associated with the member
                                 {

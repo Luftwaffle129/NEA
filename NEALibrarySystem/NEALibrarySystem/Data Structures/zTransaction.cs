@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures
 {
-    public class Transaction
+    public class zTransaction
     {
         private int _ID;
         public int ID
@@ -57,7 +57,7 @@ namespace NEALibrarySystem.Data_Structures
             get { return _description; }
             set { _description = value; }
         }
-        public Transaction()
+        public zTransaction()
         {
 
         }
@@ -67,7 +67,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="memberBarcode"></param>
         /// <param name="price"></param>
         /// <param name="description"></param>
-        public Transaction(string memberBarcode, double price, string description)
+        public zTransaction(string memberBarcode, double price, string description)
         {
             _memberBarcode = memberBarcode;
             _type = TransactionType.Custom;
@@ -83,19 +83,19 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="type">Type of transaction or circulation</param>
         /// <param name="dueDate">Date of a book return or reservation pick up date</param>
         /// <param name="price"></param>
-        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, TransactionType type, DateTime dueDate)
+        public zTransaction(List<zCirculatedBook> circulatedBooks, string memberBarcode, TransactionType type, DateTime dueDate)
         {
             _memberBarcode = memberBarcode;
             _type = type;
             Date = dueDate;
         }
-        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, TransactionType type)
+        public zTransaction(List<zCirculatedBook> circulatedBooks, string memberBarcode, TransactionType type)
         {
             _memberBarcode = memberBarcode;
             _type = type;
         }
 
-        public Transaction(List<CirculatedBook> circulatedBooks, string memberBarcode, double price)
+        public zTransaction(List<zCirculatedBook> circulatedBooks, string memberBarcode, double price)
         {
             _memberBarcode = memberBarcode;
             _type = TransactionType.Sale;
