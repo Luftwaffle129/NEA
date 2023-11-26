@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures.Records;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -96,26 +97,30 @@ namespace NEALibrarySystem.Data_Structures
         {
             for (int i = 0; i < 10; i++)
             {
-                zBook book = new zBook();
-                book.SetTitle(titles[rand.Next(0, titles.Length)]);
-                string ISBN = "";
+                BookCreator bookCreator = new BookCreator();
+                bookCreator.Title = titles[rand.Next(0, titles.Length)];
+                string isbn = "";
                 for (int j = 0; j < 13; j++)
                 {
-                    ISBN += GenerateRandomDigit().ToString();
+                    isbn += GenerateRandomDigit().ToString();
                 }
-                book.ISBN = ISBN;
-                book.SetMediaType(GenerateRandomString(10));
-                book.SetAuthor(GenerateRandomString(10));
-                book.SetPublisher(GenerateRandomString(10));
-                string[] genres = { GenerateRandomString(10), GenerateRandomString(10) };
-                book.SetGenres(genres.ToList<string>());
-                string[] themes = { GenerateRandomString(10), GenerateRandomString(10) };
-                book.SetThemes(themes.ToList<string>());
-                book.Description = GenerateRandomString(10);
-                book.Price = 9.99;
-                books.Add(book);
+                bookCreator.Isbn = isbn;
+                bookCreator.MediaType = GenerateRandomString(10);
+                bookCreator.Author = GenerateRandomString(10);
+                bookCreator.Publisher = GenerateRandomString(10);
+                List<string> genres = new List<string>();
+                for (int j = 0; j < 2; j++)
+                    genres.Add(GenerateRandomString(10));
+                bookCreator.Genres = genres;
+                List<string> themes = new List<string>();
+                for (int j = 0; j < 2; j++)
+                    themes.Add(GenerateRandomString(10));
+                bookCreator.Themes = themes;
+                bookCreator.Description = GenerateRandomString(10);
+                bookCreator.Price = 9.99;
+                Book book = new Book(bookCreator);
+                DataLibrary.Books.Add(book);
             }
-            DataLibrary.Books = books;
         }
         /// <summary>
         /// generates 10 random members
@@ -184,7 +189,9 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.Genres.Clear();
             DataLibrary.Themes.Clear();
             DataLibrary.Staff.Clear();
-            DataLibrary.Transactions.Clear();
+            DataLibrary.Loans.Clear();
+            DataLibrary.Reservations.Clear();
+            DataLibrary.BookCopies.Clear();
         }
     }
 }

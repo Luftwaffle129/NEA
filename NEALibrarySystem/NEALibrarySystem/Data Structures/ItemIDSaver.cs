@@ -11,7 +11,7 @@ namespace NEALibrarySystem.Data_Structures
     {
         public ItemIDSaver(ItemBook itemID) 
         {
-            ID = itemID.Id;
+            Id = itemID.Id;
             Name = itemID.Name;
         }
         public int ID { get; set; }

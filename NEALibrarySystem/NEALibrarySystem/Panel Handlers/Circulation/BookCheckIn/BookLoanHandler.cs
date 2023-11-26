@@ -14,8 +14,8 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
     public class BookLoanHandler
     {
         private DateTimePicker _returnDate;
-        public CirculationObjectHandler CirculationManager;
-        public BookLoanHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker ReturnDate) 
+        public zCirculationObjectHandler CirculationManager;
+        public BookLoanHandler(zCirculationObjectHandler circulationObjectHandler, DateTimePicker ReturnDate) 
         { 
             CirculationManager = circulationObjectHandler;
             _returnDate = ReturnDate;

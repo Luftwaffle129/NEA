@@ -1,4 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
+using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +15,33 @@ namespace NEALibrarySystem.PanelHandlers
     public class BookDetailsHandler
     {
         private BookDetailsObjects _objects;
-        private zBook _bookData;
+        private Book _bookData;
+        private List<BookCopy> _bookCopyList;
         private bool _IsNewRecord = false;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
-            _bookData = new zBook();
+            _bookData = new Book();
             InitialiseCopyDetails();
         }
         /// <summary>
         /// Loads the book details into the input boxes
         /// </summary>
-        public void Load(zBook book = null)
+        public void Load(Book book = null)
         {
             //book details
             if (book != null)
             {
                 _bookData = book;
-                _objects.Title.Text = _bookData.GetTitle();
+                _objects.Title.Text = _bookData.Title.Name;
                 _objects.SeriesTitle.Text = _bookData.SeriesTitle;
                 _objects.SeriesNumber.Text = _bookData.SeriesNumber.ToString();
-                _objects.ISBN.Text = _bookData.ISBN;
-                _objects.MediaType.Text = _bookData.GetMediaType();
-                _objects.Author.Text = _bookData.GetAuthor();
-                _objects.Publisher.Text = _bookData.GetPublisher();
-                _objects.Genres.Text = DataFormatter.ListToString(_bookData.GetGenres());
-                _objects.Themes.Text = DataFormatter.ListToString(_bookData.GetThemes());
+                _objects.ISBN.Text = _bookData.Isbn;
+                _objects.MediaType.Text = _bookData.MediaType.Name;
+                _objects.Author.Text = _bookData.Author.Name;
+                _objects.Publisher.Text = _bookData.Publisher.Name;
+                _objects.Genres.Text = DataFormatter.ItemBookListToString(_bookData.Genres);
+                _objects.Themes.Text = DataFormatter.ItemBookListToString(_bookData.Themes);
                 _objects.Description.Text = _bookData.Description;
                 _objects.Price.Text = _bookData.Price.ToString();
             }
@@ -191,19 +193,18 @@ namespace NEALibrarySystem.PanelHandlers
         /// retrieves the book record created from the inputted data
         /// </summary>
         /// <returns>inputted book data</returns>
-        private zBook GetBookInput() 
+        private BookCreator GetBookInput() 
         {
-            zBook temp = new zBook();
-            temp.SetTitle(_objects.Title.Text);
+            BookCreator temp = new BookCreator();
+            temp.Title = _objects.Title.Text;
             temp.SeriesTitle = _objects.SeriesTitle.Text;
             temp.SeriesNumber = Convert.ToInt32(_objects.SeriesNumber.Text);
-            temp.SetMediaType(_objects.MediaType.Text);
-            temp.SetAuthor(_objects.Author.Text);
-            temp.SetPublisher(_objects.Publisher.Text);
-            temp.SetGenres(_objects.Genres.Text.Split(',').ToList<string>());
-            temp.SetThemes(_objects.Themes.Text.Split(',').ToList<string>());
+            temp.MediaType = _objects.MediaType.Text;
+            temp.Author = _objects.Author.Text;
+            temp.Publisher = _objects.Publisher.Text;
+            temp.Genres = DataFormatter.RemoveWhiteSpace(_objects.Genres.Text).Split(',').ToList<string>();
+            temp.Themes = DataFormatter.RemoveWhiteSpace(_objects.Themes.Text).Split(',').ToList<string>();
             temp.Description = _objects.Description.Text;
-            temp.BookCopies = _bookData.BookCopies;
             return temp;
         }
         /// <summary>

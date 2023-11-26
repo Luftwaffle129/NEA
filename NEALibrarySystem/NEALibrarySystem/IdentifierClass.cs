@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem
 {
-    public static class Comparison
+    internal class IdentifierClass
     {
-
     }
-
 }

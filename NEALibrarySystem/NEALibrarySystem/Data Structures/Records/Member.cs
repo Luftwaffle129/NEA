@@ -14,21 +14,20 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class Member
     {
-        public string Barcode { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string DateOfBirth { get; set; }
-        public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string AddressLine3 { get; set; }
-        public string AddressLine4 { get; set; }
-        public string AddressLine5 { get; set; }
-        public string Postcode { get; set; }
-        public DateTime JoinDate { get; set; }
-        public MemberType Type { get; set; }
-
+        public ReferenceClass<string, Member> Barcode;
+        public ReferenceClass<string, Member> FirstName;
+        public ReferenceClass<string, Book> LastName;
+        public string DateOfBirth;
+        public string EmailAddress;
+        public string PhoneNumber;
+        public string AddressLine1;
+        public string AddressLine2;
+        public string AddressLine3;
+        public string AddressLine4;
+        public string AddressLine5;
+        public string Postcode;
+        public DateTime JoinDate;
+        public ReferenceClass<MemberType, Book> Type;
         public Member()
         {
             JoinDate = DateTime.Today;

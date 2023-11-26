@@ -133,7 +133,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="ISBN">ISBN of book to be deleted</param>
         public static void DeleteBook(string ISBN)
         {
-            
+            if (DataLibrary.Books.Count > 0) 
+            {
+
+            }
         }
         /// <summary>
         /// Deletes the member record with the inputted member barcode
@@ -174,83 +177,13 @@ namespace NEALibrarySystem.Data_Structures
         public static void CreateDataDirectory()
         {
             Directory.CreateDirectory(Application.StartupPath + "\\data");
-        }
-        /*
-        #region Load Files
-        private static string DataFilePath = Application.StartupPath + "\\data\\";
-        /// <summary>
-        /// Reads all files and load data into the appropiate data structures
-        /// </summary>
-        public static void LoadAllFiles()
-        {
-            LoadBooksFile();
-            Titles = LoadItemIDFile("titles");
-            MediaTypes = LoadItemIDFile("mediaTypes");
-            Authors = LoadItemIDFile("authors");
-            Publishers = LoadItemIDFile("publishers");
-            Genres = LoadItemIDFile("genres");
-            Themes = LoadItemIDFile("themes");
-        }
-        public static void LoadBooksFile()
-        {
-            BookSaverCollection bookSaverCollection = FileHandler.LoadFile<BookSaverCollection>(DataFilePath, "books");
-            if (bookSaverCollection != null)
-            {
-                foreach (BookSaver bookSaver in bookSaverCollection.Collection)
-                {
-                    zBook temp = new zBook(bookSaver);
-                    Books.Add(temp);
-                }
-            }
-        }
-        private static List<ItemBook> LoadItemIDFile(string fileName)
-        {
-            List<ItemBook> Output = new List<ItemBook>();
-            ItemIDSaverCollection itemIDSaverCollection = FileHandler.LoadFile<ItemIDSaverCollection>(DataFilePath, fileName);
-            if (itemIDSaverCollection != null)
-            {
-                foreach (ItemIDSaver itemIDSaver in itemIDSaverCollection.Collection)
-                {
-                    ItemBook temp = new ItemBook(itemIDSaver);
-                    Output.Add(temp);
-                }
-            }
-            return Output;
-        }
-        #endregion
-        #region Save Files
-        public static void SaveAllFiles(string filePath = null)
-        {
-            SaveBooksFile(filePath);
-            SaveItemIDFile(Titles, "titles", filePath);
-            SaveItemIDFile(MediaTypes, "mediaTypes", filePath);
-            SaveItemIDFile(Authors, "authors", filePath);
-            SaveItemIDFile(Publishers, "publishers", filePath);
-            SaveItemIDFile(Genres, "genres", filePath);
-            SaveItemIDFile(Themes, "themes", filePath);
-        }
-        public static void SaveBooksFile(string filePath = null)
-        {
-            if (filePath == null)
-                filePath = DataFilePath;
-            BookSaverCollection bookSaverCollection = new BookSaverCollection(DataLibrary.Books);
-            FileHandler.SaveFile<BookSaverCollection>(bookSaverCollection, filePath, "books");
-        }
-        private static void SaveItemIDFile(List<ItemBook> itemIDs, string name = null, string filePath = null)
-        {
-            if (filePath == null)
-                filePath = DataFilePath;
-            ItemIDSaverCollection itemIDSaverCollection = new ItemIDSaverCollection(itemIDs);
-            FileHandler.SaveFile<ItemIDSaverCollection>(itemIDSaverCollection, filePath, name);
-        }
-        #endregion
-        */
+        }  
         #endregion
         #region data handling
         #region insertion
         public static int InsertItemBook(ref List<ItemBook> itemBookList, ItemBook itemBook)
         {
-            int index = Search.GetInsertIndex(itemBookList, itemBook.Name);
+            int index = SearchAndSort.GetInsertIndex(itemBookList, itemBook.Name);
             itemBookList.Insert(index, itemBook);
             return index;
         }

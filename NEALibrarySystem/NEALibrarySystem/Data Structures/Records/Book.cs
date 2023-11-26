@@ -12,37 +12,18 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class Book
     {
-        public string SeriesTitle { get; set; }
-        public int SeriesNumber { get; set; }
-        public string Isbn { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
-        private ItemBook _title;
-        public ItemBook Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
-        private ItemBook _mediaType;
-        public ItemBook MediaType
-        {
-            get { return _mediaType; }
-            set { _mediaType = value; }
-        }
-        public ItemBook Author { get; set; }
-        public ItemBook Publisher { get; set; }
-        private List<ItemBook> _genres = new List<ItemBook>();
-        public List<ItemBook> Genres
-        {
-            get { return _genres; }
-            set { _genres = value ?? new List<ItemBook>(); }
-        }
-        private List<ItemBook> _themes = new List<ItemBook>();
-        public List<ItemBook> Themes
-        {
-            get { return _themes; }
-            set { _themes = value ?? new List<ItemBook>(); }
-        }
+        public ReferenceClass<string, Book> SeriesTitle;
+        public int SeriesNumber;
+        public ReferenceClass<string, Book> Isbn;
+        public string Description;
+        public ReferenceClass<double, Book> Price;
+        public ReferenceClass<string, Book> Title;
+        public ReferenceClass<string, Book> MediaType;
+        public ReferenceClass<string, Book> Author;
+        public ReferenceClass<string, Book> Publisher;
+        public List<ReferenceClass<string, Book>> Genres;
+        public List<ReferenceClass<string, Book>> Themes;
+        public Book() { }
         /// <summary>
         /// Creates a new book record from the data in bookCreator
         /// </summary>
@@ -104,7 +85,7 @@ namespace NEALibrarySystem.Data_Structures
             // add book reference to an existing item if possible
             if (itemBookList.Count > 0)
             {
-                int itemIndex = Search.GetFoundIndex(itemBookList, text);
+                int itemIndex = SearchAndSort.GetFoundIndex(itemBookList, text);
                 if (itemIndex != -1) // if there is an existing itemBook class
                 {
                     itemBookList[itemIndex].Books.Add(this);

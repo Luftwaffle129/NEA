@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem
 {
-    public static class Comparison
+    public class ReferenceClass<T, F> where F : class
     {
-
+        public T Value { get; set; }
+        public F Reference { get; set; }
     }
-
 }

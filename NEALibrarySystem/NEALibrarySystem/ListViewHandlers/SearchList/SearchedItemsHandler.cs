@@ -16,7 +16,6 @@ namespace NEALibrarySystem.SearchList
         /// <summary>
         /// Current feature that the search tab is set to
         /// </summary>
-        private DataLibrary.Feature _currentFeature = DataLibrary.Feature.None;
         public SearchedItemsHandler(ListView listview)
         {
             lsvSearch = listview;
@@ -51,51 +50,43 @@ namespace NEALibrarySystem.SearchList
         }
         public void ToBook()
         {
-            //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
-            //{
-                LoadColumns(ref lsvSearch, DataLibrary.Feature.Book);
+            LoadColumns(ref lsvSearch, DataLibrary.Feature.Book);
 
-                foreach (zBook book in DataLibrary.Books)
+            foreach (Book book in DataLibrary.Books)
+            {
+                string[] data =
                 {
-                    string[] data =
-                    {
-                        book.GetTitle(),
-                        book.ISBN,
-                        book.GetMediaType(),
-                        book.GetAuthor(),
-                        book.GetPublisher(),
-                        DataFormatter.ListToString(book.GetGenres()),
-                        DataFormatter.ListToString(book.GetThemes())
-                    };
-                    ListViewItem row = new ListViewItem(data);
-                    lsvSearch.Items.Add(row);
-                }
-                lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                _currentFeature = DataLibrary.Feature.Book;
-            //}
+                    book.Title.Name,
+                    book.Isbn,
+                    book.MediaType.Name,
+                    book.Author.Name,
+                    book.Publisher.Name,
+                    DataFormatter.ItemBookListToString(book.Genres),
+                    DataFormatter.ItemBookListToString(book.Themes)
+                };
+                ListViewItem row = new ListViewItem(data);
+                lsvSearch.Items.Add(row);
+            }
+            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         public void ToMember()
         {
-           //if (FrmMainSystem.Main.CurrentFeature != _currentFeature)
-            //{
-                LoadColumns(ref lsvSearch, DataLibrary.Feature.Member);
+            LoadColumns(ref lsvSearch, DataLibrary.Feature.Member);
 
-                foreach (Member member in DataLibrary.Members)
+            foreach (Member member in DataLibrary.Members)
+            {
+                string[] data = new string[4]
                 {
-                    string[] data = new string[4]
-                    {
-                    member.Barcode,
-                    member.FirstName,
-                    member.LastName,
-                    member.Type.ToString()
-                    };
-                    ListViewItem row = new ListViewItem(data);
-                    lsvSearch.Items.Add(row);
-                }
+                member.Barcode,
+                member.FirstName,
+                member.LastName,
+                member.Type.ToString()
+                };
+                ListViewItem row = new ListViewItem(data);
+                lsvSearch.Items.Add(row);
+            }
 
-                lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                _currentFeature = DataLibrary.Feature.Member;
-            //}
+            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         public static void LoadColumns(ref ListView lsv, DataLibrary.Feature feature)
         {

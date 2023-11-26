@@ -88,7 +88,7 @@ namespace NEALibrarySystem
         }
         private void InitialiseCheckIn()
         {
-            CirculationObjectHandler circulationObjectHandler = new CirculationObjectHandler
+            zCirculationObjectHandler circulationObjectHandler = new zCirculationObjectHandler
             (
                 txtReturnMemberBarcode,
                 txtReturnMemberName,
