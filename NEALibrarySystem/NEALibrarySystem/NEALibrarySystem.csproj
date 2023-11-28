@@ -53,26 +53,13 @@
     <Compile Include="Data Structures\Records\Book.cs" />
     <Compile Include="Data Structures\Records\BookCopy.cs" />
     <Compile Include="Data Structures\Records\BookCreator.cs" />
-    <Compile Include="Data Structures\BookItemID.cs" />
     <Compile Include="Data Structures\Records\CirculationCopy.cs" />
-    <Compile Include="Data Structures\Item.cs" />
-    <Compile Include="Data Structures\ItemBook.cs" />
-    <Compile Include="Data Structures\ItemBookRef.cs" />
-    <Compile Include="Data Structures\zBook.cs" />
-    <Compile Include="Data Structures\zBookCopy.cs" />
-    <Compile Include="Data Structures\zBookCopySaver.cs" />
-    <Compile Include="Data Structures\BookSaver.cs" />
-    <Compile Include="Data Structures\BookSaverCollection.cs" />
     <Compile Include="Data Structures\Records\FileHandler.cs" />
-    <Compile Include="Data Structures\zItemId.cs" />
-    <Compile Include="Data Structures\ItemIDSaver.cs" />
-    <Compile Include="Data Structures\ItemIDSaverCollection.cs" />
     <Compile Include="Data Structures\Records\Member.cs" />
     <Compile Include="Data Structures\Records\DataLibrary.cs" />
     <Compile Include="Data Structures\Records\Settings.cs" />
     <Compile Include="Data Structures\Records\Staff.cs" />
     <Compile Include="Data Structures\Records\TestData.cs" />
-    <Compile Include="Data Structures\zTransaction.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
     <Compile Include="Panel Handlers\Delete\DeleteHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
@@ -129,7 +116,6 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data Structures\zCirculatedBook.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\zCirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookLoanHandler.cs" />
