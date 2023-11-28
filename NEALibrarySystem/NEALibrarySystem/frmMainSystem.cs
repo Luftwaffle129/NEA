@@ -179,6 +179,15 @@ namespace NEALibrarySystem
             NavigatorCloseAllPanels();
             NavigatorOpenSearchViewTab();
         }
+        private void NavigatorOpenDetails(ListViewItem item)
+        {
+            switch (CurrentFeature)
+            {
+                case DataLibrary.Feature.Book:
+                    Li
+                    break;
+            }
+        }
         #endregion
         #region sub tab handling
         private void NavigatorSetSubTabNames(string[] tabs)
@@ -436,7 +445,24 @@ namespace NEALibrarySystem
             _loanHandler.CirculationManager.UpdateMemberDetails();
         }
         #endregion
-
+        #region search handler
+        private void lsvSearchItems_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lsvSearchItems.Items.Count > 0)
+            {
+                int index = 0;
+                bool foundItem = false;
+                do
+                {
+                    if (lsvSearchItems.GetItemRect(index).Contains(e.Location))
+                    {
+                        NavigatorOpenDetails(lsvSearchItems.Items[index]);
+                        foundItem = true;
+                    }
+                } while (++index < lsvSearchItems.Items.Count && !foundItem);
+            }
+        }
+        #endregion
         #endregion
 
         #endregion

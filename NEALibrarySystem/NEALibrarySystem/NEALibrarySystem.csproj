@@ -47,18 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentifierClass.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
     <Compile Include="Data Structures\Records\Book.cs" />
     <Compile Include="Data Structures\Records\BookCopy.cs" />
     <Compile Include="Data Structures\Records\BookCreator.cs" />
-    <Compile Include="Data Structures\Records\BookItemID.cs" />
+    <Compile Include="Data Structures\BookItemID.cs" />
     <Compile Include="Data Structures\Records\CirculationCopy.cs" />
-    <Compile Include="Data Structures\Records\Item.cs" />
-    <Compile Include="Data Structures\Records\ItemBook.cs" />
-    <Compile Include="Data Structures\Records\ItemBookRef.cs" />
+    <Compile Include="Data Structures\Item.cs" />
+    <Compile Include="Data Structures\ItemBook.cs" />
+    <Compile Include="Data Structures\ItemBookRef.cs" />
     <Compile Include="Data Structures\zBook.cs" />
     <Compile Include="Data Structures\zBookCopy.cs" />
     <Compile Include="Data Structures\zBookCopySaver.cs" />
@@ -228,6 +227,7 @@
     <Content Include="ToDoList.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data Structures\RecordCreators\" />
     <Folder Include="Data Structures\RecordSavers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

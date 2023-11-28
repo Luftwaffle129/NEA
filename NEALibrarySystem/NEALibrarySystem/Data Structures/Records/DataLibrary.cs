@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using static NEALibrarySystem.SearchAndSort;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -29,76 +30,84 @@ namespace NEALibrarySystem.Data_Structures
             set { _books = value ?? new List<Book>(); }
         }
         #endregion
+        #region titles
+        private static List<ReferenceClass<string, Book>> _titles = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Titles
+        { 
+            get { return _titles; } 
+            set { _titles = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region series titles
+        private static List<ReferenceClass<string, Book>> _seriesTitles = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> SeriesTitles
+        {
+            get { return _seriesTitles; }
+            set { _seriesTitles = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region isbn
+        private static List<ReferenceClass<string, Book>> _isbns = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Isbns
+        {
+            get { return _isbns; }
+            set { _isbns = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region price
+        private static List<ReferenceClass<double, Book>> _prices = new List<ReferenceClass<double, Book>>();
+        public static List<ReferenceClass<double, Book>> Prices
+        {
+            get { return _prices; }
+            set { _prices = value ?? new List<ReferenceClass<double, Book>>(); }
+        }
+        #endregion
+        #region mediaTypes
+        private static List<ReferenceClass<string, Book>> _mediaTypes = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> MediaTypes
+        {
+            get { return _mediaTypes; }
+            set { _mediaTypes = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region author
+        private static List<ReferenceClass<string, Book>> _authors = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Authors
+        {
+            get { return _authors; }
+            set { _authors = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region publishers
+        private static List<ReferenceClass<string, Book>> _publishers = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Publishers
+        {
+            get { return _publishers; }
+            set { _publishers = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region genres
+        private static List<ReferenceClass<string, Book>> _genres = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Genres
+        {
+            get { return _genres; }
+            set { _genres = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
+        #region themes
+        private static List<ReferenceClass<string, Book>> _themes = new List<ReferenceClass<string, Book>>();
+        public static List<ReferenceClass<string, Book>> Themes
+        {
+            get { return _themes; }
+            set { _themes = value ?? new List<ReferenceClass<string, Book>>(); }
+        }
+        #endregion
         #region members
         private static List<Member> _members = new List<Member>();
         public static List<Member> Members
         {
             get { return _members; }
             set { _members = value ?? new List<Member>(); }
-        }
-        #endregion
-        #region titles
-        private static List<ItemBook> _titles = new List<ItemBook>();
-        public static List<ItemBook> Titles
-        { 
-            get { return _titles; } 
-            set { _titles = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region mediaTypes
-        private static List<ItemBook> _mediaTypes = new List<ItemBook>();
-        public static List<ItemBook> MediaTypes
-        {
-            get { return _mediaTypes; }
-            set { _mediaTypes = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region author
-        private static List<ItemBook> _authors = new List<ItemBook>();
-        public static List<ItemBook> Authors
-        {
-            get { return _authors; }
-            set { _authors = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region publishers
-        private static List<ItemBook> _publishers = new List<ItemBook>();
-        public static List<ItemBook> Publishers
-        {
-            get { return _publishers; }
-            set { _publishers = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region genres
-        private static List<ItemBook> _genres = new List<ItemBook>();
-        public static List<ItemBook> Genres
-        {
-            get { return _genres; }
-            set { _genres = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region themes
-        private static List<ItemBook> _themes = new List<ItemBook>();
-        public static List<ItemBook> Themes
-        {
-            get { return _themes; }
-            set { _themes = value ?? new List<ItemBook>(); }
-        }
-        #endregion
-        #region genreBook
-        private static List<BookItemID> _genreBook;
-        public static List<BookItemID> GenreBook
-        {
-            get { return _genreBook; }
-            set { _genreBook = value ?? new List<BookItemID>(); }
-        }
-        #endregion
-        #region themeBook
-        private static List<BookItemID> _themeBook;
-        public static List<BookItemID> ThemeBook
-        {
-            get { return _themeBook; }
-            set { _themeBook = value ?? new List<BookItemID>(); }
         }
         #endregion
         #region staff
@@ -126,37 +135,6 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #endregion
-        #region Deleting records
-        /// <summary>
-        /// Deletes the book record with the inputted ISBN
-        /// </summary>
-        /// <param name="ISBN">ISBN of book to be deleted</param>
-        public static void DeleteBook(string ISBN)
-        {
-            if (DataLibrary.Books.Count > 0) 
-            {
-
-            }
-        }
-        /// <summary>
-        /// Deletes the member record with the inputted member barcode
-        /// </summary>
-        /// <param name="barcode">member barcode of member to be deleted</param>
-        public static void DeleteMember(string barcode)
-        {
-            
-        }
-        /// <summary>
-        /// Removes the itemID from the list if it is not linked to any other records
-        /// </summary>
-        /// <param name="itemIDList">List containing the ItemID that might be removed</param>
-        /// <param name="usedIDs">List of IDs that are being used by records</param>
-        /// <param name="ID">The ID of the ItemID that might be removed</param>
-        public static void RemoveUnnecessaryItemID(ref List<ItemBook> itemIDList, List<int> usedIDs, int ID)
-        {
-
-        }
-        #endregion
         #region enums
         public enum Feature
         {
@@ -180,16 +158,61 @@ namespace NEALibrarySystem.Data_Structures
         }  
         #endregion
         #region data handling
-        #region insertion
-        public static int InsertItemBook(ref List<ItemBook> itemBookList, ItemBook itemBook)
-        {
-            int index = SearchAndSort.GetInsertIndex(itemBookList, itemBook.Name);
-            itemBookList.Insert(index, itemBook);
-            return index;
-        }
-        #endregion
         #region filtering
 
+        #endregion
+        #region AddingRecords
+        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare) where F : class
+        {
+            ReferenceClass<T, F> referenceClass = new ReferenceClass<T, F>();
+            referenceClass.Value = item;
+            referenceClass.Reference = reference;
+            itemList = DataLibrary.AddReferenceRecord(itemList, referenceClass, compare);
+            return itemList;
+        }
+        public static List<ReferenceClass<T, F>> AddReferenceRecord<T, F>(List<ReferenceClass<T, F>> list, ReferenceClass<T, F> record, Compare<T> compare) where F : class
+        {
+            list.Insert(SearchAndSort.BinaryInsert(list, record, compare), record);
+            return list;
+        }
+        #endregion
+        #region Deleting records
+        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> list, ReferenceClass<T,F> item, Compare<T> compare) where F : class
+        {
+            list.RemoveAt(SearchAndSort.Binary(list, item.Value, compare));
+            return list;
+        }
+        /// <summary>
+        /// Removes the book and it's references from the system
+        /// </summary>
+        /// <param name="book">book to be deleted</param>
+        public static void DeleteBook(Book book)
+        {
+            // delete references
+            DataLibrary.Titles = DeleteReferenceClass(DataLibrary.Titles, book.Title, TwoStrings);
+            DataLibrary.SeriesTitles = DeleteReferenceClass(DataLibrary.SeriesTitles, book.SeriesTitle, TwoStrings);
+            DataLibrary.MediaTypes = DeleteReferenceClass(DataLibrary.MediaTypes, book.MediaType, TwoStrings);
+            DataLibrary.Isbns = DeleteReferenceClass(DataLibrary.Isbns, book.Isbn, TwoStrings);
+            DataLibrary.Prices = DeleteReferenceClass(DataLibrary.Prices, book.Price, TwoDoubles);
+            DataLibrary.Authors = DeleteReferenceClass(DataLibrary.Authors, book.Author, TwoStrings);
+            DataLibrary.Publishers = DeleteReferenceClass(DataLibrary.Publishers, book.Publisher, TwoStrings);
+            if (book.Genres.Count > 0)
+                foreach (ReferenceClass<string, Book> genre in book.Genres)
+                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings);
+            if (book.Themes.Count > 0)
+                foreach (ReferenceClass<string, Book> theme in book.Themes)
+                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings);
+            // delete book
+            DataLibrary.Books.Remove(book);
+        }
+        /// <summary>
+        /// Deletes the member record with the inputted member barcode
+        /// </summary>
+        /// <param name="barcode">member barcode of member to be deleted</param>
+        public static void DeleteMember(string barcode)
+        {
+
+        }
         #endregion
         #endregion
     }

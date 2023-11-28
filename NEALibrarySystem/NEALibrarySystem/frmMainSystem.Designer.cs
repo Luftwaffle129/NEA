@@ -1115,6 +1115,7 @@
             this.lsvSearchItems.TabIndex = 38;
             this.lsvSearchItems.UseCompatibleStateImageBehavior = false;
             this.lsvSearchItems.SelectedIndexChanged += new System.EventHandler(this.lsvSearchItems_SelectedIndexChanged);
+            this.lsvSearchItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsvSearchItems_MouseDoubleClick);
             // 
             // Title
             // 
@@ -3215,10 +3216,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSell);

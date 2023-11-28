@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Data_Structures
     {
         public ReferenceClass<string, Member> Barcode;
         public ReferenceClass<string, Member> FirstName;
-        public ReferenceClass<string, Book> LastName;
+        public ReferenceClass<string, Member> LastName;
         public string DateOfBirth;
         public string EmailAddress;
         public string PhoneNumber;
@@ -27,7 +27,7 @@ namespace NEALibrarySystem.Data_Structures
         public string AddressLine5;
         public string Postcode;
         public DateTime JoinDate;
-        public ReferenceClass<MemberType, Book> Type;
+        public ReferenceClass<MemberType, Member> Type;
         public Member()
         {
             JoinDate = DateTime.Today;
