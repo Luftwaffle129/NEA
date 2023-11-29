@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures.Records;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -28,9 +29,22 @@ namespace NEALibrarySystem.Data_Structures
         public string Postcode;
         public DateTime JoinDate;
         public ReferenceClass<MemberType, Member> Type;
-        public Member()
+        public Member(MemberCreator memberInfo)
         {
             JoinDate = DateTime.Today;
+            DateOfBirth = memberInfo.DateOfBirth;
+            EmailAddress = memberInfo.EmailAddress;
+            PhoneNumber = memberInfo.PhoneNumber;
+            AddressLine1 = memberInfo.AddressLine1;
+            AddressLine2 = memberInfo.AddressLine2;
+            AddressLine3 = memberInfo.AddressLine3;
+            AddressLine4 = memberInfo.AddressLine4;
+            AddressLine5 = memberInfo.AddressLine5;
+            Postcode = memberInfo.Postcode;
+            DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoStrings);
+            DataLibrary.FirstName = DataLibrary.CreateReferenceClass(DataLibrary.FirstName, this, memberInfo.FirstName, SearchAndSort.TwoStrings);
+            DataLibrary.LastName = DataLibrary.CreateReferenceClass(DataLibrary.LastName, this, memberInfo.LastName, SearchAndSort.TwoStrings);
+            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoMemberTypes);
         }
     }
     public enum MemberType

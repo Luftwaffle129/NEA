@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />

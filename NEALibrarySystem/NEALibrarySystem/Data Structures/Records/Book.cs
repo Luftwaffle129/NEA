@@ -37,19 +37,19 @@ namespace NEALibrarySystem.Data_Structures
             SeriesNumber = bookInfo.SeriesNumber;
             Description = bookInfo.Description;
             // set the referenced attributes
-            DataLibrary.Titles = DataLibrary.AddReferenceClass(DataLibrary.Titles, this, bookInfo.Title);
-            DataLibrary.SeriesTitles = DataLibrary.AddReferenceClass(DataLibrary.SeriesTitles, this, bookInfo.SeriesTitle);
-            DataLibrary.Isbns = DataLibrary.AddReferenceClass(DataLibrary.Isbns, this, bookInfo.Isbn);
-            DataLibrary.Prices = DataLibrary.AddReferenceClass(DataLibrary.Prices, this, bookInfo.Price);
-            DataLibrary.MediaTypes = DataLibrary.AddReferenceClass(DataLibrary.MediaTypes, this, bookInfo.MediaType);
-            DataLibrary.Authors = DataLibrary.AddReferenceClass(DataLibrary.Authors, this, bookInfo.Author);
-            DataLibrary.Publishers = DataLibrary.AddReferenceClass(DataLibrary.Publishers, this, bookInfo.Publisher);
+            DataLibrary.Titles = DataLibrary.CreateReferenceClass(DataLibrary.Titles, this, bookInfo.Title,SearchAndSort.TwoStrings);
+            DataLibrary.SeriesTitles = DataLibrary.CreateReferenceClass(DataLibrary.SeriesTitles, this, bookInfo.SeriesTitle, SearchAndSort.TwoStrings);
+            DataLibrary.Isbns = DataLibrary.CreateReferenceClass(DataLibrary.Isbns, this, bookInfo.Isbn, SearchAndSort.TwoStrings);
+            DataLibrary.Prices = DataLibrary.CreateReferenceClass(DataLibrary.Prices, this, bookInfo.Price, SearchAndSort.TwoDoubles);
+            DataLibrary.MediaTypes = DataLibrary.CreateReferenceClass(DataLibrary.MediaTypes, this, bookInfo.MediaType, SearchAndSort.TwoStrings);
+            DataLibrary.Authors = DataLibrary.CreateReferenceClass(DataLibrary.Authors, this, bookInfo.Author, SearchAndSort.TwoStrings);
+            DataLibrary.Publishers = DataLibrary.CreateReferenceClass(DataLibrary.Publishers, this, bookInfo.Publisher, SearchAndSort.TwoStrings);
             if (bookInfo.Genres.Count > 0)
                 foreach (string genre in bookInfo.Genres)
-                    DataLibrary.Genres = DataLibrary.AddReferenceClass(DataLibrary.Genres, this, genre);
+                    DataLibrary.Genres = DataLibrary.CreateReferenceClass(DataLibrary.Genres, this, genre, SearchAndSort.TwoStrings);
             if (bookInfo.Themes.Count > 0)
                 foreach (string theme in bookInfo.Themes)
-                    DataLibrary.Themes = DataLibrary.AddReferenceClass(DataLibrary.Themes, this, theme);
+                    DataLibrary.Themes = DataLibrary.CreateReferenceClass(DataLibrary.Themes, this, theme, SearchAndSort.TwoStrings);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class TestData
     {
-        private List<zBook> books = new List<zBook>();
+        private List<Book> books = new List<Book>();
         private List<Member> members = new List<Member>();
         private Random rand = new Random();
 
@@ -129,30 +129,32 @@ namespace NEALibrarySystem.Data_Structures
         {
             for (int i = 0; i < 10; i++)
             {
-                Member member = new Member();
+                MemberCreator memberCreator = new MemberCreator();
                 string barcode = "";
                 for (int j = 0; j < 12; j++) 
                 {
                     barcode += GenerateRandomDigit().ToString();
                 }
-                member.Barcode = barcode;
-                member.FirstName = firstNames[rand.Next(0, firstNames.Length)];
-                member.LastName = lastNames[rand.Next(0, lastNames.Length)];
-                member.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}";
-                member.EmailAddress = $"{GenerateRandomString(10)}@gmail.com";
+                memberCreator.Barcode = barcode;
+                memberCreator.FirstName = firstNames[rand.Next(0, firstNames.Length)];
+                memberCreator.LastName = lastNames[rand.Next(0, lastNames.Length)];
+                memberCreator.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}";
+                memberCreator.EmailAddress = $"{GenerateRandomString(10)}@gmail.com";
                 string phoneNumber = "";
                 for (int j = 0; j < 11; j++)
                 {
                     phoneNumber += GenerateRandomDigit().ToString();
                 }
-                member.PhoneNumber = phoneNumber;
-                member.AddressLine1 = "Devon";
-                member.AddressLine2 = "Exeter";
-                member.AddressLine3 = "Exeter rd";
-                member.AddressLine4 = "ApartmentName";
-                member.AddressLine5 = "Apartment Number";
-                member.DateOfBirth = "11/07/2006";
-                member.Type = MemberType.Adult;
+                memberCreator.PhoneNumber = phoneNumber;
+                memberCreator.AddressLine1 = "Devon";
+                memberCreator.AddressLine2 = "Exeter";
+                memberCreator.AddressLine3 = "Exeter rd";
+                memberCreator.AddressLine4 = "ApartmentName";
+                memberCreator.AddressLine5 = "Apartment Number";
+                memberCreator.DateOfBirth = "11/07/2006";
+                memberCreator.Type = MemberType.Adult;
+                Member member = new Member(memberCreator);
+                // CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
                 members.Add(member);
             }
             DataLibrary.Members = members;

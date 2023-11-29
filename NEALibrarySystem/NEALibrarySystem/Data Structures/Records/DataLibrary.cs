@@ -22,6 +22,21 @@ namespace NEALibrarySystem.Data_Structures
             set { _bookCopies = value ?? new List<BookCopy>(); }
         }
         #endregion
+        #region book copy barcodes
+        private static List<ReferenceClass<string, BookCopy>> _copyBarcodes;
+        public static List<ReferenceClass<string, BookCopy>> CopyBarcodes
+        {
+            get { return _copyBarcodes; }
+            set { _copyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
+        }
+        #endregion
+        #endregion book copy books
+        private static List<ReferenceClass<Book, BookCopy>> _bookCopyBooks;
+        public static List<ReferenceClass<Book, BookCopy>> BookCopyBooks
+        {
+            get { return _bookCopyBooks; }
+            set { _bookCopyBooks = value ?? new List<ReferenceClass<Book, BookCopy>>(); }
+        }
         #region books
         private static List<Book> _books = new List<Book>();
         public static List<Book> Books
@@ -110,6 +125,46 @@ namespace NEALibrarySystem.Data_Structures
             set { _members = value ?? new List<Member>(); }
         }
         #endregion
+        #region member barcodes
+        private static List<ReferenceClass<string, Member>> _memberBarcodes = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> MemberBarcodes
+        {
+            get { return _memberBarcodes; }
+            set { _memberBarcodes = value ?? new List<ReferenceClass<string, Member>>(); }
+        }
+        #endregion
+        #region first name
+        private static List<ReferenceClass<string, Member>> _firstName = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value ?? new List<ReferenceClass<string, Member>>(); }
+        }
+        #endregion
+        #region surname
+        private static List<ReferenceClass<string, Member>> _surname = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> LastName
+        {
+            get { return _surname; }
+            set { _surname = value ?? new List<ReferenceClass<string, Member>>(); }
+        }
+        #endregion
+        #region surname
+        private static List<ReferenceClass<MemberType, Member>> _memberType = new List<ReferenceClass<MemberType, Member>>();
+        public static List<ReferenceClass<MemberType, Member>> MemberType
+        {
+            get { return _memberType; }
+            set { _memberType = value ?? new List<ReferenceClass<MemberType, Member>>(); }
+        }
+        #endregion
+        #region media type
+        private static List<ReferenceClass<MemberType, Member>> _mediaType = new List<ReferenceClass<MemberType, Member>>();
+        public static List<ReferenceClass<MemberType, Member>> MediaType
+        {
+            get { return _mediaType; }
+            set { _mediaType = value ?? new List<ReferenceClass<MemberType, Member>>(); }
+        }
+        #endregion
         #region staff
         private static List<Staff> _staff = new List<Staff>();
         public static List<Staff> Staff
@@ -134,7 +189,6 @@ namespace NEALibrarySystem.Data_Structures
             set { _loans = value ?? new List<CirculationCopy>(); }
         }
         #endregion
-        #endregion
         #region enums
         public enum Feature
         {
@@ -155,22 +209,39 @@ namespace NEALibrarySystem.Data_Structures
         public static void CreateDataDirectory()
         {
             Directory.CreateDirectory(Application.StartupPath + "\\data");
-        }  
+        }
+        public static void LoadAllFiles()
+        {
+
+        }
+        public static void SaveAllFiles()
+        {
+
+        }
         #endregion
         #region data handling
         #region filtering
 
         #endregion
         #region AddingRecords
-        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare) where F : class
+        public static List<ReferenceClass<T, F>> CreateReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare) where F : class
         {
             ReferenceClass<T, F> referenceClass = new ReferenceClass<T, F>();
             referenceClass.Value = item;
             referenceClass.Reference = reference;
-            itemList = DataLibrary.AddReferenceRecord(itemList, referenceClass, compare);
+            itemList = DataLibrary.AddReferenceClass(itemList, referenceClass, compare);
             return itemList;
         }
-        public static List<ReferenceClass<T, F>> AddReferenceRecord<T, F>(List<ReferenceClass<T, F>> list, ReferenceClass<T, F> record, Compare<T> compare) where F : class
+        /// <summary>
+        /// Adds the reference class to the inputted list of reference classes
+        /// </summary>
+        /// <typeparam name="T">Value of the reference class</typeparam>
+        /// <typeparam name="F">Class that the reference classes refer to</typeparam>
+        /// <param name="list">List of reference classes</param>
+        /// <param name="record">Reference class to add</param>
+        /// <param name="compare">Comparison method</param>
+        /// <returns>The updated list</returns>
+        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> list, ReferenceClass<T, F> record, Compare<T> compare) where F : class
         {
             list.Insert(SearchAndSort.BinaryInsert(list, record, compare), record);
             return list;

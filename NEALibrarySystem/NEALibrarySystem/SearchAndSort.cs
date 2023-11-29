@@ -100,6 +100,15 @@ namespace NEALibrarySystem
             else
                 return Greatest.Right;
         }
+        public static Greatest TwoMemberTypes(MemberType member1, MemberType member2)
+        {
+            if (member1 == member2)
+                return Greatest.equal;
+            else if (member1 > member2)
+                return Greatest.Left;
+            else
+                return Greatest.Right;
+        }
         public static Greatest TwoReferenceClasses<F>(ReferenceClass<string,F> ref1, ReferenceClass<string,F> ref2) where F : class
         {
             return TwoStrings(ref1.Value, ref2.Value);
