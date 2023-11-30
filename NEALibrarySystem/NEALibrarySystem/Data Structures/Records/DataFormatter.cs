@@ -10,19 +10,31 @@ namespace NEALibrarySystem.Data_Structures
 {
     public static class DataFormatter
     {
-        public static string ItemBookListToString(List<ItemBook> itemBookList)
+        /// <summary>
+        /// converts a list of reference classes' values to a string
+        /// </summary>
+        /// <typeparam name="T">Reference class value</typeparam>
+        /// <typeparam name="F">Reference class reference</typeparam>
+        /// <param name="list">list of reference classes</param>
+        /// <returns>string of values</returns>
+        public static string ReferenceClassListToString<T, F>(List<ReferenceClass<T, F>> list) where F : class
         {
             string output = "";
-            if (itemBookList.Count > 0)
+            if (list.Count > 0)
             {
-                foreach (ItemBook itemBook in itemBookList)
+                foreach (ReferenceClass<T, F> item in list)
                 {
-                    output += itemBook.Name + ", ";
+                    output += item.Value.ToString() + ",";
                 }
-                output = output.Remove(output.Length - 2, 2);
+                output = output.Remove(output.Length - 1, 1);
             }
             return output;
         }
+        /// <summary>
+        /// removes the white space from a string
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static string RemoveWhiteSpace(string text)
         {
             string output = "";

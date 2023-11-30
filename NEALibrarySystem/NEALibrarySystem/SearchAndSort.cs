@@ -100,11 +100,20 @@ namespace NEALibrarySystem
             else
                 return Greatest.Right;
         }
-        public static Greatest TwoMemberTypes(MemberType member1, MemberType member2)
+        public static Greatest TwoEnums(MemberType member1, MemberType member2)
         {
             if (member1 == member2)
                 return Greatest.equal;
             else if (member1 > member2)
+                return Greatest.Left;
+            else
+                return Greatest.Right;
+        }
+        public static Greatest TwoEnums(CirculationType copy1, CirculationType copy2)
+        {
+            if (copy1 == copy2)
+                return Greatest.equal;
+            else if (copy1 > copy2)
                 return Greatest.Left;
             else
                 return Greatest.Right;
@@ -116,6 +125,19 @@ namespace NEALibrarySystem
         public static Greatest TwoReferenceClasses<F>(ReferenceClass<int, F> ref1, ReferenceClass<int, F> ref2) where F : class
         {
             return TwoIntegers(ref1.Value, ref2.Value);
+        }
+        public static Greatest TwoBooks(Book book1, Book book2)
+        {
+            return TwoStrings(book1.Isbn.Value, book2.Isbn.Value);
+        }
+        public static Greatest TwoDates(DateTime date1, DateTime date2)
+        {
+            if (date1 == date2)
+                return Greatest.equal;
+            else if (date1 > date2)
+                return Greatest.Left;
+            else
+                return Greatest.Right;
         }
     }
     public enum Greatest

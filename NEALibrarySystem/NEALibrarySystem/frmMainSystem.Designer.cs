@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -270,8 +270,6 @@
             this.txtReserveLateFee = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
             this.pnlCirculationDetails = new System.Windows.Forms.Panel();
-            this.lblTransactionDescription = new System.Windows.Forms.Label();
-            this.txtTransactionDescription = new System.Windows.Forms.TextBox();
             this.lsvTransactionBooks = new System.Windows.Forms.ListView();
             this.lblTransactionPrice = new System.Windows.Forms.Label();
             this.btnTransactionBack = new System.Windows.Forms.Button();
@@ -2388,16 +2386,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea2.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend2);
+            chartArea7.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend7);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series2);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series7);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3009,8 +3007,6 @@
             // 
             // pnlCirculationDetails
             // 
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDescription);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDescription);
             this.pnlCirculationDetails.Controls.Add(this.lsvTransactionBooks);
             this.pnlCirculationDetails.Controls.Add(this.lblTransactionPrice);
             this.pnlCirculationDetails.Controls.Add(this.btnTransactionBack);
@@ -3032,33 +3028,12 @@
             this.pnlCirculationDetails.Size = new System.Drawing.Size(1770, 980);
             this.pnlCirculationDetails.TabIndex = 75;
             // 
-            // lblTransactionDescription
-            // 
-            this.lblTransactionDescription.AutoSize = true;
-            this.lblTransactionDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionDescription.Location = new System.Drawing.Point(15, 830);
-            this.lblTransactionDescription.Name = "lblTransactionDescription";
-            this.lblTransactionDescription.Size = new System.Drawing.Size(159, 31);
-            this.lblTransactionDescription.TabIndex = 71;
-            this.lblTransactionDescription.Text = "Description:";
-            // 
-            // txtTransactionDescription
-            // 
-            this.txtTransactionDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTransactionDescription.Location = new System.Drawing.Point(255, 821);
-            this.txtTransactionDescription.Multiline = true;
-            this.txtTransactionDescription.Name = "txtTransactionDescription";
-            this.txtTransactionDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTransactionDescription.Size = new System.Drawing.Size(1159, 100);
-            this.txtTransactionDescription.TabIndex = 70;
-            // 
             // lsvTransactionBooks
             // 
             this.lsvTransactionBooks.HideSelection = false;
             this.lsvTransactionBooks.Location = new System.Drawing.Point(255, 410);
             this.lsvTransactionBooks.Name = "lsvTransactionBooks";
-            this.lsvTransactionBooks.Size = new System.Drawing.Size(1159, 389);
+            this.lsvTransactionBooks.Size = new System.Drawing.Size(1159, 100);
             this.lsvTransactionBooks.TabIndex = 69;
             this.lsvTransactionBooks.UseCompatibleStateImageBehavior = false;
             // 
@@ -3187,9 +3162,9 @@
             this.lblTransactionBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransactionBooks.Location = new System.Drawing.Point(15, 410);
             this.lblTransactionBooks.Name = "lblTransactionBooks";
-            this.lblTransactionBooks.Size = new System.Drawing.Size(98, 31);
+            this.lblTransactionBooks.Size = new System.Drawing.Size(84, 31);
             this.lblTransactionBooks.TabIndex = 53;
-            this.lblTransactionBooks.Text = "Books:";
+            this.lblTransactionBooks.Text = "Book:";
             // 
             // lblTransactionType
             // 
@@ -3216,9 +3191,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
-            this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlBookDetails);
@@ -3532,8 +3507,6 @@
         private System.Windows.Forms.Label lblTransactionType;
         private System.Windows.Forms.TextBox txtTransactionMemberName;
         private System.Windows.Forms.ListView lsvTransactionBooks;
-        private System.Windows.Forms.TextBox txtTransactionDescription;
-        private System.Windows.Forms.Label lblTransactionDescription;
         private System.Windows.Forms.Button btnLoanDelete;
     }
 }

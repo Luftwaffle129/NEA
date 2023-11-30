@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Structures\RecordSavers\ReferenceClassSaver.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
@@ -131,7 +132,7 @@
       <DependentUpon>frmResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
-    <Compile Include="ListViewHandlers\SearchList\SearchedItemsHandler.cs" />
+    <Compile Include="ListViewHandlers\SearchList\SearchItemsHandler.cs" />
     <Compile Include="SearchAndSort.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
@@ -215,7 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data Structures\RecordCreators\" />
-    <Folder Include="Data Structures\RecordSavers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

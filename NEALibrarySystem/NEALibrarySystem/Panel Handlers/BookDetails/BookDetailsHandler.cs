@@ -17,7 +17,7 @@ namespace NEALibrarySystem.PanelHandlers
         private BookDetailsObjects _objects;
         private Book _bookData;
         private List<BookCopy> _bookCopyList;
-        private bool _IsNewRecord = false;
+        private bool _isNewRecord = false;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
@@ -33,15 +33,15 @@ namespace NEALibrarySystem.PanelHandlers
             if (book != null)
             {
                 _bookData = book;
-                _objects.Title.Text = _bookData.Title.Name;
-                _objects.SeriesTitle.Text = _bookData.SeriesTitle;
+                _objects.Title.Text = _bookData.Title.Value;
+                _objects.SeriesTitle.Text = _bookData.SeriesTitle.Value;
                 _objects.SeriesNumber.Text = _bookData.SeriesNumber.ToString();
-                _objects.ISBN.Text = _bookData.Isbn;
-                _objects.MediaType.Text = _bookData.MediaType.Name;
-                _objects.Author.Text = _bookData.Author.Name;
-                _objects.Publisher.Text = _bookData.Publisher.Name;
-                _objects.Genres.Text = DataFormatter.ItemBookListToString(_bookData.Genres);
-                _objects.Themes.Text = DataFormatter.ItemBookListToString(_bookData.Themes);
+                _objects.ISBN.Text = _bookData.Isbn.Value;
+                _objects.MediaType.Text = _bookData.MediaType.Value;
+                _objects.Author.Text = _bookData.Author.Value;
+                _objects.Publisher.Text = _bookData.Publisher.Value;
+                _objects.Genres.Text = DataFormatter.ReferenceClassListToString(_bookData.Genres);
+                _objects.Themes.Text = DataFormatter.ReferenceClassListToString(_bookData.Themes);
                 _objects.Description.Text = _bookData.Description;
                 _objects.Price.Text = _bookData.Price.ToString();
             }
@@ -60,7 +60,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Price.Text = "";
 
                 _objects.CopyDetails.Items.Clear();
-                _IsNewRecord = true;
+                _isNewRecord = true;
             }
 
             UpdateBookCopies();
@@ -165,28 +165,16 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void Save()
         {
-            if (_IsNewRecord)
+            if (_isNewRecord)
             {
                 //add the new record and empty the input fields
-                DataLibrary.Books.Add(GetBookInput());
+                DataLibrary.Books.Add(new Book(GetBookInput()));
                 Load();
             }
             else
             {
-                //remove old record of the book
-                if (DataLibrary.Books.Count !=0)
-                {
-                    bool isReplaced = false;
-                    int index = 0;
-                    do
-                    {
-                        if (DataLibrary.Books[index] == _bookData)
-                        {
-                            DataLibrary.Books[index] = GetBookInput();
-                            isReplaced = true;
-                        }
-                    } while (!isReplaced || ++index >= DataLibrary.Books.Count);
-                }
+                //update old book record
+                DataLibrary.ModifyBookRecord(_bookData, GetBookInput());
             }
         }
         /// <summary>
@@ -202,8 +190,8 @@ namespace NEALibrarySystem.PanelHandlers
             temp.MediaType = _objects.MediaType.Text;
             temp.Author = _objects.Author.Text;
             temp.Publisher = _objects.Publisher.Text;
-            temp.Genres = DataFormatter.RemoveWhiteSpace(_objects.Genres.Text).Split(',').ToList<string>();
-            temp.Themes = DataFormatter.RemoveWhiteSpace(_objects.Themes.Text).Split(',').ToList<string>();
+            temp.Genres = _objects.Genres.Text.Split(',').ToList<string>();
+            temp.Themes = _objects.Themes.Text.Split(',').ToList<string>();
             temp.Description = _objects.Description.Text;
             return temp;
         }
@@ -212,7 +200,7 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void Cancel()
         {
-            if (_IsNewRecord)
+            if (_isNewRecord)
             { 
                 Load();
             }

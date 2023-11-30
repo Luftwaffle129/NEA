@@ -44,7 +44,7 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoStrings);
             DataLibrary.FirstName = DataLibrary.CreateReferenceClass(DataLibrary.FirstName, this, memberInfo.FirstName, SearchAndSort.TwoStrings);
             DataLibrary.LastName = DataLibrary.CreateReferenceClass(DataLibrary.LastName, this, memberInfo.LastName, SearchAndSort.TwoStrings);
-            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoMemberTypes);
+            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoEnums);
         }
     }
     public enum MemberType

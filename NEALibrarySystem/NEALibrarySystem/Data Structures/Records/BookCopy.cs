@@ -9,11 +9,12 @@ namespace NEALibrarySystem.Data_Structures
     public class BookCopy
     {
         public ReferenceClass<string, BookCopy> Barcode { get; set; }
-        public ReferenceClass<Book, BookCopy> Book { get; set; }
+        public Book Book { get; set; }
         public BookCopy(string barcode, Book book)
         {
-            Barcode = barcode;
+            DataLibrary.BookCopyBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.BookCopyBarcodes, this, barcode, SearchAndSort.TwoStrings);
             Book = book;
+            Book.BookCopies.Add(this);
         }
     }
 }

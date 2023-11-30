@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures.Records;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -24,19 +25,12 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region book copy barcodes
         private static List<ReferenceClass<string, BookCopy>> _copyBarcodes;
-        public static List<ReferenceClass<string, BookCopy>> CopyBarcodes
+        public static List<ReferenceClass<string, BookCopy>> BookCopyBarcodes
         {
             get { return _copyBarcodes; }
             set { _copyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
         }
         #endregion
-        #endregion book copy books
-        private static List<ReferenceClass<Book, BookCopy>> _bookCopyBooks;
-        public static List<ReferenceClass<Book, BookCopy>> BookCopyBooks
-        {
-            get { return _bookCopyBooks; }
-            set { _bookCopyBooks = value ?? new List<ReferenceClass<Book, BookCopy>>(); }
-        }
         #region books
         private static List<Book> _books = new List<Book>();
         public static List<Book> Books
@@ -173,20 +167,36 @@ namespace NEALibrarySystem.Data_Structures
             set { _staff = value ?? new List<Staff>(); }
         }
         #endregion
-        #region Reservations
-        private static List<CirculationCopy> _reservations;
-        public static List <CirculationCopy> Reservations
+        #region circulation copies
+        private static List<CirculationCopy> _circulationCopy;
+        public static List <CirculationCopy> CirculationCopy
         {
-            get { return _reservations; }
-            set { _reservations = value ?? new List<CirculationCopy>(); }
+            get { return _circulationCopy; }
+            set { _circulationCopy = value ?? new List<CirculationCopy>(); }
         }
         #endregion
-        #region Loans
-        private static List<CirculationCopy> _loans;
-        public static List<CirculationCopy> Loans
+        #region circulation copy types
+        private static List<ReferenceClass<CirculationType, CirculationCopy>> _circulationTypes;
+        public static List<ReferenceClass<CirculationType, CirculationCopy>> CirculationTypes
         {
-            get { return _loans; }
-            set { _loans = value ?? new List<CirculationCopy>(); }
+            get { return _circulationTypes; }
+            set { _circulationTypes = value ?? new List<ReferenceClass<CirculationType, CirculationCopy>>(); }
+        }
+        #endregion
+        #region circulation due dates
+        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDueDates;
+        public static List<ReferenceClass<DateTime, CirculationCopy>> CirculationDueDates
+        {
+            get { return _circulationDueDates; }
+            set { _circulationDueDates = value ?? new List<ReferenceClass<DateTime, CirculationCopy>>(); }
+        }
+        #endregion
+        #region circulation dates
+        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDates;
+        public static List<ReferenceClass<DateTime, CirculationCopy>> CirculationDates
+        {
+            get { return _circulationDates; }
+            set { _circulationDates = value ?? new List<ReferenceClass<DateTime, CirculationCopy>>(); }
         }
         #endregion
         #region enums
@@ -201,6 +211,7 @@ namespace NEALibrarySystem.Data_Structures
             Settings = 6,
             None = -1
         }
+        #endregion
         #endregion
         #region file handling
         /// <summary>
@@ -223,7 +234,17 @@ namespace NEALibrarySystem.Data_Structures
         #region filtering
 
         #endregion
-        #region AddingRecords
+        #region Adding Records
+        /// <summary>
+        /// Creates a new reference class and adds it to the specified list
+        /// </summary>
+        /// <typeparam name="T">Item value</typeparam>
+        /// <typeparam name="F">Class being referenced</typeparam>
+        /// <param name="itemList">List of reference classes</param>
+        /// <param name="reference">Class being referenced</param>
+        /// <param name="item">Value of the reference class</param>
+        /// <param name="compare">Comparison method</param>
+        /// <returns>List of reference classes containing the new reference class</returns>
         public static List<ReferenceClass<T, F>> CreateReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare) where F : class
         {
             ReferenceClass<T, F> referenceClass = new ReferenceClass<T, F>();
@@ -237,21 +258,76 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         /// <typeparam name="T">Value of the reference class</typeparam>
         /// <typeparam name="F">Class that the reference classes refer to</typeparam>
-        /// <param name="list">List of reference classes</param>
+        /// <param name="itemList">List of reference classes</param>
         /// <param name="record">Reference class to add</param>
         /// <param name="compare">Comparison method</param>
         /// <returns>The updated list</returns>
-        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> list, ReferenceClass<T, F> record, Compare<T> compare) where F : class
+        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<T> compare) where F : class
         {
-            list.Insert(SearchAndSort.BinaryInsert(list, record, compare), record);
-            return list;
+            itemList.Insert(SearchAndSort.BinaryInsert(itemList, record, compare), record);
+            return itemList;
+        }
+        /// <summary>
+        /// Creates a new book copy and adds it to the list of book copies
+        /// </summary>
+        /// <param name="barcode">barcode of the new book copy</param>
+        /// <param name="book">book of the new book copy</param>    
+        public static void CreateBookCopy(string barcode, Book book)
+        {
+            DataLibrary.BookCopies.Add(new BookCopy(barcode, book));
+        }
+        #endregion
+        #region Modifying Records
+        /// <summary>
+        /// Updates a book record with the new information
+        /// </summary>
+        /// <param name="book">book to update</param>
+        /// <param name="newBookInfo">new informatipn for the book</param>
+        /// <returns>Updated book</returns>
+        public static Book ModifyBookRecord(Book book, BookCreator newBookInfo)
+        {
+            book.SeriesNumber = newBookInfo.SeriesNumber;
+            book.Description = newBookInfo.Description;
+            book.Title.Value = newBookInfo.Title;
+            book.SeriesTitle.Value = newBookInfo.SeriesTitle;
+            book.Isbn.Value = newBookInfo.Isbn;
+            book.Price.Value = newBookInfo.Price;
+            book.MediaType.Value = newBookInfo.MediaType;
+            book.Author.Value = newBookInfo.Author;
+            book.Publisher.Value = newBookInfo.Publisher;
+            // remove old genres
+            if (book.Genres.Count > 0)
+                foreach (ReferenceClass<string, Book> genre in book.Genres)
+                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, SearchAndSort.TwoStrings);
+            // add new genres
+            if (newBookInfo.Genres.Count > 0)
+                foreach (string genre in newBookInfo.Genres)
+                    DataLibrary.Genres = CreateReferenceClass(DataLibrary.Genres, book, genre, SearchAndSort.TwoStrings);
+            // remove old themes
+            if (book.Themes.Count > 0)
+                foreach (ReferenceClass<string, Book> theme in book.Themes)
+                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, SearchAndSort.TwoStrings);
+            // add new themes
+            if (newBookInfo.Themes.Count > 0)
+                foreach (string theme in newBookInfo.Themes)
+                    DataLibrary.Themes = CreateReferenceClass(DataLibrary.Themes, book, theme, SearchAndSort.TwoStrings);
+            return book;
         }
         #endregion
         #region Deleting records
-        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> list, ReferenceClass<T,F> item, Compare<T> compare) where F : class
+        /// <summary>
+        /// Removes the specified reference class from a list of reference classes
+        /// </summary>
+        /// <typeparam name="T">Value of the reference class</typeparam>
+        /// <typeparam name="F">Class that the reference classes refer to</typeparam>
+        /// <param name="itemList">List of reference classes</param>
+        /// <param name="record">Reference class to remove</param>
+        /// <param name="compare">Comparison method</param>
+        /// <returns>The updated list</returns>
+        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> itemList, ReferenceClass<T,F> item, Compare<T> compare) where F : class
         {
-            list.RemoveAt(SearchAndSort.Binary(list, item.Value, compare));
-            return list;
+            itemList.RemoveAt(SearchAndSort.Binary(itemList, item.Value, compare));
+            return itemList;
         }
         /// <summary>
         /// Removes the book and it's references from the system
@@ -282,6 +358,17 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="barcode">member barcode of member to be deleted</param>
         public static void DeleteMember(string barcode)
         {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bookCopy"></param>
+        public static void DeleteBookCopy(BookCopy bookCopy) 
+        {
+            bookCopy.Book.BookCopies.Remove(bookCopy);
+            DataLibrary.BookCopyBarcodes.Remove(bookCopy.Barcode);
+            DataLibrary.BookCopies.Remove(bookCopy);
 
         }
         #endregion

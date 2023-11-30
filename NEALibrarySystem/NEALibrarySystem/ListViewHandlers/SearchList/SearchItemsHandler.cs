@@ -10,13 +10,13 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.SearchList
 {
-    public class SearchedItemsHandler
+    public class SearchItemsHandler
     {
         private ListView lsvSearch;
         /// <summary>
         /// Current feature that the search tab is set to
         /// </summary>
-        public SearchedItemsHandler(ListView listview)
+        public SearchItemsHandler(ListView listview)
         {
             lsvSearch = listview;
             lsvSearch.View = View.Details;
@@ -56,13 +56,13 @@ namespace NEALibrarySystem.SearchList
             {
                 string[] data =
                 {
-                    book.Title.Name,
-                    book.Isbn,
-                    book.MediaType.Name,
-                    book.Author.Name,
-                    book.Publisher.Name,
-                    DataFormatter.ItemBookListToString(book.Genres),
-                    DataFormatter.ItemBookListToString(book.Themes)
+                    book.Title.Value,
+                    book.Isbn.Value,
+                    book.MediaType.Value,
+                    book.Author.Value,
+                    book.Publisher.Value,
+                    DataFormatter.ReferenceClassListToString(book.Genres),
+                    DataFormatter.ReferenceClassListToString(book.Themes)
                 };
                 ListViewItem row = new ListViewItem(data);
                 lsvSearch.Items.Add(row);
@@ -77,10 +77,10 @@ namespace NEALibrarySystem.SearchList
             {
                 string[] data = new string[4]
                 {
-                member.Barcode,
-                member.FirstName,
-                member.LastName,
-                member.Type.ToString()
+                member.Barcode.Value,
+                member.FirstName.Value,
+                member.LastName.Value,
+                member.Type.Value.ToString()
                 };
                 ListViewItem row = new ListViewItem(data);
                 lsvSearch.Items.Add(row);
@@ -96,28 +96,65 @@ namespace NEALibrarySystem.SearchList
             switch (feature)
             {
                 case (DataLibrary.Feature.Member):
-                    columns = new string[4]
+                    columns = new string[]
                     {
-                        "Barcode",
-                        "First Name",
-                        "Last Name",
-                        "Member Type"
+                        GetMemberColumn(0),
+                        GetMemberColumn(1),
+                        GetMemberColumn(2),
+                        GetMemberColumn(3),
                     };
                     break;
                 case (DataLibrary.Feature.Book):
-                    columns = new string[7]
+                    columns = new string[]
                     {
-                        "Title",
-                        "ISBN",
-                        "Media Type",
-                        "Author",
-                        "Publisher",
-                        "Genres",
-                        "Themes"
+                        GetBookColumn(0),
+                        GetBookColumn(1),
+                        GetBookColumn(2),
+                        GetBookColumn(3),
+                        GetBookColumn(4),
+                        GetBookColumn(5),
+                        GetBookColumn(6),
                     };
                     break;
             }
             ListViewHandler.SetColumns(columns, ref lsv);
         }
+        public static string GetBookColumn(int num)
+        {
+            string column = ((BookColumn)num).ToString();
+            if (num == (int)BookColumn.MediaType)
+                column = column.Insert(5, " ");
+            else if (num == (int)BookColumn.Isbn)
+                column = column.ToUpper();
+            return column;
+        }
+        public static string GetMemberColumn(int num)
+        {
+            string column = ((MemberColumn)num).ToString();
+            if (num == (int)MemberColumn.FirstName)
+                column = column.Insert(5, " ");
+            else if (num == (int)MemberColumn.LastName)
+                column = column.Insert(4, " ");
+            else if (num == (int)MemberColumn.MemberType)
+                column = column.Insert(6, " ");
+            return column;
+        }
+    }
+    public enum BookColumn
+    {
+        Title,
+        Isbn,
+        MediaType,
+        Author,
+        Publisher,
+        Genres,
+        Themes
+    }
+    public enum MemberColumn
+    {
+        Barcode,
+        FirstName,
+        LastName,
+        MemberType
     }
 }

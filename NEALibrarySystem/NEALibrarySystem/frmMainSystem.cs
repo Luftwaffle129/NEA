@@ -27,7 +27,7 @@ namespace NEALibrarySystem
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
-            _searchedItemsHandler = new SearchedItemsHandler(lsvSearchItems);
+            _searchedItemsHandler = new SearchItemsHandler(lsvSearchItems);
             NavigatorOpenBookTab();
         }
 
@@ -39,11 +39,10 @@ namespace NEALibrarySystem
         private Button[] _subTabs;
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
 
-        private SearchedItemsHandler _searchedItemsHandler;
+        private SearchItemsHandler _searchedItemsHandler;
         private BookLoanHandler _loanHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private DeleteHandler _deleteHandler;
-
         #region initialisation
         public void InitializePanels()
         {
@@ -184,7 +183,7 @@ namespace NEALibrarySystem
             switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
-                    Li
+                    _bookDetailsHandler.Load(DataLibrary.Books[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[SearchItemsHandler.GetBookColumn((int)BookColumn.Isbn)].Text, SearchAndSort.TwoStrings)]);
                     break;
             }
         }
@@ -249,8 +248,6 @@ namespace NEALibrarySystem
         #region events
         private void frmMainSystem_Load(object sender, EventArgs e)
         {
-            bool leftPanelVisible = true;
-            bool topPanelVisible = true;
             DataLibrary.LoadAllFiles();
 
             //overdue books
