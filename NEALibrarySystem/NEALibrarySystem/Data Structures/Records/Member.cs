@@ -29,6 +29,13 @@ namespace NEALibrarySystem.Data_Structures
         public string Postcode;
         public DateTime JoinDate;
         public ReferenceClass<MemberType, Member> Type;
+
+        private List<CircMemberRelation> _circMemberRelation;
+        public List<CircMemberRelation> CircMemberRelations
+        {
+            get { return _circMemberRelation; }
+            set { _circMemberRelation = value ?? new List<CircMemberRelation>(); }    
+        }
         public Member(MemberCreator memberInfo)
         {
             JoinDate = DateTime.Today;

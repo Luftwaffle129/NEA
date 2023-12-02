@@ -24,8 +24,7 @@ namespace NEALibrarySystem.Data_Structures
         public List<ReferenceClass<string, Book>> Genres;
         public List<ReferenceClass<string, Book>> Themes;
 
-        public List<BookCopy> BookCopies;
-        public List<ReferenceClass<CirculationCopy, Book>> CirculationCopies;
+        public List<BookCopyRelation> BookCopyRelations;
         public Book() { }
         /// <summary>
         /// Creates a new book record from the data in a BookCreator class

@@ -85,7 +85,7 @@ namespace NEALibrarySystem.PanelHandlers
                         OverdueEmailLastSent = DateTime.Today,
                         MemberID = barcode,
                     };
-                    _bookData.BookCopies.Add(temp);
+                    _bookData.BookCopyRelation.Add(temp);
                 }
             }
             UpdateBookCopies();
@@ -97,11 +97,11 @@ namespace NEALibrarySystem.PanelHandlers
         {
             foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
             {
-                for (int i = 0; i < _bookData.BookCopies.Count; i++)
+                for (int i = 0; i < _bookData.BookCopyRelation.Count; i++)
                 {
-                    if (item.SubItems[0].Text == _bookData.BookCopies[i].Barcode)
+                    if (item.SubItems[0].Text == _bookData.BookCopyRelation[i].Barcode)
                     {
-                        _bookData.BookCopies.RemoveAt(i);
+                        _bookData.BookCopyRelation.RemoveAt(i);
                     }
                 }
             }
@@ -113,9 +113,9 @@ namespace NEALibrarySystem.PanelHandlers
         private void UpdateBookCopies()
         {
             _objects.CopyDetails.Items.Clear();
-            if (_bookData.BookCopies != null)
+            if (_bookData.BookCopyRelation != null)
             {
-                foreach (zBookCopy bookCopy in _bookData.BookCopies)
+                foreach (zBookCopy bookCopy in _bookData.BookCopyRelation)
                 {
                     string[] data = new string[3]
                     {

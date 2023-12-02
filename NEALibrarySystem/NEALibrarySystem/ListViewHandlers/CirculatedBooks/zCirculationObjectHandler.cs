@@ -102,9 +102,9 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                     // get total of the number of loans, overdue books and the late fees of the member
                     foreach (Book book in DataLibrary.Books)
                     {
-                        if (book.BookCopies.Count > 0)
+                        if (book.BookCopyRelation.Count > 0)
                         {
-                            foreach (zBookCopy bookCopy in book.BookCopies)
+                            foreach (zBookCopy bookCopy in book.BookCopyRelation)
                             {
                                 if (bookCopy.MemberID == barcode) // if book is associated with the member
                                 {

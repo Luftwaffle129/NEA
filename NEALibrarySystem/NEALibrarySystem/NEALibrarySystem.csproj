@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data Structures\RecordSavers\ReferenceClassSaver.cs" />
+    <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
+    <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
+    <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />

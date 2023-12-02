@@ -44,15 +44,15 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                     bool loaned = false;
                     do
                     {
-                        if (DataLibrary.Books[indexBook].BookCopies.Count > 0)
+                        if (DataLibrary.Books[indexBook].BookCopyRelation.Count > 0)
                         {
-                            for (int indexCopy = 0; indexCopy < DataLibrary.Books[indexBook].BookCopies.Count; indexCopy++)
+                            for (int indexCopy = 0; indexCopy < DataLibrary.Books[indexBook].BookCopyRelation.Count; indexCopy++)
                             {
-                                if (DataLibrary.Books[indexBook].BookCopies[indexCopy].Barcode == loanBook.Barcode)
+                                if (DataLibrary.Books[indexBook].BookCopyRelation[indexCopy].Barcode == loanBook.Barcode)
                                 {
-                                    DataLibrary.Books[indexBook].BookCopies[indexCopy].Status = status.Loaned;
-                                    DataLibrary.Books[indexBook].BookCopies[indexCopy].MemberID = CirculationManager.SelectedMember.Barcode;
-                                    DataLibrary.Books[indexBook].BookCopies[indexCopy].ReturnDate = _returnDate.Value;
+                                    DataLibrary.Books[indexBook].BookCopyRelation[indexCopy].Status = status.Loaned;
+                                    DataLibrary.Books[indexBook].BookCopyRelation[indexCopy].MemberID = CirculationManager.SelectedMember.Barcode;
+                                    DataLibrary.Books[indexBook].BookCopyRelation[indexCopy].ReturnDate = _returnDate.Value;
                                 }
                             }
                         }

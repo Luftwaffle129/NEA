@@ -31,6 +31,14 @@ namespace NEALibrarySystem.Data_Structures
             set { _copyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
         }
         #endregion
+        #region book copy relations
+        private static List<BookCopyRelation> _bookCopyRelation;
+        public static List<BookCopyRelation> BookCopyRelations
+        {
+            get { return _bookCopyRelation; }
+            set { _bookCopyRelation = value?? new List<BookCopyRelation>(); }
+        }
+        #endregion
         #region books
         private static List<Book> _books = new List<Book>();
         public static List<Book> Books
@@ -168,11 +176,11 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region circulation copies
-        private static List<CirculationCopy> _circulationCopy;
-        public static List <CirculationCopy> CirculationCopy
+        private static List<CirculationCopy> _circulationCopies;
+        public static List <CirculationCopy> CirculationCopies
         {
-            get { return _circulationCopy; }
-            set { _circulationCopy = value ?? new List<CirculationCopy>(); }
+            get { return _circulationCopies; }
+            set { _circulationCopies = value ?? new List<CirculationCopy>(); }
         }
         #endregion
         #region circulation copy types
@@ -197,6 +205,14 @@ namespace NEALibrarySystem.Data_Structures
         {
             get { return _circulationDates; }
             set { _circulationDates = value ?? new List<ReferenceClass<DateTime, CirculationCopy>>(); }
+        }
+        #endregion
+        #region
+        private static List<CircMemberRelation> _circMemberRelations;
+        public static List<CircMemberRelation> CircMemberRelations
+        {
+            get { return _circMemberRelations; }
+            set { _circMemberRelations = value ?? new List<CircMemberRelation>(); }
         }
         #endregion
         #region enums
@@ -322,11 +338,12 @@ namespace NEALibrarySystem.Data_Structures
         /// <typeparam name="F">Class that the reference classes refer to</typeparam>
         /// <param name="itemList">List of reference classes</param>
         /// <param name="record">Reference class to remove</param>
-        /// <param name="compare">Comparison method</param>
+        /// <param name="compareValue">Comparison method</param>
         /// <returns>The updated list</returns>
-        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> itemList, ReferenceClass<T,F> item, Compare<T> compare) where F : class
+        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> itemList, ReferenceClass<T,F> item, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
         {
-            itemList.RemoveAt(SearchAndSort.Binary(itemList, item.Value, compare));
+            itemList.RemoveAt(SearchAndSort.BinaryReferenceClass(itemList, item, compareValue, compareRef));
+
             return itemList;
         }
         /// <summary>
@@ -361,15 +378,24 @@ namespace NEALibrarySystem.Data_Structures
 
         }
         /// <summary>
-        /// 
+        /// Deletes the specified book copy and the references to it
         /// </summary>
-        /// <param name="bookCopy"></param>
+        /// <param name="bookCopy">book copy to delete</param>
         public static void DeleteBookCopy(BookCopy bookCopy) 
         {
-            bookCopy.Book.BookCopies.Remove(bookCopy);
+            bookCopy.BookRelation.Book.BookCopyRelations.Remove(bookCopy.BookRelation);
+            DataLibrary.BookCopyRelations.Remove(bookCopy.BookRelation);
             DataLibrary.BookCopyBarcodes.Remove(bookCopy.Barcode);
             DataLibrary.BookCopies.Remove(bookCopy);
-
+        }
+        public static void DeleteCirculationCopy(CirculationCopy circulationCopy)
+        {
+            circulationCopy.CircMemberRelation.Member.CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
+            DataLibrary.CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
+            circulationCopy.BookCopy.CirculationCopy = null;
+            DataLibrary.CirculationDueDates = DeleteReferenceClass(DataLibrary.CirculationDueDates, circulationCopy.DueDate, TwoDates);
+            DataLibrary.CirculationDates = DeleteReferenceClass(DataLibrary.CirculationDates, circulationCopy.Date, TwoDates);
+            DataLibrary.CirculationTypes = DeleteReferenceClass(DataLibrary.CirculationTypes, circulationCopy.Type, TwoEnums);
         }
         #endregion
         #endregion
