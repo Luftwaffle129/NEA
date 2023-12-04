@@ -459,7 +459,13 @@ namespace NEALibrarySystem
                 } while (++index < lsvSearchItems.Items.Count && !foundItem);
             }
         }
+
+        private void txtTransactionPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
+
         #endregion
 
         #endregion

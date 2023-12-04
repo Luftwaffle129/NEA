@@ -280,7 +280,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>The updated list</returns>
         public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<T> compare) where F : class
         {
-            itemList.Insert(SearchAndSort.BinaryInsert(itemList, record, compare), record);
+            itemList.Insert(SearchAndSort.BinaryReferenceInsert(itemList, record, compare), record);
             return itemList;
         }
         /// <summary>
@@ -314,19 +314,19 @@ namespace NEALibrarySystem.Data_Structures
             // remove old genres
             if (book.Genres.Count > 0)
                 foreach (ReferenceClass<string, Book> genre in book.Genres)
-                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, SearchAndSort.TwoStrings);
+                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings, TwoBooks);
             // add new genres
             if (newBookInfo.Genres.Count > 0)
                 foreach (string genre in newBookInfo.Genres)
-                    DataLibrary.Genres = CreateReferenceClass(DataLibrary.Genres, book, genre, SearchAndSort.TwoStrings);
+                    DataLibrary.Genres = CreateReferenceClass(DataLibrary.Genres, book, genre, TwoStrings);
             // remove old themes
             if (book.Themes.Count > 0)
                 foreach (ReferenceClass<string, Book> theme in book.Themes)
-                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, SearchAndSort.TwoStrings);
+                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings, TwoBooks);
             // add new themes
             if (newBookInfo.Themes.Count > 0)
                 foreach (string theme in newBookInfo.Themes)
-                    DataLibrary.Themes = CreateReferenceClass(DataLibrary.Themes, book, theme, SearchAndSort.TwoStrings);
+                    DataLibrary.Themes = CreateReferenceClass(DataLibrary.Themes, book, theme, TwoStrings);
             return book;
         }
         #endregion
@@ -343,7 +343,6 @@ namespace NEALibrarySystem.Data_Structures
         public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> itemList, ReferenceClass<T,F> item, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
         {
             itemList.RemoveAt(SearchAndSort.BinaryReferenceClass(itemList, item, compareValue, compareRef));
-
             return itemList;
         }
         /// <summary>
@@ -352,20 +351,24 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="book">book to be deleted</param>
         public static void DeleteBook(Book book)
         {
+            //delete book copies
+            if (book.BookCopyRelations.Count > 0)
+                for (int i = 0; i < book.BookCopyRelations.Count; i++)
+                    DeleteBookCopy(book.BookCopyRelations[i].Copy);
             // delete references
-            DataLibrary.Titles = DeleteReferenceClass(DataLibrary.Titles, book.Title, TwoStrings);
-            DataLibrary.SeriesTitles = DeleteReferenceClass(DataLibrary.SeriesTitles, book.SeriesTitle, TwoStrings);
-            DataLibrary.MediaTypes = DeleteReferenceClass(DataLibrary.MediaTypes, book.MediaType, TwoStrings);
-            DataLibrary.Isbns = DeleteReferenceClass(DataLibrary.Isbns, book.Isbn, TwoStrings);
-            DataLibrary.Prices = DeleteReferenceClass(DataLibrary.Prices, book.Price, TwoDoubles);
-            DataLibrary.Authors = DeleteReferenceClass(DataLibrary.Authors, book.Author, TwoStrings);
-            DataLibrary.Publishers = DeleteReferenceClass(DataLibrary.Publishers, book.Publisher, TwoStrings);
+            DataLibrary.Titles = DeleteReferenceClass(DataLibrary.Titles, book.Title, TwoStrings, TwoBooks);
+            DataLibrary.SeriesTitles = DeleteReferenceClass(DataLibrary.SeriesTitles, book.SeriesTitle, TwoStrings, TwoBooks);
+            DataLibrary.MediaTypes = DeleteReferenceClass(DataLibrary.MediaTypes, book.MediaType, TwoStrings, TwoBooks);
+            DataLibrary.Isbns = DeleteReferenceClass(DataLibrary.Isbns, book.Isbn, TwoStrings, TwoBooks);
+            DataLibrary.Prices = DeleteReferenceClass(DataLibrary.Prices, book.Price, TwoDoubles, TwoBooks);
+            DataLibrary.Authors = DeleteReferenceClass(DataLibrary.Authors, book.Author, TwoStrings, TwoBooks);
+            DataLibrary.Publishers = DeleteReferenceClass(DataLibrary.Publishers, book.Publisher, TwoStrings, TwoBooks);
             if (book.Genres.Count > 0)
                 foreach (ReferenceClass<string, Book> genre in book.Genres)
-                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings);
+                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings, TwoBooks);
             if (book.Themes.Count > 0)
                 foreach (ReferenceClass<string, Book> theme in book.Themes)
-                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings);
+                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings, TwoBooks);
             // delete book
             DataLibrary.Books.Remove(book);
         }
@@ -383,19 +386,28 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="bookCopy">book copy to delete</param>
         public static void DeleteBookCopy(BookCopy bookCopy) 
         {
+            // delete book copy relation
             bookCopy.BookRelation.Book.BookCopyRelations.Remove(bookCopy.BookRelation);
             DataLibrary.BookCopyRelations.Remove(bookCopy.BookRelation);
-            DataLibrary.BookCopyBarcodes.Remove(bookCopy.Barcode);
+            // delete barcode
+            DataLibrary.BookCopyBarcodes = DeleteReferenceClass(DataLibrary.BookCopyBarcodes, bookCopy.Barcode, TwoStrings, TwoBookCopies);
+            // delete circulation copy
+            if (bookCopy.CirculationCopy != null)
+                DeleteCirculationCopy(bookCopy.CirculationCopy);
+            // delete book
             DataLibrary.BookCopies.Remove(bookCopy);
         }
         public static void DeleteCirculationCopy(CirculationCopy circulationCopy)
         {
+            // delete member relation
             circulationCopy.CircMemberRelation.Member.CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
             DataLibrary.CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
+            // delete book copy relation
             circulationCopy.BookCopy.CirculationCopy = null;
-            DataLibrary.CirculationDueDates = DeleteReferenceClass(DataLibrary.CirculationDueDates, circulationCopy.DueDate, TwoDates);
-            DataLibrary.CirculationDates = DeleteReferenceClass(DataLibrary.CirculationDates, circulationCopy.Date, TwoDates);
-            DataLibrary.CirculationTypes = DeleteReferenceClass(DataLibrary.CirculationTypes, circulationCopy.Type, TwoEnums);
+            // delete reference classes
+            DataLibrary.CirculationDueDates = DeleteReferenceClass(DataLibrary.CirculationDueDates, circulationCopy.DueDate, TwoDates, TwoCirculationCopies);
+            DataLibrary.CirculationDates = DeleteReferenceClass(DataLibrary.CirculationDates, circulationCopy.Date, TwoDates, TwoCirculationCopies);
+            DataLibrary.CirculationTypes = DeleteReferenceClass(DataLibrary.CirculationTypes, circulationCopy.Type, TwoEnums, TwoCirculationCopies);
         }
         #endregion
         #endregion

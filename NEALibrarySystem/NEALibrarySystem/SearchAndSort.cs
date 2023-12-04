@@ -141,13 +141,15 @@ namespace NEALibrarySystem
         }
         public static int BinaryReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
         {
+            // Get list of ReferenceClasses that share the same value
             int[] itemBoundaries = BinaryRange(itemList, item.Value, compareValue);
             List<ReferenceClass<T, F>> itemMatchList = new List<ReferenceClass<T, F>>();
             itemMatchList.AddRange(itemList.GetRange(itemBoundaries[0], itemBoundaries[1] - itemBoundaries[0] + 1));
+            // Sort them in order of their unique identifier
             itemMatchList = QuickSort(itemMatchList, compareRef);
             return BinaryUniqueRef(itemMatchList, item, compareRef);
         }
-        public static int BinaryInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<T> compare) where F : class
+        public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<T> compare) where F : class
         {
             if (itemList.Count == 0) // if empty, return first index
                 return 0;
@@ -183,16 +185,16 @@ namespace NEALibrarySystem
         }
         #endregion
         #region sort
-        public static List<F> QuickSort<F>(List<F> list, Compare<F> compare)
+        public static List<T> QuickSort<T>(List<T> list, Compare<T> compare)
         {
             Partition(list, 0, list.Count - 1, compare);
             return list;
         }
-        private static List<F> Partition<F>(List<F> list, int left, int right, Compare<F> compare)
+        private static List<T> Partition<T>(List<T> list, int left, int right, Compare<T> compare)
         {
             if (left < right)
             {
-                F pivot = list[left];
+                T pivot = list[left];
                 int leftIndex = left;
                 int rightIndex = right;
                 while (rightIndex > leftIndex)
@@ -283,14 +285,20 @@ namespace NEALibrarySystem
                 return Greatest.Right;
         }
         // REWRITE THIS BELOW -----------------------------------------------------------------------------=-------------------------------------=
-        public static Greatest TwoBooks(Book book1, Book book2)
+        // ReferenceClass reference comparisons
+        public static Greatest TwoBooks<T>(ReferenceClass<T, Book> book1, ReferenceClass<T, Book> book2)
         {
-            return TwoStrings(book1.Isbn.Value, book2.Isbn.Value);
+            return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
         }
-        public static Greatest TwoBookCopies(BookCopy copy1, BookCopy copy2)
+        public static Greatest TwoBookCopies<T>(ReferenceClass<T, BookCopy> copy1, ReferenceClass<T, BookCopy> copy2)
         {
-            return TwoStrings(copy1.Barcode.Value, copy2.Barcode.Value);
+            return TwoStrings(copy1.Reference.Barcode.Value, copy2.Reference.Barcode.Value);
         }
+        public static Greatest TwoCirculationCopies<T>(ReferenceClass<T, CirculationCopy> copy1, ReferenceClass<T, CirculationCopy> copy2)
+        {
+            return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+        }
+
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {
             if (date1 == date2)
