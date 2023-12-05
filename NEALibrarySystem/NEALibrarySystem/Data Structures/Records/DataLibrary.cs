@@ -349,9 +349,21 @@ namespace NEALibrarySystem.Data_Structures
         {
             CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoDates, TwoCirculationCopies);
         }
-        public static Member ModifyMember(Member member, MemberCreator newMemberInfo)
+        public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
-            DataLibrary.MemberBarcodes = DeleteReferenceClass
+            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoStrings, TwoMembers);
+            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoStrings, TwoMembers);
+            LastNames = ModifyReferenceClass(LastNames, member, member.LastName, out member.LastName, newMemberInfo.LastName, TwoStrings, TwoMembers);
+            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoEnums, TwoMembers);
+            member.DateOfBirth = newMemberInfo.DateOfBirth;
+            member.EmailAddress = newMemberInfo.EmailAddress;
+            member.PhoneNumber = newMemberInfo.PhoneNumber;
+            member.AddressLine1 = newMemberInfo.AddressLine1;
+            member.AddressLine2 = newMemberInfo.AddressLine2;
+            member.AddressLine3 = newMemberInfo.AddressLine3;
+            member.AddressLine4 = newMemberInfo.AddressLine4;
+            member.AddressLine5 = newMemberInfo.AddressLine5;
+            member.Postcode = newMemberInfo.Postcode;
         }
         #endregion
         #region Deleting records
@@ -381,19 +393,12 @@ namespace NEALibrarySystem.Data_Structures
                     DeleteBookCopy(book.BookCopyRelations[i].Copy);
             // delete references
             DataLibrary.Titles = DeleteReferenceClass(DataLibrary.Titles, book.Title, TwoStrings, TwoBooks);
-            book.Title = null;
             DataLibrary.SeriesTitles = DeleteReferenceClass(DataLibrary.SeriesTitles, book.SeriesTitle, TwoStrings, TwoBooks);
-            book.SeriesTitle = null;
             DataLibrary.MediaTypes = DeleteReferenceClass(DataLibrary.MediaTypes, book.MediaType, TwoStrings, TwoBooks);
-            book.MediaType = null;
             DataLibrary.Isbns = DeleteReferenceClass(DataLibrary.Isbns, book.Isbn, TwoStrings, TwoBooks);
-            book.Isbn = null;
             DataLibrary.Prices = DeleteReferenceClass(DataLibrary.Prices, book.Price, TwoDoubles, TwoBooks);
-            book.Price = null;
             DataLibrary.Authors = DeleteReferenceClass(DataLibrary.Authors, book.Author, TwoStrings, TwoBooks);
-            book.Author = null;
             DataLibrary.Publishers = DeleteReferenceClass(DataLibrary.Publishers, book.Publisher, TwoStrings, TwoBooks);
-            book.Publisher = null;
             if (book.Genres.Count > 0)
                 foreach (ReferenceClass<string, Book> genre in book.Genres)
                     DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings, TwoBooks);
@@ -417,13 +422,9 @@ namespace NEALibrarySystem.Data_Structures
                     DeleteCirculationCopy(circMemberRelation.CirculationCopy);
             // delete reference classes
             DataLibrary.MemberBarcodes = DeleteReferenceClass(DataLibrary.MemberBarcodes, member.Barcode, TwoStrings, TwoMembers);
-            member.Barcode = null;
             DataLibrary.FirstNames = DeleteReferenceClass(DataLibrary.FirstNames, member.FirstName, TwoStrings, TwoMembers);
-            member.FirstName = null;
             DataLibrary.LastNames = DeleteReferenceClass(DataLibrary.LastNames, member.LastName, TwoStrings, TwoMembers);
-            member.LastName = null;
             DataLibrary.MemberTypes = DeleteReferenceClass(DataLibrary.MemberTypes, member.Type, TwoEnums, TwoMembers);
-            member.Type = null;
             // delete member
             DataLibrary.Members.Remove(member);
         }
@@ -438,7 +439,6 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.BookCopyRelations.Remove(bookCopy.BookRelation);
             // delete barcode
             DataLibrary.BookCopyBarcodes = DeleteReferenceClass(DataLibrary.BookCopyBarcodes, bookCopy.Barcode, TwoStrings, TwoBookCopies);
-            bookCopy.Barcode = null;
             // delete circulation copy
             if (bookCopy.CirculationCopy != null)
                 DeleteCirculationCopy(bookCopy.CirculationCopy);
@@ -454,11 +454,9 @@ namespace NEALibrarySystem.Data_Structures
             circulationCopy.BookCopy.CirculationCopy = null;
             // delete reference classes
             DataLibrary.CirculationDueDates = DeleteReferenceClass(DataLibrary.CirculationDueDates, circulationCopy.DueDate, TwoDates, TwoCirculationCopies);
-            circulationCopy.DueDate = null;
             DataLibrary.CirculationDates = DeleteReferenceClass(DataLibrary.CirculationDates, circulationCopy.Date, TwoDates, TwoCirculationCopies);
-            circulationCopy.Date = null;
             DataLibrary.CirculationTypes = DeleteReferenceClass(DataLibrary.CirculationTypes, circulationCopy.Type, TwoEnums, TwoCirculationCopies);
-            circulationCopy.Type = null;
+            CirculationCopies.Remove(circulationCopy);
         }
         #endregion
         #endregion

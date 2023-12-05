@@ -55,8 +55,8 @@ namespace NEALibrarySystem.Data_Structures
             FirstName = DataLibrary.FirstNames[index];
             DataLibrary.LastNames = DataLibrary.CreateReferenceClass(DataLibrary.LastNames, this, memberInfo.LastName, SearchAndSort.TwoStrings, out index);
             LastName = DataLibrary.LastNames[index];
-            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoEnums, out index);
-            Type = DataLibrary.MemberType[index];
+            DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoEnums, out index);
+            Type = DataLibrary.MemberTypes[index];
         }
     }
     public enum MemberType
