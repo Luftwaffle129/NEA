@@ -298,6 +298,10 @@ namespace NEALibrarySystem
         {
             return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
         }
+        public static Greatest TwoMembers<T>(ReferenceClass<T, Member> member1, ReferenceClass<T, Member> member2)
+        {
+            return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
+        }
 
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {

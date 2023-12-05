@@ -48,10 +48,15 @@ namespace NEALibrarySystem.Data_Structures
             AddressLine4 = memberInfo.AddressLine4;
             AddressLine5 = memberInfo.AddressLine5;
             Postcode = memberInfo.Postcode;
-            DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoStrings);
-            DataLibrary.FirstName = DataLibrary.CreateReferenceClass(DataLibrary.FirstName, this, memberInfo.FirstName, SearchAndSort.TwoStrings);
-            DataLibrary.LastName = DataLibrary.CreateReferenceClass(DataLibrary.LastName, this, memberInfo.LastName, SearchAndSort.TwoStrings);
-            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoEnums);
+            int index; // index of the created reference class
+            DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoStrings, out index);
+            Barcode = DataLibrary.MemberBarcodes[index];
+            DataLibrary.FirstNames = DataLibrary.CreateReferenceClass(DataLibrary.FirstNames, this, memberInfo.FirstName, SearchAndSort.TwoStrings, out index);
+            FirstName = DataLibrary.FirstNames[index];
+            DataLibrary.LastNames = DataLibrary.CreateReferenceClass(DataLibrary.LastNames, this, memberInfo.LastName, SearchAndSort.TwoStrings, out index);
+            LastName = DataLibrary.LastNames[index];
+            DataLibrary.MemberType = DataLibrary.CreateReferenceClass(DataLibrary.MemberType, this, memberInfo.Type, SearchAndSort.TwoEnums, out index);
+            Type = DataLibrary.MemberType[index];
         }
     }
     public enum MemberType

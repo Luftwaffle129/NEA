@@ -191,8 +191,7 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.Genres.Clear();
             DataLibrary.Themes.Clear();
             DataLibrary.Staff.Clear();
-            DataLibrary.Loans.Clear();
-            DataLibrary.Reservations.Clear();
+            DataLibrary.CirculationCopies.Clear();
             DataLibrary.BookCopies.Clear();
         }
     }

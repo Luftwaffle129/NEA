@@ -137,7 +137,7 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region first name
         private static List<ReferenceClass<string, Member>> _firstName = new List<ReferenceClass<string, Member>>();
-        public static List<ReferenceClass<string, Member>> FirstName
+        public static List<ReferenceClass<string, Member>> FirstNames
         {
             get { return _firstName; }
             set { _firstName = value ?? new List<ReferenceClass<string, Member>>(); }
@@ -145,26 +145,18 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region surname
         private static List<ReferenceClass<string, Member>> _surname = new List<ReferenceClass<string, Member>>();
-        public static List<ReferenceClass<string, Member>> LastName
+        public static List<ReferenceClass<string, Member>> LastNames
         {
             get { return _surname; }
             set { _surname = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
-        #region surname
-        private static List<ReferenceClass<MemberType, Member>> _memberType = new List<ReferenceClass<MemberType, Member>>();
-        public static List<ReferenceClass<MemberType, Member>> MemberType
+        #region member type
+        private static List<ReferenceClass<MemberType, Member>> _memberTypes = new List<ReferenceClass<MemberType, Member>>();
+        public static List<ReferenceClass<MemberType, Member>> MemberTypes
         {
-            get { return _memberType; }
-            set { _memberType = value ?? new List<ReferenceClass<MemberType, Member>>(); }
-        }
-        #endregion
-        #region media type
-        private static List<ReferenceClass<MemberType, Member>> _mediaType = new List<ReferenceClass<MemberType, Member>>();
-        public static List<ReferenceClass<MemberType, Member>> MediaType
-        {
-            get { return _mediaType; }
-            set { _mediaType = value ?? new List<ReferenceClass<MemberType, Member>>(); }
+            get { return _memberTypes; }
+            set { _memberTypes = value ?? new List<ReferenceClass<MemberType, Member>>(); }
         }
         #endregion
         #region staff
@@ -261,12 +253,12 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="item">Value of the reference class</param>
         /// <param name="compare">Comparison method</param>
         /// <returns>List of reference classes containing the new reference class</returns>
-        public static List<ReferenceClass<T, F>> CreateReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare) where F : class
+        public static List<ReferenceClass<T, F>> CreateReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, F reference, T item, Compare<T> compare, out int index) where F : class
         {
             ReferenceClass<T, F> referenceClass = new ReferenceClass<T, F>();
             referenceClass.Value = item;
             referenceClass.Reference = reference;
-            itemList = DataLibrary.AddReferenceClass(itemList, referenceClass, compare);
+            itemList = DataLibrary.AddReferenceClass(itemList, referenceClass, compare, out index);
             return itemList;
         }
         /// <summary>
@@ -278,9 +270,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="record">Reference class to add</param>
         /// <param name="compare">Comparison method</param>
         /// <returns>The updated list</returns>
-        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<T> compare) where F : class
+        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<T> compare, out int index) where F : class
         {
-            itemList.Insert(SearchAndSort.BinaryReferenceInsert(itemList, record, compare), record);
+            index = SearchAndSort.BinaryReferenceInsert(itemList, record, compare);
+            itemList.Insert(index, record);
             return itemList;
         }
         /// <summary>
@@ -295,39 +288,70 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region Modifying Records
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="F"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="reference"></param>
+        /// <param name="oldReferenceClass"></param>
+        /// <param name="newValue"></param>
+        /// <param name="compareValue"></param>
+        /// <param name="compareRef"></param>
+        /// <param name="newReferenceClass"></param>
+        /// <returns></returns>
+        public static List<ReferenceClass<T,F>> ModifyReferenceClass<T,F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T,F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
+        {
+            list = DeleteReferenceClass(list, oldReferenceClass, compareValue, compareRef);
+            list = CreateReferenceClass(list, reference, newValue, compareValue, out int index);
+            newReferenceClass = list[index];
+            return list;
+        }
+        public static List<ReferenceClass<T, F>> ModifyReferenceClassList<T, F>(List<ReferenceClass<T, F>> list, F reference, List<ReferenceClass<T, F>> oldReferenceClassList, out List<ReferenceClass<T, F>> newReferenceClassList, List<T> newValueList, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
+        {
+            // delete old references
+            newReferenceClassList = new List<ReferenceClass<T, F>>();
+            if (oldReferenceClassList.Count > 0)
+                foreach (ReferenceClass<T, F> referenceClass in oldReferenceClassList)
+                    list = DeleteReferenceClass(list, referenceClass, compareValue, compareRef);
+            oldReferenceClassList.Clear();
+            // add new values as reference classes
+            if (newValueList.Count > 0)
+                foreach (T value in newValueList)
+                {
+                    list = CreateReferenceClass(list, reference, value, compareValue, out int index);
+                    newReferenceClassList.Add(list[index]);
+                }
+            return list;
+        }
+        /// <summary>
         /// Updates a book record with the new information
         /// </summary>
         /// <param name="book">book to update</param>
         /// <param name="newBookInfo">new informatipn for the book</param>
         /// <returns>Updated book</returns>
-        public static Book ModifyBookRecord(Book book, BookCreator newBookInfo)
+        public static void ModifyBookRecord(Book book, BookCreator newBookInfo)
         {
             book.SeriesNumber = newBookInfo.SeriesNumber;
             book.Description = newBookInfo.Description;
-            book.Title.Value = newBookInfo.Title;
-            book.SeriesTitle.Value = newBookInfo.SeriesTitle;
-            book.Isbn.Value = newBookInfo.Isbn;
-            book.Price.Value = newBookInfo.Price;
-            book.MediaType.Value = newBookInfo.MediaType;
-            book.Author.Value = newBookInfo.Author;
-            book.Publisher.Value = newBookInfo.Publisher;
-            // remove old genres
-            if (book.Genres.Count > 0)
-                foreach (ReferenceClass<string, Book> genre in book.Genres)
-                    DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings, TwoBooks);
-            // add new genres
-            if (newBookInfo.Genres.Count > 0)
-                foreach (string genre in newBookInfo.Genres)
-                    DataLibrary.Genres = CreateReferenceClass(DataLibrary.Genres, book, genre, TwoStrings);
-            // remove old themes
-            if (book.Themes.Count > 0)
-                foreach (ReferenceClass<string, Book> theme in book.Themes)
-                    DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings, TwoBooks);
-            // add new themes
-            if (newBookInfo.Themes.Count > 0)
-                foreach (string theme in newBookInfo.Themes)
-                    DataLibrary.Themes = CreateReferenceClass(DataLibrary.Themes, book, theme, TwoStrings);
-            return book;
+
+            Titles = ModifyReferenceClass(Titles, book, book.Title, out book.Title, newBookInfo.Title, TwoStrings, TwoBooks);
+            SeriesTitles = ModifyReferenceClass(SeriesTitles, book, book.SeriesTitle, out book.SeriesTitle, newBookInfo.SeriesTitle, TwoStrings, TwoBooks);
+            Isbns = ModifyReferenceClass(Isbns, book, book.Isbn, out book.Isbn, newBookInfo.Isbn, TwoStrings, TwoBooks);
+            Prices = ModifyReferenceClass(Prices, book, book.Price, out book.Price, newBookInfo.Price, TwoDoubles, TwoBooks);
+            MediaTypes = ModifyReferenceClass(MediaTypes, book, book.MediaType, out book.MediaType, newBookInfo.MediaType, TwoStrings, TwoBooks);
+            Authors = ModifyReferenceClass(Authors, book, book.Author, out book.Author, newBookInfo.Author, TwoStrings, TwoBooks);
+            Publishers = ModifyReferenceClass(Publishers, book, book.Publisher, out book.Publisher, newBookInfo.Publisher, TwoStrings, TwoBooks);
+            Genres = ModifyReferenceClassList(Genres, book, book.Genres, out book.Genres, newBookInfo.Genres, TwoStrings, TwoBooks);
+            Themes = ModifyReferenceClassList(Themes, book, book.Themes, out book.Themes, newBookInfo.Themes, TwoStrings, TwoBooks);
+        }
+        public static void ModifyCirculationCopy(CirculationCopy circCopy, DateTime newDueDate)
+        {
+            CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoDates, TwoCirculationCopies);
+        }
+        public static Member ModifyMember(Member member, MemberCreator newMemberInfo)
+        {
+            DataLibrary.MemberBarcodes = DeleteReferenceClass
         }
         #endregion
         #region Deleting records
@@ -357,18 +381,27 @@ namespace NEALibrarySystem.Data_Structures
                     DeleteBookCopy(book.BookCopyRelations[i].Copy);
             // delete references
             DataLibrary.Titles = DeleteReferenceClass(DataLibrary.Titles, book.Title, TwoStrings, TwoBooks);
+            book.Title = null;
             DataLibrary.SeriesTitles = DeleteReferenceClass(DataLibrary.SeriesTitles, book.SeriesTitle, TwoStrings, TwoBooks);
+            book.SeriesTitle = null;
             DataLibrary.MediaTypes = DeleteReferenceClass(DataLibrary.MediaTypes, book.MediaType, TwoStrings, TwoBooks);
+            book.MediaType = null;
             DataLibrary.Isbns = DeleteReferenceClass(DataLibrary.Isbns, book.Isbn, TwoStrings, TwoBooks);
+            book.Isbn = null;
             DataLibrary.Prices = DeleteReferenceClass(DataLibrary.Prices, book.Price, TwoDoubles, TwoBooks);
+            book.Price = null;
             DataLibrary.Authors = DeleteReferenceClass(DataLibrary.Authors, book.Author, TwoStrings, TwoBooks);
+            book.Author = null;
             DataLibrary.Publishers = DeleteReferenceClass(DataLibrary.Publishers, book.Publisher, TwoStrings, TwoBooks);
+            book.Publisher = null;
             if (book.Genres.Count > 0)
                 foreach (ReferenceClass<string, Book> genre in book.Genres)
                     DataLibrary.Genres = DeleteReferenceClass(DataLibrary.Genres, genre, TwoStrings, TwoBooks);
+            book.Genres.Clear();
             if (book.Themes.Count > 0)
                 foreach (ReferenceClass<string, Book> theme in book.Themes)
                     DataLibrary.Themes = DeleteReferenceClass(DataLibrary.Themes, theme, TwoStrings, TwoBooks);
+            book.Themes.Clear();
             // delete book
             DataLibrary.Books.Remove(book);
         }
@@ -376,9 +409,23 @@ namespace NEALibrarySystem.Data_Structures
         /// Deletes the member record with the inputted member barcode
         /// </summary>
         /// <param name="barcode">member barcode of member to be deleted</param>
-        public static void DeleteMember(string barcode)
+        public static void DeleteMember(Member member)
         {
-
+            // delete circulation references
+            if (member.CircMemberRelations.Count > 0)
+                foreach (CircMemberRelation circMemberRelation in member.CircMemberRelations)
+                    DeleteCirculationCopy(circMemberRelation.CirculationCopy);
+            // delete reference classes
+            DataLibrary.MemberBarcodes = DeleteReferenceClass(DataLibrary.MemberBarcodes, member.Barcode, TwoStrings, TwoMembers);
+            member.Barcode = null;
+            DataLibrary.FirstNames = DeleteReferenceClass(DataLibrary.FirstNames, member.FirstName, TwoStrings, TwoMembers);
+            member.FirstName = null;
+            DataLibrary.LastNames = DeleteReferenceClass(DataLibrary.LastNames, member.LastName, TwoStrings, TwoMembers);
+            member.LastName = null;
+            DataLibrary.MemberTypes = DeleteReferenceClass(DataLibrary.MemberTypes, member.Type, TwoEnums, TwoMembers);
+            member.Type = null;
+            // delete member
+            DataLibrary.Members.Remove(member);
         }
         /// <summary>
         /// Deletes the specified book copy and the references to it
@@ -391,6 +438,7 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.BookCopyRelations.Remove(bookCopy.BookRelation);
             // delete barcode
             DataLibrary.BookCopyBarcodes = DeleteReferenceClass(DataLibrary.BookCopyBarcodes, bookCopy.Barcode, TwoStrings, TwoBookCopies);
+            bookCopy.Barcode = null;
             // delete circulation copy
             if (bookCopy.CirculationCopy != null)
                 DeleteCirculationCopy(bookCopy.CirculationCopy);
@@ -406,8 +454,11 @@ namespace NEALibrarySystem.Data_Structures
             circulationCopy.BookCopy.CirculationCopy = null;
             // delete reference classes
             DataLibrary.CirculationDueDates = DeleteReferenceClass(DataLibrary.CirculationDueDates, circulationCopy.DueDate, TwoDates, TwoCirculationCopies);
+            circulationCopy.DueDate = null;
             DataLibrary.CirculationDates = DeleteReferenceClass(DataLibrary.CirculationDates, circulationCopy.Date, TwoDates, TwoCirculationCopies);
+            circulationCopy.Date = null;
             DataLibrary.CirculationTypes = DeleteReferenceClass(DataLibrary.CirculationTypes, circulationCopy.Type, TwoEnums, TwoCirculationCopies);
+            circulationCopy.Type = null;
         }
         #endregion
         #endregion
