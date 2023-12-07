@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Data_Structures
         public BookCopy(string barcode, Book book)
         {
             int index; // index that the reference class is inserted into
-            DataLibrary.BookCopyBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.BookCopyBarcodes, this, barcode, SearchAndSort.TwoStrings, out index);
+            DataLibrary.BookCopyBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.BookCopyBarcodes, this, barcode, SearchAndSort.TwoBookCopyBarcodes, out index);
             Barcode = DataLibrary.BookCopyBarcodes[index];
             BookRelation = new BookCopyRelation(book, this);
             DataLibrary.BookCopyRelations.Add(BookRelation);

@@ -150,6 +150,12 @@ namespace NEALibrarySystem.SearchList
         Genres,
         Themes
     }
+    public enum BookCopyColumn
+    {
+        Barcode,
+        Status,
+        DueDate
+    }
     public enum MemberColumn
     {
         Barcode,

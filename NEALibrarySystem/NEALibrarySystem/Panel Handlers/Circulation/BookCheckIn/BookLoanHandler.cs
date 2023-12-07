@@ -1,5 +1,4 @@
-﻿using NEALibrarySystem.Data_Structures;
-using NEALibrarySystem.ListViewHandlers.CirculatedItems;
+﻿using NEALibrarySystem.Data_Structures
 using NEALibrarySystem.ListViewHandlers.SelectedItems;
 using System;
 using System.Collections.Generic;

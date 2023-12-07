@@ -15,32 +15,13 @@ namespace NEALibrarySystem
         /// <summary>
         /// Returns the index of an item in a list of unique data
         /// </summary>
-        /// <typeparam name="T">Type of Value in reference class</typeparam>
-        /// <typeparam name="F"></typeparam>
-        /// <param name="itemList"></param>
-        /// <param name="item"></param>
-        /// <param name="compare"></param>
+        /// <typeparam name="T">Search item type</typeparam>
+        /// <typeparam name="F">Type of item in the list</typeparam>
+        /// <param name="itemList">list of items</param>
+        /// <param name="item">search item</param>
+        /// <param name="compare">comparison method</param>
         /// <returns></returns>
-        public static int BinaryUniqueValue<T, F>(List<ReferenceClass<T, F>> itemList, T item, Compare<T> compare) where F : class
-        {
-            if (itemList.Count > 0)
-            {
-                int left = 0;
-                int right = itemList.Count - 1;
-                while (left < right)
-                {
-                    int middle = (left + right) / 2;
-                    if (compare(itemList[middle].Value, item) == Greatest.equal)
-                        return middle;
-                    else if (compare(itemList[middle].Value, item) == Greatest.Left)
-                        left = middle + 1;
-                    else
-                        right = middle - 1;
-                }
-            }
-            return -1;
-        }
-        public static int BinaryUniqueRef<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>> compare) where F : class
+        public static int Binary<T, F>(List<F> itemList, T item, Compare<T, F> compare)
         {
             if (itemList.Count > 0)
             {
@@ -58,8 +39,29 @@ namespace NEALibrarySystem
                 }
             }
             return -1;
+
         }
-        public static int Binary<T, F>(List<ReferenceClass<T, F>> itemList, T item, Compare<T> compare, out int left, out int right) where F : class
+        /*
+        public static int BinaryRefClassUniqueRef<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<F> compare)
+        {
+            if (itemList.Count > 0)
+            {
+                int left = 0;
+                int right = itemList.Count - 1;
+                while (left < right)
+                {
+                    int middle = (left + right) / 2;
+                    if (compare(itemList[middle], item) == Greatest.equal)
+                        return middle;
+                    else if (compare(itemList[middle], item) == Greatest.Left)
+                        left = middle + 1;
+                    else
+                        right = middle - 1;
+                }
+            }
+            return -1;
+        } */
+        public static int Binary<T, F>(List<F> itemList, T item, Compare<T,F> compare, out int left, out int right)
         {
             if (itemList.Count > 0)
             {
@@ -68,9 +70,9 @@ namespace NEALibrarySystem
                 while (left < right)
                 {
                     int middle = (left + right) / 2;
-                    if (compare(itemList[middle].Value, item) == Greatest.equal)
+                    if (compare(itemList[middle], item) == Greatest.equal)
                         return middle;
-                    else if (compare(itemList[middle].Value, item) == Greatest.Left)
+                    else if (compare(itemList[middle], item) == Greatest.Left)
                         left = middle + 1;
                     else
                         right = middle - 1;
@@ -80,7 +82,16 @@ namespace NEALibrarySystem
             right = -1;
             return -1;
         }
-        public static int[] BinaryRange<T, F>(List<ReferenceClass<T, F>> itemList, T item, Compare<T> compare) where F : class
+        /// <summary>
+        /// Performs a binary search to find the range of indexes of matching items in the inputted sorted list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="F"></typeparam>
+        /// <param name="itemList"></param>
+        /// <param name="item"></param>
+        /// <param name="compare"></param>
+        /// <returns></returns>
+        public static int[] BinaryRange<T, F>(List<F> itemList, T item, Compare<T, F> compare)
         {
             if (itemList.Count > 0)
             {
@@ -106,9 +117,9 @@ namespace NEALibrarySystem
                     while (left < right && !middleFound)
                     {
                         middle = (left + right) / 2;
-                        if (compare(itemList[middle].Value, item) == Greatest.equal && compare(itemList[middle - 1].Value, item) == Greatest.Right)
+                        if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle - 1], item) == Greatest.Right)
                             middleFound = true;
-                        else if (compare(itemList[middle].Value, item) == Greatest.Left)
+                        else if (compare(itemList[middle], item) == Greatest.Left)
                             left = middle + 1;
                         else
                             right = middle - 1;
@@ -127,9 +138,9 @@ namespace NEALibrarySystem
                     while (left < right && !middleFound)
                     {
                         middle = (left + right) / 2;
-                        if (compare(itemList[middle].Value, item) == Greatest.equal && compare(itemList[middle + 1].Value, item) == Greatest.Right)
+                        if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle + 1], item) == Greatest.Right)
                             middleFound = true;
-                        else if (compare(itemList[middle].Value, item) == Greatest.Left)
+                        else if (compare(itemList[middle], item) == Greatest.Left)
                             left = middle + 1;
                         else
                             right = middle - 1;
@@ -139,6 +150,7 @@ namespace NEALibrarySystem
             }
             return new int[] { -1, -1 };
         }
+        /*
         public static int BinaryReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<T> compareValue, Compare<ReferenceClass<T, F>> compareRef) where F : class
         {
             // Get list of ReferenceClasses that share the same value
@@ -147,15 +159,15 @@ namespace NEALibrarySystem
             itemMatchList.AddRange(itemList.GetRange(itemBoundaries[0], itemBoundaries[1] - itemBoundaries[0] + 1));
             // Sort them in order of their unique identifier
             itemMatchList = QuickSort(itemMatchList, compareRef);
-            return BinaryUniqueRef(itemMatchList, item, compareRef);
-        }
-        public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<T> compare) where F : class
+            return BinaryRefClassUniqueRef(itemMatchList, item, compareRef);
+        } */
+        public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
             if (itemList.Count == 0) // if empty, return first index
                 return 0;
             else if (itemList.Count == 1) // if count = 1, return before or after the only item
             {
-                if (compare(itemList[0].Value, item.Value) == Greatest.Right)
+                if (compare(itemList[0], item) == Greatest.Right)
                     return 1;
                 else
                     return 0;
@@ -168,9 +180,9 @@ namespace NEALibrarySystem
                 while (left < right)
                 {
                     int middle = (left + right) / 2;
-                    if (compare(itemList[middle].Value, item.Value) == Greatest.Right) // if middle element is smaller than the item:
+                    if (compare(itemList[middle], item) == Greatest.Right) // if middle element is smaller than the item:
                     {
-                        if (compare(itemList[middle + 1].Value, item.Value) == Greatest.Left) // if true, the index to insert is found
+                        if (compare(itemList[middle + 1], item) == Greatest.Left) // if true, the index to insert is found
                             return middle + 1;
                         else
                             left = middle + 1;
@@ -185,16 +197,16 @@ namespace NEALibrarySystem
         }
         #endregion
         #region sort
-        public static List<T> QuickSort<T>(List<T> list, Compare<T> compare)
+        public static List<F> QuickSort<T, F>(List<F> list, Compare<T, F> compare) where T : F
         {
             Partition(list, 0, list.Count - 1, compare);
             return list;
         }
-        private static List<T> Partition<T>(List<T> list, int left, int right, Compare<T> compare)
+        private static List<F> Partition<T, F>(List<F> list, int left, int right, Compare<T, F> compare) where T : F
         {
             if (left < right)
             {
-                T pivot = list[left];
+                T pivot = (T)list[left];
                 int leftIndex = left;
                 int rightIndex = right;
                 while (rightIndex > leftIndex)
@@ -229,7 +241,15 @@ namespace NEALibrarySystem
         }
         #endregion
         #region compare
-        public delegate Greatest Compare<T>(T item1, T item2);
+        /// <summary>
+        /// Compares the two inputted items
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="F"></typeparam>
+        /// <param name="item1">Item from a list of items</param>
+        /// <param name="item2">Search item</param>
+        /// <returns>Returns an enum stating the greater of the two values</returns>
+        public delegate Greatest Compare<T, F>(F item1, T item2);
         public static Greatest TwoStrings(string text1, string text2)
         {
             if (text1 == text2)
@@ -284,25 +304,69 @@ namespace NEALibrarySystem
             else
                 return Greatest.Right;
         }
-        // REWRITE THIS BELOW -----------------------------------------------------------------------------=-------------------------------------=
-        // ReferenceClass reference comparisons
-        public static Greatest TwoBooks<T>(ReferenceClass<T, Book> book1, ReferenceClass<T, Book> book2)
+        // class comparisons
+        public static Greatest RefClassAndString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
         {
-            return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
+            return TwoStrings(referenceClass.Value, str);
         }
-        public static Greatest TwoBookCopies<T>(ReferenceClass<T, BookCopy> copy1, ReferenceClass<T, BookCopy> copy2)
+        public static Greatest TwoRefClassBooks(ReferenceClass<string, Book> book1, ReferenceClass<string, Book> book2)
+        {
+            Greatest value = TwoStrings(book1.Value, book2.Value);
+            if (value == Greatest.equal)
+                return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
+            return value;
+        }
+        public static Greatest TwoRefClassBooks(ReferenceClass<double, Book> book1, ReferenceClass<double, Book> book2)
+        {
+            Greatest value = TwoDoubles(book1.Value, book2.Value);
+            if (value == Greatest.equal)
+                return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
+            return value;
+        }
+        public static Greatest TwoBookCopyBarcodes<T>(ReferenceClass<T, BookCopy> copy1, ReferenceClass<T, BookCopy> copy2)
         {
             return TwoStrings(copy1.Reference.Barcode.Value, copy2.Reference.Barcode.Value);
         }
-        public static Greatest TwoCirculationCopies<T>(ReferenceClass<T, CirculationCopy> copy1, ReferenceClass<T, CirculationCopy> copy2)
+        public static Greatest BookCopyAndBarcode(BookCopy copy, string barcode)
         {
-            return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+            return TwoStrings(copy.Barcode.Value, barcode);
         }
-        public static Greatest TwoMembers<T>(ReferenceClass<T, Member> member1, ReferenceClass<T, Member> member2)
+        public static Greatest BookCopyAndIsbn(BookCopy copy, string isbn)
         {
-            return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
+            return TwoStrings(copy.BookRelation.Book.Isbn.Value, isbn);
         }
-
+        public static Greatest TwoBookCopyBooks(BookCopy copy1, BookCopy copy2)
+        {
+            return TwoStrings(copy1.BookRelation.Book.Isbn.Value, copy2.BookRelation.Book.Isbn.Value);
+        }
+        public static Greatest TwoCirculationCopies(ReferenceClass<DateTime, CirculationCopy> copy1, ReferenceClass<DateTime, CirculationCopy> copy2)
+        {
+            Greatest value = TwoDates(copy1.Value, copy2.Value);
+            if (value == Greatest.equal)
+                return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
+            return value;
+        }
+        public static Greatest TwoCirculationCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
+        {
+            Greatest value = TwoEnums(copy1.Value, copy2.Value);
+            if (value == Greatest.equal)
+                return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
+            return value;
+        }
+        public static Greatest TwoMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
+        {
+            Greatest value = TwoStrings(member1.Value, member2.Value);
+            if (value == Greatest.equal)
+                return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
+            return value;
+        }
+        public static Greatest TwoMembers(ReferenceClass<MemberType, Member> member1, ReferenceClass<MemberType, Member> member2)
+        {
+            Greatest value = TwoEnums(member1.Value, member2.Value);
+            if (value == Greatest.equal)
+                return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
+            return value;
+        }
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {
             if (date1 == date2)

@@ -19,11 +19,11 @@ namespace NEALibrarySystem.Data_Structures
         public CirculationCopy(CirculationCopyCreator info)
         {
             int index; // index that the reference class is inserted into
-            DataLibrary.CirculationTypes = DataLibrary.CreateReferenceClass(DataLibrary.CirculationTypes, this, info.Type, SearchAndSort.TwoEnums, out index);
+            DataLibrary.CirculationTypes = DataLibrary.CreateReferenceClass(DataLibrary.CirculationTypes, this, info.Type, SearchAndSort.TwoCirculationCopies, out index);
             Type = DataLibrary.CirculationTypes[index];
-            DataLibrary.CirculationDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDates, this, DateTime.Now, SearchAndSort.TwoDates, out index);
+            DataLibrary.CirculationDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDates, this, DateTime.Now, SearchAndSort.TwoCirculationCopies, out index);
             Date = DataLibrary.CirculationDates[index];
-            DataLibrary.CirculationDueDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDueDates, this, info.DueDate, SearchAndSort.TwoDates, out index);
+            DataLibrary.CirculationDueDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDueDates, this, info.DueDate, SearchAndSort.TwoCirculationCopies, out index);
             DueDate = DataLibrary.CirculationDueDates[index];
             CircMemberRelation circMemberRelation = new CircMemberRelation(info.Member, this);
             DataLibrary.CircMemberRelations.Add(circMemberRelation);

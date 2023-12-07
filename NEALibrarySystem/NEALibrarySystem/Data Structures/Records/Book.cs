@@ -37,30 +37,30 @@ namespace NEALibrarySystem.Data_Structures
             Description = bookInfo.Description;
             // set the referenced attributes
             int index = 0; // index that the reference class is inserted into
-            DataLibrary.Titles = DataLibrary.CreateReferenceClass(DataLibrary.Titles, this, bookInfo.Title,SearchAndSort.TwoStrings, out index);
+            DataLibrary.Titles = DataLibrary.CreateReferenceClass(DataLibrary.Titles, this, bookInfo.Title,SearchAndSort.TwoRefClassBooks, out index);
             Title = DataLibrary.Titles[index];
-            DataLibrary.SeriesTitles = DataLibrary.CreateReferenceClass(DataLibrary.SeriesTitles, this, bookInfo.SeriesTitle, SearchAndSort.TwoStrings, out index);
+            DataLibrary.SeriesTitles = DataLibrary.CreateReferenceClass(DataLibrary.SeriesTitles, this, bookInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks, out index);
             SeriesTitle = DataLibrary.SeriesTitles[index];
-            DataLibrary.Isbns = DataLibrary.CreateReferenceClass(DataLibrary.Isbns, this, bookInfo.Isbn, SearchAndSort.TwoStrings, out index);
+            DataLibrary.Isbns = DataLibrary.CreateReferenceClass(DataLibrary.Isbns, this, bookInfo.Isbn, SearchAndSort.TwoRefClassBooks, out index);
             Isbn = DataLibrary.Isbns[index];
-            DataLibrary.Prices = DataLibrary.CreateReferenceClass(DataLibrary.Prices, this, bookInfo.Price, SearchAndSort.TwoDoubles, out index);
+            DataLibrary.Prices = DataLibrary.CreateReferenceClass(DataLibrary.Prices, this, bookInfo.Price, SearchAndSort.TwoRefClassBooks, out index);
             Price = DataLibrary.Prices[index];
-            DataLibrary.MediaTypes = DataLibrary.CreateReferenceClass(DataLibrary.MediaTypes, this, bookInfo.MediaType, SearchAndSort.TwoStrings, out index);
+            DataLibrary.MediaTypes = DataLibrary.CreateReferenceClass(DataLibrary.MediaTypes, this, bookInfo.MediaType, SearchAndSort.TwoRefClassBooks, out index);
             MediaType = DataLibrary.MediaTypes[index];
-            DataLibrary.Authors = DataLibrary.CreateReferenceClass(DataLibrary.Authors, this, bookInfo.Author, SearchAndSort.TwoStrings, out index);
+            DataLibrary.Authors = DataLibrary.CreateReferenceClass(DataLibrary.Authors, this, bookInfo.Author, SearchAndSort.TwoRefClassBooks, out index);
             Author = DataLibrary.Authors[index];
-            DataLibrary.Publishers = DataLibrary.CreateReferenceClass(DataLibrary.Publishers, this, bookInfo.Publisher, SearchAndSort.TwoStrings, out index);
+            DataLibrary.Publishers = DataLibrary.CreateReferenceClass(DataLibrary.Publishers, this, bookInfo.Publisher, SearchAndSort.TwoRefClassBooks, out index);
             Publisher = DataLibrary.Publishers[index];
             if (bookInfo.Genres.Count > 0)
                 foreach (string genre in bookInfo.Genres)
                 {
-                    DataLibrary.Genres = DataLibrary.CreateReferenceClass(DataLibrary.Genres, this, genre, SearchAndSort.TwoStrings, out index);
+                    DataLibrary.Genres = DataLibrary.CreateReferenceClass(DataLibrary.Genres, this, genre, SearchAndSort.TwoRefClassBooks, out index);
                     Genres.Add(DataLibrary.Genres[index]);
                 }
             if (bookInfo.Themes.Count > 0)
                 foreach (string theme in bookInfo.Themes)
                 {
-                    DataLibrary.Themes = DataLibrary.CreateReferenceClass(DataLibrary.Themes, this, theme, SearchAndSort.TwoStrings, out index);
+                    DataLibrary.Themes = DataLibrary.CreateReferenceClass(DataLibrary.Themes, this, theme, SearchAndSort.TwoRefClassBooks, out index);
                     Themes.Add(DataLibrary.Themes[index]);
                 }
         }

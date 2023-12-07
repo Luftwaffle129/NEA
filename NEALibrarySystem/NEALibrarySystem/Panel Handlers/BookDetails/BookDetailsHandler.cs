@@ -1,5 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.Data_Structures.Records;
+using NEALibrarySystem.SearchList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +64,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _isNewRecord = true;
             }
 
-            UpdateBookCopies();
+            UpdateBookCopyList();
         }
         #region Book Copies
         /// <summary>
@@ -77,56 +78,30 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 foreach(string barcode in frmAddBookCopies.barcodes)
                 {
-                    zBookCopy temp = new zBookCopy()
-                    {
-                        Barcode = barcode,
-                        Status = status.InStock,
-                        ReturnDate = DateTime.Today,
-                        OverdueEmailLastSent = DateTime.Today,
-                        MemberID = barcode,
-                    };
-                    _bookData.BookCopyRelation.Add(temp);
+                    BookCopy bookCopy = new BookCopy(barcode, _bookData);
+                    DataLibrary.BookCopies.Add(bookCopy);
                 }
             }
-            UpdateBookCopies();
+            UpdateBookCopyList();
         }
         /// <summary>
-        /// deletes the selected book copies
+        /// deletes the selected book copies in the list view
         /// </summary>
         public void DeleteBookCopies()
         {
             foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
             {
-                for (int i = 0; i < _bookData.BookCopyRelation.Count; i++)
-                {
-                    if (item.SubItems[0].Text == _bookData.BookCopyRelation[i].Barcode)
-                    {
-                        _bookData.BookCopyRelation.RemoveAt(i);
-                    }
-                }
+                DataLibrary.DeleteBookCopy(DataLibrary.BookCopies[SearchAndSort.Binary(DataLibrary.BookCopies, item.SubItems[(int)BookCopyColumn.Barcode].Text, SearchAndSort.BookCopyAndBarcode)]);
             }
-            UpdateBookCopies();
+            UpdateBookCopyList();
         }
         /// <summary>
         /// Updates book copies shown in the book copy details listview
         /// </summary>
-        private void UpdateBookCopies()
+        private void UpdateBookCopyList()
         {
             _objects.CopyDetails.Items.Clear();
-            if (_bookData.BookCopyRelation != null)
-            {
-                foreach (zBookCopy bookCopy in _bookData.BookCopyRelation)
-                {
-                    string[] data = new string[3]
-                    {
-                    bookCopy.Barcode,
-                    bookCopy.Status.ToString(),
-                    bookCopy.ReturnDate.ToString()
-                    };
-                    ListViewItem row = new ListViewItem(data);
-                    _objects.CopyDetails.Items.Add(row);
-                }
-            }
+            SearchAndSort.BinaryRange(DataLibrary.BookCopies, _bookData.Isbn.Value, SearchAndSort.BookCopyAndIsbn);
         }
         /// <summary>
         /// initialises the list view used to display book copies
@@ -142,7 +117,7 @@ namespace NEALibrarySystem.PanelHandlers
             _objects.CopyDetails.GridLines = false;
             _objects.CopyDetails.Sorting = SortOrder.None;
             _objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            //add columns
+            // add columns
             string[] columns = new string[3]
             {
                 "Barcode",
