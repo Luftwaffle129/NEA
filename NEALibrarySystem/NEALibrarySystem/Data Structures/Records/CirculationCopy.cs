@@ -14,16 +14,15 @@ namespace NEALibrarySystem.Data_Structures
         public BookCopy BookCopy { get; set; }
         public ReferenceClass<DateTime, CirculationCopy> DueDate;
         public bool EmailSent { get; set; }
-
         public CircMemberRelation CircMemberRelation { get; set; }
         public CirculationCopy(CirculationCopyCreator info)
         {
             int index; // index that the reference class is inserted into
-            DataLibrary.CirculationTypes = DataLibrary.CreateReferenceClass(DataLibrary.CirculationTypes, this, info.Type, SearchAndSort.TwoCirculationCopies, out index);
+            DataLibrary.CirculationTypes = DataLibrary.CreateReferenceClass(DataLibrary.CirculationTypes, this, info.Type, SearchAndSort.TwoRefClassCircCopies, out index);
             Type = DataLibrary.CirculationTypes[index];
-            DataLibrary.CirculationDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDates, this, DateTime.Now, SearchAndSort.TwoCirculationCopies, out index);
+            DataLibrary.CirculationDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDates, this, DateTime.Now, SearchAndSort.TwoRefClassCircCopies, out index);
             Date = DataLibrary.CirculationDates[index];
-            DataLibrary.CirculationDueDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDueDates, this, info.DueDate, SearchAndSort.TwoCirculationCopies, out index);
+            DataLibrary.CirculationDueDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDueDates, this, info.DueDate, SearchAndSort.TwoRefClassCircCopies, out index);
             DueDate = DataLibrary.CirculationDueDates[index];
             CircMemberRelation circMemberRelation = new CircMemberRelation(info.Member, this);
             DataLibrary.CircMemberRelations.Add(circMemberRelation);

@@ -3,6 +3,7 @@ using NEALibrarySystem.ListViewHandlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -79,7 +80,7 @@ namespace NEALibrarySystem.SearchList
                 {
                 member.Barcode.Value,
                 member.FirstName.Value,
-                member.LastName.Value,
+                member.Surname.Value,
                 member.Type.Value.ToString()
                 };
                 ListViewItem row = new ListViewItem(data);
@@ -96,71 +97,29 @@ namespace NEALibrarySystem.SearchList
             switch (feature)
             {
                 case (DataLibrary.Feature.Member):
-                    columns = new string[]
+                    columns = new string[4]
                     {
-                        GetMemberColumn(0),
-                        GetMemberColumn(1),
-                        GetMemberColumn(2),
-                        GetMemberColumn(3),
+                        "Barcode",
+                        "First Name",
+                        "Surname",
+                        "Member type"
                     };
                     break;
                 case (DataLibrary.Feature.Book):
-                    columns = new string[]
+                    columns = new string[7]
                     {
-                        GetBookColumn(0),
-                        GetBookColumn(1),
-                        GetBookColumn(2),
-                        GetBookColumn(3),
-                        GetBookColumn(4),
-                        GetBookColumn(5),
-                        GetBookColumn(6),
+                        "Title",
+                        "ISBN",
+                        "Media Type",
+                        "Author",
+                        "Publisher",
+                        "Genres",
+                        "Themes"
                     };
                     break;
             }
             ListViewHandler.SetColumns(columns, ref lsv);
         }
-        public static string GetBookColumn(int num)
-        {
-            string column = ((BookColumn)num).ToString();
-            if (num == (int)BookColumn.MediaType)
-                column = column.Insert(5, " ");
-            else if (num == (int)BookColumn.Isbn)
-                column = column.ToUpper();
-            return column;
-        }
-        public static string GetMemberColumn(int num)
-        {
-            string column = ((MemberColumn)num).ToString();
-            if (num == (int)MemberColumn.FirstName)
-                column = column.Insert(5, " ");
-            else if (num == (int)MemberColumn.LastName)
-                column = column.Insert(4, " ");
-            else if (num == (int)MemberColumn.MemberType)
-                column = column.Insert(6, " ");
-            return column;
-        }
     }
-    public enum BookColumn
-    {
-        Title,
-        Isbn,
-        MediaType,
-        Author,
-        Publisher,
-        Genres,
-        Themes
-    }
-    public enum BookCopyColumn
-    {
-        Barcode,
-        Status,
-        DueDate
-    }
-    public enum MemberColumn
-    {
-        Barcode,
-        FirstName,
-        LastName,
-        MemberType
-    }
+
 }

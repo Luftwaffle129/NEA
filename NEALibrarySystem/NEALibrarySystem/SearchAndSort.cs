@@ -335,32 +335,28 @@ namespace NEALibrarySystem
         {
             return TwoStrings(copy.BookRelation.Book.Isbn.Value, isbn);
         }
-        public static Greatest TwoBookCopyBooks(BookCopy copy1, BookCopy copy2)
-        {
-            return TwoStrings(copy1.BookRelation.Book.Isbn.Value, copy2.BookRelation.Book.Isbn.Value);
-        }
-        public static Greatest TwoCirculationCopies(ReferenceClass<DateTime, CirculationCopy> copy1, ReferenceClass<DateTime, CirculationCopy> copy2)
+        public static Greatest TwoRefClassCircCopies(ReferenceClass<DateTime, CirculationCopy> copy1, ReferenceClass<DateTime, CirculationCopy> copy2)
         {
             Greatest value = TwoDates(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
                 return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
             return value;
         }
-        public static Greatest TwoCirculationCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
+        public static Greatest TwoRefClassCircCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
         {
             Greatest value = TwoEnums(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
                 return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
             return value;
         }
-        public static Greatest TwoMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
+        public static Greatest TwoRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
         {
             Greatest value = TwoStrings(member1.Value, member2.Value);
             if (value == Greatest.equal)
                 return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
             return value;
         }
-        public static Greatest TwoMembers(ReferenceClass<MemberType, Member> member1, ReferenceClass<MemberType, Member> member2)
+        public static Greatest TwoRefClassMembers(ReferenceClass<MemberType, Member> member1, ReferenceClass<MemberType, Member> member2)
         {
             Greatest value = TwoEnums(member1.Value, member2.Value);
             if (value == Greatest.equal)

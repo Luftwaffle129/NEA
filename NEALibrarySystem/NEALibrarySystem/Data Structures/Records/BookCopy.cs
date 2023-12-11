@@ -21,6 +21,30 @@ namespace NEALibrarySystem.Data_Structures
             BookRelation = new BookCopyRelation(book, this);
             DataLibrary.BookCopyRelations.Add(BookRelation);
             BookRelation.Book.BookCopyRelations.Add(BookRelation);
+            CirculationCopy = null;
+        }
+        public string GetStatus()
+        {
+            if (CirculationCopy == null)
+                return "In Stock";
+            if (CirculationCopy.Type.Value == CirculationType.reserved)
+                return "Reserved";
+            else
+                return "Loaned";
+        }
+        public string GetMemberBarcode()
+        {
+            if (CirculationCopy == null)
+                return "";
+            else
+                return CirculationCopy.CircMemberRelation.Member.Barcode.Value;
+        }
+        public string GetDueDate()
+        {
+            if (CirculationCopy == null)
+                return "";
+            else
+                return CirculationCopy.DueDate.Value.Date.ToString();
         }
     }
 }

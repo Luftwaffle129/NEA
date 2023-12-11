@@ -17,7 +17,7 @@ namespace NEALibrarySystem.Data_Structures
     {
         public ReferenceClass<string, Member> Barcode;
         public ReferenceClass<string, Member> FirstName;
-        public ReferenceClass<string, Member> LastName;
+        public ReferenceClass<string, Member> Surname;
         public string DateOfBirth;
         public string EmailAddress;
         public string PhoneNumber;
@@ -49,15 +49,17 @@ namespace NEALibrarySystem.Data_Structures
             AddressLine5 = memberInfo.AddressLine5;
             Postcode = memberInfo.Postcode;
             int index; // index of the created reference class
-            DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoMembers, out index);
+            DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoRefClassMembers, out index);
             Barcode = DataLibrary.MemberBarcodes[index];
-            DataLibrary.FirstNames = DataLibrary.CreateReferenceClass(DataLibrary.FirstNames, this, memberInfo.FirstName, SearchAndSort.TwoMembers, out index);
+            DataLibrary.FirstNames = DataLibrary.CreateReferenceClass(DataLibrary.FirstNames, this, memberInfo.FirstName, SearchAndSort.TwoRefClassMembers, out index);
             FirstName = DataLibrary.FirstNames[index];
-            DataLibrary.LastNames = DataLibrary.CreateReferenceClass(DataLibrary.LastNames, this, memberInfo.LastName, SearchAndSort.TwoMembers, out index);
-            LastName = DataLibrary.LastNames[index];
-            DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoMembers, out index);
+            DataLibrary.LastNames = DataLibrary.CreateReferenceClass(DataLibrary.LastNames, this, memberInfo.LastName, SearchAndSort.TwoRefClassMembers, out index);
+            Surname = DataLibrary.LastNames[index];
+            DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoRefClassMembers, out index);
             Type = DataLibrary.MemberTypes[index];
         }
+
+        public const int MemberTypeCount = 3;
     }
     public enum MemberType
     {

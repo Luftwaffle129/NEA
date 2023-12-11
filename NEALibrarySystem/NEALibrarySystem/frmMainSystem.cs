@@ -13,7 +13,7 @@ using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.SearchList;
 using NEALibrarySystem.Panel_Handlers.BookCheckIn;
 using NEALibrarySystem.PanelHandlers;
-using NEALibrarySystem.ListViewHandlers.SelectedItems;
+using NEALibrarySystem.ListViewHandlers.CirculatedBooks;
 
 namespace NEALibrarySystem
 {
@@ -41,6 +41,7 @@ namespace NEALibrarySystem
 
         private SearchItemsHandler _searchedItemsHandler;
         private BookLoanHandler _loanHandler;
+        private BookReturnHandler _returnHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private DeleteHandler _deleteHandler;
         #region initialisation
@@ -57,7 +58,8 @@ namespace NEALibrarySystem
             new Panel[] { pnlSetting }
             };
 
-            InitialiseCheckIn();
+            InitialiseLoan();
+            InitialiseReturn();
             InitialiseBookDetails();
             InitialiseDelete();
         }
@@ -85,9 +87,24 @@ namespace NEALibrarySystem
                 btnSubTab7
             };
         }
-        private void InitialiseCheckIn()
+        private void InitialiseLoan()
         {
-            zCirculationObjectHandler circulationObjectHandler = new zCirculationObjectHandler
+            CirculationObjectHandler circulationObjectHandler = new CirculationObjectHandler
+            (
+                txtLoanMemberBarcode,
+                txtLoanMemberName,
+                txtLoanLoans,
+                txtLoanOverdue,
+                txtLoanLateFees,
+                txtLoanEnterBarcode,
+                lsvLoanSelectedBooks,
+                false
+            );
+            _loanHandler = new BookLoanHandler(circulationObjectHandler, dtpLoanReturnDate);
+        }
+        private void InitialiseReturn()
+        {
+            CirculationObjectHandler circulationObjectHandler = new CirculationObjectHandler
             (
                 txtReturnMemberBarcode,
                 txtReturnMemberName,
@@ -98,7 +115,7 @@ namespace NEALibrarySystem
                 lsvReturnSelectedBooks,
                 false
             );
-            _loanHandler = new BookLoanHandler(circulationObjectHandler, dtpLoanReturnDate);
+            _returnHandler = new BookReturnHandler(circulationObjectHandler);
         }
         private void InitialiseBookDetails()
         {
@@ -183,7 +200,7 @@ namespace NEALibrarySystem
             switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
-                    _bookDetailsHandler.Load(DataLibrary.Books[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[SearchItemsHandler.GetBookColumn((int)BookColumn.Isbn)].Text, SearchAndSort.RefClassAndString)]);
+                    _bookDetailsHandler.Load(DataLibrary.Books[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)]);
                     break;
             }
         }
@@ -312,7 +329,7 @@ namespace NEALibrarySystem
         {
             if (pnlReturn.Visible)
             {
-                _loanHandler.Load();
+                _returnHandler.Load();
             }
         }
         private void pnlSell_VisibleChanged(object sender, EventArgs e)
@@ -442,6 +459,24 @@ namespace NEALibrarySystem
             _loanHandler.CirculationManager.UpdateMemberDetails();
         }
         #endregion
+        #region return handler
+        private void txtReturnMemberBarcode_TextChanged(object sender, EventArgs e)
+        {
+            _returnHandler.MemberBarcodeUpdated();
+        }
+        private void txtReturnEnterBarcode_TextChanged(object sender, EventArgs e)
+        {
+            _returnHandler.CirculationManager.AddBookCopy();
+        }
+        private void btnReturnSave_Click(object sender, EventArgs e)
+        {
+            _returnHandler.Save();
+        }
+        private void btnReturnCancel_Click(object sender, EventArgs e)
+        {
+            _returnHandler.Load();
+        }
+        #endregion
         #region search handler
         private void lsvSearchItems_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -469,6 +504,10 @@ namespace NEALibrarySystem
         #endregion
 
         #endregion
+        private void txtReturnLoans_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         /*
          *  OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "c:\\";

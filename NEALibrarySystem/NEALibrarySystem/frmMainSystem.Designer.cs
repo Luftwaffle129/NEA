@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -135,10 +135,10 @@
             this.txtLoanLateFees = new System.Windows.Forms.TextBox();
             this.dtpLoanReturnDate = new System.Windows.Forms.DateTimePicker();
             this.lblLoanSetDueDate = new System.Windows.Forms.Label();
-            this.txtLoanLateBooks = new System.Windows.Forms.TextBox();
+            this.txtLoanOverdue = new System.Windows.Forms.TextBox();
             this.lblLoanOverdueBooks = new System.Windows.Forms.Label();
             this.txtLoanSelectedBooks = new System.Windows.Forms.Label();
-            this.txtLoanCurrentMemberCheckOuts = new System.Windows.Forms.TextBox();
+            this.txtLoanLoans = new System.Windows.Forms.TextBox();
             this.lblLoanCurrentMemberLoans = new System.Windows.Forms.Label();
             this.txtLoanMemberBarcode = new System.Windows.Forms.TextBox();
             this.lblLoanMemberBarcode = new System.Windows.Forms.Label();
@@ -1386,10 +1386,10 @@
             this.pnlLoan.Controls.Add(this.txtLoanLateFees);
             this.pnlLoan.Controls.Add(this.dtpLoanReturnDate);
             this.pnlLoan.Controls.Add(this.lblLoanSetDueDate);
-            this.pnlLoan.Controls.Add(this.txtLoanLateBooks);
+            this.pnlLoan.Controls.Add(this.txtLoanOverdue);
             this.pnlLoan.Controls.Add(this.lblLoanOverdueBooks);
             this.pnlLoan.Controls.Add(this.txtLoanSelectedBooks);
-            this.pnlLoan.Controls.Add(this.txtLoanCurrentMemberCheckOuts);
+            this.pnlLoan.Controls.Add(this.txtLoanLoans);
             this.pnlLoan.Controls.Add(this.lblLoanCurrentMemberLoans);
             this.pnlLoan.Controls.Add(this.txtLoanMemberBarcode);
             this.pnlLoan.Controls.Add(this.lblLoanMemberBarcode);
@@ -1502,14 +1502,14 @@
             this.lblLoanSetDueDate.TabIndex = 22;
             this.lblLoanSetDueDate.Text = "Due Date:";
             // 
-            // txtLoanLateBooks
+            // txtLoanOverdue
             // 
-            this.txtLoanLateBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoanLateBooks.Location = new System.Drawing.Point(249, 227);
-            this.txtLoanLateBooks.Name = "txtLoanLateBooks";
-            this.txtLoanLateBooks.ReadOnly = true;
-            this.txtLoanLateBooks.Size = new System.Drawing.Size(212, 38);
-            this.txtLoanLateBooks.TabIndex = 21;
+            this.txtLoanOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanOverdue.Location = new System.Drawing.Point(249, 227);
+            this.txtLoanOverdue.Name = "txtLoanOverdue";
+            this.txtLoanOverdue.ReadOnly = true;
+            this.txtLoanOverdue.Size = new System.Drawing.Size(212, 38);
+            this.txtLoanOverdue.TabIndex = 21;
             // 
             // lblLoanOverdueBooks
             // 
@@ -1531,14 +1531,14 @@
             this.txtLoanSelectedBooks.TabIndex = 18;
             this.txtLoanSelectedBooks.Text = "Selected Books:";
             // 
-            // txtLoanCurrentMemberCheckOuts
+            // txtLoanLoans
             // 
-            this.txtLoanCurrentMemberCheckOuts.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoanCurrentMemberCheckOuts.Location = new System.Drawing.Point(249, 167);
-            this.txtLoanCurrentMemberCheckOuts.Name = "txtLoanCurrentMemberCheckOuts";
-            this.txtLoanCurrentMemberCheckOuts.ReadOnly = true;
-            this.txtLoanCurrentMemberCheckOuts.Size = new System.Drawing.Size(212, 38);
-            this.txtLoanCurrentMemberCheckOuts.TabIndex = 17;
+            this.txtLoanLoans.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoanLoans.Location = new System.Drawing.Point(249, 167);
+            this.txtLoanLoans.Name = "txtLoanLoans";
+            this.txtLoanLoans.ReadOnly = true;
+            this.txtLoanLoans.Size = new System.Drawing.Size(212, 38);
+            this.txtLoanLoans.TabIndex = 17;
             // 
             // lblLoanCurrentMemberLoans
             // 
@@ -1833,6 +1833,7 @@
             this.txtReturnEnterBarcode.Name = "txtReturnEnterBarcode";
             this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnEnterBarcode.TabIndex = 30;
+            this.txtReturnEnterBarcode.TextChanged += new System.EventHandler(this.txtReturnEnterBarcode_TextChanged);
             // 
             // lblReturnLateFees
             // 
@@ -1894,6 +1895,7 @@
             this.txtReturnLoans.ReadOnly = true;
             this.txtReturnLoans.Size = new System.Drawing.Size(212, 38);
             this.txtReturnLoans.TabIndex = 22;
+            this.txtReturnLoans.TextChanged += new System.EventHandler(this.txtReturnLoans_TextChanged);
             // 
             // lblReturnLoans
             // 
@@ -1914,6 +1916,7 @@
             this.txtReturnMemberBarcode.Name = "txtReturnMemberBarcode";
             this.txtReturnMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnMemberBarcode.TabIndex = 20;
+            this.txtReturnMemberBarcode.TextChanged += new System.EventHandler(this.txtReturnMemberBarcode_TextChanged);
             // 
             // lblReturnMemberBarcode
             // 
@@ -1958,6 +1961,7 @@
             this.btnReturnCancel.TabIndex = 14;
             this.btnReturnCancel.Text = "Cancel";
             this.btnReturnCancel.UseVisualStyleBackColor = false;
+            this.btnReturnCancel.Click += new System.EventHandler(this.btnReturnCancel_Click);
             // 
             // txtReturnLateFees
             // 
@@ -1980,6 +1984,7 @@
             this.btnReturnSave.TabIndex = 13;
             this.btnReturnSave.Text = "Save";
             this.btnReturnSave.UseVisualStyleBackColor = false;
+            this.btnReturnSave.Click += new System.EventHandler(this.btnReturnSave_Click);
             // 
             // pnlBookDetails
             // 
@@ -2386,16 +2391,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend3);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series3);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3192,15 +3197,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlReturn);
+            this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlReservation);
-            this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlStaff);
@@ -3346,11 +3351,11 @@
         private System.Windows.Forms.Button btnStaffSave;
         private System.Windows.Forms.Panel pnlLoan;
         private System.Windows.Forms.Label lblLoanSetDueDate;
-        private System.Windows.Forms.TextBox txtLoanLateBooks;
+        private System.Windows.Forms.TextBox txtLoanOverdue;
         private System.Windows.Forms.Label lblLoanOverdueBooks;
         private System.Windows.Forms.ListView lsvLoanSelectedBooks;
         private System.Windows.Forms.Label txtLoanSelectedBooks;
-        private System.Windows.Forms.TextBox txtLoanCurrentMemberCheckOuts;
+        private System.Windows.Forms.TextBox txtLoanLoans;
         private System.Windows.Forms.Label lblLoanCurrentMemberLoans;
         private System.Windows.Forms.TextBox txtLoanMemberBarcode;
         private System.Windows.Forms.Label lblLoanMemberBarcode;

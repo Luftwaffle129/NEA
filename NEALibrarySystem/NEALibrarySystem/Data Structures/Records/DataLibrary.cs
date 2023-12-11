@@ -347,14 +347,14 @@ namespace NEALibrarySystem.Data_Structures
         }
         public static void ModifyCirculationCopy(CirculationCopy circCopy, DateTime newDueDate)
         {
-            CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoCirculationCopies);
+            CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoRefClassCircCopies);
         }
         public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
-            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoMembers);
-            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoMembers);
-            LastNames = ModifyReferenceClass(LastNames, member, member.LastName, out member.LastName, newMemberInfo.LastName, TwoMembers);
-            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoMembers);
+            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
+            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
+            LastNames = ModifyReferenceClass(LastNames, member, member.Surname, out member.Surname, newMemberInfo.LastName, TwoRefClassMembers);
+            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;
@@ -421,10 +421,10 @@ namespace NEALibrarySystem.Data_Structures
                 foreach (CircMemberRelation circMemberRelation in member.CircMemberRelations)
                     DeleteCirculationCopy(circMemberRelation.CirculationCopy);
             // delete reference classes
-            MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoMembers);
-            FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoMembers);
-            LastNames = DeleteReferenceClass(LastNames, member.LastName, TwoMembers);
-            MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoMembers);
+            MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
+            FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoRefClassMembers);
+            LastNames = DeleteReferenceClass(LastNames, member.Surname, TwoRefClassMembers);
+            MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
             // delete member
             Members.Remove(member);
         }
@@ -453,9 +453,9 @@ namespace NEALibrarySystem.Data_Structures
             // delete book copy relation
             circulationCopy.BookCopy.CirculationCopy = null;
             // delete reference classes
-            CirculationDueDates = DeleteReferenceClass(CirculationDueDates, circulationCopy.DueDate, TwoCirculationCopies);
-            CirculationDates = DeleteReferenceClass(CirculationDates, circulationCopy.Date, TwoCirculationCopies);
-            CirculationTypes = DeleteReferenceClass(CirculationTypes, circulationCopy.Type, TwoCirculationCopies);
+            CirculationDueDates = DeleteReferenceClass(CirculationDueDates, circulationCopy.DueDate, TwoRefClassCircCopies);
+            CirculationDates = DeleteReferenceClass(CirculationDates, circulationCopy.Date, TwoRefClassCircCopies);
+            CirculationTypes = DeleteReferenceClass(CirculationTypes, circulationCopy.Type, TwoRefClassCircCopies);
             CirculationCopies.Remove(circulationCopy);
         }
         #endregion

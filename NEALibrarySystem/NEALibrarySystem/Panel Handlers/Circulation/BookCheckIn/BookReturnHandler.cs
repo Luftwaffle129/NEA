@@ -11,14 +11,12 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
 {
-    public class BookLoanHandler
+    public class BookReturnHandler
     {
-        private DateTimePicker _returnDate;
         public CirculationObjectHandler CirculationManager;
-        public BookLoanHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker ReturnDate) 
-        { 
+        public BookReturnHandler(CirculationObjectHandler circulationObjectHandler)
+        {
             CirculationManager = circulationObjectHandler;
-            _returnDate = ReturnDate;
         }
         /// <summary>
         /// empties all fields in the panel
@@ -26,10 +24,6 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         public void Load()
         {
             CirculationManager.ResetFields();
-            CirculationManager.BookCopyList.Clear();
-            CirculationManager.SelectedMember = null;
-            _returnDate.Value = DateTime.Today;
-            _returnDate.MinDate = DateTime.Today;
         }
         /// <summary>
         /// updates the book copies being loaned and creates a transaction record
@@ -41,7 +35,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             {
                 if (CirculationManager.BookCopyList.Count > 0)
                 {
-                    // check if the books can be loaned
+                    // check if the books can be returned
                     bool validBooks = true;
                     int index = 0;
                     while (index < CirculationManager.BookCopyList.Count)
@@ -49,28 +43,23 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                         if (CirculationManager.BookCopyList[index].CirculationCopy != null)
                         {
                             // check if book is not loaned or reserved by another member
-                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.loaned 
+                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.reserved
                                 || CirculationManager.BookCopyList[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != CirculationManager.SelectedMember.Barcode.Value)
                                 validBooks = false;
                         }
+                        else
+                                validBooks = false;
                     }
                     if (validBooks)
                     {
-                        // loan books
                         foreach (BookCopy copy in CirculationManager.BookCopyList)
                         {
-                            CirculationCopyCreator creator = new CirculationCopyCreator();
-                            creator.BookCopy = copy;
-                            creator.Member = CirculationManager.SelectedMember;
-                            creator.DueDate = _returnDate.Value;
-                            creator.Type = CirculationType.loaned;
-                            DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
+                            DataLibrary.DeleteCirculationCopy(copy.CirculationCopy);
                         }
-                        FrmMainSystem.Main.DisplayProcessMessage("Books Loaned");
-                        Load();
+                        FrmMainSystem.Main.DisplayProcessMessage("Books Returned");
                     }
                     else
-                        MessageBox.Show("Not all book copies available");
+                        MessageBox.Show("Not all book copies loaned by the member");
                 }
                 else
                     MessageBox.Show("No book copies selected");
@@ -84,14 +73,6 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         public void MemberBarcodeUpdated()
         {
             CirculationManager.UpdateMemberDetails();
-            if (CirculationManager.SelectedMember != null)
-            {
-                _returnDate.Value = DateTime.Today.AddDays(Settings.LoanDurations[(int)CirculationManager.SelectedMember.Type.Value]);
-            }
-            else
-            {
-                _returnDate.Value = DateTime.Today;
-            }
         }
     }
 }

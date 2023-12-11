@@ -52,6 +52,7 @@
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
     <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookReturnHandler.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />

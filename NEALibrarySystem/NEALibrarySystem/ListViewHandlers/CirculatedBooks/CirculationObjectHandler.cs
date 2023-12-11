@@ -1,4 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
+using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +21,14 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         private TextBox _enterBarcodes;
 
         // Variables
-        private Member _selectedMember;
         private bool _priceNeeded;
-        private List<BookCopy> _selectedBookCopyList;
-        public List<BookCopy> SelectedBookCopyList
+        private List<BookCopy> _bookCopyList;
+        public List<BookCopy> BookCopyList
         {
-            get { return _selectedBookCopyList; }
-            set { _selectedBookCopyList = value ?? new List<BookCopy>(); }
+            get { return _bookCopyList; }
+            set { _bookCopyList = value ?? new List<BookCopy>(); }
         }
-
+        public Member SelectedMember;
         /// <summary>
         /// Initials ciruclation objects
         /// </summary>
@@ -52,11 +52,20 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _enterBarcodes = enterBarcode;
             _priceNeeded = priceNeeded;
             InitialiseListView(priceNeeded);
+            SelectedMember = null;
         }
         /// <summary>
         /// Clears the Objects' text properties
         /// </summary>
         public void ResetFields()
+        {
+            _enterBarcodes.Text = "";
+            ResetMemberDetailFields();
+        }
+        /// <summary>
+        /// Clears the Objects' text properties
+        /// </summary>
+        public void ResetMemberDetailFields()
         {
             _memberName.Text = "";
             _memberBarcode.Text = "";
@@ -65,21 +74,44 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _overdueBooks.Text = "0";
             _enterBarcodes.Text = "";
         }
+        /// <summary>
+        /// Updates the textboxes displaying the curreny
+        /// </summary>
         public void UpdateMemberDetails()
         {
             // set up textboxes
             int currentLoans = 0;
             int overdueBooks = 0;
-            int lateFees = 0;
+            double lateFees = 0;
             string barcode = _memberBarcode.Text;
 
             if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength)
             {
-                _selectedMember = null;
-                // find the member's name from the barcode
-                int memberIndex = SearchAndSort.Binary(DataLibrary.Members, barcode);
-                // get member's loaned book copies
-
+                int memberBarcodeIndex = SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString);
+                if (memberBarcodeIndex != -1)
+                {
+                    // find the member and their name from the barcode
+                    SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
+                    _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
+                    // get member's loans and reservations
+                    foreach (CircMemberRelation relation in DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference.CircMemberRelations)
+                    {
+                        if (relation.CirculationCopy.Type.Value == CirculationType.loaned)
+                        {
+                            currentLoans++;
+                            if (relation.CirculationCopy.DueDate.Value < DateTime.Now)
+                            {
+                                overdueBooks++;
+                                lateFees += GetLateFees(relation.CirculationCopy.DueDate.Value - DateTime.Now);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ResetMemberDetailFields();
+                    SelectedMember = null;
+                }
             }
             _currentLoans.Text = currentLoans.ToString();
             _overdueBooks.Text = overdueBooks.ToString();
@@ -104,24 +136,109 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _selectedBooks.Scrollable = true;
 
             // sets columns
-            string[] columns =
+            string[] columns;
+            if (PriceNeeded)
             {
-                "Barcode",
-                "Title",
-                "Series Title",
-                "Author",
-                "Price"
-            };
-            if (!PriceNeeded)
-            {
-                string[] tempColumns = new string[columns.Length - 1];
-                for (int index = 0; index < tempColumns.Length; index++)
+                columns = new string[]
                 {
-                    tempColumns[index] = columns[index];
-                }
-                columns = tempColumns;
+                    "Barcode",
+                    "Title",
+                    "Series Title",
+                    "Author",
+                    "Price",
+                    "Status",
+                    "Member Barcode"
+                };
+            }
+            else
+            {
+                columns = new string[]
+                {
+                    "Barcode",
+                    "Title",
+                    "Series Title",
+                    "Author",
+                    "Status",
+                    "Member Barcode"
+                };
             }
             ListViewHandler.SetColumns(columns, ref _selectedBooks);
+        }
+        public void UpdateListView()
+        {
+            _selectedBooks.Items.Clear();
+            foreach (BookCopy copy in BookCopyList)
+            {
+                string[] data = Array.Empty<string>();
+                if (_priceNeeded)
+                {
+                    data = new string[]
+                    {
+                        copy.Barcode.Value,
+                        copy.BookRelation.Book.Title.Value,
+                        copy.BookRelation.Book.SeriesTitle.Value,
+                        copy.BookRelation.Book.Author.Value,
+                        copy.BookRelation.Book.Price.Value.ToString(),
+                        copy.GetStatus(),
+                        copy.GetMemberBarcode()
+
+                    };
+                }
+                else
+                {
+                    data = new string[]
+{
+                        copy.Barcode.Value,
+                        copy.BookRelation.Book.Title.Value,
+                        copy.BookRelation.Book.SeriesTitle.Value,
+                        copy.BookRelation.Book.Author.Value,
+                        copy.GetStatus(),
+                        copy.GetMemberBarcode()
+                    };
+                }
+                ListViewItem row = new ListViewItem(data);
+                _selectedBooks.Items.Add(row);
+            }
+        }
+        /// <summary>
+        /// removes the checked items from the list view of selected books
+        /// </summary>
+        public void DeleteCheckedListView()
+        {
+            if (_selectedBooks.CheckedItems.Count > 0)
+            {
+                foreach (ListViewItem item in _selectedBooks.CheckedItems)
+                {
+                    if (BookCopyList.Count > 0)
+                    {
+                        for (int index = 0; index < BookCopyList.Count; index++)
+                        {
+                            if (BookCopyList[index].Barcode.Value == item.SubItems[0].Text)
+                            {
+                                BookCopyList.RemoveAt(index);
+                            }
+                        }
+                    }
+                }
+                UpdateListView();
+            }
+        }
+        public void AddBookCopy()
+        {
+            string barcode = _enterBarcodes.Text;
+            int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString);
+            if (index == -1)
+            {
+                MessageBox.Show("Book Not Found");
+            }
+            else
+            {
+                BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
+            }
+        }
+        public double GetLateFees(TimeSpan time)
+        {
+            return time.Days * Settings.LateFeePerDay;
         }
     }
 }

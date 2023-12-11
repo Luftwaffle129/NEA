@@ -1,4 +1,5 @@
-﻿using NEALibrarySystem.Data_Structures;
+﻿/*
+ * using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.ListViewHandlers.CirculatedItems;
 using System;
 using System.CodeDom.Compiler;
@@ -94,7 +95,7 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
                     {
                         memberFound = true;
                         SelectedMember = DataLibrary.Members[index];
-                        _memberName.Text = $"{SelectedMember.FirstName} {SelectedMember.LastName}";
+                        _memberName.Text = $"{SelectedMember.FirstName} {SelectedMember.Surname}";
                     }
                 } while (++index < DataLibrary.Members.Count && !memberFound);
                 if (DataLibrary.Books.Count > 0 && memberFound)
@@ -223,4 +224,4 @@ namespace NEALibrarySystem.ListViewHandlers.SelectedItems
             }
         }
     }
-}
+} */

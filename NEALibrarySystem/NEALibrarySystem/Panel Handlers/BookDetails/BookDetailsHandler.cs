@@ -1,5 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.Data_Structures.Records;
+using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.SearchList;
 using System;
 using System.Collections.Generic;
@@ -78,8 +79,7 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 foreach(string barcode in frmAddBookCopies.barcodes)
                 {
-                    BookCopy bookCopy = new BookCopy(barcode, _bookData);
-                    DataLibrary.BookCopies.Add(bookCopy);
+                    DataLibrary.CreateBookCopy(barcode, _bookData);
                 }
             }
             UpdateBookCopyList();
@@ -89,10 +89,9 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void DeleteBookCopies()
         {
-            foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
-            {
-                DataLibrary.DeleteBookCopy(DataLibrary.BookCopies[SearchAndSort.Binary(DataLibrary.BookCopies, item.SubItems[(int)BookCopyColumn.Barcode].Text, SearchAndSort.BookCopyAndBarcode)]);
-            }
+            if (_objects.CopyDetails.CheckedItems.Count > 0)
+                foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
+                    DataLibrary.DeleteBookCopy(DataLibrary.BookCopies[SearchAndSort.Binary(DataLibrary.BookCopies, item.SubItems[0].Text, SearchAndSort.BookCopyAndBarcode)]);
             UpdateBookCopyList();
         }
         /// <summary>
@@ -101,7 +100,16 @@ namespace NEALibrarySystem.PanelHandlers
         private void UpdateBookCopyList()
         {
             _objects.CopyDetails.Items.Clear();
-            SearchAndSort.BinaryRange(DataLibrary.BookCopies, _bookData.Isbn.Value, SearchAndSort.BookCopyAndIsbn);
+            foreach (int index in SearchAndSort.BinaryRange(DataLibrary.BookCopies, _bookData.Isbn.Value, SearchAndSort.BookCopyAndIsbn))
+            {
+                BookCopy bookCopy = DataLibrary.BookCopies[index];
+                string[] data =
+                {
+                    bookCopy.Barcode.Value,
+                    bookCopy.GetStatus(),
+                    bookCopy.GetDueDate()
+                };
+            }
         }
         /// <summary>
         /// initialises the list view used to display book copies
@@ -184,5 +192,7 @@ namespace NEALibrarySystem.PanelHandlers
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             }
         }
+
     }
+
 }
