@@ -53,8 +53,8 @@ namespace NEALibrarySystem.Data_Structures
             Barcode = DataLibrary.MemberBarcodes[index];
             DataLibrary.FirstNames = DataLibrary.CreateReferenceClass(DataLibrary.FirstNames, this, memberInfo.FirstName, SearchAndSort.TwoRefClassMembers, out index);
             FirstName = DataLibrary.FirstNames[index];
-            DataLibrary.LastNames = DataLibrary.CreateReferenceClass(DataLibrary.LastNames, this, memberInfo.LastName, SearchAndSort.TwoRefClassMembers, out index);
-            Surname = DataLibrary.LastNames[index];
+            DataLibrary.Surnames = DataLibrary.CreateReferenceClass(DataLibrary.Surnames, this, memberInfo.LastName, SearchAndSort.TwoRefClassMembers, out index);
+            Surname = DataLibrary.Surnames[index];
             DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoRefClassMembers, out index);
             Type = DataLibrary.MemberTypes[index];
         }

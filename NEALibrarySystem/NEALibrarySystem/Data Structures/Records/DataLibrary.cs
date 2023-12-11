@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Data_Structures
     {
         #region data structures
         #region book copies
-        private static List<BookCopy> _bookCopies;
+        private static List<BookCopy> _bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
         {
             get { return _bookCopies; }
@@ -24,19 +24,19 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region book copy barcodes
-        private static List<ReferenceClass<string, BookCopy>> _copyBarcodes;
+        private static List<ReferenceClass<string, BookCopy>> _bookCopyBarcodes = new List<ReferenceClass<string, BookCopy>>();
         public static List<ReferenceClass<string, BookCopy>> BookCopyBarcodes
         {
-            get { return _copyBarcodes; }
-            set { _copyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
+            get { return _bookCopyBarcodes; }
+            set { _bookCopyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
         }
         #endregion
         #region book copy relations
-        private static List<BookCopyRelation> _bookCopyRelation;
+        private static List<BookCopyRelation> _bookCopyRelations = new List<BookCopyRelation>();
         public static List<BookCopyRelation> BookCopyRelations
         {
-            get { return _bookCopyRelation; }
-            set { _bookCopyRelation = value?? new List<BookCopyRelation>(); }
+            get { return _bookCopyRelations; }
+            set { _bookCopyRelations = value ?? new List<BookCopyRelation>(); }
         }
         #endregion
         #region books
@@ -136,19 +136,19 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region first name
-        private static List<ReferenceClass<string, Member>> _firstName = new List<ReferenceClass<string, Member>>();
+        private static List<ReferenceClass<string, Member>> _firstNames = new List<ReferenceClass<string, Member>>();
         public static List<ReferenceClass<string, Member>> FirstNames
         {
-            get { return _firstName; }
-            set { _firstName = value ?? new List<ReferenceClass<string, Member>>(); }
+            get { return _firstNames; }
+            set { _firstNames = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
         #region surname
-        private static List<ReferenceClass<string, Member>> _surname = new List<ReferenceClass<string, Member>>();
-        public static List<ReferenceClass<string, Member>> LastNames
+        private static List<ReferenceClass<string, Member>> _surnames = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> Surnames
         {
-            get { return _surname; }
-            set { _surname = value ?? new List<ReferenceClass<string, Member>>(); }
+            get { return _surnames; }
+            set { _surnames = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
         #region member type
@@ -168,7 +168,7 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region circulation copies
-        private static List<CirculationCopy> _circulationCopies;
+        private static List<CirculationCopy> _circulationCopies = new List<CirculationCopy>();
         public static List <CirculationCopy> CirculationCopies
         {
             get { return _circulationCopies; }
@@ -176,7 +176,7 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region circulation copy types
-        private static List<ReferenceClass<CirculationType, CirculationCopy>> _circulationTypes;
+        private static List<ReferenceClass<CirculationType, CirculationCopy>> _circulationTypes = new List<ReferenceClass<CirculationType, CirculationCopy>>();
         public static List<ReferenceClass<CirculationType, CirculationCopy>> CirculationTypes
         {
             get { return _circulationTypes; }
@@ -184,7 +184,7 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region circulation due dates
-        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDueDates;
+        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDueDates = new List<ReferenceClass<DateTime, CirculationCopy>>();
         public static List<ReferenceClass<DateTime, CirculationCopy>> CirculationDueDates
         {
             get { return _circulationDueDates; }
@@ -192,15 +192,15 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region circulation dates
-        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDates;
+        private static List<ReferenceClass<DateTime, CirculationCopy>> _circulationDates = new List<ReferenceClass<DateTime, CirculationCopy>>();
         public static List<ReferenceClass<DateTime, CirculationCopy>> CirculationDates
         {
             get { return _circulationDates; }
             set { _circulationDates = value ?? new List<ReferenceClass<DateTime, CirculationCopy>>(); }
         }
         #endregion
-        #region
-        private static List<CircMemberRelation> _circMemberRelations;
+        #region circulation member relations
+        private static List<CircMemberRelation> _circMemberRelations = new List<CircMemberRelation>();
         public static List<CircMemberRelation> CircMemberRelations
         {
             get { return _circMemberRelations; }
@@ -357,7 +357,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
             FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
-            LastNames = ModifyReferenceClass(LastNames, member, member.Surname, out member.Surname, newMemberInfo.LastName, TwoRefClassMembers);
+            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.LastName, TwoRefClassMembers);
             MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
@@ -427,7 +427,7 @@ namespace NEALibrarySystem.Data_Structures
             // delete reference classes
             MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
             FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoRefClassMembers);
-            LastNames = DeleteReferenceClass(LastNames, member.Surname, TwoRefClassMembers);
+            Surnames = DeleteReferenceClass(Surnames, member.Surname, TwoRefClassMembers);
             MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
             // delete member
             Members.Remove(member);
@@ -463,6 +463,38 @@ namespace NEALibrarySystem.Data_Structures
             CirculationCopies.Remove(circulationCopy);
         }
         #endregion
+        #endregion
+        #region the no no
+        /// <summary>
+        /// DO NOT DO THIS. THIS BAD
+        /// </summary>
+        public static void ClearAllData()
+        {
+            _bookCopies.Clear();
+            _bookCopyBarcodes.Clear();
+            _bookCopyRelations.Clear();
+            _books.Clear();
+            _titles.Clear();
+            _seriesTitles.Clear();
+            _isbns.Clear();
+            _prices.Clear();
+            _mediaTypes.Clear();
+            _authors.Clear();
+            _publishers.Clear();
+            _themes.Clear();
+            _genres.Clear();
+            _members.Clear();
+            _memberBarcodes.Clear();
+            _firstNames.Clear();
+            _surnames.Clear();
+            _memberTypes.Clear();
+            _staff.Clear();
+            _circulationCopies.Clear();
+            _circulationTypes.Clear();
+            _circulationDueDates.Clear();
+            _circulationDates.Clear();
+            _circMemberRelations.Clear();
+        }
         #endregion
     }
 }

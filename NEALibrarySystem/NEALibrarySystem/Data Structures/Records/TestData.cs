@@ -1,4 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures.Records;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +84,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestData()
         {
-            ClearAllData();
+            DataLibrary.ClearAllData();
             GenerateBooks();
             GenerateMembers();
             // set up settings details
@@ -99,6 +100,7 @@ namespace NEALibrarySystem.Data_Structures
             {
                 BookCreator bookCreator = new BookCreator();
                 bookCreator.Title = titles[rand.Next(0, titles.Length)];
+                bookCreator.SeriesTitle = titles[rand.Next(0, titles.Length)];
                 string isbn = "";
                 for (int j = 0; j < 13; j++)
                 {
@@ -176,23 +178,6 @@ namespace NEALibrarySystem.Data_Structures
                 output += GenerateRandomLetter();
             }
             return output;
-        }
-        /// <summary>
-        /// clears all records
-        /// </summary>
-        private void ClearAllData()
-        {
-            DataLibrary.Books.Clear();
-            DataLibrary.Members.Clear();
-            DataLibrary.Titles.Clear();
-            DataLibrary.MediaTypes.Clear();
-            DataLibrary.Authors.Clear();
-            DataLibrary.Publishers.Clear();
-            DataLibrary.Genres.Clear();
-            DataLibrary.Themes.Clear();
-            DataLibrary.Staff.Clear();
-            DataLibrary.CirculationCopies.Clear();
-            DataLibrary.BookCopies.Clear();
         }
     }
 }

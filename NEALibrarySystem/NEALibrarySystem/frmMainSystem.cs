@@ -200,7 +200,7 @@ namespace NEALibrarySystem
             switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
-                    _bookDetailsHandler.Load(DataLibrary.Books[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)]);
+                    _bookDetailsHandler.Load(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference);
                     break;
             }
         }

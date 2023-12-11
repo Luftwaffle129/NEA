@@ -19,7 +19,7 @@ namespace NEALibrarySystem.PanelHandlers
         private BookDetailsObjects _objects;
         private Book _bookData;
         private List<TempBookCopy> _bookCopyList;
-        private bool _isNewRecord = false;
+        private bool _isNewRecord = true;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
@@ -46,6 +46,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Themes.Text = DataFormatter.ReferenceClassListToString(_bookData.Themes);
                 _objects.Description.Text = _bookData.Description;
                 _objects.Price.Text = _bookData.Price.ToString();
+                _isNewRecord = false;
             }
             else 
             {

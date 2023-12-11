@@ -24,6 +24,8 @@ namespace NEALibrarySystem
         /// <returns></returns>
         public static int Binary<T, F>(List<F> itemList, T item, Compare<T, F> compare)
         {
+            if (itemList.Count > 8)
+                MessageBox.Show("oopsie poopsie");
             if (itemList.Count > 0)
             {
                 int left = 0;
@@ -164,6 +166,8 @@ namespace NEALibrarySystem
         } */
         public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
+            if (itemList.Count > 8)
+                MessageBox.Show("oopsie poopsie");
             if (itemList.Count == 0) // if empty, return first index
                 return 0;
             else if (itemList.Count == 1) // if count = 1, return before or after the only item
@@ -178,12 +182,12 @@ namespace NEALibrarySystem
                 int left = 0;
                 int right = itemList.Count - 1;
 
-                while (left < right)
+                while (left <= right)
                 {
                     int middle = (left + right) / 2;
                     if (compare(itemList[middle], item) == Greatest.Right) // if middle element is smaller than the item:
                     {
-                        if (compare(itemList[middle + 1], item) == Greatest.Left) // if true, the index to insert is found
+                        if (middle == itemList.Count - 1 || compare(itemList[middle + 1], item) == Greatest.Left) // if true, the index to insert is found
                             return middle + 1;
                         else
                             left = middle + 1;
@@ -193,7 +197,7 @@ namespace NEALibrarySystem
                         right = middle - 1;
                     }
                 }
-                return -1;
+                return itemList.Count - 1;
             }
         }
         #endregion
@@ -255,16 +259,16 @@ namespace NEALibrarySystem
         {
             if (text1 == text2)
                 return Greatest.equal;
-            int minimumLength = Math.Abs(text1.Length - text2.Length);
+            int minimumLength = text1.Length < text2.Length ? text1.Length : text2.Length;
             for (int i = 0; i < minimumLength; i++)
             {
-                if (text1[i] < text2[i])
-                {
-                    return Greatest.Right;
-                }
-                else if (text1[i] > text2[i])
+                if (Convert.ToInt32(text1[i]) > Convert.ToInt32(text2[i]))
                 {
                     return Greatest.Left;
+                }
+                else if (Convert.ToInt32(text1[i]) < Convert.ToInt32(text2[i]))
+                {
+                    return Greatest.Right;
                 }
             }
             return (text2.Length > text1.Length) ? Greatest.Right : Greatest.Left; // returns the longest item as the largest
