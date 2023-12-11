@@ -18,7 +18,7 @@ namespace NEALibrarySystem.PanelHandlers
     {
         private BookDetailsObjects _objects;
         private Book _bookData;
-        private List<BookCopy> _bookCopyList;
+        private List<TempBookCopy> _bookCopyList;
         private bool _isNewRecord = false;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
@@ -49,6 +49,7 @@ namespace NEALibrarySystem.PanelHandlers
             }
             else 
             {
+                _bookData = new Book();
                 _objects.Title.Text = "";
                 _objects.SeriesTitle.Text = "";
                 _objects.SeriesNumber.Text = "";
@@ -79,7 +80,7 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 foreach(string barcode in frmAddBookCopies.barcodes)
                 {
-                    DataLibrary.CreateBookCopy(barcode, _bookData);
+                    _bookCopyList.Add(new TempBookCopy(barcode));
                 }
             }
             UpdateBookCopyList();
@@ -89,9 +90,17 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void DeleteBookCopies()
         {
+            /*
             if (_objects.CopyDetails.CheckedItems.Count > 0)
                 foreach(ListViewItem item in _objects.CopyDetails.CheckedItems)
                     DataLibrary.DeleteBookCopy(DataLibrary.BookCopies[SearchAndSort.Binary(DataLibrary.BookCopies, item.SubItems[0].Text, SearchAndSort.BookCopyAndBarcode)]);
+            */
+            if (_objects.CopyDetails.CheckedItems.Count > 0)
+                foreach (ListViewItem item in _objects.CopyDetails.CheckedItems)
+                    foreach (TempBookCopy copy in _bookCopyList)
+                        if (item.SubItems[0].Text == copy.Barcode)
+                            _bookCopyList.Remove(copy);
+
             UpdateBookCopyList();
         }
         /// <summary>
@@ -100,15 +109,18 @@ namespace NEALibrarySystem.PanelHandlers
         private void UpdateBookCopyList()
         {
             _objects.CopyDetails.Items.Clear();
-            foreach (int index in SearchAndSort.BinaryRange(DataLibrary.BookCopies, _bookData.Isbn.Value, SearchAndSort.BookCopyAndIsbn))
+            if (_bookData.Isbn != null)
             {
-                BookCopy bookCopy = DataLibrary.BookCopies[index];
-                string[] data =
+                foreach (TempBookCopy bookCopy in _bookCopyList)
                 {
-                    bookCopy.Barcode.Value,
-                    bookCopy.GetStatus(),
-                    bookCopy.GetDueDate()
-                };
+                    string[] data =
+                    {
+                    bookCopy.Barcode,
+                    bookCopy.Status,
+                    bookCopy.DueDate
+                    };
+                    _objects.CopyDetails.Items.Add(new ListViewItem(data));
+                }
             }
         }
         /// <summary>
@@ -130,10 +142,29 @@ namespace NEALibrarySystem.PanelHandlers
             {
                 "Barcode",
                 "Status",
-                "Due date"
+                "Due Date"
             };
             AddColumns(columns);
             _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            List<BookCopy> currentBookCopyList = GetCurrentBookCopies();
+            if (currentBookCopyList.Count > 0)
+                foreach (BookCopy bookCopy in currentBookCopyList)
+                {
+                    _bookCopyList.Add(new TempBookCopy(bookCopy));
+                }
+        }
+        public List<BookCopy> GetCurrentBookCopies()
+        {
+            List<BookCopy> bookCopyList = new List<BookCopy>();
+            if (!_isNewRecord)
+            {
+                int[] indexRange = SearchAndSort.BinaryRange(DataLibrary.BookCopies, _bookData.Isbn.Value, SearchAndSort.BookCopyAndIsbn);
+                for (int index = indexRange[0]; index <= indexRange[1]; index++)
+                {
+                    BookCopy bookCopy = DataLibrary.BookCopies[index];
+                }
+            }
+            return bookCopyList;
         }
         private void AddColumns(string[] columns)
         {
@@ -144,20 +175,47 @@ namespace NEALibrarySystem.PanelHandlers
         }
         #endregion
         /// <summary>
-        /// Saves the inputted book data into the list of books
+        /// Saves the inputted book data into the list of books and book copies
         /// </summary>
         public void Save()
         {
             if (_isNewRecord)
             {
-                //add the new record and empty the input fields
-                DataLibrary.Books.Add(new Book(GetBookInput()));
+                Book book = new Book(GetBookInput());
+                DataLibrary.Books.Add(book);
+                // Delete the removed book copies
+                List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies);
+                if (_bookCopyList.Count > 0)
+                {
+                    foreach (BookCopy copy in oldBookCopyList)
+                        if (SearchAndSort.Binary(_bookCopyList, copy, SearchAndSort.TempBookCopyAndBookCopy) == -1)
+                            DataLibrary.DeleteBookCopy(copy);
+                }
+                else
+                {
+                    foreach (BookCopy copy in oldBookCopyList)
+                        DataLibrary.DeleteBookCopy(copy);
+                }
+                // Add new book copies
+                foreach (TempBookCopy copy in _bookCopyList)
+                {
+                    if (copy.BookCopy == null) // Check if the TempBookCopy is a new copy
+                    {
+                        DataLibrary.CreateBookCopy(copy.Barcode, book);
+                    }
+                }
                 Load();
             }
             else
             {
                 //update old book record
-                DataLibrary.ModifyBookRecord(_bookData, GetBookInput());
+                Book book = new Book(GetBookInput());
+                DataLibrary.Books.Add(book);
+                // Add new book copies
+                foreach (TempBookCopy copy in _bookCopyList)
+                {
+                    DataLibrary.CreateBookCopy(copy.Barcode, book);
+                }
             }
         }
         /// <summary>

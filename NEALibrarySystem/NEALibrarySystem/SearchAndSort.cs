@@ -1,4 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
+using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,14 +84,14 @@ namespace NEALibrarySystem
             return -1;
         }
         /// <summary>
-        /// Performs a binary search to find the range of indexes of matching items in the inputted sorted list
+        /// Performs a binary search to find the range of indexes of matching items in the inputted sorted list. Requires a sorted ascending list.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="F"></typeparam>
-        /// <param name="itemList"></param>
-        /// <param name="item"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Search item to find in the list</typeparam>
+        /// <typeparam name="F">Items in the list</typeparam>
+        /// <param name="itemList">list of items to search through</param>
+        /// <param name="item">Search Item</param>
+        /// <param name="compare">Method to compare the search item to the items in the list</param>
+        /// <returns>Indexes of left most and right most found indexes. Returns {-1, -1} if item is not found</returns>
         public static int[] BinaryRange<T, F>(List<F> itemList, T item, Compare<T, F> compare)
         {
             if (itemList.Count > 0)
@@ -362,6 +363,14 @@ namespace NEALibrarySystem
             if (value == Greatest.equal)
                 return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
             return value;
+        }
+        public static Greatest TwoBookCopies(BookCopy copy1, BookCopy copy2)
+        {
+            return TwoStrings(copy1.Barcode.Value, copy2.Barcode.Value);
+        }
+        public static Greatest TempBookCopyAndBookCopy(TempBookCopy tempCopy, BookCopy copy)
+        {
+            return TwoStrings(tempCopy.BookCopy.Barcode.Value, copy.Barcode.Value);
         }
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {

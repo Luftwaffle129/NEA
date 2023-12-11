@@ -345,6 +345,10 @@ namespace NEALibrarySystem.Data_Structures
             Genres = ModifyReferenceClassList(Genres, book, book.Genres, out book.Genres, newBookInfo.Genres, TwoRefClassBooks);
             Themes = ModifyReferenceClassList(Themes, book, book.Themes, out book.Themes, newBookInfo.Themes, TwoRefClassBooks);
         }
+        public static void ModifyBookCopyRecord(TempBookCopy tempCopy)
+        {
+            BookCopy bookCopy = DataLibrary.BookCopyBarcodes[SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, tempCopy.Barcode, RefClassAndString)].Reference;
+        }
         public static void ModifyCirculationCopy(CirculationCopy circCopy, DateTime newDueDate)
         {
             CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoRefClassCircCopies);

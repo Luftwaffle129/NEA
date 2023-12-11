@@ -71,10 +71,10 @@ namespace NEALibrarySystem
                         switch (FrmMainSystem.Main.CurrentFeature)
                         {
                             case (DataLibrary.Feature.Book):
-                                DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.ISBN, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference);
+                                DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference);
                                 break;
                             case (DataLibrary.Feature.Member):
-                                DataLibrary.DeleteMember(item.SubItems[0].Text);
+                                DataLibrary.DeleteMember(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
                                 break;
                         }
                     }
