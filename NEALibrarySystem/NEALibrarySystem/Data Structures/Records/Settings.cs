@@ -12,6 +12,8 @@ namespace NEALibrarySystem.Data_Structures
         public static string Password { get; set; }
         public static string GmailKey { get; set; }
         public static int MemberBarcodeLength { get; set; }
+        public static int BookCopyBarcodeLength { get; set; }
+
         private static int[] _loanDurations = new int[Member.MemberTypeCount];
         public static int[] LoanDurations 
         {

@@ -24,18 +24,16 @@ namespace NEALibrarySystem
         /// <returns></returns>
         public static int Binary<T, F>(List<F> itemList, T item, Compare<T, F> compare)
         {
-            if (itemList.Count > 8)
-                MessageBox.Show("oopsie poopsie");
             if (itemList.Count > 0)
             {
                 int left = 0;
                 int right = itemList.Count - 1;
-                while (left < right)
+                while (left <= right)
                 {
                     int middle = (left + right) / 2;
                     if (compare(itemList[middle], item) == Greatest.equal)
                         return middle;
-                    else if (compare(itemList[middle], item) == Greatest.Left)
+                    else if (compare(itemList[middle], item) == Greatest.Right)
                         left = middle + 1;
                     else
                         right = middle - 1;
@@ -56,7 +54,7 @@ namespace NEALibrarySystem
                     int middle = (left + right) / 2;
                     if (compare(itemList[middle], item) == Greatest.equal)
                         return middle;
-                    else if (compare(itemList[middle], item) == Greatest.Left)
+                    else if (compare(itemList[middle], item) == Greatest.Right)
                         left = middle + 1;
                     else
                         right = middle - 1;
@@ -70,12 +68,12 @@ namespace NEALibrarySystem
             {
                 left = 0;
                 right = itemList.Count - 1;
-                while (left < right)
+                while (left <= right)
                 {
                     int middle = (left + right) / 2;
                     if (compare(itemList[middle], item) == Greatest.equal)
                         return middle;
-                    else if (compare(itemList[middle], item) == Greatest.Left)
+                    else if (compare(itemList[middle], item) == Greatest.Right)
                         left = middle + 1;
                     else
                         right = middle - 1;
@@ -117,12 +115,12 @@ namespace NEALibrarySystem
                     int right = firstFoundIndex;
                     int middle = -1;
                     bool middleFound = false;
-                    while (left < right && !middleFound)
+                    while (left <= right && !middleFound)
                     {
                         middle = (left + right) / 2;
                         if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle - 1], item) == Greatest.Right)
                             middleFound = true;
-                        else if (compare(itemList[middle], item) == Greatest.Left)
+                        else if (compare(itemList[middle], item) == Greatest.Right)
                             left = middle + 1;
                         else
                             right = middle - 1;
@@ -143,7 +141,7 @@ namespace NEALibrarySystem
                         middle = (left + right) / 2;
                         if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle + 1], item) == Greatest.Right)
                             middleFound = true;
-                        else if (compare(itemList[middle], item) == Greatest.Left)
+                        else if (compare(itemList[middle], item) == Greatest.Right)
                             left = middle + 1;
                         else
                             right = middle - 1;
@@ -166,8 +164,6 @@ namespace NEALibrarySystem
         } */
         public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
-            if (itemList.Count > 8)
-                MessageBox.Show("oopsie poopsie");
             if (itemList.Count == 0) // if empty, return first index
                 return 0;
             else if (itemList.Count == 1) // if count = 1, return before or after the only item
@@ -192,6 +188,8 @@ namespace NEALibrarySystem
                         else
                             left = middle + 1;
                     }
+                    else if (middle == 0)
+                        return 0;
                     else
                     {
                         right = middle - 1;
@@ -328,9 +326,9 @@ namespace NEALibrarySystem
                 return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
             return value;
         }
-        public static Greatest TwoBookCopyBarcodes<T>(ReferenceClass<T, BookCopy> copy1, ReferenceClass<T, BookCopy> copy2)
+        public static Greatest TwoBookCopyBarcodes(ReferenceClass<string, BookCopy> copy1, ReferenceClass<string, BookCopy> copy2)
         {
-            return TwoStrings(copy1.Reference.Barcode.Value, copy2.Reference.Barcode.Value);
+            return TwoStrings(copy1.Value, copy2.Value);
         }
         public static Greatest BookCopyAndBarcode(BookCopy copy, string barcode)
         {

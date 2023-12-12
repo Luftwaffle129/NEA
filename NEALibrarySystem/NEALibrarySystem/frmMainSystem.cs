@@ -14,6 +14,7 @@ using NEALibrarySystem.SearchList;
 using NEALibrarySystem.Panel_Handlers.BookCheckIn;
 using NEALibrarySystem.PanelHandlers;
 using NEALibrarySystem.ListViewHandlers.CirculatedBooks;
+using System.Drawing.Text;
 
 namespace NEALibrarySystem
 {
@@ -29,6 +30,7 @@ namespace NEALibrarySystem
             InitializeTabs();
             _searchedItemsHandler = new SearchItemsHandler(lsvSearchItems);
             NavigatorOpenBookTab();
+            this.FormBorderStyle = FormBorderStyle.Sizable;
         }
 
         public bool _isAdministrator;
@@ -44,6 +46,8 @@ namespace NEALibrarySystem
         private BookReturnHandler _returnHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private DeleteHandler _deleteHandler;
+
+        private Book _selectedBook; // Used to stored the selected book when opening the book details panel
         #region initialisation
         public void InitializePanels()
         {
@@ -129,7 +133,7 @@ namespace NEALibrarySystem
                 Title = txtBookTitle,
                 SeriesTitle = txtBookSeriesTitle,
                 SeriesNumber = txtBookSeriesNumber,
-                ISBN = txtBookISBN,
+                Isbn = txtBookISBN,
                 MediaType = txtBookMediaType,
                 Author = txtBookAuthor,
                 Publisher = txtBookPublisher,
@@ -200,7 +204,10 @@ namespace NEALibrarySystem
             switch (CurrentFeature)
             {
                 case DataLibrary.Feature.Book:
-                    _bookDetailsHandler.Load(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference);
+                    _selectedBook = DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference;
+                    NavigatorCloseAllPanels();
+                    pnlBookDetails.Visible = true;
+                    NavigatorResetSelectedItems();
                     break;
             }
         }
@@ -220,6 +227,10 @@ namespace NEALibrarySystem
                     _subTabs[i].Visible = false;
                 }
             }
+        }
+        private void NavigatorResetSelectedItems()
+        {
+            _selectedBook = null;
         }
         private void NavigatorSubTab(int index)
         {
@@ -250,6 +261,7 @@ namespace NEALibrarySystem
                     break;
             }
             _panels[feature][index].Visible = true;
+            NavigatorResetSelectedItems();
         }
         #endregion
         private void ChangeIcon()
@@ -322,7 +334,7 @@ namespace NEALibrarySystem
         {
             if (pnlLoan.Visible)
             {
-                
+                _loanHandler.Load();
             }
         }
         private void pnlCheckIn_VisibleChanged(object sender, EventArgs e)
@@ -340,7 +352,7 @@ namespace NEALibrarySystem
         {
             if (pnlBookDetails.Visible)
             {
-                _bookDetailsHandler.Load();
+                _bookDetailsHandler.Load(_selectedBook);
             }
         }
         private void pnlSearch_VisibleChanged(object sender, EventArgs e)

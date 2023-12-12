@@ -23,7 +23,7 @@ namespace NEALibrarySystem.PanelHandlers
         public TextBox Title;
         public TextBox SeriesTitle;
         public TextBox SeriesNumber;
-        public TextBox ISBN;
+        public TextBox Isbn;
         public TextBox MediaType;
         public TextBox Author;
         public TextBox Publisher;

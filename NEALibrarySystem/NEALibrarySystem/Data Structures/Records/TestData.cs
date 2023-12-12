@@ -84,12 +84,15 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestData()
         {
+            // set up settings details
+            Settings.MemberBarcodeLength = 10;
+            Settings.LoanDurations = new int[3] { 14, 7, 5 };
+            Settings.BookCopyBarcodeLength = 10;
+
             DataLibrary.ClearAllData();
             GenerateBooks();
             GenerateMembers();
-            // set up settings details
-            Settings.MemberBarcodeLength = 10;
-            Settings.LoanDurations = new int[3]{ 14, 7, 5 };
+            FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
         /// <summary>
         /// create 10 random book records with no copies attached to them
@@ -121,6 +124,17 @@ namespace NEALibrarySystem.Data_Structures
                 bookCreator.Description = GenerateRandomString(10);
                 bookCreator.Price = 9.99;
                 Book book = new Book(bookCreator);
+                int copyCount = rand.Next(0, 10);
+                if (copyCount > 0)
+                {
+                    for (int j = 0; j < copyCount; j++)
+                    {
+                        string barcode = "";
+                        for (int k = 0; k < Settings.BookCopyBarcodeLength; k++)
+                            barcode += GenerateRandomDigit();
+                        DataLibrary.BookCopies.Add(new BookCopy(barcode, book));
+                    }
+                }
                 DataLibrary.Books.Add(book);
             }
         }
