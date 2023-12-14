@@ -22,7 +22,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 
         // Variables
         private bool _priceNeeded;
-        private List<BookCopy> _bookCopyList;
+        private List<BookCopy> _bookCopyList = new List<BookCopy>();
         public List<BookCopy> BookCopyList
         {
             get { return _bookCopyList; }
@@ -96,13 +96,13 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     // get member's loans and reservations
                     foreach (CircMemberRelation relation in DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference.CircMemberRelations)
                     {
-                        if (relation.CirculationCopy.Type.Value == CirculationType.loaned)
+                        if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
                         {
                             currentLoans++;
                             if (relation.CirculationCopy.DueDate.Value < DateTime.Now)
                             {
                                 overdueBooks++;
-                                lateFees += GetLateFees(relation.CirculationCopy.DueDate.Value - DateTime.Now);
+                                lateFees += GetLateFees(relation.CirculationCopy.DueDate.Value);
                             }
                         }
                     }
@@ -147,6 +147,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     "Author",
                     "Price",
                     "Status",
+                    "Due Date",
                     "Member Barcode"
                 };
             }
@@ -159,6 +160,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     "Series Title",
                     "Author",
                     "Status",
+                    "Due Date",
                     "Member Barcode"
                 };
             }
@@ -180,8 +182,8 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.BookRelation.Book.Author.Value,
                         copy.BookRelation.Book.Price.Value.ToString(),
                         copy.GetStatus(),
+                        copy.GetDueDate(),
                         copy.GetMemberBarcode()
-
                     };
                 }
                 else
@@ -193,6 +195,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.BookRelation.Book.SeriesTitle.Value,
                         copy.BookRelation.Book.Author.Value,
                         copy.GetStatus(),
+                        copy.GetDueDate(),
                         copy.GetMemberBarcode()
                     };
                 }
@@ -236,9 +239,12 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                 BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
             }
         }
-        public double GetLateFees(TimeSpan time)
+        public double GetLateFees(DateTime date)
         {
-            return time.Days * Settings.LateFeePerDay;
+            if (date.Date <= DateTime.Now.Date)
+                return 0;
+            else
+                return (date - DateTime.Now.Date).TotalDays * Settings.LateFeePerDay;
         }
     }
 }

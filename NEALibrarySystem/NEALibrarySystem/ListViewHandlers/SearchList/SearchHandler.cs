@@ -11,13 +11,13 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.SearchList
 {
-    public class SearchItemsHandler
+    public class SearchHandler
     {
         private ListView lsvSearch;
         /// <summary>
         /// Current feature that the search tab is set to
         /// </summary>
-        public SearchItemsHandler(ListView listview)
+        public SearchHandler(ListView listview)
         {
             lsvSearch = listview;
             lsvSearch.View = View.Details;
@@ -33,32 +33,33 @@ namespace NEALibrarySystem.SearchList
         }
         public void SetUpSearchTab()
         {
-            switch (FrmMainSystem.Main.CurrentFeature)
+            switch (FrmMainSystem.Main.SearchFeature)
             {
-                case DataLibrary.Feature.Book:
+                case DataLibrary.SearchFeature.Book:
                     ToBook();
                     break;
-                case DataLibrary.Feature.Member:
+                case DataLibrary.SearchFeature.Circulation:
+                    ToCirculation();
+                    break;
+                case DataLibrary.SearchFeature.Member:
                     ToMember();
                     break;
-                case DataLibrary.Feature.Transaction:
-
-                    break;
-                case DataLibrary.Feature.Staff:
+                case DataLibrary.SearchFeature.Staff:
 
                     break;
             }
         }
         public void ToBook()
         {
-            LoadColumns(ref lsvSearch, DataLibrary.Feature.Book);
+            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Book);
 
             foreach (Book book in DataLibrary.Books)
             {
                 string[] data =
                 {
-                    book.Title.Value,
                     book.Isbn.Value,
+                    book.Title.Value,
+                    book.SeriesTitle.Value,
                     book.MediaType.Value,
                     book.Author.Value,
                     book.Publisher.Value,
@@ -70,9 +71,32 @@ namespace NEALibrarySystem.SearchList
             }
             lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
+        public void ToCirculation()
+        {
+            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Circulation);
+
+            foreach (CirculationCopy copy in DataLibrary.CirculationCopies)
+            {
+                string[] data =
+                {
+                    copy.BookCopy.Barcode.Value,
+                    copy.BookCopy.BookRelation.Book.Title.Value,
+                    copy.BookCopy.BookRelation.Book.SeriesTitle.Value,
+                    copy.BookCopy.BookRelation.Book.Author.Value,
+                    copy.Date.Value.ToString(),
+                    copy.Type.Value.ToString(),
+                    copy.DueDate.Value.Date.ToString(),
+                    copy.CircMemberRelation.Member.Barcode.Value.ToString(),
+
+                };
+                ListViewItem row = new ListViewItem(data);
+                lsvSearch.Items.Add(row);
+            }
+            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
         public void ToMember()
         {
-            LoadColumns(ref lsvSearch, DataLibrary.Feature.Member);
+            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Member);
 
             foreach (Member member in DataLibrary.Members)
             {
@@ -89,14 +113,14 @@ namespace NEALibrarySystem.SearchList
 
             lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        public static void LoadColumns(ref ListView lsv, DataLibrary.Feature feature)
+        public static void LoadColumns(ref ListView lsv, DataLibrary.SearchFeature feature)
         {
             lsv.Clear();
 
             string[] columns = new string[0];
             switch (feature)
             {
-                case (DataLibrary.Feature.Member):
+                case DataLibrary.SearchFeature.Member:
                     columns = new string[4]
                     {
                         "Barcode",
@@ -105,16 +129,30 @@ namespace NEALibrarySystem.SearchList
                         "Member type"
                     };
                     break;
-                case (DataLibrary.Feature.Book):
-                    columns = new string[7]
+                case DataLibrary.SearchFeature.Book:
+                    columns = new string[8]
                     {
-                        "Title",
                         "ISBN",
+                        "Title",
+                        "Series Title",
                         "Media Type",
                         "Author",
                         "Publisher",
                         "Genres",
                         "Themes"
+                    };
+                    break;
+                case DataLibrary.SearchFeature.Circulation:
+                    columns = new string[]
+                    {
+                        "Barcode",
+                        "Title",
+                        "Series Title",
+                        "Author",
+                        "Date",
+                        "Status",
+                        "Due Date",
+                        "Member Barcode"
                     };
                     break;
             }

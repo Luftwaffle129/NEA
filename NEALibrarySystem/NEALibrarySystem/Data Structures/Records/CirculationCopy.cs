@@ -34,7 +34,7 @@ namespace NEALibrarySystem.Data_Structures
     }
     public enum CirculationType
     {
-        reserved,
-        loaned
+        Reserved,
+        Loaned
     }
 }

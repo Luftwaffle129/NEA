@@ -232,6 +232,7 @@
             this.btnCreateBackup = new System.Windows.Forms.Button();
             this.pctIcon = new System.Windows.Forms.PictureBox();
             this.pnlMainTabs = new System.Windows.Forms.Panel();
+            this.btnCirculation = new System.Windows.Forms.Button();
             this.pnlSubTabs = new System.Windows.Forms.Panel();
             this.pnlSell = new System.Windows.Forms.Panel();
             this.lblSellPrice = new System.Windows.Forms.Label();
@@ -318,8 +319,8 @@
             this.btnBooks.BackColor = System.Drawing.Color.Silver;
             this.btnBooks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBooks.Location = new System.Drawing.Point(0, 150);
+            this.btnBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBooks.Location = new System.Drawing.Point(0, 225);
             this.btnBooks.Name = "btnBooks";
             this.btnBooks.Size = new System.Drawing.Size(150, 75);
             this.btnBooks.TabIndex = 1;
@@ -333,8 +334,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMembers.BackColor = System.Drawing.Color.Silver;
             this.btnMembers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMembers.Location = new System.Drawing.Point(0, 225);
+            this.btnMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMembers.Location = new System.Drawing.Point(0, 300);
             this.btnMembers.Name = "btnMembers";
             this.btnMembers.Size = new System.Drawing.Size(150, 75);
             this.btnMembers.TabIndex = 2;
@@ -348,8 +349,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTransactions.BackColor = System.Drawing.Color.Silver;
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransactions.Location = new System.Drawing.Point(0, 300);
+            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransactions.Location = new System.Drawing.Point(0, 375);
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Size = new System.Drawing.Size(150, 75);
             this.btnTransactions.TabIndex = 3;
@@ -362,8 +363,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStaff.BackColor = System.Drawing.Color.Silver;
             this.btnStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStaff.Location = new System.Drawing.Point(0, 375);
+            this.btnStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStaff.Location = new System.Drawing.Point(0, 450);
             this.btnStaff.Name = "btnStaff";
             this.btnStaff.Size = new System.Drawing.Size(150, 75);
             this.btnStaff.TabIndex = 4;
@@ -376,8 +377,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStatistics.BackColor = System.Drawing.Color.Silver;
             this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistics.Location = new System.Drawing.Point(0, 450);
+            this.btnStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatistics.Location = new System.Drawing.Point(0, 525);
             this.btnStatistics.Name = "btnStatistics";
             this.btnStatistics.Size = new System.Drawing.Size(150, 75);
             this.btnStatistics.TabIndex = 5;
@@ -390,8 +391,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBackups.BackColor = System.Drawing.Color.Silver;
             this.btnBackups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackups.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackups.Location = new System.Drawing.Point(0, 525);
+            this.btnBackups.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackups.Location = new System.Drawing.Point(0, 600);
             this.btnBackups.Name = "btnBackups";
             this.btnBackups.Size = new System.Drawing.Size(150, 75);
             this.btnBackups.TabIndex = 6;
@@ -404,8 +405,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.BackColor = System.Drawing.Color.Silver;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettings.Location = new System.Drawing.Point(0, 600);
+            this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSettings.Location = new System.Drawing.Point(0, 675);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(150, 75);
             this.btnSettings.TabIndex = 8;
@@ -2562,6 +2563,7 @@
             // pnlMainTabs
             // 
             this.pnlMainTabs.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlMainTabs.Controls.Add(this.btnCirculation);
             this.pnlMainTabs.Controls.Add(this.pctIcon);
             this.pnlMainTabs.Controls.Add(this.btnBooks);
             this.pnlMainTabs.Controls.Add(this.btnMembers);
@@ -2576,6 +2578,22 @@
             this.pnlMainTabs.Name = "pnlMainTabs";
             this.pnlMainTabs.Size = new System.Drawing.Size(150, 1080);
             this.pnlMainTabs.TabIndex = 31;
+            // 
+            // btnCirculation
+            // 
+            this.btnCirculation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCirculation.BackColor = System.Drawing.Color.Silver;
+            this.btnCirculation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCirculation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCirculation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCirculation.Location = new System.Drawing.Point(0, 150);
+            this.btnCirculation.Name = "btnCirculation";
+            this.btnCirculation.Size = new System.Drawing.Size(150, 75);
+            this.btnCirculation.TabIndex = 10;
+            this.btnCirculation.Text = "CIRCULATION";
+            this.btnCirculation.UseVisualStyleBackColor = false;
+            this.btnCirculation.Click += new System.EventHandler(this.btnCirculation_Click);
             // 
             // pnlSubTabs
             // 
@@ -3197,13 +3215,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
-            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlStatistics);
@@ -3514,5 +3532,6 @@
         private System.Windows.Forms.TextBox txtTransactionMemberName;
         private System.Windows.Forms.ListView lsvTransactionBooks;
         private System.Windows.Forms.Button btnLoanDelete;
+        private System.Windows.Forms.Button btnCirculation;
     }
 }

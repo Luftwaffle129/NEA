@@ -312,6 +312,10 @@ namespace NEALibrarySystem
         {
             return TwoStrings(referenceClass.Value, str);
         }
+        public static Greatest RefClassAndDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
+        {
+            return TwoDates(reference.Value, date);
+        }
         public static Greatest TwoRefClassBooks(ReferenceClass<string, Book> book1, ReferenceClass<string, Book> book2)
         {
             Greatest value = TwoStrings(book1.Value, book2.Value);

@@ -210,14 +210,22 @@ namespace NEALibrarySystem.Data_Structures
         #region enums
         public enum Feature
         {
-            Book = 0,
-            Member = 1,
-            Transaction = 2,
-            Staff = 3,
-            Statistics = 4,
-            Backups = 5,
-            Settings = 6,
+            Circulation = 0,
+            Book = 1,
+            Member = 2,
+            Transaction = 3,
+            Staff = 4,
+            Statistics = 5,
+            Backups = 6,
+            Settings = 7,
             None = -1
+        }
+        public enum SearchFeature
+        {
+            Book,
+            Circulation,
+            Member,
+            Staff
         }
         #endregion
         #endregion

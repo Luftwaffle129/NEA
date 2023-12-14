@@ -28,7 +28,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             if (CirculationCopy == null)
                 return "In Stock";
-            if (CirculationCopy.Type.Value == CirculationType.reserved)
+            if (CirculationCopy.Type.Value == CirculationType.Reserved)
                 return "Reserved";
             else
                 return "Loaned";

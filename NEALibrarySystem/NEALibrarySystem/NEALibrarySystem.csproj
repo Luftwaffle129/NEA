@@ -53,7 +53,8 @@
     <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookReturnHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookLoanHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\BookReturnHandler.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
@@ -125,7 +126,6 @@
     </Compile>
     <Compile Include="ListViewHandlers\CirculatedBooks\zCirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookCheckIn\BookLoanHandler.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\Records\DataFormatter.cs" />
     <Compile Include="Program.cs" />
@@ -137,7 +137,7 @@
       <DependentUpon>frmResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
-    <Compile Include="ListViewHandlers\SearchList\SearchItemsHandler.cs" />
+    <Compile Include="ListViewHandlers\SearchList\SearchHandler.cs" />
     <Compile Include="SearchAndSort.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
@@ -221,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data Structures\RecordCreators\" />
+    <Folder Include="Panel Handlers\MemberDetails\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

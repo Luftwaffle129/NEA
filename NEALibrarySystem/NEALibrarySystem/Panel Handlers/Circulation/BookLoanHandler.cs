@@ -49,7 +49,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                         if (CirculationManager.BookCopyList[index].CirculationCopy != null)
                         {
                             // check if book is not loaned or reserved by another member
-                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.loaned 
+                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.Loaned 
                                 || CirculationManager.BookCopyList[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != CirculationManager.SelectedMember.Barcode.Value)
                                 validBooks = false;
                         }
@@ -63,7 +63,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                             creator.BookCopy = copy;
                             creator.Member = CirculationManager.SelectedMember;
                             creator.DueDate = _returnDate.Value;
-                            creator.Type = CirculationType.loaned;
+                            creator.Type = CirculationType.Loaned;
                             DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                         }
                         FrmMainSystem.Main.DisplayProcessMessage("Books Loaned");

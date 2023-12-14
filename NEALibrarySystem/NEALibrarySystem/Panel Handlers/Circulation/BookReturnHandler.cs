@@ -43,7 +43,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                         if (CirculationManager.BookCopyList[index].CirculationCopy != null)
                         {
                             // check if book is not loaned or reserved by another member
-                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.reserved
+                            if (CirculationManager.BookCopyList[index].CirculationCopy.Type.Value == CirculationType.Reserved
                                 || CirculationManager.BookCopyList[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != CirculationManager.SelectedMember.Barcode.Value)
                                 validBooks = false;
                         }

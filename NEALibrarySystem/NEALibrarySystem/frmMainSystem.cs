@@ -28,7 +28,7 @@ namespace NEALibrarySystem
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
-            _searchedItemsHandler = new SearchItemsHandler(lsvSearchItems);
+            _searchedItemsHandler = new SearchHandler(lsvSearchItems);
             NavigatorOpenBookTab();
             this.FormBorderStyle = FormBorderStyle.Sizable;
         }
@@ -40,20 +40,23 @@ namespace NEALibrarySystem
         private Button[] _mainTabs;
         private Button[] _subTabs;
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
+        public DataLibrary.SearchFeature SearchFeature = DataLibrary.SearchFeature.Book;
 
-        private SearchItemsHandler _searchedItemsHandler;
+        private SearchHandler _searchedItemsHandler;
         private BookLoanHandler _loanHandler;
         private BookReturnHandler _returnHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private DeleteHandler _deleteHandler;
 
         private Book _selectedBook; // Used to stored the selected book when opening the book details panel
+        private CirculationCopy _selectedCircCopy;
         #region initialisation
         public void InitializePanels()
         {
             _panels = new Panel[][] 
             {
-            new Panel[] { pnlReturn, pnlLoan, pnlSell, pnlReservation, pnlSearch, pnlBookDetails, pnlDelete },
+            new Panel[] { pnlReturn, pnlLoan, pnlSell, pnlReservation},
+            new Panel[] { pnlSearch, pnlBookDetails, pnlSearch },
             new Panel[] { pnlSearch, pnlMemberDetails, pnlDelete },
             new Panel[] { pnlSearch, pnlCirculationDetails },
             new Panel[] { pnlSearch, pnlStaff },
@@ -166,21 +169,32 @@ namespace NEALibrarySystem
             pnlSearch.Visible = true;
 
         }
+        private void NavigatorOpenCirculationTab()
+        {
+            CurrentFeature = DataLibrary.Feature.Circulation;
+
+            string[] tabs =
+            {
+                "Return",
+                "Loan",
+                "Sell",
+                "Reserve",
+            };
+            NavigatorSetSubTabNames(tabs);
+
+            NavigatorOpenSearchViewTab();
+        }
         private void NavigatorOpenBookTab()
         {
             CurrentFeature = DataLibrary.Feature.Book;
 
-            string[] bookTabs =
+            string[] tabs =
             {
-                "Check In",
-                "Check Out",
-                "Sell",
-                "Create Reservation",
-                "Search Books",
+                "View Books",
                 "Create New Book",
-                "Remove Books"
+                "View Circulated Books"
             };
-            NavigatorSetSubTabNames(bookTabs);
+            NavigatorSetSubTabNames(tabs);
 
             NavigatorOpenSearchViewTab();
         }
@@ -188,27 +202,34 @@ namespace NEALibrarySystem
         {
             CurrentFeature = DataLibrary.Feature.Member;
 
-            string[] memberTabs =
+            string[] tabs =
             {
-                "Search Members",
+                "View Members",
                 "Add Member",
                 "Delete Member"
             };
-            NavigatorSetSubTabNames(memberTabs);
+            NavigatorSetSubTabNames(tabs);
 
             NavigatorCloseAllPanels();
             NavigatorOpenSearchViewTab();
         }
         private void NavigatorOpenDetails(ListViewItem item)
         {
-            switch (CurrentFeature)
+            switch (SearchFeature)
             {
-                case DataLibrary.Feature.Book:
+                case DataLibrary.SearchFeature.Book:
                     _selectedBook = DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[1].Text, SearchAndSort.RefClassAndString)].Reference;
                     NavigatorCloseAllPanels();
                     pnlBookDetails.Visible = true;
                     NavigatorResetSelectedItems();
                     break;
+                case DataLibrary.SearchFeature.Circulation:
+                    _selectedCircCopy = DataLibrary.CirculationDates[SearchAndSort.Binary(DataLibrary.CirculationDates, Convert.ToDateTime(item.SubItems[4].Text), SearchAndSort.RefClassAndDate)].Reference;
+                    NavigatorCloseAllPanels();
+                    pnlCirculationDetails.Visible = true;
+                    NavigatorResetSelectedItems();
+                    break;
+
             }
         }
         #endregion
@@ -231,36 +252,53 @@ namespace NEALibrarySystem
         private void NavigatorResetSelectedItems()
         {
             _selectedBook = null;
+            _selectedCircCopy = null;
         }
         private void NavigatorSubTab(int index)
         {
             NavigatorCloseAllPanels();
+            
+            /*
             int feature = 0;
             switch (CurrentFeature)
             {
-                case DataLibrary.Feature.Book:
+                case DataLibrary.Feature.Circulation:
                     feature = 0;
                     break;
-                case DataLibrary.Feature.Member:
+                case DataLibrary.Feature.Book:
                     feature = 1;
                     break;
-                case DataLibrary.Feature.Transaction: 
-                    feature = 2; 
+                case DataLibrary.Feature.Member:
+                    feature = 2;
                     break;
-                case DataLibrary.Feature.Staff: 
+                case DataLibrary.Feature.Transaction: 
                     feature = 3; 
                     break;
+                case DataLibrary.Feature.Staff: 
+                    feature = 4; 
+                    break;
                 case DataLibrary.Feature.Statistics: 
-                    feature = 4;
+                    feature = 5;
                     break;
                 case DataLibrary.Feature.Backups: 
-                    feature = 5; 
-                    break;
-                case DataLibrary.Feature.Settings: 
                     feature = 6; 
                     break;
+                case DataLibrary.Feature.Settings: 
+                    feature = 7; 
+                    break;
             }
-            _panels[feature][index].Visible = true;
+            */
+            // set the correct search feature if opening a search tab
+            if (CurrentFeature == DataLibrary.Feature.Member)
+                SearchFeature = DataLibrary.SearchFeature.Member;
+            else if (CurrentFeature == DataLibrary.Feature.Staff)
+                SearchFeature = DataLibrary.SearchFeature.Staff;
+            else if (CurrentFeature == DataLibrary.Feature.Book && index == 0)
+                SearchFeature = DataLibrary.SearchFeature.Book;
+            else if (CurrentFeature == DataLibrary.Feature.Book && index == 2)
+                SearchFeature = DataLibrary.SearchFeature.Circulation;
+            //open the panel
+            _panels[(int)CurrentFeature][index].Visible = true;
             NavigatorResetSelectedItems();
         }
         #endregion
@@ -293,10 +331,12 @@ namespace NEALibrarySystem
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            /*
             if (this.FormBorderStyle == FormBorderStyle.None)
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             else
                 this.FormBorderStyle = FormBorderStyle.None;
+            */
         }
         #endregion
         #region sub tabs
@@ -520,17 +560,22 @@ namespace NEALibrarySystem
         {
 
         }
+
+        private void btnCirculation_Click(object sender, EventArgs e)
+        {
+            NavigatorOpenCirculationTab();
+        }
         /*
-         *  OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
+*  OpenFileDialog openFileDialog = new OpenFileDialog();
+   openFileDialog.InitialDirectory = "c:\\";
+   openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+   openFileDialog.FilterIndex = 2;
+   openFileDialog.RestoreDirectory = true;
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
+   if (openFileDialog.ShowDialog() == DialogResult.OK)
+   {
 
-            }
-         */
+   }
+*/
     }
 }
