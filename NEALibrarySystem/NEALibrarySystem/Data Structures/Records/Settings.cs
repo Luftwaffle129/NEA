@@ -20,6 +20,12 @@ namespace NEALibrarySystem.Data_Structures
             get { return _loanDurations; }
             set { _loanDurations = value ?? new int[Member.MemberTypeCount]; }
         }
+        private static int[] _reserveDurations = new int[Member.MemberTypeCount];
+        public static int[] ReserveDurations
+        {
+            get { return _reserveDurations; }
+            set { _reserveDurations = value ?? new int[Member.MemberTypeCount]; }
+        }
         public static double LateFeePerDay { get; set; }
     }
 }

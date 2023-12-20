@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using static NEALibrarySystem.SearchAndSort;
@@ -210,14 +211,14 @@ namespace NEALibrarySystem.Data_Structures
         #region enums
         public enum Feature
         {
-            Circulation = 0,
-            Book = 1,
-            Member = 2,
-            Transaction = 3,
-            Staff = 4,
-            Statistics = 5,
-            Backups = 6,
-            Settings = 7,
+            Circulation,
+            Book,
+            Member,
+            Transaction,
+            Staff,
+            Statistics,
+            Backups,
+            Settings,
             None = -1
         }
         public enum SearchFeature
@@ -227,26 +228,176 @@ namespace NEALibrarySystem.Data_Structures
             Member,
             Staff
         }
+        public enum CirculationError
+        {
+            None,
+            NoMember,
+            NoBookCopies,
+            InvalidBookCopies
+        }
         #endregion
         #endregion
         #region file handling
-        /// <summary>
-        /// creates the directory to save the data fields to
-        /// </summary>
-        public static void CreateDataDirectory()
-        {
-            Directory.CreateDirectory(Application.StartupPath + "\\data");
-        }
-        public static void LoadAllFiles()
-        {
-
-        }
-        public static void SaveAllFiles()
-        {
-
-        }
         #endregion
         #region data handling
+        #region circulation
+        public static CirculationError Loan(Member member, List<BookCopy> bookCopies, DateTime returnDate)
+        {
+            // check if necessary inputs exist
+            if (member != null)
+            {
+                if (bookCopies.Count > 0)
+                {
+                    // check if the books can be loaned
+                    bool validBooks = true;
+                    int index = 0;
+                    do
+                    {
+                        if (bookCopies[index].CirculationCopy != null)
+                        {
+                            // check if book is not loaned or reserved by another member
+                            if (bookCopies[index].CirculationCopy.Type.Value == CirculationType.Loaned
+                                || bookCopies[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != member.Barcode.Value)
+                                validBooks = false;
+                        }
+                    } while (++index < bookCopies.Count && validBooks);
+                    if (validBooks)
+                    {
+                        // loan books
+                        foreach (BookCopy copy in bookCopies)
+                        {
+                            CirculationCopyCreator creator = new CirculationCopyCreator()
+                            {
+                                BookCopy = copy,
+                                Member = member,
+                                DueDate = returnDate,
+                                Type = CirculationType.Loaned
+                            };
+                            DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
+                        }
+                        return CirculationError.None;
+                    }
+                    else
+                        return CirculationError.InvalidBookCopies;
+                }
+                else
+                    return CirculationError.NoBookCopies;
+            }
+            else
+                return CirculationError.NoMember;
+        }
+        public static CirculationError Return(Member member, List<BookCopy> bookCopies)
+        {
+            // check if necessary inputs exist
+            if (member != null)
+            {
+                if (bookCopies.Count > 0)
+                {
+                    // check if the books can be returned
+                    bool validBooks = true;
+                    int index = 0;
+                    do
+                    {
+                        // check if book is circulated
+                        if (bookCopies[index].CirculationCopy != null)
+                        {
+                            // check if book is not reserved, and not loaned by another member
+                            if (bookCopies[index].CirculationCopy.Type.Value == CirculationType.Reserved
+                                || bookCopies[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != member.Barcode.Value)
+                                validBooks = false;
+                        }
+                        else
+                            validBooks = false;
+
+                    } while (++index < bookCopies.Count && validBooks);
+                    if (validBooks)
+                    {
+                        // return books
+                        foreach (BookCopy copy in bookCopies)
+                        {
+                            DeleteCirculationCopy(copy.CirculationCopy);
+                        }
+                        return CirculationError.None;
+                    }
+                    else
+                        return CirculationError.InvalidBookCopies;
+                }
+                else
+                    return CirculationError.NoBookCopies;
+            }
+            else
+                return CirculationError.NoMember;
+        }
+        public static CirculationError Sell(List<BookCopy> bookCopies)
+        {
+            // check if necessary inputs exist
+            if (bookCopies.Count > 0)
+            {
+                // check if the books can be returned
+                bool validBooks = true;
+                int index = 0;
+                do
+                {
+                    // check if book is circulated
+                    if (bookCopies[index].CirculationCopy != null)
+                        validBooks = false;
+                } while (++index < bookCopies.Count && validBooks);
+                if (validBooks)
+                {
+                    // return books
+                    foreach (BookCopy copy in bookCopies)
+                    {
+                        DeleteBookCopy(copy);
+                    }
+                    return CirculationError.None;
+                }
+                else
+                    return CirculationError.InvalidBookCopies;
+            }
+            else
+                return CirculationError.NoBookCopies;
+        }
+        public static CirculationError Reserve(Member member, List<BookCopy> bookCopies, DateTime pickUpByDate)
+        {
+            // check if necessary inputs exist
+            if (member != null)
+            {
+                if (bookCopies.Count > 0)
+                {
+                    // check if the books can be loaned
+                    bool validBooks = true;
+                    int index = 0;
+                    do
+                    {
+                        if (bookCopies[index].CirculationCopy != null)
+                            validBooks = false;
+                    } while (++index < bookCopies.Count && validBooks);
+                    if (validBooks)
+                    {
+                        // loan books
+                        foreach (BookCopy copy in bookCopies)
+                        {
+                            CirculationCopyCreator creator = new CirculationCopyCreator()
+                            {
+                                BookCopy = copy,
+                                Member = member,
+                                DueDate = pickUpByDate,
+                                Type = CirculationType.Reserved
+                            };
+                            DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
+                        }
+                        return CirculationError.None;
+                    }
+                    else
+                        return CirculationError.InvalidBookCopies;
+                }
+                else
+                    return CirculationError.NoBookCopies;
+            }
+            else
+                return CirculationError.NoMember;
+        }
+        #endregion
         #region filtering
 
         #endregion
@@ -280,7 +431,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>The updated list</returns>
         public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare, out int index) where F : class
         {
-            index = SearchAndSort.BinaryReferenceInsert(itemList, record, compare);
+            index = SearchAndSort.BinaryInsert(itemList, record, compare);
             itemList.Insert(index, record);
             return itemList;
         }
@@ -474,7 +625,7 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region the no no
         /// <summary>
-        /// DO NOT DO THIS. THIS BAD
+        /// DO NOT DO THIS. THIS BAD. FOR TEST DATA PURPOSES ONLY
         /// </summary>
         public static void ClearAllData()
         {

@@ -60,22 +60,24 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         public void ResetFields()
         {
             _enterBarcodes.Text = "";
+            _memberBarcode.Text = "";
             ResetMemberDetailFields();
+            _selectedBooks.Items.Clear();
         }
         /// <summary>
-        /// Clears the Objects' text properties
+        /// Clears the objects' text properties
         /// </summary>
         public void ResetMemberDetailFields()
         {
             _memberName.Text = "";
-            _memberBarcode.Text = "";
             _currentLoans.Text = "0";
             _lateFees.Text = "0";
             _overdueBooks.Text = "0";
             _enterBarcodes.Text = "";
         }
         /// <summary>
-        /// Updates the textboxes displaying the curreny
+        /// Displays the member name, current loans, number of overdue books and the total of the late fees
+        /// of the member barcode inputted in a member is found
         /// </summary>
         public void UpdateMemberDetails()
         {
@@ -84,17 +86,16 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             int overdueBooks = 0;
             double lateFees = 0;
             string barcode = _memberBarcode.Text;
-
-            if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength)
+            int memberBarcodeIndex = SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString);
+            if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength && memberBarcodeIndex != -1)
             {
-                int memberBarcodeIndex = SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString);
-                if (memberBarcodeIndex != -1)
+                // find the member and their name from the barcode
+                SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
+                _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
+                // get member's loans and reservations
+                if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.CircMemberRelations.Count > 0)
                 {
-                    // find the member and their name from the barcode
-                    SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
-                    _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
-                    // get member's loans and reservations
-                    foreach (CircMemberRelation relation in DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference.CircMemberRelations)
+                    foreach (CircMemberRelation relation in SelectedMember.CircMemberRelations)
                     {
                         if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
                         {
@@ -107,11 +108,11 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         }
                     }
                 }
-                else
-                {
-                    ResetMemberDetailFields();
-                    SelectedMember = null;
-                }
+            }
+            else
+            {
+                ResetMemberDetailFields();
+                SelectedMember = null;
             }
             _currentLoans.Text = currentLoans.ToString();
             _overdueBooks.Text = overdueBooks.ToString();
@@ -206,7 +207,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         /// <summary>
         /// removes the checked items from the list view of selected books
         /// </summary>
-        public void DeleteCheckedListView()
+        public void DeleteCheckedBookCopies()
         {
             if (_selectedBooks.CheckedItems.Count > 0)
             {
@@ -237,6 +238,8 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             else
             {
                 BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
+                UpdateListView();
+                _enterBarcodes.Text = "";
             }
         }
         public double GetLateFees(DateTime date)

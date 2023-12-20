@@ -28,7 +28,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             if (CirculationCopy == null)
                 return "In Stock";
-            if (CirculationCopy.Type.Value == CirculationType.Reserved)
+            else if (CirculationCopy.Type.Value == CirculationType.Reserved)
                 return "Reserved";
             else
                 return "Loaned";
@@ -45,7 +45,7 @@ namespace NEALibrarySystem.Data_Structures
             if (CirculationCopy == null)
                 return "";
             else
-                return CirculationCopy.DueDate.Value.Date.ToString();
+                return DataFormatter.GetDate(CirculationCopy.DueDate.Value);
         }
     }
 }

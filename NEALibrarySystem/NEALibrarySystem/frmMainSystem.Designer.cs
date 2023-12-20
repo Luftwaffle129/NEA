@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -47,16 +47,13 @@
             this.btnSubTab6 = new System.Windows.Forms.Button();
             this.btnSubTab7 = new System.Windows.Forms.Button();
             this.lblMessageOutput = new System.Windows.Forms.Label();
-            this.dtpReservationSetDueDate = new System.Windows.Forms.DateTimePicker();
-            this.lblReservationSetDueDate = new System.Windows.Forms.Label();
+            this.dtpReservePickUpByDate = new System.Windows.Forms.DateTimePicker();
+            this.lblReserveSetDueDate = new System.Windows.Forms.Label();
             this.pnlMemberDetails = new System.Windows.Forms.Panel();
-            this.grpMemberBookLinks = new System.Windows.Forms.GroupBox();
             this.lsvMemberBookLinks = new System.Windows.Forms.ListView();
             this.txtMemberJoinDate = new System.Windows.Forms.TextBox();
             this.lblMemberJoinDate = new System.Windows.Forms.Label();
             this.txtMemberPostcode = new System.Windows.Forms.TextBox();
-            this.txtMemberAddressLine4 = new System.Windows.Forms.TextBox();
-            this.txtMemberAddressLine5 = new System.Windows.Forms.TextBox();
             this.lblMemberPostcode = new System.Windows.Forms.Label();
             this.lblLinkedMembers = new System.Windows.Forms.Label();
             this.txtMemberAddressLine1 = new System.Windows.Forms.TextBox();
@@ -64,17 +61,14 @@
             this.btnMemberCancel = new System.Windows.Forms.Button();
             this.txtMemberBarcode = new System.Windows.Forms.TextBox();
             this.btnMemberSave = new System.Windows.Forms.Button();
-            this.lblMemberName = new System.Windows.Forms.Label();
+            this.lblMemberFirstName = new System.Windows.Forms.Label();
             this.txtMemberAssociatedMemberBarcodes = new System.Windows.Forms.TextBox();
             this.txtMemberCustomerType = new System.Windows.Forms.TextBox();
-            this.txtMemberName = new System.Windows.Forms.TextBox();
+            this.txtMemberFirstName = new System.Windows.Forms.TextBox();
             this.lblMemberAddressLine2 = new System.Windows.Forms.Label();
-            this.txtMemberDateOfBirth = new System.Windows.Forms.TextBox();
-            this.lblMemberAddressLine5 = new System.Windows.Forms.Label();
             this.txtMemberAddressLine3 = new System.Windows.Forms.TextBox();
             this.txtMemberAddressLine2 = new System.Windows.Forms.TextBox();
             this.lblMemberSurname = new System.Windows.Forms.Label();
-            this.lblMemberAddressLine4 = new System.Windows.Forms.Label();
             this.lblMemberAddressLine1 = new System.Windows.Forms.Label();
             this.txtMemberEmailAddress = new System.Windows.Forms.TextBox();
             this.txtMemberPhoneNumber = new System.Windows.Forms.TextBox();
@@ -162,6 +156,7 @@
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.pnlReturn = new System.Windows.Forms.Panel();
+            this.btnReturnDelete = new System.Windows.Forms.Button();
             this.lblReturnEnterBarcode = new System.Windows.Forms.Label();
             this.txtReturnEnterBarcode = new System.Windows.Forms.TextBox();
             this.lblReturnLateFees = new System.Windows.Forms.Label();
@@ -235,10 +230,11 @@
             this.btnCirculation = new System.Windows.Forms.Button();
             this.pnlSubTabs = new System.Windows.Forms.Panel();
             this.pnlSell = new System.Windows.Forms.Panel();
+            this.btnSellDelete = new System.Windows.Forms.Button();
             this.lblSellPrice = new System.Windows.Forms.Label();
             this.txtSellPrice = new System.Windows.Forms.TextBox();
             this.lblSellEnterBarcodes = new System.Windows.Forms.Label();
-            this.txtSellEnterBarcodes = new System.Windows.Forms.TextBox();
+            this.txtSellEnterBarcode = new System.Windows.Forms.TextBox();
             this.lblSellLateFees = new System.Windows.Forms.Label();
             this.txtSellLateFees = new System.Windows.Forms.TextBox();
             this.txtSellOverdue = new System.Windows.Forms.TextBox();
@@ -253,10 +249,11 @@
             this.lsvSellSelectedBooks = new System.Windows.Forms.ListView();
             this.btnSellSave = new System.Windows.Forms.Button();
             this.btnSellCancel = new System.Windows.Forms.Button();
-            this.pnlReservation = new System.Windows.Forms.Panel();
-            this.lblreserveEnterBarcode = new System.Windows.Forms.Label();
+            this.pnlReserve = new System.Windows.Forms.Panel();
+            this.btnReserveDelete = new System.Windows.Forms.Button();
             this.lblReserveLateFees = new System.Windows.Forms.Label();
-            this.txtRserveEnterBarcode = new System.Windows.Forms.TextBox();
+            this.lblReserveEnterBarcode = new System.Windows.Forms.Label();
+            this.txtReserveEnterBarcode = new System.Windows.Forms.TextBox();
             this.txtReserveOverdue = new System.Windows.Forms.TextBox();
             this.lblReserveOverdue = new System.Windows.Forms.Label();
             this.lsvReserveSelectedBooks = new System.Windows.Forms.ListView();
@@ -268,27 +265,31 @@
             this.txtReserveMemberName = new System.Windows.Forms.TextBox();
             this.lblReserveMemberName = new System.Windows.Forms.Label();
             this.btnReserveCancel = new System.Windows.Forms.Button();
-            this.txtReserveLateFee = new System.Windows.Forms.TextBox();
+            this.txtReserveLateFees = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
             this.pnlCirculationDetails = new System.Windows.Forms.Panel();
-            this.lsvTransactionBooks = new System.Windows.Forms.ListView();
-            this.lblTransactionPrice = new System.Windows.Forms.Label();
-            this.btnTransactionBack = new System.Windows.Forms.Button();
-            this.txtTransactionType = new System.Windows.Forms.TextBox();
-            this.btnTransactionDelete = new System.Windows.Forms.Button();
-            this.lblTransactionMemberBarode = new System.Windows.Forms.Label();
-            this.txtTransactionPrice = new System.Windows.Forms.TextBox();
-            this.txtTransactionDueDate = new System.Windows.Forms.TextBox();
-            this.txtTransactionMemberBarcode = new System.Windows.Forms.TextBox();
-            this.txtTransactionDate = new System.Windows.Forms.TextBox();
-            this.lblTransactionMemberName = new System.Windows.Forms.Label();
-            this.lblTransactionDate = new System.Windows.Forms.Label();
-            this.lblTransactionDueDate = new System.Windows.Forms.Label();
-            this.lblTransactionBooks = new System.Windows.Forms.Label();
-            this.lblTransactionType = new System.Windows.Forms.Label();
-            this.txtTransactionMemberName = new System.Windows.Forms.TextBox();
+            this.dtpCircDetailsDueDate = new System.Windows.Forms.DateTimePicker();
+            this.btnCircDetailsSave = new System.Windows.Forms.Button();
+            this.lsvCircDetailsBookData = new System.Windows.Forms.ListView();
+            this.lblCircDetailsPrice = new System.Windows.Forms.Label();
+            this.btnCircDetailsBack = new System.Windows.Forms.Button();
+            this.txtCircDetailsType = new System.Windows.Forms.TextBox();
+            this.btnCircDetailsDelete = new System.Windows.Forms.Button();
+            this.lblCircDetailsMemberBarode = new System.Windows.Forms.Label();
+            this.txtCircDetailsPrice = new System.Windows.Forms.TextBox();
+            this.txtCircDetailsMemberBarcode = new System.Windows.Forms.TextBox();
+            this.txtCircDetailsDate = new System.Windows.Forms.TextBox();
+            this.lblCircDetailsMemberName = new System.Windows.Forms.Label();
+            this.lblCircDetailsDate = new System.Windows.Forms.Label();
+            this.lblCircDetailsDueDate = new System.Windows.Forms.Label();
+            this.lblCircDetailsBooks = new System.Windows.Forms.Label();
+            this.lblTCircDetailsType = new System.Windows.Forms.Label();
+            this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblMemberAddressLine4 = new System.Windows.Forms.Label();
+            this.txtMemberAddressLine4 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlMemberDetails.SuspendLayout();
-            this.grpMemberBookLinks.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.grpRunningTotal.SuspendLayout();
             this.pnlStaff.SuspendLayout();
@@ -308,7 +309,7 @@
             this.pnlMainTabs.SuspendLayout();
             this.pnlSubTabs.SuspendLayout();
             this.pnlSell.SuspendLayout();
-            this.pnlReservation.SuspendLayout();
+            this.pnlReserve.SuspendLayout();
             this.pnlCirculationDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -554,34 +555,35 @@
             this.lblMessageOutput.TabIndex = 43;
             this.lblMessageOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dtpReservationSetDueDate
+            // dtpReservePickUpByDate
             // 
-            this.dtpReservationSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpReservationSetDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReservationSetDueDate.Location = new System.Drawing.Point(249, 870);
-            this.dtpReservationSetDueDate.Name = "dtpReservationSetDueDate";
-            this.dtpReservationSetDueDate.Size = new System.Drawing.Size(212, 38);
-            this.dtpReservationSetDueDate.TabIndex = 15;
-            this.dtpReservationSetDueDate.Value = new System.DateTime(2023, 6, 29, 0, 0, 0, 0);
+            this.dtpReservePickUpByDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpReservePickUpByDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpReservePickUpByDate.Location = new System.Drawing.Point(249, 870);
+            this.dtpReservePickUpByDate.Name = "dtpReservePickUpByDate";
+            this.dtpReservePickUpByDate.Size = new System.Drawing.Size(212, 38);
+            this.dtpReservePickUpByDate.TabIndex = 15;
+            this.dtpReservePickUpByDate.Value = new System.DateTime(2023, 6, 29, 0, 0, 0, 0);
             // 
-            // lblReservationSetDueDate
+            // lblReserveSetDueDate
             // 
-            this.lblReservationSetDueDate.AutoSize = true;
-            this.lblReservationSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReservationSetDueDate.Location = new System.Drawing.Point(15, 873);
-            this.lblReservationSetDueDate.Name = "lblReservationSetDueDate";
-            this.lblReservationSetDueDate.Size = new System.Drawing.Size(155, 31);
-            this.lblReservationSetDueDate.TabIndex = 10;
-            this.lblReservationSetDueDate.Text = "Pick Up By:";
+            this.lblReserveSetDueDate.AutoSize = true;
+            this.lblReserveSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReserveSetDueDate.Location = new System.Drawing.Point(15, 873);
+            this.lblReserveSetDueDate.Name = "lblReserveSetDueDate";
+            this.lblReserveSetDueDate.Size = new System.Drawing.Size(155, 31);
+            this.lblReserveSetDueDate.TabIndex = 10;
+            this.lblReserveSetDueDate.Text = "Pick Up By:";
             // 
             // pnlMemberDetails
             // 
-            this.pnlMemberDetails.Controls.Add(this.grpMemberBookLinks);
+            this.pnlMemberDetails.Controls.Add(this.lsvMemberBookLinks);
+            this.pnlMemberDetails.Controls.Add(this.label3);
+            this.pnlMemberDetails.Controls.Add(this.dateTimePicker1);
             this.pnlMemberDetails.Controls.Add(this.txtMemberJoinDate);
             this.pnlMemberDetails.Controls.Add(this.lblMemberJoinDate);
             this.pnlMemberDetails.Controls.Add(this.txtMemberPostcode);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine4);
-            this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine5);
             this.pnlMemberDetails.Controls.Add(this.lblMemberPostcode);
             this.pnlMemberDetails.Controls.Add(this.lblLinkedMembers);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine1);
@@ -589,13 +591,11 @@
             this.pnlMemberDetails.Controls.Add(this.btnMemberCancel);
             this.pnlMemberDetails.Controls.Add(this.txtMemberBarcode);
             this.pnlMemberDetails.Controls.Add(this.btnMemberSave);
-            this.pnlMemberDetails.Controls.Add(this.lblMemberName);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberFirstName);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAssociatedMemberBarcodes);
             this.pnlMemberDetails.Controls.Add(this.txtMemberCustomerType);
-            this.pnlMemberDetails.Controls.Add(this.txtMemberName);
+            this.pnlMemberDetails.Controls.Add(this.txtMemberFirstName);
             this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine2);
-            this.pnlMemberDetails.Controls.Add(this.txtMemberDateOfBirth);
-            this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine5);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine3);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine2);
             this.pnlMemberDetails.Controls.Add(this.lblMemberSurname);
@@ -615,30 +615,21 @@
             this.pnlMemberDetails.TabIndex = 54;
             this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMember_VisibleChanged);
             // 
-            // grpMemberBookLinks
-            // 
-            this.grpMemberBookLinks.Controls.Add(this.lsvMemberBookLinks);
-            this.grpMemberBookLinks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpMemberBookLinks.Location = new System.Drawing.Point(1437, 32);
-            this.grpMemberBookLinks.Name = "grpMemberBookLinks";
-            this.grpMemberBookLinks.Size = new System.Drawing.Size(327, 889);
-            this.grpMemberBookLinks.TabIndex = 46;
-            this.grpMemberBookLinks.TabStop = false;
-            this.grpMemberBookLinks.Text = "Book links";
-            // 
             // lsvMemberBookLinks
             // 
+            this.lsvMemberBookLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvMemberBookLinks.HideSelection = false;
-            this.lsvMemberBookLinks.Location = new System.Drawing.Point(6, 37);
+            this.lsvMemberBookLinks.Location = new System.Drawing.Point(1461, 81);
             this.lsvMemberBookLinks.Name = "lsvMemberBookLinks";
-            this.lsvMemberBookLinks.Size = new System.Drawing.Size(315, 848);
+            this.lsvMemberBookLinks.Size = new System.Drawing.Size(303, 784);
             this.lsvMemberBookLinks.TabIndex = 1;
             this.lsvMemberBookLinks.UseCompatibleStateImageBehavior = false;
             // 
             // txtMemberJoinDate
             // 
             this.txtMemberJoinDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberJoinDate.Location = new System.Drawing.Point(255, 883);
+            this.txtMemberJoinDate.Location = new System.Drawing.Point(255, 827);
             this.txtMemberJoinDate.Name = "txtMemberJoinDate";
             this.txtMemberJoinDate.ReadOnly = true;
             this.txtMemberJoinDate.Size = new System.Drawing.Size(1159, 38);
@@ -648,7 +639,7 @@
             // 
             this.lblMemberJoinDate.AutoSize = true;
             this.lblMemberJoinDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberJoinDate.Location = new System.Drawing.Point(15, 886);
+            this.lblMemberJoinDate.Location = new System.Drawing.Point(15, 830);
             this.lblMemberJoinDate.Name = "lblMemberJoinDate";
             this.lblMemberJoinDate.Size = new System.Drawing.Size(137, 31);
             this.lblMemberJoinDate.TabIndex = 73;
@@ -657,32 +648,16 @@
             // txtMemberPostcode
             // 
             this.txtMemberPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberPostcode.Location = new System.Drawing.Point(255, 827);
+            this.txtMemberPostcode.Location = new System.Drawing.Point(255, 767);
             this.txtMemberPostcode.Name = "txtMemberPostcode";
             this.txtMemberPostcode.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberPostcode.TabIndex = 72;
-            // 
-            // txtMemberAddressLine4
-            // 
-            this.txtMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberAddressLine4.Location = new System.Drawing.Point(255, 707);
-            this.txtMemberAddressLine4.Name = "txtMemberAddressLine4";
-            this.txtMemberAddressLine4.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberAddressLine4.TabIndex = 70;
-            // 
-            // txtMemberAddressLine5
-            // 
-            this.txtMemberAddressLine5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberAddressLine5.Location = new System.Drawing.Point(255, 767);
-            this.txtMemberAddressLine5.Name = "txtMemberAddressLine5";
-            this.txtMemberAddressLine5.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberAddressLine5.TabIndex = 71;
             // 
             // lblMemberPostcode
             // 
             this.lblMemberPostcode.AutoSize = true;
             this.lblMemberPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberPostcode.Location = new System.Drawing.Point(15, 830);
+            this.lblMemberPostcode.Location = new System.Drawing.Point(15, 770);
             this.lblMemberPostcode.Name = "lblMemberPostcode";
             this.lblMemberPostcode.Size = new System.Drawing.Size(136, 31);
             this.lblMemberPostcode.TabIndex = 69;
@@ -712,9 +687,9 @@
             this.lblMemberAddressLine3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMemberAddressLine3.Location = new System.Drawing.Point(15, 650);
             this.lblMemberAddressLine3.Name = "lblMemberAddressLine3";
-            this.lblMemberAddressLine3.Size = new System.Drawing.Size(193, 31);
+            this.lblMemberAddressLine3.Size = new System.Drawing.Size(145, 31);
             this.lblMemberAddressLine3.TabIndex = 66;
-            this.lblMemberAddressLine3.Text = "Address line 3:";
+            this.lblMemberAddressLine3.Text = "Town/City:";
             // 
             // btnMemberCancel
             // 
@@ -748,15 +723,15 @@
             this.btnMemberSave.Text = "Save";
             this.btnMemberSave.UseVisualStyleBackColor = false;
             // 
-            // lblMemberName
+            // lblMemberFirstName
             // 
-            this.lblMemberName.AutoSize = true;
-            this.lblMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberName.Location = new System.Drawing.Point(15, 110);
-            this.lblMemberName.Name = "lblMemberName";
-            this.lblMemberName.Size = new System.Drawing.Size(94, 31);
-            this.lblMemberName.TabIndex = 45;
-            this.lblMemberName.Text = "Name:";
+            this.lblMemberFirstName.AutoSize = true;
+            this.lblMemberFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberFirstName.Location = new System.Drawing.Point(15, 110);
+            this.lblMemberFirstName.Name = "lblMemberFirstName";
+            this.lblMemberFirstName.Size = new System.Drawing.Size(155, 31);
+            this.lblMemberFirstName.TabIndex = 45;
+            this.lblMemberFirstName.Text = "First Name:";
             // 
             // txtMemberAssociatedMemberBarcodes
             // 
@@ -774,13 +749,13 @@
             this.txtMemberCustomerType.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberCustomerType.TabIndex = 62;
             // 
-            // txtMemberName
+            // txtMemberFirstName
             // 
-            this.txtMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberName.Location = new System.Drawing.Point(255, 107);
-            this.txtMemberName.Name = "txtMemberName";
-            this.txtMemberName.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberName.TabIndex = 44;
+            this.txtMemberFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberFirstName.Location = new System.Drawing.Point(255, 107);
+            this.txtMemberFirstName.Name = "txtMemberFirstName";
+            this.txtMemberFirstName.Size = new System.Drawing.Size(1159, 38);
+            this.txtMemberFirstName.TabIndex = 44;
             // 
             // lblMemberAddressLine2
             // 
@@ -788,27 +763,9 @@
             this.lblMemberAddressLine2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMemberAddressLine2.Location = new System.Drawing.Point(15, 590);
             this.lblMemberAddressLine2.Name = "lblMemberAddressLine2";
-            this.lblMemberAddressLine2.Size = new System.Drawing.Size(193, 31);
+            this.lblMemberAddressLine2.Size = new System.Drawing.Size(144, 31);
             this.lblMemberAddressLine2.TabIndex = 46;
-            this.lblMemberAddressLine2.Text = "Address line 2:";
-            // 
-            // txtMemberDateOfBirth
-            // 
-            this.txtMemberDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberDateOfBirth.Location = new System.Drawing.Point(255, 227);
-            this.txtMemberDateOfBirth.Name = "txtMemberDateOfBirth";
-            this.txtMemberDateOfBirth.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberDateOfBirth.TabIndex = 61;
-            // 
-            // lblMemberAddressLine5
-            // 
-            this.lblMemberAddressLine5.AutoSize = true;
-            this.lblMemberAddressLine5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberAddressLine5.Location = new System.Drawing.Point(15, 770);
-            this.lblMemberAddressLine5.Name = "lblMemberAddressLine5";
-            this.lblMemberAddressLine5.Size = new System.Drawing.Size(193, 31);
-            this.lblMemberAddressLine5.TabIndex = 47;
-            this.lblMemberAddressLine5.Text = "Address line 5:";
+            this.lblMemberAddressLine2.Text = "Address 2:";
             // 
             // txtMemberAddressLine3
             // 
@@ -836,25 +793,15 @@
             this.lblMemberSurname.TabIndex = 49;
             this.lblMemberSurname.Text = "Surname:";
             // 
-            // lblMemberAddressLine4
-            // 
-            this.lblMemberAddressLine4.AutoSize = true;
-            this.lblMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberAddressLine4.Location = new System.Drawing.Point(15, 710);
-            this.lblMemberAddressLine4.Name = "lblMemberAddressLine4";
-            this.lblMemberAddressLine4.Size = new System.Drawing.Size(193, 31);
-            this.lblMemberAddressLine4.TabIndex = 48;
-            this.lblMemberAddressLine4.Text = "Address line 4:";
-            // 
             // lblMemberAddressLine1
             // 
             this.lblMemberAddressLine1.AutoSize = true;
             this.lblMemberAddressLine1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMemberAddressLine1.Location = new System.Drawing.Point(15, 530);
             this.lblMemberAddressLine1.Name = "lblMemberAddressLine1";
-            this.lblMemberAddressLine1.Size = new System.Drawing.Size(193, 31);
+            this.lblMemberAddressLine1.Size = new System.Drawing.Size(144, 31);
             this.lblMemberAddressLine1.TabIndex = 50;
-            this.lblMemberAddressLine1.Text = "Address line 1:";
+            this.lblMemberAddressLine1.Text = "Address 1:";
             // 
             // txtMemberEmailAddress
             // 
@@ -878,9 +825,9 @@
             this.lblMemberDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMemberDateOfBirth.Location = new System.Drawing.Point(15, 230);
             this.lblMemberDateOfBirth.Name = "lblMemberDateOfBirth";
-            this.lblMemberDateOfBirth.Size = new System.Drawing.Size(179, 31);
+            this.lblMemberDateOfBirth.Size = new System.Drawing.Size(173, 31);
             this.lblMemberDateOfBirth.TabIndex = 51;
-            this.lblMemberDateOfBirth.Text = "Date Of Birth:";
+            this.lblMemberDateOfBirth.Text = "Date of Birth:";
             // 
             // lblMemberCustomerType
             // 
@@ -1403,6 +1350,7 @@
             this.pnlLoan.TabIndex = 17;
             this.pnlLoan.VisibleChanged += new System.EventHandler(this.pnlLoan_VisibleChanged);
             this.pnlLoan.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCheckOut_Paint);
+            this.pnlLoan.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pnlLoan_PreviewKeyDown);
             // 
             // btnLoanDelete
             // 
@@ -1458,6 +1406,7 @@
             this.txtLoanEnterBarcode.Name = "txtLoanEnterBarcode";
             this.txtLoanEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtLoanEnterBarcode.TabIndex = 32;
+            this.txtLoanEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtLoanEnterBarcode_PreviewKeyDown);
             // 
             // lblLoanLateFees
             // 
@@ -1793,6 +1742,7 @@
             this.pnlReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlReturn.Controls.Add(this.btnReturnDelete);
             this.pnlReturn.Controls.Add(this.lblReturnEnterBarcode);
             this.pnlReturn.Controls.Add(this.txtReturnEnterBarcode);
             this.pnlReturn.Controls.Add(this.lblReturnLateFees);
@@ -1815,6 +1765,20 @@
             this.pnlReturn.TabIndex = 52;
             this.pnlReturn.VisibleChanged += new System.EventHandler(this.pnlCheckIn_VisibleChanged);
             // 
+            // btnReturnDelete
+            // 
+            this.btnReturnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReturnDelete.BackColor = System.Drawing.Color.Red;
+            this.btnReturnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnDelete.Location = new System.Drawing.Point(1278, 870);
+            this.btnReturnDelete.Name = "btnReturnDelete";
+            this.btnReturnDelete.Size = new System.Drawing.Size(212, 38);
+            this.btnReturnDelete.TabIndex = 34;
+            this.btnReturnDelete.Text = "Delete";
+            this.btnReturnDelete.UseVisualStyleBackColor = false;
+            this.btnReturnDelete.Click += new System.EventHandler(this.btnReturnDelete_Click);
+            // 
             // lblReturnEnterBarcode
             // 
             this.lblReturnEnterBarcode.AutoSize = true;
@@ -1835,6 +1799,7 @@
             this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnEnterBarcode.TabIndex = 30;
             this.txtReturnEnterBarcode.TextChanged += new System.EventHandler(this.txtReturnEnterBarcode_TextChanged);
+            this.txtReturnEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReturnEnterBarcode_PreviewKeyDown);
             // 
             // lblReturnLateFees
             // 
@@ -1874,7 +1839,7 @@
             this.lsvReturnSelectedBooks.HideSelection = false;
             this.lsvReturnSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvReturnSelectedBooks.Name = "lsvReturnSelectedBooks";
-            this.lsvReturnSelectedBooks.Size = new System.Drawing.Size(1241, 561);
+            this.lsvReturnSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvReturnSelectedBooks.TabIndex = 24;
             this.lsvReturnSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
@@ -2392,16 +2357,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea12.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend12);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series12.ChartArea = "ChartArea1";
+            series12.Legend = "Legend1";
+            series12.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series12);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2620,10 +2585,11 @@
             this.pnlSell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSell.Controls.Add(this.btnSellDelete);
             this.pnlSell.Controls.Add(this.lblSellPrice);
             this.pnlSell.Controls.Add(this.txtSellPrice);
             this.pnlSell.Controls.Add(this.lblSellEnterBarcodes);
-            this.pnlSell.Controls.Add(this.txtSellEnterBarcodes);
+            this.pnlSell.Controls.Add(this.txtSellEnterBarcode);
             this.pnlSell.Controls.Add(this.lblSellLateFees);
             this.pnlSell.Controls.Add(this.txtSellLateFees);
             this.pnlSell.Controls.Add(this.txtSellOverdue);
@@ -2643,6 +2609,20 @@
             this.pnlSell.Size = new System.Drawing.Size(1770, 980);
             this.pnlSell.TabIndex = 62;
             this.pnlSell.VisibleChanged += new System.EventHandler(this.pnlSell_VisibleChanged);
+            // 
+            // btnSellDelete
+            // 
+            this.btnSellDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSellDelete.BackColor = System.Drawing.Color.Red;
+            this.btnSellDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSellDelete.Location = new System.Drawing.Point(1278, 870);
+            this.btnSellDelete.Name = "btnSellDelete";
+            this.btnSellDelete.Size = new System.Drawing.Size(212, 38);
+            this.btnSellDelete.TabIndex = 34;
+            this.btnSellDelete.Text = "Delete";
+            this.btnSellDelete.UseVisualStyleBackColor = false;
+            this.btnSellDelete.Click += new System.EventHandler(this.btnSellDelete_Click);
             // 
             // lblSellPrice
             // 
@@ -2675,15 +2655,17 @@
             this.lblSellEnterBarcodes.TabIndex = 29;
             this.lblSellEnterBarcodes.Text = "Enter barcodes:";
             // 
-            // txtSellEnterBarcodes
+            // txtSellEnterBarcode
             // 
-            this.txtSellEnterBarcodes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSellEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSellEnterBarcodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSellEnterBarcodes.Location = new System.Drawing.Point(249, 287);
-            this.txtSellEnterBarcodes.Name = "txtSellEnterBarcodes";
-            this.txtSellEnterBarcodes.Size = new System.Drawing.Size(1241, 38);
-            this.txtSellEnterBarcodes.TabIndex = 30;
+            this.txtSellEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellEnterBarcode.Location = new System.Drawing.Point(249, 287);
+            this.txtSellEnterBarcode.Name = "txtSellEnterBarcode";
+            this.txtSellEnterBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtSellEnterBarcode.TabIndex = 30;
+            this.txtSellEnterBarcode.TextChanged += new System.EventHandler(this.txtSellEnterBarcode_TextChanged);
+            this.txtSellEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSellEnterBarcode_PreviewKeyDown);
             // 
             // lblSellLateFees
             // 
@@ -2761,6 +2743,7 @@
             this.txtSellMemberBarcode.Name = "txtSellMemberBarcode";
             this.txtSellMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtSellMemberBarcode.TabIndex = 20;
+            this.txtSellMemberBarcode.TextChanged += new System.EventHandler(this.txtSellMemberBarcode_TextChanged);
             // 
             // lblSellMemberBarcode
             // 
@@ -2818,6 +2801,7 @@
             this.btnSellSave.TabIndex = 13;
             this.btnSellSave.Text = "Save";
             this.btnSellSave.UseVisualStyleBackColor = false;
+            this.btnSellSave.Click += new System.EventHandler(this.btnSellSave_Click);
             // 
             // btnSellCancel
             // 
@@ -2831,45 +2815,51 @@
             this.btnSellCancel.TabIndex = 14;
             this.btnSellCancel.Text = "Cancel";
             this.btnSellCancel.UseVisualStyleBackColor = false;
+            this.btnSellCancel.Click += new System.EventHandler(this.btnSellCancel_Click);
             // 
-            // pnlReservation
+            // pnlReserve
             // 
-            this.pnlReservation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlReserve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlReservation.Controls.Add(this.lblreserveEnterBarcode);
-            this.pnlReservation.Controls.Add(this.lblReserveLateFees);
-            this.pnlReservation.Controls.Add(this.txtRserveEnterBarcode);
-            this.pnlReservation.Controls.Add(this.txtReserveOverdue);
-            this.pnlReservation.Controls.Add(this.lblReserveOverdue);
-            this.pnlReservation.Controls.Add(this.lsvReserveSelectedBooks);
-            this.pnlReservation.Controls.Add(this.lblReserveSelectedBooks);
-            this.pnlReservation.Controls.Add(this.txtReserveLoans);
-            this.pnlReservation.Controls.Add(this.lblReserveLoans);
-            this.pnlReservation.Controls.Add(this.txtReserveMemberBarcode);
-            this.pnlReservation.Controls.Add(this.lblReserveMemberBarcode);
-            this.pnlReservation.Controls.Add(this.txtReserveMemberName);
-            this.pnlReservation.Controls.Add(this.lblReserveMemberName);
-            this.pnlReservation.Controls.Add(this.btnReserveCancel);
-            this.pnlReservation.Controls.Add(this.txtReserveLateFee);
-            this.pnlReservation.Controls.Add(this.btnReserveSave);
-            this.pnlReservation.Controls.Add(this.dtpReservationSetDueDate);
-            this.pnlReservation.Controls.Add(this.lblReservationSetDueDate);
-            this.pnlReservation.Location = new System.Drawing.Point(150, 100);
-            this.pnlReservation.Name = "pnlReservation";
-            this.pnlReservation.Size = new System.Drawing.Size(1770, 980);
-            this.pnlReservation.TabIndex = 63;
-            this.pnlReservation.VisibleChanged += new System.EventHandler(this.pnlReservation_VisibleChanged);
+            this.pnlReserve.Controls.Add(this.btnReserveDelete);
+            this.pnlReserve.Controls.Add(this.lblReserveLateFees);
+            this.pnlReserve.Controls.Add(this.lblReserveEnterBarcode);
+            this.pnlReserve.Controls.Add(this.txtReserveEnterBarcode);
+            this.pnlReserve.Controls.Add(this.txtReserveOverdue);
+            this.pnlReserve.Controls.Add(this.lblReserveOverdue);
+            this.pnlReserve.Controls.Add(this.lsvReserveSelectedBooks);
+            this.pnlReserve.Controls.Add(this.lblReserveSelectedBooks);
+            this.pnlReserve.Controls.Add(this.txtReserveLoans);
+            this.pnlReserve.Controls.Add(this.lblReserveLoans);
+            this.pnlReserve.Controls.Add(this.txtReserveMemberBarcode);
+            this.pnlReserve.Controls.Add(this.lblReserveMemberBarcode);
+            this.pnlReserve.Controls.Add(this.txtReserveMemberName);
+            this.pnlReserve.Controls.Add(this.lblReserveMemberName);
+            this.pnlReserve.Controls.Add(this.btnReserveCancel);
+            this.pnlReserve.Controls.Add(this.txtReserveLateFees);
+            this.pnlReserve.Controls.Add(this.btnReserveSave);
+            this.pnlReserve.Controls.Add(this.dtpReservePickUpByDate);
+            this.pnlReserve.Controls.Add(this.lblReserveSetDueDate);
+            this.pnlReserve.Location = new System.Drawing.Point(150, 100);
+            this.pnlReserve.Name = "pnlReserve";
+            this.pnlReserve.Size = new System.Drawing.Size(1770, 980);
+            this.pnlReserve.TabIndex = 63;
+            this.pnlReserve.VisibleChanged += new System.EventHandler(this.pnlReserve_VisibleChanged);
             // 
-            // lblreserveEnterBarcode
+            // btnReserveDelete
             // 
-            this.lblreserveEnterBarcode.AutoSize = true;
-            this.lblreserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblreserveEnterBarcode.Location = new System.Drawing.Point(15, 290);
-            this.lblreserveEnterBarcode.Name = "lblreserveEnterBarcode";
-            this.lblreserveEnterBarcode.Size = new System.Drawing.Size(206, 31);
-            this.lblreserveEnterBarcode.TabIndex = 29;
-            this.lblreserveEnterBarcode.Text = "Enter barcodes:";
+            this.btnReserveDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReserveDelete.BackColor = System.Drawing.Color.Red;
+            this.btnReserveDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReserveDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReserveDelete.Location = new System.Drawing.Point(1278, 870);
+            this.btnReserveDelete.Name = "btnReserveDelete";
+            this.btnReserveDelete.Size = new System.Drawing.Size(212, 38);
+            this.btnReserveDelete.TabIndex = 34;
+            this.btnReserveDelete.Text = "Delete";
+            this.btnReserveDelete.UseVisualStyleBackColor = false;
+            this.btnReserveDelete.Click += new System.EventHandler(this.btnReserveDelete_Click);
             // 
             // lblReserveLateFees
             // 
@@ -2881,15 +2871,27 @@
             this.lblReserveLateFees.TabIndex = 27;
             this.lblReserveLateFees.Text = "Late Fees owed:";
             // 
-            // txtRserveEnterBarcode
+            // lblReserveEnterBarcode
             // 
-            this.txtRserveEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblReserveEnterBarcode.AutoSize = true;
+            this.lblReserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReserveEnterBarcode.Location = new System.Drawing.Point(15, 290);
+            this.lblReserveEnterBarcode.Name = "lblReserveEnterBarcode";
+            this.lblReserveEnterBarcode.Size = new System.Drawing.Size(206, 31);
+            this.lblReserveEnterBarcode.TabIndex = 29;
+            this.lblReserveEnterBarcode.Text = "Enter barcodes:";
+            // 
+            // txtReserveEnterBarcode
+            // 
+            this.txtReserveEnterBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRserveEnterBarcode.Location = new System.Drawing.Point(249, 287);
-            this.txtRserveEnterBarcode.Name = "txtRserveEnterBarcode";
-            this.txtRserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtRserveEnterBarcode.TabIndex = 30;
+            this.txtReserveEnterBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReserveEnterBarcode.Location = new System.Drawing.Point(249, 287);
+            this.txtReserveEnterBarcode.Name = "txtReserveEnterBarcode";
+            this.txtReserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
+            this.txtReserveEnterBarcode.TabIndex = 30;
+            this.txtReserveEnterBarcode.TextChanged += new System.EventHandler(this.txtRserveEnterBarcode_TextChanged);
+            this.txtReserveEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReserveEnterBarcode_PreviewKeyDown);
             // 
             // txtReserveOverdue
             // 
@@ -2961,6 +2963,7 @@
             this.txtReserveMemberBarcode.Name = "txtReserveMemberBarcode";
             this.txtReserveMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReserveMemberBarcode.TabIndex = 20;
+            this.txtReserveMemberBarcode.TextChanged += new System.EventHandler(this.txtReserveMemberBarcode_TextChanged);
             // 
             // lblReserveMemberBarcode
             // 
@@ -3005,15 +3008,16 @@
             this.btnReserveCancel.TabIndex = 14;
             this.btnReserveCancel.Text = "Cancel";
             this.btnReserveCancel.UseVisualStyleBackColor = false;
+            this.btnReserveCancel.Click += new System.EventHandler(this.btnReserveCancel_Click);
             // 
-            // txtReserveLateFee
+            // txtReserveLateFees
             // 
-            this.txtReserveLateFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtReserveLateFee.Location = new System.Drawing.Point(710, 230);
-            this.txtReserveLateFee.Name = "txtReserveLateFee";
-            this.txtReserveLateFee.ReadOnly = true;
-            this.txtReserveLateFee.Size = new System.Drawing.Size(212, 38);
-            this.txtReserveLateFee.TabIndex = 28;
+            this.txtReserveLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReserveLateFees.Location = new System.Drawing.Point(710, 230);
+            this.txtReserveLateFees.Name = "txtReserveLateFees";
+            this.txtReserveLateFees.ReadOnly = true;
+            this.txtReserveLateFees.Size = new System.Drawing.Size(212, 38);
+            this.txtReserveLateFees.TabIndex = 28;
             // 
             // btnReserveSave
             // 
@@ -3027,187 +3031,252 @@
             this.btnReserveSave.TabIndex = 13;
             this.btnReserveSave.Text = "Save";
             this.btnReserveSave.UseVisualStyleBackColor = false;
+            this.btnReserveSave.Click += new System.EventHandler(this.btnReserveSave_Click);
             // 
             // pnlCirculationDetails
             // 
-            this.pnlCirculationDetails.Controls.Add(this.lsvTransactionBooks);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionPrice);
-            this.pnlCirculationDetails.Controls.Add(this.btnTransactionBack);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionType);
-            this.pnlCirculationDetails.Controls.Add(this.btnTransactionDelete);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionMemberBarode);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionPrice);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDueDate);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionMemberBarcode);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionDate);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionMemberName);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDate);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionDueDate);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionBooks);
-            this.pnlCirculationDetails.Controls.Add(this.lblTransactionType);
-            this.pnlCirculationDetails.Controls.Add(this.txtTransactionMemberName);
+            this.pnlCirculationDetails.Controls.Add(this.dtpCircDetailsDueDate);
+            this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsSave);
+            this.pnlCirculationDetails.Controls.Add(this.lsvCircDetailsBookData);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsPrice);
+            this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsBack);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsType);
+            this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsDelete);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsMemberBarode);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsPrice);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsMemberBarcode);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsMemberName);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsDueDate);
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsBooks);
+            this.pnlCirculationDetails.Controls.Add(this.lblTCircDetailsType);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsMemberName);
             this.pnlCirculationDetails.Location = new System.Drawing.Point(150, 100);
             this.pnlCirculationDetails.Name = "pnlCirculationDetails";
             this.pnlCirculationDetails.Size = new System.Drawing.Size(1770, 980);
             this.pnlCirculationDetails.TabIndex = 75;
+            this.pnlCirculationDetails.VisibleChanged += new System.EventHandler(this.pnlCirculationDetails_VisibleChanged);
             // 
-            // lsvTransactionBooks
+            // dtpCircDetailsDueDate
             // 
-            this.lsvTransactionBooks.HideSelection = false;
-            this.lsvTransactionBooks.Location = new System.Drawing.Point(255, 410);
-            this.lsvTransactionBooks.Name = "lsvTransactionBooks";
-            this.lsvTransactionBooks.Size = new System.Drawing.Size(1159, 100);
-            this.lsvTransactionBooks.TabIndex = 69;
-            this.lsvTransactionBooks.UseCompatibleStateImageBehavior = false;
+            this.dtpCircDetailsDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.dtpCircDetailsDueDate.Location = new System.Drawing.Point(255, 287);
+            this.dtpCircDetailsDueDate.Name = "dtpCircDetailsDueDate";
+            this.dtpCircDetailsDueDate.Size = new System.Drawing.Size(495, 38);
+            this.dtpCircDetailsDueDate.TabIndex = 71;
             // 
-            // lblTransactionPrice
+            // btnCircDetailsSave
             // 
-            this.lblTransactionPrice.AutoSize = true;
-            this.lblTransactionPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionPrice.Location = new System.Drawing.Point(15, 350);
-            this.lblTransactionPrice.Name = "lblTransactionPrice";
-            this.lblTransactionPrice.Size = new System.Drawing.Size(84, 31);
-            this.lblTransactionPrice.TabIndex = 68;
-            this.lblTransactionPrice.Text = "Price:";
+            this.btnCircDetailsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCircDetailsSave.BackColor = System.Drawing.Color.LightGray;
+            this.btnCircDetailsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCircDetailsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCircDetailsSave.Location = new System.Drawing.Point(1518, 924);
+            this.btnCircDetailsSave.Name = "btnCircDetailsSave";
+            this.btnCircDetailsSave.Size = new System.Drawing.Size(120, 50);
+            this.btnCircDetailsSave.TabIndex = 70;
+            this.btnCircDetailsSave.Text = "Save";
+            this.btnCircDetailsSave.UseVisualStyleBackColor = false;
             // 
-            // btnTransactionBack
+            // lsvCircDetailsBookData
             // 
-            this.btnTransactionBack.BackColor = System.Drawing.Color.LightGray;
-            this.btnTransactionBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransactionBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransactionBack.Location = new System.Drawing.Point(1644, 924);
-            this.btnTransactionBack.Name = "btnTransactionBack";
-            this.btnTransactionBack.Size = new System.Drawing.Size(120, 50);
-            this.btnTransactionBack.TabIndex = 1;
-            this.btnTransactionBack.Text = "Back";
-            this.btnTransactionBack.UseVisualStyleBackColor = false;
+            this.lsvCircDetailsBookData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvCircDetailsBookData.HideSelection = false;
+            this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 410);
+            this.lsvCircDetailsBookData.Name = "lsvCircDetailsBookData";
+            this.lsvCircDetailsBookData.Size = new System.Drawing.Size(1159, 100);
+            this.lsvCircDetailsBookData.TabIndex = 69;
+            this.lsvCircDetailsBookData.UseCompatibleStateImageBehavior = false;
             // 
-            // txtTransactionType
+            // lblCircDetailsPrice
             // 
-            this.txtTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionType.Location = new System.Drawing.Point(255, 47);
-            this.txtTransactionType.Name = "txtTransactionType";
-            this.txtTransactionType.ReadOnly = true;
-            this.txtTransactionType.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionType.TabIndex = 65;
+            this.lblCircDetailsPrice.AutoSize = true;
+            this.lblCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsPrice.Location = new System.Drawing.Point(15, 350);
+            this.lblCircDetailsPrice.Name = "lblCircDetailsPrice";
+            this.lblCircDetailsPrice.Size = new System.Drawing.Size(84, 31);
+            this.lblCircDetailsPrice.TabIndex = 68;
+            this.lblCircDetailsPrice.Text = "Price:";
             // 
-            // btnTransactionDelete
+            // btnCircDetailsBack
             // 
-            this.btnTransactionDelete.BackColor = System.Drawing.Color.Red;
-            this.btnTransactionDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransactionDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransactionDelete.Location = new System.Drawing.Point(1518, 924);
-            this.btnTransactionDelete.Name = "btnTransactionDelete";
-            this.btnTransactionDelete.Size = new System.Drawing.Size(120, 50);
-            this.btnTransactionDelete.TabIndex = 0;
-            this.btnTransactionDelete.Text = "Delete";
-            this.btnTransactionDelete.UseVisualStyleBackColor = false;
+            this.btnCircDetailsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCircDetailsBack.BackColor = System.Drawing.Color.LightGray;
+            this.btnCircDetailsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCircDetailsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCircDetailsBack.Location = new System.Drawing.Point(1644, 924);
+            this.btnCircDetailsBack.Name = "btnCircDetailsBack";
+            this.btnCircDetailsBack.Size = new System.Drawing.Size(120, 50);
+            this.btnCircDetailsBack.TabIndex = 1;
+            this.btnCircDetailsBack.Text = "Back";
+            this.btnCircDetailsBack.UseVisualStyleBackColor = false;
             // 
-            // lblTransactionMemberBarode
+            // txtCircDetailsType
             // 
-            this.lblTransactionMemberBarode.AutoSize = true;
-            this.lblTransactionMemberBarode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionMemberBarode.Location = new System.Drawing.Point(15, 110);
-            this.lblTransactionMemberBarode.Name = "lblTransactionMemberBarode";
-            this.lblTransactionMemberBarode.Size = new System.Drawing.Size(228, 31);
-            this.lblTransactionMemberBarode.TabIndex = 45;
-            this.lblTransactionMemberBarode.Text = "Member Barcode:";
+            this.txtCircDetailsType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsType.Location = new System.Drawing.Point(255, 47);
+            this.txtCircDetailsType.Name = "txtCircDetailsType";
+            this.txtCircDetailsType.ReadOnly = true;
+            this.txtCircDetailsType.Size = new System.Drawing.Size(495, 38);
+            this.txtCircDetailsType.TabIndex = 65;
             // 
-            // txtTransactionPrice
+            // btnCircDetailsDelete
             // 
-            this.txtTransactionPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionPrice.Location = new System.Drawing.Point(255, 347);
-            this.txtTransactionPrice.Name = "txtTransactionPrice";
-            this.txtTransactionPrice.ReadOnly = true;
-            this.txtTransactionPrice.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionPrice.TabIndex = 63;
-            this.txtTransactionPrice.TextChanged += new System.EventHandler(this.txtTransactionPrice_TextChanged);
+            this.btnCircDetailsDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCircDetailsDelete.BackColor = System.Drawing.Color.Red;
+            this.btnCircDetailsDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCircDetailsDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCircDetailsDelete.Location = new System.Drawing.Point(1392, 924);
+            this.btnCircDetailsDelete.Name = "btnCircDetailsDelete";
+            this.btnCircDetailsDelete.Size = new System.Drawing.Size(120, 50);
+            this.btnCircDetailsDelete.TabIndex = 0;
+            this.btnCircDetailsDelete.Text = "Delete";
+            this.btnCircDetailsDelete.UseVisualStyleBackColor = false;
             // 
-            // txtTransactionDueDate
+            // lblCircDetailsMemberBarode
             // 
-            this.txtTransactionDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionDueDate.Location = new System.Drawing.Point(255, 287);
-            this.txtTransactionDueDate.Name = "txtTransactionDueDate";
-            this.txtTransactionDueDate.ReadOnly = true;
-            this.txtTransactionDueDate.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionDueDate.TabIndex = 62;
+            this.lblCircDetailsMemberBarode.AutoSize = true;
+            this.lblCircDetailsMemberBarode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsMemberBarode.Location = new System.Drawing.Point(15, 110);
+            this.lblCircDetailsMemberBarode.Name = "lblCircDetailsMemberBarode";
+            this.lblCircDetailsMemberBarode.Size = new System.Drawing.Size(228, 31);
+            this.lblCircDetailsMemberBarode.TabIndex = 45;
+            this.lblCircDetailsMemberBarode.Text = "Member Barcode:";
             // 
-            // txtTransactionMemberBarcode
+            // txtCircDetailsPrice
             // 
-            this.txtTransactionMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionMemberBarcode.Location = new System.Drawing.Point(255, 107);
-            this.txtTransactionMemberBarcode.Name = "txtTransactionMemberBarcode";
-            this.txtTransactionMemberBarcode.ReadOnly = true;
-            this.txtTransactionMemberBarcode.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionMemberBarcode.TabIndex = 44;
+            this.txtCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsPrice.Location = new System.Drawing.Point(255, 347);
+            this.txtCircDetailsPrice.Name = "txtCircDetailsPrice";
+            this.txtCircDetailsPrice.ReadOnly = true;
+            this.txtCircDetailsPrice.Size = new System.Drawing.Size(495, 38);
+            this.txtCircDetailsPrice.TabIndex = 63;
+            this.txtCircDetailsPrice.TextChanged += new System.EventHandler(this.txtTransactionPrice_TextChanged);
             // 
-            // txtTransactionDate
+            // txtCircDetailsMemberBarcode
             // 
-            this.txtTransactionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionDate.Location = new System.Drawing.Point(255, 227);
-            this.txtTransactionDate.Name = "txtTransactionDate";
-            this.txtTransactionDate.ReadOnly = true;
-            this.txtTransactionDate.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionDate.TabIndex = 61;
+            this.txtCircDetailsMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCircDetailsMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsMemberBarcode.Location = new System.Drawing.Point(255, 107);
+            this.txtCircDetailsMemberBarcode.Name = "txtCircDetailsMemberBarcode";
+            this.txtCircDetailsMemberBarcode.ReadOnly = true;
+            this.txtCircDetailsMemberBarcode.Size = new System.Drawing.Size(1159, 38);
+            this.txtCircDetailsMemberBarcode.TabIndex = 44;
             // 
-            // lblTransactionMemberName
+            // txtCircDetailsDate
             // 
-            this.lblTransactionMemberName.AutoSize = true;
-            this.lblTransactionMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionMemberName.Location = new System.Drawing.Point(15, 170);
-            this.lblTransactionMemberName.Name = "lblTransactionMemberName";
-            this.lblTransactionMemberName.Size = new System.Drawing.Size(199, 31);
-            this.lblTransactionMemberName.TabIndex = 49;
-            this.lblTransactionMemberName.Text = "Member Name:";
+            this.txtCircDetailsDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsDate.Location = new System.Drawing.Point(255, 227);
+            this.txtCircDetailsDate.Name = "txtCircDetailsDate";
+            this.txtCircDetailsDate.ReadOnly = true;
+            this.txtCircDetailsDate.Size = new System.Drawing.Size(495, 38);
+            this.txtCircDetailsDate.TabIndex = 61;
             // 
-            // lblTransactionDate
+            // lblCircDetailsMemberName
             // 
-            this.lblTransactionDate.AutoSize = true;
-            this.lblTransactionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionDate.Location = new System.Drawing.Point(15, 230);
-            this.lblTransactionDate.Name = "lblTransactionDate";
-            this.lblTransactionDate.Size = new System.Drawing.Size(80, 31);
-            this.lblTransactionDate.TabIndex = 51;
-            this.lblTransactionDate.Text = "Date:";
+            this.lblCircDetailsMemberName.AutoSize = true;
+            this.lblCircDetailsMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsMemberName.Location = new System.Drawing.Point(15, 170);
+            this.lblCircDetailsMemberName.Name = "lblCircDetailsMemberName";
+            this.lblCircDetailsMemberName.Size = new System.Drawing.Size(199, 31);
+            this.lblCircDetailsMemberName.TabIndex = 49;
+            this.lblCircDetailsMemberName.Text = "Member Name:";
             // 
-            // lblTransactionDueDate
+            // lblCircDetailsDate
             // 
-            this.lblTransactionDueDate.AutoSize = true;
-            this.lblTransactionDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionDueDate.Location = new System.Drawing.Point(15, 290);
-            this.lblTransactionDueDate.Name = "lblTransactionDueDate";
-            this.lblTransactionDueDate.Size = new System.Drawing.Size(132, 31);
-            this.lblTransactionDueDate.TabIndex = 52;
-            this.lblTransactionDueDate.Text = "Due date:";
+            this.lblCircDetailsDate.AutoSize = true;
+            this.lblCircDetailsDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsDate.Location = new System.Drawing.Point(15, 230);
+            this.lblCircDetailsDate.Name = "lblCircDetailsDate";
+            this.lblCircDetailsDate.Size = new System.Drawing.Size(80, 31);
+            this.lblCircDetailsDate.TabIndex = 51;
+            this.lblCircDetailsDate.Text = "Date:";
             // 
-            // lblTransactionBooks
+            // lblCircDetailsDueDate
             // 
-            this.lblTransactionBooks.AutoSize = true;
-            this.lblTransactionBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionBooks.Location = new System.Drawing.Point(15, 410);
-            this.lblTransactionBooks.Name = "lblTransactionBooks";
-            this.lblTransactionBooks.Size = new System.Drawing.Size(84, 31);
-            this.lblTransactionBooks.TabIndex = 53;
-            this.lblTransactionBooks.Text = "Book:";
+            this.lblCircDetailsDueDate.AutoSize = true;
+            this.lblCircDetailsDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsDueDate.Location = new System.Drawing.Point(15, 290);
+            this.lblCircDetailsDueDate.Name = "lblCircDetailsDueDate";
+            this.lblCircDetailsDueDate.Size = new System.Drawing.Size(132, 31);
+            this.lblCircDetailsDueDate.TabIndex = 52;
+            this.lblCircDetailsDueDate.Text = "Due date:";
             // 
-            // lblTransactionType
+            // lblCircDetailsBooks
             // 
-            this.lblTransactionType.AutoSize = true;
-            this.lblTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionType.Location = new System.Drawing.Point(15, 50);
-            this.lblTransactionType.Name = "lblTransactionType";
-            this.lblTransactionType.Size = new System.Drawing.Size(219, 31);
-            this.lblTransactionType.TabIndex = 55;
-            this.lblTransactionType.Text = "Circulation Type:";
+            this.lblCircDetailsBooks.AutoSize = true;
+            this.lblCircDetailsBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsBooks.Location = new System.Drawing.Point(15, 410);
+            this.lblCircDetailsBooks.Name = "lblCircDetailsBooks";
+            this.lblCircDetailsBooks.Size = new System.Drawing.Size(84, 31);
+            this.lblCircDetailsBooks.TabIndex = 53;
+            this.lblCircDetailsBooks.Text = "Book:";
             // 
-            // txtTransactionMemberName
+            // lblTCircDetailsType
             // 
-            this.txtTransactionMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransactionMemberName.Location = new System.Drawing.Point(255, 167);
-            this.txtTransactionMemberName.Name = "txtTransactionMemberName";
-            this.txtTransactionMemberName.ReadOnly = true;
-            this.txtTransactionMemberName.Size = new System.Drawing.Size(1159, 38);
-            this.txtTransactionMemberName.TabIndex = 56;
+            this.lblTCircDetailsType.AutoSize = true;
+            this.lblTCircDetailsType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTCircDetailsType.Location = new System.Drawing.Point(15, 50);
+            this.lblTCircDetailsType.Name = "lblTCircDetailsType";
+            this.lblTCircDetailsType.Size = new System.Drawing.Size(219, 31);
+            this.lblTCircDetailsType.TabIndex = 55;
+            this.lblTCircDetailsType.Text = "Circulation Type:";
+            // 
+            // txtCircDetailsMemberName
+            // 
+            this.txtCircDetailsMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCircDetailsMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsMemberName.Location = new System.Drawing.Point(255, 167);
+            this.txtCircDetailsMemberName.Name = "txtCircDetailsMemberName";
+            this.txtCircDetailsMemberName.ReadOnly = true;
+            this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
+            this.txtCircDetailsMemberName.TabIndex = 56;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(255, 227);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 7, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(212, 38);
+            this.dateTimePicker1.TabIndex = 75;
+            this.dateTimePicker1.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            // 
+            // lblMemberAddressLine4
+            // 
+            this.lblMemberAddressLine4.AutoSize = true;
+            this.lblMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberAddressLine4.Location = new System.Drawing.Point(15, 710);
+            this.lblMemberAddressLine4.Name = "lblMemberAddressLine4";
+            this.lblMemberAddressLine4.Size = new System.Drawing.Size(109, 31);
+            this.lblMemberAddressLine4.TabIndex = 48;
+            this.lblMemberAddressLine4.Text = "County:";
+            // 
+            // txtMemberAddressLine4
+            // 
+            this.txtMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberAddressLine4.Location = new System.Drawing.Point(255, 707);
+            this.txtMemberAddressLine4.Name = "txtMemberAddressLine4";
+            this.txtMemberAddressLine4.Size = new System.Drawing.Size(1159, 38);
+            this.txtMemberAddressLine4.TabIndex = 70;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.label3.Location = new System.Drawing.Point(1455, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(303, 38);
+            this.label3.TabIndex = 76;
+            this.label3.Text = "Loaned and Reserved:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // FrmMainSystem
             // 
@@ -3216,14 +3285,14 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlBookDetails);
+            this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
+            this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlCirculationDetails);
+            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
-            this.Controls.Add(this.pnlSell);
-            this.Controls.Add(this.pnlReservation);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlStaff);
@@ -3234,10 +3303,10 @@
             this.MinimumSize = new System.Drawing.Size(1430, 800);
             this.Name = "FrmMainSystem";
             this.Text = "Main System";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMainSystem_FormClosed);
             this.Load += new System.EventHandler(this.frmMainSystem_Load);
             this.pnlMemberDetails.ResumeLayout(false);
             this.pnlMemberDetails.PerformLayout();
-            this.grpMemberBookLinks.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
             this.grpRunningTotal.ResumeLayout(false);
@@ -3268,8 +3337,8 @@
             this.pnlSubTabs.ResumeLayout(false);
             this.pnlSell.ResumeLayout(false);
             this.pnlSell.PerformLayout();
-            this.pnlReservation.ResumeLayout(false);
-            this.pnlReservation.PerformLayout();
+            this.pnlReserve.ResumeLayout(false);
+            this.pnlReserve.PerformLayout();
             this.pnlCirculationDetails.ResumeLayout(false);
             this.pnlCirculationDetails.PerformLayout();
             this.ResumeLayout(false);
@@ -3294,16 +3363,13 @@
         private System.Windows.Forms.Button btnSubTab6;
         private System.Windows.Forms.Button btnSubTab7;
         private System.Windows.Forms.Label lblMessageOutput;
-        private System.Windows.Forms.DateTimePicker dtpReservationSetDueDate;
-        private System.Windows.Forms.Label lblReservationSetDueDate;
+        private System.Windows.Forms.DateTimePicker dtpReservePickUpByDate;
+        private System.Windows.Forms.Label lblReserveSetDueDate;
         private System.Windows.Forms.Panel pnlMemberDetails;
-        private System.Windows.Forms.GroupBox grpMemberBookLinks;
         private System.Windows.Forms.ListView lsvMemberBookLinks;
         private System.Windows.Forms.TextBox txtMemberJoinDate;
         private System.Windows.Forms.Label lblMemberJoinDate;
         private System.Windows.Forms.TextBox txtMemberPostcode;
-        private System.Windows.Forms.TextBox txtMemberAddressLine4;
-        private System.Windows.Forms.TextBox txtMemberAddressLine5;
         private System.Windows.Forms.Label lblMemberPostcode;
         private System.Windows.Forms.Label lblLinkedMembers;
         private System.Windows.Forms.TextBox txtMemberAddressLine1;
@@ -3311,17 +3377,14 @@
         private System.Windows.Forms.Button btnMemberCancel;
         private System.Windows.Forms.TextBox txtMemberBarcode;
         private System.Windows.Forms.Button btnMemberSave;
-        private System.Windows.Forms.Label lblMemberName;
+        private System.Windows.Forms.Label lblMemberFirstName;
         private System.Windows.Forms.TextBox txtMemberAssociatedMemberBarcodes;
         private System.Windows.Forms.TextBox txtMemberCustomerType;
-        private System.Windows.Forms.TextBox txtMemberName;
+        private System.Windows.Forms.TextBox txtMemberFirstName;
         private System.Windows.Forms.Label lblMemberAddressLine2;
-        private System.Windows.Forms.TextBox txtMemberDateOfBirth;
-        private System.Windows.Forms.Label lblMemberAddressLine5;
         private System.Windows.Forms.TextBox txtMemberAddressLine3;
         private System.Windows.Forms.TextBox txtMemberAddressLine2;
         private System.Windows.Forms.Label lblMemberSurname;
-        private System.Windows.Forms.Label lblMemberAddressLine4;
         private System.Windows.Forms.Label lblMemberAddressLine1;
         private System.Windows.Forms.TextBox txtMemberEmailAddress;
         private System.Windows.Forms.TextBox txtMemberPhoneNumber;
@@ -3476,7 +3539,7 @@
         private System.Windows.Forms.Panel pnlSubTabs;
         private System.Windows.Forms.Panel pnlSell;
         private System.Windows.Forms.Label lblSellEnterBarcodes;
-        private System.Windows.Forms.TextBox txtSellEnterBarcodes;
+        private System.Windows.Forms.TextBox txtSellEnterBarcode;
         private System.Windows.Forms.Label lblSellLateFees;
         private System.Windows.Forms.TextBox txtSellOverdue;
         private System.Windows.Forms.Label lblSellOverdue;
@@ -3493,9 +3556,9 @@
         private System.Windows.Forms.Button btnSellSave;
         private System.Windows.Forms.Label lblSellPrice;
         private System.Windows.Forms.TextBox txtSellPrice;
-        private System.Windows.Forms.Panel pnlReservation;
-        private System.Windows.Forms.Label lblreserveEnterBarcode;
-        private System.Windows.Forms.TextBox txtRserveEnterBarcode;
+        private System.Windows.Forms.Panel pnlReserve;
+        private System.Windows.Forms.Label lblReserveEnterBarcode;
+        private System.Windows.Forms.TextBox txtReserveEnterBarcode;
         private System.Windows.Forms.Label lblReserveLateFees;
         private System.Windows.Forms.TextBox txtReserveOverdue;
         private System.Windows.Forms.Label lblReserveOverdue;
@@ -3508,30 +3571,38 @@
         private System.Windows.Forms.TextBox txtReserveMemberName;
         private System.Windows.Forms.Label lblReserveMemberName;
         private System.Windows.Forms.Button btnReserveCancel;
-        private System.Windows.Forms.TextBox txtReserveLateFee;
+        private System.Windows.Forms.TextBox txtReserveLateFees;
         private System.Windows.Forms.Button btnReserveSave;
         private System.Windows.Forms.Label lblLoanLateFees;
         private System.Windows.Forms.TextBox txtLoanLateFees;
         private System.Windows.Forms.Label lblLoanEnterBarcode;
         private System.Windows.Forms.TextBox txtLoanEnterBarcode;
         private System.Windows.Forms.Panel pnlCirculationDetails;
-        private System.Windows.Forms.Label lblTransactionPrice;
-        private System.Windows.Forms.Button btnTransactionBack;
-        private System.Windows.Forms.TextBox txtTransactionType;
-        private System.Windows.Forms.Button btnTransactionDelete;
-        private System.Windows.Forms.Label lblTransactionMemberBarode;
-        private System.Windows.Forms.TextBox txtTransactionPrice;
-        private System.Windows.Forms.TextBox txtTransactionDueDate;
-        private System.Windows.Forms.TextBox txtTransactionMemberBarcode;
-        private System.Windows.Forms.TextBox txtTransactionDate;
-        private System.Windows.Forms.Label lblTransactionMemberName;
-        private System.Windows.Forms.Label lblTransactionDate;
-        private System.Windows.Forms.Label lblTransactionDueDate;
-        private System.Windows.Forms.Label lblTransactionBooks;
-        private System.Windows.Forms.Label lblTransactionType;
-        private System.Windows.Forms.TextBox txtTransactionMemberName;
-        private System.Windows.Forms.ListView lsvTransactionBooks;
+        private System.Windows.Forms.Label lblCircDetailsPrice;
+        private System.Windows.Forms.Button btnCircDetailsBack;
+        private System.Windows.Forms.TextBox txtCircDetailsType;
+        private System.Windows.Forms.Button btnCircDetailsDelete;
+        private System.Windows.Forms.Label lblCircDetailsMemberBarode;
+        private System.Windows.Forms.TextBox txtCircDetailsMemberBarcode;
+        private System.Windows.Forms.TextBox txtCircDetailsDate;
+        private System.Windows.Forms.Label lblCircDetailsMemberName;
+        private System.Windows.Forms.Label lblCircDetailsDate;
+        private System.Windows.Forms.Label lblCircDetailsDueDate;
+        private System.Windows.Forms.Label lblCircDetailsBooks;
+        private System.Windows.Forms.Label lblTCircDetailsType;
+        private System.Windows.Forms.TextBox txtCircDetailsMemberName;
+        private System.Windows.Forms.ListView lsvCircDetailsBookData;
         private System.Windows.Forms.Button btnLoanDelete;
         private System.Windows.Forms.Button btnCirculation;
+        private System.Windows.Forms.Button btnCircDetailsSave;
+        private System.Windows.Forms.DateTimePicker dtpCircDetailsDueDate;
+        private System.Windows.Forms.TextBox txtCircDetailsPrice;
+        private System.Windows.Forms.Button btnReturnDelete;
+        private System.Windows.Forms.Button btnSellDelete;
+        private System.Windows.Forms.Button btnReserveDelete;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtMemberAddressLine4;
+        private System.Windows.Forms.Label lblMemberAddressLine4;
     }
 }

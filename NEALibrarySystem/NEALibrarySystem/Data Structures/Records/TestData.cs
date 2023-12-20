@@ -85,13 +85,15 @@ namespace NEALibrarySystem.Data_Structures
         public void GenerateTestData()
         {
             // set up settings details
-            Settings.MemberBarcodeLength = 10;
+            Settings.MemberBarcodeLength = 3;
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
-            Settings.BookCopyBarcodeLength = 10;
+            Settings.ReserveDurations = new int[3] { 7, 6, 5 };
+            Settings.BookCopyBarcodeLength = 3;
 
             DataLibrary.ClearAllData();
             GenerateBooks();
             GenerateMembers();
+            GenerateCirculationCopies();
             FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
         /// <summary>
@@ -147,10 +149,16 @@ namespace NEALibrarySystem.Data_Structures
             {
                 MemberCreator memberCreator = new MemberCreator();
                 string barcode = "";
-                for (int j = 0; j < 12; j++) 
+                bool uniqueCode = false;
+                do
                 {
-                    barcode += GenerateRandomDigit().ToString();
-                }
+                    for (int j = 0; j < Settings.MemberBarcodeLength; j++)
+                    {
+                        barcode += GenerateRandomDigit().ToString();
+                    }
+                    if (SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString) == -1)
+                        uniqueCode = true;
+                } while (!uniqueCode);
                 memberCreator.Barcode = barcode;
                 memberCreator.FirstName = firstNames[rand.Next(0, firstNames.Length)];
                 memberCreator.LastName = lastNames[rand.Next(0, lastNames.Length)];
@@ -174,6 +182,27 @@ namespace NEALibrarySystem.Data_Structures
                 members.Add(member);
             }
             DataLibrary.Members = members;
+
+        }
+        private void GenerateCirculationCopies()
+        {
+            foreach (var member in DataLibrary.Members)
+            {
+                int count = rand.Next(0, 3);
+                if (count > 0)
+                {
+                    List<BookCopy> copies = new List<BookCopy>();
+                    for (int i = 0; i < count; i++)
+                    {
+                        int index = rand.Next(0, DataLibrary.BookCopies.Count);
+                        if (SearchAndSort.Binary(DataLibrary.CirculationCopies, DataLibrary.BookCopies[index], SearchAndSort.CircCopyAndBookCopy) == -1)
+                        {
+                            copies.Add(DataLibrary.BookCopies[index]);
+                        }
+                    }
+                    DataLibrary.Loan(member, copies, DateTime.Today.AddDays(rand.Next(1, 14)));
+                }
+            }
         }
         private int GenerateRandomDigit(int max = 10)
         {

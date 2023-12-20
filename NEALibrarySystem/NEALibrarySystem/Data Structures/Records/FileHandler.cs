@@ -56,5 +56,25 @@ namespace NEALibrarySystem.Data_Structures
                 return default(FileType);
             }
         }
+        /// <summary>
+        /// creates the directory to save the data fields to
+        /// </summary>
+        public static void CreateDataDirectory()
+        {
+            Directory.CreateDirectory(Application.StartupPath + "\\data");
+        }
+        public static void SaveBooks() 
+        {
+            List<string> titles = GetUniqueItems(DataLibrary.Titles);
+        }
+        private static List<T> GetUniqueItems<T, F>(List<ReferenceClass<T, F>> itemList, SearchAndSort.Compare<ReferenceClass<T, F>, T> compare) where F : class
+        {
+            List<T> uniqueItems = new List<T>(); 
+            foreach (ReferenceClass<T, F> item in itemList)
+            {
+                if (SearchAndSort.Binary(uniqueItems, item, compare) == -1)
+                    SearchAndSort.BinaryReferenceInsert
+            }
+        }
     }
 }

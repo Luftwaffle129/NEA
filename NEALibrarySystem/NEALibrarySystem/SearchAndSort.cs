@@ -162,7 +162,44 @@ namespace NEALibrarySystem
             itemMatchList = QuickSort(itemMatchList, compareRef);
             return BinaryRefClassUniqueRef(itemMatchList, item, compareRef);
         } */
+        /*
         public static int BinaryReferenceInsert<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
+        {
+            if (itemList.Count == 0) // if empty, return first index
+                return 0;
+            else if (itemList.Count == 1) // if count = 1, return before or after the only item
+            {
+                if (compare(itemList[0], item) == Greatest.Right)
+                    return 1;
+                else
+                    return 0;
+            }
+            else // else, perform a binary search for a location to add the item
+            {
+                int left = 0;
+                int right = itemList.Count - 1;
+
+                while (left <= right)
+                {
+                    int middle = (left + right) / 2;
+                    if (compare(itemList[middle], item) == Greatest.Right) // if middle element is smaller than the item:
+                    {
+                        if (middle == itemList.Count - 1 || compare(itemList[middle + 1], item) == Greatest.Left) // if true, the index to insert is found
+                            return middle + 1;
+                        else
+                            left = middle + 1;
+                    }
+                    else if (middle == 0)
+                        return 0;
+                    else
+                    {
+                        right = middle - 1;
+                    }
+                }
+                return itemList.Count - 1;
+            }
+        }*/
+        public static int BinaryInsert<T, F>(List<T> itemList, T item, Compare<T, F> compare) where T : F
         {
             if (itemList.Count == 0) // if empty, return first index
                 return 0;
@@ -289,6 +326,15 @@ namespace NEALibrarySystem
             else
                 return Greatest.Right;
         }
+        public static Greatest TwoDates(DateTime date1, DateTime date2)
+        {
+            if (Math.Floor(date1.TimeOfDay.TotalSeconds) == date2.TimeOfDay.TotalSeconds && date1.Date == date2.Date)
+                return Greatest.equal;
+            else if (date1 > date2)
+                return Greatest.Left;
+            else
+                return Greatest.Right;
+        }
         public static Greatest TwoEnums(MemberType member1, MemberType member2)
         {
             if (member1 == member2)
@@ -346,14 +392,14 @@ namespace NEALibrarySystem
         {
             Greatest value = TwoDates(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
-                return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
+                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
         {
             Greatest value = TwoEnums(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
-                return TwoDates(copy1.Reference.DueDate.Value, copy2.Reference.DueDate.Value);
+                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
             return value;
         }
         public static Greatest TwoRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
@@ -378,14 +424,13 @@ namespace NEALibrarySystem
         {
             return TwoStrings(tempCopy.BookCopy.Barcode.Value, copy.Barcode.Value);
         }
-        public static Greatest TwoDates(DateTime date1, DateTime date2)
+        public static Greatest CircCopyAndBookCopy(CirculationCopy circCopy, BookCopy bookCopy)
         {
-            if (date1 == date2)
-                return Greatest.equal;
-            else if (date1 > date2)
-                return Greatest.Left;
-            else
-                return Greatest.Right;
+            return TwoBookCopies(circCopy.BookCopy, bookCopy);
+        }
+        public static Greatest TwoTempBookCopies(TempBookCopy copy1, TempBookCopy copy2)
+        {
+            return TwoStrings(copy1.Barcode, copy2.Barcode);
         }
         #endregion
     }

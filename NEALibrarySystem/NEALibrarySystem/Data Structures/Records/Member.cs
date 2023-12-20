@@ -30,7 +30,7 @@ namespace NEALibrarySystem.Data_Structures
         public DateTime JoinDate;
         public ReferenceClass<MemberType, Member> Type;
 
-        private List<CircMemberRelation> _circMemberRelation;
+        private List<CircMemberRelation> _circMemberRelation = new List<CircMemberRelation>();
         public List<CircMemberRelation> CircMemberRelations
         {
             get { return _circMemberRelation; }
@@ -57,6 +57,11 @@ namespace NEALibrarySystem.Data_Structures
             Surname = DataLibrary.Surnames[index];
             DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoRefClassMembers, out index);
             Type = DataLibrary.MemberTypes[index];
+
+        }
+        public string GetFullName()
+        {
+            return FirstName.Value + " " + Surname.Value;
         }
 
         public const int MemberTypeCount = 3;

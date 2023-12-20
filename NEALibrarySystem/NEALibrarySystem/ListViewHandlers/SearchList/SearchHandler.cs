@@ -85,7 +85,7 @@ namespace NEALibrarySystem.SearchList
                     copy.BookCopy.BookRelation.Book.Author.Value,
                     copy.Date.Value.ToString(),
                     copy.Type.Value.ToString(),
-                    copy.DueDate.Value.Date.ToString(),
+                    DataFormatter.GetDate(copy.DueDate.Value),
                     copy.CircMemberRelation.Member.Barcode.Value.ToString(),
 
                 };

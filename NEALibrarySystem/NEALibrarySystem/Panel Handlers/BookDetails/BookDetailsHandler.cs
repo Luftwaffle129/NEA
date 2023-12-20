@@ -124,6 +124,7 @@ namespace NEALibrarySystem.PanelHandlers
                     _objects.CopyDetails.Items.Add(new ListViewItem(data));
                 }
             }
+            _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         /// <summary>
         /// initialises the list view used to display book copies
@@ -148,7 +149,6 @@ namespace NEALibrarySystem.PanelHandlers
                 "Due Date"
             };
             AddColumns(columns);
-            _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             _bookCopyList.Clear();
             List<BookCopy> currentBookCopyList = GetCurrentBookCopies();
@@ -217,7 +217,7 @@ namespace NEALibrarySystem.PanelHandlers
                     foreach (TempBookCopy copy in _bookCopyList)
                         if (copy.BookCopy != null)
                             unchangedBookCopyList.Add(copy);
-
+                    unchangedBookCopyList = SearchAndSort.QuickSort<TempBookCopy, TempBookCopy>(unchangedBookCopyList, SearchAndSort.TwoTempBookCopies);
                     // Get the old book copies to remove
                     if (unchangedBookCopyList.Count > 0)
                         foreach (BookCopy copy in oldBookCopyList)
@@ -259,8 +259,8 @@ namespace NEALibrarySystem.PanelHandlers
             temp.MediaType = _objects.MediaType.Text;
             temp.Author = _objects.Author.Text;
             temp.Publisher = _objects.Publisher.Text;
-            temp.Genres = _objects.Genres.Text.Split(',').ToList<string>();
-            temp.Themes = _objects.Themes.Text.Split(',').ToList<string>();
+            temp.Genres = DataFormatter.SplitString(_objects.Genres.Text, ", ");
+            temp.Themes = DataFormatter.SplitString(_objects.Themes.Text, ", ");
             temp.Description = _objects.Description.Text;
             return temp;
         }

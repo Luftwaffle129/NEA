@@ -47,14 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Structures\RecordSavers\BookCopySaver.cs" />
+    <Compile Include="Data Structures\RecordSavers\BookSaver.cs" />
     <Compile Include="Data Structures\RecordSavers\ReferenceClassSaver.cs" />
     <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
     <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookLoanHandler.cs" />
-    <Compile Include="Panel Handlers\Circulation\BookReturnHandler.cs" />
+    <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
+    <Compile Include="MemberDetailsHandler.cs" />
+    <Compile Include="MemberDetailsObjects.cs" />
+    <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsObjects.cs" />
+    <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\LoanHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\ReturnHandler.cs" />
     <Compile Include="ReferenceClass.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
@@ -139,6 +146,7 @@
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchHandler.cs" />
     <Compile Include="SearchAndSort.cs" />
+    <Compile Include="SellHandler.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
     </EmbeddedResource>

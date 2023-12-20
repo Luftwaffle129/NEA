@@ -24,9 +24,9 @@ namespace NEALibrarySystem.Data_Structures
             {
                 foreach (ReferenceClass<T, F> item in list)
                 {
-                    output += item.Value.ToString() + ",";
+                    output += item.Value.ToString() + ", ";
                 }
-                output = output.Remove(output.Length - 1, 1);
+                output = output.Remove(output.Length - 2, 2);
             }
             return output;
         }
@@ -50,6 +50,37 @@ namespace NEALibrarySystem.Data_Structures
                 }
             }
             return output;
+        }
+        // Gets the date in the dd/mm/yyyy format
+        public static string GetDate(DateTime dateTime)
+        {
+            return dateTime.Date.ToString().Substring(0,10);
+        }
+
+        public static List<string> SplitString(string text, string separator)
+        {
+            List<string> stringArr = new List<string>();
+            int startIndex = 0;
+            int pointer = 0;
+            int length = 0;
+            do
+            {
+                if (text.Substring(pointer, separator.Length) != separator)
+                {
+                    length++;
+                }
+                else
+                {
+                    if (length > 0)
+                        stringArr.Add(text.Substring(startIndex, length));
+                    pointer += separator.Length;
+                    startIndex = pointer;
+                    length = 0;
+                }
+            } while (++pointer < text.Length - (separator.Length - 1));
+            if (length > 0)
+                stringArr.Add(text.Substring(startIndex, length + separator.Length));
+            return stringArr;
         }
     }
 }
