@@ -1,5 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.ListViewHandlers;
+using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +14,26 @@ namespace NEALibrarySystem.SearchList
 {
     public class SearchHandler
     {
-        private ListView lsvSearch;
-        /// <summary>
-        /// Current feature that the search tab is set to
-        /// </summary>
-        public SearchHandler(ListView listview)
+        private SearchObjects _objects;
+
+        public SearchHandler(SearchObjects objects)
         {
-            lsvSearch = listview;
-            lsvSearch.View = View.Details;
-            lsvSearch.LabelEdit = false;
-            lsvSearch.AllowColumnReorder = false;
-            lsvSearch.CheckBoxes = true;
-            lsvSearch.MultiSelect = true;
-            lsvSearch.FullRowSelect = true;
-            lsvSearch.GridLines = false;
-            lsvSearch.Sorting = SortOrder.None;
-            lsvSearch.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lsvSearch.Scrollable = true;
+            _objects = objects;
+            _objects.ItemViewer.View = View.Details;
+            _objects.ItemViewer.LabelEdit = false;
+            _objects.ItemViewer.AllowColumnReorder = false;
+            _objects.ItemViewer.CheckBoxes = true;
+            _objects.ItemViewer.MultiSelect = true;
+            _objects.ItemViewer.FullRowSelect = true;
+            _objects.ItemViewer.GridLines = false;
+            _objects.ItemViewer.Sorting = SortOrder.None;
+            _objects.ItemViewer.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            _objects.ItemViewer.Scrollable = true;
         }
+        #region loading
         public void SetUpSearchTab()
         {
+
             switch (FrmMainSystem.Main.SearchFeature)
             {
                 case DataLibrary.SearchFeature.Book:
@@ -51,7 +52,7 @@ namespace NEALibrarySystem.SearchList
         }
         public void ToBook()
         {
-            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Book);
+            LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Book);
 
             foreach (Book book in DataLibrary.Books)
             {
@@ -63,17 +64,18 @@ namespace NEALibrarySystem.SearchList
                     book.MediaType.Value,
                     book.Author.Value,
                     book.Publisher.Value,
-                    DataFormatter.ReferenceClassListToString(book.Genres),
-                    DataFormatter.ReferenceClassListToString(book.Themes)
+                    DataFormatter.ListToString(book.Genres),
+                    DataFormatter.ListToString(book.Themes)
                 };
                 ListViewItem row = new ListViewItem(data);
-                lsvSearch.Items.Add(row);
+                _objects.ItemViewer.Items.Add(row);
             }
-            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            _objects.Delete.Visible = true;
         }
         public void ToCirculation()
         {
-            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Circulation);
+            LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Circulation);
 
             foreach (CirculationCopy copy in DataLibrary.CirculationCopies)
             {
@@ -90,13 +92,14 @@ namespace NEALibrarySystem.SearchList
 
                 };
                 ListViewItem row = new ListViewItem(data);
-                lsvSearch.Items.Add(row);
+                _objects.ItemViewer.Items.Add(row);
             }
-            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            _objects.Delete.Visible = true;
         }
         public void ToMember()
         {
-            LoadColumns(ref lsvSearch, DataLibrary.SearchFeature.Member);
+            LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Member);
 
             foreach (Member member in DataLibrary.Members)
             {
@@ -108,10 +111,10 @@ namespace NEALibrarySystem.SearchList
                 member.Type.Value.ToString()
                 };
                 ListViewItem row = new ListViewItem(data);
-                lsvSearch.Items.Add(row);
+                _objects.ItemViewer.Items.Add(row);
             }
-
-            lsvSearch.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            _objects.Delete.Visible = true;
         }
         public static void LoadColumns(ref ListView lsv, DataLibrary.SearchFeature feature)
         {
@@ -157,6 +160,72 @@ namespace NEALibrarySystem.SearchList
                     break;
             }
             ListViewHandler.SetColumns(columns, ref lsv);
+        }
+        #endregion
+        public void Search()
+        {
+            
+        }
+        public void Delete()
+        {
+            if (_objects.ItemViewer.CheckedItems.Count > 0)
+            {
+                // output a confirmation message
+                string itemType = "";
+                frmConfirmation confirmation;
+                    // get the type of item being deleted
+                switch (FrmMainSystem.Main.SearchFeature)
+                {
+                    case DataLibrary.SearchFeature.Member:
+                        if (_objects.ItemViewer.CheckedItems.Count == 1)
+                            itemType = "member";
+                        else
+                            itemType = "members";
+                        break;
+                    case DataLibrary.SearchFeature.Book:
+                        if (_objects.ItemViewer.CheckedItems.Count == 1)
+                            itemType = "book";
+                        else
+                            itemType = "books";
+                        break;
+                    case DataLibrary.SearchFeature.Circulation:
+                        if (_objects.ItemViewer.CheckedItems.Count == 1)
+                            itemType = "loan/reservation";
+                        else
+                            itemType = "loans/reservations";
+                        break;
+                    case DataLibrary.SearchFeature.Staff:
+                        itemType = "staff";
+                        break;
+                }
+                    // output the confirmation message
+                if (_objects.ItemViewer.CheckedItems.Count == 1)
+                    confirmation = new frmConfirmation($"Do you want do delete 1 {itemType}?");
+                else
+                    confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType}?");
+
+                if (confirmation.DialogResult == DialogResult.Yes)
+                {
+                    switch (FrmMainSystem.Main.SearchFeature)
+                    {
+                        case DataLibrary.SearchFeature.Member:
+                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                                DataLibrary.DeleteMember(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
+                            break;
+                        case DataLibrary.SearchFeature.Book:
+                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                                DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
+                            break;
+                        case DataLibrary.SearchFeature.Circulation:
+                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                                DataLibrary.DeleteCirculationCopy(DataLibrary.CirculationDates[SearchAndSort.Binary(DataLibrary.CirculationDates, Convert.ToDateTime(item.SubItems[4].Text), SearchAndSort.RefClassAndDate)].Reference);
+                            break;
+                        case DataLibrary.SearchFeature.Staff:
+                            break;
+                    }
+                    FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");
+                }
+            }
         }
     }
 

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Data Structures\RecordSavers\BookCopySaver.cs" />
     <Compile Include="Data Structures\RecordSavers\BookSaver.cs" />
+    <Compile Include="Data Structures\RecordSavers\MemberSaver.cs" />
     <Compile Include="Data Structures\RecordSavers\ReferenceClassSaver.cs" />
     <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
+    <Compile Include="ListViewHandlers\SearchList\SearchObjects.cs" />
     <Compile Include="MemberDetailsHandler.cs" />
     <Compile Include="MemberDetailsObjects.cs" />
     <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsObjects.cs" />

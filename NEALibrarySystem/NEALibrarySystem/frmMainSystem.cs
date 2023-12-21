@@ -16,6 +16,7 @@ using NEALibrarySystem.PanelHandlers;
 using NEALibrarySystem.ListViewHandlers.CirculatedBooks;
 using System.Drawing.Text;
 using NEALibrarySystem.Panel_Handlers.CirculationDetails;
+using NEALibrarySystem.ListViewHandlers.SearchList;
 
 namespace NEALibrarySystem
 {
@@ -29,7 +30,6 @@ namespace NEALibrarySystem
             InitializeComponent();
             InitializePanels();
             InitializeTabs();
-            _searchedItemsHandler = new SearchHandler(lsvSearchItems);
             NavigatorOpenBookTab();
             FormBorderStyle = FormBorderStyle.Sizable;
         }
@@ -69,6 +69,7 @@ namespace NEALibrarySystem
             new Panel[] { pnlSetting }
             };
 
+            InitialiseSearchTab();
             InitialiseLoan();
             InitialiseReturn();
             InitialiseSell();
@@ -100,6 +101,21 @@ namespace NEALibrarySystem
                 btnSubTab6,
                 btnSubTab7
             };
+        }
+        private void InitialiseSearchTab()
+        {
+            SearchObjects searchObjects = new SearchObjects()
+            {
+                SearchField = cmbSearchField,
+                Search = txtSearchBox,
+                Filter1Field = cmbFilter1,
+                Filter1 = txtFilter1,
+                Filter2Field = cmbFilter2,
+                Filter2 = txtFilter2,
+                ItemViewer = lsvSearchItems,
+                Delete = btnSearchDelete
+            };
+            _searchedItemsHandler = new SearchHandler(searchObjects);
         }
         private void InitialiseLoan()
         {

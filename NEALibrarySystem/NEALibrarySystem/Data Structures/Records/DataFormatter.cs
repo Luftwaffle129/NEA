@@ -17,7 +17,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <typeparam name="F">Reference class reference</typeparam>
         /// <param name="list">list of reference classes</param>
         /// <returns>string of values</returns>
-        public static string ReferenceClassListToString<T, F>(List<ReferenceClass<T, F>> list) where F : class
+        public static string ListToString<T, F>(List<ReferenceClass<T, F>> list) where F : class
         {
             string output = "";
             if (list.Count > 0)
@@ -25,6 +25,19 @@ namespace NEALibrarySystem.Data_Structures
                 foreach (ReferenceClass<T, F> item in list)
                 {
                     output += item.Value.ToString() + ", ";
+                }
+                output = output.Remove(output.Length - 2, 2);
+            }
+            return output;
+        }
+        public static string ListToString(List<string> list)
+        {
+            string output = "";
+            if (list.Count > 0)
+            {
+                foreach (string item in list)
+                {
+                    output += item + ", ";
                 }
                 output = output.Remove(output.Length - 2, 2);
             }

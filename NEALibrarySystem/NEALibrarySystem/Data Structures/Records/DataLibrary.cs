@@ -15,6 +15,9 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class DataLibrary
     {
+        #region data
+        public static Staff CurrentUser;
+        #endregion
         #region data structures
         #region book copies
         private static List<BookCopy> _bookCopies = new List<BookCopy>();
@@ -51,8 +54,8 @@ namespace NEALibrarySystem.Data_Structures
         #region titles
         private static List<ReferenceClass<string, Book>> _titles = new List<ReferenceClass<string, Book>>();
         public static List<ReferenceClass<string, Book>> Titles
-        { 
-            get { return _titles; } 
+        {
+            get { return _titles; }
             set { _titles = value ?? new List<ReferenceClass<string, Book>>(); }
         }
         #endregion
@@ -170,7 +173,7 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region circulation copies
         private static List<CirculationCopy> _circulationCopies = new List<CirculationCopy>();
-        public static List <CirculationCopy> CirculationCopies
+        public static List<CirculationCopy> CirculationCopies
         {
             get { return _circulationCopies; }
             set { _circulationCopies = value ?? new List<CirculationCopy>(); }
@@ -459,7 +462,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="compareRef"></param>
         /// <param name="newReferenceClass"></param>
         /// <returns></returns>
-        public static List<ReferenceClass<T,F>> ModifyReferenceClass<T,F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T,F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
+        public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
             list = DeleteReferenceClass(list, oldReferenceClass, compare);
             list = CreateReferenceClass(list, reference, newValue, compare, out int index);
@@ -539,7 +542,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="record">Reference class to remove</param>
         /// <param name="compareValue">Comparison method</param>
         /// <returns>The updated list</returns>
-        public static List<ReferenceClass<T,F>> DeleteReferenceClass<T,F>(List<ReferenceClass<T,F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
+        public static List<ReferenceClass<T, F>> DeleteReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
             itemList.RemoveAt(SearchAndSort.Binary(itemList, item, compare));
             return itemList;
@@ -561,7 +564,7 @@ namespace NEALibrarySystem.Data_Structures
             Isbns = DeleteReferenceClass(Isbns, book.Isbn, TwoRefClassBooks);
             Prices = DeleteReferenceClass(Prices, book.Price, TwoRefClassBooks);
             Authors = DeleteReferenceClass(Authors, book.Author, TwoRefClassBooks);
-            Publishers = DeleteReferenceClass(Publishers, book.Publisher,  TwoRefClassBooks);
+            Publishers = DeleteReferenceClass(Publishers, book.Publisher, TwoRefClassBooks);
             if (book.Genres.Count > 0)
                 foreach (ReferenceClass<string, Book> genre in book.Genres)
                     Genres = DeleteReferenceClass(Genres, genre, TwoRefClassBooks);
@@ -595,7 +598,7 @@ namespace NEALibrarySystem.Data_Structures
         /// Deletes the specified book copy and the references to it
         /// </summary>
         /// <param name="bookCopy">book copy to delete</param>
-        public static void DeleteBookCopy(BookCopy bookCopy) 
+        public static void DeleteBookCopy(BookCopy bookCopy)
         {
             // delete book copy relation
             bookCopy.BookRelation.Book.BookCopyRelations.Remove(bookCopy.BookRelation);
@@ -623,36 +626,41 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #endregion
-        #region the no no
-        /// <summary>
-        /// DO NOT DO THIS. THIS BAD. FOR TEST DATA PURPOSES ONLY
-        /// </summary>
-        public static void ClearAllData()
+        #region Clear all data
+        public static class ClearData
         {
-            _bookCopies.Clear();
-            _bookCopyBarcodes.Clear();
-            _bookCopyRelations.Clear();
-            _books.Clear();
-            _titles.Clear();
-            _seriesTitles.Clear();
-            _isbns.Clear();
-            _prices.Clear();
-            _mediaTypes.Clear();
-            _authors.Clear();
-            _publishers.Clear();
-            _themes.Clear();
-            _genres.Clear();
-            _members.Clear();
-            _memberBarcodes.Clear();
-            _firstNames.Clear();
-            _surnames.Clear();
-            _memberTypes.Clear();
-            _staff.Clear();
-            _circulationCopies.Clear();
-            _circulationTypes.Clear();
-            _circulationDueDates.Clear();
-            _circulationDates.Clear();
-            _circMemberRelations.Clear();
+            public static void All()
+            {
+                Book();
+                _bookCopies.Clear();
+                _bookCopyBarcodes.Clear();
+                _bookCopyRelations.Clear();
+
+                _members.Clear();
+                _memberBarcodes.Clear();
+                _firstNames.Clear();
+                _surnames.Clear();
+                _memberTypes.Clear();
+                _staff.Clear();
+                _circulationCopies.Clear();
+                _circulationTypes.Clear();
+                _circulationDueDates.Clear();
+                _circulationDates.Clear();
+                _circMemberRelations.Clear();
+            }
+            public static void Book()
+            {
+                _books.Clear();
+                _titles.Clear();
+                _seriesTitles.Clear();
+                _isbns.Clear();
+                _prices.Clear();
+                _mediaTypes.Clear();
+                _authors.Clear();
+                _publishers.Clear();
+                _themes.Clear();
+                _genres.Clear();
+            }
         }
         #endregion
     }

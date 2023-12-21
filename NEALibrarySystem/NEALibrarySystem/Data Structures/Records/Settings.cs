@@ -8,8 +8,8 @@ namespace NEALibrarySystem.Data_Structures
 {
     public static class Settings
     {
-        public static string Username { get; set; }
-        public static string Password { get; set; }
+        public static string GmailUsername { get; set; }
+        public static string GmailPassword { get; set; }
         public static string GmailKey { get; set; }
         public static int MemberBarcodeLength { get; set; }
         public static int BookCopyBarcodeLength { get; set; }

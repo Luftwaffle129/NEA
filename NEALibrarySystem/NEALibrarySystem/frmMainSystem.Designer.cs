@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -51,9 +51,12 @@
             this.lblReserveSetDueDate = new System.Windows.Forms.Label();
             this.pnlMemberDetails = new System.Windows.Forms.Panel();
             this.lsvMemberBookLinks = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.txtMemberJoinDate = new System.Windows.Forms.TextBox();
             this.lblMemberJoinDate = new System.Windows.Forms.Label();
             this.txtMemberPostcode = new System.Windows.Forms.TextBox();
+            this.txtMemberAddressLine4 = new System.Windows.Forms.TextBox();
             this.lblMemberPostcode = new System.Windows.Forms.Label();
             this.lblLinkedMembers = new System.Windows.Forms.Label();
             this.txtMemberAddressLine1 = new System.Windows.Forms.TextBox();
@@ -63,12 +66,12 @@
             this.btnMemberSave = new System.Windows.Forms.Button();
             this.lblMemberFirstName = new System.Windows.Forms.Label();
             this.txtMemberAssociatedMemberBarcodes = new System.Windows.Forms.TextBox();
-            this.txtMemberCustomerType = new System.Windows.Forms.TextBox();
             this.txtMemberFirstName = new System.Windows.Forms.TextBox();
             this.lblMemberAddressLine2 = new System.Windows.Forms.Label();
             this.txtMemberAddressLine3 = new System.Windows.Forms.TextBox();
             this.txtMemberAddressLine2 = new System.Windows.Forms.TextBox();
             this.lblMemberSurname = new System.Windows.Forms.Label();
+            this.lblMemberAddressLine4 = new System.Windows.Forms.Label();
             this.lblMemberAddressLine1 = new System.Windows.Forms.Label();
             this.txtMemberEmailAddress = new System.Windows.Forms.TextBox();
             this.txtMemberPhoneNumber = new System.Windows.Forms.TextBox();
@@ -79,19 +82,8 @@
             this.txtMemberSurname = new System.Windows.Forms.TextBox();
             this.lblMemberPhoneNumber = new System.Windows.Forms.Label();
             this.pnlSearch = new System.Windows.Forms.Panel();
-            this.chkSearchCopyBarcodes = new System.Windows.Forms.CheckBox();
             this.lblSearchField = new System.Windows.Forms.Label();
             this.cmbSearchField = new System.Windows.Forms.ComboBox();
-            this.grpRunningTotal = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtRunninGTotalOutput = new System.Windows.Forms.TextBox();
-            this.lblRunningTotal = new System.Windows.Forms.Label();
-            this.btnSetRunningTotalDate = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtRunningTotalDate = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtRunningTotalTime = new System.Windows.Forms.TextBox();
-            this.btnResetRunningTotal = new System.Windows.Forms.Button();
             this.lsvSearchItems = new System.Windows.Forms.ListView();
             this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SeriesTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -103,7 +95,6 @@
             this.btnresetFilters = new System.Windows.Forms.Button();
             this.lblFilter1 = new System.Windows.Forms.Label();
             this.lblFilter2 = new System.Windows.Forms.Label();
-            this.btnApplyFilters = new System.Windows.Forms.Button();
             this.cmbFilter2 = new System.Windows.Forms.ComboBox();
             this.cmbFilter1 = new System.Windows.Forms.ComboBox();
             this.pnlStaff = new System.Windows.Forms.Panel();
@@ -285,13 +276,10 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.lblMemberAddressLine4 = new System.Windows.Forms.Label();
-            this.txtMemberAddressLine4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btnSearchDelete = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
-            this.grpRunningTotal.SuspendLayout();
             this.pnlStaff.SuspendLayout();
             this.pnlLoan.SuspendLayout();
             this.pnlDelete.SuspendLayout();
@@ -577,6 +565,7 @@
             // 
             // pnlMemberDetails
             // 
+            this.pnlMemberDetails.Controls.Add(this.comboBox1);
             this.pnlMemberDetails.Controls.Add(this.lsvMemberBookLinks);
             this.pnlMemberDetails.Controls.Add(this.label3);
             this.pnlMemberDetails.Controls.Add(this.dateTimePicker1);
@@ -593,7 +582,6 @@
             this.pnlMemberDetails.Controls.Add(this.btnMemberSave);
             this.pnlMemberDetails.Controls.Add(this.lblMemberFirstName);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAssociatedMemberBarcodes);
-            this.pnlMemberDetails.Controls.Add(this.txtMemberCustomerType);
             this.pnlMemberDetails.Controls.Add(this.txtMemberFirstName);
             this.pnlMemberDetails.Controls.Add(this.lblMemberAddressLine2);
             this.pnlMemberDetails.Controls.Add(this.txtMemberAddressLine3);
@@ -626,6 +614,30 @@
             this.lsvMemberBookLinks.TabIndex = 1;
             this.lsvMemberBookLinks.UseCompatibleStateImageBehavior = false;
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.label3.Location = new System.Drawing.Point(1455, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(303, 38);
+            this.label3.TabIndex = 76;
+            this.label3.Text = "Loaned and Reserved:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(255, 227);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 7, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(212, 38);
+            this.dateTimePicker1.TabIndex = 75;
+            this.dateTimePicker1.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            // 
             // txtMemberJoinDate
             // 
             this.txtMemberJoinDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -652,6 +664,14 @@
             this.txtMemberPostcode.Name = "txtMemberPostcode";
             this.txtMemberPostcode.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberPostcode.TabIndex = 72;
+            // 
+            // txtMemberAddressLine4
+            // 
+            this.txtMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberAddressLine4.Location = new System.Drawing.Point(255, 707);
+            this.txtMemberAddressLine4.Name = "txtMemberAddressLine4";
+            this.txtMemberAddressLine4.Size = new System.Drawing.Size(1159, 38);
+            this.txtMemberAddressLine4.TabIndex = 70;
             // 
             // lblMemberPostcode
             // 
@@ -741,14 +761,6 @@
             this.txtMemberAssociatedMemberBarcodes.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberAssociatedMemberBarcodes.TabIndex = 63;
             // 
-            // txtMemberCustomerType
-            // 
-            this.txtMemberCustomerType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberCustomerType.Location = new System.Drawing.Point(255, 287);
-            this.txtMemberCustomerType.Name = "txtMemberCustomerType";
-            this.txtMemberCustomerType.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberCustomerType.TabIndex = 62;
-            // 
             // txtMemberFirstName
             // 
             this.txtMemberFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -792,6 +804,16 @@
             this.lblMemberSurname.Size = new System.Drawing.Size(131, 31);
             this.lblMemberSurname.TabIndex = 49;
             this.lblMemberSurname.Text = "Surname:";
+            // 
+            // lblMemberAddressLine4
+            // 
+            this.lblMemberAddressLine4.AutoSize = true;
+            this.lblMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberAddressLine4.Location = new System.Drawing.Point(15, 710);
+            this.lblMemberAddressLine4.Name = "lblMemberAddressLine4";
+            this.lblMemberAddressLine4.Size = new System.Drawing.Size(109, 31);
+            this.lblMemberAddressLine4.TabIndex = 48;
+            this.lblMemberAddressLine4.Text = "County:";
             // 
             // lblMemberAddressLine1
             // 
@@ -882,10 +904,9 @@
             this.pnlSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSearch.Controls.Add(this.chkSearchCopyBarcodes);
+            this.pnlSearch.Controls.Add(this.btnSearchDelete);
             this.pnlSearch.Controls.Add(this.lblSearchField);
             this.pnlSearch.Controls.Add(this.cmbSearchField);
-            this.pnlSearch.Controls.Add(this.grpRunningTotal);
             this.pnlSearch.Controls.Add(this.lsvSearchItems);
             this.pnlSearch.Controls.Add(this.lblSearch);
             this.pnlSearch.Controls.Add(this.txtFilter2);
@@ -895,7 +916,6 @@
             this.pnlSearch.Controls.Add(this.btnresetFilters);
             this.pnlSearch.Controls.Add(this.lblFilter1);
             this.pnlSearch.Controls.Add(this.lblFilter2);
-            this.pnlSearch.Controls.Add(this.btnApplyFilters);
             this.pnlSearch.Controls.Add(this.cmbFilter2);
             this.pnlSearch.Controls.Add(this.cmbFilter1);
             this.pnlSearch.Location = new System.Drawing.Point(150, 100);
@@ -904,29 +924,15 @@
             this.pnlSearch.TabIndex = 55;
             this.pnlSearch.VisibleChanged += new System.EventHandler(this.pnlSearch_VisibleChanged);
             // 
-            // chkSearchCopyBarcodes
-            // 
-            this.chkSearchCopyBarcodes.AutoSize = true;
-            this.chkSearchCopyBarcodes.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.chkSearchCopyBarcodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSearchCopyBarcodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSearchCopyBarcodes.Location = new System.Drawing.Point(730, 89);
-            this.chkSearchCopyBarcodes.Name = "chkSearchCopyBarcodes";
-            this.chkSearchCopyBarcodes.Size = new System.Drawing.Size(81, 75);
-            this.chkSearchCopyBarcodes.TabIndex = 42;
-            this.chkSearchCopyBarcodes.Text = "Show\r\nCopy\r\nBarcodes";
-            this.chkSearchCopyBarcodes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkSearchCopyBarcodes.UseVisualStyleBackColor = true;
-            // 
             // lblSearchField
             // 
             this.lblSearchField.AutoSize = true;
             this.lblSearchField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSearchField.Location = new System.Drawing.Point(6, 10);
             this.lblSearchField.Name = "lblSearchField";
-            this.lblSearchField.Size = new System.Drawing.Size(102, 20);
+            this.lblSearchField.Size = new System.Drawing.Size(132, 20);
             this.lblSearchField.TabIndex = 40;
-            this.lblSearchField.Text = "Search Field:";
+            this.lblSearchField.Text = "Search Category:";
             // 
             // cmbSearchField
             // 
@@ -936,114 +942,6 @@
             this.cmbSearchField.Name = "cmbSearchField";
             this.cmbSearchField.Size = new System.Drawing.Size(236, 28);
             this.cmbSearchField.TabIndex = 39;
-            // 
-            // grpRunningTotal
-            // 
-            this.grpRunningTotal.Controls.Add(this.button1);
-            this.grpRunningTotal.Controls.Add(this.txtRunninGTotalOutput);
-            this.grpRunningTotal.Controls.Add(this.lblRunningTotal);
-            this.grpRunningTotal.Controls.Add(this.btnSetRunningTotalDate);
-            this.grpRunningTotal.Controls.Add(this.label2);
-            this.grpRunningTotal.Controls.Add(this.txtRunningTotalDate);
-            this.grpRunningTotal.Controls.Add(this.label1);
-            this.grpRunningTotal.Controls.Add(this.txtRunningTotalTime);
-            this.grpRunningTotal.Controls.Add(this.btnResetRunningTotal);
-            this.grpRunningTotal.Location = new System.Drawing.Point(817, 3);
-            this.grpRunningTotal.Name = "grpRunningTotal";
-            this.grpRunningTotal.Size = new System.Drawing.Size(345, 161);
-            this.grpRunningTotal.TabIndex = 37;
-            this.grpRunningTotal.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.LightGray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(227, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 133);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Add Custom Transaction";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // txtRunninGTotalOutput
-            // 
-            this.txtRunninGTotalOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRunninGTotalOutput.Location = new System.Drawing.Point(96, 129);
-            this.txtRunninGTotalOutput.Name = "txtRunninGTotalOutput";
-            this.txtRunninGTotalOutput.ReadOnly = true;
-            this.txtRunninGTotalOutput.Size = new System.Drawing.Size(125, 26);
-            this.txtRunninGTotalOutput.TabIndex = 36;
-            // 
-            // lblRunningTotal
-            // 
-            this.lblRunningTotal.AutoSize = true;
-            this.lblRunningTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRunningTotal.Location = new System.Drawing.Point(6, 12);
-            this.lblRunningTotal.Name = "lblRunningTotal";
-            this.lblRunningTotal.Size = new System.Drawing.Size(151, 20);
-            this.lblRunningTotal.TabIndex = 35;
-            this.lblRunningTotal.Text = "RUNNING TOTAL";
-            // 
-            // btnSetRunningTotalDate
-            // 
-            this.btnSetRunningTotalDate.BackColor = System.Drawing.Color.LightGray;
-            this.btnSetRunningTotalDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSetRunningTotalDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetRunningTotalDate.Location = new System.Drawing.Point(6, 39);
-            this.btnSetRunningTotalDate.Name = "btnSetRunningTotalDate";
-            this.btnSetRunningTotalDate.Size = new System.Drawing.Size(84, 76);
-            this.btnSetRunningTotalDate.TabIndex = 29;
-            this.btnSetRunningTotalDate.Text = "Set Start Date";
-            this.btnSetRunningTotalDate.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(93, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 16);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Date:";
-            // 
-            // txtRunningTotalDate
-            // 
-            this.txtRunningTotalDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRunningTotalDate.Location = new System.Drawing.Point(96, 97);
-            this.txtRunningTotalDate.Name = "txtRunningTotalDate";
-            this.txtRunningTotalDate.Size = new System.Drawing.Size(125, 26);
-            this.txtRunningTotalDate.TabIndex = 32;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(93, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 16);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Time:";
-            // 
-            // txtRunningTotalTime
-            // 
-            this.txtRunningTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRunningTotalTime.Location = new System.Drawing.Point(96, 49);
-            this.txtRunningTotalTime.Name = "txtRunningTotalTime";
-            this.txtRunningTotalTime.Size = new System.Drawing.Size(125, 26);
-            this.txtRunningTotalTime.TabIndex = 33;
-            // 
-            // btnResetRunningTotal
-            // 
-            this.btnResetRunningTotal.BackColor = System.Drawing.Color.LightGray;
-            this.btnResetRunningTotal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResetRunningTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetRunningTotal.Location = new System.Drawing.Point(6, 129);
-            this.btnResetRunningTotal.Name = "btnResetRunningTotal";
-            this.btnResetRunningTotal.Size = new System.Drawing.Size(84, 26);
-            this.btnResetRunningTotal.TabIndex = 34;
-            this.btnResetRunningTotal.Text = "Reset";
-            this.btnResetRunningTotal.UseVisualStyleBackColor = false;
             // 
             // lsvSearchItems
             // 
@@ -1148,18 +1046,6 @@
             this.lblFilter2.Size = new System.Drawing.Size(61, 20);
             this.lblFilter2.TabIndex = 22;
             this.lblFilter2.Text = "Filter 2:";
-            // 
-            // btnApplyFilters
-            // 
-            this.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApplyFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnApplyFilters.Location = new System.Drawing.Point(265, 125);
-            this.btnApplyFilters.Name = "btnApplyFilters";
-            this.btnApplyFilters.Size = new System.Drawing.Size(216, 39);
-            this.btnApplyFilters.TabIndex = 26;
-            this.btnApplyFilters.Text = "Apply filters";
-            this.btnApplyFilters.UseVisualStyleBackColor = false;
             // 
             // cmbFilter2
             // 
@@ -2357,16 +2243,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea12.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend12);
+            chartArea5.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend5);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series12.ChartArea = "ChartArea1";
-            series12.Legend = "Legend1";
-            series12.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series12);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series5);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3236,47 +3122,26 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
-            // dateTimePicker1
+            // btnSearchDelete
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(255, 227);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2024, 7, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(212, 38);
-            this.dateTimePicker1.TabIndex = 75;
-            this.dateTimePicker1.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
+            this.btnSearchDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSearchDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnSearchDelete.Location = new System.Drawing.Point(834, 125);
+            this.btnSearchDelete.Name = "btnSearchDelete";
+            this.btnSearchDelete.Size = new System.Drawing.Size(216, 39);
+            this.btnSearchDelete.TabIndex = 41;
+            this.btnSearchDelete.Text = "Delete Selected";
+            this.btnSearchDelete.UseVisualStyleBackColor = false;
             // 
-            // lblMemberAddressLine4
+            // comboBox1
             // 
-            this.lblMemberAddressLine4.AutoSize = true;
-            this.lblMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberAddressLine4.Location = new System.Drawing.Point(15, 710);
-            this.lblMemberAddressLine4.Name = "lblMemberAddressLine4";
-            this.lblMemberAddressLine4.Size = new System.Drawing.Size(109, 31);
-            this.lblMemberAddressLine4.TabIndex = 48;
-            this.lblMemberAddressLine4.Text = "County:";
-            // 
-            // txtMemberAddressLine4
-            // 
-            this.txtMemberAddressLine4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberAddressLine4.Location = new System.Drawing.Point(255, 707);
-            this.txtMemberAddressLine4.Name = "txtMemberAddressLine4";
-            this.txtMemberAddressLine4.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberAddressLine4.TabIndex = 70;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.label3.Location = new System.Drawing.Point(1455, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(303, 38);
-            this.label3.TabIndex = 76;
-            this.label3.Text = "Loaned and Reserved:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(255, 287);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(1159, 39);
+            this.comboBox1.TabIndex = 77;
             // 
             // FrmMainSystem
             // 
@@ -3285,13 +3150,13 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlMemberDetails);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlBackup);
@@ -3309,8 +3174,6 @@
             this.pnlMemberDetails.PerformLayout();
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
-            this.grpRunningTotal.ResumeLayout(false);
-            this.grpRunningTotal.PerformLayout();
             this.pnlStaff.ResumeLayout(false);
             this.pnlStaff.PerformLayout();
             this.pnlLoan.ResumeLayout(false);
@@ -3379,7 +3242,6 @@
         private System.Windows.Forms.Button btnMemberSave;
         private System.Windows.Forms.Label lblMemberFirstName;
         private System.Windows.Forms.TextBox txtMemberAssociatedMemberBarcodes;
-        private System.Windows.Forms.TextBox txtMemberCustomerType;
         private System.Windows.Forms.TextBox txtMemberFirstName;
         private System.Windows.Forms.Label lblMemberAddressLine2;
         private System.Windows.Forms.TextBox txtMemberAddressLine3;
@@ -3397,16 +3259,6 @@
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Label lblSearchField;
         private System.Windows.Forms.ComboBox cmbSearchField;
-        private System.Windows.Forms.GroupBox grpRunningTotal;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtRunninGTotalOutput;
-        private System.Windows.Forms.Label lblRunningTotal;
-        private System.Windows.Forms.Button btnSetRunningTotalDate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtRunningTotalDate;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtRunningTotalTime;
-        private System.Windows.Forms.Button btnResetRunningTotal;
         private System.Windows.Forms.ListView lsvSearchItems;
         private System.Windows.Forms.ColumnHeader Title;
         private System.Windows.Forms.ColumnHeader SeriesTitle;
@@ -3418,7 +3270,6 @@
         private System.Windows.Forms.Button btnresetFilters;
         private System.Windows.Forms.Label lblFilter1;
         private System.Windows.Forms.Label lblFilter2;
-        private System.Windows.Forms.Button btnApplyFilters;
         private System.Windows.Forms.ComboBox cmbFilter2;
         private System.Windows.Forms.ComboBox cmbFilter1;
         private System.Windows.Forms.Panel pnlStaff;
@@ -3520,7 +3371,6 @@
         private System.Windows.Forms.Button btnCreateBackup;
         private System.Windows.Forms.DateTimePicker dtpLoanReturnDate;
         private System.Windows.Forms.ComboBox cmbStaffAccessLevel;
-        private System.Windows.Forms.CheckBox chkSearchCopyBarcodes;
         private System.Windows.Forms.Panel pnlDelete;
         private System.Windows.Forms.ListView lsvDelete;
         private System.Windows.Forms.Label lblDeleteSelectedRecords;
@@ -3604,5 +3454,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMemberAddressLine4;
         private System.Windows.Forms.Label lblMemberAddressLine4;
+        private System.Windows.Forms.Button btnSearchDelete;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

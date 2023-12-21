@@ -42,8 +42,8 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.MediaType.Text = _bookData.MediaType.Value;
                 _objects.Author.Text = _bookData.Author.Value;
                 _objects.Publisher.Text = _bookData.Publisher.Value;
-                _objects.Genres.Text = DataFormatter.ReferenceClassListToString(_bookData.Genres);
-                _objects.Themes.Text = DataFormatter.ReferenceClassListToString(_bookData.Themes);
+                _objects.Genres.Text = DataFormatter.ListToString(_bookData.Genres);
+                _objects.Themes.Text = DataFormatter.ListToString(_bookData.Themes);
                 _objects.Description.Text = _bookData.Description;
                 _objects.Price.Text = _bookData.Price.Value.ToString();
                 _isNewRecord = false;

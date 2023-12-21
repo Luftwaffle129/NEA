@@ -12,7 +12,17 @@ namespace NEALibrarySystem
         public TextBox Barcode;
         public TextBox FirstName;
         public TextBox LastName;
-        public TextBox DateOfBirth;
-        public TextBox Description;
+        public DateTimePicker DateOfBirth;
+        public ComboBox CustomerType;
+        public TextBox LinkedMembers;
+        public TextBox EmailAddress;
+        public TextBox PhoneNumber;
+        public TextBox Address1;
+        public TextBox Address2;
+        public TextBox TownCity;
+        public TextBox County;
+        public TextBox PostCode;
+        public TextBox JoinDate;
+        public ListView Circulations;
     }
 }

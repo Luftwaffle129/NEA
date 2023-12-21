@@ -84,13 +84,17 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestData()
         {
+            //set up staff
+            DataLibrary.CurrentUser = new Staff();
+            DataLibrary.CurrentUser.IsAdministrator = true;
+
             // set up settings details
             Settings.MemberBarcodeLength = 3;
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
             Settings.ReserveDurations = new int[3] { 7, 6, 5 };
             Settings.BookCopyBarcodeLength = 3;
 
-            DataLibrary.ClearAllData();
+            DataLibrary.ClearData.All();
             GenerateBooks();
             GenerateMembers();
             GenerateCirculationCopies();

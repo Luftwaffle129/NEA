@@ -68,8 +68,8 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
                 book.MediaType.Value,
                 book.Author.Value,
                 book.Publisher.Value,
-                DataFormatter.ReferenceClassListToString(book.Genres),
-                DataFormatter.ReferenceClassListToString(book.Themes)
+                DataFormatter.ListToString(book.Genres),
+                DataFormatter.ListToString(book.Themes)
             };
             _objects.BookCopy.Items.Add(new ListViewItem(data));
             _objects.BookCopy.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
