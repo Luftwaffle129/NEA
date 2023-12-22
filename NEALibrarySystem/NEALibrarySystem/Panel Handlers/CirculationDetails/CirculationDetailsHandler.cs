@@ -53,7 +53,8 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
         public void Load(CirculationCopy circCopy)
         {
             _circCopy = circCopy;
-            _objects.CirculationType.Text = _circCopy.Type.Value.ToString();
+            _objects.Id.Text = _circCopy.Id.Value.ToString();
+            _objects.Type.Text = _circCopy.Type.Value.ToString();
             _objects.MemberBarcode.Text = _circCopy.CircMemberRelation.Member.Barcode.Value;
             _objects.MemberName.Text = _circCopy.CircMemberRelation.Member.GetFullName();
             _objects.Date.Text = _circCopy.Date.Value.ToString();
@@ -71,6 +72,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
                 DataFormatter.ListToString(book.Genres),
                 DataFormatter.ListToString(book.Themes)
             };
+            _objects.BookCopy.Items.Clear();
             _objects.BookCopy.Items.Add(new ListViewItem(data));
             _objects.BookCopy.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }

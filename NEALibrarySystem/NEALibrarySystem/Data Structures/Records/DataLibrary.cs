@@ -532,8 +532,8 @@ namespace NEALibrarySystem.Data_Structures
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;
-            member.AddressLine1 = newMemberInfo.AddressLine1;
-            member.AddressLine2 = newMemberInfo.AddressLine2;
+            member.Address1 = newMemberInfo.Address1;
+            member.Address2 = newMemberInfo.Address2;
             member.TownCity = newMemberInfo.TownCity;
             member.County = newMemberInfo.County;
             member.Postcode = newMemberInfo.Postcode;
@@ -648,15 +648,8 @@ namespace NEALibrarySystem.Data_Structures
             public static void All()
             {
                 Book();
-                _bookCopies.Clear();
-                _bookCopyBarcodes.Clear();
-                _bookCopyRelations.Clear();
-
-                _members.Clear();
-                _memberBarcodes.Clear();
-                _firstNames.Clear();
-                _surnames.Clear();
-                _memberTypes.Clear();
+                Member();
+                BookCopy();
                 _staff.Clear();
                 _circulationCopies.Clear();
                 _circulationTypes.Clear();
@@ -676,6 +669,20 @@ namespace NEALibrarySystem.Data_Structures
                 _publishers.Clear();
                 _themes.Clear();
                 _genres.Clear();
+            }
+            public static void Member()
+            {
+                _members.Clear();
+                _memberBarcodes.Clear();
+                _firstNames.Clear();
+                _surnames.Clear();
+                _memberTypes.Clear();
+            }
+            public static void BookCopy()
+            {
+                _bookCopies.Clear();
+                _bookCopyBarcodes.Clear();
+                _bookCopyRelations.Clear();
             }
         }
         #endregion

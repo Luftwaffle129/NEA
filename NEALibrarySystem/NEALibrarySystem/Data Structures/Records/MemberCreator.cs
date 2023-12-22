@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures.Records
 {
+    /// <summary>
+    /// Used to hold the data for a member record before adding or modifying an existing one
+    /// </summary>
     public class MemberCreator
     {
         public string Barcode;
         public string FirstName;
         public string Surname;
-        public string DateOfBirth;
+        public DateTime DateOfBirth;
         public string EmailAddress;
         public string PhoneNumber;
-        public string AddressLine1;
-        public string AddressLine2;
+        public string Address1;
+        public string Address2;
         public string TownCity;
         public string County;
         public string Postcode;

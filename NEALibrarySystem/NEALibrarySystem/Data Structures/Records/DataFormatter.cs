@@ -120,5 +120,13 @@ namespace NEALibrarySystem.Data_Structures
             }
             return -1;
         }
+        public static List<string> MemberListToBarcodeList(List<Member> memberList)
+        {
+            List<string> barcodeList = new List<string>();
+            if (memberList.Count > 0)
+                foreach (Member member in memberList)
+                    barcodeList.Add(member.Barcode.Value);
+            return barcodeList;
+        }
     }
 }

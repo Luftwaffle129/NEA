@@ -400,21 +400,21 @@ namespace NEALibrarySystem
         {
             Greatest value = TwoDates(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
-                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+                return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<int, CirculationCopy> copy1, ReferenceClass<int, CirculationCopy> copy2)
         {
             Greatest value = TwoIntegers(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
-                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+                return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
         {
             Greatest value = TwoEnums(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
-                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+                return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)

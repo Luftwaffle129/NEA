@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 namespace NEALibrarySystem.Data_Structures.RecordSavers
 {
     [System.Serializable]
+    /// <summary>
+    /// Used to convert book records into serializable formats to be saved
+    /// </summary>
     public class BookSaver
     {
         public string SeriesTitle;

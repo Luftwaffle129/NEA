@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -277,6 +277,8 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
+            this.txtCircDetailsId = new System.Windows.Forms.TextBox();
+            this.lblCircDetailsId = new System.Windows.Forms.Label();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaff.SuspendLayout();
@@ -2265,16 +2267,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea5.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend1);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series1);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2943,6 +2945,8 @@
             // 
             // pnlCirculationDetails
             // 
+            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsId);
+            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsId);
             this.pnlCirculationDetails.Controls.Add(this.dtpCircDetailsDueDate);
             this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsSave);
             this.pnlCirculationDetails.Controls.Add(this.lsvCircDetailsBookData);
@@ -2968,7 +2972,7 @@
             // dtpCircDetailsDueDate
             // 
             this.dtpCircDetailsDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.dtpCircDetailsDueDate.Location = new System.Drawing.Point(255, 287);
+            this.dtpCircDetailsDueDate.Location = new System.Drawing.Point(255, 347);
             this.dtpCircDetailsDueDate.Name = "dtpCircDetailsDueDate";
             this.dtpCircDetailsDueDate.Size = new System.Drawing.Size(495, 38);
             this.dtpCircDetailsDueDate.TabIndex = 71;
@@ -2992,7 +2996,7 @@
             this.lsvCircDetailsBookData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvCircDetailsBookData.HideSelection = false;
-            this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 410);
+            this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 467);
             this.lsvCircDetailsBookData.Name = "lsvCircDetailsBookData";
             this.lsvCircDetailsBookData.Size = new System.Drawing.Size(1159, 100);
             this.lsvCircDetailsBookData.TabIndex = 69;
@@ -3002,7 +3006,7 @@
             // 
             this.lblCircDetailsPrice.AutoSize = true;
             this.lblCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsPrice.Location = new System.Drawing.Point(15, 350);
+            this.lblCircDetailsPrice.Location = new System.Drawing.Point(15, 410);
             this.lblCircDetailsPrice.Name = "lblCircDetailsPrice";
             this.lblCircDetailsPrice.Size = new System.Drawing.Size(84, 31);
             this.lblCircDetailsPrice.TabIndex = 68;
@@ -3025,7 +3029,7 @@
             // txtCircDetailsType
             // 
             this.txtCircDetailsType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsType.Location = new System.Drawing.Point(255, 47);
+            this.txtCircDetailsType.Location = new System.Drawing.Point(255, 107);
             this.txtCircDetailsType.Name = "txtCircDetailsType";
             this.txtCircDetailsType.ReadOnly = true;
             this.txtCircDetailsType.Size = new System.Drawing.Size(495, 38);
@@ -3035,7 +3039,7 @@
             // 
             this.lblCircDetailsMemberBarode.AutoSize = true;
             this.lblCircDetailsMemberBarode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsMemberBarode.Location = new System.Drawing.Point(15, 110);
+            this.lblCircDetailsMemberBarode.Location = new System.Drawing.Point(15, 170);
             this.lblCircDetailsMemberBarode.Name = "lblCircDetailsMemberBarode";
             this.lblCircDetailsMemberBarode.Size = new System.Drawing.Size(228, 31);
             this.lblCircDetailsMemberBarode.TabIndex = 45;
@@ -3044,7 +3048,7 @@
             // txtCircDetailsPrice
             // 
             this.txtCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsPrice.Location = new System.Drawing.Point(255, 347);
+            this.txtCircDetailsPrice.Location = new System.Drawing.Point(255, 407);
             this.txtCircDetailsPrice.Name = "txtCircDetailsPrice";
             this.txtCircDetailsPrice.ReadOnly = true;
             this.txtCircDetailsPrice.Size = new System.Drawing.Size(495, 38);
@@ -3056,7 +3060,7 @@
             this.txtCircDetailsMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCircDetailsMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsMemberBarcode.Location = new System.Drawing.Point(255, 107);
+            this.txtCircDetailsMemberBarcode.Location = new System.Drawing.Point(255, 167);
             this.txtCircDetailsMemberBarcode.Name = "txtCircDetailsMemberBarcode";
             this.txtCircDetailsMemberBarcode.ReadOnly = true;
             this.txtCircDetailsMemberBarcode.Size = new System.Drawing.Size(1159, 38);
@@ -3065,7 +3069,7 @@
             // txtCircDetailsDate
             // 
             this.txtCircDetailsDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsDate.Location = new System.Drawing.Point(255, 227);
+            this.txtCircDetailsDate.Location = new System.Drawing.Point(255, 287);
             this.txtCircDetailsDate.Name = "txtCircDetailsDate";
             this.txtCircDetailsDate.ReadOnly = true;
             this.txtCircDetailsDate.Size = new System.Drawing.Size(495, 38);
@@ -3075,7 +3079,7 @@
             // 
             this.lblCircDetailsMemberName.AutoSize = true;
             this.lblCircDetailsMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsMemberName.Location = new System.Drawing.Point(15, 170);
+            this.lblCircDetailsMemberName.Location = new System.Drawing.Point(15, 230);
             this.lblCircDetailsMemberName.Name = "lblCircDetailsMemberName";
             this.lblCircDetailsMemberName.Size = new System.Drawing.Size(199, 31);
             this.lblCircDetailsMemberName.TabIndex = 49;
@@ -3085,7 +3089,7 @@
             // 
             this.lblCircDetailsDate.AutoSize = true;
             this.lblCircDetailsDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsDate.Location = new System.Drawing.Point(15, 230);
+            this.lblCircDetailsDate.Location = new System.Drawing.Point(15, 290);
             this.lblCircDetailsDate.Name = "lblCircDetailsDate";
             this.lblCircDetailsDate.Size = new System.Drawing.Size(80, 31);
             this.lblCircDetailsDate.TabIndex = 51;
@@ -3095,7 +3099,7 @@
             // 
             this.lblCircDetailsDueDate.AutoSize = true;
             this.lblCircDetailsDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsDueDate.Location = new System.Drawing.Point(15, 290);
+            this.lblCircDetailsDueDate.Location = new System.Drawing.Point(15, 350);
             this.lblCircDetailsDueDate.Name = "lblCircDetailsDueDate";
             this.lblCircDetailsDueDate.Size = new System.Drawing.Size(132, 31);
             this.lblCircDetailsDueDate.TabIndex = 52;
@@ -3105,7 +3109,7 @@
             // 
             this.lblCircDetailsBooks.AutoSize = true;
             this.lblCircDetailsBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsBooks.Location = new System.Drawing.Point(15, 410);
+            this.lblCircDetailsBooks.Location = new System.Drawing.Point(15, 470);
             this.lblCircDetailsBooks.Name = "lblCircDetailsBooks";
             this.lblCircDetailsBooks.Size = new System.Drawing.Size(84, 31);
             this.lblCircDetailsBooks.TabIndex = 53;
@@ -3115,7 +3119,7 @@
             // 
             this.lblTCircDetailsType.AutoSize = true;
             this.lblTCircDetailsType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTCircDetailsType.Location = new System.Drawing.Point(15, 50);
+            this.lblTCircDetailsType.Location = new System.Drawing.Point(15, 110);
             this.lblTCircDetailsType.Name = "lblTCircDetailsType";
             this.lblTCircDetailsType.Size = new System.Drawing.Size(219, 31);
             this.lblTCircDetailsType.TabIndex = 55;
@@ -3126,11 +3130,30 @@
             this.txtCircDetailsMemberName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCircDetailsMemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsMemberName.Location = new System.Drawing.Point(255, 167);
+            this.txtCircDetailsMemberName.Location = new System.Drawing.Point(255, 227);
             this.txtCircDetailsMemberName.Name = "txtCircDetailsMemberName";
             this.txtCircDetailsMemberName.ReadOnly = true;
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
+            // 
+            // txtCircDetailsId
+            // 
+            this.txtCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsId.Location = new System.Drawing.Point(255, 47);
+            this.txtCircDetailsId.Name = "txtCircDetailsId";
+            this.txtCircDetailsId.ReadOnly = true;
+            this.txtCircDetailsId.Size = new System.Drawing.Size(495, 38);
+            this.txtCircDetailsId.TabIndex = 72;
+            // 
+            // lblCircDetailsId
+            // 
+            this.lblCircDetailsId.AutoSize = true;
+            this.lblCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsId.Location = new System.Drawing.Point(15, 50);
+            this.lblCircDetailsId.Name = "lblCircDetailsId";
+            this.lblCircDetailsId.Size = new System.Drawing.Size(50, 31);
+            this.lblCircDetailsId.TabIndex = 73;
+            this.lblCircDetailsId.Text = "ID:";
             // 
             // FrmMainSystem
             // 
@@ -3444,5 +3467,7 @@
         private System.Windows.Forms.Label lblMemberCounty;
         private System.Windows.Forms.Button btnSearchDelete;
         private System.Windows.Forms.ComboBox cmbMemberType;
+        private System.Windows.Forms.Label lblCircDetailsId;
+        private System.Windows.Forms.TextBox txtCircDetailsId;
     }
 }

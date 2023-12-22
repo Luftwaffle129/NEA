@@ -17,7 +17,7 @@ namespace NEALibrarySystem
         public MemberDetailsObjects _objects;
 
         private Member _memberData;
-        private List<CirculationCopy> _circulationList;
+        private List<CirculationCopy> _circulationList = new List<CirculationCopy>();
         public MemberDetailsHandler(MemberDetailsObjects memberDetailsObjects)
         {
             _objects = memberDetailsObjects;
@@ -39,6 +39,9 @@ namespace NEALibrarySystem
             _objects.Circulations.GridLines = false;
             _objects.Circulations.Sorting = SortOrder.None;
             _objects.Circulations.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+            _objects.DateOfBirth.MaxDate = DateTime.Today.AddDays(-1);
+            _objects.DateOfBirth.MinDate = DateTime.Today.AddYears(-130);
             // add columns
             string[] columns = new string[3]
             {
@@ -74,11 +77,12 @@ namespace NEALibrarySystem
                 _objects.FirstName.Text = member.FirstName.Value;
                 _objects.Surname.Text = member.Surname.Value;
                 _objects.MemberType.Text = member.Type.Value.ToString();
+                _objects.DateOfBirth.Value = member.DateOfBirth;
                 _objects.LinkedMembers.Text = DataFormatter.ListToString(member.LinkedMembers);
                 _objects.EmailAddress.Text = member.EmailAddress;
                 _objects.PhoneNumber.Text = member.PhoneNumber;
-                _objects.Address1.Text = member.AddressLine1;
-                _objects.Address2.Text = member.AddressLine2;
+                _objects.Address1.Text = member.Address1;
+                _objects.Address2.Text = member.Address2;
                 _objects.TownCity.Text = member.TownCity;
                 _objects.County.Text = member.County;
                 _objects.PostCode.Text = member.Postcode;
@@ -109,11 +113,12 @@ namespace NEALibrarySystem
             int eNumIndex = DataFormatter.StringToEnum<MemberType>(_objects.MemberType.Text);
             if (eNumIndex != -1)
                 memberCreator.Type = (MemberType)eNumIndex;
+            memberCreator.DateOfBirth = _objects.DateOfBirth.Value;
             memberCreator.LinkedMembers = DataFormatter.SplitString(_objects.LinkedMembers.Text, ", ");
             memberCreator.EmailAddress = _objects.EmailAddress.Text;
             memberCreator.PhoneNumber = _objects.PhoneNumber.Text;
-            memberCreator.AddressLine1 = _objects.Address1.Text;
-            memberCreator.AddressLine2 = _objects.Address2.Text;
+            memberCreator.Address1 = _objects.Address1.Text;
+            memberCreator.Address2 = _objects.Address2.Text;
             memberCreator.TownCity = _objects.TownCity.Text;
             memberCreator.County = _objects.County.Text;
             memberCreator.Postcode = _objects.PostCode.Text;

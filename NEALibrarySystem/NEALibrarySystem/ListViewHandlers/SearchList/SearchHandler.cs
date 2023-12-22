@@ -81,6 +81,7 @@ namespace NEALibrarySystem.SearchList
             {
                 string[] data =
                 {
+                    copy.Id.Value.ToString(),
                     copy.BookCopy.Barcode.Value,
                     copy.BookCopy.BookRelation.Book.Title.Value,
                     copy.BookCopy.BookRelation.Book.SeriesTitle.Value,
@@ -88,8 +89,7 @@ namespace NEALibrarySystem.SearchList
                     copy.Date.Value.ToString(),
                     copy.Type.Value.ToString(),
                     DataFormatter.GetDate(copy.DueDate.Value),
-                    copy.CircMemberRelation.Member.Barcode.Value.ToString(),
-
+                    copy.CircMemberRelation.Member.Barcode.Value.ToString()
                 };
                 ListViewItem row = new ListViewItem(data);
                 _objects.ItemViewer.Items.Add(row);
@@ -148,6 +148,7 @@ namespace NEALibrarySystem.SearchList
                 case DataLibrary.SearchFeature.Circulation:
                     columns = new string[]
                     {
+                        "ID",
                         "Barcode",
                         "Title",
                         "Series Title",

@@ -17,8 +17,6 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class TestData
     {
-        private List<Book> books = new List<Book>();
-        private List<Member> members = new List<Member>();
         private Random rand = new Random();
 
         private string[] firstNames =
@@ -174,18 +172,15 @@ namespace NEALibrarySystem.Data_Structures
                     phoneNumber += GenerateRandomDigit().ToString();
                 }
                 memberCreator.PhoneNumber = phoneNumber;
-                memberCreator.AddressLine1 = "Exeter rd";
-                memberCreator.AddressLine2 = "Fotlondys";
+                memberCreator.Address1 = "Exeter rd";
+                memberCreator.Address2 = "Fotlondys";
                 memberCreator.TownCity = "Exeter";
                 memberCreator.County = "Devon";
-                memberCreator.DateOfBirth = "11/07/2006";
+                memberCreator.DateOfBirth = Convert.ToDateTime("11/07/2006");
+                memberCreator.JoinDate = Convert.ToDateTime("24/12/2020");
                 memberCreator.Type = (MemberType)rand.Next(0, Member.TypeCount);
-                Member member = new Member(memberCreator);
-                // CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
-                members.Add(member);
+                DataLibrary.Members.Add(new Member(memberCreator));
             }
-            DataLibrary.Members = members;
-
         }
         private void GenerateCirculationCopies()
         {

@@ -55,6 +55,7 @@ namespace NEALibrarySystem
 
         private Book _selectedBook; // Used to stored the selected book when opening the book details panel
         private CirculationCopy _selectedCircCopy;
+        private Member _selectedMember;
         #region initialisation
         public void InitializePanels()
         {
@@ -206,7 +207,8 @@ namespace NEALibrarySystem
         {
             CirculationDetailsObjects circulationDetailsObjects = new CirculationDetailsObjects()
             {
-                CirculationType = txtCircDetailsType,
+                Id = txtCircDetailsId,
+                Type = txtCircDetailsType,
                 MemberBarcode = txtCircDetailsMemberBarcode,
                 MemberName = txtCircDetailsMemberName,
                 Date = txtCircDetailsDate,
@@ -320,16 +322,28 @@ namespace NEALibrarySystem
                         MessageBox.Show("Book not found");
                     break;
                 case DataLibrary.SearchFeature.Circulation:
-                    index = SearchAndSort.Binary(DataLibrary.CirculationDates, Convert.ToDateTime(item.SubItems[4].Text), SearchAndSort.RefClassAndDate);
+                    index = SearchAndSort.Binary(DataLibrary.CirculationIds, Convert.ToInt32(item.SubItems[0].Text), SearchAndSort.RefClassAndInteger);
                     if (index != -1)
                     {
-                        _selectedCircCopy = DataLibrary.CirculationDates[index].Reference;
+                        _selectedCircCopy = DataLibrary.CirculationIds[index].Reference;
                         NavigatorCloseAllPanels();
                         pnlCirculationDetails.Visible = true;
                         NavigatorResetSelectedItems();
                     }
                     else
                         MessageBox.Show("Circulation copy not found");
+                    break;
+                case DataLibrary.SearchFeature.Member:
+                    index = SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString);
+                    if (index != -1)
+                    {
+                        _selectedMember = DataLibrary.MemberBarcodes[index].Reference;
+                        NavigatorCloseAllPanels();
+                        pnlMemberDetails.Visible = true;
+                        NavigatorResetSelectedItems();
+                    }
+                    else
+                        MessageBox.Show("Member not found");
                     break;
 
             }
@@ -355,6 +369,7 @@ namespace NEALibrarySystem
         {
             _selectedBook = null;
             _selectedCircCopy = null;
+            _selectedMember = null;
         }
         private void NavigatorSubTab(int index)
         {
@@ -502,7 +517,8 @@ namespace NEALibrarySystem
         }
         private void pnlMember_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlMemberDetails.Visible)
+                _memberDetailsHandler.Load(_selectedMember);
         }
         private void pnlStatistics_VisibleChanged(object sender, EventArgs e)
         {

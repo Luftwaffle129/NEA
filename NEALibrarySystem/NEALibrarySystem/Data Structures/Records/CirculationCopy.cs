@@ -30,7 +30,7 @@ namespace NEALibrarySystem.Data_Structures
                     uniqueID = true;
             } while (!uniqueID);
             DataLibrary.CirculationIds = DataLibrary.CreateReferenceClass(DataLibrary.CirculationIds, this, id, SearchAndSort.TwoRefClassCircCopies, out index);
-            
+            Id = DataLibrary.CirculationIds[index];
             DataLibrary.CirculationDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDates, this, DateTime.Now, SearchAndSort.TwoRefClassCircCopies, out index);
             Date = DataLibrary.CirculationDates[index];
             BookCopy = info.BookCopy;

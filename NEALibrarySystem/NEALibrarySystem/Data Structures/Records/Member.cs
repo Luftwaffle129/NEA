@@ -19,11 +19,11 @@ namespace NEALibrarySystem.Data_Structures
         public ReferenceClass<string, Member> Barcode;
         public ReferenceClass<string, Member> FirstName;
         public ReferenceClass<string, Member> Surname;
-        public string DateOfBirth;
+        public DateTime DateOfBirth;
         public string EmailAddress;
         public string PhoneNumber;
-        public string AddressLine1;
-        public string AddressLine2;
+        public string Address1;
+        public string Address2;
         public string TownCity;
         public string County;
         public string Postcode;
@@ -49,8 +49,8 @@ namespace NEALibrarySystem.Data_Structures
             DateOfBirth = memberInfo.DateOfBirth;
             EmailAddress = memberInfo.EmailAddress;
             PhoneNumber = memberInfo.PhoneNumber;
-            AddressLine1 = memberInfo.AddressLine1;
-            AddressLine2 = memberInfo.AddressLine2;
+            Address1 = memberInfo.Address1;
+            Address2 = memberInfo.Address2;
             TownCity = memberInfo.TownCity;
             County = memberInfo.County;
             Postcode = memberInfo.Postcode;
@@ -71,8 +71,11 @@ namespace NEALibrarySystem.Data_Structures
         public void AddMemberLink(string memberBarcode)
         {
             Member member = DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, memberBarcode, SearchAndSort.RefClassAndString)].Reference;
-            LinkedMembers.Add(member);
-            member.LinkedMembers.Add(this);
+            if (!LinkedMembers.Contains(member))
+            {
+                LinkedMembers.Add(member);
+                member.LinkedMembers.Add(this);
+            }
         }
         public void RemoveMemberLink(Member member)
         {
