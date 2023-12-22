@@ -51,23 +51,23 @@ namespace NEALibrarySystem.PanelHandlers
             else 
             {
                 _bookData = new Book();
-                _objects.Title.Text = "";
-                _objects.SeriesTitle.Text = "";
-                _objects.SeriesNumber.Text = "";
-                _objects.Isbn.Text = "";
-                _objects.MediaType.Text = "";
-                _objects.Author.Text = "";
-                _objects.Publisher.Text = "";
-                _objects.Genres.Text = "";
-                _objects.Themes.Text = "";
-                _objects.Description.Text = "";
-                _objects.Price.Text = "";
+                _objects.Title.Clear();
+                _objects.SeriesTitle.Clear();
+                _objects.SeriesNumber.Clear();
+                _objects.Isbn.Clear();
+                _objects.MediaType.Clear();
+                _objects.Author.Clear();
+                _objects.Publisher.Clear();
+                _objects.Genres.Clear();
+                _objects.Themes.Clear();
+                _objects.Description.Clear();
+                _objects.Price.Clear();
 
                 _objects.CopyDetails.Items.Clear();
                 _isNewRecord = true;
             }
             InitialiseCopyDetails();
-            DataLibrary.BookCopies = DataLibrary.BookCopies;
+            LoadCopyDetails();
         }
         #region Book Copies
         /// <summary>
@@ -148,8 +148,10 @@ namespace NEALibrarySystem.PanelHandlers
                 "Status",
                 "Due Date"
             };
-            AddColumns(columns);
-
+            ListViewHandler.SetColumns(columns, ref _objects.CopyDetails);
+        }
+        public void LoadCopyDetails()
+        {
             _bookCopyList.Clear();
             List<BookCopy> currentBookCopyList = GetCurrentBookCopies();
             if (currentBookCopyList.Count > 0)
@@ -168,13 +170,6 @@ namespace NEALibrarySystem.PanelHandlers
                     bookCopyList.Add(copyRelation.Copy);
             }
             return bookCopyList;
-        }
-        private void AddColumns(string[] columns)
-        {
-            foreach (string column in columns)
-            {
-                _objects.CopyDetails.Columns.Add(column);
-            }
         }
         #endregion
         /// <summary>
@@ -270,13 +265,9 @@ namespace NEALibrarySystem.PanelHandlers
         public void Cancel()
         {
             if (_isNewRecord)
-            { 
                 Load();
-            }
             else
-            {
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
-            }
         }
 
     }

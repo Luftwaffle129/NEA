@@ -179,6 +179,14 @@ namespace NEALibrarySystem.Data_Structures
             set { _circulationCopies = value ?? new List<CirculationCopy>(); }
         }
         #endregion
+        #region circulation IDs
+        private static List<ReferenceClass<int, CirculationCopy>> _circulationIds = new List<ReferenceClass<int, CirculationCopy>>();
+        public static List<ReferenceClass<int, CirculationCopy>> CirculationIds
+        {
+            get { return _circulationIds; }
+            set { _circulationIds = value ?? new List<ReferenceClass<int, CirculationCopy>>(); }
+        }
+        #endregion
         #region circulation copy types
         private static List<ReferenceClass<CirculationType, CirculationCopy>> _circulationTypes = new List<ReferenceClass<CirculationType, CirculationCopy>>();
         public static List<ReferenceClass<CirculationType, CirculationCopy>> CirculationTypes
@@ -519,17 +527,25 @@ namespace NEALibrarySystem.Data_Structures
         {
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
             FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
-            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.LastName, TwoRefClassMembers);
+            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
             MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;
             member.AddressLine1 = newMemberInfo.AddressLine1;
             member.AddressLine2 = newMemberInfo.AddressLine2;
-            member.AddressLine3 = newMemberInfo.AddressLine3;
-            member.AddressLine4 = newMemberInfo.AddressLine4;
-            member.AddressLine5 = newMemberInfo.AddressLine5;
+            member.TownCity = newMemberInfo.TownCity;
+            member.County = newMemberInfo.County;
             member.Postcode = newMemberInfo.Postcode;
+
+            // remove member links
+            if (member.LinkedMembers.Count > 0)
+                foreach (Member link in member.LinkedMembers)
+                    member.RemoveMemberLink(link);
+            if (newMemberInfo.LinkedMembers.Count > 0)
+                // add new member links
+                foreach (string link in newMemberInfo.LinkedMembers)
+                    member.AddMemberLink(link);
         }
         #endregion
         #region Deleting records

@@ -59,8 +59,8 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         /// </summary>
         public void ResetFields()
         {
-            _enterBarcodes.Text = "";
-            _memberBarcode.Text = "";
+            _enterBarcodes.Clear();
+            _memberBarcode.Clear();
             ResetMemberDetailFields();
             _selectedBooks.Items.Clear();
         }

@@ -358,6 +358,14 @@ namespace NEALibrarySystem
         {
             return TwoStrings(referenceClass.Value, str);
         }
+        public static Greatest RefClassAndInteger<F>(ReferenceClass<int, F> referenceClass, int integer) where F : class
+        {
+            return TwoIntegers(referenceClass.Value, integer);
+        }
+        public static Greatest MemberAndString(Member member, string str)
+        {
+            return TwoStrings(member.Barcode.Value, str);
+        }
         public static Greatest RefClassAndDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
         {
             return TwoDates(reference.Value, date);
@@ -391,6 +399,13 @@ namespace NEALibrarySystem
         public static Greatest TwoRefClassCircCopies(ReferenceClass<DateTime, CirculationCopy> copy1, ReferenceClass<DateTime, CirculationCopy> copy2)
         {
             Greatest value = TwoDates(copy1.Value, copy2.Value);
+            if (value == Greatest.equal)
+                return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
+            return value;
+        }
+        public static Greatest TwoRefClassCircCopies(ReferenceClass<int, CirculationCopy> copy1, ReferenceClass<int, CirculationCopy> copy2)
+        {
+            Greatest value = TwoIntegers(copy1.Value, copy2.Value);
             if (value == Greatest.equal)
                 return TwoDates(copy1.Reference.Date.Value, copy2.Reference.Date.Value);
             return value;

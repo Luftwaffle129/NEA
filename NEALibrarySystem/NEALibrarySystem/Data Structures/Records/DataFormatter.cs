@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Diagnostics.Eventing.Reader;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -38,6 +39,19 @@ namespace NEALibrarySystem.Data_Structures
                 foreach (string item in list)
                 {
                     output += item + ", ";
+                }
+                output = output.Remove(output.Length - 2, 2);
+            }
+            return output;
+        }
+        public static string ListToString(List<Member> list)
+        {
+            string output = "";
+            if (list.Count > 0)
+            {
+                foreach (Member item in list)
+                {
+                    output += item.Barcode.Value + ", ";
                 }
                 output = output.Remove(output.Length - 2, 2);
             }
@@ -94,6 +108,17 @@ namespace NEALibrarySystem.Data_Structures
             if (length > 0)
                 stringArr.Add(text.Substring(startIndex, length + separator.Length));
             return stringArr;
+        }
+        public static int StringToEnum<T>(string value) where T : Enum
+        {
+            for (int i = 0; i < Enum.GetNames(typeof(T)).Length; i++)
+            {
+                if (value == ((T)(object)i).ToString())
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }

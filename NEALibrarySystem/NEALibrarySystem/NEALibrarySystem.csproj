@@ -58,8 +58,8 @@
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchObjects.cs" />
-    <Compile Include="MemberDetailsHandler.cs" />
-    <Compile Include="MemberDetailsObjects.cs" />
+    <Compile Include="Panel Handlers\MemberDetails\MemberDetailsHandler.cs" />
+    <Compile Include="Panel Handlers\MemberDetails\MemberDetailsObjects.cs" />
     <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsObjects.cs" />
     <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\LoanHandler.cs" />
@@ -231,7 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data Structures\RecordCreators\" />
-    <Folder Include="Panel Handlers\MemberDetails\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

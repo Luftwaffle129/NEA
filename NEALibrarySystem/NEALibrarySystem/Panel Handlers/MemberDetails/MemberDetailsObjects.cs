@@ -11,9 +11,9 @@ namespace NEALibrarySystem
     {
         public TextBox Barcode;
         public TextBox FirstName;
-        public TextBox LastName;
+        public TextBox Surname;
         public DateTimePicker DateOfBirth;
-        public ComboBox CustomerType;
+        public ComboBox MemberType;
         public TextBox LinkedMembers;
         public TextBox EmailAddress;
         public TextBox PhoneNumber;

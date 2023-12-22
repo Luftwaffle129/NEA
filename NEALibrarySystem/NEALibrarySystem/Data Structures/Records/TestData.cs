@@ -165,7 +165,7 @@ namespace NEALibrarySystem.Data_Structures
                 } while (!uniqueCode);
                 memberCreator.Barcode = barcode;
                 memberCreator.FirstName = firstNames[rand.Next(0, firstNames.Length)];
-                memberCreator.LastName = lastNames[rand.Next(0, lastNames.Length)];
+                memberCreator.Surname = lastNames[rand.Next(0, lastNames.Length)];
                 memberCreator.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}";
                 memberCreator.EmailAddress = $"{GenerateRandomString(10)}@gmail.com";
                 string phoneNumber = "";
@@ -174,13 +174,12 @@ namespace NEALibrarySystem.Data_Structures
                     phoneNumber += GenerateRandomDigit().ToString();
                 }
                 memberCreator.PhoneNumber = phoneNumber;
-                memberCreator.AddressLine1 = "Devon";
-                memberCreator.AddressLine2 = "Exeter";
-                memberCreator.AddressLine3 = "Exeter rd";
-                memberCreator.AddressLine4 = "ApartmentName";
-                memberCreator.AddressLine5 = "Apartment Number";
+                memberCreator.AddressLine1 = "Exeter rd";
+                memberCreator.AddressLine2 = "Fotlondys";
+                memberCreator.TownCity = "Exeter";
+                memberCreator.County = "Devon";
                 memberCreator.DateOfBirth = "11/07/2006";
-                memberCreator.Type = MemberType.Adult;
+                memberCreator.Type = (MemberType)rand.Next(0, Member.TypeCount);
                 Member member = new Member(memberCreator);
                 // CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE CHANGE
                 members.Add(member);

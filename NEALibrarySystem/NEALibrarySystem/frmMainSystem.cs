@@ -50,6 +50,7 @@ namespace NEALibrarySystem
         private ReserveHandler _reserveHandler;
         private BookDetailsHandler _bookDetailsHandler;
         private CirculationDetailsHandler _circulationDetailsHandler;
+        private MemberDetailsHandler _memberDetailsHandler;
         private DeleteHandler _deleteHandler;
 
         private Book _selectedBook; // Used to stored the selected book when opening the book details panel
@@ -76,6 +77,7 @@ namespace NEALibrarySystem
             InitialiseReserve();
             InitialiseBookDetails();
             InitialiseCirculationDetails();
+            InitialiseMemberDetails();
             InitialiseDelete();
         }
         private void InitializeTabs()
@@ -212,6 +214,28 @@ namespace NEALibrarySystem
                 BookCopy = lsvCircDetailsBookData
             };
             _circulationDetailsHandler = new CirculationDetailsHandler(circulationDetailsObjects);
+        }
+        private void InitialiseMemberDetails()
+        {
+            MemberDetailsObjects memberDetailsObjects = new MemberDetailsObjects()
+            {
+                Barcode = txtMemberBarcode,
+                FirstName = txtMemberFirstName,
+                Surname = txtMemberSurname,
+                DateOfBirth = dtpMemberDateOfBirth,
+                MemberType = cmbMemberType,
+                LinkedMembers = txtMemberLinkedMembers,
+                EmailAddress = txtMemberEmailAddress,
+                PhoneNumber = txtMemberPhoneNumber,
+                Address1 = txtMemberAddress1,
+                Address2 = txtMemberAddress2,
+                TownCity = txtMemberTownCity,
+                County = txtMemberCounty,
+                PostCode = txtMemberPostcode,
+                JoinDate = txtMemberJoinDate,
+                Circulations = lsvMemberCirculations
+            };
+            _memberDetailsHandler = new MemberDetailsHandler(memberDetailsObjects);
         }
         private void InitialiseDelete()
         {
@@ -549,6 +573,26 @@ namespace NEALibrarySystem
             _bookDetailsHandler.DeleteBookCopies();
         }
         #endregion
+        #region circulation details
+        private void btnCircDetailsSave_Click(object sender, EventArgs e)
+        {
+            _circulationDetailsHandler.Save();
+        }
+        private void btnCircDetailsBack_Click(object sender, EventArgs e)
+        {
+            _circulationDetailsHandler.Cancel();
+        }
+        #endregion
+        #region member details
+        private void btnMemberSave_Click(object sender, EventArgs e)
+        {
+            _memberDetailsHandler.Save();
+        }
+        private void btnMemberCancel_Click(object sender, EventArgs e)
+        {
+            _memberDetailsHandler.Cancel();
+        }
+        #endregion
         #region delete handler
 
         private void btnDeleteDelete_Click(object sender, EventArgs e)
@@ -724,6 +768,7 @@ namespace NEALibrarySystem
         {
 
         }
+
         /*
 *  OpenFileDialog openFileDialog = new OpenFileDialog();
 openFileDialog.InitialDirectory = "c:\\";

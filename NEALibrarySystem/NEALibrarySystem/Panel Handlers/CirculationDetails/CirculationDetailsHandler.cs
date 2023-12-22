@@ -80,7 +80,11 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             FrmMainSystem.Main.DisplayProcessMessage("Circulation Copy Deleted");
             FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
-        public void Back()
+        public void Save()
+        {
+            DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
+        }
+        public void Cancel()
         {
             FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }

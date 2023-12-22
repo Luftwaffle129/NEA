@@ -14,17 +14,17 @@ namespace NEALibrarySystem.Data_Structures
         public static int MemberBarcodeLength { get; set; }
         public static int BookCopyBarcodeLength { get; set; }
 
-        private static int[] _loanDurations = new int[Member.MemberTypeCount];
+        private static int[] _loanDurations = new int[Member.TypeCount];
         public static int[] LoanDurations 
         {
             get { return _loanDurations; }
-            set { _loanDurations = value ?? new int[Member.MemberTypeCount]; }
+            set { _loanDurations = value ?? new int[Member.TypeCount]; }
         }
-        private static int[] _reserveDurations = new int[Member.MemberTypeCount];
+        private static int[] _reserveDurations = new int[Member.TypeCount];
         public static int[] ReserveDurations
         {
             get { return _reserveDurations; }
-            set { _reserveDurations = value ?? new int[Member.MemberTypeCount]; }
+            set { _reserveDurations = value ?? new int[Member.TypeCount]; }
         }
         public static double LateFeePerDay { get; set; }
     }
