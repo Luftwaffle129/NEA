@@ -792,6 +792,11 @@ namespace NEALibrarySystem
         {
 
         }
+
+        private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+        }
         /*
 *  OpenFileDialog openFileDialog = new OpenFileDialog();
 openFileDialog.InitialDirectory = "c:\\";

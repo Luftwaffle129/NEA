@@ -199,6 +199,15 @@ namespace NEALibrarySystem
                 return itemList.Count - 1;
             }
         }*/
+        /// <summary>
+        /// Finds the location to insert a new item of data into a sorted list
+        /// </summary>
+        /// <typeparam name="T">data type of the list and item-to-insert</typeparam>
+        /// <typeparam name="F">data type of the list and item-to-insert</typeparam>
+        /// <param name="itemList">list of items</param>
+        /// <param name="item">item to insert</param>
+        /// <param name="compare">comparison algorithm</param>
+        /// <returns>index to insert the new item at</returns>
         public static int BinaryInsert<T, F>(List<T> itemList, T item, Compare<T, F> compare) where T : F
         {
             if (itemList.Count == 0) // if empty, return first index
@@ -237,11 +246,29 @@ namespace NEALibrarySystem
         }
         #endregion
         #region sort
+        /// <summary>
+        /// Sorting algorithm to sort a list of items
+        /// </summary>
+        /// <typeparam name="T">Datatype of items being sorted</typeparam>
+        /// <typeparam name="F">Datatype of items being sorted</typeparam>
+        /// <param name="list">List of items</param>
+        /// <param name="compare">Comparison method</param>
+        /// <returns>Sorted list</returns>
         public static List<F> QuickSort<T, F>(List<F> list, Compare<T, F> compare) where T : F
         {
             Partition(list, 0, list.Count - 1, compare);
             return list;
         }
+        /// <summary>
+        /// Partition to sort
+        /// </summary>
+        /// <typeparam name="T">Datatype of items being sorted</typeparam>
+        /// <typeparam name="F">Datatype of items being sorted</typeparam>
+        /// <param name="list">List of items</param>
+        /// <param name="left">Start index of the partition</param>
+        /// <param name="right">End index of the partition</param>
+        /// <param name="compare">Comparison method</param>
+        /// <returns>item list with the partition section specified being sorted/</returns>
         private static List<F> Partition<T, F>(List<F> list, int left, int right, Compare<T, F> compare) where T : F
         {
             if (left < right)
@@ -446,6 +473,14 @@ namespace NEALibrarySystem
         public static Greatest TwoTempBookCopies(TempBookCopy copy1, TempBookCopy copy2)
         {
             return TwoStrings(copy1.Barcode, copy2.Barcode);
+        }
+        public static Greatest TwoListViewItems(ListViewItem item1, ListViewItem item2)
+        {
+            return TwoStrings(item1.SubItems[0].Text, item2.SubItems[0].Text);
+        }
+        public static Greatest TwoBooks(Book book1, Book book2)
+        {
+            return TwoStrings(book1.Isbn.Value, book2.Isbn.Value);
         }
         #endregion
     }

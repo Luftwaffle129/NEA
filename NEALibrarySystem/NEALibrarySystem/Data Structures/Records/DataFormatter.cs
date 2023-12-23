@@ -78,12 +78,32 @@ namespace NEALibrarySystem.Data_Structures
             }
             return output;
         }
-        // Gets the date in the dd/mm/yyyy format
+        // Gets the date in the YYYY/MM/DD format
         public static string GetDate(DateTime dateTime)
         {
-            return dateTime.Date.ToString().Substring(0,10);
+            string year = dateTime.Year.ToString();
+            string month = dateTime.Month.ToString();
+            month = month.Length == 1 ? "0" + month : month;
+            string day = dateTime.Day.ToString();
+            day = day.Length == 1 ? "0" + day : day;
+            return $"{year}/{month}/{day}";
         }
-
+        // Gets the date in the YYYY/MM/DD HH/MM/SS format
+        public static string GetDateAndTime(DateTime dateTime)
+        {
+            string year = dateTime.Year.ToString();
+            string month = dateTime.Month.ToString();
+            month = month.Length == 1 ? "0" + month : month;
+            string day = dateTime.Day.ToString();
+            day = day.Length == 1 ? "0" + day : day;
+            return $"{year}/{month}/{day} {dateTime.TimeOfDay}";
+        }
+        /// <summary>
+        /// Splits the string into elements in a list using the separator
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static List<string> SplitString(string text, string separator)
         {
             List<string> stringArr = new List<string>();
@@ -127,6 +147,18 @@ namespace NEALibrarySystem.Data_Structures
                 foreach (Member member in memberList)
                     barcodeList.Add(member.Barcode.Value);
             return barcodeList;
+        }
+        public static List<T> ReverseList<T>(List<T> list)
+        {
+            int left = 0;
+            int right = list.Count - 1;
+            while (left < right)
+            {
+                T temp = list[left];
+                list[left] = list[right];
+                list[right] = temp;
+            }
+            return list;
         }
     }
 }

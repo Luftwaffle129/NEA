@@ -57,7 +57,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             _objects.Type.Text = _circCopy.Type.Value.ToString();
             _objects.MemberBarcode.Text = _circCopy.CircMemberRelation.Member.Barcode.Value;
             _objects.MemberName.Text = _circCopy.CircMemberRelation.Member.GetFullName();
-            _objects.Date.Text = _circCopy.Date.Value.ToString();
+            _objects.Date.Text = DataFormatter.GetDateAndTime(_circCopy.Date.Value);
             _objects.DueDate.Text = DataFormatter.GetDate(_circCopy.DueDate.Value);
             Book book = circCopy.BookCopy.BookRelation.Book;
             string[] data =
