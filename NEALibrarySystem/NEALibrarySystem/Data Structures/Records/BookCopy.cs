@@ -24,6 +24,10 @@ namespace NEALibrarySystem.Data_Structures
 
             CirculationCopy = null;
         }
+        /// <summary>
+        /// Gets the status of the book copy
+        /// </summary>
+        /// <returns></returns>
         public string GetStatus()
         {
             if (CirculationCopy == null)
@@ -33,6 +37,10 @@ namespace NEALibrarySystem.Data_Structures
             else
                 return "Loaned";
         }
+        /// <summary>
+        /// Gets the member barcode of the book if it is circulated
+        /// </summary>
+        /// <returns>book copy's circulated member's barcode</returns>
         public string GetMemberBarcode()
         {
             if (CirculationCopy == null)
@@ -40,6 +48,10 @@ namespace NEALibrarySystem.Data_Structures
             else
                 return CirculationCopy.CircMemberRelation.Member.Barcode.Value;
         }
+        /// <summary>
+        /// gets the due date of the book if it is circulated
+        /// </summary>
+        /// <returns>book copy's circulated due date</returns>
         public string GetDueDate()
         {
             if (CirculationCopy == null)

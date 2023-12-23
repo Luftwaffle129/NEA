@@ -85,6 +85,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
         public void Save()
         {
             DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
+            FileHandler.Save.CirculationCopies();
         }
         public void Cancel()
         {

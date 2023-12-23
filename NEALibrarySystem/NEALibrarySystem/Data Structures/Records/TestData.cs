@@ -82,6 +82,16 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestData()
         {
+
+            DataLibrary.ClearData.All();
+            GenerateBooks();
+            GenerateMembers();
+            GenerateCirculationCopies();
+            FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+            FileHandler.Save.All();
+        }
+        public void GenerateTestParameters()
+        {
             //set up staff
             DataLibrary.CurrentUser = new Staff();
             DataLibrary.CurrentUser.IsAdministrator = true;
@@ -91,12 +101,6 @@ namespace NEALibrarySystem.Data_Structures
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
             Settings.ReserveDurations = new int[3] { 7, 6, 5 };
             Settings.BookCopyBarcodeLength = 3;
-
-            DataLibrary.ClearData.All();
-            GenerateBooks();
-            GenerateMembers();
-            GenerateCirculationCopies();
-            FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
         /// <summary>
         /// create 10 random book records with no copies attached to them
@@ -109,7 +113,7 @@ namespace NEALibrarySystem.Data_Structures
                 bookCreator.Title = titles[rand.Next(0, titles.Length)];
                 bookCreator.SeriesTitle = titles[rand.Next(0, titles.Length)];
                 string isbn = "";
-                for (int j = 0; j < 13; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     isbn += GenerateRandomDigit().ToString();
                 }

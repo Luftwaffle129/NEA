@@ -94,20 +94,16 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                 _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
                 // get member's loans and reservations
                 if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.CircMemberRelations.Count > 0)
-                {
                     foreach (CircMemberRelation relation in SelectedMember.CircMemberRelations)
-                    {
                         if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
                         {
                             currentLoans++;
                             if (relation.CirculationCopy.DueDate.Value < DateTime.Now)
                             {
                                 overdueBooks++;
-                                lateFees += GetLateFees(relation.CirculationCopy.DueDate.Value);
+                                lateFees += CirculationCopy.GetLateFees(relation.CirculationCopy.DueDate.Value);
                             }
                         }
-                    }
-                }
             }
             else
             {
@@ -139,7 +135,6 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             // sets columns
             string[] columns;
             if (PriceNeeded)
-            {
                 columns = new string[]
                 {
                     "Barcode",
@@ -151,9 +146,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     "Due Date",
                     "Member Barcode"
                 };
-            }
             else
-            {
                 columns = new string[]
                 {
                     "Barcode",
@@ -164,17 +157,18 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     "Due Date",
                     "Member Barcode"
                 };
-            }
             ListViewHandler.SetColumns(columns, ref _selectedBooks);
         }
+        /// <summary>
+        /// Updates the items in the list view
+        /// </summary>
         public void UpdateListView()
         {
             _selectedBooks.Items.Clear();
             foreach (BookCopy copy in BookCopyList)
             {
-                string[] data = Array.Empty<string>();
+                string[] data;
                 if (_priceNeeded)
-                {
                     data = new string[]
                     {
                         copy.Barcode.Value,
@@ -186,11 +180,9 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.GetDueDate(),
                         copy.GetMemberBarcode()
                     };
-                }
                 else
-                {
                     data = new string[]
-{
+                    {
                         copy.Barcode.Value,
                         copy.BookRelation.Book.Title.Value,
                         copy.BookRelation.Book.SeriesTitle.Value,
@@ -199,10 +191,10 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.GetDueDate(),
                         copy.GetMemberBarcode()
                     };
-                }
                 ListViewItem row = new ListViewItem(data);
                 _selectedBooks.Items.Add(row);
             }
+            _selectedBooks.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         /// <summary>
         /// removes the checked items from the list view of selected books
@@ -212,42 +204,27 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             if (_selectedBooks.CheckedItems.Count > 0)
             {
                 foreach (ListViewItem item in _selectedBooks.CheckedItems)
-                {
-                    if (BookCopyList.Count > 0)
-                    {
-                        for (int index = 0; index < BookCopyList.Count; index++)
-                        {
-                            if (BookCopyList[index].Barcode.Value == item.SubItems[0].Text)
-                            {
-                                BookCopyList.RemoveAt(index);
-                            }
-                        }
-                    }
-                }
+                    for (int index = 0; index < BookCopyList.Count; index++)
+                        if (BookCopyList[index].Barcode.Value == item.SubItems[0].Text)
+                            BookCopyList.RemoveAt(index);
                 UpdateListView();
             }
         }
+        /// <summary>
+        /// Adds the book copy with the barcode inputted in the 'enter barcode' textbox
+        /// </summary>
         public void AddBookCopy()
         {
             string barcode = _enterBarcodes.Text;
-            int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString);
+            int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString); // gets the index of the stored book copy barcode
             if (index == -1)
-            {
                 MessageBox.Show("Book Not Found");
-            }
             else
             {
                 BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
                 UpdateListView();
-                _enterBarcodes.Text = "";
+                _enterBarcodes.Clear();
             }
-        }
-        public double GetLateFees(DateTime date)
-        {
-            if (date.Date <= DateTime.Now.Date)
-                return 0;
-            else
-                return (date - DateTime.Now.Date).TotalDays * Settings.LateFeePerDay;
         }
     }
 }

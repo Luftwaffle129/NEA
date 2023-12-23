@@ -182,10 +182,12 @@ namespace NEALibrarySystem.PanelHandlers
                 Book book = new Book(GetBookInput());
                 DataLibrary.Books.Add(book);
                 // Add new book copies
-                foreach (TempBookCopy copy in _bookCopyList)
-                {
-                    DataLibrary.CreateBookCopy(copy.Barcode, book);
-                }
+                if (_bookCopyList.Count > 0)
+                    foreach (TempBookCopy copy in _bookCopyList)
+                        DataLibrary.CreateBookCopy(copy.Barcode, book);
+                FileHandler.Save.Books();
+                FileHandler.Save.BookCopies();
+                FileHandler.Save.CirculationCopies();
                 Load();
             }
             else
@@ -237,6 +239,9 @@ namespace NEALibrarySystem.PanelHandlers
                         DataLibrary.CreateBookCopy(copy.Barcode, _bookData);
                     }
                 }
+                FileHandler.Save.Books();
+                FileHandler.Save.BookCopies();
+                FileHandler.Save.CirculationCopies();
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             }
         }

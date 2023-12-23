@@ -328,7 +328,7 @@ namespace NEALibrarySystem
         }
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {
-            if (Math.Floor(date1.TimeOfDay.TotalSeconds) == date2.TimeOfDay.TotalSeconds && date1.Date == date2.Date)
+            if (date1.Date == date2.Date)
                 return Greatest.equal;
             else if (date1 > date2)
                 return Greatest.Left;

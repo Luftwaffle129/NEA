@@ -24,5 +24,6 @@ namespace NEALibrarySystem
         public TextBox PostCode;
         public TextBox JoinDate;
         public ListView Circulations;
+        public TextBox LateFees;
     }
 }

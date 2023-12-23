@@ -16,9 +16,10 @@ namespace NEALibrarySystem.Data_Structures
     public static class DataLibrary
     {
         #region data
-        public static Staff CurrentUser;
+        public static Staff CurrentUser; // stores the details of the current user
         #endregion
         #region data structures
+        // contains the lists of data stored by the program
         #region book copies
         private static List<BookCopy> _bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
@@ -220,6 +221,7 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region enums
+        // contains the enums used when handling processes and form navigation
         public enum Feature
         {
             Circulation,
@@ -248,10 +250,15 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #endregion
-        #region file handling
-        #endregion
         #region data handling
         #region circulation
+        /// <summary>
+        /// Creates a loan of each book copy to the provided member if the inputted data is valid
+        /// </summary>
+        /// <param name="member">member loaning the books</param>
+        /// <param name="bookCopies">book copies being loaned</param>
+        /// <param name="returnDate">date that the books should be returned</param>
+        /// <returns>Any errors that occured befored the books could be loaned</returns>
         public static CirculationError Loan(Member member, List<BookCopy> bookCopies, DateTime returnDate)
         {
             // check if necessary inputs exist
@@ -274,7 +281,7 @@ namespace NEALibrarySystem.Data_Structures
                     } while (++index < bookCopies.Count && validBooks);
                     if (validBooks)
                     {
-                        // loan books
+                        // create a loan record for each book copy
                         foreach (BookCopy copy in bookCopies)
                         {
                             CirculationCopyCreator creator = new CirculationCopyCreator()
@@ -286,6 +293,7 @@ namespace NEALibrarySystem.Data_Structures
                             };
                             DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                         }
+                        FileHandler.Save.CirculationCopies();
                         return CirculationError.None;
                     }
                     else
@@ -297,6 +305,12 @@ namespace NEALibrarySystem.Data_Structures
             else
                 return CirculationError.NoMember;
         }
+        /// <summary>
+        /// Returns the inputted book copies from the specified member
+        /// </summary>
+        /// <param name="member">Member returning the books</param>
+        /// <param name="bookCopies">Book copies being returned</param>
+        /// <returns>Any errors that occured befored the books could be returned</returns>
         public static CirculationError Return(Member member, List<BookCopy> bookCopies)
         {
             // check if necessary inputs exist
@@ -323,11 +337,12 @@ namespace NEALibrarySystem.Data_Structures
                     } while (++index < bookCopies.Count && validBooks);
                     if (validBooks)
                     {
-                        // return books
+                        // deletes the circulation copies of the returned books
                         foreach (BookCopy copy in bookCopies)
                         {
                             DeleteCirculationCopy(copy.CirculationCopy);
                         }
+                        FileHandler.Save.CirculationCopies();
                         return CirculationError.None;
                     }
                     else
@@ -339,27 +354,34 @@ namespace NEALibrarySystem.Data_Structures
             else
                 return CirculationError.NoMember;
         }
+        /// <summary>
+        /// Sells the list of book copies and removes them from the program
+        /// </summary>
+        /// <param name="bookCopies">list of book copies to sell</param>
+        /// <returns>Any errors that occured befored the books could be sold</returns>
         public static CirculationError Sell(List<BookCopy> bookCopies)
         {
             // check if necessary inputs exist
             if (bookCopies.Count > 0)
             {
-                // check if the books can be returned
+                // check if the books can be sold
                 bool validBooks = true;
                 int index = 0;
                 do
                 {
-                    // check if book is circulated
+                    // check if book is not circulated
                     if (bookCopies[index].CirculationCopy != null)
                         validBooks = false;
                 } while (++index < bookCopies.Count && validBooks);
                 if (validBooks)
                 {
-                    // return books
+                    // remove the book copies from the program
                     foreach (BookCopy copy in bookCopies)
                     {
                         DeleteBookCopy(copy);
                     }
+                    FileHandler.Save.BookCopies();
+                    FileHandler.Save.CirculationCopies();
                     return CirculationError.None;
                 }
                 else
@@ -375,17 +397,18 @@ namespace NEALibrarySystem.Data_Structures
             {
                 if (bookCopies.Count > 0)
                 {
-                    // check if the books can be loaned
+                    // check if the books can be reserved
                     bool validBooks = true;
                     int index = 0;
                     do
                     {
+                        // check that books are not circulated
                         if (bookCopies[index].CirculationCopy != null)
                             validBooks = false;
                     } while (++index < bookCopies.Count && validBooks);
                     if (validBooks)
                     {
-                        // loan books
+                        // create a reservation record for each book copy
                         foreach (BookCopy copy in bookCopies)
                         {
                             CirculationCopyCreator creator = new CirculationCopyCreator()
@@ -397,6 +420,7 @@ namespace NEALibrarySystem.Data_Structures
                             };
                             DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                         }
+                        FileHandler.Save.CirculationCopies();
                         return CirculationError.None;
                     }
                     else
@@ -570,9 +594,10 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteBook(Book book)
         {
             //delete book copies
-            if (book.BookCopyRelations.Count > 0)
-                for (int i = 0; i < book.BookCopyRelations.Count; i++)
-                    DeleteBookCopy(book.BookCopyRelations[i].Copy);
+            while (book.BookCopyRelations.Count > 0)
+            {
+                DeleteBookCopy(book.BookCopyRelations[0].Copy);
+            }
             // delete references
             Titles = DeleteReferenceClass(Titles, book.Title, TwoRefClassBooks);
             SeriesTitles = DeleteReferenceClass(SeriesTitles, book.SeriesTitle, TwoRefClassBooks);
@@ -591,6 +616,7 @@ namespace NEALibrarySystem.Data_Structures
             book.Themes.Clear();
             // delete book
             Books.Remove(book);
+            FileHandler.Save.Books();
         }
         /// <summary>
         /// Deletes the member record with the inputted member barcode
@@ -609,6 +635,7 @@ namespace NEALibrarySystem.Data_Structures
             MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
             // delete member
             Members.Remove(member);
+            FileHandler.Save.Members();
         }
         /// <summary>
         /// Deletes the specified book copy and the references to it
@@ -624,8 +651,8 @@ namespace NEALibrarySystem.Data_Structures
             // delete circulation copy
             if (bookCopy.CirculationCopy != null)
                 DeleteCirculationCopy(bookCopy.CirculationCopy);
-            // delete book
             BookCopies.Remove(bookCopy);
+            FileHandler.Save.BookCopies();
         }
         public static void DeleteCirculationCopy(CirculationCopy circulationCopy)
         {
@@ -639,6 +666,7 @@ namespace NEALibrarySystem.Data_Structures
             CirculationDates = DeleteReferenceClass(CirculationDates, circulationCopy.Date, TwoRefClassCircCopies);
             CirculationTypes = DeleteReferenceClass(CirculationTypes, circulationCopy.Type, TwoRefClassCircCopies);
             CirculationCopies.Remove(circulationCopy);
+            FileHandler.Save.CirculationCopies();
         }
         #endregion
         #endregion
@@ -650,12 +678,8 @@ namespace NEALibrarySystem.Data_Structures
                 Book();
                 Member();
                 BookCopy();
+                CirculationCopy();
                 _staff.Clear();
-                _circulationCopies.Clear();
-                _circulationTypes.Clear();
-                _circulationDueDates.Clear();
-                _circulationDates.Clear();
-                _circMemberRelations.Clear();
             }
             public static void Book()
             {
@@ -683,6 +707,15 @@ namespace NEALibrarySystem.Data_Structures
                 _bookCopies.Clear();
                 _bookCopyBarcodes.Clear();
                 _bookCopyRelations.Clear();
+            }
+            public static void CirculationCopy()
+            {
+                _circulationIds.Clear();
+                _circulationCopies.Clear();
+                _circulationTypes.Clear();
+                _circulationDueDates.Clear();
+                _circulationDates.Clear();
+                _circMemberRelations.Clear();
             }
         }
         #endregion

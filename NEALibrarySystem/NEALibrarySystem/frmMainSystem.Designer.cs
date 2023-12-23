@@ -50,6 +50,8 @@
             this.dtpReservePickUpByDate = new System.Windows.Forms.DateTimePicker();
             this.lblReserveSetDueDate = new System.Windows.Forms.Label();
             this.pnlMemberDetails = new System.Windows.Forms.Panel();
+            this.txtMemberLateFees = new System.Windows.Forms.TextBox();
+            this.lblMemberDetailsLateFees = new System.Windows.Forms.Label();
             this.cmbMemberType = new System.Windows.Forms.ComboBox();
             this.lsvMemberCirculations = new System.Windows.Forms.ListView();
             this.label3 = new System.Windows.Forms.Label();
@@ -261,6 +263,8 @@
             this.txtReserveLateFees = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
             this.pnlCirculationDetails = new System.Windows.Forms.Panel();
+            this.lblCircDetailsId = new System.Windows.Forms.Label();
+            this.txtCircDetailsId = new System.Windows.Forms.TextBox();
             this.dtpCircDetailsDueDate = new System.Windows.Forms.DateTimePicker();
             this.btnCircDetailsSave = new System.Windows.Forms.Button();
             this.lsvCircDetailsBookData = new System.Windows.Forms.ListView();
@@ -277,8 +281,6 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
-            this.txtCircDetailsId = new System.Windows.Forms.TextBox();
-            this.lblCircDetailsId = new System.Windows.Forms.Label();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaff.SuspendLayout();
@@ -566,6 +568,8 @@
             // 
             // pnlMemberDetails
             // 
+            this.pnlMemberDetails.Controls.Add(this.txtMemberLateFees);
+            this.pnlMemberDetails.Controls.Add(this.lblMemberDetailsLateFees);
             this.pnlMemberDetails.Controls.Add(this.cmbMemberType);
             this.pnlMemberDetails.Controls.Add(this.lsvMemberCirculations);
             this.pnlMemberDetails.Controls.Add(this.label3);
@@ -604,6 +608,25 @@
             this.pnlMemberDetails.TabIndex = 54;
             this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMember_VisibleChanged);
             // 
+            // txtMemberLateFees
+            // 
+            this.txtMemberLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberLateFees.Location = new System.Drawing.Point(1608, 827);
+            this.txtMemberLateFees.Name = "txtMemberLateFees";
+            this.txtMemberLateFees.ReadOnly = true;
+            this.txtMemberLateFees.Size = new System.Drawing.Size(156, 38);
+            this.txtMemberLateFees.TabIndex = 79;
+            // 
+            // lblMemberDetailsLateFees
+            // 
+            this.lblMemberDetailsLateFees.AutoSize = true;
+            this.lblMemberDetailsLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberDetailsLateFees.Location = new System.Drawing.Point(1456, 830);
+            this.lblMemberDetailsLateFees.Name = "lblMemberDetailsLateFees";
+            this.lblMemberDetailsLateFees.Size = new System.Drawing.Size(143, 31);
+            this.lblMemberDetailsLateFees.TabIndex = 78;
+            this.lblMemberDetailsLateFees.Text = "Late Fees:";
+            // 
             // cmbMemberType
             // 
             this.cmbMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
@@ -620,7 +643,7 @@
             this.lsvMemberCirculations.HideSelection = false;
             this.lsvMemberCirculations.Location = new System.Drawing.Point(1461, 81);
             this.lsvMemberCirculations.Name = "lsvMemberCirculations";
-            this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 784);
+            this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 724);
             this.lsvMemberCirculations.TabIndex = 1;
             this.lsvMemberCirculations.UseCompatibleStateImageBehavior = false;
             // 
@@ -947,6 +970,7 @@
             this.btnSearchDelete.TabIndex = 41;
             this.btnSearchDelete.Text = "Delete Selected";
             this.btnSearchDelete.UseVisualStyleBackColor = false;
+            this.btnSearchDelete.Click += new System.EventHandler(this.btnSearchDelete_Click);
             // 
             // lblSearchField
             // 
@@ -2969,6 +2993,25 @@
             this.pnlCirculationDetails.TabIndex = 75;
             this.pnlCirculationDetails.VisibleChanged += new System.EventHandler(this.pnlCirculationDetails_VisibleChanged);
             // 
+            // lblCircDetailsId
+            // 
+            this.lblCircDetailsId.AutoSize = true;
+            this.lblCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCircDetailsId.Location = new System.Drawing.Point(15, 50);
+            this.lblCircDetailsId.Name = "lblCircDetailsId";
+            this.lblCircDetailsId.Size = new System.Drawing.Size(50, 31);
+            this.lblCircDetailsId.TabIndex = 73;
+            this.lblCircDetailsId.Text = "ID:";
+            // 
+            // txtCircDetailsId
+            // 
+            this.txtCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCircDetailsId.Location = new System.Drawing.Point(255, 47);
+            this.txtCircDetailsId.Name = "txtCircDetailsId";
+            this.txtCircDetailsId.ReadOnly = true;
+            this.txtCircDetailsId.Size = new System.Drawing.Size(495, 38);
+            this.txtCircDetailsId.TabIndex = 72;
+            // 
             // dtpCircDetailsDueDate
             // 
             this.dtpCircDetailsDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
@@ -3136,35 +3179,16 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
-            // txtCircDetailsId
-            // 
-            this.txtCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsId.Location = new System.Drawing.Point(255, 47);
-            this.txtCircDetailsId.Name = "txtCircDetailsId";
-            this.txtCircDetailsId.ReadOnly = true;
-            this.txtCircDetailsId.Size = new System.Drawing.Size(495, 38);
-            this.txtCircDetailsId.TabIndex = 72;
-            // 
-            // lblCircDetailsId
-            // 
-            this.lblCircDetailsId.AutoSize = true;
-            this.lblCircDetailsId.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsId.Location = new System.Drawing.Point(15, 50);
-            this.lblCircDetailsId.Name = "lblCircDetailsId";
-            this.lblCircDetailsId.Size = new System.Drawing.Size(50, 31);
-            this.lblCircDetailsId.TabIndex = 73;
-            this.lblCircDetailsId.Text = "ID:";
-            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlSearch);
+            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
@@ -3469,5 +3493,7 @@
         private System.Windows.Forms.ComboBox cmbMemberType;
         private System.Windows.Forms.Label lblCircDetailsId;
         private System.Windows.Forms.TextBox txtCircDetailsId;
+        private System.Windows.Forms.TextBox txtMemberLateFees;
+        private System.Windows.Forms.Label lblMemberDetailsLateFees;
     }
 }

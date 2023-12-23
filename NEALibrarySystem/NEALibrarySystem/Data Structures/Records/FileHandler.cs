@@ -70,7 +70,8 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public static void CreateDataDirectory()
         {
-            Directory.CreateDirectory(Application.StartupPath + "\\Data");
+            if (!Directory.Exists(Application.StartupPath + "\\Data"))
+                Directory.CreateDirectory(Application.StartupPath + "\\Data");
         }
         /// <summary>
         /// Checks if all data files exist
@@ -82,15 +83,18 @@ namespace NEALibrarySystem.Data_Structures
             {
                 "Titles",
                 "Prices",
-                "Media Types",
+                "MediaTypes",
                 "Authors",
                 "Publishers",
                 "Genres",
                 "Themes",
-                "Books"
+                "Books",
+                "Members",
+                "BookCopies",
+                "CirculationCopies"
             };
             foreach (string file in files)
-                if (File.Exists(filePath + $"\\{file}.bin"))
+                if (!File.Exists(filePath + $"\\{file}.bin"))
                     missingFiles.Add(file);
             if (missingFiles.Count > 0)
             {
@@ -98,204 +102,278 @@ namespace NEALibrarySystem.Data_Structures
                 confirmation.ShowDialog();
                 if (confirmation.DialogResult == DialogResult.Yes)
                     foreach (string file in missingFiles)
-                        File.Create(filePath + $"\\{file}.bin");
-            }
-        }
-        #region Save
-        /// <summary>
-        /// Saves all data stored about the books into their respective files
-        /// </summary>
-        public static void SaveBooks() 
-        {
-            // get unique properties of all the books
-            List<string> titles = GetUniqueItems(DataLibrary.Titles, SearchAndSort.TwoStrings);
-            List<double> prices = GetUniqueItems(DataLibrary.Prices, SearchAndSort.TwoDoubles);
-            List<string> mediaTypes = GetUniqueItems(DataLibrary.MediaTypes, SearchAndSort.TwoStrings);
-            List<string> authors = GetUniqueItems(DataLibrary.Authors, SearchAndSort.TwoStrings);
-            List<string> publishers = GetUniqueItems(DataLibrary.Publishers, SearchAndSort.TwoStrings);
-            List<string> genres = GetUniqueItems(DataLibrary.Genres, SearchAndSort.TwoStrings);
-            List<string> themes = GetUniqueItems(DataLibrary.Themes, SearchAndSort.TwoStrings);
-
-            // saves each book. Some properties store a number corresponding to the index of a string in the lists of unique properties 
-            // Change each record into a serializable format
-            BookSaver[] bookSavers = new BookSaver[DataLibrary.Books.Count];
-            if (DataLibrary.Books.Count > 0)
-            {
-                for (int i = 0; i < DataLibrary.Books.Count; i++)
-                {
-                    Book book = DataLibrary.Books[i];
-                    BookSaver saver = new BookSaver();
-
-                    saver.Title = SearchAndSort.Binary(titles, book.Title.Value, SearchAndSort.TwoStrings);
-                    saver.SeriesTitle = book.SeriesTitle.Value;
-                    saver.SeriesNumber = book.SeriesNumber;
-                    saver.Isbn = book.Isbn.Value;
-                    saver.Description = book.Description;
-                    saver.MediaType = SearchAndSort.Binary(mediaTypes, book.MediaType.Value, SearchAndSort.TwoStrings);
-                    saver.Author = SearchAndSort.Binary(authors, book.Author.Value, SearchAndSort.TwoStrings);
-                    saver.Publisher = SearchAndSort.Binary(publishers, book.Publisher.Value, SearchAndSort.TwoStrings);
-                    saver.Price = SearchAndSort.Binary(prices, book.Price.Value, SearchAndSort.TwoDoubles);
-                    saver.Publisher = SearchAndSort.Binary(publishers, book.Publisher.Value, SearchAndSort.TwoStrings);
-
-                    saver.Genres = new int[book.Genres.Count];
-                    if (book.Genres.Count > 0)
-                        for (int j = 0; j < DataLibrary.Genres.Count; j++)
-                            saver.Genres[j] = SearchAndSort.Binary(genres, book.Genres[j].Value, SearchAndSort.TwoStrings);
-
-                    saver.Themes = new int[book.Themes.Count];
-                    if (book.Themes.Count > 0)
-                        for (int j = 0; j < DataLibrary.Themes.Count; j++)
-                            saver.Themes[j] = SearchAndSort.Binary(themes, book.Themes[j].Value, SearchAndSort.TwoStrings);
-
-                    bookSavers[i] = saver;
-                }
-            }
-            SaveFile(titles.ToArray(), filePath, "Titles");
-            SaveFile(prices.ToArray(), filePath, "Prices");
-            SaveFile(mediaTypes.ToArray(), filePath, "Media Types");
-            SaveFile(authors.ToArray(), filePath, "Authors");
-            SaveFile(publishers.ToArray(), filePath, "Publishers");
-            SaveFile(genres.ToArray(), filePath, "Genres");
-            SaveFile(themes.ToArray(), filePath, "Themes");
-
-            SaveFile(bookSavers, filePath, "Books");
-        }
-        /// <summary>
-        /// Saves the data stored about all members into the member file
-        /// </summary>
-        public static void SaveMembers()
-        {
-            // Change each record into a serializable format
-            MemberSaver[] memberSavers = new MemberSaver[DataLibrary.Members.Count];
-            if (DataLibrary.Members.Count > 0)
-            {
-                for (int i = 0; i < DataLibrary.Members.Count; i++)
-                {
-                    Member member = DataLibrary.Members[i];
-                    MemberSaver saver = new MemberSaver();
-                    saver.Barcode = member.Barcode.Value;
-                    saver.FirstName = member.FirstName.Value;
-                    saver.Surname = member.Surname.Value;
-                    saver.DateOfBirth = member.DateOfBirth;
-                    saver.LinkedMembers = DataFormatter.MemberListToBarcodeList(member.LinkedMembers).ToArray();
-                    saver.EmailAddress = member.EmailAddress;
-                    saver.PhoneNumber = member.PhoneNumber;
-                    saver.Address1 = member.Address1;
-                    saver.Address2 = member.Address2;
-                    saver.TownCity = member.TownCity;
-                    saver.County = member.County;
-                    saver.Postcode = member.Postcode;
-                    saver.JoinDate = member.JoinDate;
-                    saver.Type = (int)member.Type.Value;
-                    memberSavers[i] = saver;
-                }
-            }
-
-            SaveFile(memberSavers, filePath, "Members");
-        }
-        /// <summary>
-        /// Saves the data stored about all book copies into the book copy file
-        /// </summary>
-        public static void SaveBookCopies()
-        {
-            // Change each record into a serializable format
-            BookCopySaver[] bookCopySavers = new BookCopySaver[DataLibrary.BookCopies.Count];
-            if (DataLibrary.BookCopies.Count > 0)
-            {
-                for (int i = 0; i < DataLibrary.BookCopies.Count; i++)
-                {
-                    BookCopy bookCopy = DataLibrary.BookCopies[i];
-                    BookCopySaver saver = new BookCopySaver();
-                    saver.Barcode = bookCopy.Barcode.Value;
-                    saver.Isbn = bookCopy.BookRelation.Book.Isbn.Value;
-                    bookCopySavers[i] = saver;
-                }
-            }
-            SaveFile(bookCopySavers, filePath, "BookCopies");
-        }
-        #endregion
-        #region Load
-        /// <summary>
-        /// Loads the book data stored in the files
-        /// </summary>
-        public static void LoadBooks()
-        {
-            // clears current book data
-            // extracts book data from the files
-            BookSaver[] bookSavers = LoadFile<BookSaver[]>(filePath, "Books");
-            string[] titles = LoadFile<string[]>(filePath, "Titles");
-            double[] prices = LoadFile<double[]>(filePath, "Prices");
-            string[] mediaTypes = LoadFile<string[]>(filePath, "MediaTypes");
-            string[] authors = LoadFile<string[]>(filePath, "Authors");
-            string[] publishers = LoadFile<string[]>(filePath, "Publishers");
-            string[] genres = LoadFile<string[]>(filePath, "Genres");
-            string[] themes = LoadFile<string[]>(filePath, "Themes");
-
-            DataLibrary.ClearData.Book();
-            // creates book files from the extracted book data
-            if (bookSavers.Length > 0)
-                foreach (BookSaver saver in bookSavers)
-                {
-                    BookCreator bookCreator = new BookCreator()
                     {
-                        Title = titles[saver.Title],
-                        SeriesTitle = saver.SeriesTitle,
-                        SeriesNumber = saver.SeriesNumber,
-                        Isbn = saver.Isbn,
-                        MediaType = mediaTypes[saver.MediaType],
-                        Author = authors[saver.Author],
-                        Publisher = publishers[saver.Publisher],
-                        Genres = saver.Genres.Length > 0 ? GetValuesFromIndexes(genres, saver.Genres) : new List<string>(),
-                        Themes = saver.Themes.Length > 0 ? GetValuesFromIndexes(themes, saver.Themes) : new List<string>(),
-                        Price = prices[saver.Price],
-                        Description = saver.Description,
-                    };
-                    DataLibrary.Books.Add(new Book(bookCreator));
-                }
+                        FileStream f = File.Create(filePath + $"\\{file}.bin");
+                        f.Close();
+                    }
+
+            }
         }
         /// <summary>
-        /// Loads the member records stored in the member file
+        /// Used to save data from the program into the files
         /// </summary>
-        public static void LoadMembers()
+        public static class Save
         {
-            MemberSaver[] memberSavers = LoadFile<MemberSaver[]>(filePath, "Members");
-            DataLibrary.ClearData.Member();
-            if (memberSavers.Length > 0)
-                foreach (MemberSaver saver in memberSavers)
+            /// <summary>
+            /// Saves all data stored into their respective files
+            /// </summary>
+            public static void All()
+            {
+                Books();
+                BookCopies();
+                CirculationCopies();
+                Members();
+            }
+            /// <summary>
+            /// Saves all data stored about the books into their respective files
+            /// </summary>
+            public static void Books()
+            {
+                // get unique properties of all the books
+                List<string> titles = GetUniqueItems(DataLibrary.Titles, SearchAndSort.TwoStrings);
+                List<double> prices = GetUniqueItems(DataLibrary.Prices, SearchAndSort.TwoDoubles);
+                List<string> mediaTypes = GetUniqueItems(DataLibrary.MediaTypes, SearchAndSort.TwoStrings);
+                List<string> authors = GetUniqueItems(DataLibrary.Authors, SearchAndSort.TwoStrings);
+                List<string> publishers = GetUniqueItems(DataLibrary.Publishers, SearchAndSort.TwoStrings);
+                List<string> genres = GetUniqueItems(DataLibrary.Genres, SearchAndSort.TwoStrings);
+                List<string> themes = GetUniqueItems(DataLibrary.Themes, SearchAndSort.TwoStrings);
+
+                // saves each book. Some properties store a number corresponding to the index of a string in the lists of unique properties 
+                // Change each record into a serializable format
+                BookSaver[] bookSavers = new BookSaver[DataLibrary.Books.Count];
+                if (DataLibrary.Books.Count > 0)
                 {
-                    MemberCreator memberCreator = new MemberCreator()
+                    for (int i = 0; i < DataLibrary.Books.Count; i++)
                     {
-                        Barcode = saver.Barcode,
-                        FirstName = saver.FirstName,
-                        Surname = saver.Surname,
-                        DateOfBirth = saver.DateOfBirth,
-                        LinkedMembers = saver.LinkedMembers.ToList(),
-                        EmailAddress = saver.EmailAddress,
-                        PhoneNumber = saver.PhoneNumber,
-                        Address1 = saver.Address1,
-                        Address2 = saver.Address2,
-                        TownCity = saver.TownCity,
-                        County = saver.County,
-                        Postcode = saver.Postcode,
-                        JoinDate = saver.JoinDate,
-                        Type = (MemberType)saver.Type
-                    };
-                    DataLibrary.Members.Add(new Member(memberCreator));
+                        Book book = DataLibrary.Books[i];
+                        BookSaver saver = new BookSaver();
+
+                        saver.Title = SearchAndSort.Binary(titles, book.Title.Value, SearchAndSort.TwoStrings);
+                        saver.SeriesTitle = book.SeriesTitle.Value;
+                        saver.SeriesNumber = book.SeriesNumber;
+                        saver.Isbn = book.Isbn.Value;
+                        saver.Description = book.Description;
+                        saver.MediaType = SearchAndSort.Binary(mediaTypes, book.MediaType.Value, SearchAndSort.TwoStrings);
+                        saver.Author = SearchAndSort.Binary(authors, book.Author.Value, SearchAndSort.TwoStrings);
+                        saver.Publisher = SearchAndSort.Binary(publishers, book.Publisher.Value, SearchAndSort.TwoStrings);
+                        saver.Price = SearchAndSort.Binary(prices, book.Price.Value, SearchAndSort.TwoDoubles);
+                        saver.Publisher = SearchAndSort.Binary(publishers, book.Publisher.Value, SearchAndSort.TwoStrings);
+
+                        saver.Genres = new int[book.Genres.Count];
+                        if (book.Genres.Count > 0)
+                            for (int j = 0; j < book.Genres.Count; j++)
+                                saver.Genres[j] = SearchAndSort.Binary(genres, book.Genres[j].Value, SearchAndSort.TwoStrings);
+
+                        saver.Themes = new int[book.Themes.Count];
+                        if (book.Themes.Count > 0)
+                            for (int j = 0; j < book.Themes.Count; j++)
+                                saver.Themes[j] = SearchAndSort.Binary(themes, book.Themes[j].Value, SearchAndSort.TwoStrings);
+
+                        bookSavers[i] = saver;
+                    }
                 }
+                SaveFile(titles.ToArray(), filePath, "Titles");
+                SaveFile(prices.ToArray(), filePath, "Prices");
+                SaveFile(mediaTypes.ToArray(), filePath, "MediaTypes");
+                SaveFile(authors.ToArray(), filePath, "Authors");
+                SaveFile(publishers.ToArray(), filePath, "Publishers");
+                SaveFile(genres.ToArray(), filePath, "Genres");
+                SaveFile(themes.ToArray(), filePath, "Themes");
+
+                SaveFile(bookSavers, filePath, "Books");
+            }
+            /// <summary>
+            /// Saves the data stored about all members into the member file
+            /// </summary>
+            public static void Members()
+            {
+                // Change each record into a serializable format
+                MemberSaver[] memberSavers = new MemberSaver[DataLibrary.Members.Count];
+                if (DataLibrary.Members.Count > 0)
+                {
+                    for (int i = 0; i < DataLibrary.Members.Count; i++)
+                    {
+                        Member member = DataLibrary.Members[i];
+                        MemberSaver saver = new MemberSaver();
+                        saver.Barcode = member.Barcode.Value;
+                        saver.FirstName = member.FirstName.Value;
+                        saver.Surname = member.Surname.Value;
+                        saver.DateOfBirth = member.DateOfBirth;
+                        saver.LinkedMembers = DataFormatter.MemberListToBarcodeList(member.LinkedMembers).ToArray();
+                        saver.EmailAddress = member.EmailAddress;
+                        saver.PhoneNumber = member.PhoneNumber;
+                        saver.Address1 = member.Address1;
+                        saver.Address2 = member.Address2;
+                        saver.TownCity = member.TownCity;
+                        saver.County = member.County;
+                        saver.Postcode = member.Postcode;
+                        saver.JoinDate = member.JoinDate;
+                        saver.Type = (int)member.Type.Value;
+                        memberSavers[i] = saver;
+                    }
+                }
+
+                SaveFile(memberSavers, filePath, "Members");
+            }
+            /// <summary>
+            /// Saves the data stored about all book copies into the book copy file
+            /// </summary>
+            public static void BookCopies()
+            {
+                // Change each record into a serializable format
+                BookCopySaver[] bookCopySavers = new BookCopySaver[DataLibrary.BookCopies.Count];
+                if (DataLibrary.BookCopies.Count > 0)
+                {
+                    for (int i = 0; i < DataLibrary.BookCopies.Count; i++)
+                    {
+                        BookCopy bookCopy = DataLibrary.BookCopies[i];
+                        BookCopySaver saver = new BookCopySaver();
+                        saver.Barcode = bookCopy.Barcode.Value;
+                        saver.Isbn = bookCopy.BookRelation.Book.Isbn.Value;
+                        bookCopySavers[i] = saver;
+                    }
+                }
+                SaveFile(bookCopySavers, filePath, "BookCopies");
+            }
+            /// <summary>
+            /// Saves the data stored about all circulation copies into the book copy file
+            /// </summary>
+            public static void CirculationCopies()
+            {
+                CirculationCopySaver[] circulationCopySavers = new CirculationCopySaver[DataLibrary.CirculationCopies.Count];
+                if (DataLibrary.CirculationCopies.Count > 0)
+                    for (int i = 0; i < DataLibrary.CirculationCopies.Count; i++)
+                    {
+                        CirculationCopy circulationCopy = DataLibrary.CirculationCopies[i];
+                        CirculationCopySaver saver = new CirculationCopySaver();
+                        saver.Id = circulationCopy.Id.Value;
+                        saver.Type = (int)circulationCopy.Type.Value;
+                        saver.BookCopyBarcode = circulationCopy.BookCopy.Barcode.Value;
+                        saver.MemberBarcode = circulationCopy.CircMemberRelation.Member.Barcode.Value;
+                        saver.DueDate = circulationCopy.DueDate.Value;
+                        saver.Date = circulationCopy.Date.Value;
+                        circulationCopySavers[i] = saver;
+                    }
+                SaveFile(circulationCopySavers, filePath, "CirculationCopies");
+            }
         }
         /// <summary>
-        /// Loads the book copy records stored in the member file
+        /// Used to load data from the files into the program
         /// </summary>
-        public static void LoadBookCopies()
+        public static class Load
         {
-            BookCopySaver[] bookCopySavers = LoadFile<BookCopySaver[]>(filePath, "BookCopies");
-            if (bookCopySavers.Length > 0)
-                foreach (BookCopySaver saver in bookCopySavers)
-                {
-                    DataLibrary.BookCopies.Add(new BookCopy(saver.Barcode, DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, saver.Isbn, SearchAndSort.RefClassAndString)].Reference));
-                }
+            /// <summary>
+            /// Loads the data stored in the files
+            /// </summary>
+            public static void All()
+            {
+                Books();
+                Members();
+                BookCopies(); // book copies rely on books so is loaded after books
+                CirculationCopies();// circulation copies rely on book copies and members so is loaded after them
+            }
+            /// <summary>
+            /// Loads the book data stored in the files
+            /// </summary>
+            public static void Books()
+            {
+                // clears current book data
+                // extracts book data from the files
+                BookSaver[] bookSavers = LoadFile<BookSaver[]>(filePath, "Books");
+                string[] titles = LoadFile<string[]>(filePath, "Titles");
+                double[] prices = LoadFile<double[]>(filePath, "Prices");
+                string[] mediaTypes = LoadFile<string[]>(filePath, "MediaTypes");
+                string[] authors = LoadFile<string[]>(filePath, "Authors");
+                string[] publishers = LoadFile<string[]>(filePath, "Publishers");
+                string[] genres = LoadFile<string[]>(filePath, "Genres");
+                string[] themes = LoadFile<string[]>(filePath, "Themes");
+
+                DataLibrary.ClearData.Book();
+                // creates book files from the extracted book data
+                if (bookSavers != null)
+                    foreach (BookSaver saver in bookSavers)
+                    {
+                        BookCreator creator = new BookCreator()
+                        {
+                            Title = titles[saver.Title],
+                            SeriesTitle = saver.SeriesTitle,
+                            SeriesNumber = saver.SeriesNumber,
+                            Isbn = saver.Isbn,
+                            MediaType = mediaTypes[saver.MediaType],
+                            Author = authors[saver.Author],
+                            Publisher = publishers[saver.Publisher],
+                            Genres = saver.Genres.Length > 0 ? GetValuesFromIndexes(genres, saver.Genres) : new List<string>(),
+                            Themes = saver.Themes.Length > 0 ? GetValuesFromIndexes(themes, saver.Themes) : new List<string>(),
+                            Price = prices[saver.Price],
+                            Description = saver.Description,
+                        };
+                        DataLibrary.Books.Add(new Book(creator));
+                    }
+            }
+            /// <summary>
+            /// Loads the member records stored in the member file
+            /// </summary>
+            public static void Members()
+            {
+                MemberSaver[] memberSavers = LoadFile<MemberSaver[]>(filePath, "Members");
+                DataLibrary.ClearData.Member();
+                if (memberSavers != null)
+                    foreach (MemberSaver saver in memberSavers)
+                    {
+                        MemberCreator creator = new MemberCreator()
+                        {
+                            Barcode = saver.Barcode,
+                            FirstName = saver.FirstName,
+                            Surname = saver.Surname,
+                            DateOfBirth = saver.DateOfBirth,
+                            LinkedMembers = saver.LinkedMembers.ToList(),
+                            EmailAddress = saver.EmailAddress,
+                            PhoneNumber = saver.PhoneNumber,
+                            Address1 = saver.Address1,
+                            Address2 = saver.Address2,
+                            TownCity = saver.TownCity,
+                            County = saver.County,
+                            Postcode = saver.Postcode,
+                            JoinDate = saver.JoinDate,
+                            Type = (MemberType)saver.Type
+                        };
+                        DataLibrary.Members.Add(new Member(creator));
+                    }
+            }
+            /// <summary>
+            /// Loads the book copy records stored in the member file
+            /// </summary>
+            public static void BookCopies()
+            {
+                BookCopySaver[] bookCopySavers = LoadFile<BookCopySaver[]>(filePath, "BookCopies");
+                DataLibrary.ClearData.BookCopy();
+                if (bookCopySavers != null)
+                    foreach (BookCopySaver saver in bookCopySavers)
+                        DataLibrary.BookCopies.Add(new BookCopy(saver.Barcode, DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, saver.Isbn, SearchAndSort.RefClassAndString)].Reference));
+            }
+            /// <summary>
+            /// Loads the circulation copy records stored in the member file
+            /// </summary>
+            public static void CirculationCopies()
+            {
+                CirculationCopySaver[] circulationCopySavers = LoadFile<CirculationCopySaver[]>(filePath, "CirculationCopies");
+                DataLibrary.ClearData.CirculationCopy();
+                if (circulationCopySavers != null)
+                    foreach (CirculationCopySaver saver in circulationCopySavers)
+                    {
+                        CirculationCopyCreator creator = new CirculationCopyCreator()
+                        {
+                            Id = saver.Id,
+                            Type = (CirculationType)saver.Type,
+                            BookCopy = DataLibrary.BookCopyBarcodes[SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, saver.BookCopyBarcode, SearchAndSort.RefClassAndString)].Reference,
+                            Member = DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, saver.MemberBarcode, SearchAndSort.RefClassAndString)].Reference,
+                            DueDate = saver.DueDate,
+                            Date = saver.Date,
+                        };
+                        DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
+                    }
+            }
         }
-        #endregion
         /// <summary>
         /// Gets the list of unique item values from the list of reference classes
         /// </summary>

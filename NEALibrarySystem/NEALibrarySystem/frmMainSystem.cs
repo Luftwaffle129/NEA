@@ -28,6 +28,7 @@ namespace NEALibrarySystem
         {
             Main = this;
             InitializeComponent();
+            _testData.GenerateTestParameters();
             InitializePanels();
             InitializeTabs();
             NavigatorOpenBookTab();
@@ -52,6 +53,8 @@ namespace NEALibrarySystem
         private CirculationDetailsHandler _circulationDetailsHandler;
         private MemberDetailsHandler _memberDetailsHandler;
         private DeleteHandler _deleteHandler;
+
+        TestData _testData = new TestData();
 
         private Book _selectedBook; // Used to stored the selected book when opening the book details panel
         private CirculationCopy _selectedCircCopy;
@@ -146,7 +149,7 @@ namespace NEALibrarySystem
                 txtReturnLateFees,
                 txtReturnEnterBarcode,
                 lsvReturnSelectedBooks,
-                false
+                true
             );
             _returnHandler = new ReturnHandler(circulationObjectHandler);
         }
@@ -235,7 +238,8 @@ namespace NEALibrarySystem
                 County = txtMemberCounty,
                 PostCode = txtMemberPostcode,
                 JoinDate = txtMemberJoinDate,
-                Circulations = lsvMemberCirculations
+                Circulations = lsvMemberCirculations,
+                LateFees = txtMemberLateFees
             };
             _memberDetailsHandler = new MemberDetailsHandler(memberDetailsObjects);
         }
@@ -551,10 +555,13 @@ namespace NEALibrarySystem
         #region main form
         private void frmMainSystem_Load(object sender, EventArgs e)
         {
-            //overdue books
+            FileHandler.CreateDataDirectory();
+            FileHandler.DataFilesExist();
+            FileHandler.Load.All();
         }
         private void FrmMainSystem_FormClosed(object sender, FormClosedEventArgs e)
         {
+            FileHandler.Save.All();
             frmLogIn.Main.Visible = true;
         }
         public void DisplayProcessMessage(string message)
@@ -563,8 +570,7 @@ namespace NEALibrarySystem
         }
         private void pctIcon_Click(object sender, EventArgs e)
         {
-            TestData testData = new TestData();
-            testData.GenerateTestData();
+            _testData.GenerateTestData();
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -738,14 +744,12 @@ namespace NEALibrarySystem
                 } while (++index < lsvSearchItems.Items.Count && !foundItem);
             }
         }
-
-        private void txtTransactionPrice_TextChanged(object sender, EventArgs e)
+        private void btnSearchDelete_Click(object sender, EventArgs e)
         {
-
+            _searchedItemsHandler.Delete();
         }
         #endregion
         #endregion
-
         #endregion
         private void txtReturnLoans_TextChanged(object sender, EventArgs e)
         {
@@ -784,7 +788,10 @@ namespace NEALibrarySystem
         {
 
         }
+        private void txtTransactionPrice_TextChanged(object sender, EventArgs e)
+        {
 
+        }
         /*
 *  OpenFileDialog openFileDialog = new OpenFileDialog();
 openFileDialog.InitialDirectory = "c:\\";

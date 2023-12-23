@@ -70,6 +70,7 @@ namespace NEALibrarySystem
                 _objects.PostCode.Clear();
                 _objects.JoinDate.Clear();
                 _objects.Circulations.Items.Clear();
+                _objects.LateFees.Clear();
             }
             else
             {
@@ -101,6 +102,11 @@ namespace NEALibrarySystem
                     };
                     _objects.Circulations.Items.Add(new ListViewItem(data));
                 }
+                // get total late fees
+                double total = 0;
+                if (_circulationList.Count > 0)
+                    foreach (CirculationCopy copy in _circulationList)
+                    total += CirculationCopy.GetLateFees(copy.DueDate.Value);
             }
         }
         public void Save()
@@ -126,7 +132,7 @@ namespace NEALibrarySystem
                 DataLibrary.Members.Add(new Member(memberCreator));
             else
                 DataLibrary.ModifyMember(_memberData, memberCreator);
-
+            FileHandler.Save.Members();
         }
         public void Cancel()
         {

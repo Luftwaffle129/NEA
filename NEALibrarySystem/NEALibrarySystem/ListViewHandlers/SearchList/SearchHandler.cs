@@ -174,7 +174,7 @@ namespace NEALibrarySystem.SearchList
                 // output a confirmation message
                 string itemType = "";
                 frmConfirmation confirmation;
-                    // get the type of item being deleted
+                // get the type of item being deleted
                 switch (FrmMainSystem.Main.SearchFeature)
                 {
                     case DataLibrary.SearchFeature.Member:
@@ -199,34 +199,37 @@ namespace NEALibrarySystem.SearchList
                         itemType = "staff";
                         break;
                 }
-                    // output the confirmation message
+                // output the confirmation message
                 if (_objects.ItemViewer.CheckedItems.Count == 1)
                     confirmation = new frmConfirmation($"Do you want do delete 1 {itemType}?");
                 else
                     confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType}?");
-
+                confirmation.ShowDialog();
                 if (confirmation.DialogResult == DialogResult.Yes)
                 {
                     switch (FrmMainSystem.Main.SearchFeature)
                     {
                         case DataLibrary.SearchFeature.Member:
-                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                            foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
                                 DataLibrary.DeleteMember(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
                             break;
                         case DataLibrary.SearchFeature.Book:
-                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                            foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
                                 DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
                             break;
                         case DataLibrary.SearchFeature.Circulation:
-                            foreach (ListViewItem item in _objects.ItemViewer.Items)
+                            foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
                                 DataLibrary.DeleteCirculationCopy(DataLibrary.CirculationDates[SearchAndSort.Binary(DataLibrary.CirculationDates, Convert.ToDateTime(item.SubItems[4].Text), SearchAndSort.RefClassAndDate)].Reference);
                             break;
                         case DataLibrary.SearchFeature.Staff:
                             break;
                     }
                     FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");
+                    ToBook();
                 }
             }
+            else
+                MessageBox.Show("No items selected");
         }
     }
 

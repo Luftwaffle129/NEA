@@ -54,6 +54,7 @@
     <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
     <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
+    <Compile Include="Data Structures\Records\CirculationCopySaver.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
