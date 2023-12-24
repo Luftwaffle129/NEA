@@ -389,6 +389,14 @@ namespace NEALibrarySystem
         {
             return TwoIntegers(referenceClass.Value, integer);
         }
+        public static Greatest RefClassAndEnum(ReferenceClass<CirculationType, CirculationCopy> referenceClass, CirculationType circulationType)
+        {
+            return TwoEnums(referenceClass.Value, circulationType);
+        }
+        public static Greatest RefClassAndEnum(ReferenceClass<MemberType, Member> referenceClass, MemberType memberType)
+        {
+            return TwoEnums(referenceClass.Value, memberType);
+        }
         public static Greatest MemberAndString(Member member, string str)
         {
             return TwoStrings(member.Barcode.Value, str);
@@ -437,6 +445,13 @@ namespace NEALibrarySystem
                 return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
+        public static Greatest TwoRefClassCircCopies(ReferenceClass<string, CirculationCopy> copy1, ReferenceClass<string, CirculationCopy> copy2)
+        {
+            Greatest value = TwoStrings(copy1.Value, copy2.Value);
+            if (value == Greatest.equal)
+                return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
+            return value;
+        }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
         {
             Greatest value = TwoEnums(copy1.Value, copy2.Value);
@@ -481,6 +496,27 @@ namespace NEALibrarySystem
         public static Greatest TwoBooks(Book book1, Book book2)
         {
             return TwoStrings(book1.Isbn.Value, book2.Isbn.Value);
+        }
+        public static Greatest TwoMembers(Member member1, Member member2)
+        {
+            return TwoStrings(member1.Barcode.Value, member2.Barcode.Value);
+        }
+        public static Greatest TwoCircCopies(CirculationCopy copy1, CirculationCopy copy2)
+        {
+            return TwoIntegers(copy1.Id.Value, copy2.Id.Value);
+        }
+        public static Greatest TwoSmallestBooks(SmallestItem<Book> item1, SmallestItem<Book> item2)
+        {
+            return TwoStrings(item1.Item.Isbn.Value, item2.Item.Isbn.Value);
+        }
+        public static Greatest TwoSmallestMembers(SmallestItem<Member> item1, SmallestItem<Member> item2)
+        {
+            return TwoStrings(item1.Item.Barcode.Value, item2.Item.Barcode.Value);
+
+        }
+        public static Greatest TwoSmallestCircCopies(SmallestItem<CirculationCopy> item1, SmallestItem<CirculationCopy> item2)
+        {
+            return TwoIntegers(item1.Item.Id.Value, item2.Item.Id.Value);
         }
         #endregion
     }

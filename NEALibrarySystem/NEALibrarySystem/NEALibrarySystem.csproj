@@ -57,6 +57,7 @@
     <Compile Include="Data Structures\Records\CirculationCopySaver.cs" />
     <Compile Include="Data Structures\Records\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
+    <Compile Include="Data Structures\SmallestItem.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchObjects.cs" />
     <Compile Include="Panel Handlers\MemberDetails\MemberDetailsHandler.cs" />

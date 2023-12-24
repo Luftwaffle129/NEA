@@ -16,7 +16,7 @@ namespace NEALibrarySystem
         {
             InitializeComponent();
             lblOutput.Text = message;
-        }
+      }
 
         private void btnYes_Click(object sender, EventArgs e)
         {

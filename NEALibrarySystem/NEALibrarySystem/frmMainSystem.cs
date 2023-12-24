@@ -44,7 +44,7 @@ namespace NEALibrarySystem
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
         public DataLibrary.SearchFeature SearchFeature = DataLibrary.SearchFeature.Book;
 
-        private SearchHandler _searchedItemsHandler;
+        private SearchHandler _searchHandler;
         private LoanHandler _loanHandler;
         private ReturnHandler _returnHandler;
         private SellHandler _sellHandler;
@@ -121,7 +121,7 @@ namespace NEALibrarySystem
                 ItemViewer = lsvSearchItems,
                 Delete = btnSearchDelete
             };
-            _searchedItemsHandler = new SearchHandler(searchObjects);
+            _searchHandler = new SearchHandler(searchObjects);
         }
         private void InitialiseLoan()
         {
@@ -517,7 +517,7 @@ namespace NEALibrarySystem
         private void pnlSearch_VisibleChanged(object sender, EventArgs e)
         {
             if (pnlSearch.Visible)
-                _searchedItemsHandler.SetUpSearchTab();
+                _searchHandler.SetUpSearchTab();
         }
         private void pnlMember_VisibleChanged(object sender, EventArgs e)
         {
@@ -746,7 +746,19 @@ namespace NEALibrarySystem
         }
         private void btnSearchDelete_Click(object sender, EventArgs e)
         {
-            _searchedItemsHandler.Delete();
+            _searchHandler.Delete();
+        }
+        private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+        }
+        private void btnSearchSearch_Click(object sender, EventArgs e)
+        {
+            _searchHandler.Search();
+        }
+        private void btnSearchResetFilters_Click(object sender, EventArgs e)
+        {
+            _searchHandler.ResetSearchInputs();
         }
         #endregion
         #endregion
@@ -789,11 +801,6 @@ namespace NEALibrarySystem
 
         }
         private void txtTransactionPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
         }

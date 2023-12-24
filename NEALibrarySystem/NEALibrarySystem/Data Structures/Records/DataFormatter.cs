@@ -160,5 +160,15 @@ namespace NEALibrarySystem.Data_Structures
             }
             return list;
         }
+        /// <summary>
+        /// Checks if text contains the subtext regardless of upper or lowercase characters
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="subtext">text that may be contained in the other</param>
+        /// <returns>True if text does contain subtext, false if otherwise</returns>
+        public static bool Contains(string text, string subtext)
+        {
+            return text.ToUpper().Contains(subtext.ToUpper());
+        }
     }
 }
