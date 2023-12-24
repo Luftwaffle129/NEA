@@ -397,13 +397,13 @@ namespace NEALibrarySystem
         {
             return TwoEnums(referenceClass.Value, memberType);
         }
-        public static Greatest MemberAndString(Member member, string str)
-        {
-            return TwoStrings(member.Barcode.Value, str);
-        }
         public static Greatest RefClassAndDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
         {
             return TwoDates(reference.Value, date);
+        }
+        public static Greatest MemberAndString(Member member, string str)
+        {
+            return TwoStrings(member.Barcode.Value, str);
         }
         public static Greatest TwoRefClassBooks(ReferenceClass<string, Book> book1, ReferenceClass<string, Book> book2)
         {
@@ -518,6 +518,29 @@ namespace NEALibrarySystem
         {
             return TwoIntegers(item1.Item.Id.Value, item2.Item.Id.Value);
         }
+        #region Starts With
+        // returns equal if the reference class value is equal to or starts with the search term at the start, else returns if it is greater or less than the search term
+        public static Greatest RefClassStartsWithString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
+        {
+            return TwoStrings(referenceClass.Value, str);
+        }
+        public static Greatest RefClassStartsWithInteger<F>(ReferenceClass<int, F> referenceClass, int integer) where F : class
+        {
+            return TwoIntegers(referenceClass.Value, integer);
+        }
+        public static Greatest RefClassStartsWithEnum(ReferenceClass<CirculationType, CirculationCopy> referenceClass, CirculationType circulationType)
+        {
+            return TwoEnums(referenceClass.Value, circulationType);
+        }
+        public static Greatest RefClassStartsWithEnum(ReferenceClass<MemberType, Member> referenceClass, MemberType memberType)
+        {
+            return TwoEnums(referenceClass.Value, memberType);
+        }
+        public static Greatest RefClassStartsWithDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
+        {
+            return TwoDates(reference.Value, date);
+        }
+        #endregion
         #endregion
     }
     public enum Greatest
