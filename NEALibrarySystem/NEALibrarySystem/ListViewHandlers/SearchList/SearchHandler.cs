@@ -3,6 +3,7 @@ using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing.Text;
 using System.Linq;
 using System.Reflection;
@@ -23,6 +24,7 @@ namespace NEALibrarySystem.SearchList
         private SearchObjects _objects;
 
         private int _currentColumn;
+        private bool _invertedSort = false;
         private static string[] _memberColumns;
         private static string[] _bookColumns;
         private static string[] _circulationCopyColumns;
@@ -37,7 +39,7 @@ namespace NEALibrarySystem.SearchList
             _objects.ItemViewer.FullRowSelect = true;
             _objects.ItemViewer.GridLines = false;
             _objects.ItemViewer.Sorting = SortOrder.None;
-            _objects.ItemViewer.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            _objects.ItemViewer.HeaderStyle = ColumnHeaderStyle.Clickable;
             _objects.ItemViewer.Scrollable = true;
 
             _memberColumns = new string[]
@@ -74,7 +76,7 @@ namespace NEALibrarySystem.SearchList
         #region loading
         public void SetUpSearchTab()
         {
-
+            _invertedSort = false;
             switch (FrmMainSystem.Main.SearchFeature)
             {
                 case SearchFeature.Book:
@@ -237,60 +239,72 @@ namespace NEALibrarySystem.SearchList
         #region UpdateListView
         public void UpdateListView(List<Member> memberList)
         {
-            foreach (Member member in memberList)
+            _objects.ItemViewer.Items.Clear();
+            if (memberList.Count > 0) 
             {
-                string[] data = new string[4]
+                foreach (Member member in memberList)
                 {
-                member.Barcode.Value,
-                member.FirstName.Value,
-                member.Surname.Value,
-                member.Type.Value.ToString()
-                };
-                ListViewItem row = new ListViewItem(data);
-                _objects.ItemViewer.Items.Add(row);
+                    string[] data = new string[4]
+                    {
+                    member.Barcode.Value,
+                    member.FirstName.Value,
+                    member.Surname.Value,
+                    member.Type.Value.ToString()
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    _objects.ItemViewer.Items.Add(row);
+                }
+                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
-            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         public void UpdateListView(List<Book> bookList)
         {
-            foreach (Book book in bookList)
+            _objects.ItemViewer.Items.Clear();
+            if (bookList.Count > 0)
             {
-                string[] data =
+                foreach (Book book in bookList)
                 {
-                    book.Isbn.Value,
-                    book.Title.Value,
-                    book.SeriesTitle.Value,
-                    book.MediaType.Value,
-                    book.Author.Value,
-                    book.Publisher.Value,
-                    DataFormatter.ListToString(book.Genres),
-                    DataFormatter.ListToString(book.Themes)
-                };
-                ListViewItem row = new ListViewItem(data);
-                _objects.ItemViewer.Items.Add(row);
-            }
-            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    string[] data =
+                    {
+                        book.Isbn.Value,
+                        book.Title.Value,
+                        book.SeriesTitle.Value,
+                        book.MediaType.Value,
+                        book.Author.Value,
+                        book.Publisher.Value,
+                        DataFormatter.ListToString(book.Genres),
+                        DataFormatter.ListToString(book.Themes)
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    _objects.ItemViewer.Items.Add(row);
+                }
+                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            }            
         }
         public void UpdateListView(List<CirculationCopy> circulationCopyList)
         {
-            foreach (CirculationCopy copy in circulationCopyList)
+            _objects.ItemViewer.Items.Clear();
+            if (circulationCopyList.Count > 0)
             {
-                string[] data =
+                foreach (CirculationCopy copy in circulationCopyList)
                 {
-                    copy.Id.Value.ToString(),
-                    copy.BookCopy.Barcode.Value,
-                    copy.BookCopy.BookRelation.Book.Title.Value,
-                    copy.BookCopy.BookRelation.Book.SeriesTitle.Value,
-                    copy.BookCopy.BookRelation.Book.Author.Value,
-                    DataFormatter.GetDateAndTime(copy.Date.Value),
-                    copy.Type.Value.ToString(),
-                    DataFormatter.GetDate(copy.DueDate.Value),
-                    copy.CircMemberRelation.Member.Barcode.Value.ToString()
-                };
-                ListViewItem row = new ListViewItem(data);
-                _objects.ItemViewer.Items.Add(row);
+                    string[] data =
+                    {
+                        copy.Id.Value.ToString(),
+                        copy.BookCopy.Barcode.Value,
+                        copy.BookCopy.BookRelation.Book.Title.Value,
+                        copy.BookCopy.BookRelation.Book.SeriesTitle.Value,
+                        copy.BookCopy.BookRelation.Book.Author.Value,
+                        DataFormatter.GetDateAndTime(copy.Date.Value),
+                        copy.Type.Value.ToString(),
+                        DataFormatter.GetDate(copy.DueDate.Value),
+                        copy.CircMemberRelation.Member.Barcode.Value.ToString()
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    _objects.ItemViewer.Items.Add(row);
+                }
+                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
-            _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         #endregion
         #region searching
@@ -309,6 +323,18 @@ namespace NEALibrarySystem.SearchList
                     MessageBox.Show("Invalid Search Category");
                     break;
                 case SearchError.NoFields:
+                    switch (FrmMainSystem.Main.SearchFeature)
+                    {
+                        case SearchFeature.Member:
+                            UpdateListView(DataLibrary.Members);
+                            break;
+                        case SearchFeature.Book:
+                            UpdateListView(DataLibrary.Books);
+                            break;
+                        case SearchFeature.Circulation:
+                            UpdateListView(DataLibrary.CirculationCopies);
+                            break;
+                    }
                     break;
                 case SearchError.None:
                     // place input fields in array to apply filters for each of them using iteration
@@ -340,32 +366,32 @@ namespace NEALibrarySystem.SearchList
                                             List<ReferenceClass<string, Member>> referenceClasses = new List<ReferenceClass<string, Member>>();
                                             foreach (Member member in members)
                                                 referenceClasses.Add(member.Barcode);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoRefClassMembers);
-                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoUpperRefClassMembers);
+                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _memberColumns[1])
                                         {
                                             List<ReferenceClass<string, Member>> referenceClasses = new List<ReferenceClass<string, Member>>();
                                             foreach (Member member in members)
                                                 referenceClasses.Add(member.FirstName);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoRefClassMembers);
-                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoUpperRefClassMembers);
+                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _memberColumns[2])
                                         {
                                             List<ReferenceClass<string, Member>> referenceClasses = new List<ReferenceClass<string, Member>>();
                                             foreach (Member member in members)
                                                 referenceClasses.Add(member.Surname);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoRefClassMembers);
-                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoUpperRefClassMembers);
+                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _memberColumns[3])
                                         {
                                             List<ReferenceClass<string, Member>> referenceClasses = new List<ReferenceClass<string, Member>>();
                                             foreach (Member member in members)
                                                 referenceClasses = CreateReferenceClass(referenceClasses, member, member.Type.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoRefClassMembers);
-                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(referenceClasses, SearchAndSort.TwoUpperRefClassMembers);
+                                            members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
@@ -396,64 +422,64 @@ namespace NEALibrarySystem.SearchList
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.Isbn);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[1])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.Title);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[2])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.SeriesTitle);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[3])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.MediaType);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[4])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.Author);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[5])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.Add(book.Publisher);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[6])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.AddRange(book.Genres);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _bookColumns[7])
                                         {
                                             List<ReferenceClass<string, Book>> referenceClasses = new List<ReferenceClass<string, Book>>();
                                             foreach (Book book in books)
                                                 referenceClasses.AddRange(book.Themes);
-                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoRefClassBooks);
-                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(referenceClasses, SearchAndSort.TwoUpperRefClassBooks);
+                                            books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
@@ -481,50 +507,52 @@ namespace NEALibrarySystem.SearchList
                                          */
                                         if (searchInputs[i].Category.Text == _circulationCopyColumns[0])
                                         {
-                                            if (Int32.TryParse(searchInputs[i].SearchTerm.Text, out int value))
-                                            {
-                                                List<ReferenceClass<int, CirculationCopy>> referenceClasses = new List<ReferenceClass<int, CirculationCopy>>();
-                                                foreach (CirculationCopy circulationCopy in circulationCopies)
-                                                    referenceClasses.Add(circulationCopy.Id);
-                                                circulationCopies = ApplyFilter(referenceClasses, value, SearchAndSort.RefClassStartsWithInteger);
-                                            }
-                                            else
-                                                circulationCopies = new List<CirculationCopy>();
+
+                                            List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
+                                            foreach (CirculationCopy circulationCopy in circulationCopies)
+                                                referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, DataFormatter.IntToString(circulationCopy.Id.Value, CirculationCopy.IdMaxValue.ToString().Length), SearchAndSort.TwoRefClassCircCopies, out int index);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies);
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[2])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[3])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[4])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[5])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, DataFormatter.GetDateAndTime(circulationCopy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[6])
                                         {
@@ -532,21 +560,23 @@ namespace NEALibrarySystem.SearchList
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, circulationCopy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out int index);
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoRefClassCircCopies);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[7])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, DataFormatter.GetDate(circulationCopy.DueDate.Value), SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                         else if (searchInputs[i].Category.Text == _circulationCopyColumns[8])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
                                                 referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
-                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.RefClassStartsWithString);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
+                                            circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
@@ -590,7 +620,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Book:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _bookColumns)
                             if (column == _objects.Filter1Field.Text)
                                 contains = true;
                         if (!contains)
@@ -598,7 +628,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Circulation:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _circulationCopyColumns)
                             if (column == _objects.Filter1Field.Text)
                                 contains = true;
                         if (!contains)
@@ -622,7 +652,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Book:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _bookColumns)
                             if (column == _objects.Filter2Field.Text)
                                 contains = true;
                         if (!contains)
@@ -630,7 +660,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Circulation:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _circulationCopyColumns)
                             if (column == _objects.Filter2Field.Text)
                                 contains = true;
                         if (!contains)
@@ -654,7 +684,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Book:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _bookColumns)
                             if (column == _objects.SearchField.Text)
                                 contains = true;
                         if (!contains)
@@ -662,7 +692,7 @@ namespace NEALibrarySystem.SearchList
                         break;
                     case SearchFeature.Circulation:
                         contains = false;
-                        foreach (string column in _memberColumns)
+                        foreach (string column in _circulationCopyColumns)
                             if (column == _objects.SearchField.Text)
                                 contains = true;
                         if (!contains)
@@ -714,21 +744,33 @@ namespace NEALibrarySystem.SearchList
         private List<Book> BookSearch(string item)
         {
             // Get lists of valid books for each property
-            List<Book> isbns = ApplyFilter(DataLibrary.Isbns, item, SearchAndSort.RefClassStartsWithString);
+
+            List<Book> isbns = ApplyFilter(DataLibrary.Isbns, item, SearchAndSort.UpperRefClassStartsWithString);
             isbns = SearchAndSort.QuickSort<Book, Book>(isbns, SearchAndSort.TwoBooks);
-            List<Book> titles = ApplyFilter(DataLibrary.Titles, item, SearchAndSort.RefClassStartsWithString);
+            // Below are the steps performed on each property below to get a list of valid books for each property:
+            // gets an ordered list of the reference class property which is case insensitive
+            List<ReferenceClass<string, Book>> titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Titles, SearchAndSort.TwoUpperRefClassBooks);
+            // get the list of books that are valid under the filter
+            List<Book> titles = ApplyFilter(titleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            // sort them based on their reference
             titles = SearchAndSort.QuickSort<Book, Book>(titles, SearchAndSort.TwoBooks);
-            List<Book> seriesTitles = ApplyFilter(DataLibrary.SeriesTitles, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> seriesTitleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.SeriesTitles, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> seriesTitles = ApplyFilter(seriesTitleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             seriesTitles = SearchAndSort.QuickSort<Book, Book>(seriesTitles, SearchAndSort.TwoBooks);
-            List<Book> mediaTypes = ApplyFilter(DataLibrary.MediaTypes, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> mediaTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.MediaTypes, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> mediaTypes = ApplyFilter(mediaTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             mediaTypes = SearchAndSort.QuickSort<Book, Book>(mediaTypes, SearchAndSort.TwoBooks);
-            List<Book> authors = ApplyFilter(DataLibrary.Authors, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> authorRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Authors, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> authors = ApplyFilter(authorRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             authors = SearchAndSort.QuickSort<Book, Book>(authors, SearchAndSort.TwoBooks);
-            List<Book> publishers = ApplyFilter(DataLibrary.Publishers, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> publisherRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Publishers, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> publishers = ApplyFilter(publisherRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             publishers = SearchAndSort.QuickSort<Book, Book>(publishers, SearchAndSort.TwoBooks);
-            List<Book> genres = ApplyFilter(DataLibrary.Genres, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> genreRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Genres, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> genres = ApplyFilter(genreRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             genres = SearchAndSort.QuickSort<Book, Book>(genres, SearchAndSort.TwoBooks);
-            List<Book> themes = ApplyFilter(DataLibrary.Themes, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Book>> themeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Themes, SearchAndSort.TwoUpperRefClassBooks);
+            List<Book> themes = ApplyFilter(themeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             themes = SearchAndSort.QuickSort<Book, Book>(themes, SearchAndSort.TwoBooks);
 
             List<List<Book>> columnTypes =new List<List<Book>>
@@ -760,19 +802,21 @@ namespace NEALibrarySystem.SearchList
         private List<Member> MemberSearch(string item)
         {
             // Get lists of valid members for each property
-            List<Member> barcodes = ApplyFilter(DataLibrary.MemberBarcodes, item, SearchAndSort.RefClassStartsWithString);
+            List<Member> barcodes = ApplyFilter(DataLibrary.MemberBarcodes, item, SearchAndSort.UpperRefClassStartsWithString);
             barcodes = SearchAndSort.QuickSort<Member, Member>(barcodes, SearchAndSort.TwoMembers);
-            List<Member> firstNames = ApplyFilter(DataLibrary.FirstNames, item, SearchAndSort.RefClassStartsWithString);
+            List<ReferenceClass<string, Member>> firstNameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.FirstNames, SearchAndSort.TwoUpperRefClassMembers);
+            List<Member> firstNames = ApplyFilter(firstNameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             firstNames = SearchAndSort.QuickSort<Member, Member>(firstNames, SearchAndSort.TwoMembers);
-            List<Member> surnames = ApplyFilter(DataLibrary.Surnames, item, SearchAndSort.RefClassStartsWithString);
+
+            List<ReferenceClass<string, Member>> surameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.Surnames, SearchAndSort.TwoUpperRefClassMembers);
+            List<Member> surnames = ApplyFilter(surameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             surnames = SearchAndSort.QuickSort<Member, Member>(surnames, SearchAndSort.TwoMembers);
-            int enumItem = DataFormatter.StringToEnum<MemberType>(item);
-            List<Member> memberTypes = new List<Member>();
-            if (enumItem != -1)
-            {
-                memberTypes = ApplyFilter(DataLibrary.MemberTypes, (MemberType)enumItem, SearchAndSort.RefClassStartsWithString);
-                memberTypes = SearchAndSort.QuickSort<Member, Member>(memberTypes, SearchAndSort.TwoMembers);
-            }
+
+            List<ReferenceClass<string, Member>> memberTypeRefClassList = new List<ReferenceClass<string, Member>>();
+            foreach (Member member in DataLibrary.Members)
+                memberTypeRefClassList = CreateReferenceClass(memberTypeRefClassList, member, member.Type.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
+            memberTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(memberTypeRefClassList, SearchAndSort.TwoUpperRefClassMembers);
+            List<Member> memberTypes = ApplyFilter(memberTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
 
             List<List<Member>> properties = new List<List<Member>>
             {
@@ -798,6 +842,7 @@ namespace NEALibrarySystem.SearchList
         private List<CirculationCopy> CirculationSearch(string item)
         {
             // Get lists of valid circulation copies for each property
+            List<ReferenceClass<string, CirculationCopy>> idRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> bookBarcodeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> titleRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> seriesTitleRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
@@ -805,55 +850,49 @@ namespace NEALibrarySystem.SearchList
             List<ReferenceClass<string, CirculationCopy>> memberBarcodeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> dateRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> dueDateRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
+            List<ReferenceClass<string, CirculationCopy>> circulationTypeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
 
             if (DataLibrary.CirculationCopies.Count > 0)
                 foreach (CirculationCopy copy in DataLibrary.CirculationCopies)
                 {
-                    bookBarcodeRefClassList = DataLibrary.CreateReferenceClass(bookBarcodeRefClassList, copy, copy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
+                    idRefClassList = DataLibrary.CreateReferenceClass(idRefClassList, copy, copy.Id.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out int index);
+                    bookBarcodeRefClassList = DataLibrary.CreateReferenceClass(bookBarcodeRefClassList, copy, copy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     titleRefClassList = DataLibrary.CreateReferenceClass(titleRefClassList, copy, copy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     seriesTitleRefClassList = DataLibrary.CreateReferenceClass(seriesTitleRefClassList, copy, copy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     authorRefClassList = DataLibrary.CreateReferenceClass(authorRefClassList, copy, copy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     memberBarcodeRefClassList = DataLibrary.CreateReferenceClass(memberBarcodeRefClassList, copy, copy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     dateRefClassList = DataLibrary.CreateReferenceClass(dateRefClassList, copy, DataFormatter.GetDateAndTime(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
                     dueDateRefClassList = DataLibrary.CreateReferenceClass(dueDateRefClassList, copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
-
+                    circulationTypeRefClassList = DataLibrary.CreateReferenceClass(circulationTypeRefClassList, copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
                 }
-            bookBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(bookBarcodeRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(titleRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            seriesTitleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(seriesTitleRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            authorRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(authorRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            memberBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(memberBarcodeRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            dateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dateRefClassList, SearchAndSort.TwoRefClassCircCopies);
-            dueDateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dueDateRefClassList, SearchAndSort.TwoRefClassCircCopies);
+            idRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(idRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            bookBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(bookBarcodeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(titleRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            seriesTitleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(seriesTitleRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            authorRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(authorRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            memberBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(memberBarcodeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            dateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            dueDateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dueDateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
+            circulationTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(circulationTypeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
 
-            List<CirculationCopy> ids = new List<CirculationCopy>();
-            if (Int32.TryParse(item, out int itemInt))
-            {
-                ids = ApplyFilter(DataLibrary.CirculationIds, itemInt, SearchAndSort.RefClassAndInteger);
-                ids = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(ids, SearchAndSort.TwoCircCopies);
-            }
-            List<CirculationCopy> bookBarcodes = ApplyFilter(bookBarcodeRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> ids = ApplyFilter(bookBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            ids = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(ids, SearchAndSort.TwoCircCopies);
+            List<CirculationCopy> bookBarcodes = ApplyFilter(bookBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             bookBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(bookBarcodes, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> titles = ApplyFilter(titleRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> titles = ApplyFilter(titleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             titles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(titles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> seriesTitles = ApplyFilter(seriesTitleRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> seriesTitles = ApplyFilter(seriesTitleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             seriesTitles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(seriesTitles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> authors = ApplyFilter(authorRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> authors = ApplyFilter(authorRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             authors = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(authors, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dates = ApplyFilter(dateRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> dates = ApplyFilter(dateRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             dates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dueDates = ApplyFilter(dueDateRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> dueDates = ApplyFilter(dueDateRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             dueDates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dueDates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> memberBarcodes = ApplyFilter(memberBarcodeRefClassList, item, SearchAndSort.RefClassStartsWithString);
+            List<CirculationCopy> memberBarcodes = ApplyFilter(memberBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             memberBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(memberBarcodes, SearchAndSort.TwoCircCopies);
-
-            int enumItem = DataFormatter.StringToEnum<CirculationType>(item);
-            List<CirculationCopy> circulationTypes = new List<CirculationCopy>();
-            if (enumItem != -1)
-            {
-                circulationTypes = ApplyFilter(DataLibrary.CirculationTypes, (CirculationType)enumItem, SearchAndSort.RefClassStartsWithString);
-                circulationTypes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(circulationTypes, SearchAndSort.TwoCircCopies);
-            }
+            List<CirculationCopy> circulationTypes = ApplyFilter(circulationTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            circulationTypes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(circulationTypes, SearchAndSort.TwoCircCopies);
 
             List<List<CirculationCopy>> properties = new List<List<CirculationCopy>>
             {
@@ -908,7 +947,12 @@ namespace NEALibrarySystem.SearchList
                     if (smallestIndex != -1)
                     {
                         // check if item has already been added
-                        if (smallestItems[smallestIndex].Item != results[results.Count - 1])
+                        if (results.Count > 0)
+                        {
+                            if (smallestItems[smallestIndex].Item != results[results.Count - 1])
+                                results.Add(smallestItems[smallestIndex].Item);
+                        }
+                        else
                             results.Add(smallestItems[smallestIndex].Item);
                         // remove added item from its previous list
                         list[smallestItems[smallestIndex].Index].RemoveAt(0);
@@ -918,6 +962,19 @@ namespace NEALibrarySystem.SearchList
                     finished = true;
             } while (!finished);
             return results;
+        }
+        #endregion
+        #region sorting
+        public void SortListView(int column)
+        {
+            if (_currentColumn == column)
+                _invertedSort = _invertedSort ? false : true; // inverts the boolean variable
+            else
+            {
+                _currentColumn = column;
+                _invertedSort = false;
+            }
+            ListViewHandler.SortListViewItems(ref _objects.ItemViewer, column, _invertedSort);
         }
         #endregion
     }

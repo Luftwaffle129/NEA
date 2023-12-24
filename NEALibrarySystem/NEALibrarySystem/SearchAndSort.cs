@@ -31,7 +31,7 @@ namespace NEALibrarySystem
                 while (left <= right)
                 {
                     int middle = (left + right) / 2;
-                    if (compare(itemList[middle], item) == Greatest.equal)
+                    if (compare(itemList[middle], item) == Greatest.Equal)
                         return middle;
                     else if (compare(itemList[middle], item) == Greatest.Right)
                         left = middle + 1;
@@ -71,7 +71,7 @@ namespace NEALibrarySystem
                 while (left <= right)
                 {
                     int middle = (left + right) / 2;
-                    if (compare(itemList[middle], item) == Greatest.equal)
+                    if (compare(itemList[middle], item) == Greatest.Equal)
                         return middle;
                     else if (compare(itemList[middle], item) == Greatest.Right)
                         left = middle + 1;
@@ -118,7 +118,7 @@ namespace NEALibrarySystem
                     while (left <= right && !middleFound)
                     {
                         middle = (left + right) / 2;
-                        if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle - 1], item) == Greatest.Right)
+                        if ((compare(itemList[middle], item) == Greatest.Equal && middle == 0) || (compare(itemList[middle], item) == Greatest.Equal && compare(itemList[middle - 1], item) == Greatest.Right))
                             middleFound = true;
                         else if (compare(itemList[middle], item) == Greatest.Right)
                             left = middle + 1;
@@ -136,18 +136,20 @@ namespace NEALibrarySystem
                     int right = rightBoundary;
                     int middle = -1;
                     bool middleFound = false;
-                    while (left < right && !middleFound)
+                    while (left <= right && !middleFound)
                     {
                         middle = (left + right) / 2;
-                        if (compare(itemList[middle], item) == Greatest.equal && compare(itemList[middle + 1], item) == Greatest.Right)
+                        if ((compare(itemList[middle], item) == Greatest.Equal && middle == itemList.Count - 1) || (compare(itemList[middle], item) == Greatest.Equal && compare(itemList[middle + 1], item) == Greatest.Left))
                             middleFound = true;
-                        else if (compare(itemList[middle], item) == Greatest.Right)
+                        else if (compare(itemList[middle], item) != Greatest.Left)
                             left = middle + 1;
                         else
                             right = middle - 1;
                     }
                     rightIndex = middle;
+                    
                 }
+                return new int[] { leftIndex, rightIndex };
             }
             return new int[] { -1, -1 };
         }
@@ -320,7 +322,27 @@ namespace NEALibrarySystem
         public static Greatest TwoStrings(string text1, string text2)
         {
             if (text1 == text2)
-                return Greatest.equal;
+                return Greatest.Equal;
+            int minimumLength = text1.Length < text2.Length ? text1.Length : text2.Length;
+            for (int i = 0; i < minimumLength; i++)
+            {
+                if (Convert.ToInt32(text1[i]) > Convert.ToInt32(text2[i]))
+                {
+                    return Greatest.Left;
+                }
+                else if (Convert.ToInt32(text1[i]) < Convert.ToInt32(text2[i]))
+                {
+                    return Greatest.Right;
+                }
+            }
+            return (text2.Length > text1.Length) ? Greatest.Right : Greatest.Left; // returns the longest item as the largest
+        }
+        public static Greatest TwoUpperStrings(string text1, string text2)
+        {
+            text1 = text1.ToUpper();
+            text2 = text2.ToUpper();
+            if (text1 == text2)
+                return Greatest.Equal;
             int minimumLength = text1.Length < text2.Length ? text1.Length : text2.Length;
             for (int i = 0; i < minimumLength; i++)
             {
@@ -338,7 +360,7 @@ namespace NEALibrarySystem
         public static Greatest TwoIntegers(int num1, int num2)
         {
             if (num1 == num2)
-                return Greatest.equal;
+                return Greatest.Equal;
             else if (num1 > num2)
                 return Greatest.Left;
             else
@@ -347,7 +369,7 @@ namespace NEALibrarySystem
         public static Greatest TwoDoubles(double num1, double num2)
         {
             if (num1 == num2)
-                return Greatest.equal;
+                return Greatest.Equal;
             else if (num1 > num2)
                 return Greatest.Left;
             else
@@ -356,7 +378,7 @@ namespace NEALibrarySystem
         public static Greatest TwoDates(DateTime date1, DateTime date2)
         {
             if (date1.Date == date2.Date)
-                return Greatest.equal;
+                return Greatest.Equal;
             else if (date1 > date2)
                 return Greatest.Left;
             else
@@ -365,7 +387,7 @@ namespace NEALibrarySystem
         public static Greatest TwoEnums(MemberType member1, MemberType member2)
         {
             if (member1 == member2)
-                return Greatest.equal;
+                return Greatest.Equal;
             else if (member1 > member2)
                 return Greatest.Left;
             else
@@ -374,13 +396,17 @@ namespace NEALibrarySystem
         public static Greatest TwoEnums(CirculationType copy1, CirculationType copy2)
         {
             if (copy1 == copy2)
-                return Greatest.equal;
+                return Greatest.Equal;
             else if (copy1 > copy2)
                 return Greatest.Left;
             else
                 return Greatest.Right;
         }
         // class comparisons
+        public static Greatest RefClassAndStringUpper<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
+        {
+            return TwoUpperStrings(referenceClass.Value, str);
+        }
         public static Greatest RefClassAndString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
         {
             return TwoStrings(referenceClass.Value, str);
@@ -408,14 +434,21 @@ namespace NEALibrarySystem
         public static Greatest TwoRefClassBooks(ReferenceClass<string, Book> book1, ReferenceClass<string, Book> book2)
         {
             Greatest value = TwoStrings(book1.Value, book2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
+                return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
+            return value;
+        }
+        public static Greatest TwoUpperRefClassBooks(ReferenceClass<string, Book> book1, ReferenceClass<string, Book> book2)
+        {
+            Greatest value = TwoStrings(book1.Value.ToUpper(), book2.Value.ToUpper());
+            if (value == Greatest.Equal)
                 return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
             return value;
         }
         public static Greatest TwoRefClassBooks(ReferenceClass<double, Book> book1, ReferenceClass<double, Book> book2)
         {
             Greatest value = TwoDoubles(book1.Value, book2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
                 return TwoStrings(book1.Reference.Isbn.Value, book2.Reference.Isbn.Value);
             return value;
         }
@@ -434,42 +467,56 @@ namespace NEALibrarySystem
         public static Greatest TwoRefClassCircCopies(ReferenceClass<DateTime, CirculationCopy> copy1, ReferenceClass<DateTime, CirculationCopy> copy2)
         {
             Greatest value = TwoDates(copy1.Value, copy2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
                 return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<int, CirculationCopy> copy1, ReferenceClass<int, CirculationCopy> copy2)
         {
             Greatest value = TwoIntegers(copy1.Value, copy2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
                 return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<string, CirculationCopy> copy1, ReferenceClass<string, CirculationCopy> copy2)
         {
             Greatest value = TwoStrings(copy1.Value, copy2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
+                return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
+            return value;
+        }
+        public static Greatest TwoUpperRefClassCircCopies(ReferenceClass<string, CirculationCopy> copy1, ReferenceClass<string, CirculationCopy> copy2)
+        {
+            Greatest value = TwoStrings(copy1.Value.ToUpper(), copy2.Value.ToUpper());
+            if (value == Greatest.Equal)
                 return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassCircCopies(ReferenceClass<CirculationType, CirculationCopy> copy1, ReferenceClass<CirculationType, CirculationCopy> copy2)
         {
             Greatest value = TwoEnums(copy1.Value, copy2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
                 return TwoIntegers(copy1.Reference.Id.Value, copy2.Reference.Id.Value);
             return value;
         }
         public static Greatest TwoRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
         {
             Greatest value = TwoStrings(member1.Value, member2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
+                return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
+            return value;
+        }
+        public static Greatest TwoUpperRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
+        {
+            Greatest value = TwoStrings(member1.Value.ToUpper(), member2.Value.ToUpper());
+            if (value == Greatest.Equal)
                 return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
             return value;
         }
         public static Greatest TwoRefClassMembers(ReferenceClass<MemberType, Member> member1, ReferenceClass<MemberType, Member> member2)
         {
             Greatest value = TwoEnums(member1.Value, member2.Value);
-            if (value == Greatest.equal)
+            if (value == Greatest.Equal)
                 return TwoStrings(member1.Reference.Barcode.Value, member2.Reference.Barcode.Value);
             return value;
         }
@@ -518,35 +565,20 @@ namespace NEALibrarySystem
         {
             return TwoIntegers(item1.Item.Id.Value, item2.Item.Id.Value);
         }
-        #region Starts With
         // returns equal if the reference class value is equal to or starts with the search term at the start, else returns if it is greater or less than the search term
-        public static Greatest RefClassStartsWithString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
+        public static Greatest UpperRefClassStartsWithString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
         {
-            return TwoStrings(referenceClass.Value, str);
+            if (referenceClass.Value.Length >= str.Length)
+                if (referenceClass.Value.Substring(0, str.Length).ToUpper() == str.ToUpper())
+                    return Greatest.Equal;
+            return TwoStrings(referenceClass.Value.ToUpper(), str.ToUpper());
         }
-        public static Greatest RefClassStartsWithInteger<F>(ReferenceClass<int, F> referenceClass, int integer) where F : class
-        {
-            return TwoIntegers(referenceClass.Value, integer);
-        }
-        public static Greatest RefClassStartsWithEnum(ReferenceClass<CirculationType, CirculationCopy> referenceClass, CirculationType circulationType)
-        {
-            return TwoEnums(referenceClass.Value, circulationType);
-        }
-        public static Greatest RefClassStartsWithEnum(ReferenceClass<MemberType, Member> referenceClass, MemberType memberType)
-        {
-            return TwoEnums(referenceClass.Value, memberType);
-        }
-        public static Greatest RefClassStartsWithDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
-        {
-            return TwoDates(reference.Value, date);
-        }
-        #endregion
         #endregion
     }
     public enum Greatest
     {
         Left = 0,
         Right = 1,
-        equal = 2
+        Equal = 2
     }
 }

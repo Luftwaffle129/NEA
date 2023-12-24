@@ -157,6 +157,8 @@ namespace NEALibrarySystem.Data_Structures
                 T temp = list[left];
                 list[left] = list[right];
                 list[right] = temp;
+                left++;
+                right--;
             }
             return list;
         }
@@ -169,6 +171,13 @@ namespace NEALibrarySystem.Data_Structures
         public static bool Contains(string text, string subtext)
         {
             return text.ToUpper().Contains(subtext.ToUpper());
+        }
+        public static string IntToString(int num, int length)
+        {
+            string text = num.ToString();
+            while (text.Length < length)
+                text = "0" + text;
+            return text;
         }
     }
 }

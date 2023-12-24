@@ -12,6 +12,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class CirculationCopy
     {
+        public static int IdMaxValue = 999999999;
         public ReferenceClass<int, CirculationCopy> Id { get; set; }
         public ReferenceClass<DateTime, CirculationCopy> Date { get; set; }
         public ReferenceClass<CirculationType, CirculationCopy> Type { get; set; }
@@ -30,7 +31,7 @@ namespace NEALibrarySystem.Data_Structures
                 Random random = new Random();
                 do
                 {
-                    id = random.Next(0, 999999999);
+                    id = random.Next(0, IdMaxValue);
                     if (SearchAndSort.Binary(DataLibrary.CirculationIds, id, SearchAndSort.RefClassAndInteger) == -1)
                         uniqueID = true;
                 } while (!uniqueID);

@@ -750,7 +750,7 @@ namespace NEALibrarySystem
         }
         private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-
+            _searchHandler.SortListView(e.Column);
         }
         private void btnSearchSearch_Click(object sender, EventArgs e)
         {
