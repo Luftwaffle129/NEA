@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -568,6 +568,9 @@
             // 
             // pnlMemberDetails
             // 
+            this.pnlMemberDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMemberDetails.Controls.Add(this.txtMemberLateFees);
             this.pnlMemberDetails.Controls.Add(this.lblMemberDetailsLateFees);
             this.pnlMemberDetails.Controls.Add(this.cmbMemberType);
@@ -610,6 +613,7 @@
             // 
             // txtMemberLateFees
             // 
+            this.txtMemberLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberLateFees.Location = new System.Drawing.Point(1608, 827);
             this.txtMemberLateFees.Name = "txtMemberLateFees";
@@ -619,6 +623,7 @@
             // 
             // lblMemberDetailsLateFees
             // 
+            this.lblMemberDetailsLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMemberDetailsLateFees.AutoSize = true;
             this.lblMemberDetailsLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMemberDetailsLateFees.Location = new System.Drawing.Point(1456, 830);
@@ -629,6 +634,8 @@
             // 
             // cmbMemberType
             // 
+            this.cmbMemberType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.cmbMemberType.FormattingEnabled = true;
             this.cmbMemberType.Location = new System.Drawing.Point(255, 287);
@@ -660,7 +667,6 @@
             // 
             // dtpMemberDateOfBirth
             // 
-            this.dtpMemberDateOfBirth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpMemberDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpMemberDateOfBirth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpMemberDateOfBirth.Location = new System.Drawing.Point(255, 227);
@@ -673,6 +679,8 @@
             // 
             // txtMemberJoinDate
             // 
+            this.txtMemberJoinDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberJoinDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberJoinDate.Location = new System.Drawing.Point(255, 827);
             this.txtMemberJoinDate.Name = "txtMemberJoinDate";
@@ -692,6 +700,8 @@
             // 
             // txtMemberPostcode
             // 
+            this.txtMemberPostcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberPostcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberPostcode.Location = new System.Drawing.Point(255, 767);
             this.txtMemberPostcode.Name = "txtMemberPostcode";
@@ -700,6 +710,8 @@
             // 
             // txtMemberCounty
             // 
+            this.txtMemberCounty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberCounty.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberCounty.Location = new System.Drawing.Point(255, 707);
             this.txtMemberCounty.Name = "txtMemberCounty";
@@ -728,6 +740,8 @@
             // 
             // txtMemberAddress1
             // 
+            this.txtMemberAddress1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberAddress1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberAddress1.Location = new System.Drawing.Point(255, 527);
             this.txtMemberAddress1.Name = "txtMemberAddress1";
@@ -746,6 +760,7 @@
             // 
             // btnMemberCancel
             // 
+            this.btnMemberCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMemberCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -759,6 +774,8 @@
             // 
             // txtMemberBarcode
             // 
+            this.txtMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberBarcode.Location = new System.Drawing.Point(255, 47);
             this.txtMemberBarcode.Name = "txtMemberBarcode";
@@ -767,6 +784,7 @@
             // 
             // btnMemberSave
             // 
+            this.btnMemberSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMemberSave.BackColor = System.Drawing.Color.LightGray;
             this.btnMemberSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMemberSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -790,6 +808,8 @@
             // 
             // txtMemberLinkedMembers
             // 
+            this.txtMemberLinkedMembers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberLinkedMembers.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberLinkedMembers.Location = new System.Drawing.Point(255, 347);
             this.txtMemberLinkedMembers.Name = "txtMemberLinkedMembers";
@@ -798,6 +818,8 @@
             // 
             // txtMemberFirstName
             // 
+            this.txtMemberFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberFirstName.Location = new System.Drawing.Point(255, 107);
             this.txtMemberFirstName.Name = "txtMemberFirstName";
@@ -816,6 +838,8 @@
             // 
             // txtMemberTownCity
             // 
+            this.txtMemberTownCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberTownCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberTownCity.Location = new System.Drawing.Point(255, 647);
             this.txtMemberTownCity.Name = "txtMemberTownCity";
@@ -824,6 +848,8 @@
             // 
             // txtMemberAddress2
             // 
+            this.txtMemberAddress2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberAddress2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberAddress2.Location = new System.Drawing.Point(255, 587);
             this.txtMemberAddress2.Name = "txtMemberAddress2";
@@ -862,6 +888,8 @@
             // 
             // txtMemberEmailAddress
             // 
+            this.txtMemberEmailAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberEmailAddress.Location = new System.Drawing.Point(255, 407);
             this.txtMemberEmailAddress.Name = "txtMemberEmailAddress";
@@ -870,6 +898,8 @@
             // 
             // txtMemberPhoneNumber
             // 
+            this.txtMemberPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberPhoneNumber.Location = new System.Drawing.Point(255, 467);
             this.txtMemberPhoneNumber.Name = "txtMemberPhoneNumber";
@@ -918,6 +948,8 @@
             // 
             // txtMemberSurname
             // 
+            this.txtMemberSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMemberSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMemberSurname.Location = new System.Drawing.Point(255, 167);
             this.txtMemberSurname.Name = "txtMemberSurname";
@@ -1891,6 +1923,9 @@
             // 
             // pnlBookDetails
             // 
+            this.pnlBookDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBookDetails.Controls.Add(this.btnBookSave);
             this.pnlBookDetails.Controls.Add(this.btnBookCancel);
             this.pnlBookDetails.Controls.Add(this.grpBooksBookStatus);
@@ -1904,6 +1939,7 @@
             // 
             // btnBookSave
             // 
+            this.btnBookSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBookSave.BackColor = System.Drawing.Color.LightGray;
             this.btnBookSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1917,6 +1953,7 @@
             // 
             // btnBookCancel
             // 
+            this.btnBookCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBookCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnBookCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1930,6 +1967,7 @@
             // 
             // grpBooksBookStatus
             // 
+            this.grpBooksBookStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBooksBookStatus.Controls.Add(this.txtBookLoaned);
             this.grpBooksBookStatus.Controls.Add(this.lblBooksInStock);
             this.grpBooksBookStatus.Controls.Add(this.txtBooksReserved);
@@ -2003,6 +2041,9 @@
             // 
             // grpBookDetails
             // 
+            this.grpBookDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBookDetails.Controls.Add(this.txtBookPrice);
             this.grpBookDetails.Controls.Add(this.txtBookDescription);
             this.grpBookDetails.Controls.Add(this.txtBookThemes);
@@ -2035,6 +2076,8 @@
             // 
             // txtBookPrice
             // 
+            this.txtBookPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookPrice.Location = new System.Drawing.Point(211, 876);
             this.txtBookPrice.Name = "txtBookPrice";
@@ -2043,6 +2086,9 @@
             // 
             // txtBookDescription
             // 
+            this.txtBookDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookDescription.Location = new System.Drawing.Point(211, 577);
             this.txtBookDescription.Multiline = true;
@@ -2052,6 +2098,8 @@
             // 
             // txtBookThemes
             // 
+            this.txtBookThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookThemes.Location = new System.Drawing.Point(211, 517);
             this.txtBookThemes.Name = "txtBookThemes";
@@ -2060,6 +2108,8 @@
             // 
             // txtBookGenres
             // 
+            this.txtBookGenres.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookGenres.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookGenres.Location = new System.Drawing.Point(211, 457);
             this.txtBookGenres.Name = "txtBookGenres";
@@ -2068,6 +2118,8 @@
             // 
             // txtBookPublisher
             // 
+            this.txtBookPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookPublisher.Location = new System.Drawing.Point(211, 397);
             this.txtBookPublisher.Name = "txtBookPublisher";
@@ -2076,6 +2128,8 @@
             // 
             // txtBookAuthor
             // 
+            this.txtBookAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookAuthor.Location = new System.Drawing.Point(211, 337);
             this.txtBookAuthor.Name = "txtBookAuthor";
@@ -2084,6 +2138,8 @@
             // 
             // txtBookMediaType
             // 
+            this.txtBookMediaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookMediaType.Location = new System.Drawing.Point(211, 277);
             this.txtBookMediaType.Name = "txtBookMediaType";
@@ -2092,6 +2148,8 @@
             // 
             // txtBookISBN
             // 
+            this.txtBookISBN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookISBN.Location = new System.Drawing.Point(211, 217);
             this.txtBookISBN.Name = "txtBookISBN";
@@ -2100,6 +2158,8 @@
             // 
             // txtBookSeriesNumber
             // 
+            this.txtBookSeriesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookSeriesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookSeriesNumber.Location = new System.Drawing.Point(211, 157);
             this.txtBookSeriesNumber.Name = "txtBookSeriesNumber";
@@ -2108,6 +2168,8 @@
             // 
             // txtBookSeriesTitle
             // 
+            this.txtBookSeriesTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookSeriesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookSeriesTitle.Location = new System.Drawing.Point(211, 97);
             this.txtBookSeriesTitle.Name = "txtBookSeriesTitle";
@@ -2116,6 +2178,7 @@
             // 
             // lblBookPrice
             // 
+            this.lblBookPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblBookPrice.AutoSize = true;
             this.lblBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBookPrice.Location = new System.Drawing.Point(10, 879);
@@ -2226,6 +2289,8 @@
             // 
             // txtBookTitle
             // 
+            this.txtBookTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookTitle.Location = new System.Drawing.Point(211, 37);
             this.txtBookTitle.Name = "txtBookTitle";
@@ -2234,6 +2299,8 @@
             // 
             // grpBookCopyDetails
             // 
+            this.grpBookCopyDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBookCopyDetails.Controls.Add(this.btnBookDeleteCopies);
             this.grpBookCopyDetails.Controls.Add(this.btnBookAddCopies);
             this.grpBookCopyDetails.Controls.Add(this.lsvBookCopyDetails);
@@ -2247,6 +2314,8 @@
             // 
             // btnBookDeleteCopies
             // 
+            this.btnBookDeleteCopies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBookDeleteCopies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnBookDeleteCopies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookDeleteCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2260,6 +2329,8 @@
             // 
             // btnBookAddCopies
             // 
+            this.btnBookAddCopies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBookAddCopies.BackColor = System.Drawing.Color.LightGray;
             this.btnBookAddCopies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookAddCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2273,6 +2344,9 @@
             // 
             // lsvBookCopyDetails
             // 
+            this.lsvBookCopyDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvBookCopyDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvBookCopyDetails.HideSelection = false;
             this.lsvBookCopyDetails.Location = new System.Drawing.Point(6, 37);
@@ -2294,16 +2368,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea6.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend6);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series6);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2972,6 +3046,9 @@
             // 
             // pnlCirculationDetails
             // 
+            this.pnlCirculationDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsId);
             this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsId);
             this.pnlCirculationDetails.Controls.Add(this.dtpCircDetailsDueDate);
@@ -3188,10 +3265,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlBookDetails);
+            this.Controls.Add(this.pnlCirculationDetails);
+            this.Controls.Add(this.pnlMemberDetails);
+            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
