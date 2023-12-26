@@ -100,7 +100,7 @@ namespace NEALibrarySystem.Data_Structures
             Settings.MemberBarcodeLength = 3;
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
             Settings.ReserveDurations = new int[3] { 7, 6, 5 };
-            Settings.BookCopyBarcodeLength = 3;
+            Settings.BookCopyBarcodeLength = 2;
         }
         /// <summary>
         /// create 10 random book records with no copies attached to them
@@ -112,11 +112,18 @@ namespace NEALibrarySystem.Data_Structures
                 BookCreator bookCreator = new BookCreator();
                 bookCreator.Title = titles[rand.Next(0, titles.Length)];
                 bookCreator.SeriesTitle = titles[rand.Next(0, titles.Length)];
-                string isbn = "";
-                for (int j = 0; j < 3; j++)
+                bool unique = false;
+                string isbn;
+                do
                 {
-                    isbn += GenerateRandomDigit().ToString();
-                }
+                    isbn = "";
+                    for (int j = 0; j < 3; j++)
+                    {
+                        isbn += GenerateRandomDigit().ToString();
+                    }
+                    if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, isbn, SearchAndSort.RefClassAndString) == -1)
+                        unique = true;
+                } while (!unique) ;
                 bookCreator.Isbn = isbn;
                 bookCreator.MediaType = GenerateRandomString(10);
                 bookCreator.Author = GenerateRandomString(10);
@@ -137,9 +144,16 @@ namespace NEALibrarySystem.Data_Structures
                 {
                     for (int j = 0; j < copyCount; j++)
                     {
-                        string barcode = "";
-                        for (int k = 0; k < Settings.BookCopyBarcodeLength; k++)
-                            barcode += GenerateRandomDigit();
+                        unique = false;
+                        string barcode;
+                        do
+                        {
+                            barcode = "";
+                            for (int k = 0; k < Settings.BookCopyBarcodeLength; k++)
+                                barcode += GenerateRandomDigit();
+                            if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString) == -1)
+                                unique = true;
+                        } while (!unique);
                         DataLibrary.BookCopies.Add(new BookCopy(barcode, book));
                     }
                 }

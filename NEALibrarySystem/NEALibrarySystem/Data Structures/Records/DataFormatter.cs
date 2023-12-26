@@ -110,23 +110,31 @@ namespace NEALibrarySystem.Data_Structures
             int startIndex = 0;
             int pointer = 0;
             int length = 0;
-            do
+            if (text.Length > 0)
             {
-                if (text.Substring(pointer, separator.Length) != separator)
+                if (text.Length >= separator.Length)
                 {
-                    length++;
+                    do
+                    {
+                        if (text.Substring(pointer, separator.Length) != separator)
+                        {
+                            length++;
+                        }
+                        else
+                        {
+                            if (length > 0)
+                                stringArr.Add(text.Substring(startIndex, length));
+                            pointer += separator.Length - 1;
+                            startIndex = pointer + 1;
+                            length = 0;
+                        }
+                    } while (++pointer < text.Length - (separator.Length - 1));
+                    if (text.Length > startIndex)
+                        stringArr.Add(text.Substring(startIndex));
                 }
                 else
-                {
-                    if (length > 0)
-                        stringArr.Add(text.Substring(startIndex, length));
-                    pointer += separator.Length;
-                    startIndex = pointer;
-                    length = 0;
-                }
-            } while (++pointer < text.Length - (separator.Length - 1));
-            if (length > 0)
-                stringArr.Add(text.Substring(startIndex, length + separator.Length));
+                    stringArr.Add(text);
+            }
             return stringArr;
         }
         public static int StringToEnum<T>(string value) where T : Enum
