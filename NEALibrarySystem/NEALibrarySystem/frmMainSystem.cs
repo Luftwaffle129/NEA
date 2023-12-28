@@ -309,6 +309,21 @@ namespace NEALibrarySystem
             NavigatorCloseAllPanels();
             NavigatorOpenSearchViewTab();
         }
+        private void NavigatorOpenStaffTab()
+        {
+            CurrentFeature = DataLibrary.Feature.Staff;
+            SearchFeature = DataLibrary.SearchFeature.Staff;
+            string[] tabs =
+            {
+                "View Staff",
+                "Add Staff",
+                "Delete Staff"
+            };
+            NavigatorSetSubTabNames(tabs);
+
+            NavigatorCloseAllPanels();
+            pnlStaff.Visible = true;
+        }
         private void NavigatorOpenDetails(ListViewItem item)
         {
             switch (SearchFeature)
@@ -447,6 +462,10 @@ namespace NEALibrarySystem
         {
             //DataLibrary.LoadTestData1();
             NavigatorOpenMemberTab();
+        }
+        private void btnStaff_Click(object sender, EventArgs e)
+        {
+            NavigatorOpenStaffTab();
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
