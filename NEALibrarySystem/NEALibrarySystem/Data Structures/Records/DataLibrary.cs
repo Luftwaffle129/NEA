@@ -625,9 +625,10 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteMember(Member member)
         {
             // delete circulation references
-            if (member.CircMemberRelations.Count > 0)
-                foreach (CircMemberRelation circMemberRelation in member.CircMemberRelations)
-                    DeleteCirculationCopy(circMemberRelation.CirculationCopy);
+            while (member.CircMemberRelations.Count > 0)
+            {
+                DeleteCirculationCopy(CircMemberRelations[0].CirculationCopy);
+            }
             // delete reference classes
             MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
             FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoRefClassMembers);

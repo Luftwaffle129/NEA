@@ -121,7 +121,7 @@ namespace NEALibrarySystem.Data_Structures
                     {
                         isbn += GenerateRandomDigit().ToString();
                     }
-                    if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, isbn, SearchAndSort.RefClassAndString) == -1)
+                    if (SearchAndSort.Binary(DataLibrary.Isbns, isbn, SearchAndSort.RefClassAndString) == -1)
                         unique = true;
                 } while (!unique) ;
                 bookCreator.Isbn = isbn;
