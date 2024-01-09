@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -23,7 +14,9 @@ namespace NEALibrarySystem
             Main = this;
             LimitPrototypeFeatures();
         }
-
+        /// <summary>
+        /// Used to hide objects not included in the prototype on the interface from the user
+        /// </summary>
         private void LimitPrototypeFeatures()
         {
             txtPassword.ReadOnly = true;
@@ -32,15 +25,17 @@ namespace NEALibrarySystem
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            // opens the mains system, hides the log in form
             frmMainSystem = new FrmMainSystem();
             frmMainSystem.Show();
             this.Hide();
         }
-
         private void btnForgotPassword_Click(object sender, EventArgs e)
         {
+            // opens the forgotten password formb hides the log in form
             frmForgottenPassword = new frmForgottenPassword();
             frmForgottenPassword.Show();
+            this.Hide();
         }
     }
 }

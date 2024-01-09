@@ -1015,6 +1015,10 @@ namespace NEALibrarySystem.SearchList
         }
         #endregion
         #region sorting
+        /// <summary>
+        /// Used to sort the list view by the inputed column. Inverts the sort if 
+        /// </summary>
+        /// <param name="column"></param>
         public void SortListView(int column)
         {
             if (_currentColumn == column)

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
@@ -19,20 +20,20 @@ namespace NEALibrarySystem.Data_Structures
     {
         private Random rand = new Random();
 
-        private string[] firstNames =
+        private string[] _firstNames =
         {
-            "eve",
-            "adam",
-            "james",
-            "jacob",
-            "sam",
-            "andrew",
-            "finn",
-            "joe",
-            "ben",
-            "sakchyam"
+            "Eve",
+            "Adam",
+            "James",
+            "Jacob",
+            "Sam",
+            "Andrew",
+            "Finn",
+            "Joe",
+            "Ben",
+            "Sakchyam"
         };
-        private string[] lastNames =
+        private string[] _lastNames =
         {
             "Smith",
             "Johnson",
@@ -54,7 +55,7 @@ namespace NEALibrarySystem.Data_Structures
             "Martinez",
             "Robinson"
         };
-        private string[] titles =
+        private string[] _titles =
         {
             "The Great Gatsby",
             "To Kill a Mockingbird",
@@ -64,7 +65,7 @@ namespace NEALibrarySystem.Data_Structures
             "The Hobbit",
             "Brave New World",
             "The Lord of the Rings",
-            "Harry Potter and the Sorcerer's Stone",
+            "Harry Potter",
             "The Da Vinci Code",
             "The Hunger Games",
             "Fahrenheit 451",
@@ -77,6 +78,78 @@ namespace NEALibrarySystem.Data_Structures
             "Gone with the Wind",
             "A Tale of Two Cities"
         };
+        private string[] _seriesTitles =
+        {
+            "Forgotten Shadow",
+            "Part Two",
+            "Rush",
+            "Gosling",
+            "",
+            ""
+        };
+        private string[] _mediaTypes =
+        {
+            "Hard Cover",
+            "Hard Cover",
+            "Hard Cover",
+            "Paperback",
+            "Paperback",
+            "Paperback",
+            "CD"
+        };
+        private string[] _authors = 
+        {
+            "F. Scott Fitzgerald",
+            "Harper Lee",
+            "George Orwell",
+            "Jane Austen",
+            "J.D. Salinger",
+            "J.R.R. Tolkien",
+            "Aldous Huxley",
+            "J.K. Rowling",
+            "Dan Brown",
+            "Suzanne Collins"
+        };
+        private string[] _publishers = 
+        {
+            "Penguin Random House",
+            "HarperCollins",
+            "Simon & Schuster",
+            "Macmillan Publishers",
+            "Hachette Book Group",
+            "Scholastic Corporation",
+            "Pearson PLC",
+            "Wiley",
+            "Oxford University Press",
+            "Bloomsbury Publishing"
+        };
+        private string[] _genres = 
+        {
+            "Mystery",
+            "Science Fiction",
+            "Fantasy",
+            "Romance",
+            "Thriller",
+            "Historical Fiction",
+            "Biography",
+            "Horror",
+            "Non-Fiction",
+            "Adventure"
+        };
+        private string[] _themes = 
+        {
+            "Medieval",
+            "Identity",
+            "Conflict",
+            "Survival",
+            "Discovery",
+            "Justice",
+            "Technology",
+            "Nature",
+            "Injustice",
+            "Family"
+        };
+
         /// <summary>
         /// Clears data structures and inserts test data
         /// </summary>
@@ -97,10 +170,10 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.CurrentUser.IsAdministrator = true;
 
             // set up settings details
-            Settings.MemberBarcodeLength = 3;
+            Settings.MemberBarcodeLength = 10;
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
             Settings.ReserveDurations = new int[3] { 7, 6, 5 };
-            Settings.BookCopyBarcodeLength = 2;
+            Settings.BookCopyBarcodeLength = 6;
             Settings.LateFeePerDay = 0.05;
         }
         /// <summary>
@@ -111,14 +184,15 @@ namespace NEALibrarySystem.Data_Structures
             for (int i = 0; i < 10; i++)
             {
                 BookCreator bookCreator = new BookCreator();
-                bookCreator.Title = titles[rand.Next(0, titles.Length)];
-                bookCreator.SeriesTitle = titles[rand.Next(0, titles.Length)];
-                bool unique = false;
+                bookCreator.Title = _titles[rand.Next(0, _titles.Length)];
+                bookCreator.SeriesTitle = _seriesTitles[rand.Next(0, _seriesTitles.Length)];
+                bool unique = false; // used to identify if an item is not already contained within a list
+                int counter; // used for adding random number of items to a list
                 string isbn;
                 do
                 {
                     isbn = "";
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < Settings.ISBNLENGTH; j++)
                     {
                         isbn += GenerateRandomDigit().ToString();
                     }
@@ -126,19 +200,43 @@ namespace NEALibrarySystem.Data_Structures
                         unique = true;
                 } while (!unique) ;
                 bookCreator.Isbn = isbn;
-                bookCreator.MediaType = GenerateRandomString(10);
-                bookCreator.Author = GenerateRandomString(10);
-                bookCreator.Publisher = GenerateRandomString(10);
+                bookCreator.MediaType = _mediaTypes[rand.Next(0, _mediaTypes.Length)];
+                bookCreator.Author = _authors[rand.Next(0, _authors.Length)];
+                bookCreator.Publisher = _publishers[rand.Next(0, _publishers.Length)];
                 List<string> genres = new List<string>();
-                for (int j = 0; j < 2; j++)
-                    genres.Add(GenerateRandomString(10));
+                counter = rand.Next(0, 3);
+                if (counter > 0)
+                    for (int j = 0; j < counter; j++)
+                    {
+                        string genreToAdd;
+                        unique = false;
+                        do
+                        {
+                            genreToAdd = _genres[rand.Next(0, _genres.Length)];
+                            if (!genres.Contains(genreToAdd))
+                                unique = true;
+                        } while (!unique);
+                        genres.Add(genreToAdd);
+                    }
                 bookCreator.Genres = genres;
                 List<string> themes = new List<string>();
-                for (int j = 0; j < 2; j++)
-                    themes.Add(GenerateRandomString(10));
+                counter = rand.Next(0, 3);
+                if (counter > 0)
+                    for (int j = 0; j < 2; j++)
+                    {
+                        string themeToAdd;
+                        unique = false;
+                        do
+                        {
+                            themeToAdd = _themes[rand.Next(0, _themes.Length)];
+                            if (!genres.Contains(themeToAdd))
+                                unique = true;
+                        } while (!unique);
+                        themes.Add(themeToAdd);
+                    }
                 bookCreator.Themes = themes;
-                bookCreator.Description = GenerateRandomString(10);
-                bookCreator.Price = "9.99";
+                bookCreator.Description = rand.Next(0,2) == 0 ? "" : "This is a book";
+                bookCreator.Price = (Convert.ToDouble(rand.Next(100, 2000)) / 100).ToString();
                 Book book = new Book(bookCreator);
                 int copyCount = rand.Next(0, 10);
                 if (copyCount > 0)
@@ -181,8 +279,8 @@ namespace NEALibrarySystem.Data_Structures
                         uniqueCode = true;
                 } while (!uniqueCode);
                 memberCreator.Barcode = barcode;
-                memberCreator.FirstName = firstNames[rand.Next(0, firstNames.Length)];
-                memberCreator.Surname = lastNames[rand.Next(0, lastNames.Length)];
+                memberCreator.FirstName = _firstNames[rand.Next(0, _firstNames.Length)];
+                memberCreator.Surname = _lastNames[rand.Next(0, _lastNames.Length)];
                 memberCreator.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}";
                 memberCreator.EmailAddress = $"{GenerateRandomString(10)}@gmail.com";
                 string phoneNumber = "";
