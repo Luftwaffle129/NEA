@@ -32,6 +32,7 @@ namespace NEALibrarySystem
             InitializePanels();
             InitializeTabs();
             NavigatorOpenBookTab();
+            LimitPrototypeFeatures();
             FormBorderStyle = FormBorderStyle.Sizable;
         }
 
@@ -39,7 +40,6 @@ namespace NEALibrarySystem
 
         #region Navigator
         private Panel[][] _panels;
-        private Button[] _mainTabs;
         private Button[] _subTabs;
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None;
         public DataLibrary.SearchFeature SearchFeature = DataLibrary.SearchFeature.Book;
@@ -59,6 +59,17 @@ namespace NEALibrarySystem
         private Book _selectedBook; // Used to stored the selected book when opening the book details panel
         private CirculationCopy _selectedCircCopy;
         private Member _selectedMember;
+
+        #region Prototype Restrictions
+        private void LimitPrototypeFeatures()
+        {
+            btnStaff.Visible = false;
+            btnSettings.Visible = false;
+            btnBackups.Visible = false;
+            btnStatistics.Visible = false;
+            btnTransactions.Visible = false;
+        }
+        #endregion
         #region initialisation
         public void InitializePanels()
         {
@@ -86,17 +97,6 @@ namespace NEALibrarySystem
         }
         private void InitializeTabs()
         {
-            _mainTabs = new Button[]
-            {
-                btnBooks,
-                btnMembers,
-                btnTransactions,
-                btnStaff,
-                btnStatistics,
-                btnBackups,
-                btnSettings,
-                btnLogOut
-            };
             _subTabs = new Button[]
             {
                 btnSubTab1,

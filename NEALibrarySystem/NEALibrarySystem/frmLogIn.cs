@@ -21,8 +21,15 @@ namespace NEALibrarySystem
         {
             InitializeComponent();
             Main = this;
+            LimitPrototypeFeatures();
         }
 
+        private void LimitPrototypeFeatures()
+        {
+            txtPassword.ReadOnly = true;
+            txtUsername.ReadOnly = true;
+            btnForgotPassword.Visible = false;
+        }
         private void btnLogin_Click(object sender, EventArgs e)
         {
             frmMainSystem = new FrmMainSystem();

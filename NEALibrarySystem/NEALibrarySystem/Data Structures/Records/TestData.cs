@@ -101,6 +101,7 @@ namespace NEALibrarySystem.Data_Structures
             Settings.LoanDurations = new int[3] { 14, 7, 5 };
             Settings.ReserveDurations = new int[3] { 7, 6, 5 };
             Settings.BookCopyBarcodeLength = 2;
+            Settings.LateFeePerDay = 0.05;
         }
         /// <summary>
         /// create 10 random book records with no copies attached to them
@@ -137,7 +138,7 @@ namespace NEALibrarySystem.Data_Structures
                     themes.Add(GenerateRandomString(10));
                 bookCreator.Themes = themes;
                 bookCreator.Description = GenerateRandomString(10);
-                bookCreator.Price = 9.99;
+                bookCreator.Price = "9.99";
                 Book book = new Book(bookCreator);
                 int copyCount = rand.Next(0, 10);
                 if (copyCount > 0)
@@ -196,7 +197,7 @@ namespace NEALibrarySystem.Data_Structures
                 memberCreator.County = "Devon";
                 memberCreator.DateOfBirth = Convert.ToDateTime("11/07/2006");
                 memberCreator.JoinDate = Convert.ToDateTime("24/12/2020");
-                memberCreator.Type = (MemberType)rand.Next(0, Member.TypeCount);
+                memberCreator.Type = ((MemberType)rand.Next(0, Member.TypeCount)).ToString();
                 DataLibrary.Members.Add(new Member(memberCreator));
             }
         }

@@ -37,7 +37,7 @@ namespace NEALibrarySystem
         public void Load(ListView.CheckedListViewItemCollection selectedItems)
         {
             // loads the correct columns for the selected record type
-            SearchHandler.LoadColumns(ref _listViewSelectedItems, FrmMainSystem.Main.SearchFeature);
+            //SearchHandler.LoadColumns(ref _listViewSelectedItems, FrmMainSystem.Main.SearchFeature);
             if (selectedItems.Count > 0)
             {
                 foreach (ListViewItem item in selectedItems)

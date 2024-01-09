@@ -69,7 +69,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns></returns>
         public static double GetLateFees(DateTime dueDate)
         {
-            if (dueDate.Date <= DateTime.Now.Date) // check if due date has not been passed yet
+            if (dueDate.Date >= DateTime.Now.Date) // check if due date has not been passed yet
                 return 0;
             else
                 return (dueDate - DateTime.Now.Date).TotalDays * Settings.LateFeePerDay;

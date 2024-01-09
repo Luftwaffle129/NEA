@@ -297,14 +297,14 @@ namespace NEALibrarySystem.Data_Structures
                         {
                             Title = titles[saver.Title],
                             SeriesTitle = saver.SeriesTitle,
-                            SeriesNumber = saver.SeriesNumber,
+                            SeriesNumber = saver.SeriesNumber.ToString(),
                             Isbn = saver.Isbn,
                             MediaType = mediaTypes[saver.MediaType],
                             Author = authors[saver.Author],
                             Publisher = publishers[saver.Publisher],
                             Genres = saver.Genres.Length > 0 ? GetValuesFromIndexes(genres, saver.Genres) : new List<string>(),
                             Themes = saver.Themes.Length > 0 ? GetValuesFromIndexes(themes, saver.Themes) : new List<string>(),
-                            Price = prices[saver.Price],
+                            Price = prices[saver.Price].ToString(),
                             Description = saver.Description,
                         };
                         DataLibrary.Books.Add(new Book(creator));
@@ -335,7 +335,7 @@ namespace NEALibrarySystem.Data_Structures
                             County = saver.County,
                             Postcode = saver.Postcode,
                             JoinDate = saver.JoinDate,
-                            Type = (MemberType)saver.Type
+                            Type = ((MemberType)saver.Type).ToString()
                         };
                         DataLibrary.Members.Add(new Member(creator));
                     }

@@ -197,14 +197,14 @@ namespace NEALibrarySystem.PanelHandlers
                 DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, newInfo.Isbn, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, newInfo.Title, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, newInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks);
-                _bookData.SeriesNumber = newInfo.SeriesNumber;
+                _bookData.SeriesNumber = Convert.ToInt32(newInfo.SeriesNumber);
                 DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, newInfo.MediaType, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, newInfo.Author, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, newInfo.Publisher, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, newInfo.Genres, SearchAndSort.TwoRefClassBooks);
                 DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, newInfo.Themes, SearchAndSort.TwoRefClassBooks);
                 _bookData.Description = newInfo.Description;
-                DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, newInfo.Price, SearchAndSort.TwoRefClassBooks);
+                DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(newInfo.Price), SearchAndSort.TwoRefClassBooks);
                 // Delete the removed book copies
                 List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies);
                 if (_bookCopyList.Count > 0)
@@ -255,7 +255,7 @@ namespace NEALibrarySystem.PanelHandlers
             temp.Isbn = _objects.Isbn.Text;
             temp.Title = _objects.Title.Text;
             temp.SeriesTitle = _objects.SeriesTitle.Text;
-            temp.SeriesNumber = Convert.ToInt32(_objects.SeriesNumber.Text);
+            temp.SeriesNumber = _objects.SeriesNumber.Text;
             temp.MediaType = _objects.MediaType.Text;
             temp.Author = _objects.Author.Text;
             temp.Publisher = _objects.Publisher.Text;

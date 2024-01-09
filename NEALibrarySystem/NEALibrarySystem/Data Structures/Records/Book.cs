@@ -33,7 +33,7 @@ namespace NEALibrarySystem.Data_Structures
         public Book(BookCreator bookInfo)
         {
             // set the attributes that are not referenced
-            SeriesNumber = bookInfo.SeriesNumber;
+            SeriesNumber = Convert.ToInt32(bookInfo.SeriesNumber);
             Description = bookInfo.Description;
             // set the referenced attributes
             int index = 0; // index that the reference class is inserted into
@@ -43,7 +43,7 @@ namespace NEALibrarySystem.Data_Structures
             Title = DataLibrary.Titles[index];
             DataLibrary.SeriesTitles = DataLibrary.CreateReferenceClass(DataLibrary.SeriesTitles, this, bookInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks, out index);
             SeriesTitle = DataLibrary.SeriesTitles[index];
-            DataLibrary.Prices = DataLibrary.CreateReferenceClass(DataLibrary.Prices, this, bookInfo.Price, SearchAndSort.TwoRefClassBooks, out index);
+            DataLibrary.Prices = DataLibrary.CreateReferenceClass(DataLibrary.Prices, this, Convert.ToDouble(bookInfo.Price), SearchAndSort.TwoRefClassBooks, out index);
             Price = DataLibrary.Prices[index];
             DataLibrary.MediaTypes = DataLibrary.CreateReferenceClass(DataLibrary.MediaTypes, this, bookInfo.MediaType, SearchAndSort.TwoRefClassBooks, out index);
             MediaType = DataLibrary.MediaTypes[index];

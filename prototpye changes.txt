@@ -1,0 +1,2 @@
+limit input to reduce validation need
+copy subitems within list view?

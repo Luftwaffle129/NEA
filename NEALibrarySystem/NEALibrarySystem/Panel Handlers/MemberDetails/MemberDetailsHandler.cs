@@ -118,7 +118,7 @@ namespace NEALibrarySystem
             memberCreator.Surname = _objects.Surname.Text;
             int eNumIndex = DataFormatter.StringToEnum<MemberType>(_objects.MemberType.Text);
             if (eNumIndex != -1)
-                memberCreator.Type = (MemberType)eNumIndex;
+                memberCreator.Type = ((MemberType)eNumIndex).ToString();
             memberCreator.DateOfBirth = _objects.DateOfBirth.Value;
             memberCreator.LinkedMembers = DataFormatter.SplitString(_objects.LinkedMembers.Text, ", ");
             memberCreator.EmailAddress = _objects.EmailAddress.Text;

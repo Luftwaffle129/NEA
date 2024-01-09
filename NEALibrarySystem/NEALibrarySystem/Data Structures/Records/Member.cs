@@ -62,7 +62,7 @@ namespace NEALibrarySystem.Data_Structures
             FirstName = DataLibrary.FirstNames[index];
             DataLibrary.Surnames = DataLibrary.CreateReferenceClass(DataLibrary.Surnames, this, memberInfo.Surname, SearchAndSort.TwoRefClassMembers, out index);
             Surname = DataLibrary.Surnames[index];
-            DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, memberInfo.Type, SearchAndSort.TwoRefClassMembers, out index);
+            DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, (MemberType)DataFormatter.StringToEnum<MemberType>(memberInfo.Type), SearchAndSort.TwoRefClassMembers, out index);
             Type = DataLibrary.MemberTypes[index];
             if (memberInfo.LinkedMembers.Count > 0)
                 foreach (string memberLink in memberInfo.LinkedMembers)

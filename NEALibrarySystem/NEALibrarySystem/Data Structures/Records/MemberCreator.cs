@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures.Records
@@ -24,6 +25,51 @@ namespace NEALibrarySystem.Data_Structures.Records
         public string Postcode;
         public List<string> LinkedMembers = new List<string>();
         public DateTime JoinDate;
-        public MemberType Type;
+        public string Type;
+
+        public bool Validate(out List<string> invalidList)
+        {
+            invalidList = new List<string>();
+            // barcode - check if it is unique
+            if (!(Barcode.Length == Settings.MemberBarcodeLength && SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) == -1))
+                invalidList.Add("Barcode");
+            // first name - not empty
+            if (FirstName.Length == 0)
+                invalidList.Add("First Name");
+            // surname - not empty
+            if (Surname.Length == 0)
+                invalidList.Add("Surname");
+            // email address - valid email address
+            if (!Regex.IsMatch(EmailAddress, @"^[\w -\.]+@([\w-]+\.)+[\w-]{ 2,4}$"))
+                invalidList.Add("EmailAddress");
+            // phone number - contains the correct characters
+            if (!Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$"))
+                invalidList.Add("Phone Number");
+            // Address 1 - not empty
+            if (FirstName.Length == 0)
+                invalidList.Add("Address 1");
+            // address 2 doesnt have any validation as it may not be required
+            // Town/City - not empty
+            if (TownCity.Length == 0)
+                invalidList.Add("Town/City");
+            // County - not empty
+            if (County.Length == 0)
+                invalidList.Add("County");
+            // Postcode - not empty
+            if (Postcode.Length == 0)
+                invalidList.Add("Postcode");
+            // Postcode - correct format
+            if (!Regex.IsMatch(Postcode, @"^[A-Z]{1,2}[0-9][0-9A-Z]? [0-9]{1}[A-Z]{2}$"))
+                invalidList.Add("Postcode");
+            // linked members - correct length and is an existing member barcode
+            bool invalidMember = false;
+            foreach (string member in LinkedMembers)
+                if (!(Barcode.Length == Settings.MemberBarcodeLength && SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) != -1))
+                    invalidMember = true;
+            if (invalidMember)
+                invalidList.Add("Linked Members");
+
+            return invalidList.Count > 0 ? false : true;
+        }
     }
 }

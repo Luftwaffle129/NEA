@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
@@ -433,9 +434,6 @@ namespace NEALibrarySystem.Data_Structures
                 return CirculationError.NoMember;
         }
         #endregion
-        #region filtering
-
-        #endregion
         #region Adding Records
         /// <summary>
         /// Creates a new reference class and adds it to the specified list
@@ -526,13 +524,13 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>Updated book</returns>
         public static void ModifyBookRecord(Book book, BookCreator newBookInfo)
         {
-            book.SeriesNumber = newBookInfo.SeriesNumber;
+            book.SeriesNumber = Convert.ToInt32(newBookInfo.SeriesNumber);
             book.Description = newBookInfo.Description;
 
             Titles = ModifyReferenceClass(Titles, book, book.Title, out book.Title, newBookInfo.Title, TwoRefClassBooks);
             SeriesTitles = ModifyReferenceClass(SeriesTitles, book, book.SeriesTitle, out book.SeriesTitle, newBookInfo.SeriesTitle, TwoRefClassBooks);
             Isbns = ModifyReferenceClass(Isbns, book, book.Isbn, out book.Isbn, newBookInfo.Isbn, TwoRefClassBooks);
-            Prices = ModifyReferenceClass(Prices, book, book.Price, out book.Price, newBookInfo.Price, TwoRefClassBooks);
+            Prices = ModifyReferenceClass(Prices, book, book.Price, out book.Price, Convert.ToDouble(newBookInfo.Price), TwoRefClassBooks);
             MediaTypes = ModifyReferenceClass(MediaTypes, book, book.MediaType, out book.MediaType, newBookInfo.MediaType, TwoRefClassBooks);
             Authors = ModifyReferenceClass(Authors, book, book.Author, out book.Author, newBookInfo.Author, TwoRefClassBooks);
             Publishers = ModifyReferenceClass(Publishers, book, book.Publisher, out book.Publisher, newBookInfo.Publisher, TwoRefClassBooks);
@@ -552,7 +550,7 @@ namespace NEALibrarySystem.Data_Structures
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
             FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
             Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
-            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, newMemberInfo.Type, TwoRefClassMembers);
+            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;

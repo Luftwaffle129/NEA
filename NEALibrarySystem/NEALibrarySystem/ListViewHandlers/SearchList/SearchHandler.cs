@@ -74,6 +74,9 @@ namespace NEALibrarySystem.SearchList
             };
         }
         #region loading
+        /// <summary>
+        /// This method is used to set up the search tab with the appropiate search feature to display the correct information
+        /// </summary>
         public void SetUpSearchTab()
         {
             _invertedSort = false;
@@ -94,25 +97,39 @@ namespace NEALibrarySystem.SearchList
             }
             UpdateComboBoxes();
         }
+        /// <summary>
+        /// Sets up the search panel for displaying book records
+        /// </summary>
         public void ToBook()
         {
             LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Book);
             _objects.Delete.Visible = true;
             UpdateListView(DataLibrary.Books);
         }
+        /// <summary>
+        /// sets up the search panel for displaying circulation records
+        /// </summary>
         public void ToCirculation()
         {
             LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Circulation);
             _objects.Delete.Visible = true;
             UpdateListView(DataLibrary.CirculationCopies);
         }
+        /// <summary>
+        /// sets up the search panel for displaying member records
+        /// </summary>
         public void ToMember()
         {
             LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Member);
             _objects.Delete.Visible = true;
             UpdateListView(DataLibrary.Members);
         }
-        public static void LoadColumns(ref ListView lsv, DataLibrary.SearchFeature feature)
+        /// <summary>
+        /// Loads the current search features appropiate columns
+        /// </summary>
+        /// <param name="lsv">Listview to add the columns to</param>
+        /// <param name="feature">search Feature to specific which comlumn headers to add</param>
+        private void LoadColumns(ref ListView lsv, DataLibrary.SearchFeature feature)
         {
             lsv.Clear();
 
@@ -132,6 +149,9 @@ namespace NEALibrarySystem.SearchList
             ListViewHandler.SetColumns(columns, ref lsv);
         }
         #endregion
+        /// <summary>
+        /// Finds the checked records in the list view and deletes them along with their dependencies
+        /// </summary>
         public void Delete()
         {
             if (_objects.ItemViewer.CheckedItems.Count > 0)
@@ -166,10 +186,11 @@ namespace NEALibrarySystem.SearchList
                 }
                 // output the confirmation message
                 if (_objects.ItemViewer.CheckedItems.Count == 1)
-                    confirmation = new frmConfirmation($"Do you want do delete 1 {itemType}?");
+                    confirmation = new frmConfirmation($"Do you want do delete 1 {itemType} and its connections?");
                 else
-                    confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType}?");
+                    confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType} and their connections?");
                 confirmation.ShowDialog();
+                // if user confirms deletion of selected records, delete each record that was checked
                 if (confirmation.DialogResult == DialogResult.Yes)
                 {
                     switch (FrmMainSystem.Main.SearchFeature)
@@ -196,37 +217,34 @@ namespace NEALibrarySystem.SearchList
             else
                 MessageBox.Show("No items selected");
         }
-
+        /// <summary>
+        /// Updates the comboboxes to contain the column headers of the current feature. Needed for selecting a search category
+        /// </summary>
         public void UpdateComboBoxes()
         {
+            string[] columns = new string[0];
             switch (FrmMainSystem.Main.SearchFeature)
             {
                 case SearchFeature.Member:
-                    _objects.SearchField.Items.Clear();
-                    _objects.SearchField.Items.AddRange(_memberColumns);
-                    _objects.Filter1Field.Items.Clear();
-                    _objects.Filter1Field.Items.AddRange(_memberColumns);
-                    _objects.Filter2Field.Items.Clear();
-                    _objects.Filter2Field.Items.AddRange(_memberColumns);
+                    columns = _memberColumns;
                     break;
                 case SearchFeature.Book:
-                    _objects.SearchField.Items.Clear();
-                    _objects.SearchField.Items.AddRange(_bookColumns);
-                    _objects.Filter1Field.Items.Clear();
-                    _objects.Filter1Field.Items.AddRange(_bookColumns);
-                    _objects.Filter2Field.Items.Clear();
-                    _objects.Filter2Field.Items.AddRange(_bookColumns);
+                    columns = _bookColumns;
                     break;
                 case SearchFeature.Circulation:
-                    _objects.SearchField.Items.Clear();
-                    _objects.SearchField.Items.AddRange(_circulationCopyColumns);
-                    _objects.Filter1Field.Items.Clear();
-                    _objects.Filter1Field.Items.AddRange(_circulationCopyColumns);
-                    _objects.Filter2Field.Items.Clear();
-                    _objects.Filter2Field.Items.AddRange(_circulationCopyColumns);
+                    columns = _circulationCopyColumns;
                     break;
             }
+            _objects.SearchField.Items.Clear();
+            _objects.SearchField.Items.AddRange(columns);
+            _objects.Filter1Field.Items.Clear();
+            _objects.Filter1Field.Items.AddRange(columns);
+            _objects.Filter2Field.Items.Clear();
+            _objects.Filter2Field.Items.AddRange(columns);
         }
+        /// <summary>
+        /// empties all search input fields
+        /// </summary>
         public void ResetSearchInputs()
         {
             _objects.Search.Text = string.Empty;
@@ -237,6 +255,10 @@ namespace NEALibrarySystem.SearchList
             _objects.Filter2Field.Text = string.Empty;
         }
         #region UpdateListView
+        /// <summary>
+        /// Updates the search panel's list view with the inputted member list
+        /// </summary>
+        /// <param name="memberList">List of members to display in the list view</param>
         public void UpdateListView(List<Member> memberList)
         {
             _objects.ItemViewer.Items.Clear();
@@ -257,6 +279,10 @@ namespace NEALibrarySystem.SearchList
                 _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
         }
+        /// <summary>
+        /// Updates the search panel's list view with the inputted book list
+        /// </summary>
+        /// <param name="bookList">List of books to display in the list view</param>
         public void UpdateListView(List<Book> bookList)
         {
             _objects.ItemViewer.Items.Clear();
@@ -281,6 +307,10 @@ namespace NEALibrarySystem.SearchList
                 _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }            
         }
+        /// <summary>
+        /// Updates the search panel's list view with the inputted ciculation list
+        /// </summary>
+        /// <param name="circulationCopyList">List of circulation records to display in the list</param>
         public void UpdateListView(List<CirculationCopy> circulationCopyList)
         {
             _objects.ItemViewer.Items.Clear();
@@ -591,16 +621,23 @@ namespace NEALibrarySystem.SearchList
                     break;
             }
         }
+        /// <summary>
+        /// Holds the objects used when searching for specific records
+        /// </summary>
         private class SearchInputs
         {
-            public ComboBox Category;
-            public TextBox SearchTerm;
+            public ComboBox Category; // stores the combobox containing the specified category
+            public TextBox SearchTerm; // stores the textbokx containing the searchterm
             public SearchInputs(ComboBox category, TextBox searchTerm)
             {
                 Category = category;
                 SearchTerm = searchTerm;
             }
         }
+        /// <summary>
+        /// Validates search input fields
+        /// </summary>
+        /// <returns>Enum representing any errors regarding the inputs</returns>
         private SearchError ValidateSearchFields()
         {
             // check if filter1 inputs are valid
@@ -704,6 +741,9 @@ namespace NEALibrarySystem.SearchList
                 return SearchError.NoFields;
             return SearchError.None;
         }
+        /// <summary>
+        /// Represents any errors encountered during the validation process
+        /// </summary>
         private enum SearchError
         {
             None,
@@ -837,11 +877,11 @@ namespace NEALibrarySystem.SearchList
         /// Get lists of valid circulation copies for each property
         /// Add all properties lists into a single list without any duplicate records
         /// 
-        /// <param name="item">items to </param>
+        /// <param name="searchItem">items to </param>
         /// <returns>List of circulation copies that match the search term</returns>
-        private List<CirculationCopy> CirculationSearch(string item)
+        private List<CirculationCopy> CirculationSearch(string searchItem)
         {
-            // Get lists of valid circulation copies for each property
+            // create the lists to contain the reference classes for the circulation records
             List<ReferenceClass<string, CirculationCopy>> idRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> bookBarcodeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> titleRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
@@ -852,6 +892,7 @@ namespace NEALibrarySystem.SearchList
             List<ReferenceClass<string, CirculationCopy>> dueDateRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
             List<ReferenceClass<string, CirculationCopy>> circulationTypeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
 
+            // populate the reference class lists with new reference classes for each circulation record
             if (DataLibrary.CirculationCopies.Count > 0)
                 foreach (CirculationCopy copy in DataLibrary.CirculationCopies)
                 {
@@ -865,6 +906,7 @@ namespace NEALibrarySystem.SearchList
                     dueDateRefClassList = DataLibrary.CreateReferenceClass(dueDateRefClassList, copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
                     circulationTypeRefClassList = DataLibrary.CreateReferenceClass(circulationTypeRefClassList, copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
                 }
+            // sort the reference classes ready for a binary sort 
             idRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(idRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
             bookBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(bookBarcodeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
             titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(titleRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
@@ -874,24 +916,25 @@ namespace NEALibrarySystem.SearchList
             dateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
             dueDateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dueDateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
             circulationTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(circulationTypeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-
-            List<CirculationCopy> ids = ApplyFilter(bookBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            
+            // gets the list of records that start with the search filter and sort the records
+            List<CirculationCopy> ids = ApplyFilter(bookBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             ids = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(ids, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> bookBarcodes = ApplyFilter(bookBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> bookBarcodes = ApplyFilter(bookBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             bookBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(bookBarcodes, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> titles = ApplyFilter(titleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> titles = ApplyFilter(titleRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             titles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(titles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> seriesTitles = ApplyFilter(seriesTitleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> seriesTitles = ApplyFilter(seriesTitleRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             seriesTitles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(seriesTitles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> authors = ApplyFilter(authorRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> authors = ApplyFilter(authorRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             authors = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(authors, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dates = ApplyFilter(dateRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> dates = ApplyFilter(dateRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             dates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dueDates = ApplyFilter(dueDateRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> dueDates = ApplyFilter(dueDateRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             dueDates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dueDates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> memberBarcodes = ApplyFilter(memberBarcodeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> memberBarcodes = ApplyFilter(memberBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             memberBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(memberBarcodes, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> circulationTypes = ApplyFilter(circulationTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
+            List<CirculationCopy> circulationTypes = ApplyFilter(circulationTypeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
             circulationTypes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(circulationTypes, SearchAndSort.TwoCircCopies);
 
             List<List<CirculationCopy>> properties = new List<List<CirculationCopy>>
@@ -928,6 +971,13 @@ namespace NEALibrarySystem.SearchList
             }
             return -1;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="compare"></param>
+        /// <returns></returns>
         private List<T> MergeWithoutDuplicates<T>(List<List<T>> list, SearchAndSort.Compare<SmallestItem<T>, SmallestItem<T>> compare) where T : class
         {
             List<T> results = new List<T>();
