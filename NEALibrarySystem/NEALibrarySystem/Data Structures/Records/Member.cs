@@ -16,6 +16,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class Member
     {
+        // member attributes
         public ReferenceClass<string, Member> Barcode;
         public ReferenceClass<string, Member> FirstName;
         public ReferenceClass<string, Member> Surname;
@@ -29,20 +30,19 @@ namespace NEALibrarySystem.Data_Structures
         public string Postcode;
         public DateTime JoinDate;
         public ReferenceClass<MemberType, Member> Type;
-
         private List<Member> _linkedMembers = new List<Member>();
         public List<Member> LinkedMembers
         {
             get { return _linkedMembers; }
             set { _linkedMembers = value ?? new List<Member>(); }
         }
-
         private List<CircMemberRelation> _circMemberRelation = new List<CircMemberRelation>();
         public List<CircMemberRelation> CircMemberRelations
         {
             get { return _circMemberRelation; }
             set { _circMemberRelation = value ?? new List<CircMemberRelation>(); }    
         }
+
         public Member(MemberCreator memberInfo)
         {
             JoinDate = DateTime.Today;
@@ -55,6 +55,7 @@ namespace NEALibrarySystem.Data_Structures
             County = memberInfo.County;
             Postcode = memberInfo.Postcode;
             JoinDate = memberInfo.JoinDate == null ? DateTime.Now : memberInfo.JoinDate;
+            // add reference classes
             int index; // index of the created reference class
             DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoRefClassMembers, out index);
             Barcode = DataLibrary.MemberBarcodes[index];
@@ -68,29 +69,50 @@ namespace NEALibrarySystem.Data_Structures
                 foreach (string memberLink in memberInfo.LinkedMembers)
                     LinkedMembers.Add(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, memberLink, SearchAndSort.RefClassAndString)].Reference);
         }
+        /// <summary>
+        /// Adds a member link to _linkedMembers attribute if it does not already exist in the list
+        /// </summary>
+        /// <param name="memberBarcode">barcode of the member to link</param>
         public void AddMemberLink(string memberBarcode)
         {
             Member member = DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, memberBarcode, SearchAndSort.RefClassAndString)].Reference;
-            if (!LinkedMembers.Contains(member))
+            if (!LinkedMembers.Contains(member) && memberBarcode != this.Barcode.Value)
             {
                 LinkedMembers.Add(member);
                 member.LinkedMembers.Add(this);
             }
         }
+        /// <summary>
+        /// Remove the specified member from the list of linked members
+        /// </summary>
+        /// <param name="member">member to remove</param>
         public void RemoveMemberLink(Member member)
         {
             member.LinkedMembers.Remove(this);
             LinkedMembers.Remove(member);
         }
+        /// <summary>
+        /// Concatenates the first name and surname
+        /// </summary>
+        /// <returns>The first name and surname of the member</returns>
         public string GetFullName()
         {
             return FirstName.Value + " " + Surname.Value;
         }
+
+        /// <summary>
+        /// Stores the number of different member types
+        /// </summary>
+        private static int _typeCount = Enum.GetNames(typeof(MemberType)).Length;
         public static int TypeCount
         {
-            get { return Enum.GetNames(typeof(MemberType)).Length; }
+            get { return _typeCount; }
+            private set { _typeCount = value; }
         }
     }
+    /// <summary>
+    /// Represents the different types of members
+    /// </summary>
     public enum MemberType
     {
         Adult,

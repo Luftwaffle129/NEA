@@ -70,7 +70,7 @@ namespace NEALibrarySystem
             if (CirculationManager.BookCopyList.Count > 0)
                 foreach (BookCopy copy in CirculationManager.BookCopyList)
                     totalPrice += copy.BookRelation.Book.Price.Value;
-            _totalPrice.Text = totalPrice.ToString();
+            _totalPrice.Text = DataFormatter.DoubleToPrice(totalPrice);
         }
     }
 }

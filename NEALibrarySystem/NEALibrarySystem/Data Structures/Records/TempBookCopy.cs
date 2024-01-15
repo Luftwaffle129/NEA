@@ -15,6 +15,10 @@ namespace NEALibrarySystem.Data_Structures.Records
         public string Status { get; set; }
         public string DueDate { get; set; }
         public BookCopy BookCopy { get; set; }
+        /// <summary>
+        /// Used to create a temporary copy of a new book copy
+        /// </summary>
+        /// <param name="barcode"></param>
         public TempBookCopy(string barcode)
         {
             Barcode = barcode;
@@ -22,6 +26,10 @@ namespace NEALibrarySystem.Data_Structures.Records
             DueDate = "";
             BookCopy = null;
         }
+        /// <summary>
+        /// used to create a temporary copy of an existing book copy
+        /// </summary>
+        /// <param name="bookCopy"></param>
         public TempBookCopy(BookCopy bookCopy)
         {
             Barcode = bookCopy.Barcode.Value;

@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Data_Structures
         public string Description;
         public ReferenceClass<string, Book> Title;
         public ReferenceClass<string, Book> SeriesTitle;
-        public ReferenceClass<string, Book> Isbn;
+        public ReferenceClass<string, Book> Isbn; // used as the primary key
         public ReferenceClass<double, Book> Price;
         public ReferenceClass<string, Book> MediaType;
         public ReferenceClass<string, Book> Author;
@@ -24,7 +24,7 @@ namespace NEALibrarySystem.Data_Structures
         public List<ReferenceClass<string, Book>> Genres = new List<ReferenceClass<string, Book>>();
         public List<ReferenceClass<string, Book>> Themes = new List<ReferenceClass<string, Book>>();
 
-        public List<BookCopyRelation> BookCopyRelations = new List<BookCopyRelation>();
+        public List<BookCopyRelation> BookCopyRelations = new List<BookCopyRelation>(); // used to relate the book to book copies
         public Book() { }
         /// <summary>
         /// Creates a new book record from the data in a BookCreator class

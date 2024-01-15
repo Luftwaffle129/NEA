@@ -19,6 +19,9 @@ namespace NEALibrarySystem.Data_Structures
     public static class FileHandler
     {
         public static string filePath;
+        /// <summary>
+        /// sets the filePath static variable to be path of the EXE file concatenated to the data directory name
+        /// </summary>
         public static void InitialiseFilePath()
         {
              filePath = Application.StartupPath + "\\Data\\";
@@ -41,7 +44,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Loads a binary files contents into the specified data structure format
         /// </summary>
-        /// <typeparam name="FileType">data structure format of the file</typeparam>
+        /// <typeparam name="FileType">Data structure format of the file</typeparam>
         /// <param name="filePath">Path to load the file from</param>
         /// <param name="fileName">Name and type of the file</param>
         /// <returns>Returns the contents of the file</returns>
@@ -66,7 +69,7 @@ namespace NEALibrarySystem.Data_Structures
             }
         }
         /// <summary>
-        /// creates the directory to save the data fields to
+        /// Creates the directory to save the data fields to
         /// </summary>
         public static void CreateDataDirectory()
         {
@@ -78,7 +81,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public static void DataFilesExist()
         {
-            List<string> missingFiles = new List<string>();
+            List<string> missingFiles = new List<string>(); // list to store missing file names
             string[] files =
             {
                 "Titles",
@@ -92,10 +95,12 @@ namespace NEALibrarySystem.Data_Structures
                 "Members",
                 "BookCopies",
                 "CirculationCopies"
-            };
+            }; // list of all file names
+            // get all missing files
             foreach (string file in files)
                 if (!File.Exists(filePath + $"\\{file}.bin"))
                     missingFiles.Add(file);
+
             if (missingFiles.Count > 0)
             {
                 frmConfirmation confirmation = new frmConfirmation($"Missing Files: {DataFormatter.ListToString(missingFiles)}\n Do you want to create new files?");
@@ -106,7 +111,6 @@ namespace NEALibrarySystem.Data_Structures
                         FileStream f = File.Create(filePath + $"\\{file}.bin");
                         f.Close();
                     }
-
             }
         }
         /// <summary>
@@ -129,7 +133,7 @@ namespace NEALibrarySystem.Data_Structures
             /// </summary>
             public static void Books()
             {
-                // get unique properties of all the books
+                // place the unique values for each property for all books into their respective lists
                 List<string> titles = GetUniqueItems(DataLibrary.Titles, SearchAndSort.TwoStrings);
                 List<double> prices = GetUniqueItems(DataLibrary.Prices, SearchAndSort.TwoDoubles);
                 List<string> mediaTypes = GetUniqueItems(DataLibrary.MediaTypes, SearchAndSort.TwoStrings);
@@ -147,12 +151,13 @@ namespace NEALibrarySystem.Data_Structures
                     {
                         Book book = DataLibrary.Books[i];
                         BookSaver saver = new BookSaver();
-
-                        saver.Title = SearchAndSort.Binary(titles, book.Title.Value, SearchAndSort.TwoStrings);
+                        // save the non-reference properties in the book file
                         saver.SeriesTitle = book.SeriesTitle.Value;
                         saver.SeriesNumber = book.SeriesNumber;
                         saver.Isbn = book.Isbn.Value;
                         saver.Description = book.Description;
+                        // find the book's value in the unique property list and save the index
+                        saver.Title = SearchAndSort.Binary(titles, book.Title.Value, SearchAndSort.TwoStrings);
                         saver.MediaType = SearchAndSort.Binary(mediaTypes, book.MediaType.Value, SearchAndSort.TwoStrings);
                         saver.Author = SearchAndSort.Binary(authors, book.Author.Value, SearchAndSort.TwoStrings);
                         saver.Publisher = SearchAndSort.Binary(publishers, book.Publisher.Value, SearchAndSort.TwoStrings);
@@ -163,15 +168,15 @@ namespace NEALibrarySystem.Data_Structures
                         if (book.Genres.Count > 0)
                             for (int j = 0; j < book.Genres.Count; j++)
                                 saver.Genres[j] = SearchAndSort.Binary(genres, book.Genres[j].Value, SearchAndSort.TwoStrings);
-
                         saver.Themes = new int[book.Themes.Count];
                         if (book.Themes.Count > 0)
                             for (int j = 0; j < book.Themes.Count; j++)
                                 saver.Themes[j] = SearchAndSort.Binary(themes, book.Themes[j].Value, SearchAndSort.TwoStrings);
-
+                        //add the book saver the the list of book savers
                         bookSavers[i] = saver;
                     }
                 }
+                // save all saver data into the book files
                 SaveFile(titles.ToArray(), filePath, "Titles");
                 SaveFile(prices.ToArray(), filePath, "Prices");
                 SaveFile(mediaTypes.ToArray(), filePath, "MediaTypes");
@@ -195,6 +200,7 @@ namespace NEALibrarySystem.Data_Structures
                     {
                         Member member = DataLibrary.Members[i];
                         MemberSaver saver = new MemberSaver();
+                        // add reformatted member data into the saver
                         saver.Barcode = member.Barcode.Value;
                         saver.FirstName = member.FirstName.Value;
                         saver.Surname = member.Surname.Value;
@@ -228,6 +234,7 @@ namespace NEALibrarySystem.Data_Structures
                     {
                         BookCopy bookCopy = DataLibrary.BookCopies[i];
                         BookCopySaver saver = new BookCopySaver();
+                        // save data required for making a new book copy into the saver
                         saver.Barcode = bookCopy.Barcode.Value;
                         saver.Isbn = bookCopy.BookRelation.Book.Isbn.Value;
                         bookCopySavers[i] = saver;
@@ -246,12 +253,14 @@ namespace NEALibrarySystem.Data_Structures
                     {
                         CirculationCopy circulationCopy = DataLibrary.CirculationCopies[i];
                         CirculationCopySaver saver = new CirculationCopySaver();
+                        // add reformatted circulation data to the saver
                         saver.Id = circulationCopy.Id.Value;
                         saver.Type = (int)circulationCopy.Type.Value;
                         saver.BookCopyBarcode = circulationCopy.BookCopy.Barcode.Value;
                         saver.MemberBarcode = circulationCopy.CircMemberRelation.Member.Barcode.Value;
                         saver.DueDate = circulationCopy.DueDate.Value;
                         saver.Date = circulationCopy.Date.Value;
+
                         circulationCopySavers[i] = saver;
                     }
                 SaveFile(circulationCopySavers, filePath, "CirculationCopies");
@@ -293,6 +302,7 @@ namespace NEALibrarySystem.Data_Structures
                 if (bookSavers != null)
                     foreach (BookSaver saver in bookSavers)
                     {
+                        // create a book creator class from the book saver class
                         BookCreator creator = new BookCreator()
                         {
                             Title = titles[saver.Title],
@@ -302,7 +312,7 @@ namespace NEALibrarySystem.Data_Structures
                             MediaType = mediaTypes[saver.MediaType],
                             Author = authors[saver.Author],
                             Publisher = publishers[saver.Publisher],
-                            Genres = saver.Genres.Length > 0 ? GetValuesFromIndexes(genres, saver.Genres) : new List<string>(),
+                            Genres = saver.Genres.Length > 0 ? GetValuesFromIndexes(genres, saver.Genres) : new List<string>(), // gets values from the unique item list if the list of indexes is not empty
                             Themes = saver.Themes.Length > 0 ? GetValuesFromIndexes(themes, saver.Themes) : new List<string>(),
                             Price = prices[saver.Price].ToString(),
                             Description = saver.Description,
@@ -320,6 +330,7 @@ namespace NEALibrarySystem.Data_Structures
                 if (memberSavers != null)
                     foreach (MemberSaver saver in memberSavers)
                     {
+                        // create a member creator class from the member saver class
                         MemberCreator creator = new MemberCreator()
                         {
                             Barcode = saver.Barcode,
@@ -334,7 +345,7 @@ namespace NEALibrarySystem.Data_Structures
                             TownCity = saver.TownCity,
                             County = saver.County,
                             Postcode = saver.Postcode,
-                            JoinDate = saver.JoinDate,
+                            JoinDate = saver.JoinDate, // join date is set as the added record is of an existing member
                             Type = ((MemberType)saver.Type).ToString()
                         };
                         DataLibrary.Members.Add(new Member(creator));
@@ -349,6 +360,7 @@ namespace NEALibrarySystem.Data_Structures
                 DataLibrary.ClearData.BookCopy();
                 if (bookCopySavers != null)
                     foreach (BookCopySaver saver in bookCopySavers)
+                        // creates a book copy using the saver's barcode, and the book record found using the saver's ISBN
                         DataLibrary.BookCopies.Add(new BookCopy(saver.Barcode, DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, saver.Isbn, SearchAndSort.RefClassAndString)].Reference));
             }
             /// <summary>
@@ -361,6 +373,7 @@ namespace NEALibrarySystem.Data_Structures
                 if (circulationCopySavers != null)
                     foreach (CirculationCopySaver saver in circulationCopySavers)
                     {
+                        // create a circulation copy using the data in the saver
                         CirculationCopyCreator creator = new CirculationCopyCreator()
                         {
                             Id = saver.Id,
@@ -368,7 +381,7 @@ namespace NEALibrarySystem.Data_Structures
                             BookCopy = DataLibrary.BookCopyBarcodes[SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, saver.BookCopyBarcode, SearchAndSort.RefClassAndString)].Reference,
                             Member = DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, saver.MemberBarcode, SearchAndSort.RefClassAndString)].Reference,
                             DueDate = saver.DueDate,
-                            Date = saver.Date,
+                            Date = saver.Date, // date is specified as it is loading an active circulation that was created in the past
                         };
                         DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                     }
@@ -377,8 +390,8 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Gets the list of unique item values from the list of reference classes
         /// </summary>
-        /// <typeparam name="T">Value</typeparam>
-        /// <typeparam name="F">Reference</typeparam>
+        /// <typeparam name="T">Value of reference class</typeparam>
+        /// <typeparam name="F">Reference type of reference class</typeparam>
         /// <param name="itemList">List of reference classes</param>
         /// <param name="compare">Method to compare the ReferenceClass value to the currently stored unique items</param>
         /// <returns>List of the unique values</returns>
@@ -397,15 +410,15 @@ namespace NEALibrarySystem.Data_Structures
         /// Uses the given indexes to find the valuse they are referencing in an array
         /// </summary>
         /// <typeparam name="T">Datatype within the list</typeparam>
-        /// <param name="uniqueItems">Array of values</param>
+        /// <param name="items">Array of values</param>
         /// <param name="indexes">Indexes to get the values of</param>
         /// <returns>List of values from the indexes</returns>
-        private static List<T> GetValuesFromIndexes<T>(T[] uniqueItems, int[] indexes)
+        private static List<T> GetValuesFromIndexes<T>(T[] items, int[] indexes)
         {
-            List<T> uniqueValues = new List<T>(); 
+            List<T> values = new List<T>(); 
             foreach (int index in indexes)
-                uniqueValues.Add(uniqueItems[index]);
-            return uniqueValues;
+                values.Add(items[index]);
+            return values;
         }
     }
 }

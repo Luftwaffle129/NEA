@@ -13,37 +13,29 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
     {
         // Objects
         private ListView _selectedBooks;
-        private TextBox _memberBarcode;
-        private TextBox _memberName;
-        private TextBox _currentLoans;
-        private TextBox _overdueBooks;
-        private TextBox _lateFees;
-        private TextBox _enterBarcodes;
+        private TextBox _memberBarcode; // Textbox that the member barcode is entered into
+        private TextBox _memberName; // Textbox that the member name is displayed at
+        private TextBox _currentLoans; // Textbox that displays the number of current loans the member has
+        private TextBox _overdueBooks; // Texbox that displays the number of overdue books that the member has
+        private TextBox _lateFees; // Textbox displaying the total sum of the member's late fees
+        private TextBox _enterBarcodes; // Textbox used to enter book copy barcodes in order to select books
 
         // Variables
-        private bool _priceNeeded;
-        private List<BookCopy> _bookCopyList = new List<BookCopy>();
+        private bool _priceNeeded; // used to toggle whether a price column is needed in the list view
+        private List<BookCopy> _bookCopyList = new List<BookCopy>(); // book copies involved in the transaction
         public List<BookCopy> BookCopyList
         {
             get { return _bookCopyList; }
             set { _bookCopyList = value ?? new List<BookCopy>(); }
         }
-        public Member SelectedMember;
+        public Member SelectedMember; // member who the books are being circulated for
         /// <summary>
-        /// Initials ciruclation objects
+        /// Initialises ciruclation objects
         /// </summary>
-        /// <param name="memberBarcode"></param>
-        /// <param name="memberName"></param>
-        /// <param name="loans"></param>
-        /// <param name="overdue"></param>
-        /// <param name="lateFees"></param>
-        /// <param name="enterBarcode"></param>
-        /// <param name="lsv"></param>
-        /// <param name="priceNeeded"></param>
-        public CirculationObjectHandler(TextBox memberBarcode, TextBox memberName, TextBox loans, TextBox overdue, TextBox lateFees, TextBox enterBarcode, ListView lsv, bool priceNeeded)
+        public CirculationObjectHandler(TextBox memberBarcode, TextBox memberName, TextBox loans, TextBox overdue, TextBox lateFees, TextBox enterBarcode, ListView selectedBooks, bool priceNeeded)
         {
             // set up listview
-            _selectedBooks = lsv;
+            _selectedBooks = selectedBooks;
             _memberBarcode = memberBarcode;
             _memberName = memberName;
             _currentLoans = loans;
@@ -65,7 +57,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _selectedBooks.Items.Clear();
         }
         /// <summary>
-        /// Clears the objects' text properties
+        /// Sets member details objects' text properties to be empty for their respective datatypes
         /// </summary>
         public void ResetMemberDetailFields()
         {
@@ -98,7 +90,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
                         {
                             currentLoans++;
-                            if (relation.CirculationCopy.DueDate.Value < DateTime.Now)
+                            if (relation.CirculationCopy.DueDate.Value < DateTime.Now) // if book is overdue
                             {
                                 overdueBooks++;
                                 lateFees += CirculationCopy.GetLateFees(relation.CirculationCopy.DueDate.Value);
@@ -115,9 +107,9 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _lateFees.Text = lateFees.ToString();
         }
         /// <summary>
-        /// sets up the list view
+        /// Sets up the list view
         /// </summary>
-        /// <param name="PriceNeeded">determines if the price of the books are displayed in the listview</param>
+        /// <param name="PriceNeeded">Determines if the price of the books are displayed in the listview</param>
         private void InitialiseListView(bool PriceNeeded)
         {
             // sets properties
@@ -134,7 +126,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 
             // sets columns
             string[] columns;
-            if (PriceNeeded)
+            if (PriceNeeded) // if price is needed, add price as a column
                 columns = new string[]
                 {
                     "Barcode",
@@ -164,8 +156,8 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         /// </summary>
         public void UpdateListView()
         {
-            _selectedBooks.Items.Clear();
-            foreach (BookCopy copy in BookCopyList)
+            _selectedBooks.Items.Clear(); // clear the list view items
+            foreach (BookCopy copy in BookCopyList) // add the book copies into the list
             {
                 string[] data;
                 if (_priceNeeded)
@@ -175,7 +167,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.BookRelation.Book.Title.Value,
                         copy.BookRelation.Book.SeriesTitle.Value,
                         copy.BookRelation.Book.Author.Value,
-                        copy.BookRelation.Book.Price.Value.ToString(),
+                        DataFormatter.DoubleToPrice(copy.BookRelation.Book.Price.Value),
                         copy.GetStatus(),
                         copy.GetDueDate(),
                         copy.GetMemberBarcode()
@@ -203,10 +195,20 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         {
             if (_selectedBooks.CheckedItems.Count > 0)
             {
-                foreach (ListViewItem item in _selectedBooks.CheckedItems)
-                    for (int index = 0; index < BookCopyList.Count; index++)
+                foreach (ListViewItem item in _selectedBooks.CheckedItems) // for each selected book
+                {
+                    bool isDeleted = false;
+                    int index = 0;
+                    // find the index of the selected item in the list of book copies and delete the record
+                    do
+                    {
                         if (BookCopyList[index].Barcode.Value == item.SubItems[0].Text)
+                        {
                             BookCopyList.RemoveAt(index);
+                            isDeleted = true;
+                        }
+                    } while (++index < BookCopyList.Count && !isDeleted);
+                }
                 UpdateListView();
             }
         }
@@ -217,10 +219,11 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         {
             string barcode = _enterBarcodes.Text;
             int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString); // gets the index of the stored book copy barcode
-            if (index == -1)
+            if (index == -1) // check if book copy was found
                 MessageBox.Show("Book Not Found");
             else
             {
+                // add book copy, update list view, and empty the barcode textbox
                 BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
                 UpdateListView();
                 _enterBarcodes.Clear();

@@ -8,16 +8,21 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Used to store a book copy
+    /// </summary>
     public class BookCopy
     {
-        public ReferenceClass<string, BookCopy> Barcode { get; set; }
-        public BookCopyRelation BookRelation { get; set; }
-        public CirculationCopy CirculationCopy { get; set; }
+        public ReferenceClass<string, BookCopy> Barcode { get; set; } // used as the prmary key
+        public BookCopyRelation BookRelation { get; set; } // links the book copy to a book
+        public CirculationCopy CirculationCopy { get; set; } // links the book copy to a circulation record
         public BookCopy(string barcode, Book book)
         {
+            // create a relation to the book
             BookRelation = new BookCopyRelation(book, this);
             DataLibrary.BookCopyRelations.Add(BookRelation);
             BookRelation.Book.BookCopyRelations.Add(BookRelation);
+
             int index; // index that the reference class is inserted into
             DataLibrary.BookCopyBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.BookCopyBarcodes, this, barcode, SearchAndSort.TwoBookCopyBarcodes, out index);
             Barcode = DataLibrary.BookCopyBarcodes[index];
@@ -27,7 +32,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Gets the status of the book copy
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String representation of the book copy's status</returns>
         public string GetStatus()
         {
             if (CirculationCopy == null)
@@ -40,7 +45,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Gets the member barcode of the book if it is circulated
         /// </summary>
-        /// <returns>book copy's circulated member's barcode</returns>
+        /// <returns>Book copy's circulated member's barcode</returns>
         public string GetMemberBarcode()
         {
             if (CirculationCopy == null)
@@ -49,9 +54,9 @@ namespace NEALibrarySystem.Data_Structures
                 return CirculationCopy.CircMemberRelation.Member.Barcode.Value;
         }
         /// <summary>
-        /// gets the due date of the book if it is circulated
+        /// Gets the due date of the book if it is circulated
         /// </summary>
-        /// <returns>book copy's circulated due date</returns>
+        /// <returns>Book copy's circulated due date</returns>
         public string GetDueDate()
         {
             if (CirculationCopy == null)

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures.Records
 {
+    /// <summary>
+    /// Used to hold the data required for creating a circulation copy
+    /// </summary>
     public class CirculationCopyCreator
     {
         public int Id = -1;

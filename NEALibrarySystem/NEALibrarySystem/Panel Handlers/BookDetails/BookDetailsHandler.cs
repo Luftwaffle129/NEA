@@ -1,25 +1,18 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.Data_Structures.Records;
 using NEALibrarySystem.ListViewHandlers;
-using NEALibrarySystem.SearchList;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.VisualStyles;
 
 namespace NEALibrarySystem.PanelHandlers
 {
     public class BookDetailsHandler
     {
         private BookDetailsObjects _objects;
-        private Book _bookData;
+        private Book _bookData; // if modifying a book record, stores the data of the existing book
         private List<TempBookCopy> _bookCopyList = new List<TempBookCopy>();
-        private bool _isNewRecord = true;
+        private bool _isNewRecord;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
             _objects = objs;
@@ -32,7 +25,7 @@ namespace NEALibrarySystem.PanelHandlers
         public void Load(Book book = null)
         {
             //book details
-            if (book != null)
+            if (book != null) // if book is not null, fill input fields with the existing book data
             {
                 _bookData = book;
                 _objects.Title.Text = _bookData.Title.Value;
@@ -45,10 +38,10 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Genres.Text = DataFormatter.ListToString(_bookData.Genres);
                 _objects.Themes.Text = DataFormatter.ListToString(_bookData.Themes);
                 _objects.Description.Text = _bookData.Description;
-                _objects.Price.Text = _bookData.Price.Value.ToString();
+                _objects.Price.Text = DataFormatter.DoubleToPrice(_bookData.Price.Value);
                 _isNewRecord = false;
             }
-            else 
+            else // if book is null, set input fields to be empty
             {
                 _bookData = new Book();
                 _objects.Title.Clear();
@@ -62,8 +55,6 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Themes.Clear();
                 _objects.Description.Clear();
                 _objects.Price.Clear();
-
-                _objects.CopyDetails.Items.Clear();
                 _isNewRecord = true;
             }
             InitialiseCopyDetails();
@@ -127,7 +118,7 @@ namespace NEALibrarySystem.PanelHandlers
             _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         /// <summary>
-        /// initialises the list view used to display book copies
+        /// Initialises the list view used to display book copies
         /// </summary>
         private void InitialiseCopyDetails()
         {
@@ -150,6 +141,9 @@ namespace NEALibrarySystem.PanelHandlers
             };
             ListViewHandler.SetColumns(columns, ref _objects.CopyDetails);
         }
+        /// <summary>
+        /// Loads the copy details of the book details being modified into the bookcopy list view. list view is left empty if creating a new book
+        /// </summary>
         public void LoadCopyDetails()
         {
             _bookCopyList.Clear();
@@ -161,6 +155,10 @@ namespace NEALibrarySystem.PanelHandlers
                 }
             UpdateBookCopyList();
         }
+        /// <summary>
+        /// Gets the book copies of the book record being modified
+        /// </summary>
+        /// <returns>List of the book record's book copies. Returns empty list if creating a new book</returns>
         public List<BookCopy> GetCurrentBookCopies()
         {
             List<BookCopy> bookCopyList = new List<BookCopy>();
@@ -179,76 +177,87 @@ namespace NEALibrarySystem.PanelHandlers
         {
             if (_isNewRecord)
             {
-                Book book = new Book(GetBookInput());
-                DataLibrary.Books.Add(book);
-                // Add new book copies
-                if (_bookCopyList.Count > 0)
-                    foreach (TempBookCopy copy in _bookCopyList)
-                        DataLibrary.CreateBookCopy(copy.Barcode, book);
-                FileHandler.Save.Books();
-                FileHandler.Save.BookCopies();
-                FileHandler.Save.CirculationCopies();
-                Load();
+                BookCreator creator = GetBookInput();
+                if (creator.Validate(out List<string> invalidInputs))
+                {
+                    Book book = new Book(creator);
+                    DataLibrary.Books.Add(book);
+                    // Add new book copies
+                    if (_bookCopyList.Count > 0)
+                        foreach (TempBookCopy copy in _bookCopyList)
+                            DataLibrary.CreateBookCopy(copy.Barcode, book);
+                    FileHandler.Save.Books();
+                    FileHandler.Save.BookCopies();
+                    FileHandler.Save.CirculationCopies();
+                    Load();
+                }
+                else
+                    MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(invalidInputs));
             }
             else
             {
                 // Update old book record
                 BookCreator newInfo = GetBookInput();
-                DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, newInfo.Isbn, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, newInfo.Title, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, newInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks);
-                _bookData.SeriesNumber = Convert.ToInt32(newInfo.SeriesNumber);
-                DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, newInfo.MediaType, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, newInfo.Author, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, newInfo.Publisher, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, newInfo.Genres, SearchAndSort.TwoRefClassBooks);
-                DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, newInfo.Themes, SearchAndSort.TwoRefClassBooks);
-                _bookData.Description = newInfo.Description;
-                DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(newInfo.Price), SearchAndSort.TwoRefClassBooks);
-                // Delete the removed book copies
-                List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies);
-                if (_bookCopyList.Count > 0)
+                if (newInfo.Validate(out List<string> invalidInputs, _bookData))
                 {
-                    List<TempBookCopy> unchangedBookCopyList = new List<TempBookCopy>();
-                    // Get the unchanged book copies from _BookCopyList
-                    foreach (TempBookCopy copy in _bookCopyList)
-                        if (copy.BookCopy != null)
-                            unchangedBookCopyList.Add(copy);
-                    unchangedBookCopyList = SearchAndSort.QuickSort<TempBookCopy, TempBookCopy>(unchangedBookCopyList, SearchAndSort.TwoTempBookCopies);
-                    // Get the old book copies to remove
-                    if (unchangedBookCopyList.Count > 0)
-                        foreach (BookCopy copy in oldBookCopyList)
-                        {
-                            if (SearchAndSort.Binary(unchangedBookCopyList, copy, SearchAndSort.TempBookCopyAndBookCopy) == -1)
+                    DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, newInfo.Isbn, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, newInfo.Title, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, newInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks);
+                    _bookData.SeriesNumber = Convert.ToInt32(newInfo.SeriesNumber);
+                    DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, newInfo.MediaType, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, newInfo.Author, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, newInfo.Publisher, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, newInfo.Genres, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, newInfo.Themes, SearchAndSort.TwoRefClassBooks);
+                    _bookData.Description = newInfo.Description;
+                    DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(newInfo.Price), SearchAndSort.TwoRefClassBooks);
+                    // Delete the removed book copies
+                    List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies);
+                    if (_bookCopyList.Count > 0)
+                    {
+                        List<TempBookCopy> unchangedBookCopyList = new List<TempBookCopy>();
+                        // Get the unchanged book copies from _BookCopyList
+                        foreach (TempBookCopy copy in _bookCopyList)
+                            if (copy.BookCopy != null)
+                                unchangedBookCopyList.Add(copy);
+                        unchangedBookCopyList = SearchAndSort.QuickSort<TempBookCopy, TempBookCopy>(unchangedBookCopyList, SearchAndSort.TwoTempBookCopies);
+                        // Get the old book copies to remove
+                        if (unchangedBookCopyList.Count > 0)
+                            foreach (BookCopy copy in oldBookCopyList)
+                            {
+                                if (SearchAndSort.Binary(unchangedBookCopyList, copy, SearchAndSort.TempBookCopyAndBookCopy) == -1)
+                                    DataLibrary.DeleteBookCopy(copy);
+                            }
+                        else
+                            foreach (BookCopy copy in oldBookCopyList)
                                 DataLibrary.DeleteBookCopy(copy);
-                        }
+                    }
                     else
+                    {
                         foreach (BookCopy copy in oldBookCopyList)
                             DataLibrary.DeleteBookCopy(copy);
+                    }
+                    // Add new book copies
+                    foreach (TempBookCopy copy in _bookCopyList)
+                    {
+                        if (copy.BookCopy == null) // Check if the TempBookCopy is a new copy
+                        {
+                            DataLibrary.CreateBookCopy(copy.Barcode, _bookData);
+                        }
+                    }
+                    FileHandler.Save.Books();
+                    FileHandler.Save.BookCopies();
+                    FileHandler.Save.CirculationCopies();
+                    FrmMainSystem.Main.NavigatorOpenSearchViewTab();
                 }
                 else
-                {
-                    foreach (BookCopy copy in oldBookCopyList)
-                        DataLibrary.DeleteBookCopy(copy);
-                }
-                // Add new book copies
-                foreach (TempBookCopy copy in _bookCopyList)
-                {
-                    if (copy.BookCopy == null) // Check if the TempBookCopy is a new copy
-                    {
-                        DataLibrary.CreateBookCopy(copy.Barcode, _bookData);
-                    }
-                }
-                FileHandler.Save.Books();
-                FileHandler.Save.BookCopies();
-                FileHandler.Save.CirculationCopies();
-                FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+                    MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(invalidInputs));
             }
         }
         /// <summary>
         /// retrieves the book record created from the inputted data
         /// </summary>
-        /// <returns>inputted book data</returns>
+        /// <returns>Inputted book data</returns>
         private BookCreator GetBookInput() 
         {
             BookCreator temp = new BookCreator();
@@ -262,6 +271,7 @@ namespace NEALibrarySystem.PanelHandlers
             temp.Genres = DataFormatter.SplitString(_objects.Genres.Text, ", ");
             temp.Themes = DataFormatter.SplitString(_objects.Themes.Text, ", ");
             temp.Description = _objects.Description.Text;
+            temp.Price = _objects.Price.Text;
             return temp;
         }
         /// <summary>
@@ -274,7 +284,5 @@ namespace NEALibrarySystem.PanelHandlers
             else
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
-
     }
-
 }

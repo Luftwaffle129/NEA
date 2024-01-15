@@ -3,18 +3,7 @@ using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing.Text;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.VisualStyles;
-using System.Xml.Linq;
 using static NEALibrarySystem.Data_Structures.DataLibrary;
 
 namespace NEALibrarySystem.SearchList
@@ -23,14 +12,16 @@ namespace NEALibrarySystem.SearchList
     {
         private SearchObjects _objects;
 
-        private int _currentColumn;
-        private bool _invertedSort = false;
+        private int _currentColumn; // index of the currently selected column in the list view
+        private bool _invertedSort = false; // used to determine if the sorting should be inverted in the column
+        // arrays used to store each features' column headers
         private static string[] _memberColumns;
         private static string[] _bookColumns;
         private static string[] _circulationCopyColumns;
         public SearchHandler(SearchObjects objects)
         {
             _objects = objects;
+            // list view properties
             _objects.ItemViewer.View = View.Details;
             _objects.ItemViewer.LabelEdit = false;
             _objects.ItemViewer.AllowColumnReorder = false;
@@ -79,7 +70,7 @@ namespace NEALibrarySystem.SearchList
         /// </summary>
         public void SetUpSearchTab()
         {
-            _invertedSort = false;
+            // opens the search view tab to the currently selected search feature
             switch (FrmMainSystem.Main.SearchFeature)
             {
                 case SearchFeature.Book:
@@ -95,6 +86,10 @@ namespace NEALibrarySystem.SearchList
 
                     break;
             }
+            // sets initial sorting method
+            _invertedSort = false;
+            SortListView(0);
+
             UpdateComboBoxes();
         }
         /// <summary>
@@ -125,10 +120,10 @@ namespace NEALibrarySystem.SearchList
             UpdateListView(DataLibrary.Members);
         }
         /// <summary>
-        /// Loads the current search features appropiate columns
+        /// Loads the current search feature's column headers
         /// </summary>
         /// <param name="lsv">Listview to add the columns to</param>
-        /// <param name="feature">search Feature to specific which comlumn headers to add</param>
+        /// <param name="feature">Search feature to specify which comlumn headers to add</param>
         private void LoadColumns(ref ListView lsv, DataLibrary.SearchFeature feature)
         {
             lsv.Clear();
@@ -157,6 +152,7 @@ namespace NEALibrarySystem.SearchList
             if (_objects.ItemViewer.CheckedItems.Count > 0)
             {
                 // output a confirmation message
+
                 string itemType = "";
                 frmConfirmation confirmation;
                 // get the type of item being deleted
@@ -190,6 +186,7 @@ namespace NEALibrarySystem.SearchList
                 else
                     confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType} and their connections?");
                 confirmation.ShowDialog();
+
                 // if user confirms deletion of selected records, delete each record that was checked
                 if (confirmation.DialogResult == DialogResult.Yes)
                 {
@@ -218,7 +215,7 @@ namespace NEALibrarySystem.SearchList
                 MessageBox.Show("No items selected");
         }
         /// <summary>
-        /// Updates the comboboxes to contain the column headers of the current feature. Needed for selecting a search category
+        /// Updates the comboboxes to contain the column headers of the current search feature. Needed for selecting a search category
         /// </summary>
         public void UpdateComboBoxes()
         {
@@ -276,7 +273,7 @@ namespace NEALibrarySystem.SearchList
                     ListViewItem row = new ListViewItem(data);
                     _objects.ItemViewer.Items.Add(row);
                 }
-                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
         }
         /// <summary>
@@ -352,7 +349,7 @@ namespace NEALibrarySystem.SearchList
                 case SearchError.SearchField:
                     MessageBox.Show("Invalid Search Category");
                     break;
-                case SearchError.NoFields:
+                case SearchError.NoFields: // if no inputs in the search fields load all records
                     switch (FrmMainSystem.Main.SearchFeature)
                     {
                         case SearchFeature.Member:
@@ -367,7 +364,7 @@ namespace NEALibrarySystem.SearchList
                     }
                     break;
                 case SearchError.None:
-                    // place input fields in array to apply filters for each of them using iteration
+                    // place input fields in array in order to apply filters for each of them using iteration
                     SearchInputs[] searchInputs = new SearchInputs[3]
                     {
                         new SearchInputs(_objects.SearchField, _objects.Search),
@@ -540,7 +537,7 @@ namespace NEALibrarySystem.SearchList
 
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
-                                                referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, DataFormatter.IntToString(circulationCopy.Id.Value, CirculationCopy.IdMaxValue.ToString().Length), SearchAndSort.TwoRefClassCircCopies, out int index);
+                                                referenceClasses = DataLibrary.CreateReferenceClass(referenceClasses, circulationCopy, DataFormatter.IntToString(circulationCopy.Id.Value, CirculationCopy.IDMAXVALUE.ToString().Length), SearchAndSort.TwoRefClassCircCopies, out int index);
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies);
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
@@ -640,106 +637,54 @@ namespace NEALibrarySystem.SearchList
         /// <returns>Enum representing any errors regarding the inputs</returns>
         private SearchError ValidateSearchFields()
         {
-            // check if filter1 inputs are valid
-
-            // check if filter 1 is used
-            if (_objects.Filter1.Text != "")
-                // check that a valid category is specified for the selected searchFeature
-                switch (FrmMainSystem.Main.SearchFeature)
-                {
-                    case SearchFeature.Member:
-                        bool contains = false;
-                        foreach (string column in _memberColumns)
-                            if (column == _objects.Filter1Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                    case SearchFeature.Book:
-                        contains = false;
-                        foreach (string column in _bookColumns)
-                            if (column == _objects.Filter1Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                    case SearchFeature.Circulation:
-                        contains = false;
-                        foreach (string column in _circulationCopyColumns)
-                            if (column == _objects.Filter1Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                }
-            // check if filter2 inputs are valid
-
-            // check if filter 2 is used
-            if (_objects.Filter2.Text != "")
-                // check that a valid category is specified for the selected searchFeature
-                switch (FrmMainSystem.Main.SearchFeature)
-                {
-                    case SearchFeature.Member:
-                        bool contains = false;
-                        foreach (string column in _memberColumns)
-                            if (column == _objects.Filter2Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                    case SearchFeature.Book:
-                        contains = false;
-                        foreach (string column in _bookColumns)
-                            if (column == _objects.Filter2Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                    case SearchFeature.Circulation:
-                        contains = false;
-                        foreach (string column in _circulationCopyColumns)
-                            if (column == _objects.Filter2Field.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.FilterFields;
-                        break;
-                }
-            // check if search field input is valid
-
-            // check if search is used
-            if (_objects.SearchField.Text != "")
-                // check that a valid category is specified for the selected searchFeature
-                switch (FrmMainSystem.Main.SearchFeature)
-                {
-                    case SearchFeature.Member:
-                        bool contains = false;
-                        foreach (string column in _memberColumns)
-                            if (column == _objects.SearchField.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.SearchField;
-                        break;
-                    case SearchFeature.Book:
-                        contains = false;
-                        foreach (string column in _bookColumns)
-                            if (column == _objects.SearchField.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.SearchField;
-                        break;
-                    case SearchFeature.Circulation:
-                        contains = false;
-                        foreach (string column in _circulationCopyColumns)
-                            if (column == _objects.SearchField.Text)
-                                contains = true;
-                        if (!contains)
-                            return SearchError.SearchField;
-                        break;
-                }
+            // check if filter categories are valid
+            if (!IsCategoryValid(_objects.Filter1Field) || !IsCategoryValid(_objects.Filter2Field))
+                return SearchError.FilterFields;
+            // check if search category is valid
+            if (!IsCategoryValid(_objects.SearchField))
+                return SearchError.SearchField;
             // check if no search filters are applied
             if (_objects.Search.Text == "" && _objects.Filter1.Text == "" && _objects.Filter2.Text == "")
                 return SearchError.NoFields;
             return SearchError.None;
+        }
+        /// <summary>
+        /// Checks whether the inputted category combobox's text is valid
+        /// </summary>
+        /// <param name="category">Combobox containing the selected category</param>
+        /// <returns>Boolean result of if the category was valid</returns>
+        private bool IsCategoryValid(ComboBox category)
+        {
+            if (category.Text != "")
+                // check that the category matches a column of the current selected searchFeature. If it does not, return not valid, else return valid
+                switch (FrmMainSystem.Main.SearchFeature)
+                {
+                    case SearchFeature.Member:
+                        bool contains = false;
+                        foreach (string column in _memberColumns)
+                            if (column == category.Text)
+                                contains = true;
+                        if (!contains)
+                            return false;
+                        break;
+                    case SearchFeature.Book:
+                        contains = false;
+                        foreach (string column in _bookColumns)
+                            if (column == category.Text)
+                                contains = true;
+                        if (!contains)
+                            return false;
+                        break;
+                    case SearchFeature.Circulation:
+                        contains = false;
+                        foreach (string column in _circulationCopyColumns)
+                            if (column == category.Text)
+                                contains = true;
+                        if (!contains)
+                            return false;
+                        break;
+                }
+            return true;
         }
         /// <summary>
         /// Represents any errors encountered during the validation process
@@ -763,8 +708,8 @@ namespace NEALibrarySystem.SearchList
         public List<F> ApplyFilter<T, F>(List<ReferenceClass<T, F>> list, T item, SearchAndSort.Compare<T, ReferenceClass<T, F>> compare) where F : class
         {
             List<F> resultList = new List<F>();
-            int[] bounds = SearchAndSort.BinaryRange(list, item, compare);
-            if (bounds[0] != -1)
+            int[] bounds = SearchAndSort.BinaryRange(list, item, compare); // finds the range of values that match the search item
+            if (bounds[0] != -1) // if there were items that matched the search term, add them to the result list
                 for (int i = bounds[0]; i <= bounds[1]; i++)
                     resultList.Add(list[i].Reference);
 
@@ -776,10 +721,10 @@ namespace NEALibrarySystem.SearchList
         /// </summary>
         /// 
         /// Algorithm method:
-        /// Get lists of valid books for each property
-        /// Add all properties lists into a single list without any duplicate records
+        /// For each property, get lists of books where the property matches the search term (case insensitive)
+        /// Merge the lists of books for each property into a single list without any duplicate records
         /// 
-        /// <param name="item">items to </param>
+        /// <param name="item">Item to search for</param>
         /// <returns>List of books that match the search term</returns>
         private List<Book> BookSearch(string item)
         {
@@ -834,10 +779,10 @@ namespace NEALibrarySystem.SearchList
         /// </summary>
         /// 
         /// Algorithm method:
-        /// Get lists of valid members for each property
-        /// Add all properties lists into a single list without any duplicate records
+        /// For each property, get lists of members where the property matches the search term (case insensitive)
+        /// Merge the lists of members for each property into a single list without any duplicate records
         /// 
-        /// <param name="item">items to </param>
+        /// <param name="item">Items to serach for</param>
         /// <returns>List of members that match the search term</returns>
         private List<Member> MemberSearch(string item)
         {
@@ -847,7 +792,6 @@ namespace NEALibrarySystem.SearchList
             List<ReferenceClass<string, Member>> firstNameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.FirstNames, SearchAndSort.TwoUpperRefClassMembers);
             List<Member> firstNames = ApplyFilter(firstNameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             firstNames = SearchAndSort.QuickSort<Member, Member>(firstNames, SearchAndSort.TwoMembers);
-
             List<ReferenceClass<string, Member>> surameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.Surnames, SearchAndSort.TwoUpperRefClassMembers);
             List<Member> surnames = ApplyFilter(surameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
             surnames = SearchAndSort.QuickSort<Member, Member>(surnames, SearchAndSort.TwoMembers);
@@ -874,10 +818,10 @@ namespace NEALibrarySystem.SearchList
         /// </summary>
         /// 
         /// Algorithm method:
-        /// Get lists of valid circulation copies for each property
-        /// Add all properties lists into a single list without any duplicate records
+        /// For each property, get lists of books where the property matches the search term (case insensitive)
+        /// Merge the lists of books for each property into a single list without any duplicate records
         /// 
-        /// <param name="searchItem">items to </param>
+        /// <param name="searchItem">Items to search for</param>
         /// <returns>List of circulation copies that match the search term</returns>
         private List<CirculationCopy> CirculationSearch(string searchItem)
         {
@@ -955,8 +899,8 @@ namespace NEALibrarySystem.SearchList
         /// <summary>
         /// Get the index of the smallest book in the list
         /// </summary>
-        /// <param name="list">list of book and the column they each belong to</param>
-        /// <returns>index of the smallest member</returns>
+        /// <param name="list">List of book and the column they each belong to</param>
+        /// <returns>Index of the smallest member</returns>
         private int GetSmallest<T>(List<SmallestItem<T>> list, SearchAndSort.Compare<SmallestItem<T>, SmallestItem<T>> compare) where T : class
         {
             int smallest = 0;
@@ -964,7 +908,7 @@ namespace NEALibrarySystem.SearchList
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (compare(list[i], list[smallest]) == Greatest.Right)
+                    if (compare(list[i], list[smallest]) == Greatest.Right) // if the list[i] is smaller than the current smallest item, set the smallest to the current index
                         smallest = i;
                 }
                 return smallest;
@@ -972,11 +916,11 @@ namespace NEALibrarySystem.SearchList
             return -1;
         }
         /// <summary>
-        /// 
+        /// Merges a list of lists into a single list of unique records
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <param name="compare"></param>
+        /// <typeparam name="T">Type of class within each list</typeparam>
+        /// <param name="list">List of lists that need to be merged</param>
+        /// <param name="compare">Algorithm used to compare each list's smallest items with each other</param>
         /// <returns></returns>
         private List<T> MergeWithoutDuplicates<T>(List<List<T>> list, SearchAndSort.Compare<SmallestItem<T>, SmallestItem<T>> compare) where T : class
         {
@@ -1018,11 +962,11 @@ namespace NEALibrarySystem.SearchList
         /// <summary>
         /// Used to sort the list view by the inputed column. Inverts the sort if 
         /// </summary>
-        /// <param name="column"></param>
+        /// <param name="column">Column to sort the list view by</param>
         public void SortListView(int column)
         {
-            if (_currentColumn == column)
-                _invertedSort = _invertedSort ? false : true; // inverts the boolean variable
+            if (_currentColumn == column) // if the current column selected is the same as the current column being sorted by
+                _invertedSort = _invertedSort ? false : true; // inverts the boolean variable _inverted sort
             else
             {
                 _currentColumn = column;

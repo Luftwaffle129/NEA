@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures.Records
 {
+    /// <summary>
+    /// Stores a link between two members
+    /// </summary>
     public class AssociatedMembers
     {
         private Member[] _members = new Member[2];

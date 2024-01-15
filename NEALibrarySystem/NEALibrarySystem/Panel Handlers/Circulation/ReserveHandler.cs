@@ -10,7 +10,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 {
     public class ReserveHandler
     {
-        private DateTimePicker _pickUpByDate;
+        private DateTimePicker _pickUpByDate; // date that the 
         public CirculationObjectHandler CirculationManager;
         public ReserveHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker pickUpByDate)
         {

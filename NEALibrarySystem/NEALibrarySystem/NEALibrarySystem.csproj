@@ -50,15 +50,14 @@
     <Compile Include="Data Structures\RecordSavers\BookCopySaver.cs" />
     <Compile Include="Data Structures\RecordSavers\BookSaver.cs" />
     <Compile Include="Data Structures\RecordSavers\MemberSaver.cs" />
-    <Compile Include="Data Structures\RecordSavers\ReferenceClassSaver.cs" />
     <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
-    <Compile Include="Data Structures\Records\CirculationCopyCreator.cs" />
-    <Compile Include="Data Structures\Records\CirculationCopySaver.cs" />
-    <Compile Include="Data Structures\Records\MemberCreator.cs" />
+    <Compile Include="Data Structures\RecordCreators\CirculationCopyCreator.cs" />
+    <Compile Include="Data Structures\RecordCreators\CirculationCopySaver.cs" />
+    <Compile Include="Data Structures\RecordCreators\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
     <Compile Include="Data Structures\SmallestItem.cs" />
-    <Compile Include="ListViewHandlers\CirculatedBooks\ReserveHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\ReserveHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchObjects.cs" />
     <Compile Include="Panel Handlers\MemberDetails\MemberDetailsHandler.cs" />
     <Compile Include="Panel Handlers\MemberDetails\MemberDetailsObjects.cs" />
@@ -71,7 +70,7 @@
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
     <Compile Include="Data Structures\Records\Book.cs" />
     <Compile Include="Data Structures\Records\BookCopy.cs" />
-    <Compile Include="Data Structures\Records\BookCreator.cs" />
+    <Compile Include="Data Structures\RecordCreators\BookCreator.cs" />
     <Compile Include="Data Structures\Records\CirculationCopy.cs" />
     <Compile Include="Data Structures\Records\FileHandler.cs" />
     <Compile Include="Data Structures\Records\Member.cs" />
@@ -135,7 +134,6 @@
     <Compile Include="frmLibrarySystem.Designer.cs">
       <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListViewHandlers\CirculatedBooks\zCirculationObjectHandler.cs" />
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\Records\DataFormatter.cs" />
@@ -150,7 +148,7 @@
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchHandler.cs" />
     <Compile Include="SearchAndSort.cs" />
-    <Compile Include="SellHandler.cs" />
+    <Compile Include="Panel Handlers\Circulation\SellHandler.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,8 +229,6 @@
   <ItemGroup>
     <Content Include="ToDoList.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data Structures\RecordCreators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

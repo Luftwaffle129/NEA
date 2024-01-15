@@ -223,7 +223,7 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region enums
         // contains the enums used when handling processes and form navigation
-        public enum Feature
+        public enum Feature // represents the current features in the main system form
         {
             Circulation,
             Book,
@@ -235,14 +235,14 @@ namespace NEALibrarySystem.Data_Structures
             Settings,
             None = -1
         }
-        public enum SearchFeature
+        public enum SearchFeature // represents the search features in the main system form
         {
             Book,
             Circulation,
             Member,
             Staff
         }
-        public enum CirculationError
+        public enum CirculationError // represents the circulation errors when circulating books
         {
             None,
             NoMember,
@@ -391,6 +391,13 @@ namespace NEALibrarySystem.Data_Structures
             else
                 return CirculationError.NoBookCopies;
         }
+        /// <summary>
+        /// Reserves the inputted book copies the the sepcifed member. Returns an error and does not carry out the reservation process in invalid data is inputted
+        /// </summary>
+        /// <param name="member">Member reserving the books</param>
+        /// <param name="bookCopies">Book copies to reserve</param>
+        /// <param name="pickUpByDate">Date the the reserved book should be picked up by</param>
+        /// <returns>Errors encountered when reserving the books. Error value set to none if reservation was succesful</returns>
         public static CirculationError Reserve(Member member, List<BookCopy> bookCopies, DateTime pickUpByDate)
         {
             // check if necessary inputs exist
@@ -480,18 +487,17 @@ namespace NEALibrarySystem.Data_Structures
         #endregion
         #region Modifying Records
         /// <summary>
-        /// 
+        /// Modifies a reference class by deleting the old one and replacing it
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="F"></typeparam>
-        /// <param name="list"></param>
-        /// <param name="reference"></param>
-        /// <param name="oldReferenceClass"></param>
-        /// <param name="newValue"></param>
-        /// <param name="compareValue"></param>
-        /// <param name="compareRef"></param>
-        /// <param name="newReferenceClass"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Value of the reference class</typeparam>
+        /// <typeparam name="F">Reference of the reference class</typeparam>
+        /// <param name="list">List of reference classes</param>
+        /// <param name="reference">Reference of the new reference class</param>
+        /// <param name="oldReferenceClass">Old reference class to delete</param>
+        /// <param name="newValue">New value of the reference class</param>
+        /// <param name="compare">Comparison algorithm when searching and inserting reference classes in the list</param>
+        /// <param name="newReferenceClass">Reference class that was changed</param>
+        /// <returns>Updated list of the reference classes</returns>
         public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
             list = DeleteReferenceClass(list, oldReferenceClass, compare);
@@ -499,6 +505,18 @@ namespace NEALibrarySystem.Data_Structures
             newReferenceClass = list[index];
             return list;
         }
+        /// <summary>
+        /// Modifies a reference class by deleting the old reference classes and replacing them
+        /// </summary>
+        /// <typeparam name="T">Value of the reference class</typeparam>
+        /// <typeparam name="F">Reference of the reference class</typeparam>
+        /// <param name="list">List of reference classes</param>
+        /// <param name="reference">Reference of the new reference class</param>
+        /// <param name="oldReferenceClassList">Old reference classes to delete</param>
+        /// <param name="newReferenceClassList">New reference classes that were added</param>
+        /// <param name="newValueList">New values to make reference classes for</param>
+        /// <param name="compare">Comparison algorithm when searching and inserting reference classes in the list</param>
+        /// <returns>Updated list of the reference classes</returns>
         public static List<ReferenceClass<T, F>> ModifyReferenceClassList<T, F>(List<ReferenceClass<T, F>> list, F reference, List<ReferenceClass<T, F>> oldReferenceClassList, out List<ReferenceClass<T, F>> newReferenceClassList, List<T> newValueList, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
             // delete old references
@@ -517,34 +535,10 @@ namespace NEALibrarySystem.Data_Structures
             return list;
         }
         /// <summary>
-        /// Updates a book record with the new information
+        /// Modifies a member record with the new information in the member creator class
         /// </summary>
-        /// <param name="book">book to update</param>
-        /// <param name="newBookInfo">new informatipn for the book</param>
-        /// <returns>Updated book</returns>
-        public static void ModifyBookRecord(Book book, BookCreator newBookInfo)
-        {
-            book.SeriesNumber = Convert.ToInt32(newBookInfo.SeriesNumber);
-            book.Description = newBookInfo.Description;
-
-            Titles = ModifyReferenceClass(Titles, book, book.Title, out book.Title, newBookInfo.Title, TwoRefClassBooks);
-            SeriesTitles = ModifyReferenceClass(SeriesTitles, book, book.SeriesTitle, out book.SeriesTitle, newBookInfo.SeriesTitle, TwoRefClassBooks);
-            Isbns = ModifyReferenceClass(Isbns, book, book.Isbn, out book.Isbn, newBookInfo.Isbn, TwoRefClassBooks);
-            Prices = ModifyReferenceClass(Prices, book, book.Price, out book.Price, Convert.ToDouble(newBookInfo.Price), TwoRefClassBooks);
-            MediaTypes = ModifyReferenceClass(MediaTypes, book, book.MediaType, out book.MediaType, newBookInfo.MediaType, TwoRefClassBooks);
-            Authors = ModifyReferenceClass(Authors, book, book.Author, out book.Author, newBookInfo.Author, TwoRefClassBooks);
-            Publishers = ModifyReferenceClass(Publishers, book, book.Publisher, out book.Publisher, newBookInfo.Publisher, TwoRefClassBooks);
-            Genres = ModifyReferenceClassList(Genres, book, book.Genres, out book.Genres, newBookInfo.Genres, TwoRefClassBooks);
-            Themes = ModifyReferenceClassList(Themes, book, book.Themes, out book.Themes, newBookInfo.Themes, TwoRefClassBooks);
-        }
-        public static void ModifyBookCopyRecord(TempBookCopy tempCopy)
-        {
-            BookCopy bookCopy = DataLibrary.BookCopyBarcodes[SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, tempCopy.Barcode, RefClassAndString)].Reference;
-        }
-        public static void ModifyCirculationCopy(CirculationCopy circCopy, DateTime newDueDate)
-        {
-            CirculationDueDates = ModifyReferenceClass(CirculationDueDates, circCopy, circCopy.DueDate, out circCopy.DueDate, newDueDate, TwoRefClassCircCopies);
-        }
+        /// <param name="member">Member to update</param>
+        /// <param name="newMemberInfo">Information to update the member details with</param>
         public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
@@ -564,8 +558,8 @@ namespace NEALibrarySystem.Data_Structures
             if (member.LinkedMembers.Count > 0)
                 foreach (Member link in member.LinkedMembers)
                     member.RemoveMemberLink(link);
+            // add new member links
             if (newMemberInfo.LinkedMembers.Count > 0)
-                // add new member links
                 foreach (string link in newMemberInfo.LinkedMembers)
                     member.AddMemberLink(link);
         }
@@ -577,8 +571,8 @@ namespace NEALibrarySystem.Data_Structures
         /// <typeparam name="T">Value of the reference class</typeparam>
         /// <typeparam name="F">Class that the reference classes refer to</typeparam>
         /// <param name="itemList">List of reference classes</param>
-        /// <param name="record">Reference class to remove</param>
-        /// <param name="compareValue">Comparison method</param>
+        /// <param name="item">Reference class to remove</param>
+        /// <param name="compare">Comparison method</param>
         /// <returns>The updated list</returns>
         public static List<ReferenceClass<T, F>> DeleteReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> item, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
@@ -588,7 +582,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Removes the book and it's references from the system
         /// </summary>
-        /// <param name="book">book to be deleted</param>
+        /// <param name="book">Book to be deleted</param>
         public static void DeleteBook(Book book)
         {
             //delete book copies
@@ -619,7 +613,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Deletes the member record with the inputted member barcode
         /// </summary>
-        /// <param name="barcode">member barcode of member to be deleted</param>
+        /// <param name="member">Member barcode of member to be deleted</param>
         public static void DeleteMember(Member member)
         {
             // delete circulation references
@@ -653,6 +647,10 @@ namespace NEALibrarySystem.Data_Structures
             BookCopies.Remove(bookCopy);
             FileHandler.Save.BookCopies();
         }
+        /// <summary>
+        /// Deletes the specified circulation copy and its relation
+        /// </summary>
+        /// <param name="circulationCopy">Circulation copy to delete</param>
         public static void DeleteCirculationCopy(CirculationCopy circulationCopy)
         {
             // delete member relation
@@ -672,6 +670,9 @@ namespace NEALibrarySystem.Data_Structures
         #region Clear all data
         public static class ClearData
         {
+            /// <summary>
+            /// Clears all stored data
+            /// </summary>
             public static void All()
             {
                 Book();
@@ -680,6 +681,9 @@ namespace NEALibrarySystem.Data_Structures
                 CirculationCopy();
                 _staff.Clear();
             }
+            /// <summary>
+            /// Clears all stored book data
+            /// </summary>
             public static void Book()
             {
                 _books.Clear();
@@ -693,6 +697,9 @@ namespace NEALibrarySystem.Data_Structures
                 _themes.Clear();
                 _genres.Clear();
             }
+            /// <summary>
+            /// Clears all stored member data
+            /// </summary>
             public static void Member()
             {
                 _members.Clear();
@@ -701,12 +708,18 @@ namespace NEALibrarySystem.Data_Structures
                 _surnames.Clear();
                 _memberTypes.Clear();
             }
+            /// <summary>
+            /// Clears all stored book copy data
+            /// </summary>
             public static void BookCopy()
             {
                 _bookCopies.Clear();
                 _bookCopyBarcodes.Clear();
                 _bookCopyRelations.Clear();
             }
+            /// <summary>
+            /// Clears all stored circulation data
+            /// </summary>
             public static void CirculationCopy()
             {
                 _circulationIds.Clear();
