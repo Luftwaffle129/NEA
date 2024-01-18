@@ -14,19 +14,27 @@ namespace NEALibrarySystem
 {
     public class MemberDetailsHandler
     {
+        // objects
         public MemberDetailsObjects _objects;
-
+        // member record being modified
         private Member _memberData;
-        private List<CirculationCopy> _circulationList = new List<CirculationCopy>();
+        private List<CirculationCopy> _circulationList = new List<CirculationCopy>(); // contains the list of circulation copies related to the member
         public MemberDetailsHandler(MemberDetailsObjects memberDetailsObjects)
         {
             _objects = memberDetailsObjects;
 
+            // add the possible member types to the member type combo box 
             for (int i = 0; i < Member.TypeCount; i++)
                 _objects.MemberType.Items.Add(((MemberType)i).ToString());
+            // sets dateTime restrictions for the age
+            _objects.DateOfBirth.MaxDate = DateTime.Today.AddDays(-1);
+            _objects.DateOfBirth.MinDate = DateTime.Today.AddYears(-130);
 
             InitialiseCirculations();
         }
+        /// <summary>
+        /// Sets up the list view properties and columns
+        /// </summary>
         private void InitialiseCirculations()
         {
             _objects.Circulations.Clear();
@@ -40,8 +48,6 @@ namespace NEALibrarySystem
             _objects.Circulations.Sorting = SortOrder.None;
             _objects.Circulations.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
-            _objects.DateOfBirth.MaxDate = DateTime.Today.AddDays(-1);
-            _objects.DateOfBirth.MinDate = DateTime.Today.AddYears(-130);
             // add columns
             string[] columns = new string[3]
             {
@@ -51,6 +57,10 @@ namespace NEALibrarySystem
             };
             ListViewHandler.SetColumns(columns, ref _objects.Circulations);
         }
+        /// <summary>
+        /// Sets up the objects of the member panel
+        /// </summary>
+        /// <param name="member">Member to be modified. Null if a new member record is being created</param>
         public void Load(Member member = null)
         {
             _memberData = member;
@@ -109,6 +119,9 @@ namespace NEALibrarySystem
                     total += CirculationCopy.GetLateFees(copy.DueDate.Value);
             }
         }
+        /// <summary>
+        /// Saves
+        /// </summary>
         public void Save()
         {
             // Gets member inputs
@@ -116,9 +129,6 @@ namespace NEALibrarySystem
             memberCreator.Barcode = _objects.Barcode.Text;
             memberCreator.FirstName = _objects.FirstName.Text;
             memberCreator.Surname = _objects.Surname.Text;
-            int eNumIndex = DataFormatter.StringToEnum<MemberType>(_objects.MemberType.Text);
-            if (eNumIndex != -1)
-                memberCreator.Type = ((MemberType)eNumIndex).ToString();
             memberCreator.DateOfBirth = _objects.DateOfBirth.Value;
             memberCreator.LinkedMembers = DataFormatter.SplitString(_objects.LinkedMembers.Text, ", ");
             memberCreator.EmailAddress = _objects.EmailAddress.Text;
@@ -128,12 +138,20 @@ namespace NEALibrarySystem
             memberCreator.TownCity = _objects.TownCity.Text;
             memberCreator.County = _objects.County.Text;
             memberCreator.Postcode = _objects.PostCode.Text;
-            if (_memberData == null)
-                DataLibrary.Members.Add(new Member(memberCreator));
+            if (memberCreator.Validate(out List<string> errors)) // check in inputes are valid
+            {
+                if (_memberData == null) // if creating a new record, add the new record to the list of members
+                    DataLibrary.Members.Add(new Member(memberCreator));
+                else // else modify the member record
+                    DataLibrary.ModifyMember(_memberData, memberCreator);
+                FileHandler.Save.Members();
+            }
             else
-                DataLibrary.ModifyMember(_memberData, memberCreator);
-            FileHandler.Save.Members();
+                MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(errors));
         }
+        /// <summary>
+        /// Resets panel if creating a record, returns to search tab if modifying a record
+        /// </summary>
         public void Cancel()
         {
             if (_memberData == null)

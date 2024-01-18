@@ -25,9 +25,6 @@ namespace NEALibrarySystem
             LimitPrototypeFeatures();
             FormBorderStyle = FormBorderStyle.Sizable;
         }
-
-        public bool _isAdministrator;
-
         #region Navigator
         private Panel[][] _panels; // a 2-dimensional jagged array containing references to the panels. Represents the layout of the system
         private Button[] _subTabs; // array containing references to the sub tab buttons
@@ -52,7 +49,7 @@ namespace NEALibrarySystem
 
         #region Prototype Restrictions
         /// <summary>
-        /// Used to restrict system access to only the usable forms
+        /// Used to restrict system access to only the implemented forms
         /// </summary>
         private void LimitPrototypeFeatures()
         {
@@ -72,14 +69,14 @@ namespace NEALibrarySystem
         {
             _panels = new Panel[][] 
             {
-            new Panel[] { pnlLoan, pnlReturn, pnlSell, pnlReserve},
-            new Panel[] { pnlSearch, pnlBookDetails, pnlSearch },
-            new Panel[] { pnlSearch, pnlMemberDetails },
-            new Panel[] { pnlSearch, pnlCirculationDetails },
-            new Panel[] { pnlSearch, pnlStaff },
-            new Panel[] { pnlStatistics },
-            new Panel[] { pnlBackup },
-            new Panel[] { pnlSetting }
+                new Panel[] { pnlLoan, pnlReturn, pnlSell, pnlReserve},
+                new Panel[] { pnlSearch, pnlBookDetails, pnlSearch },
+                new Panel[] { pnlSearch, pnlMemberDetails },
+                new Panel[] { pnlSearch, pnlCirculationDetails },
+                new Panel[] { pnlSearch, pnlStaff },
+                new Panel[] { pnlStatistics },
+                new Panel[] { pnlBackup },
+                new Panel[] { pnlSetting }
             };
 
             InitialiseSearchTab();
@@ -92,7 +89,7 @@ namespace NEALibrarySystem
             InitialiseMemberDetails();
         }
         /// <summary>
-        /// populates the sub tab array with the sub tab button references
+        /// Populates the sub tab array with the sub tab button references
         /// </summary>
         private void InitializeSubTabs()
         {
@@ -180,7 +177,7 @@ namespace NEALibrarySystem
             _sellHandler = new SellHandler(circulationObjectHandler, txtSellPrice);
         }
         /// <summary>
-        /// Initialises the reserve panel handler with the necessary objects
+        /// Initialises the reserve panel handler with the necessary objects and parameters
         /// </summary>
         private void InitialiseReserve()
         {
@@ -495,7 +492,7 @@ namespace NEALibrarySystem
         /// <summary>
         /// Displays the inputted string in the label's text
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Text to display in the label</param>
         public void DisplayProcessMessage(string message)
         {
             lblMessageOutput.Text = message;
@@ -522,7 +519,7 @@ namespace NEALibrarySystem
             this.Close();
         }
         #region main tabs
-        // events when buttons in the leftmost panel are clicked
+        // events when buttons in the left-most panel are clicked
         private void btnCirculation_Click(object sender, EventArgs e)
         {
             NavigatorOpenCirculationTab();
@@ -638,7 +635,7 @@ namespace NEALibrarySystem
                 _circulationDetailsHandler.Load(_selectedCircCopy);
         }
         #endregion
-        #region book details
+        #region book details panel
         private void btnBookSave_Click(object sender, EventArgs e)
         {
             _bookDetailsHandler.Save();
@@ -656,7 +653,7 @@ namespace NEALibrarySystem
             _bookDetailsHandler.DeleteBookCopies();
         }
         #endregion
-        #region circulation details
+        #region circulation details panel
         private void btnCircDetailsSave_Click(object sender, EventArgs e)
         {
             _circulationDetailsHandler.Save();
@@ -665,8 +662,12 @@ namespace NEALibrarySystem
         {
             _circulationDetailsHandler.Cancel();
         }
+        private void btnCircDetailsDelete_Click(object sender, EventArgs e)
+        {
+            _circulationDetailsHandler.Delete();
+        }
         #endregion
-        #region member details
+        #region member details panel
         private void btnMemberSave_Click(object sender, EventArgs e)
         {
             _memberDetailsHandler.Save();
@@ -676,21 +677,11 @@ namespace NEALibrarySystem
             _memberDetailsHandler.Cancel();
         }
         #endregion
-        #region delete handler
-
-        private void btnDeleteDelete_Click(object sender, EventArgs e)
-        {
-        }
-        private void btnDeleteCancel_Click(object sender, EventArgs e)
-        {
-        }
-        #endregion
-        #region loan handler
+        #region loan handler panel
         private void btnLoanSave_Click(object sender, EventArgs e)
         {
             _loanHandler.Save();
         }
-
         private void btnLoanCancel_Click(object sender, EventArgs e)
         {
             _loanHandler.Load();
@@ -708,10 +699,10 @@ namespace NEALibrarySystem
         }
         private void txtLoanMemberBarcode_TextChanged(object sender, EventArgs e)
         {
-            _loanHandler.CirculationManager.UpdateMemberDetails();
+            _loanHandler.MemberBarcodeUpdated();
         }
         #endregion
-        #region return handler
+        #region return handler panel
         private void txtReturnMemberBarcode_TextChanged(object sender, EventArgs e)
         {
             _returnHandler.MemberBarcodeUpdated();
@@ -736,7 +727,7 @@ namespace NEALibrarySystem
             _returnHandler.Load();
         }
         #endregion
-        #region sell handler
+        #region sell handler panel
         private void btnSellDelete_Click(object sender, EventArgs e)
         {
             _sellHandler.BookCopiesRemoved();
@@ -761,10 +752,10 @@ namespace NEALibrarySystem
             _sellHandler.MemberBarcodeUpdated();
         }
         #endregion
-        #region reserve handler
+        #region reserve handler panel
         private void txtReserveMemberBarcode_TextChanged(object sender, EventArgs e)
         {
-            _reserveHandler.CirculationManager.UpdateMemberDetails();
+            _reserveHandler.MemberBarcodeUpdated();
         }
         private void txtReserveEnterBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -786,7 +777,7 @@ namespace NEALibrarySystem
             _reserveHandler.Load();
         }
         #endregion
-        #region search handler
+        #region search handler panel
         private void lsvSearchItems_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (lsvSearchItems.Items.Count > 0) // serach list view is not empty
@@ -822,58 +813,17 @@ namespace NEALibrarySystem
         }
         #endregion
         #endregion
-        private void txtReturnLoans_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlLoan_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-
-        }
-
-
-        private void txtRserveEnterBarcode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSellEnterBarcode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtReturnEnterBarcode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void pnlCheckOut_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void lsvSearchItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void txtTransactionPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         /* Code used for opening the file dialog - not used in prototype
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
+   OpenFileDialog openFileDialog = new OpenFileDialog();
+   openFileDialog.InitialDirectory = "c:\\";
+   openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+   openFileDialog.FilterIndex = 2;
+   openFileDialog.RestoreDirectory = true;
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
+   if (openFileDialog.ShowDialog() == DialogResult.OK)
+   {
 
-            }
-        */
+   }
+*/
     }
 }

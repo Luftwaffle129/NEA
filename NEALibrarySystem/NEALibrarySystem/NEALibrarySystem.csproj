@@ -66,7 +66,6 @@
     <Compile Include="Panel Handlers\Circulation\LoanHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\ReturnHandler.cs" />
     <Compile Include="ReferenceClass.cs" />
-    <Compile Include="Comparison.cs" />
     <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
     <Compile Include="Data Structures\Records\Book.cs" />
     <Compile Include="Data Structures\Records\BookCopy.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="Data Structures\Records\Staff.cs" />
     <Compile Include="Data Structures\Records\TestData.cs" />
     <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
-    <Compile Include="Panel Handlers\Delete\DeleteHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,23 +90,11 @@
     <Compile Include="frmCustomTransaction.Designer.cs">
       <DependentUpon>frmCustomTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSelectDate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSelectDate.Designer.cs">
-      <DependentUpon>frmSelectDate.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConfirmation.Designer.cs">
       <DependentUpon>frmConfirmation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDesigner.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDesigner.Designer.cs">
-      <DependentUpon>frmDesigner.cs</DependentUpon>
     </Compile>
     <Compile Include="frmForgottenPassword.cs">
       <SubType>Form</SubType>
@@ -127,12 +113,6 @@
     </Compile>
     <Compile Include="frmLogIn.Designer.cs">
       <DependentUpon>frmLogIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLibrarySystem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLibrarySystem.Designer.cs">
-      <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </Compile>
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
@@ -155,14 +135,8 @@
     <EmbeddedResource Include="frmCustomTransaction.resx">
       <DependentUpon>frmCustomTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSelectDate.resx">
-      <DependentUpon>frmSelectDate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmConfirmation.resx">
       <DependentUpon>frmConfirmation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDesigner.resx">
-      <DependentUpon>frmDesigner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmForgottenPassword.resx">
       <DependentUpon>frmForgottenPassword.cs</DependentUpon>
@@ -175,9 +149,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmResetPassword.resx">
       <DependentUpon>frmResetPassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLibrarySystem.resx">
-      <DependentUpon>frmLibrarySystem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,14 +19,16 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             CirculationManager = circulationObjectHandler;
         }
         /// <summary>
-        /// empties all fields in the panel
+        /// Resets all fields in the panel
         /// </summary>
         public void Load()
         {
             CirculationManager.ResetFields();
+            CirculationManager.BookCopyList.Clear();
+            CirculationManager.SelectedMember = null;
         }
         /// <summary>
-        /// updates the book copies being loaned and creates a circulation record
+        /// Returns the books if possible, else outputs an error to the user
         /// </summary>
         public void Save()
         {
@@ -39,7 +41,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                     MessageBox.Show("No book copies selected");
                     break;
                 case DataLibrary.CirculationError.InvalidBookCopies:
-                    MessageBox.Show("Not all book copies available");
+                    MessageBox.Show("Not all book copies returnable");
                     break;
                 case DataLibrary.CirculationError.None:
                     FrmMainSystem.Main.DisplayProcessMessage("Books Returned");

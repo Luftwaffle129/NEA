@@ -14,30 +14,31 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
 {
     public class LoanHandler
     {
+        // objects of the loan panel
         private DateTimePicker _returnDate;
         public CirculationObjectHandler CirculationManager;
         public LoanHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker ReturnDate) 
         { 
             CirculationManager = circulationObjectHandler;
             _returnDate = ReturnDate;
+            _returnDate.Value = DateTime.Today.AddDays(1);
+            _returnDate.MinDate = DateTime.Today.AddDays(1);
         }
         /// <summary>
-        /// empties all fields in the panel
+        /// Resets the objects and empties the current member value
         /// </summary>
         public void Load()
         {
             CirculationManager.ResetFields();
             CirculationManager.BookCopyList.Clear();
             CirculationManager.SelectedMember = null;
-            _returnDate.Value = DateTime.Today.AddDays(1);
-            _returnDate.MinDate = DateTime.Today.AddDays(1);
         }
         /// <summary>
-        /// updates the book copies being loaned and creates a circulation record
+        /// Loans the book copies if possible, else output an error to the user
         /// </summary>
         public void Save()
         {
-            switch (DataLibrary.Loan(CirculationManager.SelectedMember, CirculationManager.BookCopyList, _returnDate.Value))
+            switch (DataLibrary.Loan(CirculationManager.SelectedMember, CirculationManager.BookCopyList, _returnDate.Value)) // Attempt to loan the book and handle the error
             {
                 case DataLibrary.CirculationError.NoMember:
                     MessageBox.Show("Member not found");
@@ -64,8 +65,6 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             CirculationManager.UpdateMemberDetails();
             if (CirculationManager.SelectedMember != null)
                 _returnDate.Value = DateTime.Today.AddDays(Settings.LoanDurations[(int)CirculationManager.SelectedMember.Type.Value]);
-            else
-                _returnDate.Value = DateTime.Today;
         }
     }
 }

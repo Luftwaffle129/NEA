@@ -13,13 +13,6 @@ namespace NEALibrarySystem.PanelHandlers
         public TextBox InStock;
         public TextBox Reserved;
         public TextBox Loaned;
-        /* buttons
-        public Button AddBookCopies;
-        public Button DeleteBookCopies;
-        public Button Save;
-        public Button Cancel;
-        */
-
         public TextBox Title;
         public TextBox SeriesTitle;
         public TextBox SeriesNumber;

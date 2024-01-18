@@ -13,8 +13,6 @@ namespace NEALibrarySystem
         /// <summary>
         /// Returns the list of barcodes and and closes the form
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.barcodes = txtBarcodes.Text.Split('\n');
@@ -24,8 +22,6 @@ namespace NEALibrarySystem
         /// <summary>
         /// Closes the form and cancels the book copy adding process
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

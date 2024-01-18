@@ -5,35 +5,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static NEALibrarySystem.Data_Structures.FileHandler;
 
 namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 {
     public class ReserveHandler
     {
-        private DateTimePicker _pickUpByDate; // date that the 
+        // objects of the reserve panel
+        private DateTimePicker _pickUpByDate;
         public CirculationObjectHandler CirculationManager;
         public ReserveHandler(CirculationObjectHandler circulationObjectHandler, DateTimePicker pickUpByDate)
         {
             CirculationManager = circulationObjectHandler;
             _pickUpByDate = pickUpByDate;
+            _pickUpByDate.Value = DateTime.Today.AddDays(1);
+            _pickUpByDate.MinDate = DateTime.Today.AddDays(1);
         }
         /// <summary>
-        /// empties all fields in the panel
+        /// Resets the objects and empties the current member value
         /// </summary>
         public void Load()
         {
             CirculationManager.ResetFields();
             CirculationManager.BookCopyList.Clear();
             CirculationManager.SelectedMember = null;
-            _pickUpByDate.Value = DateTime.Today.AddDays(1);
-            _pickUpByDate.MinDate = DateTime.Today.AddDays(1);
         }
         /// <summary>
-        /// updates the book copies being loaned and creates a circulation record
+        /// Loans the book copies if possible, else output an error to the user
         /// </summary>
         public void Save()
         {
-            switch (DataLibrary.Reserve(CirculationManager.SelectedMember, CirculationManager.BookCopyList, _pickUpByDate.Value))
+            switch (DataLibrary.Reserve(CirculationManager.SelectedMember, CirculationManager.BookCopyList, _pickUpByDate.Value)) // Attempt to reserve the book and handle the error
             {
                 case DataLibrary.CirculationError.NoMember:
                     MessageBox.Show("Member not found");
@@ -60,8 +62,6 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             CirculationManager.UpdateMemberDetails();
             if (CirculationManager.SelectedMember != null)
                 _pickUpByDate.Value = DateTime.Today.AddDays(Settings.ReserveDurations[(int)CirculationManager.SelectedMember.Type.Value]);
-            else
-                _pickUpByDate.Value = DateTime.Today;
         }
     }
 }

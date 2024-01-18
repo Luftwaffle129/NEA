@@ -22,6 +22,7 @@ namespace NEALibrarySystem.PanelHandlers
         /// <summary>
         /// Loads the book details into the input boxes
         /// </summary>
+        /// <param name="book">book to be modified. null if creating a new book</param>
         public void Load(Book book = null)
         {
             //book details
@@ -175,7 +176,7 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void Save()
         {
-            if (_isNewRecord)
+            if (_isNewRecord) // if the panel is being used to create a record
             {
                 BookCreator creator = GetBookInput();
                 if (creator.Validate(out List<string> invalidInputs))
@@ -188,44 +189,43 @@ namespace NEALibrarySystem.PanelHandlers
                             DataLibrary.CreateBookCopy(copy.Barcode, book);
                     FileHandler.Save.Books();
                     FileHandler.Save.BookCopies();
-                    FileHandler.Save.CirculationCopies();
                     Load();
                 }
                 else
                     MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(invalidInputs));
             }
-            else
+            else // else the panel is being used to modify a record
             {
                 // Update old book record
-                BookCreator newInfo = GetBookInput();
-                if (newInfo.Validate(out List<string> invalidInputs, _bookData))
+                BookCreator creator = GetBookInput();
+                if (creator.Validate(out List<string> invalidInputs, _bookData))
                 {
-                    DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, newInfo.Isbn, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, newInfo.Title, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, newInfo.SeriesTitle, SearchAndSort.TwoRefClassBooks);
-                    _bookData.SeriesNumber = Convert.ToInt32(newInfo.SeriesNumber);
-                    DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, newInfo.MediaType, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, newInfo.Author, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, newInfo.Publisher, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, newInfo.Genres, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, newInfo.Themes, SearchAndSort.TwoRefClassBooks);
-                    _bookData.Description = newInfo.Description;
-                    DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(newInfo.Price), SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, creator.Isbn, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, creator.Title, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, creator.SeriesTitle, SearchAndSort.TwoRefClassBooks);
+                    _bookData.SeriesNumber = Convert.ToInt32(creator.SeriesNumber);
+                    DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, creator.MediaType, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, creator.Author, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, creator.Publisher, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, creator.Genres, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, creator.Themes, SearchAndSort.TwoRefClassBooks);
+                    _bookData.Description = creator.Description;
+                    DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(creator.Price), SearchAndSort.TwoRefClassBooks);
                     // Delete the removed book copies
-                    List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies);
+                    List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies); // list of book copies before modifying the record
                     if (_bookCopyList.Count > 0)
                     {
-                        List<TempBookCopy> unchangedBookCopyList = new List<TempBookCopy>();
+                        List<TempBookCopy> unchangedBookCopyList = new List<TempBookCopy>(); // list of book copies in the modified record that were not changed from the old record
                         // Get the unchanged book copies from _BookCopyList
                         foreach (TempBookCopy copy in _bookCopyList)
                             if (copy.BookCopy != null)
                                 unchangedBookCopyList.Add(copy);
                         unchangedBookCopyList = SearchAndSort.QuickSort<TempBookCopy, TempBookCopy>(unchangedBookCopyList, SearchAndSort.TwoTempBookCopies);
-                        // Get the old book copies to remove
+                        // Get the remove the deleted book copies
                         if (unchangedBookCopyList.Count > 0)
                             foreach (BookCopy copy in oldBookCopyList)
                             {
-                                if (SearchAndSort.Binary(unchangedBookCopyList, copy, SearchAndSort.TempBookCopyAndBookCopy) == -1)
+                                if (SearchAndSort.Binary(unchangedBookCopyList, copy, SearchAndSort.TempBookCopyAndBookCopy) == -1) // deletes the old book copy if it is not in the list of modified book copies
                                     DataLibrary.DeleteBookCopy(copy);
                             }
                         else
@@ -255,7 +255,7 @@ namespace NEALibrarySystem.PanelHandlers
             }
         }
         /// <summary>
-        /// retrieves the book record created from the inputted data
+        /// Retrieves the book record created from the inputted data
         /// </summary>
         /// <returns>Inputted book data</returns>
         private BookCreator GetBookInput() 

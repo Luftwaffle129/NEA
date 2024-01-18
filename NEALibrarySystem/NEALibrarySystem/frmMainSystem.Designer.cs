@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -260,6 +260,7 @@
             this.txtReserveLateFees = new System.Windows.Forms.TextBox();
             this.btnReserveSave = new System.Windows.Forms.Button();
             this.pnlCirculationDetails = new System.Windows.Forms.Panel();
+            this.btnCircDetailsDelete = new System.Windows.Forms.Button();
             this.lblCircDetailsId = new System.Windows.Forms.Label();
             this.txtCircDetailsId = new System.Windows.Forms.TextBox();
             this.dtpCircDetailsDueDate = new System.Windows.Forms.DateTimePicker();
@@ -1037,7 +1038,6 @@
             this.lsvSearchItems.TabIndex = 38;
             this.lsvSearchItems.UseCompatibleStateImageBehavior = false;
             this.lsvSearchItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvSearchItems_ColumnClick);
-            this.lsvSearchItems.SelectedIndexChanged += new System.EventHandler(this.lsvSearchItems_SelectedIndexChanged);
             this.lsvSearchItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsvSearchItems_MouseDoubleClick);
             // 
             // Title
@@ -1283,8 +1283,6 @@
             this.pnlLoan.Size = new System.Drawing.Size(1770, 980);
             this.pnlLoan.TabIndex = 17;
             this.pnlLoan.VisibleChanged += new System.EventHandler(this.pnlLoan_VisibleChanged);
-            this.pnlLoan.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCheckOut_Paint);
-            this.pnlLoan.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pnlLoan_PreviewKeyDown);
             // 
             // btnLoanDelete
             // 
@@ -1373,7 +1371,6 @@
             this.dtpLoanReturnDate.Size = new System.Drawing.Size(212, 38);
             this.dtpLoanReturnDate.TabIndex = 23;
             this.dtpLoanReturnDate.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
-            this.dtpLoanReturnDate.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // lblLoanSetDueDate
             // 
@@ -1539,7 +1536,6 @@
             this.btnDeleteCancel.TabIndex = 14;
             this.btnDeleteCancel.Text = "Cancel";
             this.btnDeleteCancel.UseVisualStyleBackColor = false;
-            this.btnDeleteCancel.Click += new System.EventHandler(this.btnDeleteCancel_Click);
             // 
             // btnDeleteDelete
             // 
@@ -1552,7 +1548,6 @@
             this.btnDeleteDelete.TabIndex = 13;
             this.btnDeleteDelete.Text = "Delete";
             this.btnDeleteDelete.UseVisualStyleBackColor = false;
-            this.btnDeleteDelete.Click += new System.EventHandler(this.btnDeleteDelete_Click);
             // 
             // pnlSetting
             // 
@@ -1732,7 +1727,6 @@
             this.txtReturnEnterBarcode.Name = "txtReturnEnterBarcode";
             this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnEnterBarcode.TabIndex = 30;
-            this.txtReturnEnterBarcode.TextChanged += new System.EventHandler(this.txtReturnEnterBarcode_TextChanged);
             this.txtReturnEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReturnEnterBarcode_PreviewKeyDown);
             // 
             // lblReturnLateFees
@@ -1795,7 +1789,6 @@
             this.txtReturnLoans.ReadOnly = true;
             this.txtReturnLoans.Size = new System.Drawing.Size(212, 38);
             this.txtReturnLoans.TabIndex = 22;
-            this.txtReturnLoans.TextChanged += new System.EventHandler(this.txtReturnLoans_TextChanged);
             // 
             // lblReturnLoans
             // 
@@ -2333,16 +2326,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend2);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series2);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -2640,7 +2633,6 @@
             this.txtSellEnterBarcode.Name = "txtSellEnterBarcode";
             this.txtSellEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtSellEnterBarcode.TabIndex = 30;
-            this.txtSellEnterBarcode.TextChanged += new System.EventHandler(this.txtSellEnterBarcode_TextChanged);
             this.txtSellEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSellEnterBarcode_PreviewKeyDown);
             // 
             // lblSellLateFees
@@ -2866,7 +2858,6 @@
             this.txtReserveEnterBarcode.Name = "txtReserveEnterBarcode";
             this.txtReserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReserveEnterBarcode.TabIndex = 30;
-            this.txtReserveEnterBarcode.TextChanged += new System.EventHandler(this.txtRserveEnterBarcode_TextChanged);
             this.txtReserveEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReserveEnterBarcode_PreviewKeyDown);
             // 
             // txtReserveOverdue
@@ -3014,6 +3005,7 @@
             this.pnlCirculationDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsDelete);
             this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsId);
             this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsId);
             this.pnlCirculationDetails.Controls.Add(this.dtpCircDetailsDueDate);
@@ -3037,6 +3029,20 @@
             this.pnlCirculationDetails.Size = new System.Drawing.Size(1770, 980);
             this.pnlCirculationDetails.TabIndex = 75;
             this.pnlCirculationDetails.VisibleChanged += new System.EventHandler(this.pnlCirculationDetails_VisibleChanged);
+            // 
+            // btnCircDetailsDelete
+            // 
+            this.btnCircDetailsDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCircDetailsDelete.BackColor = System.Drawing.Color.Red;
+            this.btnCircDetailsDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCircDetailsDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCircDetailsDelete.Location = new System.Drawing.Point(1392, 924);
+            this.btnCircDetailsDelete.Name = "btnCircDetailsDelete";
+            this.btnCircDetailsDelete.Size = new System.Drawing.Size(120, 50);
+            this.btnCircDetailsDelete.TabIndex = 74;
+            this.btnCircDetailsDelete.Text = "Delete";
+            this.btnCircDetailsDelete.UseVisualStyleBackColor = false;
+            this.btnCircDetailsDelete.Click += new System.EventHandler(this.btnCircDetailsDelete_Click);
             // 
             // lblCircDetailsId
             // 
@@ -3141,7 +3147,6 @@
             this.txtCircDetailsPrice.ReadOnly = true;
             this.txtCircDetailsPrice.Size = new System.Drawing.Size(495, 38);
             this.txtCircDetailsPrice.TabIndex = 63;
-            this.txtCircDetailsPrice.TextChanged += new System.EventHandler(this.txtTransactionPrice_TextChanged);
             // 
             // txtCircDetailsMemberBarcode
             // 
@@ -3230,10 +3235,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlStaff);
             this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
@@ -3537,5 +3542,6 @@
         private System.Windows.Forms.TextBox txtCircDetailsId;
         private System.Windows.Forms.TextBox txtMemberLateFees;
         private System.Windows.Forms.Label lblMemberDetailsLateFees;
+        private System.Windows.Forms.Button btnCircDetailsDelete;
     }
 }

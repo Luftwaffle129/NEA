@@ -16,7 +16,7 @@ namespace NEALibrarySystem.SearchList
         private bool _invertedSort = false; // used to determine if the sorting should be inverted in the column
         // arrays used to store each features' column headers
         private static string[] _memberColumns;
-        private static string[] _bookColumns;
+        public static string[] _bookColumns;
         private static string[] _circulationCopyColumns;
         public SearchHandler(SearchObjects objects)
         {

@@ -11,6 +11,7 @@ namespace NEALibrarySystem
 {
     public class SellHandler
     {
+        // Objects of the sell panel
         public CirculationObjectHandler CirculationManager;
         public TextBox _totalPrice;
         public SellHandler(CirculationObjectHandler circulationObjectHandler, TextBox totalPrice)
@@ -19,16 +20,17 @@ namespace NEALibrarySystem
             _totalPrice = totalPrice;
         }
         /// <summary>
-        /// empties all fields in the panel
+        /// Resets all fields in the panel
         /// </summary>
         public void Load()
         {
             CirculationManager.ResetFields();
             CirculationManager.BookCopyList.Clear();
             CirculationManager.SelectedMember = null;
+            _totalPrice.Text = "0.00";
         }
         /// <summary>
-        /// updates the book copies being loaned and creates a circulation record
+        /// Attempts to sell the book copies if possible. if not possible, output an error
         /// </summary>
         public void Save()
         {
@@ -54,16 +56,23 @@ namespace NEALibrarySystem
         {
             CirculationManager.UpdateMemberDetails();
         }
+        /// <summary>
+        /// Adds the book copy and the total price
+        /// </summary>
         public void BookCopyAdded()
         {
             CirculationManager.AddBookCopy();
             UpdateTotalPrice();
         }
+        /// <summary>
+        /// Removes the checked book copies and the total price
+        /// </summary>
         public void BookCopiesRemoved() 
         {
             CirculationManager.DeleteCheckedBookCopies();
             UpdateTotalPrice();
         }
+        // Displays the total price of the selected book copies in the total price textbox
         private void UpdateTotalPrice()
         {
             double totalPrice = 0;

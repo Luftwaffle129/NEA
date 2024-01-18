@@ -233,7 +233,7 @@ namespace NEALibrarySystem.Data_Structures
             Settings.LateFeePerDay = 0.05;
         }
         /// <summary>
-        /// create 10 random book records with a up to 10 book copies for each book
+        /// Create 10 random book records with a up to 10 book copies for each book
         /// </summary>
         private void GenerateBooks()
         {
@@ -293,7 +293,7 @@ namespace NEALibrarySystem.Data_Structures
                         do
                         {
                             themeToAdd = _themes[rand.Next(0, _themes.Length)]; // get a random theme
-                            if (!genres.Contains(themeToAdd)) // if book already has the theme, generate a new one
+                            if (!themes.Contains(themeToAdd)) // if book already has the theme, generate a new one
                                 unique = true;
                         } while (!unique);
                         themes.Add(themeToAdd);
