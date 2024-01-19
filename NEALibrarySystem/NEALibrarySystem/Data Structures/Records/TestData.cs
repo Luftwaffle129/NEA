@@ -221,10 +221,6 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestParameters()
         {
-            //set up staff
-            DataLibrary.CurrentUser = new Staff();
-            DataLibrary.CurrentUser.IsAdministrator = true;
-
             // set up settings details
             Settings.MemberBarcodeLength = 10;
             Settings.LoanDurations = new int[3] { 14, 7, 5 };

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NEALibrarySystem.Data_Structures
+﻿namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Used to store settings data for library system features and information about data structure attribute properties
+    /// </summary>
     public static class Settings
     {
         public const int ISBNLENGTH = 13; 

@@ -814,16 +814,16 @@ namespace NEALibrarySystem
         #endregion
         #endregion
         /* Code used for opening the file dialog - not used in prototype
-   OpenFileDialog openFileDialog = new OpenFileDialog();
-   openFileDialog.InitialDirectory = "c:\\";
-   openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-   openFileDialog.FilterIndex = 2;
-   openFileDialog.RestoreDirectory = true;
+           OpenFileDialog openFileDialog = new OpenFileDialog();
+           openFileDialog.InitialDirectory = "c:\\";
+           openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+           openFileDialog.FilterIndex = 2;
+           openFileDialog.RestoreDirectory = true;
 
-   if (openFileDialog.ShowDialog() == DialogResult.OK)
-   {
+           if (openFileDialog.ShowDialog() == DialogResult.OK)
+           {
 
-   }
-*/
+           }
+        */
     }
 }

@@ -21,16 +21,16 @@
 + remove barcode field for book details
 + update add and edit book details
 
-- settings file gmail credentials
-- add way to select book copies in panels
-- add way to unselect books
-- delete book copies in details
++ settings file gmail credentials
++ add way to select book copies in panels
++ add way to unselect books
++ delete book copies in details
 
 PROTOTYPE
-- search system
-- check in
-- check out
-- sell
-- add book
-- delete records
++ search system
++ check in
++ check out
++ sell
++ add book
++ delete records
 

@@ -53,7 +53,7 @@
     <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
     <Compile Include="Data Structures\RecordCreators\CirculationCopyCreator.cs" />
-    <Compile Include="Data Structures\RecordCreators\CirculationCopySaver.cs" />
+    <Compile Include="Data Structures\RecordSavers\CirculationCopySaver.cs" />
     <Compile Include="Data Structures\RecordCreators\MemberCreator.cs" />
     <Compile Include="Data Structures\Records\TempBookCopy.cs" />
     <Compile Include="Data Structures\SmallestItem.cs" />
@@ -65,8 +65,7 @@
     <Compile Include="Panel Handlers\CirculationDetails\CirculationDetailsHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\LoanHandler.cs" />
     <Compile Include="Panel Handlers\Circulation\ReturnHandler.cs" />
-    <Compile Include="ReferenceClass.cs" />
-    <Compile Include="Data Structures\Records\AssociatedMembers.cs" />
+    <Compile Include="Data Structures\Records\ReferenceClass.cs" />
     <Compile Include="Data Structures\Records\Book.cs" />
     <Compile Include="Data Structures\Records\BookCopy.cs" />
     <Compile Include="Data Structures\RecordCreators\BookCreator.cs" />

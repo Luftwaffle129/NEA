@@ -1,12 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
 using static NEALibrarySystem.SearchAndSort;
 
 namespace NEALibrarySystem.Data_Structures
@@ -16,9 +10,6 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class DataLibrary
     {
-        #region data
-        public static Staff CurrentUser; // stores the details of the current user
-        #endregion
         #region data structures
         // contains the lists of data stored by the program
         #region book copies
@@ -163,14 +154,6 @@ namespace NEALibrarySystem.Data_Structures
         {
             get { return _memberTypes; }
             set { _memberTypes = value ?? new List<ReferenceClass<MemberType, Member>>(); }
-        }
-        #endregion
-        #region staff
-        private static List<Staff> _staff = new List<Staff>();
-        public static List<Staff> Staff
-        {
-            get { return _staff; }
-            set { _staff = value ?? new List<Staff>(); }
         }
         #endregion
         #region circulation copies
@@ -679,7 +662,6 @@ namespace NEALibrarySystem.Data_Structures
                 Member();
                 BookCopy();
                 CirculationCopy();
-                _staff.Clear();
             }
             /// <summary>
             /// Clears all stored book data
