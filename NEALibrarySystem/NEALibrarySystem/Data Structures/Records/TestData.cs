@@ -1,15 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures.Records;
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.DataVisualization.Charting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace NEALibrarySystem.Data_Structures
 {

@@ -626,7 +626,7 @@ namespace NEALibrarySystem
         /// </summary>
         /// <typeparam name="F">Class being referenced by the reference class</typeparam>
         /// <param name="referenceClass">Reference class to have its value compared</param>
-        /// <param name="str">string of text</param>
+        /// <param name="str">String of text</param>
         /// <returns>Returns equal if the reference class value is equal to or starts with the search term at the start, else returns if it is greater or less than the search term</returns>
         public static Greatest UpperRefClassStartsWithString<F>(ReferenceClass<string, F> referenceClass, string str) where F : class
         {

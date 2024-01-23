@@ -76,7 +76,7 @@
     <Compile Include="Data Structures\Records\Settings.cs" />
     <Compile Include="Data Structures\Records\Staff.cs" />
     <Compile Include="Data Structures\Records\TestData.cs" />
-    <Compile Include="ListViewHandlers\CirculatedBooks\CirculationObjectHandler.cs" />
+    <Compile Include="Panel Handlers\CirculatedBooks\CirculationObjectHandler.cs" />
     <Compile Include="frmAddBookCopies.cs">
       <SubType>Form</SubType>
     </Compile>
