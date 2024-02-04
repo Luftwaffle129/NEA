@@ -103,18 +103,15 @@ namespace NEALibrarySystem.PanelHandlers
         private void UpdateBookCopyList()
         {
             _objects.CopyDetails.Items.Clear();
-            if (_bookData.Isbn != null)
+            foreach (TempBookCopy bookCopy in _bookCopyList)
             {
-                foreach (TempBookCopy bookCopy in _bookCopyList)
+                string[] data =
                 {
-                    string[] data =
-                    {
-                    bookCopy.Barcode,
-                    bookCopy.Status,
-                    bookCopy.DueDate
-                    };
-                    _objects.CopyDetails.Items.Add(new ListViewItem(data));
-                }
+                bookCopy.Barcode,
+                bookCopy.Status,
+                bookCopy.DueDate
+                };
+                _objects.CopyDetails.Items.Add(new ListViewItem(data));
             }
             _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }

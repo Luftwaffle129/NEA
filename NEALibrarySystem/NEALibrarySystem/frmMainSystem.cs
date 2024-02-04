@@ -812,6 +812,7 @@ namespace NEALibrarySystem
             _searchHandler.ResetSearchInputs();
         }
         #endregion
+
         #endregion
         /* Code used for opening the file dialog - not used in prototype
            OpenFileDialog openFileDialog = new OpenFileDialog();

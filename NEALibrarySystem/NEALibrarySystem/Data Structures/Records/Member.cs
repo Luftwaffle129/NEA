@@ -46,8 +46,8 @@ namespace NEALibrarySystem.Data_Structures
             Address2 = memberInfo.Address2;
             TownCity = memberInfo.TownCity;
             County = memberInfo.County;
-            Postcode = memberInfo.Postcode;
-            JoinDate = memberInfo.JoinDate == null ? DateTime.Now : memberInfo.JoinDate;
+            Postcode = memberInfo.Postcode.ToUpper();
+            JoinDate = memberInfo.JoinDate == DateTime.MinValue ? DateTime.Now : memberInfo.JoinDate;
             // add reference classes
             int index; // index of the created reference class
             DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoRefClassMembers, out index);

@@ -30,7 +30,6 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             _objects.BookCopy.HeaderStyle = ColumnHeaderStyle.Clickable;
             _objects.BookCopy.Scrollable = true;
 
-            _objects.DueDate.MinDate = DateTime.Today.AddDays(1);
             // sets columns
             string[] columns;
             columns = new string[]
@@ -91,8 +90,21 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
         /// </summary>
         public void Save()
         {
-            DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
-            FileHandler.Save.CirculationCopies();
+            bool isValid = true;
+            if (_circCopy.DueDate.Value != _objects.DueDate.Value)
+            {
+                if (_objects.DueDate.Value <= DateTime.Today)
+                    isValid = false;
+            }
+            if (isValid)
+            {
+                DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
+                FileHandler.Save.CirculationCopies();
+            }
+            else
+            {
+                MessageBox.Show("Changed due date cannot be before today");
+            }
         }
         /// <summary>
         /// Cancels the changes to the circulation copy and opens the search tab

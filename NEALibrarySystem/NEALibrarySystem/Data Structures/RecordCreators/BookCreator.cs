@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace NEALibrarySystem.Data_Structures.Records
@@ -80,22 +81,31 @@ namespace NEALibrarySystem.Data_Structures.Records
             // publisher - is not empty
             if (Publisher.Length == 0)
                 invalidList.Add("Publisher");
-            // genres - no empty genres
-            bool invalidGenre = false;
-            foreach (string s in Genres)
-                if (s.Length == 0)
-                    invalidGenre = true;
-            if (invalidGenre)
+            // genres
+            if (!ValidateGenreTheme(Genres))
                 invalidList.Add("Genres");
-            // themes - no empty themes
-            bool invalidTheme = false;
-            foreach (string s in Themes)
-                if (s.Length == 0)
-                    invalidTheme = true;
-            if (invalidTheme)
+            // themes
+            if (!ValidateGenreTheme(Themes))
                 invalidList.Add("Themes");
-
             return invalidList.Count > 0 ? false : true;
+        }
+        /// <summary>
+        /// Check that no phrases are empty or occur more than once in the list of strings, and contains only letters, numbers, hyphens and spaces
+        /// </summary>
+        /// <param name="strings"></param>
+        /// <returns>Boolean value of whether the list of genres or themes are valid</returns>
+        private bool ValidateGenreTheme(List<string> strings)
+        {
+            List<string> seenStrings = new List<string>(); // stores values that have already been seen
+            foreach (string s in strings)
+            {
+                // check that the phrase is not "" and it does not occur more than once in the list of strings, and contains only letters, numbers, hyphens and spaces. Returns false if otherwise
+                if (s.Length == 0 || seenStrings.Contains(s) || Regex.IsMatch(s, @"^[a-zA-Z0-9 -]*$"))
+                    return false;
+                else
+                    seenStrings.Add(s);
+            }
+            return true;
         }
     }
 }

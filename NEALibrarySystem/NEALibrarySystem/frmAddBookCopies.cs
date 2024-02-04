@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures;
+using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace NEALibrarySystem
 {
@@ -16,8 +18,13 @@ namespace NEALibrarySystem
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.barcodes = txtBarcodes.Text.Split('\n');
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (ValidBookCopyBarcodes())
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+                MessageBox.Show("Invalid barcodes");
         }
         /// <summary>
         /// Closes the form and cancels the book copy adding process
@@ -26,6 +33,21 @@ namespace NEALibrarySystem
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+        /// <summary>
+        /// Determine of inputted barcodes consist of only digits and are the correct length
+        /// </summary>
+        /// <returns>Boolean result of whether the barcodes are valid</returns>
+        private bool ValidBookCopyBarcodes()
+        {
+            foreach (string barcode in barcodes)
+            {
+                if (!(barcode.Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$")))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

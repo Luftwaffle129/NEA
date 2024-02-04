@@ -217,11 +217,14 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             string barcode = _enterBarcodes.Text;
             int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString); // gets the index of the stored book copy barcode
             if (index == -1) // check if book copy was found
-                MessageBox.Show("Book Not Found");
+                MessageBox.Show("Book Copy Not Found");
+            BookCopy bookCopy = DataLibrary.BookCopyBarcodes[index].Reference;
+            if (BookCopyList.Contains(bookCopy))
+                MessageBox.Show("Book Copy Already Selected");
             else
             {
                 // add book copy, update list view, and empty the barcode textbox
-                BookCopyList.Add(DataLibrary.BookCopyBarcodes[index].Reference);
+                BookCopyList.Add(bookCopy);
                 UpdateListView();
                 _enterBarcodes.Clear();
             }

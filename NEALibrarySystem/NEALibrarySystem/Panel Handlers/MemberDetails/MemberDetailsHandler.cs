@@ -12,7 +12,7 @@ namespace NEALibrarySystem
         // objects
         public MemberDetailsObjects _objects;
         // member record being modified
-        private Member _memberData;
+        private Member _memberData = null;
         private List<CirculationCopy> _circulationList = new List<CirculationCopy>(); // contains the list of circulation copies related to the member
         public MemberDetailsHandler(MemberDetailsObjects memberDetailsObjects)
         {
@@ -125,6 +125,7 @@ namespace NEALibrarySystem
             memberCreator.FirstName = _objects.FirstName.Text;
             memberCreator.Surname = _objects.Surname.Text;
             memberCreator.DateOfBirth = _objects.DateOfBirth.Value;
+            memberCreator.Type = _objects.MemberType.Text;
             memberCreator.LinkedMembers = DataFormatter.SplitString(_objects.LinkedMembers.Text, ", ");
             memberCreator.EmailAddress = _objects.EmailAddress.Text;
             memberCreator.PhoneNumber = _objects.PhoneNumber.Text;
@@ -133,7 +134,7 @@ namespace NEALibrarySystem
             memberCreator.TownCity = _objects.TownCity.Text;
             memberCreator.County = _objects.County.Text;
             memberCreator.Postcode = _objects.PostCode.Text;
-            if (memberCreator.Validate(out List<string> errors)) // check in inputes are valid
+            if (memberCreator.Validate(out List<string> errors, _memberData)) // check in inputes are valid
             {
                 if (_memberData == null) // if creating a new record, add the new record to the list of members
                     DataLibrary.Members.Add(new Member(memberCreator));

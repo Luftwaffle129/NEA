@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
@@ -266,11 +266,9 @@
             this.dtpCircDetailsDueDate = new System.Windows.Forms.DateTimePicker();
             this.btnCircDetailsSave = new System.Windows.Forms.Button();
             this.lsvCircDetailsBookData = new System.Windows.Forms.ListView();
-            this.lblCircDetailsPrice = new System.Windows.Forms.Label();
             this.btnCircDetailsBack = new System.Windows.Forms.Button();
             this.txtCircDetailsType = new System.Windows.Forms.TextBox();
             this.lblCircDetailsMemberBarode = new System.Windows.Forms.Label();
-            this.txtCircDetailsPrice = new System.Windows.Forms.TextBox();
             this.txtCircDetailsMemberBarcode = new System.Windows.Forms.TextBox();
             this.txtCircDetailsDate = new System.Windows.Forms.TextBox();
             this.lblCircDetailsMemberName = new System.Windows.Forms.Label();
@@ -2326,16 +2324,16 @@
             // chtStatisticsChart
             // 
             this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea2.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend2);
+            chartArea3.Name = "ChartArea1";
+            this.chtStatisticsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chtStatisticsChart.Legends.Add(legend3);
             this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
             this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chtStatisticsChart.Series.Add(series3);
             this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
             this.chtStatisticsChart.TabIndex = 0;
             this.chtStatisticsChart.Text = "chart1";
@@ -3011,11 +3009,9 @@
             this.pnlCirculationDetails.Controls.Add(this.dtpCircDetailsDueDate);
             this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsSave);
             this.pnlCirculationDetails.Controls.Add(this.lsvCircDetailsBookData);
-            this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsPrice);
             this.pnlCirculationDetails.Controls.Add(this.btnCircDetailsBack);
             this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsType);
             this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsMemberBarode);
-            this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsPrice);
             this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsMemberBarcode);
             this.pnlCirculationDetails.Controls.Add(this.txtCircDetailsDate);
             this.pnlCirculationDetails.Controls.Add(this.lblCircDetailsMemberName);
@@ -3090,21 +3086,11 @@
             this.lsvCircDetailsBookData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvCircDetailsBookData.HideSelection = false;
-            this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 467);
+            this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 407);
             this.lsvCircDetailsBookData.Name = "lsvCircDetailsBookData";
             this.lsvCircDetailsBookData.Size = new System.Drawing.Size(1159, 100);
             this.lsvCircDetailsBookData.TabIndex = 69;
             this.lsvCircDetailsBookData.UseCompatibleStateImageBehavior = false;
-            // 
-            // lblCircDetailsPrice
-            // 
-            this.lblCircDetailsPrice.AutoSize = true;
-            this.lblCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsPrice.Location = new System.Drawing.Point(15, 410);
-            this.lblCircDetailsPrice.Name = "lblCircDetailsPrice";
-            this.lblCircDetailsPrice.Size = new System.Drawing.Size(84, 31);
-            this.lblCircDetailsPrice.TabIndex = 68;
-            this.lblCircDetailsPrice.Text = "Price:";
             // 
             // btnCircDetailsBack
             // 
@@ -3138,15 +3124,6 @@
             this.lblCircDetailsMemberBarode.Size = new System.Drawing.Size(228, 31);
             this.lblCircDetailsMemberBarode.TabIndex = 45;
             this.lblCircDetailsMemberBarode.Text = "Member Barcode:";
-            // 
-            // txtCircDetailsPrice
-            // 
-            this.txtCircDetailsPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCircDetailsPrice.Location = new System.Drawing.Point(255, 407);
-            this.txtCircDetailsPrice.Name = "txtCircDetailsPrice";
-            this.txtCircDetailsPrice.ReadOnly = true;
-            this.txtCircDetailsPrice.Size = new System.Drawing.Size(495, 38);
-            this.txtCircDetailsPrice.TabIndex = 63;
             // 
             // txtCircDetailsMemberBarcode
             // 
@@ -3202,7 +3179,7 @@
             // 
             this.lblCircDetailsBooks.AutoSize = true;
             this.lblCircDetailsBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCircDetailsBooks.Location = new System.Drawing.Point(15, 470);
+            this.lblCircDetailsBooks.Location = new System.Drawing.Point(15, 410);
             this.lblCircDetailsBooks.Name = "lblCircDetailsBooks";
             this.lblCircDetailsBooks.Size = new System.Drawing.Size(84, 31);
             this.lblCircDetailsBooks.TabIndex = 53;
@@ -3511,7 +3488,6 @@
         private System.Windows.Forms.Label lblLoanEnterBarcode;
         private System.Windows.Forms.TextBox txtLoanEnterBarcode;
         private System.Windows.Forms.Panel pnlCirculationDetails;
-        private System.Windows.Forms.Label lblCircDetailsPrice;
         private System.Windows.Forms.Button btnCircDetailsBack;
         private System.Windows.Forms.TextBox txtCircDetailsType;
         private System.Windows.Forms.Label lblCircDetailsMemberBarode;
@@ -3528,7 +3504,6 @@
         private System.Windows.Forms.Button btnCirculation;
         private System.Windows.Forms.Button btnCircDetailsSave;
         private System.Windows.Forms.DateTimePicker dtpCircDetailsDueDate;
-        private System.Windows.Forms.TextBox txtCircDetailsPrice;
         private System.Windows.Forms.Button btnReturnDelete;
         private System.Windows.Forms.Button btnSellDelete;
         private System.Windows.Forms.Button btnReserveDelete;

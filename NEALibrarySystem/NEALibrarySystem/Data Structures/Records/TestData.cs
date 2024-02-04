@@ -214,8 +214,8 @@ namespace NEALibrarySystem.Data_Structures
         {
             // set up settings details
             Settings.MemberBarcodeLength = 10;
-            Settings.LoanDurations = new int[3] { 14, 7, 5 };
-            Settings.ReserveDurations = new int[3] { 14, 7, 5 };
+            Settings.LoanDurations = new int[4] { 14, 7, 10, 14 };
+            Settings.ReserveDurations = new int[4] { 14, 7, 10, 14 };
             Settings.BookCopyBarcodeLength = 6;
             Settings.LateFeePerDay = 0.05;
         }
@@ -338,7 +338,7 @@ namespace NEALibrarySystem.Data_Structures
                 memberCreator.Barcode = barcode;
                 memberCreator.FirstName = _firstNames[rand.Next(0, _firstNames.Length)]; // generate a realistic random first name
                 memberCreator.Surname = _lastNames[rand.Next(0, _lastNames.Length)]; // generate a realistic random surname
-                memberCreator.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}"; // generate a random standard postcode
+                memberCreator.Postcode = $"{GenerateRandomLetter()}{GenerateRandomLetter()}{GenerateRandomDigit()} {GenerateRandomDigit(19)}{GenerateRandomLetter()}{GenerateRandomLetter()}".ToUpper(); // generate a random standard postcode
                 memberCreator.EmailAddress = $"{_emails[rand.Next(0, _emails.Length)]}@gmail.com"; // generate realistic random email
                 // generate a random phone number
                 string phoneNumber = "";
