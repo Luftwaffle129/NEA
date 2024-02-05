@@ -633,6 +633,7 @@
             // 
             this.cmbMemberType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.cmbMemberType.FormattingEnabled = true;
             this.cmbMemberType.Location = new System.Drawing.Point(255, 287);
@@ -1013,6 +1014,7 @@
             // 
             // cmbSearchField
             // 
+            this.cmbSearchField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSearchField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchField.FormattingEnabled = true;
             this.cmbSearchField.Location = new System.Drawing.Point(10, 33);
@@ -1128,6 +1130,7 @@
             // 
             // cmbFilter2
             // 
+            this.cmbFilter2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFilter2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFilter2.FormattingEnabled = true;
             this.cmbFilter2.Location = new System.Drawing.Point(504, 33);
@@ -1137,6 +1140,7 @@
             // 
             // cmbFilter1
             // 
+            this.cmbFilter1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFilter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFilter1.FormattingEnabled = true;
             this.cmbFilter1.Location = new System.Drawing.Point(265, 33);
@@ -3212,11 +3216,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlCirculationDetails);
+            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlStaff);
-            this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);

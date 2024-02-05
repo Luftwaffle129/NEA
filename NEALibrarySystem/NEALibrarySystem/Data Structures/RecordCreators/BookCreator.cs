@@ -99,7 +99,7 @@ namespace NEALibrarySystem.Data_Structures.Records
             foreach (string s in strings)
             {
                 // check that the phrase is not "" and it does not occur more than once in the list of strings, and contains only letters, numbers, hyphens and spaces. Returns false if otherwise
-                if (s.Length == 0 || seenStrings.Contains(s) || Regex.IsMatch(s, @"^[a-zA-Z0-9 -]*$"))
+                if (s.Length == 0 || seenStrings.Contains(s) || !Regex.IsMatch(s, @"^[a-zA-Z0-9 -]*$"))
                     return false;
                 else
                     seenStrings.Add(s);

@@ -233,10 +233,13 @@ namespace NEALibrarySystem.SearchList
                     break;
             }
             _objects.SearchField.Items.Clear();
+            _objects.SearchField.Items.Add("");
             _objects.SearchField.Items.AddRange(columns);
             _objects.Filter1Field.Items.Clear();
+            _objects.Filter1Field.Items.Add("");
             _objects.Filter1Field.Items.AddRange(columns);
             _objects.Filter2Field.Items.Clear();
+            _objects.Filter2Field.Items.Add("");
             _objects.Filter2Field.Items.AddRange(columns);
         }
         /// <summary>
@@ -423,7 +426,7 @@ namespace NEALibrarySystem.SearchList
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
                                     {
-                                        members = MemberSearch(_objects.Search.Text);
+                                        members = MemberSearch(_objects.Search.Text, members);
                                     }
                                 }
                             }
@@ -511,7 +514,7 @@ namespace NEALibrarySystem.SearchList
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
                                     {
-                                        books = BookSearch(_objects.Search.Text);
+                                        books = BookSearch(_objects.Search.Text, books);
                                     }
                                 }
 
@@ -608,7 +611,7 @@ namespace NEALibrarySystem.SearchList
                                     }
                                     else if (i == 0) // if not, then perform a search on all properties if it is the first search term
                                     {
-                                        circulationCopies = CirculationSearch(_objects.Search.Text);
+                                        circulationCopies = CirculationSearch(_objects.Search.Text, circulationCopies);
                                     }
                                 }
                             }
@@ -724,52 +727,49 @@ namespace NEALibrarySystem.SearchList
         /// For each property, get lists of books where the property matches the search term (case insensitive)
         /// Merge the lists of books for each property into a single list without any duplicate records
         /// 
-        /// <param name="item">Item to search for</param>
+        /// <param name="searchItem">Item to search for</param>
         /// <returns>List of books that match the search term</returns>
-        private List<Book> BookSearch(string item)
+        private List<Book> BookSearch(string searchItem, List<Book> books)
         {
-            // Get lists of valid books for each property
-
-            List<Book> isbns = ApplyFilter(DataLibrary.Isbns, item, SearchAndSort.UpperRefClassStartsWithString);
-            isbns = SearchAndSort.QuickSort<Book, Book>(isbns, SearchAndSort.TwoBooks);
-            // Below are the steps performed on each property below to get a list of valid books for each property:
-            // gets an ordered list of the reference class property which is case insensitive
-            List<ReferenceClass<string, Book>> titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Titles, SearchAndSort.TwoUpperRefClassBooks);
-            // get the list of books that are valid under the filter
-            List<Book> titles = ApplyFilter(titleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            // sort them based on their reference
-            titles = SearchAndSort.QuickSort<Book, Book>(titles, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> seriesTitleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.SeriesTitles, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> seriesTitles = ApplyFilter(seriesTitleRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            seriesTitles = SearchAndSort.QuickSort<Book, Book>(seriesTitles, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> mediaTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.MediaTypes, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> mediaTypes = ApplyFilter(mediaTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            mediaTypes = SearchAndSort.QuickSort<Book, Book>(mediaTypes, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> authorRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Authors, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> authors = ApplyFilter(authorRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            authors = SearchAndSort.QuickSort<Book, Book>(authors, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> publisherRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Publishers, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> publishers = ApplyFilter(publisherRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            publishers = SearchAndSort.QuickSort<Book, Book>(publishers, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> genreRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Genres, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> genres = ApplyFilter(genreRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            genres = SearchAndSort.QuickSort<Book, Book>(genres, SearchAndSort.TwoBooks);
-            List<ReferenceClass<string, Book>> themeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(DataLibrary.Themes, SearchAndSort.TwoUpperRefClassBooks);
-            List<Book> themes = ApplyFilter(themeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            themes = SearchAndSort.QuickSort<Book, Book>(themes, SearchAndSort.TwoBooks);
-
-            List<List<Book>> columnTypes =new List<List<Book>>
+            List<ReferenceClass<string, Book>>[] attributeRefClasses = new List<ReferenceClass<string, Book>>[_bookColumns.Length]; // stores lists of reference classes of the inputted books
+            List<List<Book>> validBooks = new List<List<Book>>(); // stores the list of books that pass the filter for each property
+            if (books.Count > 0)
             {
-                isbns,
-                titles,
-                seriesTitles,
-                mediaTypes,
-                authors, 
-                publishers, 
-                genres, 
-                themes
-            };
-            return MergeWithoutDuplicates(columnTypes, SearchAndSort.TwoSmallestBooks);
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = new List<ReferenceClass<string, Book>>();
+                }
+                // add each book's reference classes into the list of attributes
+                foreach (Book book in books)
+                {
+                    int i = 0; // index of attribute list being used
+                    attributeRefClasses[i++].Add(book.Isbn);
+                    attributeRefClasses[i++].Add(book.Title);
+                    attributeRefClasses[i++].Add(book.SeriesTitle);
+                    attributeRefClasses[i++].Add(book.MediaType);
+                    attributeRefClasses[i++].Add(book.Author);
+                    attributeRefClasses[i++].Add(book.Publisher);
+                    foreach (ReferenceClass<string, Book> genre in book.Genres)
+                    {
+                        attributeRefClasses[i].Add(genre);
+                    }
+                    i++;
+                    foreach (ReferenceClass<string, Book> theme in book.Themes)
+                    {
+                        attributeRefClasses[i].Add(theme);
+                    }
+                }
+                // for each attribute's list of reference classes, sort the list, apply the filter to get the valid books, sort the list of valid books, and add them to the list of valid books
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = SearchAndSort.QuickSort<ReferenceClass<string, Book>, ReferenceClass<string, Book>>(attributeRefClasses[i], SearchAndSort.TwoUpperRefClassBooks);
+                    validBooks.Add(SearchAndSort.QuickSort<Book, Book>(ApplyFilter(attributeRefClasses[i], searchItem, SearchAndSort.UpperRefClassStartsWithString), SearchAndSort.TwoBooks));
+                }
+                // merge lists of attributes into a single list without any duplicated records and return
+                return MergeWithoutDuplicates(validBooks, SearchAndSort.TwoSmallestBooks);
+            }
+            else
+                return new List<Book>();
         }
 
         #endregion
@@ -784,32 +784,37 @@ namespace NEALibrarySystem.SearchList
         /// 
         /// <param name="item">Items to serach for</param>
         /// <returns>List of members that match the search term</returns>
-        private List<Member> MemberSearch(string item)
+        private List<Member> MemberSearch(string searchItem, List<Member> members)
         {
-            // Get lists of valid members for each property
-            List<Member> barcodes = ApplyFilter(DataLibrary.MemberBarcodes, item, SearchAndSort.UpperRefClassStartsWithString);
-            barcodes = SearchAndSort.QuickSort<Member, Member>(barcodes, SearchAndSort.TwoMembers);
-            List<ReferenceClass<string, Member>> firstNameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.FirstNames, SearchAndSort.TwoUpperRefClassMembers);
-            List<Member> firstNames = ApplyFilter(firstNameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            firstNames = SearchAndSort.QuickSort<Member, Member>(firstNames, SearchAndSort.TwoMembers);
-            List<ReferenceClass<string, Member>> surameRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(DataLibrary.Surnames, SearchAndSort.TwoUpperRefClassMembers);
-            List<Member> surnames = ApplyFilter(surameRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-            surnames = SearchAndSort.QuickSort<Member, Member>(surnames, SearchAndSort.TwoMembers);
+            List<ReferenceClass<string, Member>>[] attributeRefClasses = new List<ReferenceClass<string, Member>>[_memberColumns.Length]; // stores lists of reference classes of the inputted members
+            List<List<Member>> validMembers = new List<List<Member>>(); // stores the list of members that pass the filter for each property
 
-            List<ReferenceClass<string, Member>> memberTypeRefClassList = new List<ReferenceClass<string, Member>>();
-            foreach (Member member in DataLibrary.Members)
-                memberTypeRefClassList = CreateReferenceClass(memberTypeRefClassList, member, member.Type.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
-            memberTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(memberTypeRefClassList, SearchAndSort.TwoUpperRefClassMembers);
-            List<Member> memberTypes = ApplyFilter(memberTypeRefClassList, item, SearchAndSort.UpperRefClassStartsWithString);
-
-            List<List<Member>> properties = new List<List<Member>>
+            if (members.Count > 0)
             {
-                barcodes, 
-                firstNames, 
-                surnames, 
-                memberTypes
-            };
-            return MergeWithoutDuplicates(properties, SearchAndSort.TwoSmallestMembers);
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = new List<ReferenceClass<string, Member>>();
+                }
+                // add each book's reference classes into the list of attributes
+                foreach (Member member in members)
+                {
+                    int i = 0; // index of attribute list being used
+                    attributeRefClasses[i++].Add(member.Barcode);
+                    attributeRefClasses[i++].Add(member.FirstName);
+                    attributeRefClasses[i++].Add(member.Surname);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], member, member.Type.Value.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
+                }
+                // for each attribute's list of reference classes, sort the list, apply the filter to get the valid members, sort the list of valid members, and add them to the list of valid members
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = SearchAndSort.QuickSort<ReferenceClass<string, Member>, ReferenceClass<string, Member>>(attributeRefClasses[i], SearchAndSort.TwoUpperRefClassMembers);
+                    validMembers.Add(SearchAndSort.QuickSort<Member, Member>(ApplyFilter(attributeRefClasses[i], searchItem, SearchAndSort.UpperRefClassStartsWithString), SearchAndSort.TwoMembers));
+                }
+                // merge lists of attributes into a single list without any duplicated records and return
+                return MergeWithoutDuplicates(validMembers, SearchAndSort.TwoSmallestMembers);
+            }
+            else
+                return new List<Member>();
         }
         #endregion
         #region circulation
@@ -818,82 +823,47 @@ namespace NEALibrarySystem.SearchList
         /// </summary>
         /// 
         /// Algorithm method:
-        /// For each property, get lists of books where the property matches the search term (case insensitive)
-        /// Merge the lists of books for each property into a single list without any duplicate records
+        /// For each property, get lists of circulation copies where the property matches the search term (case insensitive)
+        /// Merge the lists of circulation copies for each property into a single list without any duplicate records
         /// 
         /// <param name="searchItem">Items to search for</param>
         /// <returns>List of circulation copies that match the search term</returns>
-        private List<CirculationCopy> CirculationSearch(string searchItem)
+        private List<CirculationCopy> CirculationSearch(string searchItem, List<CirculationCopy> circulationCopies)
         {
-            // create the lists to contain the reference classes for the circulation records
-            List<ReferenceClass<string, CirculationCopy>> idRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> bookBarcodeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> titleRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> seriesTitleRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> authorRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> memberBarcodeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> dateRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> dueDateRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
-            List<ReferenceClass<string, CirculationCopy>> circulationTypeRefClassList = new List<ReferenceClass<string, CirculationCopy>>();
+            List<ReferenceClass<string, CirculationCopy>>[] attributeRefClasses = new List<ReferenceClass<string, CirculationCopy>>[_circulationCopyColumns.Length]; // stores lists of reference classes of the inputted circulation copies
+            List<List<CirculationCopy>> validCirculationCopies = new List<List<CirculationCopy>>(); // stores the list of circulation copies that pass the filter for each property
 
-            // populate the reference class lists with new reference classes for each circulation record
-            if (DataLibrary.CirculationCopies.Count > 0)
-                foreach (CirculationCopy copy in DataLibrary.CirculationCopies)
-                {
-                    idRefClassList = DataLibrary.CreateReferenceClass(idRefClassList, copy, copy.Id.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out int index);
-                    bookBarcodeRefClassList = DataLibrary.CreateReferenceClass(bookBarcodeRefClassList, copy, copy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    titleRefClassList = DataLibrary.CreateReferenceClass(titleRefClassList, copy, copy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    seriesTitleRefClassList = DataLibrary.CreateReferenceClass(seriesTitleRefClassList, copy, copy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    authorRefClassList = DataLibrary.CreateReferenceClass(authorRefClassList, copy, copy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    memberBarcodeRefClassList = DataLibrary.CreateReferenceClass(memberBarcodeRefClassList, copy, copy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    dateRefClassList = DataLibrary.CreateReferenceClass(dateRefClassList, copy, DataFormatter.GetDateAndTime(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
-                    dueDateRefClassList = DataLibrary.CreateReferenceClass(dueDateRefClassList, copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
-                    circulationTypeRefClassList = DataLibrary.CreateReferenceClass(circulationTypeRefClassList, copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
-                }
-            // sort the reference classes ready for a binary sort 
-            idRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(idRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            bookBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(bookBarcodeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            titleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(titleRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            seriesTitleRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(seriesTitleRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            authorRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(authorRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            memberBarcodeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(memberBarcodeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            dateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            dueDateRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(dueDateRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            circulationTypeRefClassList = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(circulationTypeRefClassList, SearchAndSort.TwoUpperRefClassCircCopies);
-            
-            // gets the list of records that start with the search filter and sort the records
-            List<CirculationCopy> ids = ApplyFilter(bookBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            ids = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(ids, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> bookBarcodes = ApplyFilter(bookBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            bookBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(bookBarcodes, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> titles = ApplyFilter(titleRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            titles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(titles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> seriesTitles = ApplyFilter(seriesTitleRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            seriesTitles = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(seriesTitles, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> authors = ApplyFilter(authorRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            authors = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(authors, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dates = ApplyFilter(dateRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            dates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> dueDates = ApplyFilter(dueDateRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            dueDates = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(dueDates, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> memberBarcodes = ApplyFilter(memberBarcodeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            memberBarcodes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(memberBarcodes, SearchAndSort.TwoCircCopies);
-            List<CirculationCopy> circulationTypes = ApplyFilter(circulationTypeRefClassList, searchItem, SearchAndSort.UpperRefClassStartsWithString);
-            circulationTypes = SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(circulationTypes, SearchAndSort.TwoCircCopies);
-
-            List<List<CirculationCopy>> properties = new List<List<CirculationCopy>>
+            if (circulationCopies.Count > 0)
             {
-                ids,
-                bookBarcodes,
-                titles,
-                seriesTitles,
-                authors,
-                dates,
-                circulationTypes,
-                dueDates,
-                memberBarcodes
-            };
-            return MergeWithoutDuplicates(properties, SearchAndSort.TwoSmallestCircCopies);
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = new List<ReferenceClass<string, CirculationCopy>>();
+                }
+                // add each circulation copy's reference classes into the list of attributes
+                foreach (CirculationCopy copy in circulationCopies)
+                {
+                    int i = 0; // index of attribute list being used
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.Id.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out int index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDateAndTime(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
+                }
+                // for each attribute's list of reference classes, sort the list, apply the filter to get the valid circulation copies, sort the list of valid circulation copies, and add them to the list of valid circulation copies
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(attributeRefClasses[i], SearchAndSort.TwoUpperRefClassCircCopies);
+                    validCirculationCopies.Add(SearchAndSort.QuickSort<CirculationCopy, CirculationCopy>(ApplyFilter(attributeRefClasses[i], searchItem, SearchAndSort.UpperRefClassStartsWithString), SearchAndSort.TwoCircCopies));
+                }
+                // merge lists of attributes into a single list without any duplicated records and return
+                return MergeWithoutDuplicates(validCirculationCopies, SearchAndSort.TwoSmallestCircCopies);
+            }
+            else
+                return new List<CirculationCopy>();
         }
         #endregion
         /// <summary>

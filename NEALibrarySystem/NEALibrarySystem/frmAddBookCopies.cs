@@ -17,7 +17,7 @@ namespace NEALibrarySystem
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.barcodes = txtBarcodes.Text.Split('\n');
+            this.barcodes = DataFormatter.SplitString(txtBarcodes.Text, "\r\n").ToArray();
             if (ValidBookCopyBarcodes())
             {
                 this.DialogResult = DialogResult.OK;
@@ -40,14 +40,21 @@ namespace NEALibrarySystem
         /// <returns>Boolean result of whether the barcodes are valid</returns>
         private bool ValidBookCopyBarcodes()
         {
-            foreach (string barcode in barcodes)
+            if (barcodes.Length > 0)
             {
-                if (!(barcode.Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$")))
+                for (int i = 0; i < barcodes.Length; i++)
                 {
-                    return false;
+                    if (barcodes[i].Substring(barcodes[i].Length - 1, 1) == "")
+                        barcodes[i] = barcodes[i].Substring(0, barcodes[i].Length - 2);
+                    if (!(barcodes[i].Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcodes[i], @"^[0-9]*$")))
+                    {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
+            else
+                return false;
         }
     }
 }
