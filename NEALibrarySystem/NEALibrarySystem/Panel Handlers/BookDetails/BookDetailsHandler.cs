@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.PanelHandlers
 {
+    /// <summary>
+    /// Used to handle processes of the book details panel
+    /// </summary>
     public class BookDetailsHandler
     {
         private BookDetailsObjects _objects;

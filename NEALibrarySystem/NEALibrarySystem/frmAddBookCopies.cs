@@ -35,7 +35,7 @@ namespace NEALibrarySystem
             this.Close();
         }
         /// <summary>
-        /// Determine of inputted barcodes consist of only digits and are the correct length
+        /// Determine of inputted barcodes consist of only digits, are unique and are the correct length
         /// </summary>
         /// <returns>Boolean result of whether the barcodes are valid</returns>
         private bool ValidBookCopyBarcodes()
@@ -44,17 +44,22 @@ namespace NEALibrarySystem
             {
                 for (int i = 0; i < barcodes.Length; i++)
                 {
-                    if (barcodes[i].Substring(barcodes[i].Length - 1, 1) == "")
-                        barcodes[i] = barcodes[i].Substring(0, barcodes[i].Length - 2);
+                    // check if barcode is the correct length and contains the correct characters
                     if (!(barcodes[i].Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcodes[i], @"^[0-9]*$")))
-                    {
                         return false;
-                    }
+                    // check that barcode is not already used
+                    if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcodes[i], SearchAndSort.RefClassAndString) != -1)
+                        return false;
                 }
                 return true;
             }
             else
                 return false;
+        }
+
+        private void frmAddBookCopies_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

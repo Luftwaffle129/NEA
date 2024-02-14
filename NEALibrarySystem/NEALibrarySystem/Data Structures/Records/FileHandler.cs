@@ -325,6 +325,7 @@ namespace NEALibrarySystem.Data_Structures
                 MemberSaver[] memberSavers = LoadFile<MemberSaver[]>(filePath, "Members");
                 DataLibrary.ClearData.Member();
                 if (memberSavers != null)
+                {
                     foreach (MemberSaver saver in memberSavers)
                     {
                         // create a member creator class from the member saver class
@@ -334,7 +335,6 @@ namespace NEALibrarySystem.Data_Structures
                             FirstName = saver.FirstName,
                             Surname = saver.Surname,
                             DateOfBirth = saver.DateOfBirth,
-                            LinkedMembers = saver.LinkedMembers.ToList(),
                             EmailAddress = saver.EmailAddress,
                             PhoneNumber = saver.PhoneNumber,
                             Address1 = saver.Address1,
@@ -347,6 +347,12 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         DataLibrary.Members.Add(new Member(creator));
                     }
+                    for (int i = 0; i < memberSavers.Length; i++)
+                    {
+                        foreach (string linkedMember in memberSavers[i].LinkedMembers)
+                            DataLibrary.Members[i].LinkedMembers.Add(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, linkedMember, SearchAndSort.RefClassAndString)].Reference);
+                    }
+                }
             }
             /// <summary>
             /// Loads the book copy records stored in the member file

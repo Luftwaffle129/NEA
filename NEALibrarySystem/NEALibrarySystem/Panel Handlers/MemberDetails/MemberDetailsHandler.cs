@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem
 {
+    /// <summary>
+    /// Used to handle processes of the member details panel
+    /// </summary>
     public class MemberDetailsHandler
     {
         // objects
@@ -59,12 +62,14 @@ namespace NEALibrarySystem
         public void Load(Member member = null)
         {
             _memberData = member;
+            _objects.Circulations.Items.Clear();
             if (member == null)
             {
                 _objects.Barcode.Clear();
                 _objects.FirstName.Clear();
                 _objects.Surname.Clear();
-                _objects.MemberType.Text = string.Empty;
+                _objects.MemberType.Text = MemberType.Adult.ToString();
+                _objects.DateOfBirth.Value = _objects.DateOfBirth.MaxDate;
                 _objects.LinkedMembers.Clear();
                 _objects.EmailAddress.Clear();
                 _objects.PhoneNumber.Clear();
@@ -137,10 +142,17 @@ namespace NEALibrarySystem
             if (memberCreator.Validate(out List<string> errors, _memberData)) // check in inputes are valid
             {
                 if (_memberData == null) // if creating a new record, add the new record to the list of members
+                {
                     DataLibrary.Members.Add(new Member(memberCreator));
+                    Load();
+                }
                 else // else modify the member record
+                {
                     DataLibrary.ModifyMember(_memberData, memberCreator);
+                    FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+                }
                 FileHandler.Save.Members();
+                FileHandler.Save.CirculationCopies();
             }
             else
                 MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(errors));

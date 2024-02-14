@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NEALibrarySystem.Data_Structures.Records
@@ -21,7 +22,7 @@ namespace NEALibrarySystem.Data_Structures.Records
         public string County;
         public string Postcode;
         public List<string> LinkedMembers = new List<string>();
-        public DateTime JoinDate = DateTime.MinValue;
+        public DateTime JoinDate = DateTime.Today;
         public string Type;
 
         public bool Validate(out List<string> invalidList, Member original = null)
@@ -32,14 +33,14 @@ namespace NEALibrarySystem.Data_Structures.Records
                 invalidList.Add("Barcode");
             else
             {
-                if (original == null)
+                if (original == null) // if creating a new record
                 {
-                    if (SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) != -1)
+                    if (!(SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) == -1)) // check that the barcode does not match an existing member barcode
                         invalidList.Add("Barcode");
                 }
-                else
+                else // modifying a record
                 {
-                    if (!(SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) != -1 || Barcode == original.Barcode.Value))
+                    if (!(SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) == -1 || Barcode == original.Barcode.Value)) // check that the barcode does not match an existing member barcode except its previous barcode
                         invalidList.Add("Barcode");
                 }
             }
@@ -49,6 +50,9 @@ namespace NEALibrarySystem.Data_Structures.Records
             // surname - not empty
             if (Surname.Length == 0)
                 invalidList.Add("Surname");
+            // date of birth - cannot be later than join date
+            if (DateOfBirth > JoinDate)
+                invalidList.Add("Date of Birth");
             // member type
             int eNumIndex = DataFormatter.StringToEnum<MemberType>(Type);
             if (eNumIndex == -1)
@@ -56,8 +60,9 @@ namespace NEALibrarySystem.Data_Structures.Records
             // email address - valid email address
             if (!Regex.IsMatch(EmailAddress, @"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
                 invalidList.Add("Email Address");
-            // phone number - contains the correct characters
-            if (!Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$"))
+            // phone number - contains the correct characters and correct number of digits
+            int digits = Regex.Matches(PhoneNumber, @"[0-9]").Count;
+            if (!( Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$") && (digits == 10 || digits == 9) ))
                 invalidList.Add("Phone Number");
             // Address 1 - not empty
             if (FirstName.Length == 0)
@@ -88,7 +93,7 @@ namespace NEALibrarySystem.Data_Structures.Records
             foreach (string barcode in LinkedMembers)
             {
                 // check that the barcode is the correct length. Returns false if otherwise
-                if (!(Barcode.Length == Settings.MemberBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$") && SearchAndSort.Binary(DataLibrary.MemberBarcodes, Barcode, SearchAndSort.RefClassAndString) != -1))
+                if (!(Barcode.Length == Settings.MemberBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$") && SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString) != -1 && barcode != Barcode))
                     return false;
                 else
                     seenBarcodes.Add(barcode);

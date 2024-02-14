@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.ListViewHandlers
 {
+    /// <summary>
+    /// Contains methods for list view handlers
+    /// </summary>
     public static class ListViewHandler
     {
         /// <summary>

@@ -609,6 +609,10 @@ namespace NEALibrarySystem.Data_Structures
             FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoRefClassMembers);
             Surnames = DeleteReferenceClass(Surnames, member.Surname, TwoRefClassMembers);
             MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
+            foreach (Member linkedMember in member.LinkedMembers)
+            {
+                member.RemoveMemberLink(linkedMember);
+            }
             // delete member
             Members.Remove(member);
             FileHandler.Save.Members();

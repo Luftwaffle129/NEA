@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
 {
+    /// <summary>
+    /// Handles the processes used in the loan panel
+    /// </summary>
     public class LoanHandler
     {
         // objects of the loan panel

@@ -8,6 +8,9 @@ using static NEALibrarySystem.Data_Structures.DataLibrary;
 
 namespace NEALibrarySystem.SearchList
 {
+    /// <summary>
+    /// Handles the methods used in the search panel
+    /// </summary>
     public class SearchHandler
     {
         private SearchObjects _objects;
@@ -194,21 +197,34 @@ namespace NEALibrarySystem.SearchList
                     {
                         case DataLibrary.SearchFeature.Member:
                             foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
+                            {
                                 DataLibrary.DeleteMember(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
+                            }
+                            UpdateListView(DataLibrary.Members);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case DataLibrary.SearchFeature.Book:
                             foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
+                            {
                                 DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
+                            }
+                            UpdateListView(DataLibrary.Books);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case DataLibrary.SearchFeature.Circulation:
                             foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
+                            {
                                 DataLibrary.DeleteCirculationCopy(DataLibrary.CirculationDates[SearchAndSort.Binary(DataLibrary.CirculationDates, Convert.ToDateTime(item.SubItems[4].Text), SearchAndSort.RefClassAndDate)].Reference);
+                            }
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case DataLibrary.SearchFeature.Staff:
                             break;
                     }
                     FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");
-                    SetUpSearchTab();
                 }
             }
             else
@@ -357,12 +373,18 @@ namespace NEALibrarySystem.SearchList
                     {
                         case SearchFeature.Member:
                             UpdateListView(DataLibrary.Members);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case SearchFeature.Book:
                             UpdateListView(DataLibrary.Books);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case SearchFeature.Circulation:
                             UpdateListView(DataLibrary.CirculationCopies);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                     }
                     break;
@@ -424,13 +446,15 @@ namespace NEALibrarySystem.SearchList
                                             members = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
-                                    else if (i == 0) // if not, then perform a search on all properties if it is the first search term
+                                    else // if not, then perform a search on all properties
                                     {
-                                        members = MemberSearch(_objects.Search.Text, members);
+                                        members = MemberSearch(searchInputs[i].SearchTerm.Text, members);
                                     }
                                 }
                             }
                             UpdateListView(members);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case SearchFeature.Book:
                             List<Book> books = DataLibrary.Books;
@@ -512,14 +536,16 @@ namespace NEALibrarySystem.SearchList
                                             books = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
-                                    else if (i == 0) // if not, then perform a search on all properties if it is the first search term
+                                    else // if not, then perform a search on all properties
                                     {
-                                        books = BookSearch(_objects.Search.Text, books);
+                                        books = BookSearch(searchInputs[i].SearchTerm.Text, books);
                                     }
                                 }
 
                             }
                             UpdateListView(books);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                         case SearchFeature.Circulation:
                             List<CirculationCopy> circulationCopies = DataLibrary.CirculationCopies;
@@ -609,13 +635,15 @@ namespace NEALibrarySystem.SearchList
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
                                     }
-                                    else if (i == 0) // if not, then perform a search on all properties if it is the first search term
+                                    else // if not, then perform a search on all properties
                                     {
-                                        circulationCopies = CirculationSearch(_objects.Search.Text, circulationCopies);
+                                        circulationCopies = CirculationSearch(searchInputs[i].SearchTerm.Text, circulationCopies);
                                     }
                                 }
                             }
                             UpdateListView(circulationCopies);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                     }
                     break;
@@ -802,7 +830,7 @@ namespace NEALibrarySystem.SearchList
                     attributeRefClasses[i++].Add(member.Barcode);
                     attributeRefClasses[i++].Add(member.FirstName);
                     attributeRefClasses[i++].Add(member.Surname);
-                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], member, member.Type.Value.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
+                    attributeRefClasses[i] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], member, member.Type.Value.ToString(), SearchAndSort.TwoRefClassMembers, out int index);
                 }
                 // for each attribute's list of reference classes, sort the list, apply the filter to get the valid members, sort the list of valid members, and add them to the list of valid members
                 for (int i = 0; i < attributeRefClasses.Length; i++)
@@ -851,7 +879,7 @@ namespace NEALibrarySystem.SearchList
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDateAndTime(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
-                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.Type.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out index);
                 }
                 // for each attribute's list of reference classes, sort the list, apply the filter to get the valid circulation copies, sort the list of valid circulation copies, and add them to the list of valid circulation copies
                 for (int i = 0; i < attributeRefClasses.Length; i++)

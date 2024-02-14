@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 {
+    /// <summary>
+    /// Handles the processes used in the reserve panel
+    /// </summary>
     public class ReserveHandler
     {
         // objects of the reserve panel

@@ -2,6 +2,9 @@
 
 namespace NEALibrarySystem.ListViewHandlers.SearchList
 {
+    /// <summary>
+    /// Stores the objects used by SearchHandler
+    /// </summary>
     public class SearchObjects
     {
         public ComboBox SearchField;

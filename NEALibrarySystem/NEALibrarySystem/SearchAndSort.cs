@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem
 {
+    /// <summary>
+    /// Contains the methods used for searching and sorting
+    /// </summary>
     public static class SearchAndSort
     {
         #region search

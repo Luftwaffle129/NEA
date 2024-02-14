@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
 {
+    /// <summary>
+    /// Handles the processes used in the return panel
+    /// </summary>
     public class ReturnHandler
     {
         public CirculationObjectHandler CirculationManager;

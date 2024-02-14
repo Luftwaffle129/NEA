@@ -2,6 +2,9 @@
 
 namespace NEALibrarySystem
 {
+    /// <summary>
+    /// Used to store the used objects in the member details panel
+    /// </summary>
     public class MemberDetailsObjects
     {
         public TextBox Barcode;

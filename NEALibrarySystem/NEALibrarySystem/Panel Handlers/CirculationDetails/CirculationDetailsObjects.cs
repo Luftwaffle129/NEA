@@ -2,6 +2,9 @@
 
 namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
 {
+    /// <summary>
+    /// Used to store the objects used in the circulation details panel handler
+    /// </summary>
     public class CirculationDetailsObjects
     {
         public TextBox Id;

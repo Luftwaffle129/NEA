@@ -86,8 +86,11 @@
             this.Controls.Add(this.lblBarcodes);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "frmAddBookCopies";
             this.Text = "Add Book Copies";
+            this.Load += new System.EventHandler(this.frmAddBookCopies_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

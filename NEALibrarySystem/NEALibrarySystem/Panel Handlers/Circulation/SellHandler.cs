@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem
 {
+    /// <summary>
+    /// Handles the methods used in the sell panel
+    /// </summary>
     public class SellHandler
     {
         // Objects of the sell panel

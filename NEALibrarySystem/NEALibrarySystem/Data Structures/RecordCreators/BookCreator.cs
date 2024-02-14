@@ -54,14 +54,14 @@ namespace NEALibrarySystem.Data_Structures.Records
                 invalidList.Add("Isbn");
             else
             {
-                if (original == null)
+                if (original == null) // if creating a new record
                 {
-                    if (SearchAndSort.Binary(DataLibrary.Isbns, Isbn, SearchAndSort.RefClassAndString) != -1)
+                    if (!(SearchAndSort.Binary(DataLibrary.Isbns, Isbn, SearchAndSort.RefClassAndString) == -1)) // check that the ISBN does not match an existing ISBN
                         invalidList.Add("Isbn");
                 }
-                else
+                else // modifying a book record
                 {
-                    if (!(SearchAndSort.Binary(DataLibrary.Isbns, Isbn, SearchAndSort.RefClassAndString) != -1 || Isbn == original.Isbn.Value))
+                    if (!(SearchAndSort.Binary(DataLibrary.Isbns, Isbn, SearchAndSort.RefClassAndString) == -1 || Isbn == original.Isbn.Value)) // check that the ISBN does not match an existing ISBN except the previous ISBN
                         invalidList.Add("Isbn");
                 }
             }

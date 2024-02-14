@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
 {
+    /// <summary>
+    /// Used to handle the processes of the circulation details panel
+    /// </summary>
     public class CirculationDetailsHandler
     {
         // objects of the circulation details panel
@@ -77,16 +80,21 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             _objects.BookCopy.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         /// <summary>
-        /// Deletes the circulation copy
+        /// Deletes the circulation copy after the user confirms that the want to delete the record
         /// </summary>
         public void Delete()
         {
-            DataLibrary.DeleteCirculationCopy(_circCopy);
-            FrmMainSystem.Main.DisplayProcessMessage("Circulation Copy Deleted");
-            FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+            frmConfirmation confirmation = new frmConfirmation("Do you want to delete this circulation record?");
+            confirmation.ShowDialog();
+            if (confirmation.DialogResult == DialogResult.Yes)
+            {
+                DataLibrary.DeleteCirculationCopy(_circCopy);
+                FrmMainSystem.Main.DisplayProcessMessage("Circulation Copy Deleted");
+                FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+            }
         }
         /// <summary>
-        /// Saves the changes to the circulation copy
+        /// Saves the changes to the circulation copy if the change to the due date is valid
         /// </summary>
         public void Save()
         {
@@ -100,6 +108,8 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             {
                 DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
                 FileHandler.Save.CirculationCopies();
+                FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+                FrmMainSystem.Main.DisplayProcessMessage("Circulation Modified");
             }
             else
             {

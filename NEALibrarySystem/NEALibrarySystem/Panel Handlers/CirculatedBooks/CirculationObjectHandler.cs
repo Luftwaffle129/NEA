@@ -2,10 +2,14 @@
 using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
 {
+    /// <summary>
+    /// Used to control processes used in circulation for multiple features
+    /// </summary>
     public class CirculationObjectHandler
     {
         // Objects
@@ -73,32 +77,46 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             // set up textboxes
             int currentLoans = 0;
             int overdueBooks = 0;
-            double lateFees = 0;
+            double lateFees = 0; // stores total late fees
+
+            // find the member associated to the inputted barcode
+
             string barcode = _memberBarcode.Text;
-            int memberBarcodeIndex = SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString);
-            if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength && memberBarcodeIndex != -1)
+            // check the inputted barcode has valid syntax
+            if (DataLibrary.Members.Count > 0 && barcode.Length == Settings.MemberBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$"))
             {
-                // find the member and their name from the barcode
-                SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
-                _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
-                // get member's loans and reservations
-                if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.CircMemberRelations.Count > 0)
-                    foreach (CircMemberRelation relation in SelectedMember.CircMemberRelations)
-                        if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
-                        {
-                            currentLoans++;
-                            if (relation.CirculationCopy.DueDate.Value < DateTime.Now) // if book is overdue
+                // check if the inputted barcode is the same a member's barcode
+                int memberBarcodeIndex = SearchAndSort.Binary(DataLibrary.MemberBarcodes, barcode, SearchAndSort.RefClassAndString);
+                if (memberBarcodeIndex != -1)
+                {
+                    // find the member and their name from the barcode
+                    SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
+                    _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
+                    // get member's loans and reservations
+                    if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.CircMemberRelations.Count > 0)
+                        foreach (CircMemberRelation relation in SelectedMember.CircMemberRelations)
+                            if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
                             {
-                                overdueBooks++;
-                                lateFees += CirculationCopy.GetLateFees(relation.CirculationCopy.DueDate.Value);
+                                currentLoans++;
+                                if (relation.CirculationCopy.DueDate.Value < DateTime.Now) // if book is overdue
+                                {
+                                    overdueBooks++;
+                                    lateFees += CirculationCopy.GetLateFees(relation.CirculationCopy.DueDate.Value);
+                                }
                             }
-                        }
+                }
+                else
+                {
+                    ResetMemberDetailFields();
+                    SelectedMember = null;
+                }
             }
             else
-            {
+            { 
                 ResetMemberDetailFields();
                 SelectedMember = null;
             }
+
             _currentLoans.Text = currentLoans.ToString();
             _overdueBooks.Text = overdueBooks.ToString();
             _lateFees.Text = lateFees.ToString();
@@ -215,19 +233,27 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         public void AddBookCopy()
         {
             string barcode = _enterBarcodes.Text;
-            int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString); // gets the index of the stored book copy barcode
-            if (index == -1) // check if book copy was found
-                MessageBox.Show("Book Copy Not Found");
-            BookCopy bookCopy = DataLibrary.BookCopyBarcodes[index].Reference;
-            if (BookCopyList.Contains(bookCopy))
-                MessageBox.Show("Book Copy Already Selected");
-            else
+            if (barcode.Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcode, @"^[0-9]*$"))
             {
-                // add book copy, update list view, and empty the barcode textbox
-                BookCopyList.Add(bookCopy);
-                UpdateListView();
-                _enterBarcodes.Clear();
+                int index = SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcode, SearchAndSort.RefClassAndString); // gets the index of the stored book copy barcode
+                if (index == -1) // check if book copy was found
+                    MessageBox.Show("Book Copy Not Found");
+                else
+                {
+                    BookCopy bookCopy = DataLibrary.BookCopyBarcodes[index].Reference;
+                    if (BookCopyList.Contains(bookCopy))
+                        MessageBox.Show("Book Copy Already Selected");
+                    else
+                    {
+                        // add book copy, update list view, and empty the barcode textbox
+                        BookCopyList.Add(bookCopy);
+                        UpdateListView();
+                        _enterBarcodes.Clear();
+                    }
+                }
             }
+            else
+                MessageBox.Show("Invalid barcode");
         }
     }
 }

@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Formats different types of data
+    /// </summary>
     public static class DataFormatter
     {
         /// <summary>

@@ -1,6 +1,9 @@
 ﻿using System.Windows.Forms;
 namespace NEALibrarySystem.PanelHandlers
 {
+    /// <summary>
+    /// Used to store the used objects in the book details panel
+    /// </summary>
     public class BookDetailsObjects
     {
         // book details
