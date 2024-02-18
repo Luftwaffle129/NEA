@@ -163,10 +163,10 @@ namespace NEALibrarySystem.PanelHandlers
         public List<BookCopy> GetCurrentBookCopies()
         {
             List<BookCopy> bookCopyList = new List<BookCopy>();
-            if (!_isNewRecord && _bookData.BookCopyRelations.Count > 0)
+            if (!_isNewRecord && _bookData.BookCopies.Count > 0)
             {
-                foreach (BookCopyRelation copyRelation in _bookData.BookCopyRelations)
-                    bookCopyList.Add(copyRelation.Copy);
+                foreach (BookCopy copy in _bookData.BookCopies)
+                    bookCopyList.Add(copy);
             }
             return bookCopyList;
         }

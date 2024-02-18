@@ -179,10 +179,10 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     data = new string[]
                     {
                         copy.Barcode.Value,
-                        copy.BookRelation.Book.Title.Value,
-                        copy.BookRelation.Book.SeriesTitle.Value,
-                        copy.BookRelation.Book.Author.Value,
-                        DataFormatter.DoubleToPrice(copy.BookRelation.Book.Price.Value),
+                        copy.Book.Title.Value,
+                        copy.Book.SeriesTitle.Value,
+                        copy.Book.Author.Value,
+                        DataFormatter.DoubleToPrice(copy.Book.Price.Value),
                         copy.GetStatus(),
                         copy.GetDueDate(),
                         copy.GetMemberBarcode()
@@ -191,9 +191,9 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     data = new string[]
                     {
                         copy.Barcode.Value,
-                        copy.BookRelation.Book.Title.Value,
-                        copy.BookRelation.Book.SeriesTitle.Value,
-                        copy.BookRelation.Book.Author.Value,
+                        copy.Book.Title.Value,
+                        copy.Book.SeriesTitle.Value,
+                        copy.Book.Author.Value,
                         copy.GetStatus(),
                         copy.GetDueDate(),
                         copy.GetMemberBarcode()

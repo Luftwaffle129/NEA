@@ -56,10 +56,5 @@ namespace NEALibrarySystem
             else
                 return false;
         }
-
-        private void frmAddBookCopies_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

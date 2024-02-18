@@ -8,14 +8,13 @@ namespace NEALibrarySystem.Data_Structures
     public class BookCopy
     {
         public ReferenceClass<string, BookCopy> Barcode { get; set; } // used as the prmary key
-        public BookCopyRelation BookRelation { get; set; } // links the book copy to a book
+        public Book Book { get; set; } // links the book copy to a book
         public CirculationCopy CirculationCopy { get; set; } // links the book copy to a circulation record
         public BookCopy(string barcode, Book book)
         {
             // create a relation to the book
-            BookRelation = new BookCopyRelation(book, this);
-            DataLibrary.BookCopyRelations.Add(BookRelation);
-            BookRelation.Book.BookCopyRelations.Add(BookRelation);
+            Book = book;
+            Book.BookCopies.Add(this);
 
             int index; // index that the reference class is inserted into
             DataLibrary.BookCopyBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.BookCopyBarcodes, this, barcode, SearchAndSort.TwoBookCopyBarcodes, out index);

@@ -28,14 +28,6 @@ namespace NEALibrarySystem.Data_Structures
             set { _bookCopyBarcodes = value ?? new List<ReferenceClass<string, BookCopy>>(); }
         }
         #endregion
-        #region book copy relations
-        private static List<BookCopyRelation> _bookCopyRelations = new List<BookCopyRelation>();
-        public static List<BookCopyRelation> BookCopyRelations
-        {
-            get { return _bookCopyRelations; }
-            set { _bookCopyRelations = value ?? new List<BookCopyRelation>(); }
-        }
-        #endregion
         #region books
         private static List<Book> _books = new List<Book>();
         public static List<Book> Books
@@ -569,9 +561,9 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteBook(Book book)
         {
             //delete book copies
-            while (book.BookCopyRelations.Count > 0)
+            while (book.BookCopies.Count > 0)
             {
-                DeleteBookCopy(book.BookCopyRelations[0].Copy);
+                DeleteBookCopy(book.BookCopies[0]);
             }
             // delete references
             Titles = DeleteReferenceClass(Titles, book.Title, TwoRefClassBooks);
@@ -624,8 +616,7 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteBookCopy(BookCopy bookCopy)
         {
             // delete book copy relation
-            bookCopy.BookRelation.Book.BookCopyRelations.Remove(bookCopy.BookRelation);
-            BookCopyRelations.Remove(bookCopy.BookRelation);
+            bookCopy.Book.BookCopies.Remove(bookCopy);
             // delete barcode
             BookCopyBarcodes = DeleteReferenceClass(BookCopyBarcodes, bookCopy.Barcode, TwoBookCopyBarcodes);
             // delete circulation copy

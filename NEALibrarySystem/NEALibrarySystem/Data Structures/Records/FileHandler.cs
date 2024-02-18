@@ -233,7 +233,7 @@ namespace NEALibrarySystem.Data_Structures
                         BookCopySaver saver = new BookCopySaver();
                         // save data required for making a new book copy into the saver
                         saver.Barcode = bookCopy.Barcode.Value;
-                        saver.Isbn = bookCopy.BookRelation.Book.Isbn.Value;
+                        saver.Isbn = bookCopy.Book.Isbn.Value;
                         bookCopySavers[i] = saver;
                     }
                 }

@@ -338,9 +338,9 @@ namespace NEALibrarySystem.SearchList
                     {
                         copy.Id.Value.ToString(),
                         copy.BookCopy.Barcode.Value,
-                        copy.BookCopy.BookRelation.Book.Title.Value,
-                        copy.BookCopy.BookRelation.Book.SeriesTitle.Value,
-                        copy.BookCopy.BookRelation.Book.Author.Value,
+                        copy.BookCopy.Book.Title.Value,
+                        copy.BookCopy.Book.SeriesTitle.Value,
+                        copy.BookCopy.Book.Author.Value,
                         DataFormatter.GetDateAndTime(copy.Date.Value),
                         copy.Type.Value.ToString(),
                         DataFormatter.GetDate(copy.DueDate.Value),
@@ -582,7 +582,7 @@ namespace NEALibrarySystem.SearchList
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
-                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
+                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
@@ -590,7 +590,7 @@ namespace NEALibrarySystem.SearchList
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
-                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
+                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
@@ -598,7 +598,7 @@ namespace NEALibrarySystem.SearchList
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
-                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
+                                                referenceClasses = DataLibrary.CreateReferenceClass<string, CirculationCopy>(referenceClasses, circulationCopy, circulationCopy.BookCopy.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out int index);
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
@@ -873,9 +873,9 @@ namespace NEALibrarySystem.SearchList
                     int i = 0; // index of attribute list being used
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.Id.Value.ToString(), SearchAndSort.TwoRefClassCircCopies, out int index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out index);
-                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.BookRelation.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.Book.Title.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.Book.SeriesTitle.Value, SearchAndSort.TwoRefClassCircCopies, out index);
+                    attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.BookCopy.Book.Author.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, copy.CircMemberRelation.Member.Barcode.Value, SearchAndSort.TwoRefClassCircCopies, out index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDateAndTime(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);
                     attributeRefClasses[i++] = DataLibrary.CreateReferenceClass(attributeRefClasses[i], copy, DataFormatter.GetDate(copy.Date.Value), SearchAndSort.TwoRefClassCircCopies, out index);

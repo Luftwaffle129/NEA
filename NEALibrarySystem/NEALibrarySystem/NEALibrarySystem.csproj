@@ -50,7 +50,6 @@
     <Compile Include="Data Structures\RecordSavers\BookCopySaver.cs" />
     <Compile Include="Data Structures\RecordSavers\BookSaver.cs" />
     <Compile Include="Data Structures\RecordSavers\MemberSaver.cs" />
-    <Compile Include="Data Structures\Records\BookCopyRelation.cs" />
     <Compile Include="Data Structures\Records\CircMemberRelation.cs" />
     <Compile Include="Data Structures\RecordCreators\CirculationCopyCreator.cs" />
     <Compile Include="Data Structures\RecordSavers\CirculationCopySaver.cs" />
