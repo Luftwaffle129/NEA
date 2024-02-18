@@ -465,11 +465,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="compare">Comparison algorithm when searching and inserting reference classes in the list</param>
         /// <param name="newReferenceClass">Reference class that was changed</param>
         /// <returns>Updated list of the reference classes</returns>
-        public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
+        public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> referenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
-            list = DeleteReferenceClass(list, oldReferenceClass, compare);
+            list = DeleteReferenceClass(list, referenceClass, compare);
             list = CreateReferenceClass(list, reference, newValue, compare, out int index);
-            newReferenceClass = list[index];
             return list;
         }
         /// <summary>
@@ -508,10 +507,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="newMemberInfo">Information to update the member details with</param>
         public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
-            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
-            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
-            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
-            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
+            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
+            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
+            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
+            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;

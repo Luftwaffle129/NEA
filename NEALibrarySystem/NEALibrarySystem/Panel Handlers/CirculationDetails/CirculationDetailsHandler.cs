@@ -106,7 +106,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             }
             if (isValid)
             {
-                DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
+                DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
                 FileHandler.Save.CirculationCopies();
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
                 FrmMainSystem.Main.DisplayProcessMessage("Circulation Modified");
