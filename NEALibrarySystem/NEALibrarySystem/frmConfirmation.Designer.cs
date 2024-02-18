@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnMemberCancel = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnYes = new System.Windows.Forms.Button();
             this.lblOutput = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnMemberCancel
             // 
-            this.btnMemberCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMemberCancel.Location = new System.Drawing.Point(668, 205);
-            this.btnMemberCancel.Name = "btnMemberCancel";
-            this.btnMemberCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnMemberCancel.TabIndex = 3;
-            this.btnMemberCancel.Text = "Cancel";
-            this.btnMemberCancel.UseVisualStyleBackColor = false;
-            this.btnMemberCancel.Click += new System.EventHandler(this.btnMemberCancel_Click);
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(668, 205);
+            this.btnCancel.Name = "btnMemberCancel";
+            this.btnCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnYes
             // 
@@ -77,7 +77,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 266);
             this.Controls.Add(this.lblOutput);
-            this.Controls.Add(this.btnMemberCancel);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnYes);
             this.Name = "frmConfirmation";
             this.Text = "Confirmation";
@@ -87,7 +87,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnMemberCancel;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnYes;
         private System.Windows.Forms.Label lblOutput;
     }
