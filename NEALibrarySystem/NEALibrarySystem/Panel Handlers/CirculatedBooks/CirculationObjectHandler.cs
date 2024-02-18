@@ -93,15 +93,15 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     SelectedMember = DataLibrary.MemberBarcodes[memberBarcodeIndex].Reference;
                     _memberName.Text = SelectedMember.FirstName.Value + " " + SelectedMember.Surname.Value;
                     // get member's loans and reservations
-                    if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.CircMemberRelations.Count > 0)
-                        foreach (CircMemberRelation relation in SelectedMember.CircMemberRelations)
-                            if (relation.CirculationCopy.Type.Value == CirculationType.Loaned)
+                    if (DataLibrary.CirculationCopies.Count > 0 && SelectedMember.Circulations.Count > 0)
+                        foreach (CirculationCopy circulationCopy in SelectedMember.Circulations)
+                            if (circulationCopy.Type.Value == CirculationType.Loaned)
                             {
                                 currentLoans++;
-                                if (relation.CirculationCopy.DueDate.Value < DateTime.Now) // if book is overdue
+                                if (circulationCopy.DueDate.Value < DateTime.Now) // if book is overdue
                                 {
                                     overdueBooks++;
-                                    lateFees += CirculationCopy.GetLateFees(relation.CirculationCopy.DueDate.Value);
+                                    lateFees += CirculationCopy.GetLateFees(circulationCopy.DueDate.Value);
                                 }
                             }
                 }

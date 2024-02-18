@@ -29,11 +29,11 @@ namespace NEALibrarySystem.Data_Structures
             get { return _linkedMembers; }
             set { _linkedMembers = value ?? new List<Member>(); }
         }
-        private List<CircMemberRelation> _circMemberRelation = new List<CircMemberRelation>();
-        public List<CircMemberRelation> CircMemberRelations
+        private List<CirculationCopy> _circulations = new List<CirculationCopy>();
+        public List<CirculationCopy> Circulations
         {
-            get { return _circMemberRelation; }
-            set { _circMemberRelation = value ?? new List<CircMemberRelation>(); }    
+            get { return _circulations; }
+            set { _circulations = value ?? new List<CirculationCopy>(); }    
         }
 
         public Member(MemberCreator memberInfo)

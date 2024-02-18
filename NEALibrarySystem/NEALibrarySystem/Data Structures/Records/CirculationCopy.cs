@@ -15,7 +15,7 @@ namespace NEALibrarySystem.Data_Structures
         public BookCopy BookCopy { get; set; }
         public ReferenceClass<DateTime, CirculationCopy> DueDate;
         public bool EmailSent { get; set; }
-        public CircMemberRelation CircMemberRelation { get; set; }
+        public Member Member { get; set; }
         public CirculationCopy(CirculationCopyCreator info)
         {
             int index; // index that the reference class is inserted into
@@ -53,11 +53,9 @@ namespace NEALibrarySystem.Data_Structures
             // due date
             DataLibrary.CirculationDueDates = DataLibrary.CreateReferenceClass(DataLibrary.CirculationDueDates, this, info.DueDate, SearchAndSort.TwoRefClassCircCopies, out index);
             DueDate = DataLibrary.CirculationDueDates[index];
-            // CircMemberRelation
-            CircMemberRelation circMemberRelation = new CircMemberRelation(info.Member, this);
-            DataLibrary.CircMemberRelations.Add(circMemberRelation);
-            circMemberRelation.Member.CircMemberRelations.Add(circMemberRelation);
-            CircMemberRelation = circMemberRelation;
+            // Member
+            Member = info.Member;
+            Member.Circulations.Add(this);
 
             EmailSent = false;
         }

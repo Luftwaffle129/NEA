@@ -188,14 +188,6 @@ namespace NEALibrarySystem.Data_Structures
             set { _circulationDates = value ?? new List<ReferenceClass<DateTime, CirculationCopy>>(); }
         }
         #endregion
-        #region circulation member relations
-        private static List<CircMemberRelation> _circMemberRelations = new List<CircMemberRelation>();
-        public static List<CircMemberRelation> CircMemberRelations
-        {
-            get { return _circMemberRelations; }
-            set { _circMemberRelations = value ?? new List<CircMemberRelation>(); }
-        }
-        #endregion
         #region enums
         // contains the enums used when handling processes and form navigation
         public enum Feature // represents the current features in the main system form
@@ -251,7 +243,7 @@ namespace NEALibrarySystem.Data_Structures
                         {
                             // check if book is not loaned or reserved by another member
                             if (bookCopies[index].CirculationCopy.Type.Value == CirculationType.Loaned
-                                || bookCopies[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != member.Barcode.Value)
+                                || bookCopies[index].CirculationCopy.Member.Barcode.Value != member.Barcode.Value)
                                 validBooks = false;
                         }
                     } while (++index < bookCopies.Count && validBooks);
@@ -304,7 +296,7 @@ namespace NEALibrarySystem.Data_Structures
                         {
                             // check if book is not reserved, and not loaned by another member
                             if (bookCopies[index].CirculationCopy.Type.Value == CirculationType.Reserved
-                                || bookCopies[index].CirculationCopy.CircMemberRelation.Member.Barcode.Value != member.Barcode.Value)
+                                || bookCopies[index].CirculationCopy.Member.Barcode.Value != member.Barcode.Value)
                                 validBooks = false;
                         }
                         else
@@ -592,9 +584,9 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteMember(Member member)
         {
             // delete circulation references
-            while (member.CircMemberRelations.Count > 0)
+            while (member.Circulations.Count > 0)
             {
-                DeleteCirculationCopy(CircMemberRelations[0].CirculationCopy);
+                DeleteCirculationCopy(member.Circulations[0]);
             }
             // delete reference classes
             MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
@@ -632,8 +624,7 @@ namespace NEALibrarySystem.Data_Structures
         public static void DeleteCirculationCopy(CirculationCopy circulationCopy)
         {
             // delete member relation
-            circulationCopy.CircMemberRelation.Member.CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
-            CircMemberRelations.Remove(circulationCopy.CircMemberRelation);
+            circulationCopy.Member.Circulations.Remove(circulationCopy);
             // delete book copy relation
             circulationCopy.BookCopy.CirculationCopy = null;
             // delete reference classes
@@ -692,7 +683,6 @@ namespace NEALibrarySystem.Data_Structures
             {
                 _bookCopies.Clear();
                 _bookCopyBarcodes.Clear();
-                _bookCopyRelations.Clear();
             }
             /// <summary>
             /// Clears all stored circulation data
@@ -704,7 +694,6 @@ namespace NEALibrarySystem.Data_Structures
                 _circulationTypes.Clear();
                 _circulationDueDates.Clear();
                 _circulationDates.Clear();
-                _circMemberRelations.Clear();
             }
         }
         #endregion

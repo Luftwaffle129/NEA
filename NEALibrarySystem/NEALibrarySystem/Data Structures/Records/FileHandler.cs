@@ -254,7 +254,7 @@ namespace NEALibrarySystem.Data_Structures
                         saver.Id = circulationCopy.Id.Value;
                         saver.Type = (int)circulationCopy.Type.Value;
                         saver.BookCopyBarcode = circulationCopy.BookCopy.Barcode.Value;
-                        saver.MemberBarcode = circulationCopy.CircMemberRelation.Member.Barcode.Value;
+                        saver.MemberBarcode = circulationCopy.Member.Barcode.Value;
                         saver.DueDate = circulationCopy.DueDate.Value;
                         saver.Date = circulationCopy.Date.Value;
 

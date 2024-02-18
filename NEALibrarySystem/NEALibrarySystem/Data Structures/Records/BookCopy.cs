@@ -44,7 +44,7 @@ namespace NEALibrarySystem.Data_Structures
             if (CirculationCopy == null)
                 return "";
             else
-                return CirculationCopy.CircMemberRelation.Member.Barcode.Value;
+                return CirculationCopy.Member.Barcode.Value;
         }
         /// <summary>
         /// Gets the due date of the book if it is circulated

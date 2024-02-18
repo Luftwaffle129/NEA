@@ -99,19 +99,20 @@ namespace NEALibrarySystem
                 _objects.PostCode.Text = member.Postcode;
                 _objects.JoinDate.Text = DataFormatter.GetDate(member.JoinDate);
                 // Get the member's loaned and reserved books
-                if (_memberData.CircMemberRelations.Count > 0)
-                    foreach (CircMemberRelation circRelation in _memberData.CircMemberRelations)
-                        _circulationList.Add(circRelation.CirculationCopy);
-                foreach (CirculationCopy circCopy in _circulationList)
+                if (_memberData.Circulations.Count > 0)
                 {
-                    string[] data =
+                    foreach (CirculationCopy circulationCopy in _memberData.Circulations)
                     {
-                        circCopy.BookCopy.Barcode.Value,
-                        circCopy.Type.Value.ToString(),
-                        DataFormatter.GetDate(circCopy.Date.Value)
-                    };
-                    _objects.Circulations.Items.Add(new ListViewItem(data));
+                        string[] data =
+                        {
+                            circulationCopy.BookCopy.Barcode.Value,
+                            circulationCopy.Type.Value.ToString(),
+                            DataFormatter.GetDate(circulationCopy.Date.Value)
+                        };
+                        _objects.Circulations.Items.Add(new ListViewItem(data));
+                    }
                 }
+
                 // get total late fees
                 double total = 0;
                 if (_circulationList.Count > 0)
