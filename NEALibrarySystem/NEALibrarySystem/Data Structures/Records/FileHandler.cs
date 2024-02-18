@@ -16,6 +16,22 @@ namespace NEALibrarySystem.Data_Structures
     public static class FileHandler
     {
         public static string filePath;
+
+        private static string[] _files =
+        {
+            "Titles",
+            "Prices",
+            "MediaTypes",
+            "Authors",
+            "Publishers",
+            "Genres",
+            "Themes",
+            "Books",
+            "Members",
+            "BookCopies",
+            "CirculationCopies"
+        }; // list of all data file names
+
         /// <summary>
         /// sets the filePath static variable to be path of the EXE file concatenated to the data directory name
         /// </summary>
@@ -66,48 +82,96 @@ namespace NEALibrarySystem.Data_Structures
             }
         }
         /// <summary>
-        /// Creates the directory to save the data fields to
+        /// Creates the directory to save the data fields to if it does not exist
         /// </summary>
         public static void CreateDataDirectory()
         {
             if (!Directory.Exists(Application.StartupPath + "\\Data"))
                 Directory.CreateDirectory(Application.StartupPath + "\\Data");
         }
-        /// <summary>
-        /// Checks if all data files exist
-        /// </summary>
-        public static void DataFilesExist()
-        {
-            List<string> missingFiles = new List<string>(); // list to store missing file names
-            string[] files =
-            {
-                "Titles",
-                "Prices",
-                "MediaTypes",
-                "Authors",
-                "Publishers",
-                "Genres",
-                "Themes",
-                "Books",
-                "Members",
-                "BookCopies",
-                "CirculationCopies"
-            }; // list of all file names
-            // get all missing files
-            foreach (string file in files)
-                if (!File.Exists(filePath + $"\\{file}.bin"))
-                    missingFiles.Add(file);
 
-            if (missingFiles.Count > 0)
+        public static void ValidateLoginFiles()
+        {
+            bool staffFileExists = true;
+            if (!File.Exists(filePath + $"\\Staff.bin"))
             {
-                frmConfirmation confirmation = new frmConfirmation($"Missing Files: {DataFormatter.ListToString(missingFiles)}\n Do you want to create new files?");
+                staffFileExists = false;
+            }
+            if (staffFileExists)
+            {
+                DataLibrary.StaffList = LoadFile<List<Staff>>(filePath, "Staff");
+            }
+            else
+            {
+                
+            }
+        }
+
+        /// <summary>
+        /// Checks if all data files exist and attempt to troubleshoot if there are missing files
+        /// </summary>
+        /// <returns>Boolean value of whether all necessary data files exist</returns>
+        public static bool HandleMissingFiles()
+        {
+            if (MissingDataFiles())
+            {
+                frmConfirmation confirmation = new frmConfirmation($"Missing Files detected. Do you want to Load from a back up or create new files?", System.Drawing.SystemColors.ControlLight, System.Drawing.SystemColors.ControlLight, "Back up", "New files");
                 confirmation.ShowDialog();
                 if (confirmation.DialogResult == DialogResult.Yes)
-                    foreach (string file in missingFiles)
+                {
+                    bool isSuccess = Backup.Save();
+                }
+                else if (confirmation.DialogResult == DialogResult.No)
+                {
+                    foreach (string file in _files)
                     {
                         FileStream f = File.Create(filePath + $"\\{file}.bin");
                         f.Close();
                     }
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Checks if all data files exist
+        /// </summary>
+        /// <returns>Boolean value of whether the necessary data files exist</returns>
+        public static bool MissingDataFiles()
+        {
+            // get all missing files
+            foreach (string file in _files)
+            {
+                if (!File.Exists(filePath + $"\\{file}.bin"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Handles saving and loading data from backups
+        /// </summary>
+        public static class Backup
+        {
+
+            /// <summary>
+            /// Creates a back up of current data in the system
+            /// </summary>
+            /// <returns>Returns a boolean result of whether the back up was successfully created</returns>
+            public static bool Save()
+            {
+                return true;
+            }
+            /// <summary>
+            /// Loads a backup of data into the system
+            /// </summary>
+            /// <returns>Returns a boolean result of whether the back up was successfully loaded</returns>
+            public static bool Load()
+            {
+                return true;
             }
         }
         /// <summary>
@@ -240,7 +304,7 @@ namespace NEALibrarySystem.Data_Structures
                 SaveFile(bookCopySavers, filePath, "BookCopies");
             }
             /// <summary>
-            /// Saves the data stored about all circulation copies into the book copy file
+            /// Saves the data stored about all circulation copies into the circulation copy file
             /// </summary>
             public static void CirculationCopies()
             {
@@ -261,6 +325,30 @@ namespace NEALibrarySystem.Data_Structures
                         circulationCopySavers[i] = saver;
                     }
                 SaveFile(circulationCopySavers, filePath, "CirculationCopies");
+            }
+            /// <summary>
+            /// Saves the data stored about all staff into the staff file
+            /// </summary>
+            public static void Staff()
+            {
+                StaffSaver[] staffSavers = new StaffSaver[DataLibrary.StaffList.Count];
+                if (DataLibrary.StaffList.Count > 0)
+                    for (int i = 0; i < DataLibrary.StaffList.Count; i++)
+                    {
+                        Staff staff = DataLibrary.StaffList[i];
+                        // translate staff record into the saver format and add it to the array of savers
+                        StaffSaver saver = new StaffSaver()
+                        {
+                            FirstName = staff.FirstName.Value,
+                            Surname = staff.Surname.Value,
+                            Username = staff.Username.Value,
+                            Password = staff.Password,
+                            EmailAddress = staff.EmailAddress,
+                            IsAdministrator = staff.IsAdministrator,
+                        };
+                        staffSavers[i] = saver;
+                    }
+                SaveFile(staffSavers, filePath, "Staff");
             }
         }
         /// <summary>
@@ -388,6 +476,12 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                     }
+            }
+
+            public static void Staff()
+            {
+                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(filePath, "Staff");
+                DataLibrary.ClearData.Staff();
             }
         }
         /// <summary>

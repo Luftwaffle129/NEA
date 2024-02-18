@@ -28,14 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
-            this.btnTransactions = new System.Windows.Forms.Button();
             this.btnStaff = new System.Windows.Forms.Button();
-            this.btnStatistics = new System.Windows.Forms.Button();
             this.btnBackups = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
@@ -102,11 +97,13 @@
             this.cmbFilter2 = new System.Windows.Forms.ComboBox();
             this.cmbFilter1 = new System.Windows.Forms.ComboBox();
             this.pnlStaff = new System.Windows.Forms.Panel();
+            this.txtStaffEmailAddress = new System.Windows.Forms.TextBox();
+            this.lblStaffAccessLevel = new System.Windows.Forms.Label();
+            this.cmbStaffAccessLevel = new System.Windows.Forms.ComboBox();
             this.txtStaffUsername = new System.Windows.Forms.TextBox();
             this.lblStaffUsername = new System.Windows.Forms.Label();
-            this.cmbStaffAccessLevel = new System.Windows.Forms.ComboBox();
             this.btnStaffPasswordVisibility = new System.Windows.Forms.Button();
-            this.lblStaffAccessLevel = new System.Windows.Forms.Label();
+            this.lblStaffEmailAddress = new System.Windows.Forms.Label();
             this.txtStaffPassword = new System.Windows.Forms.TextBox();
             this.lblStaffPassword = new System.Windows.Forms.Label();
             this.btnStaffCancel = new System.Windows.Forms.Button();
@@ -202,17 +199,6 @@
             this.btnBookDeleteCopies = new System.Windows.Forms.Button();
             this.btnBookAddCopies = new System.Windows.Forms.Button();
             this.lsvBookCopyDetails = new System.Windows.Forms.ListView();
-            this.pnlStatistics = new System.Windows.Forms.Panel();
-            this.chtStatisticsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.grpStatisticsInputs = new System.Windows.Forms.GroupBox();
-            this.chkStatisticsTimeAsVariable = new System.Windows.Forms.CheckBox();
-            this.cmbStatisticsTimeInterval = new System.Windows.Forms.ComboBox();
-            this.cmbStatisticsTotalOrChange = new System.Windows.Forms.ComboBox();
-            this.btnStatisticsEnter = new System.Windows.Forms.Button();
-            this.lblStatisticsVariables = new System.Windows.Forms.Label();
-            this.txtStatisticsVariables = new System.Windows.Forms.TextBox();
-            this.lblStatisticsVariableType = new System.Windows.Forms.Label();
-            this.cmbStatisticsVariableType = new System.Windows.Forms.ComboBox();
             this.pnlBackup = new System.Windows.Forms.Panel();
             this.lblLastBackupDate = new System.Windows.Forms.Label();
             this.btnRestoreBackup = new System.Windows.Forms.Button();
@@ -277,6 +263,10 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
+            this.txtStaffSurname = new System.Windows.Forms.TextBox();
+            this.lblStaffSurname = new System.Windows.Forms.Label();
+            this.txtStaffFirstName = new System.Windows.Forms.TextBox();
+            this.lblStaffFirstName = new System.Windows.Forms.Label();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaff.SuspendLayout();
@@ -288,9 +278,6 @@
             this.grpBooksBookStatus.SuspendLayout();
             this.grpBookDetails.SuspendLayout();
             this.grpBookCopyDetails.SuspendLayout();
-            this.pnlStatistics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtStatisticsChart)).BeginInit();
-            this.grpStatisticsInputs.SuspendLayout();
             this.pnlBackup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).BeginInit();
             this.pnlMainTabs.SuspendLayout();
@@ -331,20 +318,6 @@
             this.btnMembers.UseVisualStyleBackColor = false;
             this.btnMembers.Click += new System.EventHandler(this.btnMembers_Click);
             // 
-            // btnTransactions
-            // 
-            this.btnTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTransactions.BackColor = System.Drawing.Color.Silver;
-            this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransactions.Location = new System.Drawing.Point(0, 375);
-            this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(150, 75);
-            this.btnTransactions.TabIndex = 3;
-            this.btnTransactions.Text = "HISTORY";
-            this.btnTransactions.UseVisualStyleBackColor = false;
-            // 
             // btnStaff
             // 
             this.btnStaff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -352,27 +325,13 @@
             this.btnStaff.BackColor = System.Drawing.Color.Silver;
             this.btnStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStaff.Location = new System.Drawing.Point(0, 450);
+            this.btnStaff.Location = new System.Drawing.Point(0, 375);
             this.btnStaff.Name = "btnStaff";
             this.btnStaff.Size = new System.Drawing.Size(150, 75);
             this.btnStaff.TabIndex = 4;
             this.btnStaff.Text = "STAFF";
             this.btnStaff.UseVisualStyleBackColor = false;
             this.btnStaff.Click += new System.EventHandler(this.btnStaff_Click);
-            // 
-            // btnStatistics
-            // 
-            this.btnStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStatistics.BackColor = System.Drawing.Color.Silver;
-            this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStatistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistics.Location = new System.Drawing.Point(0, 525);
-            this.btnStatistics.Name = "btnStatistics";
-            this.btnStatistics.Size = new System.Drawing.Size(150, 75);
-            this.btnStatistics.TabIndex = 5;
-            this.btnStatistics.Text = "STATISTICS";
-            this.btnStatistics.UseVisualStyleBackColor = false;
             // 
             // btnBackups
             // 
@@ -381,7 +340,7 @@
             this.btnBackups.BackColor = System.Drawing.Color.Silver;
             this.btnBackups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBackups.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackups.Location = new System.Drawing.Point(0, 600);
+            this.btnBackups.Location = new System.Drawing.Point(0, 450);
             this.btnBackups.Name = "btnBackups";
             this.btnBackups.Size = new System.Drawing.Size(150, 75);
             this.btnBackups.TabIndex = 6;
@@ -395,7 +354,7 @@
             this.btnSettings.BackColor = System.Drawing.Color.Silver;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettings.Location = new System.Drawing.Point(0, 675);
+            this.btnSettings.Location = new System.Drawing.Point(0, 525);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(150, 75);
             this.btnSettings.TabIndex = 8;
@@ -1150,11 +1109,17 @@
             // 
             // pnlStaff
             // 
+            this.pnlStaff.Controls.Add(this.txtStaffFirstName);
+            this.pnlStaff.Controls.Add(this.lblStaffFirstName);
+            this.pnlStaff.Controls.Add(this.txtStaffSurname);
+            this.pnlStaff.Controls.Add(this.lblStaffSurname);
+            this.pnlStaff.Controls.Add(this.txtStaffEmailAddress);
+            this.pnlStaff.Controls.Add(this.lblStaffAccessLevel);
+            this.pnlStaff.Controls.Add(this.cmbStaffAccessLevel);
             this.pnlStaff.Controls.Add(this.txtStaffUsername);
             this.pnlStaff.Controls.Add(this.lblStaffUsername);
-            this.pnlStaff.Controls.Add(this.cmbStaffAccessLevel);
             this.pnlStaff.Controls.Add(this.btnStaffPasswordVisibility);
-            this.pnlStaff.Controls.Add(this.lblStaffAccessLevel);
+            this.pnlStaff.Controls.Add(this.lblStaffEmailAddress);
             this.pnlStaff.Controls.Add(this.txtStaffPassword);
             this.pnlStaff.Controls.Add(this.lblStaffPassword);
             this.pnlStaff.Controls.Add(this.btnStaffCancel);
@@ -1165,10 +1130,38 @@
             this.pnlStaff.TabIndex = 56;
             this.pnlStaff.VisibleChanged += new System.EventHandler(this.pnlStaff_VisibleChanged);
             // 
+            // txtStaffEmailAddress
+            // 
+            this.txtStaffEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffEmailAddress.Location = new System.Drawing.Point(255, 347);
+            this.txtStaffEmailAddress.Name = "txtStaffEmailAddress";
+            this.txtStaffEmailAddress.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffEmailAddress.TabIndex = 117;
+            // 
+            // lblStaffAccessLevel
+            // 
+            this.lblStaffAccessLevel.AutoSize = true;
+            this.lblStaffAccessLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffAccessLevel.Location = new System.Drawing.Point(15, 410);
+            this.lblStaffAccessLevel.Name = "lblStaffAccessLevel";
+            this.lblStaffAccessLevel.Size = new System.Drawing.Size(183, 31);
+            this.lblStaffAccessLevel.TabIndex = 116;
+            this.lblStaffAccessLevel.Text = "Access Level:";
+            // 
+            // cmbStaffAccessLevel
+            // 
+            this.cmbStaffAccessLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStaffAccessLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbStaffAccessLevel.FormattingEnabled = true;
+            this.cmbStaffAccessLevel.Location = new System.Drawing.Point(255, 407);
+            this.cmbStaffAccessLevel.Name = "cmbStaffAccessLevel";
+            this.cmbStaffAccessLevel.Size = new System.Drawing.Size(1229, 39);
+            this.cmbStaffAccessLevel.TabIndex = 115;
+            // 
             // txtStaffUsername
             // 
             this.txtStaffUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStaffUsername.Location = new System.Drawing.Point(255, 107);
+            this.txtStaffUsername.Location = new System.Drawing.Point(255, 227);
             this.txtStaffUsername.Name = "txtStaffUsername";
             this.txtStaffUsername.Size = new System.Drawing.Size(1230, 38);
             this.txtStaffUsername.TabIndex = 114;
@@ -1177,56 +1170,50 @@
             // 
             this.lblStaffUsername.AutoSize = true;
             this.lblStaffUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffUsername.Location = new System.Drawing.Point(15, 110);
+            this.lblStaffUsername.Location = new System.Drawing.Point(15, 230);
             this.lblStaffUsername.Name = "lblStaffUsername";
             this.lblStaffUsername.Size = new System.Drawing.Size(147, 31);
             this.lblStaffUsername.TabIndex = 113;
             this.lblStaffUsername.Text = "Username:";
-            // 
-            // cmbStaffAccessLevel
-            // 
-            this.cmbStaffAccessLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStaffAccessLevel.FormattingEnabled = true;
-            this.cmbStaffAccessLevel.Location = new System.Drawing.Point(255, 227);
-            this.cmbStaffAccessLevel.Name = "cmbStaffAccessLevel";
-            this.cmbStaffAccessLevel.Size = new System.Drawing.Size(1229, 39);
-            this.cmbStaffAccessLevel.TabIndex = 111;
             // 
             // btnStaffPasswordVisibility
             // 
             this.btnStaffPasswordVisibility.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffPasswordVisibility.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStaffPasswordVisibility.Location = new System.Drawing.Point(1235, 167);
+            this.btnStaffPasswordVisibility.Location = new System.Drawing.Point(1235, 287);
             this.btnStaffPasswordVisibility.Name = "btnStaffPasswordVisibility";
             this.btnStaffPasswordVisibility.Size = new System.Drawing.Size(249, 38);
             this.btnStaffPasswordVisibility.TabIndex = 110;
             this.btnStaffPasswordVisibility.Text = "Show/Hide";
             this.btnStaffPasswordVisibility.UseVisualStyleBackColor = false;
+            this.btnStaffPasswordVisibility.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnStaffPasswordVisibility_MouseDown);
+            this.btnStaffPasswordVisibility.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnStaffPasswordVisibility_MouseUp);
             // 
-            // lblStaffAccessLevel
+            // lblStaffEmailAddress
             // 
-            this.lblStaffAccessLevel.AutoSize = true;
-            this.lblStaffAccessLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffAccessLevel.Location = new System.Drawing.Point(15, 230);
-            this.lblStaffAccessLevel.Name = "lblStaffAccessLevel";
-            this.lblStaffAccessLevel.Size = new System.Drawing.Size(183, 31);
-            this.lblStaffAccessLevel.TabIndex = 108;
-            this.lblStaffAccessLevel.Text = "Access Level:";
+            this.lblStaffEmailAddress.AutoSize = true;
+            this.lblStaffEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffEmailAddress.Location = new System.Drawing.Point(15, 350);
+            this.lblStaffEmailAddress.Name = "lblStaffEmailAddress";
+            this.lblStaffEmailAddress.Size = new System.Drawing.Size(89, 31);
+            this.lblStaffEmailAddress.TabIndex = 108;
+            this.lblStaffEmailAddress.Text = "Email:";
             // 
             // txtStaffPassword
             // 
             this.txtStaffPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStaffPassword.Location = new System.Drawing.Point(255, 167);
+            this.txtStaffPassword.Location = new System.Drawing.Point(255, 287);
             this.txtStaffPassword.Name = "txtStaffPassword";
             this.txtStaffPassword.Size = new System.Drawing.Size(974, 38);
             this.txtStaffPassword.TabIndex = 107;
+            this.txtStaffPassword.UseSystemPasswordChar = true;
             // 
             // lblStaffPassword
             // 
             this.lblStaffPassword.AutoSize = true;
             this.lblStaffPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffPassword.Location = new System.Drawing.Point(15, 170);
+            this.lblStaffPassword.Location = new System.Drawing.Point(15, 290);
             this.lblStaffPassword.Name = "lblStaffPassword";
             this.lblStaffPassword.Size = new System.Drawing.Size(142, 31);
             this.lblStaffPassword.TabIndex = 106;
@@ -2315,128 +2302,6 @@
             this.lsvBookCopyDetails.TabIndex = 0;
             this.lsvBookCopyDetails.UseCompatibleStateImageBehavior = false;
             // 
-            // pnlStatistics
-            // 
-            this.pnlStatistics.Controls.Add(this.chtStatisticsChart);
-            this.pnlStatistics.Controls.Add(this.grpStatisticsInputs);
-            this.pnlStatistics.Location = new System.Drawing.Point(150, 100);
-            this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Size = new System.Drawing.Size(1770, 980);
-            this.pnlStatistics.TabIndex = 60;
-            this.pnlStatistics.VisibleChanged += new System.EventHandler(this.pnlStatistics_VisibleChanged);
-            // 
-            // chtStatisticsChart
-            // 
-            this.chtStatisticsChart.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            this.chtStatisticsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtStatisticsChart.Legends.Add(legend1);
-            this.chtStatisticsChart.Location = new System.Drawing.Point(307, 36);
-            this.chtStatisticsChart.Name = "chtStatisticsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chtStatisticsChart.Series.Add(series1);
-            this.chtStatisticsChart.Size = new System.Drawing.Size(1429, 917);
-            this.chtStatisticsChart.TabIndex = 0;
-            this.chtStatisticsChart.Text = "chart1";
-            // 
-            // grpStatisticsInputs
-            // 
-            this.grpStatisticsInputs.Controls.Add(this.chkStatisticsTimeAsVariable);
-            this.grpStatisticsInputs.Controls.Add(this.cmbStatisticsTimeInterval);
-            this.grpStatisticsInputs.Controls.Add(this.cmbStatisticsTotalOrChange);
-            this.grpStatisticsInputs.Controls.Add(this.btnStatisticsEnter);
-            this.grpStatisticsInputs.Controls.Add(this.lblStatisticsVariables);
-            this.grpStatisticsInputs.Controls.Add(this.txtStatisticsVariables);
-            this.grpStatisticsInputs.Controls.Add(this.lblStatisticsVariableType);
-            this.grpStatisticsInputs.Controls.Add(this.cmbStatisticsVariableType);
-            this.grpStatisticsInputs.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
-            this.grpStatisticsInputs.Location = new System.Drawing.Point(6, 19);
-            this.grpStatisticsInputs.Name = "grpStatisticsInputs";
-            this.grpStatisticsInputs.Size = new System.Drawing.Size(295, 934);
-            this.grpStatisticsInputs.TabIndex = 8;
-            this.grpStatisticsInputs.TabStop = false;
-            this.grpStatisticsInputs.Text = "Chart Inputs";
-            // 
-            // chkStatisticsTimeAsVariable
-            // 
-            this.chkStatisticsTimeAsVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.chkStatisticsTimeAsVariable.Location = new System.Drawing.Point(6, 702);
-            this.chkStatisticsTimeAsVariable.Name = "chkStatisticsTimeAsVariable";
-            this.chkStatisticsTimeAsVariable.Size = new System.Drawing.Size(283, 60);
-            this.chkStatisticsTimeAsVariable.TabIndex = 10;
-            this.chkStatisticsTimeAsVariable.Text = "Use Time As Variable";
-            this.chkStatisticsTimeAsVariable.UseVisualStyleBackColor = true;
-            // 
-            // cmbStatisticsTimeInterval
-            // 
-            this.cmbStatisticsTimeInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStatisticsTimeInterval.FormattingEnabled = true;
-            this.cmbStatisticsTimeInterval.Location = new System.Drawing.Point(6, 811);
-            this.cmbStatisticsTimeInterval.Name = "cmbStatisticsTimeInterval";
-            this.cmbStatisticsTimeInterval.Size = new System.Drawing.Size(283, 33);
-            this.cmbStatisticsTimeInterval.TabIndex = 9;
-            // 
-            // cmbStatisticsTotalOrChange
-            // 
-            this.cmbStatisticsTotalOrChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStatisticsTotalOrChange.FormattingEnabled = true;
-            this.cmbStatisticsTotalOrChange.Location = new System.Drawing.Point(6, 768);
-            this.cmbStatisticsTotalOrChange.Name = "cmbStatisticsTotalOrChange";
-            this.cmbStatisticsTotalOrChange.Size = new System.Drawing.Size(283, 33);
-            this.cmbStatisticsTotalOrChange.TabIndex = 8;
-            // 
-            // btnStatisticsEnter
-            // 
-            this.btnStatisticsEnter.BackColor = System.Drawing.Color.LightGray;
-            this.btnStatisticsEnter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStatisticsEnter.Location = new System.Drawing.Point(6, 855);
-            this.btnStatisticsEnter.Name = "btnStatisticsEnter";
-            this.btnStatisticsEnter.Size = new System.Drawing.Size(283, 70);
-            this.btnStatisticsEnter.TabIndex = 6;
-            this.btnStatisticsEnter.Text = "Enter";
-            this.btnStatisticsEnter.UseVisualStyleBackColor = false;
-            // 
-            // lblStatisticsVariables
-            // 
-            this.lblStatisticsVariables.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatisticsVariables.Location = new System.Drawing.Point(6, 113);
-            this.lblStatisticsVariables.Name = "lblStatisticsVariables";
-            this.lblStatisticsVariables.Size = new System.Drawing.Size(283, 40);
-            this.lblStatisticsVariables.TabIndex = 7;
-            this.lblStatisticsVariables.Text = "Field Options:";
-            this.lblStatisticsVariables.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // txtStatisticsVariables
-            // 
-            this.txtStatisticsVariables.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatisticsVariables.Location = new System.Drawing.Point(6, 157);
-            this.txtStatisticsVariables.Multiline = true;
-            this.txtStatisticsVariables.Name = "txtStatisticsVariables";
-            this.txtStatisticsVariables.Size = new System.Drawing.Size(283, 531);
-            this.txtStatisticsVariables.TabIndex = 2;
-            // 
-            // lblStatisticsVariableType
-            // 
-            this.lblStatisticsVariableType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatisticsVariableType.Location = new System.Drawing.Point(6, 34);
-            this.lblStatisticsVariableType.Name = "lblStatisticsVariableType";
-            this.lblStatisticsVariableType.Size = new System.Drawing.Size(283, 40);
-            this.lblStatisticsVariableType.TabIndex = 5;
-            this.lblStatisticsVariableType.Text = "Field:";
-            this.lblStatisticsVariableType.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // cmbStatisticsVariableType
-            // 
-            this.cmbStatisticsVariableType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStatisticsVariableType.FormattingEnabled = true;
-            this.cmbStatisticsVariableType.Location = new System.Drawing.Point(6, 77);
-            this.cmbStatisticsVariableType.Name = "cmbStatisticsVariableType";
-            this.cmbStatisticsVariableType.Size = new System.Drawing.Size(283, 33);
-            this.cmbStatisticsVariableType.TabIndex = 3;
-            // 
             // pnlBackup
             // 
             this.pnlBackup.Controls.Add(this.lblLastBackupDate);
@@ -2503,9 +2368,7 @@
             this.pnlMainTabs.Controls.Add(this.pctIcon);
             this.pnlMainTabs.Controls.Add(this.btnBooks);
             this.pnlMainTabs.Controls.Add(this.btnMembers);
-            this.pnlMainTabs.Controls.Add(this.btnTransactions);
             this.pnlMainTabs.Controls.Add(this.btnStaff);
-            this.pnlMainTabs.Controls.Add(this.btnStatistics);
             this.pnlMainTabs.Controls.Add(this.btnBackups);
             this.pnlMainTabs.Controls.Add(this.btnSettings);
             this.pnlMainTabs.Controls.Add(this.btnLogOut);
@@ -3210,23 +3073,58 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
+            // txtStaffSurname
+            // 
+            this.txtStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffSurname.Location = new System.Drawing.Point(255, 167);
+            this.txtStaffSurname.Name = "txtStaffSurname";
+            this.txtStaffSurname.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffSurname.TabIndex = 119;
+            // 
+            // lblStaffSurname
+            // 
+            this.lblStaffSurname.AutoSize = true;
+            this.lblStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffSurname.Location = new System.Drawing.Point(15, 170);
+            this.lblStaffSurname.Name = "lblStaffSurname";
+            this.lblStaffSurname.Size = new System.Drawing.Size(131, 31);
+            this.lblStaffSurname.TabIndex = 118;
+            this.lblStaffSurname.Text = "Surname:";
+            // 
+            // txtStaffFirstName
+            // 
+            this.txtStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffFirstName.Location = new System.Drawing.Point(255, 107);
+            this.txtStaffFirstName.Name = "txtStaffFirstName";
+            this.txtStaffFirstName.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffFirstName.TabIndex = 121;
+            // 
+            // lblStaffFirstName
+            // 
+            this.lblStaffFirstName.AutoSize = true;
+            this.lblStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffFirstName.Location = new System.Drawing.Point(15, 110);
+            this.lblStaffFirstName.Name = "lblStaffFirstName";
+            this.lblStaffFirstName.Size = new System.Drawing.Size(147, 31);
+            this.lblStaffFirstName.TabIndex = 120;
+            this.lblStaffFirstName.Text = "First Name";
+            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlStaff);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlStaff);
             this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlDelete);
-            this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlSetting);
             this.Controls.Add(this.pnlSubTabs);
@@ -3257,10 +3155,6 @@
             this.grpBookDetails.ResumeLayout(false);
             this.grpBookDetails.PerformLayout();
             this.grpBookCopyDetails.ResumeLayout(false);
-            this.pnlStatistics.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chtStatisticsChart)).EndInit();
-            this.grpStatisticsInputs.ResumeLayout(false);
-            this.grpStatisticsInputs.PerformLayout();
             this.pnlBackup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).EndInit();
             this.pnlMainTabs.ResumeLayout(false);
@@ -3279,9 +3173,7 @@
         private System.Windows.Forms.PictureBox pctIcon;
         private System.Windows.Forms.Button btnBooks;
         private System.Windows.Forms.Button btnMembers;
-        private System.Windows.Forms.Button btnTransactions;
         private System.Windows.Forms.Button btnStaff;
-        private System.Windows.Forms.Button btnStatistics;
         private System.Windows.Forms.Button btnBackups;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnLogOut;
@@ -3341,7 +3233,7 @@
         private System.Windows.Forms.ComboBox cmbFilter1;
         private System.Windows.Forms.Panel pnlStaff;
         private System.Windows.Forms.Button btnStaffPasswordVisibility;
-        private System.Windows.Forms.Label lblStaffAccessLevel;
+        private System.Windows.Forms.Label lblStaffEmailAddress;
         private System.Windows.Forms.TextBox txtStaffPassword;
         private System.Windows.Forms.Label lblStaffPassword;
         private System.Windows.Forms.Button btnStaffCancel;
@@ -3420,29 +3312,17 @@
         private System.Windows.Forms.TextBox txtBookTitle;
         private System.Windows.Forms.GroupBox grpBookCopyDetails;
         private System.Windows.Forms.ListView lsvBookCopyDetails;
-        private System.Windows.Forms.Panel pnlStatistics;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chtStatisticsChart;
-        private System.Windows.Forms.GroupBox grpStatisticsInputs;
-        private System.Windows.Forms.ComboBox cmbStatisticsTimeInterval;
-        private System.Windows.Forms.ComboBox cmbStatisticsTotalOrChange;
-        private System.Windows.Forms.Button btnStatisticsEnter;
-        private System.Windows.Forms.Label lblStatisticsVariables;
-        private System.Windows.Forms.TextBox txtStatisticsVariables;
-        private System.Windows.Forms.Label lblStatisticsVariableType;
-        private System.Windows.Forms.ComboBox cmbStatisticsVariableType;
         private System.Windows.Forms.Panel pnlBackup;
         private System.Windows.Forms.Label lblLastBackupDate;
         private System.Windows.Forms.Button btnRestoreBackup;
         private System.Windows.Forms.Button btnCreateBackup;
         private System.Windows.Forms.DateTimePicker dtpLoanReturnDate;
-        private System.Windows.Forms.ComboBox cmbStaffAccessLevel;
         private System.Windows.Forms.Panel pnlDelete;
         private System.Windows.Forms.ListView lsvDelete;
         private System.Windows.Forms.Label lblDeleteSelectedRecords;
         private System.Windows.Forms.Button btnDeleteCancel;
         private System.Windows.Forms.Button btnDeleteDelete;
         private System.Windows.Forms.Button btnBookAddCopies;
-        private System.Windows.Forms.CheckBox chkStatisticsTimeAsVariable;
         private System.Windows.Forms.TextBox txtStaffUsername;
         private System.Windows.Forms.Label lblStaffUsername;
         private System.Windows.Forms.Button btnBookDeleteCopies;
@@ -3522,5 +3402,12 @@
         private System.Windows.Forms.TextBox txtMemberLateFees;
         private System.Windows.Forms.Label lblMemberDetailsLateFees;
         private System.Windows.Forms.Button btnCircDetailsDelete;
+        private System.Windows.Forms.TextBox txtStaffEmailAddress;
+        private System.Windows.Forms.Label lblStaffAccessLevel;
+        private System.Windows.Forms.ComboBox cmbStaffAccessLevel;
+        private System.Windows.Forms.TextBox txtStaffFirstName;
+        private System.Windows.Forms.Label lblStaffFirstName;
+        private System.Windows.Forms.TextBox txtStaffSurname;
+        private System.Windows.Forms.Label lblStaffSurname;
     }
 }

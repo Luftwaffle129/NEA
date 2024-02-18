@@ -52,8 +52,8 @@ namespace NEALibrarySystem.Data_Structures
             int index; // index of the created reference class
             DataLibrary.MemberBarcodes = DataLibrary.CreateReferenceClass(DataLibrary.MemberBarcodes, this, memberInfo.Barcode, SearchAndSort.TwoRefClassMembers, out index);
             Barcode = DataLibrary.MemberBarcodes[index];
-            DataLibrary.FirstNames = DataLibrary.CreateReferenceClass(DataLibrary.FirstNames, this, memberInfo.FirstName, SearchAndSort.TwoRefClassMembers, out index);
-            FirstName = DataLibrary.FirstNames[index];
+            DataLibrary.MemberFirstNames = DataLibrary.CreateReferenceClass(DataLibrary.MemberFirstNames, this, memberInfo.FirstName, SearchAndSort.TwoRefClassMembers, out index);
+            FirstName = DataLibrary.MemberFirstNames[index];
             DataLibrary.Surnames = DataLibrary.CreateReferenceClass(DataLibrary.Surnames, this, memberInfo.Surname, SearchAndSort.TwoRefClassMembers, out index);
             Surname = DataLibrary.Surnames[index];
             DataLibrary.MemberTypes = DataLibrary.CreateReferenceClass(DataLibrary.MemberTypes, this, (MemberType)DataFormatter.StringToEnum<MemberType>(memberInfo.Type), SearchAndSort.TwoRefClassMembers, out index);

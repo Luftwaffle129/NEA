@@ -1,4 +1,5 @@
-﻿using NEALibrarySystem.Data_Structures.Records;
+﻿using NEALibrarySystem.Data_Structures.RecordCreators;
+using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
 using static NEALibrarySystem.SearchAndSort;
@@ -10,8 +11,41 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class DataLibrary
     {
+        public static Staff CurrentUser = new Staff();
         #region data structures
         // contains the lists of data stored by the program
+        #region staffList
+        private static List<Staff> _staffList = new List<Staff>();
+        public static List<Staff> StaffList
+        {
+            get { return _staffList; }
+            set { _staffList = value ?? new List<Staff>(); }
+        }
+        #endregion
+        #region staffFirstNames
+        private static List<ReferenceClass<string, Staff>> _staffFirstNames = new List<ReferenceClass<string, Staff>>();
+        public static List<ReferenceClass<string, Staff>> StaffFirstNames
+        {
+            get { return _staffFirstNames; }
+            set { _staffFirstNames = value ?? new List<ReferenceClass<string, Staff>>(); }
+        }
+        #endregion
+        #region staffSurnames
+        private static List<ReferenceClass<string, Staff>> _staffSurnames = new List<ReferenceClass<string, Staff>>();
+        public static List<ReferenceClass<string, Staff>> StaffSurnames
+        {
+            get { return _staffSurnames; }
+            set { _staffSurnames = value ?? new List<ReferenceClass<string, Staff>>(); }
+        }
+        #endregion
+        #region staffUsernames
+        private static List<ReferenceClass<string, Staff>> _staffUsernames = new List<ReferenceClass<string, Staff>>();
+        public static List<ReferenceClass<string, Staff>> StaffUsernames
+        {
+            get { return _staffUsernames; }
+            set { _staffUsernames = value ?? new List<ReferenceClass<string, Staff>>(); }
+        }
+        #endregion
         #region book copies
         private static List<BookCopy> _bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
@@ -124,12 +158,12 @@ namespace NEALibrarySystem.Data_Structures
             set { _memberBarcodes = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
-        #region first name
-        private static List<ReferenceClass<string, Member>> _firstNames = new List<ReferenceClass<string, Member>>();
-        public static List<ReferenceClass<string, Member>> FirstNames
+        #region member first name
+        private static List<ReferenceClass<string, Member>> _memberFirstNames = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> MemberFirstNames
         {
-            get { return _firstNames; }
-            set { _firstNames = value ?? new List<ReferenceClass<string, Member>>(); }
+            get { return _memberFirstNames; }
+            set { _memberFirstNames = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
         #region surname
@@ -195,9 +229,7 @@ namespace NEALibrarySystem.Data_Structures
             Circulation,
             Book,
             Member,
-            Transaction,
             Staff,
-            Statistics,
             Backups,
             Settings,
             None = -1
@@ -508,7 +540,7 @@ namespace NEALibrarySystem.Data_Structures
         public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
-            FirstNames = ModifyReferenceClass(FirstNames, member, member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
+            MemberFirstNames = ModifyReferenceClass(MemberFirstNames, member, member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
             Surnames = ModifyReferenceClass(Surnames, member, member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
             MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
@@ -528,6 +560,20 @@ namespace NEALibrarySystem.Data_Structures
             if (newMemberInfo.LinkedMembers.Count > 0)
                 foreach (string link in newMemberInfo.LinkedMembers)
                     member.AddMemberLink(link);
+        }
+        /// <summary>
+        /// Modifies a staff record with the new information in the staff creator class
+        /// </summary>
+        /// <param name="staff">Staff to update</param>
+        /// <param name="newStaffInfo">Information to update the staff details with</param>
+        public static void ModifyStaff(Staff staff, StaffCreator newStaffInfo)
+        {
+            StaffFirstNames = ModifyReferenceClass(StaffFirstNames, staff, staff.FirstName, newStaffInfo.FirstName, TwoRefClassStaff);
+            StaffSurnames = ModifyReferenceClass(StaffSurnames, staff, staff.Surname, newStaffInfo.Surname, TwoRefClassStaff);
+            StaffUsernames = ModifyReferenceClass(StaffUsernames, staff, staff.Username, newStaffInfo.Username, TwoRefClassStaff);
+            staff.Password = newStaffInfo.Password;
+            staff.EmailAddress = newStaffInfo.EmailAddress;
+            staff.IsAdministrator = newStaffInfo.IsAdministrator;
         }
         #endregion
         #region Deleting records
@@ -589,7 +635,7 @@ namespace NEALibrarySystem.Data_Structures
             }
             // delete reference classes
             MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
-            FirstNames = DeleteReferenceClass(FirstNames, member.FirstName, TwoRefClassMembers);
+            MemberFirstNames = DeleteReferenceClass(MemberFirstNames, member.FirstName, TwoRefClassMembers);
             Surnames = DeleteReferenceClass(Surnames, member.Surname, TwoRefClassMembers);
             MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
             foreach (Member linkedMember in member.LinkedMembers)
@@ -633,6 +679,21 @@ namespace NEALibrarySystem.Data_Structures
             CirculationCopies.Remove(circulationCopy);
             FileHandler.Save.CirculationCopies();
         }
+        /// <summary>
+        /// Deletes the specified staff record and its reference classes
+        /// </summary>
+        /// <param name="staff">Staff to delete</param>
+        public static void DeleteStaff(Staff staff)
+        {
+            // delete reference classes
+            StaffFirstNames = DeleteReferenceClass(StaffFirstNames, staff.FirstName, TwoRefClassStaff);
+            StaffSurnames = DeleteReferenceClass(StaffSurnames, staff.Surname, TwoRefClassStaff);
+            StaffUsernames = DeleteReferenceClass(StaffUsernames, staff.Username, TwoRefClassStaff);
+            // delete record
+            StaffList.Remove(staff);
+            FileHandler.Save.Staff();
+
+        }
         #endregion
         #endregion
         #region Clear all data
@@ -647,6 +708,7 @@ namespace NEALibrarySystem.Data_Structures
                 Member();
                 BookCopy();
                 CirculationCopy();
+                Staff();
             }
             /// <summary>
             /// Clears all stored book data
@@ -671,7 +733,7 @@ namespace NEALibrarySystem.Data_Structures
             {
                 _members.Clear();
                 _memberBarcodes.Clear();
-                _firstNames.Clear();
+                _memberFirstNames.Clear();
                 _surnames.Clear();
                 _memberTypes.Clear();
             }
@@ -693,6 +755,16 @@ namespace NEALibrarySystem.Data_Structures
                 _circulationTypes.Clear();
                 _circulationDueDates.Clear();
                 _circulationDates.Clear();
+            }
+            /// <summary>
+            /// Clears all stored staff data
+            /// </summary>
+            public static void Staff()
+            {
+                StaffList.Clear();
+                StaffFirstNames.Clear();
+                StaffSurnames.Clear();
+                StaffUsernames.Clear();
             }
         }
         #endregion

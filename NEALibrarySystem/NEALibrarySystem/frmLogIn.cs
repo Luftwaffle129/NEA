@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures;
+using System;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -26,6 +27,9 @@ namespace NEALibrarySystem
         private void btnLogin_Click(object sender, EventArgs e)
         {
             // opens the mains system, hides the log in form
+            FileHandler.CreateDataDirectory();
+            if (FileHandler.HandleMissingFiles())
+                FileHandler.Load.All();
             frmMainSystem = new FrmMainSystem();
             frmMainSystem.Show();
             this.Hide();

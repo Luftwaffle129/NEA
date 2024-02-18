@@ -3,7 +3,7 @@
 namespace NEALibrarySystem
 {
     /// <summary>
-    /// Used to store the used objects in the member details panel
+    /// Used to store the objects used in the member details panel
     /// </summary>
     public class MemberDetailsObjects
     {

@@ -514,7 +514,7 @@ namespace NEALibrarySystem
             return value;
         }
         /// <summary>
-        /// Compares two reference classes with string values and book references. strings are compared case-insensitive
+        /// Compares two reference classes with string values and member references. strings are compared case-insensitive
         /// </summary>
         /// <returns>Enum indicating the greater item</returns>
         public static Greatest TwoUpperRefClassMembers(ReferenceClass<string, Member> member1, ReferenceClass<string, Member> member2)
@@ -592,6 +592,14 @@ namespace NEALibrarySystem
             return TwoStrings(member1.Barcode.Value, member2.Barcode.Value);
         }
         /// <summary>
+        /// Compares two staff by their barcodes
+        /// </summary>
+        /// <returns>Enum indicating the greater item</returns>
+        public static Greatest TwoStaff(Staff staff1, Staff staff2)
+        {
+            return TwoStrings(staff1.Username.Value, staff2.Username.Value);
+        }
+        /// <summary>
         /// Compares two circulation copies by their IDs
         /// </summary>
         /// <returns>Enum indicating the greater item</returns>
@@ -625,6 +633,14 @@ namespace NEALibrarySystem
             return TwoIntegers(item1.Item.Id.Value, item2.Item.Id.Value);
         }
         /// <summary>
+        /// Compares two Smallest staff classes by the staff usernames
+        /// </summary>
+        /// <returns>Enum indicating the greater item</returns>
+        public static Greatest TwoSmallestStaff(SmallestItem<Staff> item1, SmallestItem<Staff> item2)
+        {
+            return TwoStrings(item1.Item.Username.Value, item2.Item.Username.Value);
+        }
+        /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="F">Class being referenced by the reference class</typeparam>
@@ -637,6 +653,28 @@ namespace NEALibrarySystem
                 if (referenceClass.Value.Substring(0, str.Length).ToUpper() == str.ToUpper())
                     return Greatest.Equal;
             return TwoStrings(referenceClass.Value.ToUpper(), str.ToUpper());
+        }
+        /// <summary>
+        /// Compares two reference classes with string values and member references
+        /// </summary>
+        /// <returns>Enum indicating the greater item</returns>
+        public static Greatest TwoRefClassStaff(ReferenceClass<string, Staff> staff1, ReferenceClass<string, Staff> staff2)
+        {
+            Greatest value = TwoStrings(staff1.Value, staff2.Value);
+            if (value == Greatest.Equal)
+                return TwoStrings(staff1.Reference.Username.Value, staff2.Reference.Username.Value);
+            return value;
+        }
+        /// <summary>
+        /// Compares two reference classes with string values and staff references. strings are compared case-insensitive
+        /// </summary>
+        /// <returns>Enum indicating the greater item</returns>
+        public static Greatest TwoUpperRefClassStaff(ReferenceClass<string, Staff> staff1, ReferenceClass<string, Staff> staff2)
+        {
+            Greatest value = TwoStrings(staff1.Value.ToUpper(), staff2.Value.ToUpper());
+            if (value == Greatest.Equal)
+                return TwoStrings(staff1.Reference.Username.Value, staff2.Reference.Username.Value);
+            return value;
         }
         #endregion
     }

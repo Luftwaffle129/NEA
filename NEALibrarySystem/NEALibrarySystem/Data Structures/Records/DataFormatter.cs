@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace NEALibrarySystem.Data_Structures
@@ -226,6 +227,11 @@ namespace NEALibrarySystem.Data_Structures
                 price += '0';
             }
             return price;
+        }
+
+        public static bool IsValidEmail(string email)
+        {
+            return Regex.IsMatch(email, @"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$");
         }
     }
 }

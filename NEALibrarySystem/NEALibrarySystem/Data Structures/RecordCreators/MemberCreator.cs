@@ -25,6 +25,12 @@ namespace NEALibrarySystem.Data_Structures.Records
         public DateTime JoinDate = DateTime.Today;
         public string Type;
 
+        /// <summary>
+        /// Validates the data stored in this class
+        /// </summary>
+        /// <param name="invalidList">List of invalid data</param>
+        /// <param name="original">Original member record</param>
+        /// <returns>Boolean result of whether the data is valid</returns>
         public bool Validate(out List<string> invalidList, Member original = null)
         {
             invalidList = new List<string>();
@@ -58,11 +64,11 @@ namespace NEALibrarySystem.Data_Structures.Records
             if (eNumIndex == -1)
                 invalidList.Add("Member Type");
             // email address - valid email address
-            if (!Regex.IsMatch(EmailAddress, @"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
+            if (!DataFormatter.IsValidEmail(EmailAddress))
                 invalidList.Add("Email Address");
             // phone number - contains the correct characters and correct number of digits
             int digits = Regex.Matches(PhoneNumber, @"[0-9]").Count;
-            if (!( Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$") && (digits == 10 || digits == 9) ))
+            if (!( Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$") && (digits == 10 || digits == 11) ))
                 invalidList.Add("Phone Number");
             // Address 1 - not empty
             if (FirstName.Length == 0)

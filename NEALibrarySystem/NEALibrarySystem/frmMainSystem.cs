@@ -7,6 +7,8 @@ using NEALibrarySystem.PanelHandlers;
 using NEALibrarySystem.ListViewHandlers.CirculatedBooks;
 using NEALibrarySystem.Panel_Handlers.CirculationDetails;
 using NEALibrarySystem.ListViewHandlers.SearchList;
+using NEALibrarySystem.Panel_Handlers.StaffHandler;
+using NEALibrarySystem.Panel_Handlers.StaffDetails;
 
 namespace NEALibrarySystem
 {
@@ -22,7 +24,6 @@ namespace NEALibrarySystem
             InitializePanels();
             InitializeSubTabs();
             NavigatorOpenBookTab();
-            LimitPrototypeFeatures();
             FormBorderStyle = FormBorderStyle.Sizable;
         }
         #region Navigator
@@ -40,6 +41,7 @@ namespace NEALibrarySystem
         private BookDetailsHandler _bookDetailsHandler;
         private CirculationDetailsHandler _circulationDetailsHandler;
         private MemberDetailsHandler _memberDetailsHandler;
+        private StaffDetailsHandler _StaffDetailsHandler;
         // declares class used for generating test data
         TestData _testData = new TestData();
         // declares variables used to store a selected record. Used in opening the details panel of the selected item in the search list view to store the selecetd record
@@ -47,19 +49,6 @@ namespace NEALibrarySystem
         private CirculationCopy _selectedCircCopy;
         private Member _selectedMember;
 
-        #region Prototype Restrictions
-        /// <summary>
-        /// Used to restrict system access to only the implemented forms
-        /// </summary>
-        private void LimitPrototypeFeatures()
-        {
-            btnStaff.Visible = false;
-            btnSettings.Visible = false;
-            btnBackups.Visible = false;
-            btnStatistics.Visible = false;
-            btnTransactions.Visible = false;
-        }
-        #endregion
         #region initialisation
         /// <summary>
         /// Initialises all features and their panels
@@ -72,11 +61,10 @@ namespace NEALibrarySystem
                 new Panel[] { pnlLoan, pnlReturn, pnlSell, pnlReserve},
                 new Panel[] { pnlSearch, pnlBookDetails, pnlSearch },
                 new Panel[] { pnlSearch, pnlMemberDetails },
-                new Panel[] { pnlSearch, pnlCirculationDetails },
                 new Panel[] { pnlSearch, pnlStaff },
-                new Panel[] { pnlStatistics },
                 new Panel[] { pnlBackup },
-                new Panel[] { pnlSetting }
+                new Panel[] { pnlSetting },
+                new Panel[] { pnlCirculationDetails } // not accessed directy by navigtion buttons but needed to close it
             };
 
             InitialiseSearchTab();
@@ -87,6 +75,7 @@ namespace NEALibrarySystem
             InitialiseBookDetails();
             InitialiseCirculationDetails();
             InitialiseMemberDetails();
+            InitialiseStaffDetails();
         }
         /// <summary>
         /// Populates the sub tab array with the sub tab button references
@@ -263,6 +252,20 @@ namespace NEALibrarySystem
             };
             _memberDetailsHandler = new MemberDetailsHandler(memberDetailsObjects);
         }
+
+        private void InitialiseStaffDetails() 
+        {
+            StaffDetailsObjects staffDetailsObjects = new StaffDetailsObjects()
+            {
+                FirstName = txtStaffFirstName,
+                Surname = txtStaffSurname,
+                Username = txtStaffUsername,
+                Password = txtStaffPassword,
+                Email = txtStaffEmailAddress,
+                AccessLevel = cmbStaffAccessLevel
+            };
+            _StaffDetailsHandler = new StaffDetailsHandler(staffDetailsObjects);
+        }
         #endregion
         #region opening panels and tabs
         /// <summary>
@@ -361,8 +364,7 @@ namespace NEALibrarySystem
             string[] tabs =
             {
                 "View Staff",
-                "Add Staff",
-                "Delete Staff"
+                "Add Staff"
             };
             NavigatorSetupSubTabs(tabs);
 
@@ -501,9 +503,7 @@ namespace NEALibrarySystem
         #region main form
         private void frmMainSystem_Load(object sender, EventArgs e)
         {
-            FileHandler.CreateDataDirectory();
-            FileHandler.DataFilesExist();
-            FileHandler.Load.All();
+            NavigatorOpenBookTab();
         }
         private void FrmMainSystem_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -627,7 +627,8 @@ namespace NEALibrarySystem
         }
         private void pnlStaff_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlStaff.Visible)
+                _StaffDetailsHandler.Load();
         }
         private void pnlCirculationDetails_VisibleChanged(object sender, EventArgs e)
         {
@@ -811,6 +812,17 @@ namespace NEALibrarySystem
         {
             _searchHandler.ResetSearchInputs();
         }
+        #endregion
+        #region staff details
+        private void btnStaffPasswordVisibility_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtStaffPassword.UseSystemPasswordChar = true;
+        }
+        private void btnStaffPasswordVisibility_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtStaffPassword.UseSystemPasswordChar = false;
+        }
+
         #endregion
 
         #endregion

@@ -19,8 +19,9 @@ namespace NEALibrarySystem.SearchList
         private bool _invertedSort = false; // used to determine if the sorting should be inverted in the column
         // arrays used to store each features' column headers
         private static string[] _memberColumns;
-        public static string[] _bookColumns;
+        public static string[] _bookColumns; //public so that circulation details panel can display a book in the same format as the search panel
         private static string[] _circulationCopyColumns;
+        private static string[] _staffColumns;
         public SearchHandler(SearchObjects objects)
         {
             _objects = objects;
@@ -66,6 +67,12 @@ namespace NEALibrarySystem.SearchList
                 "Due Date",
                 "Member Barcode"
             };
+            _staffColumns = new string[]
+            {
+                "Firstname",
+                "Surname",
+                "Username"
+            };
         }
         #region loading
         /// <summary>
@@ -86,7 +93,7 @@ namespace NEALibrarySystem.SearchList
                     ToMember();
                     break;
                 case SearchFeature.Staff:
-
+                    ToStaff();
                     break;
             }
             // sets initial sorting method
@@ -123,6 +130,15 @@ namespace NEALibrarySystem.SearchList
             UpdateListView(DataLibrary.Members);
         }
         /// <summary>
+        /// sets up the search panel for displaying staff records
+        /// </summary>
+        public void ToStaff()
+        {
+            LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Staff);
+            _objects.Delete.Visible = true;
+            UpdateListView(DataLibrary.StaffList);
+        }
+        /// <summary>
         /// Loads the current search feature's column headers
         /// </summary>
         /// <param name="lsv">Listview to add the columns to</param>
@@ -142,6 +158,9 @@ namespace NEALibrarySystem.SearchList
                     break;
                 case DataLibrary.SearchFeature.Circulation:
                     columns = _circulationCopyColumns;
+                    break;
+                case DataLibrary.SearchFeature.Staff:
+                    columns = _staffColumns;
                     break;
             }
             ListViewHandler.SetColumns(columns, ref lsv);
@@ -223,6 +242,13 @@ namespace NEALibrarySystem.SearchList
                             SortListView(_currentColumn);
                             break;
                         case DataLibrary.SearchFeature.Staff:
+                            foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
+                            {
+                                DataLibrary.DeleteStaff(DataLibrary.StaffUsernames[SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString)].Reference);
+                            }
+                            UpdateListView(DataLibrary.StaffList);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
                             break;
                     }
                     FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");
@@ -247,6 +273,9 @@ namespace NEALibrarySystem.SearchList
                     break;
                 case SearchFeature.Circulation:
                     columns = _circulationCopyColumns;
+                    break;
+                case SearchFeature.Staff:
+                    columns = _staffColumns;
                     break;
             }
             _objects.SearchField.Items.Clear();
@@ -353,6 +382,29 @@ namespace NEALibrarySystem.SearchList
                 _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
         }
+        /// <summary>
+        /// Updates the search panel's list view with the inputted staff list
+        /// </summary>
+        /// <param name="staffList">List of staff records to display in the list</param>
+        public void UpdateListView(List<Staff> staffList)
+        {
+            _objects.ItemViewer.Items.Clear();
+            if (staffList.Count > 0)
+            {
+                foreach (Staff staff in staffList)
+                {
+                    string[] data =
+                    {
+                        staff.FirstName.Value,
+                        staff.Surname.Value,
+                        staff.Username.Value
+                    };
+                    ListViewItem row = new ListViewItem(data);
+                    _objects.ItemViewer.Items.Add(row);
+                }
+                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            }
+        }
         #endregion
         #region searching
         /// <summary>
@@ -384,6 +436,11 @@ namespace NEALibrarySystem.SearchList
                             break;
                         case SearchFeature.Circulation:
                             UpdateListView(DataLibrary.CirculationCopies);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
+                            break;
+                        case SearchFeature.Staff:
+                            UpdateListView(DataLibrary.StaffList);
                             _invertedSort = !_invertedSort;
                             SortListView(_currentColumn);
                             break;
@@ -646,6 +703,56 @@ namespace NEALibrarySystem.SearchList
                             _invertedSort = !_invertedSort;
                             SortListView(_currentColumn);
                             break;
+                        case SearchFeature.Staff:
+                            List<Staff> staffList = DataLibrary.StaffList;
+                            for (int i = 0; i < searchInputs.Length; i++)
+                            {
+                                if (staffList.Count > 0)
+                                {
+                                    // check if filter category is used
+                                    if (searchInputs[i].Category.Text != "")
+                                    {
+                                        /* Find which column the category is being specified as
+                                         * Once found, create a reference class list containing all the reference classes for the specified property
+                                         * Sort the list
+                                         * Apply the filter to get the new filtered list of records
+                                         */
+                                        if (searchInputs[i].Category.Text == _circulationCopyColumns[0])
+                                        {
+
+                                            List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
+                                            foreach (Staff staff in staffList)
+                                                referenceClasses.Add(staff.FirstName); 
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
+                                            staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
+                                        }
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
+                                        {
+                                            List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
+                                            foreach (Staff staff in staffList)
+                                                referenceClasses.Add(staff.Surname);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
+                                            staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
+                                        }
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
+                                        {
+                                            List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
+                                            foreach (Staff staff in staffList)
+                                                referenceClasses.Add(staff.Username);
+                                            referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
+                                            staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
+                                        }
+                                    }
+                                    else // if not, then perform a search on all properties
+                                    {
+                                        staffList = StaffSearch(searchInputs[i].SearchTerm.Text, staffList);
+                                    }
+                                }
+                            }
+                            UpdateListView(staffList);
+                            _invertedSort = !_invertedSort;
+                            SortListView(_currentColumn);
+                            break;
                     }
                     break;
             }
@@ -893,6 +1000,49 @@ namespace NEALibrarySystem.SearchList
             }
             else
                 return new List<CirculationCopy>();
+        }
+        #endregion
+        #region staff
+        /// <summary>
+        /// Finds all members that contain the specified item in any of its properties
+        /// </summary>
+        /// 
+        /// Algorithm method:
+        /// For each property, get lists of members where the property matches the search term (case insensitive)
+        /// Merge the lists of members for each property into a single list without any duplicate records
+        /// 
+        /// <param name="item">Items to serach for</param>
+        /// <returns>List of members that match the search term</returns>
+        private List<Staff> StaffSearch(string searchItem, List<Staff> staffList)
+        {
+            List<ReferenceClass<string, Staff>>[] attributeRefClasses = new List<ReferenceClass<string, Staff>>[_staffColumns.Length]; // stores lists of reference classes of the inputted members
+            List<List<Staff>> validStaffList = new List<List<Staff>>(); // stores the list of members that pass the filter for each property
+
+            if (staffList.Count > 0)
+            {
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = new List<ReferenceClass<string, Staff>>();
+                }
+                // add each book's reference classes into the list of attributes
+                foreach (Staff staff in staffList)
+                {
+                    int i = 0; // index of attribute list being used
+                    attributeRefClasses[i++].Add(staff.FirstName);
+                    attributeRefClasses[i++].Add(staff.Surname);
+                    attributeRefClasses[i++].Add(staff.Username);
+                }
+                // for each attribute's list of reference classes, sort the list, apply the filter to get the valid members, sort the list of valid members, and add them to the list of valid members
+                for (int i = 0; i < attributeRefClasses.Length; i++)
+                {
+                    attributeRefClasses[i] = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(attributeRefClasses[i], SearchAndSort.TwoUpperRefClassStaff);
+                    validStaffList.Add(SearchAndSort.QuickSort<Staff, Staff>(ApplyFilter(attributeRefClasses[i], searchItem, SearchAndSort.UpperRefClassStartsWithString), SearchAndSort.TwoStaff));
+                }
+                // merge lists of attributes into a single list without any duplicated records and return
+                return MergeWithoutDuplicates(validStaffList, SearchAndSort.TwoSmallestStaff);
+            }
+            else
+                return new List<Staff>();
         }
         #endregion
         /// <summary>
