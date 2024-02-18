@@ -1,6 +1,9 @@
-﻿using NEALibrarySystem.Data_Structures.Records;
+﻿using Microsoft.Win32;
+using NEALibrarySystem.Data_Structures.RecordCreators;
+using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -204,6 +207,7 @@ namespace NEALibrarySystem.Data_Structures
             GenerateBooks();
             GenerateMembers();
             GenerateCirculationCopies();
+            GenerateStaff();
             FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             FileHandler.Save.All();
         }
@@ -382,6 +386,45 @@ namespace NEALibrarySystem.Data_Structures
                 }
             }
         }
+        private void GenerateStaff()
+        {
+            DataLibrary.ClearData.Staff();
+            StaffCreator staffCreator = new StaffCreator()
+            {
+                FirstName = "Keon",
+                Surname = "Trinh",
+                Username = "17ktrinh",
+                Password = "Password1",
+                EmailAddress = "keontrinh1515@gmail.com",
+                IsAdministrator = true
+            };
+            DataLibrary.StaffList.Add(new Staff(staffCreator));
+            DataLibrary.CurrentUser = DataLibrary.StaffList[0];
+            for (int i = 0; i < 5; i++)
+            {
+                string username = "";
+                for (int j = 0; j < 5; j++)
+                {
+                    username += GenerateRandomLetter();
+                }
+                string password = "";
+                for (int j = 0; j < 5; j++)
+                {
+                    password += GenerateRandomLetter();
+                }
+                staffCreator = new StaffCreator()
+                {
+                    FirstName = _firstNames[rand.Next(0, _firstNames.Length)], // generate a realistic random first name
+                    Surname = _lastNames[rand.Next(0, _lastNames.Length)], // generate a realistic random surname
+                    Username = username,
+                    Password = password,
+                    EmailAddress = $"{_emails[rand.Next(0, _emails.Length)]}@tbgs.co.uk", // generate realistic random email
+                    IsAdministrator = false,
+                };
+                DataLibrary.StaffList.Add(new Staff(staffCreator));
+            }
+        }
+
         /// <summary>
         /// Generates a random digit from 0 to the specifed number exclusive. 0-9 if number is not specified
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace NEALibrarySystem.Data_Structures
 {
+    [System.Serializable]
     /// <summary>
     /// Used to store settings data for library system features and information about data structure attribute properties
     /// </summary>

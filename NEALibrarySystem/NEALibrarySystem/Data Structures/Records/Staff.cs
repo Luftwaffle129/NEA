@@ -19,12 +19,12 @@ namespace NEALibrarySystem.Data_Structures
             EmailAddress = creator.EmailAddress;
             IsAdministrator = creator.IsAdministrator;
             // create reference classes
-            DataLibrary.StaffFirstNames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffFirstNames, this, creator.FirstName, SearchAndSort.TwoRefClassStaff, out int index);
+            DataLibrary.StaffUsernames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffUsernames, this, creator.Username, SearchAndSort.TwoRefClassStaff, out int index);
+            Username = DataLibrary.StaffUsernames[index];
+            DataLibrary.StaffFirstNames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffFirstNames, this, creator.FirstName, SearchAndSort.TwoRefClassStaff, out index);
             FirstName = DataLibrary.StaffFirstNames[index];
             DataLibrary.StaffSurnames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffSurnames, this, creator.Surname, SearchAndSort.TwoRefClassStaff, out index);
             Surname = DataLibrary.StaffSurnames[index];
-            DataLibrary.StaffUsernames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffUsernames, this, creator.Username, SearchAndSort.TwoRefClassStaff, out index);
-            Username = DataLibrary.StaffUsernames[index];
         }
     }
 }

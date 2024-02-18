@@ -369,7 +369,7 @@ namespace NEALibrarySystem
             NavigatorSetupSubTabs(tabs);
 
             NavigatorCloseAllPanels();
-            pnlStaff.Visible = true;
+            pnlSearch.Visible = true;
         }
         /// <summary>
         /// Opens the details panel
@@ -516,6 +516,7 @@ namespace NEALibrarySystem
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            DataLibrary.CurrentUser = null;
             this.Close();
         }
         #region main tabs
@@ -538,7 +539,7 @@ namespace NEALibrarySystem
         }
         private void btnSettings_Click(object sender, EventArgs e)
         {
-
+            NavigatorOpenSettingsTab();
         }
         #endregion
         #region sub tabs
@@ -821,6 +822,11 @@ namespace NEALibrarySystem
         private void btnStaffPasswordVisibility_MouseDown(object sender, MouseEventArgs e)
         {
             txtStaffPassword.UseSystemPasswordChar = false;
+        }
+
+        private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         #endregion

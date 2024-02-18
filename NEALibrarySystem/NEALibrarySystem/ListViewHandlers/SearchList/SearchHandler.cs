@@ -135,7 +135,12 @@ namespace NEALibrarySystem.SearchList
         public void ToStaff()
         {
             LoadColumns(ref _objects.ItemViewer, DataLibrary.SearchFeature.Staff);
-            _objects.Delete.Visible = true;
+
+            if (DataLibrary.CurrentUser.IsAdministrator) // control whether user can delete records
+                _objects.Delete.Visible = true;
+            else
+                _objects.Delete.Visible = false;
+
             UpdateListView(DataLibrary.StaffList);
         }
         /// <summary>
@@ -242,13 +247,28 @@ namespace NEALibrarySystem.SearchList
                             SortListView(_currentColumn);
                             break;
                         case DataLibrary.SearchFeature.Staff:
+                            bool invalidStaff = false;
                             foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
                             {
-                                DataLibrary.DeleteStaff(DataLibrary.StaffUsernames[SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString)].Reference);
+                                if (DataLibrary.StaffUsernames[SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString)].Reference == DataLibrary.CurrentUser)
+                                {
+                                    invalidStaff = true;
+                                }
                             }
-                            UpdateListView(DataLibrary.StaffList);
-                            _invertedSort = !_invertedSort;
-                            SortListView(_currentColumn);
+                            if (!invalidStaff)
+                            {
+                                foreach (ListViewItem item in _objects.ItemViewer.CheckedItems)
+                                {
+                                    DataLibrary.DeleteStaff(DataLibrary.StaffUsernames[SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString)].Reference);
+                                }
+                                UpdateListView(DataLibrary.StaffList);
+                                _invertedSort = !_invertedSort;
+                                SortListView(_currentColumn);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error: Cannot delete your own staff record");
+                            }
                             break;
                     }
                     FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");

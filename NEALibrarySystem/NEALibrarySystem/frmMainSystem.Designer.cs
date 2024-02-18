@@ -2377,6 +2377,7 @@
             this.pnlMainTabs.Name = "pnlMainTabs";
             this.pnlMainTabs.Size = new System.Drawing.Size(150, 1080);
             this.pnlMainTabs.TabIndex = 31;
+            this.pnlMainTabs.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainTabs_Paint);
             // 
             // btnCirculation
             // 
