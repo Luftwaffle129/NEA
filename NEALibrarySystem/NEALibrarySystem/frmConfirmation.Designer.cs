@@ -33,13 +33,13 @@
             this.lblOutput = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnMemberCancel
+            // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(668, 205);
-            this.btnCancel.Name = "btnMemberCancel";
+            this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 50);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
@@ -79,6 +79,7 @@
             this.Controls.Add(this.lblOutput);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnYes);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConfirmation";
             this.Text = "Confirmation";
             this.ResumeLayout(false);

@@ -6,40 +6,59 @@ namespace NEALibrarySystem
 {
     public partial class frmLogIn : Form
     {
+        private const int ATTEMPTCOOLDOWN = 1; // minimum time between attempts in seconds
+
         public static frmLogIn Main;
         FrmMainSystem frmMainSystem;
         frmForgottenPassword frmForgottenPassword;
+        DateTime previousAttempt = DateTime.MinValue;
         public frmLogIn()
         {
             InitializeComponent();
             Main = this;
-            LimitPrototypeFeatures();
+            FileHandler.HandleStartUp();
         }
-        /// <summary>
-        /// Used to hide objects not included in the prototype on the interface from the user
-        /// </summary>
-        private void LimitPrototypeFeatures()
-        {
-            txtPassword.ReadOnly = true;
-            txtUsername.ReadOnly = true;
-            btnForgotPassword.Visible = false;
-        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // opens the mains system, hides the log in form
-            FileHandler.CreateDataDirectory();
-            if (FileHandler.HandleMissingFiles())
-                FileHandler.Load.All();
-            frmMainSystem = new FrmMainSystem();
-            frmMainSystem.Show();
-            this.Hide();
+            if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN))
+            {
+                // opens the mains system, hides the log in form
+                frmMainSystem = new FrmMainSystem();
+                frmMainSystem.Show();
+                this.Hide();
+            }
+            else
+            {
+                
+            }
         }
         private void btnForgotPassword_Click(object sender, EventArgs e)
         {
-            // opens the forgotten password formb hides the log in form
+            // opens the forgotten password form hides the log in form
             frmForgottenPassword = new frmForgottenPassword();
             frmForgottenPassword.Show();
             this.Hide();
+        }
+        
+        private bool IsValidCredentials()
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
+            int usernameIndex = SearchAndSort.Binary(DataLibrary.StaffUsernames, username, SearchAndSort.RefClassAndString);
+
+            if (usernameIndex != -1)
+            {
+                if (password == DataLibrary.StaffUsernames[usernameIndex].Reference.Password)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
         }
     }
 }

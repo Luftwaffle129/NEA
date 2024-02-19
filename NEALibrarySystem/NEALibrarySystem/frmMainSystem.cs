@@ -25,6 +25,20 @@ namespace NEALibrarySystem
             InitializeSubTabs();
             NavigatorOpenBookTab();
             FormBorderStyle = FormBorderStyle.Sizable;
+
+            // hide buttons that are not available to the user's access level
+            if (DataLibrary.CurrentUser.IsAdministrator == false)
+            {
+                btnSettings.Visible = false;
+                btnBackups.Visible = false;
+                btnStaffSave.Visible = false;
+            }
+            else
+            {
+                btnSettings.Visible = true;
+                btnBackups.Visible = true;
+                btnStaffSave.Visible = true;
+            }
         }
         #region Navigator
         private Panel[][] _panels; // a 2-dimensional jagged array containing references to the panels. Represents the layout of the system
@@ -63,7 +77,7 @@ namespace NEALibrarySystem
                 new Panel[] { pnlSearch, pnlMemberDetails },
                 new Panel[] { pnlSearch, pnlStaff },
                 new Panel[] { pnlBackup },
-                new Panel[] { pnlSetting },
+                new Panel[] { pnlSettings },
                 new Panel[] { pnlCirculationDetails } // not accessed directy by navigtion buttons but needed to close it
             };
 
@@ -368,9 +382,30 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
 
+            if (!DataLibrary.CurrentUser.IsAdministrator)
+            {
+                btnSubTab2.Visible = false;
+            }
+
             NavigatorCloseAllPanels();
             pnlSearch.Visible = true;
         }
+        /// <summary>
+        /// Opens the settings feature
+        /// - sets the sub tabs to the correct text
+        /// - closes all panels
+        /// - opens the settings panel
+        /// </summary>
+        private void NavigatorOpenSettingsTab()
+        {
+            CurrentFeature = DataLibrary.Feature.Settings;
+            string[] tabs = new string[0];
+            NavigatorSetupSubTabs(tabs);
+
+            NavigatorCloseAllPanels();
+            pnlSettings.Visible = true;
+        }
+
         /// <summary>
         /// Opens the details panel
         /// process:
@@ -437,6 +472,7 @@ namespace NEALibrarySystem
         /// <param name="tabs">Array of text that the tabs will contain</param>
         private void NavigatorSetupSubTabs(string[] tabs)
         {
+            btnSubTab2.Visible = true; // display sub tab
             // for the length of all sub tabs
             for (int i = 0; i < _subTabs.Length; i++)
             {

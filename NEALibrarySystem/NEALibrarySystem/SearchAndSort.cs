@@ -82,7 +82,7 @@ namespace NEALibrarySystem
         /// </summary>
         /// <typeparam name="T">Search item to find in the list</typeparam>
         /// <typeparam name="F">Items in the list</typeparam>
-        /// <param name="itemList">list of items to search through</param>
+        /// <param name="itemList">List of items to search through</param>
         /// <param name="item">Search Item</param>
         /// <param name="compare">Method to compare the search item to the items in the list</param>
         /// <returns>Indexes of left most and right most found indexes. Returns {-1, -1} if item is not found</returns>

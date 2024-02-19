@@ -1,4 +1,5 @@
-﻿using NEALibrarySystem.Data_Structures.Records;
+﻿using NEALibrarySystem.Data_Structures.RecordCreators;
+using NEALibrarySystem.Data_Structures.Records;
 using NEALibrarySystem.Data_Structures.RecordSavers;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,8 @@ namespace NEALibrarySystem.Data_Structures
             "Books",
             "Members",
             "BookCopies",
-            "CirculationCopies"
+            "CirculationCopies",
+            "Staff"
         }; // list of all data file names
 
         /// <summary>
@@ -90,49 +92,88 @@ namespace NEALibrarySystem.Data_Structures
                 Directory.CreateDirectory(Application.StartupPath + "\\Data");
         }
 
-        public static void ValidateLoginFiles()
+        public static bool StaffFilesExist()
         {
-            bool staffFileExists = true;
-            if (!File.Exists(filePath + $"\\Staff.bin"))
-            {
-                staffFileExists = false;
-            }
-            if (staffFileExists)
-            {
-                DataLibrary.StaffList = LoadFile<List<Staff>>(filePath, "Staff");
-            }
+            if (File.Exists(filePath + $"\\Staff.bin"))
+                return true;
             else
-            {
-                
-            }
+                return false;
         }
 
         /// <summary>
-        /// Checks if all data files exist and attempt to troubleshoot if there are missing files
+        /// Loads all data into the system, loads from back up or creates new files of initial load fails.
         /// </summary>
-        /// <returns>Boolean value of whether all necessary data files exist</returns>
-        public static bool HandleMissingFiles()
+        public static void HandleStartUp()
         {
-            if (MissingDataFiles())
+            if (MissingDataFiles()) // if files are missing
             {
-                frmConfirmation confirmation = new frmConfirmation($"Missing Files detected. Do you want to Load from a back up or create new files?", System.Drawing.SystemColors.ControlLight, System.Drawing.SystemColors.ControlLight, "Back up", "New files");
-                confirmation.ShowDialog();
-                if (confirmation.DialogResult == DialogResult.Yes)
+                HandleInvalidFiles();
+            }
+            else
+            {
+                try
                 {
-                    bool isSuccess = Backup.Save();
+                    FileHandler.Load.All();
                 }
-                else if (confirmation.DialogResult == DialogResult.No)
+                catch
                 {
+                    HandleInvalidFiles();
+                }
+            }
+        }
+
+        private static void HandleInvalidFiles()
+        {
+            bool resolved = false;
+            do
+            {
+                frmConfirmation confirmation = new frmConfirmation($"Invalid files detected. Do you want to Load from a back up or create new files?", System.Drawing.SystemColors.ControlLight, System.Drawing.SystemColors.ControlLight, "Back up", "New files");
+
+                confirmation.ShowDialog();
+                if (confirmation.DialogResult == DialogResult.Yes) // user chooses to load a backup
+                {
+                    bool isSuccess = Backup.Load();
+                    if (isSuccess)
+                    {
+                        try
+                        {
+                            FileHandler.Load.All();
+                            resolved = true;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error: Corrupt files");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Back up could not be loaded");
+                    }
+                }
+                else if (confirmation.DialogResult == DialogResult.No) // user chooses to create new files
+                {
+                    FileHandler.InitialiseFilePath();
                     foreach (string file in _files)
                     {
                         FileStream f = File.Create(filePath + $"\\{file}.bin");
                         f.Close();
                     }
+                    DataLibrary.ClearData.All();
+                    StaffCreator defaultStaff = new StaffCreator()
+                    {
+                        FirstName = "",
+                        Surname = "",
+                        Username = "Admin",
+                        Password = "Password1",
+                        EmailAddress = "",
+                        IsAdministrator = true,
+                    };
+                    DataLibrary.StaffList.Add(new Staff(defaultStaff));
+                    FileHandler.Save.All();
+                    MessageBox.Show("New files created. Default Staff Member created.\nUsername: Admin\nPassword: Password1");
+                    resolved = true;
                 }
-                else
-                    return false;
-            }
-            return true;
+            } while (!resolved);
         }
         /// <summary>
         /// Checks if all data files exist
@@ -188,6 +229,7 @@ namespace NEALibrarySystem.Data_Structures
                 BookCopies();
                 CirculationCopies();
                 Members();
+                Staff();
             }
             /// <summary>
             /// Saves all data stored about the books into their respective files
@@ -365,6 +407,7 @@ namespace NEALibrarySystem.Data_Structures
                 Members();
                 BookCopies(); // book copies rely on books so is loaded after books
                 CirculationCopies();// circulation copies rely on book copies and members so is loaded after them
+                Staff();
             }
             /// <summary>
             /// Loads the book data stored in the files
@@ -480,8 +523,8 @@ namespace NEALibrarySystem.Data_Structures
 
             public static void Staff()
             {
-                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(filePath, "Staff");
                 DataLibrary.ClearData.Staff();
+                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(filePath, "Staff");
             }
         }
         /// <summary>

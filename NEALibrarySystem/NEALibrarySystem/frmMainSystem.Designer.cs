@@ -97,6 +97,10 @@
             this.cmbFilter2 = new System.Windows.Forms.ComboBox();
             this.cmbFilter1 = new System.Windows.Forms.ComboBox();
             this.pnlStaff = new System.Windows.Forms.Panel();
+            this.txtStaffFirstName = new System.Windows.Forms.TextBox();
+            this.lblStaffFirstName = new System.Windows.Forms.Label();
+            this.txtStaffSurname = new System.Windows.Forms.TextBox();
+            this.lblStaffSurname = new System.Windows.Forms.Label();
             this.txtStaffEmailAddress = new System.Windows.Forms.TextBox();
             this.lblStaffAccessLevel = new System.Windows.Forms.Label();
             this.cmbStaffAccessLevel = new System.Windows.Forms.ComboBox();
@@ -128,12 +132,7 @@
             this.lsvLoanSelectedBooks = new System.Windows.Forms.ListView();
             this.btnLoanSave = new System.Windows.Forms.Button();
             this.btnLoanCancel = new System.Windows.Forms.Button();
-            this.pnlDelete = new System.Windows.Forms.Panel();
-            this.lsvDelete = new System.Windows.Forms.ListView();
-            this.lblDeleteSelectedRecords = new System.Windows.Forms.Label();
-            this.btnDeleteCancel = new System.Windows.Forms.Button();
-            this.btnDeleteDelete = new System.Windows.Forms.Button();
-            this.pnlSetting = new System.Windows.Forms.Panel();
+            this.pnlSettings = new System.Windows.Forms.Panel();
             this.lblDefaultSettings = new System.Windows.Forms.Label();
             this.txtSettingDefault = new System.Windows.Forms.TextBox();
             this.cmbSettingDefault2 = new System.Windows.Forms.ComboBox();
@@ -263,16 +262,11 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
-            this.txtStaffSurname = new System.Windows.Forms.TextBox();
-            this.lblStaffSurname = new System.Windows.Forms.Label();
-            this.txtStaffFirstName = new System.Windows.Forms.TextBox();
-            this.lblStaffFirstName = new System.Windows.Forms.Label();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaff.SuspendLayout();
             this.pnlLoan.SuspendLayout();
-            this.pnlDelete.SuspendLayout();
-            this.pnlSetting.SuspendLayout();
+            this.pnlSettings.SuspendLayout();
             this.pnlReturn.SuspendLayout();
             this.pnlBookDetails.SuspendLayout();
             this.grpBooksBookStatus.SuspendLayout();
@@ -1130,6 +1124,42 @@
             this.pnlStaff.TabIndex = 56;
             this.pnlStaff.VisibleChanged += new System.EventHandler(this.pnlStaff_VisibleChanged);
             // 
+            // txtStaffFirstName
+            // 
+            this.txtStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffFirstName.Location = new System.Drawing.Point(255, 107);
+            this.txtStaffFirstName.Name = "txtStaffFirstName";
+            this.txtStaffFirstName.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffFirstName.TabIndex = 121;
+            // 
+            // lblStaffFirstName
+            // 
+            this.lblStaffFirstName.AutoSize = true;
+            this.lblStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffFirstName.Location = new System.Drawing.Point(15, 110);
+            this.lblStaffFirstName.Name = "lblStaffFirstName";
+            this.lblStaffFirstName.Size = new System.Drawing.Size(147, 31);
+            this.lblStaffFirstName.TabIndex = 120;
+            this.lblStaffFirstName.Text = "First Name";
+            // 
+            // txtStaffSurname
+            // 
+            this.txtStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStaffSurname.Location = new System.Drawing.Point(255, 167);
+            this.txtStaffSurname.Name = "txtStaffSurname";
+            this.txtStaffSurname.Size = new System.Drawing.Size(1230, 38);
+            this.txtStaffSurname.TabIndex = 119;
+            // 
+            // lblStaffSurname
+            // 
+            this.lblStaffSurname.AutoSize = true;
+            this.lblStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStaffSurname.Location = new System.Drawing.Point(15, 170);
+            this.lblStaffSurname.Name = "lblStaffSurname";
+            this.lblStaffSurname.Size = new System.Drawing.Size(131, 31);
+            this.lblStaffSurname.TabIndex = 118;
+            this.lblStaffSurname.Text = "Surname:";
+            // 
             // txtStaffEmailAddress
             // 
             this.txtStaffEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1482,79 +1512,23 @@
             this.btnLoanCancel.UseVisualStyleBackColor = false;
             this.btnLoanCancel.Click += new System.EventHandler(this.btnLoanCancel_Click);
             // 
-            // pnlDelete
+            // pnlSettings
             // 
-            this.pnlDelete.Controls.Add(this.lsvDelete);
-            this.pnlDelete.Controls.Add(this.lblDeleteSelectedRecords);
-            this.pnlDelete.Controls.Add(this.btnDeleteCancel);
-            this.pnlDelete.Controls.Add(this.btnDeleteDelete);
-            this.pnlDelete.Location = new System.Drawing.Point(150, 100);
-            this.pnlDelete.Name = "pnlDelete";
-            this.pnlDelete.Size = new System.Drawing.Size(1770, 980);
-            this.pnlDelete.TabIndex = 54;
-            this.pnlDelete.VisibleChanged += new System.EventHandler(this.pnlDelete_VisibleChanged);
-            // 
-            // lsvDelete
-            // 
-            this.lsvDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsvDelete.HideSelection = false;
-            this.lsvDelete.Location = new System.Drawing.Point(311, 47);
-            this.lsvDelete.Name = "lsvDelete";
-            this.lsvDelete.Size = new System.Drawing.Size(1179, 867);
-            this.lsvDelete.TabIndex = 24;
-            this.lsvDelete.UseCompatibleStateImageBehavior = false;
-            // 
-            // lblDeleteSelectedRecords
-            // 
-            this.lblDeleteSelectedRecords.AutoSize = true;
-            this.lblDeleteSelectedRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeleteSelectedRecords.Location = new System.Drawing.Point(15, 50);
-            this.lblDeleteSelectedRecords.Name = "lblDeleteSelectedRecords";
-            this.lblDeleteSelectedRecords.Size = new System.Drawing.Size(237, 31);
-            this.lblDeleteSelectedRecords.TabIndex = 23;
-            this.lblDeleteSelectedRecords.Text = "Selected Records:";
-            // 
-            // btnDeleteCancel
-            // 
-            this.btnDeleteCancel.BackColor = System.Drawing.Color.LightGray;
-            this.btnDeleteCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteCancel.Location = new System.Drawing.Point(1644, 924);
-            this.btnDeleteCancel.Name = "btnDeleteCancel";
-            this.btnDeleteCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnDeleteCancel.TabIndex = 14;
-            this.btnDeleteCancel.Text = "Cancel";
-            this.btnDeleteCancel.UseVisualStyleBackColor = false;
-            // 
-            // btnDeleteDelete
-            // 
-            this.btnDeleteDelete.BackColor = System.Drawing.Color.Red;
-            this.btnDeleteDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteDelete.Location = new System.Drawing.Point(1518, 924);
-            this.btnDeleteDelete.Name = "btnDeleteDelete";
-            this.btnDeleteDelete.Size = new System.Drawing.Size(120, 50);
-            this.btnDeleteDelete.TabIndex = 13;
-            this.btnDeleteDelete.Text = "Delete";
-            this.btnDeleteDelete.UseVisualStyleBackColor = false;
-            // 
-            // pnlSetting
-            // 
-            this.pnlSetting.Controls.Add(this.lblDefaultSettings);
-            this.pnlSetting.Controls.Add(this.txtSettingDefault);
-            this.pnlSetting.Controls.Add(this.cmbSettingDefault2);
-            this.pnlSetting.Controls.Add(this.cmbSettingDefault3);
-            this.pnlSetting.Controls.Add(this.cmbSettingDefault1);
-            this.pnlSetting.Controls.Add(this.btnGmailKeyIsVisible);
-            this.pnlSetting.Controls.Add(this.textBox12);
-            this.pnlSetting.Controls.Add(this.lblSettingGmailKey);
-            this.pnlSetting.Controls.Add(this.btnSettingCancel);
-            this.pnlSetting.Controls.Add(this.btnSettingSave);
-            this.pnlSetting.Location = new System.Drawing.Point(150, 100);
-            this.pnlSetting.Name = "pnlSetting";
-            this.pnlSetting.Size = new System.Drawing.Size(1770, 980);
-            this.pnlSetting.TabIndex = 58;
-            this.pnlSetting.VisibleChanged += new System.EventHandler(this.pnlSetting_VisibleChanged);
+            this.pnlSettings.Controls.Add(this.lblDefaultSettings);
+            this.pnlSettings.Controls.Add(this.txtSettingDefault);
+            this.pnlSettings.Controls.Add(this.cmbSettingDefault2);
+            this.pnlSettings.Controls.Add(this.cmbSettingDefault3);
+            this.pnlSettings.Controls.Add(this.cmbSettingDefault1);
+            this.pnlSettings.Controls.Add(this.btnGmailKeyIsVisible);
+            this.pnlSettings.Controls.Add(this.textBox12);
+            this.pnlSettings.Controls.Add(this.lblSettingGmailKey);
+            this.pnlSettings.Controls.Add(this.btnSettingCancel);
+            this.pnlSettings.Controls.Add(this.btnSettingSave);
+            this.pnlSettings.Location = new System.Drawing.Point(150, 100);
+            this.pnlSettings.Name = "pnlSettings";
+            this.pnlSettings.Size = new System.Drawing.Size(1770, 980);
+            this.pnlSettings.TabIndex = 58;
+            this.pnlSettings.VisibleChanged += new System.EventHandler(this.pnlSetting_VisibleChanged);
             // 
             // lblDefaultSettings
             // 
@@ -3074,48 +3048,13 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
-            // txtStaffSurname
-            // 
-            this.txtStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStaffSurname.Location = new System.Drawing.Point(255, 167);
-            this.txtStaffSurname.Name = "txtStaffSurname";
-            this.txtStaffSurname.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffSurname.TabIndex = 119;
-            // 
-            // lblStaffSurname
-            // 
-            this.lblStaffSurname.AutoSize = true;
-            this.lblStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffSurname.Location = new System.Drawing.Point(15, 170);
-            this.lblStaffSurname.Name = "lblStaffSurname";
-            this.lblStaffSurname.Size = new System.Drawing.Size(131, 31);
-            this.lblStaffSurname.TabIndex = 118;
-            this.lblStaffSurname.Text = "Surname:";
-            // 
-            // txtStaffFirstName
-            // 
-            this.txtStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStaffFirstName.Location = new System.Drawing.Point(255, 107);
-            this.txtStaffFirstName.Name = "txtStaffFirstName";
-            this.txtStaffFirstName.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffFirstName.TabIndex = 121;
-            // 
-            // lblStaffFirstName
-            // 
-            this.lblStaffFirstName.AutoSize = true;
-            this.lblStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStaffFirstName.Location = new System.Drawing.Point(15, 110);
-            this.lblStaffFirstName.Name = "lblStaffFirstName";
-            this.lblStaffFirstName.Size = new System.Drawing.Size(147, 31);
-            this.lblStaffFirstName.TabIndex = 120;
-            this.lblStaffFirstName.Text = "First Name";
-            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlStaff);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlBookDetails);
@@ -3125,9 +3064,7 @@
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlLoan);
-            this.Controls.Add(this.pnlDelete);
             this.Controls.Add(this.pnlBackup);
-            this.Controls.Add(this.pnlSetting);
             this.Controls.Add(this.pnlSubTabs);
             this.Controls.Add(this.pnlMainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -3144,10 +3081,8 @@
             this.pnlStaff.PerformLayout();
             this.pnlLoan.ResumeLayout(false);
             this.pnlLoan.PerformLayout();
-            this.pnlDelete.ResumeLayout(false);
-            this.pnlDelete.PerformLayout();
-            this.pnlSetting.ResumeLayout(false);
-            this.pnlSetting.PerformLayout();
+            this.pnlSettings.ResumeLayout(false);
+            this.pnlSettings.PerformLayout();
             this.pnlReturn.ResumeLayout(false);
             this.pnlReturn.PerformLayout();
             this.pnlBookDetails.ResumeLayout(false);
@@ -3253,7 +3188,7 @@
         private System.Windows.Forms.Label lblLoanOutMemberName;
         private System.Windows.Forms.Button btnLoanSave;
         private System.Windows.Forms.Button btnLoanCancel;
-        private System.Windows.Forms.Panel pnlSetting;
+        private System.Windows.Forms.Panel pnlSettings;
         private System.Windows.Forms.Label lblDefaultSettings;
         private System.Windows.Forms.TextBox txtSettingDefault;
         private System.Windows.Forms.ComboBox cmbSettingDefault2;
@@ -3318,11 +3253,6 @@
         private System.Windows.Forms.Button btnRestoreBackup;
         private System.Windows.Forms.Button btnCreateBackup;
         private System.Windows.Forms.DateTimePicker dtpLoanReturnDate;
-        private System.Windows.Forms.Panel pnlDelete;
-        private System.Windows.Forms.ListView lsvDelete;
-        private System.Windows.Forms.Label lblDeleteSelectedRecords;
-        private System.Windows.Forms.Button btnDeleteCancel;
-        private System.Windows.Forms.Button btnDeleteDelete;
         private System.Windows.Forms.Button btnBookAddCopies;
         private System.Windows.Forms.TextBox txtStaffUsername;
         private System.Windows.Forms.Label lblStaffUsername;
