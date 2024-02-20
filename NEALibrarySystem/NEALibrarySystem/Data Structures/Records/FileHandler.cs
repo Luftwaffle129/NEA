@@ -480,7 +480,7 @@ namespace NEALibrarySystem.Data_Structures
                 SaveFile(staffSavers, FilePath, "Staff");
             }
             /// <summary>
-            /// Saves the data stored about all staff into the staff file
+            /// Saves the data stored about all settings into the settings file
             /// </summary>
             public static void Settings()
             {
@@ -629,7 +629,7 @@ namespace NEALibrarySystem.Data_Structures
                 return true;
             }
             /// <summary>
-            /// Loads the circulation copy records stored in the member file
+            /// Loads the circulation copy records stored in the circulation file
             /// </summary>
             public static bool CirculationCopies()
             {
@@ -655,7 +655,9 @@ namespace NEALibrarySystem.Data_Structures
                     }
                 return true;
             }
-
+            /// <summary>
+            /// Loads the staff records stored in the staff file
+            /// </summary>
             public static bool Staff()
             {
                 bool validFiles;
@@ -680,6 +682,9 @@ namespace NEALibrarySystem.Data_Structures
                     }
                 return true;
             }
+            /// <summary>
+            /// Loads the settings stored in the settings file
+            /// </summary>
             public static bool Settings() 
             {
                 bool validFiles;
