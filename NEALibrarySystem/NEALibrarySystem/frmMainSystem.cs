@@ -16,7 +16,7 @@ namespace NEALibrarySystem
     {
         public static FrmMainSystem Main;
 
-        public FrmMainSystem()
+        public FrmMainSystem(Staff staff)
         {
             Main = this;
             InitializeComponent();
@@ -25,6 +25,7 @@ namespace NEALibrarySystem
             InitializeSubTabs();
             NavigatorOpenBookTab();
             FormBorderStyle = FormBorderStyle.Sizable;
+            DataLibrary.CurrentUser = staff;
 
             // hide buttons that are not available to the user's access level
             if (DataLibrary.CurrentUser.IsAdministrator == false)
@@ -62,6 +63,7 @@ namespace NEALibrarySystem
         private Book _selectedBook;
         private CirculationCopy _selectedCircCopy;
         private Member _selectedMember;
+        private Staff _selectedStaff;
 
         #region initialisation
         /// <summary>
@@ -75,7 +77,7 @@ namespace NEALibrarySystem
                 new Panel[] { pnlLoan, pnlReturn, pnlSell, pnlReserve},
                 new Panel[] { pnlSearch, pnlBookDetails, pnlSearch },
                 new Panel[] { pnlSearch, pnlMemberDetails },
-                new Panel[] { pnlSearch, pnlStaff },
+                new Panel[] { pnlSearch, pnlStaffDetails },
                 new Panel[] { pnlBackup },
                 new Panel[] { pnlSettings },
                 new Panel[] { pnlCirculationDetails } // not accessed directy by navigtion buttons but needed to close it
@@ -461,6 +463,19 @@ namespace NEALibrarySystem
                     else
                         MessageBox.Show("Member not found");
                     break;
+                case DataLibrary.SearchFeature.Staff:
+                    // gets index of the selected record within the datastructure it is stored
+                    index = SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString);
+                    if (index != -1) // if not found
+                    {
+                        _selectedStaff = DataLibrary.StaffUsernames[index].Reference;
+                        NavigatorCloseAllPanels();
+                        pnlStaffDetails.Visible = true;
+                        NavigatorResetSelectedItems();
+                    }
+                    else
+                        MessageBox.Show("Staff not found");
+                    break;
 
             }
         }
@@ -498,6 +513,7 @@ namespace NEALibrarySystem
             _selectedBook = null;
             _selectedCircCopy = null;
             _selectedMember = null;
+            _selectedStaff = null;
         }
         /// <summary>
         /// Opens the corrcet sub tab panel from the button clicked in the top navigation panel
@@ -642,7 +658,7 @@ namespace NEALibrarySystem
             if (pnlSearch.Visible)
                 _searchHandler.SetUpSearchTab();
         }
-        private void pnlMember_VisibleChanged(object sender, EventArgs e)
+        private void pnlMemberDetails_VisibleChanged(object sender, EventArgs e)
         {
             if (pnlMemberDetails.Visible)
                 _memberDetailsHandler.Load(_selectedMember);
@@ -664,8 +680,8 @@ namespace NEALibrarySystem
         }
         private void pnlStaff_VisibleChanged(object sender, EventArgs e)
         {
-            if (pnlStaff.Visible)
-                _StaffDetailsHandler.Load();
+            if (pnlStaffDetails.Visible)
+                _StaffDetailsHandler.Load(_selectedStaff);
         }
         private void pnlCirculationDetails_VisibleChanged(object sender, EventArgs e)
         {
@@ -859,13 +875,81 @@ namespace NEALibrarySystem
         {
             txtStaffPassword.UseSystemPasswordChar = false;
         }
+        private void btnStaffSave_Click(object sender, EventArgs e)
+        {
+            _StaffDetailsHandler.Save();
+        }
 
+        private void btnStaffCancel_Click(object sender, EventArgs e)
+        {
+            _StaffDetailsHandler.Cancel();
+        }
+
+        #endregion
         private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        #endregion
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpSettingsCirculation_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSettingsGmailPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown11_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown8_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown9_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numSettingsBarcodeMember_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSettingsGmailKey_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown10_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion
         /* Code used for opening the file dialog - not used in prototype

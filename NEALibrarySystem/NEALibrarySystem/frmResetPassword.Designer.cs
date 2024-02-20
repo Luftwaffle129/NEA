@@ -74,6 +74,7 @@
             this.txtConfirmPassword.PasswordChar = '•';
             this.txtConfirmPassword.Size = new System.Drawing.Size(213, 20);
             this.txtConfirmPassword.TabIndex = 6;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // txtPassword
             // 
@@ -82,6 +83,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(213, 20);
             this.txtPassword.TabIndex = 5;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // btnChangePassword
             // 
@@ -94,6 +96,7 @@
             this.btnChangePassword.TabIndex = 9;
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // frmResetPassword
             // 
@@ -112,6 +115,7 @@
             this.Name = "frmResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ResetPassword";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmResetPassword_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

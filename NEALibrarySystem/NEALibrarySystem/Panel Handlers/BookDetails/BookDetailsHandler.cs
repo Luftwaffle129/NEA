@@ -200,17 +200,17 @@ namespace NEALibrarySystem.PanelHandlers
                 BookCreator creator = GetBookInput();
                 if (creator.Validate(out List<string> invalidInputs, _bookData))
                 {
-                    DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, creator.Isbn, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, creator.Title, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, creator.SeriesTitle, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, creator.Isbn, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, creator.Title, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, creator.SeriesTitle, SearchAndSort.TwoRefClassBooks);
                     _bookData.SeriesNumber = Convert.ToInt32(creator.SeriesNumber);
-                    DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, creator.MediaType, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, creator.Author, SearchAndSort.TwoRefClassBooks);
-                    DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, creator.Publisher, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.MediaTypes = DataLibrary.ModifyReferenceClass(DataLibrary.MediaTypes, _bookData, _bookData.MediaType, out _bookData.MediaType, creator.MediaType, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Authors = DataLibrary.ModifyReferenceClass(DataLibrary.Authors, _bookData, _bookData.Author, out _bookData.Author, creator.Author, SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Publishers = DataLibrary.ModifyReferenceClass(DataLibrary.Publishers, _bookData, _bookData.Publisher, out _bookData.Publisher, creator.Publisher, SearchAndSort.TwoRefClassBooks);
                     DataLibrary.Genres = DataLibrary.ModifyReferenceClassList(DataLibrary.Genres, _bookData, _bookData.Genres, out _bookData.Genres, creator.Genres, SearchAndSort.TwoRefClassBooks);
                     DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, creator.Themes, SearchAndSort.TwoRefClassBooks);
                     _bookData.Description = creator.Description;
-                    DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, Convert.ToDouble(creator.Price), SearchAndSort.TwoRefClassBooks);
+                    DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(creator.Price), SearchAndSort.TwoRefClassBooks);
                     // Delete the removed book copies
                     List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies); // list of book copies before modifying the record
                     if (_bookCopyList.Count > 0)

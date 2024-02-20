@@ -418,7 +418,7 @@ namespace NEALibrarySystem.Data_Structures
                     Surname = _lastNames[rand.Next(0, _lastNames.Length)], // generate a realistic random surname
                     Username = username,
                     Password = password,
-                    EmailAddress = $"{_emails[rand.Next(0, _emails.Length)]}@tbgs.co.uk", // generate realistic random email
+                    EmailAddress = $"{i}@tbgs.co.uk", // generate realistic random email
                     IsAdministrator = false,
                 };
                 DataLibrary.StaffList.Add(new Staff(staffCreator));

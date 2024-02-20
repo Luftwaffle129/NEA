@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Structures\RecordCreators\SettingsCreator.cs" />
     <Compile Include="Data Structures\RecordCreators\StaffCreator.cs" />
     <Compile Include="Data Structures\RecordSavers\BookCopySaver.cs" />
     <Compile Include="Data Structures\RecordSavers\BookSaver.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="ListViewHandlers\ListViewHandler.cs" />
     <Compile Include="Panel Handlers\BookDetails\BookDetailsObjects.cs" />
     <Compile Include="Data Structures\Records\DataFormatter.cs" />
+    <Compile Include="Panel Handlers\Settings\SettingsHandler.cs" />
+    <Compile Include="Panel Handlers\Settings\SettingsObjects.cs" />
     <Compile Include="Panel Handlers\StaffDetails\StaffDetailsHandler.cs" />
     <Compile Include="Panel Handlers\StaffDetails\StaffDetailsObjects.cs" />
     <Compile Include="Program.cs" />

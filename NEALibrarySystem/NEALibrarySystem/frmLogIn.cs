@@ -23,14 +23,22 @@ namespace NEALibrarySystem
         {
             if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN))
             {
-                // opens the mains system, hides the log in form
-                frmMainSystem = new FrmMainSystem();
-                frmMainSystem.Show();
-                this.Hide();
+                int staffIndex = IsValidCredentials();
+                if (staffIndex != -1)
+                {
+                    // opens the mains system, hides the log in form
+                    frmMainSystem = new FrmMainSystem(DataLibrary.StaffUsernames[staffIndex].Reference);
+                    frmMainSystem.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid credentials");
+                }
             }
             else
             {
-                
+                MessageBox.Show("Wait 1 second between attempts");
             }
         }
         private void btnForgotPassword_Click(object sender, EventArgs e)
@@ -40,8 +48,7 @@ namespace NEALibrarySystem
             frmForgottenPassword.Show();
             this.Hide();
         }
-        
-        private bool IsValidCredentials()
+        private int IsValidCredentials()
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
@@ -52,13 +59,13 @@ namespace NEALibrarySystem
             {
                 if (password == DataLibrary.StaffUsernames[usernameIndex].Reference.Password)
                 {
-                    return true;
+                    return usernameIndex;
                 }
                 else
-                    return false;
+                    return -1;
             }
             else
-                return false;
+                return -1;
         }
     }
 }

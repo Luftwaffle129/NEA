@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,38 @@ namespace NEALibrarySystem
 {
     public partial class frmResetPassword : Form
     {
-        public frmResetPassword()
+        Staff _staff;
+        public frmResetPassword(Staff staff)
         {
             InitializeComponent();
+            _staff = staff;
+            txtPassword.Text = "";
+            txtConfirmPassword.Text = "";
+        }
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.Text.Length >= 4) 
+            {
+                if (txtConfirmPassword.Text == txtPassword.Text)
+                {
+                    _staff.Password = txtPassword.Text;
+                    MessageBox.Show("Password changed");
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Passwords do not match");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Password too short");
+            }
+        }
+
+        private void frmResetPassword_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmLogIn.Main.Show();
         }
     }
 }

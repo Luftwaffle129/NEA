@@ -1,6 +1,7 @@
 ﻿using NEALibrarySystem.Data_Structures.RecordCreators;
 using NEALibrarySystem.Data_Structures.Records;
 using NEALibrarySystem.Data_Structures.RecordSavers;
+using NEALibrarySystem.Properties;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -230,6 +231,7 @@ namespace NEALibrarySystem.Data_Structures
                 CirculationCopies();
                 Members();
                 Staff();
+                Settings();
             }
             /// <summary>
             /// Saves all data stored about the books into their respective files
@@ -392,6 +394,15 @@ namespace NEALibrarySystem.Data_Structures
                     }
                 SaveFile(staffSavers, filePath, "Staff");
             }
+            /// <summary>
+            /// Saves the data stored about all staff into the staff file
+            /// </summary>
+            public static void Settings()
+            {
+                SettingsCreator creator = new SettingsCreator();
+                creator.GetCurrentSettings();
+                SaveFile(creator, filePath, "Settings");
+            }
         }
         /// <summary>
         /// Used to load data from the files into the program
@@ -525,6 +536,26 @@ namespace NEALibrarySystem.Data_Structures
             {
                 DataLibrary.ClearData.Staff();
                 StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(filePath, "Staff");
+                if (staffSavers != null)
+                    foreach (StaffSaver saver in staffSavers)
+                    {
+                        // create a circulation copy using the data in the saver
+                        StaffCreator creator = new StaffCreator()
+                        {
+                            FirstName = saver.FirstName,
+                            Surname = saver.Surname,
+                            Username = saver.Username,
+                            Password = saver.Password,
+                            EmailAddress = saver.EmailAddress,
+                            IsAdministrator = saver.IsAdministrator
+                        };
+                        DataLibrary.StaffList.Add(new Staff(creator));
+                    }
+            }
+            public static void Settings() 
+            {
+                SettingsCreator creator = LoadFile<SettingsCreator>(filePath, "Settings");
+                
             }
         }
         /// <summary>

@@ -32,9 +32,22 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             {
                 invalidList.Add("Surname");
             }
-            if (!DataFormatter.IsValidEmail(EmailAddress)) // email address must be in the correct format
+            if (!DataFormatter.IsValidEmail(EmailAddress) ) // email address must be in the correct format
             {
                 invalidList.Add("Email Address");
+            }
+            else
+            {
+                if (original == null) // if creating a new record, username must be unique
+                {
+                    if (SearchAndSort.Binary(DataLibrary.StaffUsernames, Username, SearchAndSort.RefClassAndString) != -1)
+                        invalidList.Add("Username");
+                }
+                else // if modifying a record, username must be unique or equal to old username
+                {
+                    if (!(SearchAndSort.Binary(DataLibrary.StaffUsernames, Username, SearchAndSort.RefClassAndString) == -1 || Username == original.Username.Value))
+                        invalidList.Add("Username");
+                }
             }
             if (Username.Length == 0) // username cannot be empty
             {

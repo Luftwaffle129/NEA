@@ -46,6 +46,14 @@ namespace NEALibrarySystem.Data_Structures
             set { _staffUsernames = value ?? new List<ReferenceClass<string, Staff>>(); }
         }
         #endregion
+        #region staffEmails
+        private static List<ReferenceClass<string, Staff>> _staffEmails = new List<ReferenceClass<string, Staff>>();
+        public static List<ReferenceClass<string, Staff>> StaffEmails
+        {
+            get { return _staffEmails; }
+            set { _staffEmails = value ?? new List<ReferenceClass<string, Staff>>(); }
+        }
+        #endregion
         #region book copies
         private static List<BookCopy> _bookCopies = new List<BookCopy>();
         public static List<BookCopy> BookCopies
@@ -497,10 +505,11 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="compare">Comparison algorithm when searching and inserting reference classes in the list</param>
         /// <param name="newReferenceClass">Reference class that was changed</param>
         /// <returns>Updated list of the reference classes</returns>
-        public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> referenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
+        public static List<ReferenceClass<T, F>> ModifyReferenceClass<T, F>(List<ReferenceClass<T, F>> list, F reference, ReferenceClass<T, F> oldReferenceClass, out ReferenceClass<T, F> newReferenceClass, T newValue, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare) where F : class
         {
-            list = DeleteReferenceClass(list, referenceClass, compare);
+            list = DeleteReferenceClass(list, oldReferenceClass, compare);
             list = CreateReferenceClass(list, reference, newValue, compare, out int index);
+            newReferenceClass = list[index];
             return list;
         }
         /// <summary>
@@ -539,10 +548,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="newMemberInfo">Information to update the member details with</param>
         public static void ModifyMember(Member member, MemberCreator newMemberInfo)
         {
-            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
-            MemberFirstNames = ModifyReferenceClass(MemberFirstNames, member, member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
-            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, newMemberInfo.Surname, TwoRefClassMembers);
-            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
+            MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
+            MemberFirstNames = ModifyReferenceClass(MemberFirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
+            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.Surname,  TwoRefClassMembers);
+            MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
             member.PhoneNumber = newMemberInfo.PhoneNumber;
@@ -568,9 +577,10 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="newStaffInfo">Information to update the staff details with</param>
         public static void ModifyStaff(Staff staff, StaffCreator newStaffInfo)
         {
-            StaffFirstNames = ModifyReferenceClass(StaffFirstNames, staff, staff.FirstName, newStaffInfo.FirstName, TwoRefClassStaff);
-            StaffSurnames = ModifyReferenceClass(StaffSurnames, staff, staff.Surname, newStaffInfo.Surname, TwoRefClassStaff);
-            StaffUsernames = ModifyReferenceClass(StaffUsernames, staff, staff.Username, newStaffInfo.Username, TwoRefClassStaff);
+            StaffFirstNames = ModifyReferenceClass(StaffFirstNames, staff, staff.FirstName, out staff.FirstName, newStaffInfo.FirstName, TwoRefClassStaff);
+            StaffSurnames = ModifyReferenceClass(StaffSurnames, staff, staff.Surname, out staff.Surname, newStaffInfo.Surname, TwoRefClassStaff);
+            StaffUsernames = ModifyReferenceClass(StaffUsernames, staff, staff.Username, out staff.Username, newStaffInfo.Username, TwoRefClassStaff);
+            
             staff.Password = newStaffInfo.Password;
             staff.EmailAddress = newStaffInfo.EmailAddress;
             staff.IsAdministrator = newStaffInfo.IsAdministrator;

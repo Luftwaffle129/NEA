@@ -96,7 +96,7 @@
             this.lblFilter2 = new System.Windows.Forms.Label();
             this.cmbFilter2 = new System.Windows.Forms.ComboBox();
             this.cmbFilter1 = new System.Windows.Forms.ComboBox();
-            this.pnlStaff = new System.Windows.Forms.Panel();
+            this.pnlStaffDetails = new System.Windows.Forms.Panel();
             this.txtStaffFirstName = new System.Windows.Forms.TextBox();
             this.lblStaffFirstName = new System.Windows.Forms.Label();
             this.txtStaffSurname = new System.Windows.Forms.TextBox();
@@ -133,14 +133,28 @@
             this.btnLoanSave = new System.Windows.Forms.Button();
             this.btnLoanCancel = new System.Windows.Forms.Button();
             this.pnlSettings = new System.Windows.Forms.Panel();
-            this.lblDefaultSettings = new System.Windows.Forms.Label();
-            this.txtSettingDefault = new System.Windows.Forms.TextBox();
-            this.cmbSettingDefault2 = new System.Windows.Forms.ComboBox();
-            this.cmbSettingDefault3 = new System.Windows.Forms.ComboBox();
-            this.cmbSettingDefault1 = new System.Windows.Forms.ComboBox();
-            this.btnGmailKeyIsVisible = new System.Windows.Forms.Button();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.grpSettingsCirculation = new System.Windows.Forms.GroupBox();
+            this.lblSettingsCirculationDueDateValue = new System.Windows.Forms.Label();
+            this.cmbSettingsCirculationDueDateType = new System.Windows.Forms.ComboBox();
+            this.numSettingsCirculationDueDateValue = new System.Windows.Forms.NumericUpDown();
+            this.lblSettingsCirculationDueDateType = new System.Windows.Forms.Label();
+            this.lblSettingsCirculationMemberType = new System.Windows.Forms.Label();
+            this.lblSettingsCirculationLateFee = new System.Windows.Forms.Label();
+            this.lblSettingsCirculationDueDate = new System.Windows.Forms.Label();
+            this.numSettingsCirculationLateFee = new System.Windows.Forms.NumericUpDown();
+            this.grpSettingsBarcode = new System.Windows.Forms.GroupBox();
+            this.numSettingsBarcodeMember = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.grpSettingsGmail = new System.Windows.Forms.GroupBox();
+            this.lblSettingsGmailUsername = new System.Windows.Forms.Label();
+            this.lblSettingsGmailPassword = new System.Windows.Forms.Label();
+            this.txtSettingsGmailPassword = new System.Windows.Forms.TextBox();
+            this.txtSettingsGmailUsername = new System.Windows.Forms.TextBox();
+            this.txtSettingsGmailKey = new System.Windows.Forms.TextBox();
             this.lblSettingGmailKey = new System.Windows.Forms.Label();
+            this.btnSettingsGmailKey = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.pnlReturn = new System.Windows.Forms.Panel();
@@ -262,11 +276,19 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
+            this.cmbSettingsCirculationMemberType = new System.Windows.Forms.ComboBox();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
-            this.pnlStaff.SuspendLayout();
+            this.pnlStaffDetails.SuspendLayout();
             this.pnlLoan.SuspendLayout();
             this.pnlSettings.SuspendLayout();
+            this.grpSettingsCirculation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsCirculationDueDateValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsCirculationLateFee)).BeginInit();
+            this.grpSettingsBarcode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeMember)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.grpSettingsGmail.SuspendLayout();
             this.pnlReturn.SuspendLayout();
             this.pnlBookDetails.SuspendLayout();
             this.grpBooksBookStatus.SuspendLayout();
@@ -559,7 +581,7 @@
             this.pnlMemberDetails.Name = "pnlMemberDetails";
             this.pnlMemberDetails.Size = new System.Drawing.Size(1770, 980);
             this.pnlMemberDetails.TabIndex = 54;
-            this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMember_VisibleChanged);
+            this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMemberDetails_VisibleChanged);
             // 
             // txtMemberLateFees
             // 
@@ -1101,28 +1123,28 @@
             this.cmbFilter1.Size = new System.Drawing.Size(216, 28);
             this.cmbFilter1.TabIndex = 24;
             // 
-            // pnlStaff
+            // pnlStaffDetails
             // 
-            this.pnlStaff.Controls.Add(this.txtStaffFirstName);
-            this.pnlStaff.Controls.Add(this.lblStaffFirstName);
-            this.pnlStaff.Controls.Add(this.txtStaffSurname);
-            this.pnlStaff.Controls.Add(this.lblStaffSurname);
-            this.pnlStaff.Controls.Add(this.txtStaffEmailAddress);
-            this.pnlStaff.Controls.Add(this.lblStaffAccessLevel);
-            this.pnlStaff.Controls.Add(this.cmbStaffAccessLevel);
-            this.pnlStaff.Controls.Add(this.txtStaffUsername);
-            this.pnlStaff.Controls.Add(this.lblStaffUsername);
-            this.pnlStaff.Controls.Add(this.btnStaffPasswordVisibility);
-            this.pnlStaff.Controls.Add(this.lblStaffEmailAddress);
-            this.pnlStaff.Controls.Add(this.txtStaffPassword);
-            this.pnlStaff.Controls.Add(this.lblStaffPassword);
-            this.pnlStaff.Controls.Add(this.btnStaffCancel);
-            this.pnlStaff.Controls.Add(this.btnStaffSave);
-            this.pnlStaff.Location = new System.Drawing.Point(150, 100);
-            this.pnlStaff.Name = "pnlStaff";
-            this.pnlStaff.Size = new System.Drawing.Size(1770, 980);
-            this.pnlStaff.TabIndex = 56;
-            this.pnlStaff.VisibleChanged += new System.EventHandler(this.pnlStaff_VisibleChanged);
+            this.pnlStaffDetails.Controls.Add(this.txtStaffFirstName);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffFirstName);
+            this.pnlStaffDetails.Controls.Add(this.txtStaffSurname);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffSurname);
+            this.pnlStaffDetails.Controls.Add(this.txtStaffEmailAddress);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffAccessLevel);
+            this.pnlStaffDetails.Controls.Add(this.cmbStaffAccessLevel);
+            this.pnlStaffDetails.Controls.Add(this.txtStaffUsername);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffUsername);
+            this.pnlStaffDetails.Controls.Add(this.btnStaffPasswordVisibility);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffEmailAddress);
+            this.pnlStaffDetails.Controls.Add(this.txtStaffPassword);
+            this.pnlStaffDetails.Controls.Add(this.lblStaffPassword);
+            this.pnlStaffDetails.Controls.Add(this.btnStaffCancel);
+            this.pnlStaffDetails.Controls.Add(this.btnStaffSave);
+            this.pnlStaffDetails.Location = new System.Drawing.Point(150, 100);
+            this.pnlStaffDetails.Name = "pnlStaffDetails";
+            this.pnlStaffDetails.Size = new System.Drawing.Size(1770, 980);
+            this.pnlStaffDetails.TabIndex = 56;
+            this.pnlStaffDetails.VisibleChanged += new System.EventHandler(this.pnlStaff_VisibleChanged);
             // 
             // txtStaffFirstName
             // 
@@ -1260,6 +1282,7 @@
             this.btnStaffCancel.TabIndex = 1;
             this.btnStaffCancel.Text = "Cancel";
             this.btnStaffCancel.UseVisualStyleBackColor = false;
+            this.btnStaffCancel.Click += new System.EventHandler(this.btnStaffCancel_Click);
             // 
             // btnStaffSave
             // 
@@ -1272,6 +1295,7 @@
             this.btnStaffSave.TabIndex = 0;
             this.btnStaffSave.Text = "Save";
             this.btnStaffSave.UseVisualStyleBackColor = false;
+            this.btnStaffSave.Click += new System.EventHandler(this.btnStaffSave_Click);
             // 
             // pnlLoan
             // 
@@ -1514,14 +1538,12 @@
             // 
             // pnlSettings
             // 
-            this.pnlSettings.Controls.Add(this.lblDefaultSettings);
-            this.pnlSettings.Controls.Add(this.txtSettingDefault);
-            this.pnlSettings.Controls.Add(this.cmbSettingDefault2);
-            this.pnlSettings.Controls.Add(this.cmbSettingDefault3);
-            this.pnlSettings.Controls.Add(this.cmbSettingDefault1);
-            this.pnlSettings.Controls.Add(this.btnGmailKeyIsVisible);
-            this.pnlSettings.Controls.Add(this.textBox12);
-            this.pnlSettings.Controls.Add(this.lblSettingGmailKey);
+            this.pnlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSettings.Controls.Add(this.grpSettingsCirculation);
+            this.pnlSettings.Controls.Add(this.grpSettingsBarcode);
+            this.pnlSettings.Controls.Add(this.grpSettingsGmail);
             this.pnlSettings.Controls.Add(this.btnSettingCancel);
             this.pnlSettings.Controls.Add(this.btnSettingSave);
             this.pnlSettings.Location = new System.Drawing.Point(150, 100);
@@ -1530,83 +1552,249 @@
             this.pnlSettings.TabIndex = 58;
             this.pnlSettings.VisibleChanged += new System.EventHandler(this.pnlSetting_VisibleChanged);
             // 
-            // lblDefaultSettings
+            // grpSettingsCirculation
             // 
-            this.lblDefaultSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDefaultSettings.Location = new System.Drawing.Point(599, 376);
-            this.lblDefaultSettings.Name = "lblDefaultSettings";
-            this.lblDefaultSettings.Size = new System.Drawing.Size(579, 36);
-            this.lblDefaultSettings.TabIndex = 79;
-            this.lblDefaultSettings.Text = "Default Settings:";
-            this.lblDefaultSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.grpSettingsCirculation.Controls.Add(this.cmbSettingsCirculationMemberType);
+            this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDateValue);
+            this.grpSettingsCirculation.Controls.Add(this.cmbSettingsCirculationDueDateType);
+            this.grpSettingsCirculation.Controls.Add(this.numSettingsCirculationDueDateValue);
+            this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDateType);
+            this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationMemberType);
+            this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationLateFee);
+            this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDate);
+            this.grpSettingsCirculation.Controls.Add(this.numSettingsCirculationLateFee);
+            this.grpSettingsCirculation.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSettingsCirculation.Location = new System.Drawing.Point(12, 433);
+            this.grpSettingsCirculation.Name = "grpSettingsCirculation";
+            this.grpSettingsCirculation.Size = new System.Drawing.Size(665, 342);
+            this.grpSettingsCirculation.TabIndex = 80;
+            this.grpSettingsCirculation.TabStop = false;
+            this.grpSettingsCirculation.Text = "Circulation";
+            this.grpSettingsCirculation.Enter += new System.EventHandler(this.grpSettingsCirculation_Enter);
             // 
-            // txtSettingDefault
+            // lblSettingsCirculationDueDateValue
             // 
-            this.txtSettingDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSettingDefault.Location = new System.Drawing.Point(600, 548);
-            this.txtSettingDefault.Name = "txtSettingDefault";
-            this.txtSettingDefault.Size = new System.Drawing.Size(579, 38);
-            this.txtSettingDefault.TabIndex = 78;
+            this.lblSettingsCirculationDueDateValue.AutoSize = true;
+            this.lblSettingsCirculationDueDateValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsCirculationDueDateValue.Location = new System.Drawing.Point(15, 286);
+            this.lblSettingsCirculationDueDateValue.Name = "lblSettingsCirculationDueDateValue";
+            this.lblSettingsCirculationDueDateValue.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblSettingsCirculationDueDateValue.Size = new System.Drawing.Size(255, 31);
+            this.lblSettingsCirculationDueDateValue.TabIndex = 85;
+            this.lblSettingsCirculationDueDateValue.Text = "Time Length (days):";
             // 
-            // cmbSettingDefault2
+            // cmbSettingsCirculationDueDateType
             // 
-            this.cmbSettingDefault2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSettingDefault2.FormattingEnabled = true;
-            this.cmbSettingDefault2.Location = new System.Drawing.Point(599, 460);
-            this.cmbSettingDefault2.Name = "cmbSettingDefault2";
-            this.cmbSettingDefault2.Size = new System.Drawing.Size(579, 39);
-            this.cmbSettingDefault2.TabIndex = 77;
+            this.cmbSettingsCirculationDueDateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSettingsCirculationDueDateType.FormattingEnabled = true;
+            this.cmbSettingsCirculationDueDateType.Location = new System.Drawing.Point(253, 163);
+            this.cmbSettingsCirculationDueDateType.Name = "cmbSettingsCirculationDueDateType";
+            this.cmbSettingsCirculationDueDateType.Size = new System.Drawing.Size(399, 39);
+            this.cmbSettingsCirculationDueDateType.TabIndex = 89;
+            this.cmbSettingsCirculationDueDateType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // cmbSettingDefault3
+            // numSettingsCirculationDueDateValue
             // 
-            this.cmbSettingDefault3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSettingDefault3.FormattingEnabled = true;
-            this.cmbSettingDefault3.Location = new System.Drawing.Point(600, 505);
-            this.cmbSettingDefault3.Name = "cmbSettingDefault3";
-            this.cmbSettingDefault3.Size = new System.Drawing.Size(578, 39);
-            this.cmbSettingDefault3.TabIndex = 76;
+            this.numSettingsCirculationDueDateValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSettingsCirculationDueDateValue.Location = new System.Drawing.Point(253, 283);
+            this.numSettingsCirculationDueDateValue.Name = "numSettingsCirculationDueDateValue";
+            this.numSettingsCirculationDueDateValue.Size = new System.Drawing.Size(399, 38);
+            this.numSettingsCirculationDueDateValue.TabIndex = 86;
+            this.numSettingsCirculationDueDateValue.ValueChanged += new System.EventHandler(this.numericUpDown11_ValueChanged);
             // 
-            // cmbSettingDefault1
+            // lblSettingsCirculationDueDateType
             // 
-            this.cmbSettingDefault1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSettingDefault1.FormattingEnabled = true;
-            this.cmbSettingDefault1.Location = new System.Drawing.Point(599, 415);
-            this.cmbSettingDefault1.Name = "cmbSettingDefault1";
-            this.cmbSettingDefault1.Size = new System.Drawing.Size(579, 39);
-            this.cmbSettingDefault1.TabIndex = 75;
+            this.lblSettingsCirculationDueDateType.AutoSize = true;
+            this.lblSettingsCirculationDueDateType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsCirculationDueDateType.Location = new System.Drawing.Point(15, 166);
+            this.lblSettingsCirculationDueDateType.Name = "lblSettingsCirculationDueDateType";
+            this.lblSettingsCirculationDueDateType.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblSettingsCirculationDueDateType.Size = new System.Drawing.Size(219, 31);
+            this.lblSettingsCirculationDueDateType.TabIndex = 81;
+            this.lblSettingsCirculationDueDateType.Text = "Circulation Type:";
             // 
-            // btnGmailKeyIsVisible
+            // lblSettingsCirculationMemberType
             // 
-            this.btnGmailKeyIsVisible.BackColor = System.Drawing.Color.LightGray;
-            this.btnGmailKeyIsVisible.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGmailKeyIsVisible.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGmailKeyIsVisible.Location = new System.Drawing.Point(1058, 317);
-            this.btnGmailKeyIsVisible.Name = "btnGmailKeyIsVisible";
-            this.btnGmailKeyIsVisible.Size = new System.Drawing.Size(120, 38);
-            this.btnGmailKeyIsVisible.TabIndex = 74;
-            this.btnGmailKeyIsVisible.Text = "Show/Hide";
-            this.btnGmailKeyIsVisible.UseVisualStyleBackColor = false;
+            this.lblSettingsCirculationMemberType.AutoSize = true;
+            this.lblSettingsCirculationMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsCirculationMemberType.Location = new System.Drawing.Point(15, 226);
+            this.lblSettingsCirculationMemberType.Name = "lblSettingsCirculationMemberType";
+            this.lblSettingsCirculationMemberType.Size = new System.Drawing.Size(188, 31);
+            this.lblSettingsCirculationMemberType.TabIndex = 80;
+            this.lblSettingsCirculationMemberType.Text = "Member Type:";
             // 
-            // textBox12
+            // lblSettingsCirculationLateFee
             // 
-            this.textBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox12.Location = new System.Drawing.Point(745, 317);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(307, 38);
-            this.textBox12.TabIndex = 73;
+            this.lblSettingsCirculationLateFee.AutoSize = true;
+            this.lblSettingsCirculationLateFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsCirculationLateFee.Location = new System.Drawing.Point(15, 46);
+            this.lblSettingsCirculationLateFee.Name = "lblSettingsCirculationLateFee";
+            this.lblSettingsCirculationLateFee.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblSettingsCirculationLateFee.Size = new System.Drawing.Size(234, 31);
+            this.lblSettingsCirculationLateFee.TabIndex = 78;
+            this.lblSettingsCirculationLateFee.Text = "Late Fee Per Day:";
+            // 
+            // lblSettingsCirculationDueDate
+            // 
+            this.lblSettingsCirculationDueDate.AutoSize = true;
+            this.lblSettingsCirculationDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsCirculationDueDate.Location = new System.Drawing.Point(15, 106);
+            this.lblSettingsCirculationDueDate.Name = "lblSettingsCirculationDueDate";
+            this.lblSettingsCirculationDueDate.Size = new System.Drawing.Size(358, 31);
+            this.lblSettingsCirculationDueDate.TabIndex = 77;
+            this.lblSettingsCirculationDueDate.Text = "Circulation due date lengths:";
+            this.lblSettingsCirculationDueDate.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // numSettingsCirculationLateFee
+            // 
+            this.numSettingsCirculationLateFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSettingsCirculationLateFee.Location = new System.Drawing.Point(253, 43);
+            this.numSettingsCirculationLateFee.Name = "numSettingsCirculationLateFee";
+            this.numSettingsCirculationLateFee.Size = new System.Drawing.Size(399, 38);
+            this.numSettingsCirculationLateFee.TabIndex = 78;
+            // 
+            // grpSettingsBarcode
+            // 
+            this.grpSettingsBarcode.Controls.Add(this.numSettingsBarcodeMember);
+            this.grpSettingsBarcode.Controls.Add(this.label1);
+            this.grpSettingsBarcode.Controls.Add(this.label2);
+            this.grpSettingsBarcode.Controls.Add(this.numericUpDown1);
+            this.grpSettingsBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSettingsBarcode.Location = new System.Drawing.Point(12, 253);
+            this.grpSettingsBarcode.Name = "grpSettingsBarcode";
+            this.grpSettingsBarcode.Size = new System.Drawing.Size(665, 166);
+            this.grpSettingsBarcode.TabIndex = 79;
+            this.grpSettingsBarcode.TabStop = false;
+            this.grpSettingsBarcode.Text = "Barcode Lengths";
+            // 
+            // numSettingsBarcodeMember
+            // 
+            this.numSettingsBarcodeMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSettingsBarcodeMember.Location = new System.Drawing.Point(253, 103);
+            this.numSettingsBarcodeMember.Name = "numSettingsBarcodeMember";
+            this.numSettingsBarcodeMember.Size = new System.Drawing.Size(399, 38);
+            this.numSettingsBarcodeMember.TabIndex = 79;
+            this.numSettingsBarcodeMember.ValueChanged += new System.EventHandler(this.numSettingsBarcodeMember_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 46);
+            this.label1.Name = "label1";
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label1.Size = new System.Drawing.Size(155, 31);
+            this.label1.TabIndex = 78;
+            this.label1.Text = "Book Copy:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(15, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 31);
+            this.label2.TabIndex = 77;
+            this.label2.Text = "Member:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown1.Location = new System.Drawing.Point(253, 43);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(399, 38);
+            this.numericUpDown1.TabIndex = 78;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // grpSettingsGmail
+            // 
+            this.grpSettingsGmail.Controls.Add(this.lblSettingsGmailUsername);
+            this.grpSettingsGmail.Controls.Add(this.lblSettingsGmailPassword);
+            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailPassword);
+            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailUsername);
+            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailKey);
+            this.grpSettingsGmail.Controls.Add(this.lblSettingGmailKey);
+            this.grpSettingsGmail.Controls.Add(this.btnSettingsGmailKey);
+            this.grpSettingsGmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSettingsGmail.Location = new System.Drawing.Point(12, 13);
+            this.grpSettingsGmail.Name = "grpSettingsGmail";
+            this.grpSettingsGmail.Size = new System.Drawing.Size(665, 226);
+            this.grpSettingsGmail.TabIndex = 75;
+            this.grpSettingsGmail.TabStop = false;
+            this.grpSettingsGmail.Text = "Gmail";
+            // 
+            // lblSettingsGmailUsername
+            // 
+            this.lblSettingsGmailUsername.AutoSize = true;
+            this.lblSettingsGmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsGmailUsername.Location = new System.Drawing.Point(15, 46);
+            this.lblSettingsGmailUsername.Name = "lblSettingsGmailUsername";
+            this.lblSettingsGmailUsername.Size = new System.Drawing.Size(147, 31);
+            this.lblSettingsGmailUsername.TabIndex = 78;
+            this.lblSettingsGmailUsername.Text = "Username:";
+            // 
+            // lblSettingsGmailPassword
+            // 
+            this.lblSettingsGmailPassword.AutoSize = true;
+            this.lblSettingsGmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsGmailPassword.Location = new System.Drawing.Point(15, 106);
+            this.lblSettingsGmailPassword.Name = "lblSettingsGmailPassword";
+            this.lblSettingsGmailPassword.Size = new System.Drawing.Size(142, 31);
+            this.lblSettingsGmailPassword.TabIndex = 77;
+            this.lblSettingsGmailPassword.Text = "Password:";
+            // 
+            // txtSettingsGmailPassword
+            // 
+            this.txtSettingsGmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSettingsGmailPassword.Location = new System.Drawing.Point(253, 103);
+            this.txtSettingsGmailPassword.Name = "txtSettingsGmailPassword";
+            this.txtSettingsGmailPassword.Size = new System.Drawing.Size(399, 38);
+            this.txtSettingsGmailPassword.TabIndex = 76;
+            this.txtSettingsGmailPassword.TextChanged += new System.EventHandler(this.txtSettingsGmailPassword_TextChanged);
+            // 
+            // txtSettingsGmailUsername
+            // 
+            this.txtSettingsGmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSettingsGmailUsername.Location = new System.Drawing.Point(253, 43);
+            this.txtSettingsGmailUsername.Name = "txtSettingsGmailUsername";
+            this.txtSettingsGmailUsername.Size = new System.Drawing.Size(399, 38);
+            this.txtSettingsGmailUsername.TabIndex = 75;
+            this.txtSettingsGmailUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // txtSettingsGmailKey
+            // 
+            this.txtSettingsGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSettingsGmailKey.Location = new System.Drawing.Point(253, 162);
+            this.txtSettingsGmailKey.Name = "txtSettingsGmailKey";
+            this.txtSettingsGmailKey.Size = new System.Drawing.Size(273, 38);
+            this.txtSettingsGmailKey.TabIndex = 73;
+            this.txtSettingsGmailKey.TextChanged += new System.EventHandler(this.txtSettingsGmailKey_TextChanged);
             // 
             // lblSettingGmailKey
             // 
             this.lblSettingGmailKey.AutoSize = true;
             this.lblSettingGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettingGmailKey.Location = new System.Drawing.Point(593, 320);
+            this.lblSettingGmailKey.Location = new System.Drawing.Point(15, 166);
             this.lblSettingGmailKey.Name = "lblSettingGmailKey";
-            this.lblSettingGmailKey.Size = new System.Drawing.Size(146, 31);
+            this.lblSettingGmailKey.Size = new System.Drawing.Size(69, 31);
             this.lblSettingGmailKey.TabIndex = 72;
-            this.lblSettingGmailKey.Text = "Gmail Key:";
+            this.lblSettingGmailKey.Text = "Key:";
+            // 
+            // btnSettingsGmailKey
+            // 
+            this.btnSettingsGmailKey.BackColor = System.Drawing.Color.LightGray;
+            this.btnSettingsGmailKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingsGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSettingsGmailKey.Location = new System.Drawing.Point(532, 162);
+            this.btnSettingsGmailKey.Name = "btnSettingsGmailKey";
+            this.btnSettingsGmailKey.Size = new System.Drawing.Size(120, 38);
+            this.btnSettingsGmailKey.TabIndex = 74;
+            this.btnSettingsGmailKey.Text = "Show/Hide";
+            this.btnSettingsGmailKey.UseVisualStyleBackColor = false;
             // 
             // btnSettingCancel
             // 
+            this.btnSettingCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettingCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1619,6 +1807,7 @@
             // 
             // btnSettingSave
             // 
+            this.btnSettingSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettingSave.BackColor = System.Drawing.Color.LightGray;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3048,6 +3237,15 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
+            // cmbSettingsCirculationMemberType
+            // 
+            this.cmbSettingsCirculationMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSettingsCirculationMemberType.FormattingEnabled = true;
+            this.cmbSettingsCirculationMemberType.Location = new System.Drawing.Point(253, 222);
+            this.cmbSettingsCirculationMemberType.Name = "cmbSettingsCirculationMemberType";
+            this.cmbSettingsCirculationMemberType.Size = new System.Drawing.Size(399, 39);
+            this.cmbSettingsCirculationMemberType.TabIndex = 90;
+            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3055,7 +3253,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlSettings);
-            this.Controls.Add(this.pnlStaff);
+            this.Controls.Add(this.pnlStaffDetails);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlCirculationDetails);
@@ -3077,12 +3275,21 @@
             this.pnlMemberDetails.PerformLayout();
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
-            this.pnlStaff.ResumeLayout(false);
-            this.pnlStaff.PerformLayout();
+            this.pnlStaffDetails.ResumeLayout(false);
+            this.pnlStaffDetails.PerformLayout();
             this.pnlLoan.ResumeLayout(false);
             this.pnlLoan.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
-            this.pnlSettings.PerformLayout();
+            this.grpSettingsCirculation.ResumeLayout(false);
+            this.grpSettingsCirculation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsCirculationDueDateValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsCirculationLateFee)).EndInit();
+            this.grpSettingsBarcode.ResumeLayout(false);
+            this.grpSettingsBarcode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeMember)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.grpSettingsGmail.ResumeLayout(false);
+            this.grpSettingsGmail.PerformLayout();
             this.pnlReturn.ResumeLayout(false);
             this.pnlReturn.PerformLayout();
             this.pnlBookDetails.ResumeLayout(false);
@@ -3167,7 +3374,7 @@
         private System.Windows.Forms.Label lblFilter2;
         private System.Windows.Forms.ComboBox cmbFilter2;
         private System.Windows.Forms.ComboBox cmbFilter1;
-        private System.Windows.Forms.Panel pnlStaff;
+        private System.Windows.Forms.Panel pnlStaffDetails;
         private System.Windows.Forms.Button btnStaffPasswordVisibility;
         private System.Windows.Forms.Label lblStaffEmailAddress;
         private System.Windows.Forms.TextBox txtStaffPassword;
@@ -3189,13 +3396,8 @@
         private System.Windows.Forms.Button btnLoanSave;
         private System.Windows.Forms.Button btnLoanCancel;
         private System.Windows.Forms.Panel pnlSettings;
-        private System.Windows.Forms.Label lblDefaultSettings;
-        private System.Windows.Forms.TextBox txtSettingDefault;
-        private System.Windows.Forms.ComboBox cmbSettingDefault2;
-        private System.Windows.Forms.ComboBox cmbSettingDefault3;
-        private System.Windows.Forms.ComboBox cmbSettingDefault1;
-        private System.Windows.Forms.Button btnGmailKeyIsVisible;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Button btnSettingsGmailKey;
+        private System.Windows.Forms.TextBox txtSettingsGmailKey;
         private System.Windows.Forms.Label lblSettingGmailKey;
         private System.Windows.Forms.Button btnSettingCancel;
         private System.Windows.Forms.Button btnSettingSave;
@@ -3340,5 +3542,25 @@
         private System.Windows.Forms.Label lblStaffFirstName;
         private System.Windows.Forms.TextBox txtStaffSurname;
         private System.Windows.Forms.Label lblStaffSurname;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.GroupBox grpSettingsGmail;
+        private System.Windows.Forms.ComboBox cmbSettingsCirculationDueDateType;
+        private System.Windows.Forms.TextBox txtSettingsGmailPassword;
+        private System.Windows.Forms.TextBox txtSettingsGmailUsername;
+        private System.Windows.Forms.Label lblSettingsGmailUsername;
+        private System.Windows.Forms.Label lblSettingsGmailPassword;
+        private System.Windows.Forms.GroupBox grpSettingsBarcode;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numSettingsBarcodeMember;
+        private System.Windows.Forms.GroupBox grpSettingsCirculation;
+        private System.Windows.Forms.Label lblSettingsCirculationDueDateValue;
+        private System.Windows.Forms.NumericUpDown numSettingsCirculationDueDateValue;
+        private System.Windows.Forms.Label lblSettingsCirculationDueDateType;
+        private System.Windows.Forms.Label lblSettingsCirculationMemberType;
+        private System.Windows.Forms.Label lblSettingsCirculationLateFee;
+        private System.Windows.Forms.Label lblSettingsCirculationDueDate;
+        private System.Windows.Forms.NumericUpDown numSettingsCirculationLateFee;
+        private System.Windows.Forms.ComboBox cmbSettingsCirculationMemberType;
     }
 }

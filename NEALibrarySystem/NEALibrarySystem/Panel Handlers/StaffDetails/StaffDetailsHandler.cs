@@ -13,7 +13,7 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
     public class StaffDetailsHandler
     {
         private StaffDetailsObjects _objects = new StaffDetailsObjects();
-        private Staff _StaffData;
+        private Staff _staffData;
         public StaffDetailsHandler(StaffDetailsObjects objects) 
         {
             _objects = objects;
@@ -23,6 +23,7 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
 
         public void Load(Staff staff = null)
         {
+            _staffData = staff;
             if (staff == null)
             {
                 _objects.FirstName.Text = string.Empty;
@@ -52,16 +53,16 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
             creator.EmailAddress = _objects.Email.Text;
             creator.IsAdministrator = _objects.AccessLevel.Text == "Staff" ? false : true;
             List<string> errors;
-            if (creator.Validate(out errors, _StaffData))
+            if (creator.Validate(out errors, _staffData))
             {
-                if (_StaffData == null) // if a new staff record is being created
+                if (_staffData == null) // if a new staff record is being created
                 {
                     Staff staff = new Staff(creator);
                     DataLibrary.StaffList.Add(staff);
                 }
                 else
                 {
-                    DataLibrary.ModifyStaff(_StaffData, creator);
+                    DataLibrary.ModifyStaff(_staffData, creator);
                 }
                 FileHandler.Save.Staff();
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
