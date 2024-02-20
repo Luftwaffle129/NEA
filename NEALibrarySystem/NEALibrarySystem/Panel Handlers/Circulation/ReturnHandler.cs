@@ -40,7 +40,6 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                     MessageBox.Show("Not all book copies returnable");
                     break;
                 case DataLibrary.CirculationError.None:
-                    FrmMainSystem.Main.DisplayProcessMessage("Books Returned");
                     Load();
                     break;
             }

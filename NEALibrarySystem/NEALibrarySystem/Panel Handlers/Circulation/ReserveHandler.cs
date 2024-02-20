@@ -45,7 +45,6 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     MessageBox.Show("Not all book copies available");
                     break;
                 case DataLibrary.CirculationError.None:
-                    FrmMainSystem.Main.DisplayProcessMessage("Books Reserved");
                     Load();
                     break;
             }

@@ -107,9 +107,6 @@ namespace NEALibrarySystem
                 btnSubTab2,
                 btnSubTab3,
                 btnSubTab4,
-                btnSubTab5,
-                btnSubTab6,
-                btnSubTab7
             };
         }
         /// <summary>
@@ -551,14 +548,6 @@ namespace NEALibrarySystem
 
         }
         #endregion
-        /// <summary>
-        /// Displays the inputted string in the label's text
-        /// </summary>
-        /// <param name="message">Text to display in the label</param>
-        public void DisplayProcessMessage(string message)
-        {
-            lblMessageOutput.Text = message;
-        }
         #region events
         #region main form
         private void frmMainSystem_Load(object sender, EventArgs e)
@@ -619,18 +608,6 @@ namespace NEALibrarySystem
         private void btnSubTab4_Click(object sender, EventArgs e)
         {
             NavigatorOpenSubTab(3);
-        }
-        private void btnSubTab5_Click(object sender, EventArgs e)
-        {
-            NavigatorOpenSubTab(4);
-        }
-        private void btnSubTab6_Click(object sender, EventArgs e)
-        {
-            NavigatorOpenSubTab(5);
-        }
-        private void btnSubTab7_Click(object sender, EventArgs e)
-        {
-            NavigatorOpenSubTab(6);
         }
         #endregion
         #endregion

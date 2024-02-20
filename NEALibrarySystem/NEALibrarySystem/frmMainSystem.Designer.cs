@@ -38,10 +38,6 @@
             this.btnSubTab2 = new System.Windows.Forms.Button();
             this.btnSubTab3 = new System.Windows.Forms.Button();
             this.btnSubTab4 = new System.Windows.Forms.Button();
-            this.btnSubTab5 = new System.Windows.Forms.Button();
-            this.btnSubTab6 = new System.Windows.Forms.Button();
-            this.btnSubTab7 = new System.Windows.Forms.Button();
-            this.lblMessageOutput = new System.Windows.Forms.Label();
             this.dtpReservePickUpByDate = new System.Windows.Forms.DateTimePicker();
             this.lblReserveSetDueDate = new System.Windows.Forms.Label();
             this.pnlMemberDetails = new System.Windows.Forms.Panel();
@@ -456,67 +452,6 @@
             this.btnSubTab4.Text = "Option 4";
             this.btnSubTab4.UseVisualStyleBackColor = false;
             this.btnSubTab4.Click += new System.EventHandler(this.btnSubTab4_Click);
-            // 
-            // btnSubTab5
-            // 
-            this.btnSubTab5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSubTab5.BackColor = System.Drawing.Color.Silver;
-            this.btnSubTab5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSubTab5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubTab5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab5.Location = new System.Drawing.Point(600, 0);
-            this.btnSubTab5.Name = "btnSubTab5";
-            this.btnSubTab5.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab5.TabIndex = 14;
-            this.btnSubTab5.Text = "Option 5";
-            this.btnSubTab5.UseVisualStyleBackColor = false;
-            this.btnSubTab5.Click += new System.EventHandler(this.btnSubTab5_Click);
-            // 
-            // btnSubTab6
-            // 
-            this.btnSubTab6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSubTab6.BackColor = System.Drawing.Color.Silver;
-            this.btnSubTab6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSubTab6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubTab6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab6.Location = new System.Drawing.Point(750, 0);
-            this.btnSubTab6.Name = "btnSubTab6";
-            this.btnSubTab6.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab6.TabIndex = 15;
-            this.btnSubTab6.Text = "Option 6";
-            this.btnSubTab6.UseVisualStyleBackColor = false;
-            this.btnSubTab6.Click += new System.EventHandler(this.btnSubTab6_Click);
-            // 
-            // btnSubTab7
-            // 
-            this.btnSubTab7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSubTab7.BackColor = System.Drawing.Color.Silver;
-            this.btnSubTab7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSubTab7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubTab7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubTab7.Location = new System.Drawing.Point(900, 0);
-            this.btnSubTab7.Name = "btnSubTab7";
-            this.btnSubTab7.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab7.TabIndex = 16;
-            this.btnSubTab7.Text = "Option 7";
-            this.btnSubTab7.UseVisualStyleBackColor = false;
-            this.btnSubTab7.Click += new System.EventHandler(this.btnSubTab7_Click);
-            // 
-            // lblMessageOutput
-            // 
-            this.lblMessageOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMessageOutput.BackColor = System.Drawing.Color.White;
-            this.lblMessageOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMessageOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageOutput.Location = new System.Drawing.Point(1570, 0);
-            this.lblMessageOutput.Name = "lblMessageOutput";
-            this.lblMessageOutput.Size = new System.Drawing.Size(200, 100);
-            this.lblMessageOutput.TabIndex = 43;
-            this.lblMessageOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dtpReservePickUpByDate
             // 
@@ -2577,10 +2512,6 @@
             this.pnlSubTabs.Controls.Add(this.btnSubTab2);
             this.pnlSubTabs.Controls.Add(this.btnSubTab3);
             this.pnlSubTabs.Controls.Add(this.btnSubTab4);
-            this.pnlSubTabs.Controls.Add(this.btnSubTab5);
-            this.pnlSubTabs.Controls.Add(this.btnSubTab6);
-            this.pnlSubTabs.Controls.Add(this.btnSubTab7);
-            this.pnlSubTabs.Controls.Add(this.lblMessageOutput);
             this.pnlSubTabs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSubTabs.Location = new System.Drawing.Point(150, 0);
             this.pnlSubTabs.Margin = new System.Windows.Forms.Padding(150, 0, 0, 0);
@@ -3326,10 +3257,6 @@
         private System.Windows.Forms.Button btnSubTab2;
         private System.Windows.Forms.Button btnSubTab3;
         private System.Windows.Forms.Button btnSubTab4;
-        private System.Windows.Forms.Button btnSubTab5;
-        private System.Windows.Forms.Button btnSubTab6;
-        private System.Windows.Forms.Button btnSubTab7;
-        private System.Windows.Forms.Label lblMessageOutput;
         private System.Windows.Forms.DateTimePicker dtpReservePickUpByDate;
         private System.Windows.Forms.Label lblReserveSetDueDate;
         private System.Windows.Forms.Panel pnlMemberDetails;

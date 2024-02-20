@@ -46,7 +46,6 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
                     MessageBox.Show("Not all book copies available");
                     break;
                 case DataLibrary.CirculationError.None:
-                    FrmMainSystem.Main.DisplayProcessMessage("Books Loaned");
                     Load();
                     break;
             }

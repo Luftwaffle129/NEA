@@ -89,7 +89,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             if (confirmation.DialogResult == DialogResult.Yes)
             {
                 DataLibrary.DeleteCirculationCopy(_circCopy);
-                FrmMainSystem.Main.DisplayProcessMessage("Circulation Copy Deleted");
+                MessageBox.Show("Circulation Copy Deleted");
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
             }
         }
@@ -109,7 +109,6 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
                 DataLibrary.CirculationDueDates = DataLibrary.ModifyReferenceClass(DataLibrary.CirculationDueDates, _circCopy, _circCopy.DueDate, out _circCopy.DueDate, _objects.DueDate.Value, SearchAndSort.TwoRefClassCircCopies);
                 FileHandler.Save.CirculationCopies();
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
-                FrmMainSystem.Main.DisplayProcessMessage("Circulation Modified");
             }
             else
             {

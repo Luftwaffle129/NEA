@@ -41,7 +41,6 @@ namespace NEALibrarySystem
                     MessageBox.Show("Not all book copies available");
                     break;
                 case DataLibrary.CirculationError.None:
-                    FrmMainSystem.Main.DisplayProcessMessage("Books Sold");
                     Load();
                     break;
             }

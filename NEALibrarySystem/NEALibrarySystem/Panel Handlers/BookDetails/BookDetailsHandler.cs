@@ -284,5 +284,30 @@ namespace NEALibrarySystem.PanelHandlers
             else
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
+
+        public void DisplayBookCopyStatuses()
+        {
+            int inStock = 0;
+            int reserved = 0;
+            int loaned = 0;
+            foreach (TempBookCopy copy in _bookCopyList)
+            {
+                switch (copy.Status)
+                {
+                    case "In Stock":
+                        inStock++;
+                        break;
+                    case "Reserved":
+                        reserved++;
+                        break;
+                    case "Loaned":
+                        loaned++;
+                        break;
+                }
+            }
+            _objects.InStock.Text = inStock.ToString();
+            _objects.Reserved.Text = reserved.ToString();
+            _objects.Loaned.Text = loaned.ToString();
+        }
     }
 }

@@ -271,7 +271,7 @@ namespace NEALibrarySystem.SearchList
                             }
                             break;
                     }
-                    FrmMainSystem.Main.DisplayProcessMessage($"Deleted {itemType}");
+                    MessageBox.Show($"Deleted {itemType}");
                 }
             }
             else
