@@ -555,7 +555,7 @@ namespace NEALibrarySystem.Data_Structures
             public static void Settings() 
             {
                 SettingsCreator creator = LoadFile<SettingsCreator>(filePath, "Settings");
-                
+                //
             }
         }
         /// <summary>
