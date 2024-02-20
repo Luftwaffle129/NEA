@@ -25,7 +25,7 @@ namespace NEALibrarySystem.Data_Structures
             DataLibrary.StaffSurnames = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffSurnames, this, creator.Surname, SearchAndSort.TwoRefClassStaff, out index);
             Surname = DataLibrary.StaffSurnames[index];
             DataLibrary.StaffEmails = DataLibrary.CreateReferenceClass<string, Staff>(DataLibrary.StaffEmails, this, creator.EmailAddress, SearchAndSort.TwoRefClassStaff, out index);
-            Surname = DataLibrary.StaffEmails[index];
+            EmailAddress = DataLibrary.StaffEmails[index];
         }
     }
 }

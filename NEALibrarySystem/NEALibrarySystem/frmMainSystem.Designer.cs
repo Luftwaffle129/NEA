@@ -134,6 +134,7 @@
             this.btnLoanCancel = new System.Windows.Forms.Button();
             this.pnlSettings = new System.Windows.Forms.Panel();
             this.grpSettingsCirculation = new System.Windows.Forms.GroupBox();
+            this.cmbSettingsCirculationMemberType = new System.Windows.Forms.ComboBox();
             this.lblSettingsCirculationDueDateValue = new System.Windows.Forms.Label();
             this.cmbSettingsCirculationDueDateType = new System.Windows.Forms.ComboBox();
             this.numSettingsCirculationDueDateValue = new System.Windows.Forms.NumericUpDown();
@@ -276,7 +277,6 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
-            this.cmbSettingsCirculationMemberType = new System.Windows.Forms.ComboBox();
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaffDetails.SuspendLayout();
@@ -1572,6 +1572,15 @@
             this.grpSettingsCirculation.Text = "Circulation";
             this.grpSettingsCirculation.Enter += new System.EventHandler(this.grpSettingsCirculation_Enter);
             // 
+            // cmbSettingsCirculationMemberType
+            // 
+            this.cmbSettingsCirculationMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSettingsCirculationMemberType.FormattingEnabled = true;
+            this.cmbSettingsCirculationMemberType.Location = new System.Drawing.Point(253, 222);
+            this.cmbSettingsCirculationMemberType.Name = "cmbSettingsCirculationMemberType";
+            this.cmbSettingsCirculationMemberType.Size = new System.Drawing.Size(399, 39);
+            this.cmbSettingsCirculationMemberType.TabIndex = 90;
+            // 
             // lblSettingsCirculationDueDateValue
             // 
             this.lblSettingsCirculationDueDateValue.AutoSize = true;
@@ -2497,6 +2506,7 @@
             this.btnRestoreBackup.TabIndex = 4;
             this.btnRestoreBackup.Text = "Restore A Backup";
             this.btnRestoreBackup.UseVisualStyleBackColor = false;
+            this.btnRestoreBackup.Click += new System.EventHandler(this.btnRestoreBackup_Click);
             // 
             // btnCreateBackup
             // 
@@ -2509,6 +2519,7 @@
             this.btnCreateBackup.TabIndex = 3;
             this.btnCreateBackup.Text = "Create Backup";
             this.btnCreateBackup.UseVisualStyleBackColor = false;
+            this.btnCreateBackup.Click += new System.EventHandler(this.btnCreateBackup_Click);
             // 
             // pctIcon
             // 
@@ -3237,21 +3248,13 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
-            // cmbSettingsCirculationMemberType
-            // 
-            this.cmbSettingsCirculationMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSettingsCirculationMemberType.FormattingEnabled = true;
-            this.cmbSettingsCirculationMemberType.Location = new System.Drawing.Point(253, 222);
-            this.cmbSettingsCirculationMemberType.Name = "cmbSettingsCirculationMemberType";
-            this.cmbSettingsCirculationMemberType.Size = new System.Drawing.Size(399, 39);
-            this.cmbSettingsCirculationMemberType.TabIndex = 90;
-            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlStaffDetails);
             this.Controls.Add(this.pnlMemberDetails);
@@ -3262,7 +3265,6 @@
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
             this.Controls.Add(this.pnlLoan);
-            this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlSubTabs);
             this.Controls.Add(this.pnlMainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

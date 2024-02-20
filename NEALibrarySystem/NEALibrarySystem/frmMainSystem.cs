@@ -9,6 +9,7 @@ using NEALibrarySystem.Panel_Handlers.CirculationDetails;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using NEALibrarySystem.Panel_Handlers.StaffHandler;
 using NEALibrarySystem.Panel_Handlers.StaffDetails;
+using NEALibrarySystem.Panel_Handlers.BackupHandler;
 
 namespace NEALibrarySystem
 {
@@ -57,6 +58,7 @@ namespace NEALibrarySystem
         private CirculationDetailsHandler _circulationDetailsHandler;
         private MemberDetailsHandler _memberDetailsHandler;
         private StaffDetailsHandler _StaffDetailsHandler;
+        private BackupHandler _backupHandler;
         // declares class used for generating test data
         TestData _testData = new TestData();
         // declares variables used to store a selected record. Used in opening the details panel of the selected item in the search list view to store the selecetd record
@@ -92,6 +94,7 @@ namespace NEALibrarySystem
             InitialiseCirculationDetails();
             InitialiseMemberDetails();
             InitialiseStaffDetails();
+            InitialiseBackup();
         }
         /// <summary>
         /// Populates the sub tab array with the sub tab button references
@@ -281,6 +284,11 @@ namespace NEALibrarySystem
                 AccessLevel = cmbStaffAccessLevel
             };
             _StaffDetailsHandler = new StaffDetailsHandler(staffDetailsObjects);
+        }
+
+        private void InitialiseBackup() 
+        {
+            _backupHandler = new BackupHandler(lblLastBackupDate);
         }
         #endregion
         #region opening panels and tabs
@@ -866,7 +874,7 @@ namespace NEALibrarySystem
             _searchHandler.ResetSearchInputs();
         }
         #endregion
-        #region staff details
+        #region staff details panel
         private void btnStaffPasswordVisibility_MouseUp(object sender, MouseEventArgs e)
         {
             txtStaffPassword.UseSystemPasswordChar = true;
@@ -885,6 +893,16 @@ namespace NEALibrarySystem
             _StaffDetailsHandler.Cancel();
         }
 
+        #endregion
+        #region backup panel
+        private void btnCreateBackup_Click(object sender, EventArgs e)
+        {
+            _backupHandler.SaveBackup();
+        }
+        private void btnRestoreBackup_Click(object sender, EventArgs e)
+        {
+            _backupHandler.LoadBackup();
+        }
         #endregion
         private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
         {

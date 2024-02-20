@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEALibrarySystem.Data_Structures;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace NEALibrarySystem
 {
     public partial class frmForgottenPassword : Form
     {
+        private Staff _staff;
         public frmForgottenPassword()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace NEALibrarySystem
         frmResetPassword frmResetPassword;
         private void btnSubmitVerificationcode_Click(object sender, EventArgs e)
         {
-            frmResetPassword = new frmResetPassword();
+            frmResetPassword = new frmResetPassword(_staff);
             frmResetPassword.ShowDialog();
         }
     }

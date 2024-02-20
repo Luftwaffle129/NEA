@@ -60,7 +60,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
         {
             CirculationManager.UpdateMemberDetails();
             if (CirculationManager.SelectedMember != null)
-                _returnDate.Value = DateTime.Today.AddDays(Settings.LoanDurations[(int)CirculationManager.SelectedMember.Type.Value]);
+                _returnDate.Value = DateTime.Today.AddDays(Data_Structures.Settings.LoanDurations[(int)CirculationManager.SelectedMember.Type.Value]);
         }
     }
 }

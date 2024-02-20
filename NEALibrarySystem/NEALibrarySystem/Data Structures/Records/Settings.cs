@@ -1,4 +1,6 @@
-﻿namespace NEALibrarySystem.Data_Structures
+﻿using System;
+
+namespace NEALibrarySystem.Data_Structures
 {
     [System.Serializable]
     /// <summary>
@@ -12,7 +14,7 @@
         public static string GmailKey { get; set; }
         public static int MemberBarcodeLength { get; set; }
         public static int BookCopyBarcodeLength { get; set; }
-
+        public static DateTime LastBackup { get; set; }
         private static int[] _loanDurations = new int[Member.TypeCount];
         public static int[] LoanDurations 
         {

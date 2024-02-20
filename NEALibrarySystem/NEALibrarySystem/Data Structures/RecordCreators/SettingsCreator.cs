@@ -15,6 +15,7 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
         public string GmailKey;
         public int MemberBarcodeLength;
         public int BookCopyBarcodeLength;
+        public DateTime LastBackup;
 
         private int[,] _durations = new int[2, Member.TypeCount]; // [0, X] refers to a loan duration, [1, X] refers to a reservation duration
         public int[,] Durations
@@ -31,13 +32,14 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             MemberBarcodeLength = Settings.MemberBarcodeLength;
             BookCopyBarcodeLength = Settings.BookCopyBarcodeLength;
             LateFeePerDay = Settings.LateFeePerDay;
+            LastBackup = Settings.LastBackup;
             for (int i = 0; i < Settings.LoanDurations.Length; i++)
             {
                 Durations[0, i] = Settings.LoanDurations[i];
                 Durations[1, i] = Settings.ReserveDurations[i];
             }
         }
-        public void SetCurrentSettings()
+        public void SetStoredSettings()
         {
             Settings.GmailUsername = GmailUsername;
             Settings.GmailPassword = GmailPassword;
@@ -45,6 +47,7 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             Settings.MemberBarcodeLength = MemberBarcodeLength;
             Settings.BookCopyBarcodeLength = BookCopyBarcodeLength;
             Settings.LateFeePerDay = LateFeePerDay;
+            Settings.LastBackup = LastBackup;
             for (int i = 0; i < 4; i++)
             {
                 Settings.LoanDurations[i] = Durations[0, i];
@@ -57,6 +60,7 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             BookCopyBarcodeLength = 6;
             Durations = new int[2, 4] { { 14, 14, 28, 28 }, {14, 14, 28 ,28} };
             LateFeePerDay = 0.05;
+            LastBackup = DateTime.MinValue;
         }
         public void Validate()
         {

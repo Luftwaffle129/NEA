@@ -39,7 +39,7 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
                 _objects.Surname.Text = staff.Surname.Value;
                 _objects.Username.Text = staff.Username.Value;
                 _objects.Password.Text = staff.Password;
-                _objects.Email.Text = staff.EmailAddress;
+                _objects.Email.Text = staff.EmailAddress.Value;
                 _objects.AccessLevel.Text = staff.IsAdministrator ? "Administrator" : "Staff";
             }
         }

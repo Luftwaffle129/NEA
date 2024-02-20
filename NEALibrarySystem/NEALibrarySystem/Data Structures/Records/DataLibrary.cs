@@ -580,9 +580,8 @@ namespace NEALibrarySystem.Data_Structures
             StaffFirstNames = ModifyReferenceClass(StaffFirstNames, staff, staff.FirstName, out staff.FirstName, newStaffInfo.FirstName, TwoRefClassStaff);
             StaffSurnames = ModifyReferenceClass(StaffSurnames, staff, staff.Surname, out staff.Surname, newStaffInfo.Surname, TwoRefClassStaff);
             StaffUsernames = ModifyReferenceClass(StaffUsernames, staff, staff.Username, out staff.Username, newStaffInfo.Username, TwoRefClassStaff);
-            
+            StaffEmails = ModifyReferenceClass(StaffEmails, staff, staff.EmailAddress, out staff.EmailAddress, newStaffInfo.EmailAddress, TwoRefClassStaff);
             staff.Password = newStaffInfo.Password;
-            staff.EmailAddress = newStaffInfo.EmailAddress;
             staff.IsAdministrator = newStaffInfo.IsAdministrator;
         }
         #endregion
@@ -699,6 +698,7 @@ namespace NEALibrarySystem.Data_Structures
             StaffFirstNames = DeleteReferenceClass(StaffFirstNames, staff.FirstName, TwoRefClassStaff);
             StaffSurnames = DeleteReferenceClass(StaffSurnames, staff.Surname, TwoRefClassStaff);
             StaffUsernames = DeleteReferenceClass(StaffUsernames, staff.Username, TwoRefClassStaff);
+            StaffEmails = DeleteReferenceClass(StaffEmails, staff.EmailAddress, TwoRefClassStaff);
             // delete record
             StaffList.Remove(staff);
             FileHandler.Save.Staff();
@@ -775,6 +775,7 @@ namespace NEALibrarySystem.Data_Structures
                 StaffFirstNames.Clear();
                 StaffSurnames.Clear();
                 StaffUsernames.Clear();
+                StaffEmails.Clear();
             }
         }
         #endregion

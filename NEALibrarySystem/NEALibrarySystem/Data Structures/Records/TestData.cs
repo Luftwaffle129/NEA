@@ -393,7 +393,7 @@ namespace NEALibrarySystem.Data_Structures
             {
                 FirstName = "Keon",
                 Surname = "Trinh",
-                Username = "17ktrinh",
+                Username = "Admin",
                 Password = "Password1",
                 EmailAddress = "keontrinh1515@gmail.com",
                 IsAdministrator = true

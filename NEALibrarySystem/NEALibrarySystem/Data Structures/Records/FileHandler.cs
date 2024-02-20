@@ -32,7 +32,8 @@ namespace NEALibrarySystem.Data_Structures
             "Members",
             "BookCopies",
             "CirculationCopies",
-            "Staff"
+            "Staff",
+            "Settings"
         }; // list of all data file names
 
         /// <summary>
@@ -160,6 +161,7 @@ namespace NEALibrarySystem.Data_Structures
                         f.Close();
                     }
                     DataLibrary.ClearData.All();
+                    // create default staff member
                     StaffCreator defaultStaff = new StaffCreator()
                     {
                         FirstName = "",
@@ -170,6 +172,10 @@ namespace NEALibrarySystem.Data_Structures
                         IsAdministrator = true,
                     };
                     DataLibrary.StaffList.Add(new Staff(defaultStaff));
+                    // load default settings
+                    SettingsCreator defaultSettings = new SettingsCreator();
+                    defaultSettings.GetDefaultSettings();
+                    defaultSettings.SetStoredSettings();
                     FileHandler.Save.All();
                     MessageBox.Show("New files created. Default Staff Member created.\nUsername: Admin\nPassword: Password1");
                     resolved = true;
@@ -387,7 +393,7 @@ namespace NEALibrarySystem.Data_Structures
                             Surname = staff.Surname.Value,
                             Username = staff.Username.Value,
                             Password = staff.Password,
-                            EmailAddress = staff.EmailAddress,
+                            EmailAddress = staff.EmailAddress.Value,
                             IsAdministrator = staff.IsAdministrator,
                         };
                         staffSavers[i] = saver;
@@ -555,7 +561,7 @@ namespace NEALibrarySystem.Data_Structures
             public static void Settings() 
             {
                 SettingsCreator creator = LoadFile<SettingsCreator>(filePath, "Settings");
-                
+                creator.SetStoredSettings();
             }
         }
         /// <summary>
