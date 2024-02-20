@@ -398,6 +398,21 @@ namespace NEALibrarySystem
             pnlSearch.Visible = true;
         }
         /// <summary>
+        /// Opens the backup feature
+        /// - sets the sub tabs to the correct text
+        /// - closes all panels
+        /// - opens the search panel
+        /// </summary>
+        private void NavigatorOpenBackupTab()
+        {
+            CurrentFeature = DataLibrary.Feature.Backups;
+            string[] tabs = new string[0];
+            NavigatorSetupSubTabs(tabs);
+
+            NavigatorCloseAllPanels();
+            pnlBackup.Visible = true;
+        }
+        /// <summary>
         /// Opens the settings feature
         /// - sets the sub tabs to the correct text
         /// - closes all panels
@@ -586,6 +601,10 @@ namespace NEALibrarySystem
         {
             NavigatorOpenStaffTab();
         }
+        private void btnBackups_Click(object sender, EventArgs e)
+        {
+            NavigatorOpenBackupTab();
+        }
         private void btnSettings_Click(object sender, EventArgs e)
         {
             NavigatorOpenSettingsTab();
@@ -657,7 +676,8 @@ namespace NEALibrarySystem
         }
         private void pnlBackup_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlBackup.Visible)
+                _backupHandler.UpdateLastBackupDate();
         }
         private void pnlSetting_VisibleChanged(object sender, EventArgs e)
         {
@@ -947,17 +967,5 @@ namespace NEALibrarySystem
         }
 
         #endregion
-        /* Code used for opening the file dialog - not used in prototype
-           OpenFileDialog openFileDialog = new OpenFileDialog();
-           openFileDialog.InitialDirectory = "c:\\";
-           openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-           openFileDialog.FilterIndex = 2;
-           openFileDialog.RestoreDirectory = true;
-
-           if (openFileDialog.ShowDialog() == DialogResult.OK)
-           {
-
-           }
-        */
     }
 }

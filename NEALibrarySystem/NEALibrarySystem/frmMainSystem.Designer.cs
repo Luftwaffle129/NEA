@@ -358,6 +358,7 @@
             this.btnBackups.TabIndex = 6;
             this.btnBackups.Text = "BACKUPS";
             this.btnBackups.UseVisualStyleBackColor = false;
+            this.btnBackups.Click += new System.EventHandler(this.btnBackups_Click);
             // 
             // btnSettings
             // 

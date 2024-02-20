@@ -117,6 +117,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.CopyDetails.Items.Add(new ListViewItem(data));
             }
             _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            DisplayBookCopyStatuses();
         }
         /// <summary>
         /// Initialises the list view used to display book copies

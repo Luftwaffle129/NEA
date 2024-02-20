@@ -2,9 +2,10 @@
 using NEALibrarySystem.Data_Structures.Records;
 using NEALibrarySystem.Data_Structures.RecordSavers;
 using NEALibrarySystem.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class FileHandler
     {
-        public static string filePath;
+        public static string FilePath;
 
         private static string[] _files =
         {
@@ -41,7 +42,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public static void InitialiseFilePath()
         {
-             filePath = Application.StartupPath + "\\Data\\";
+             FilePath = Application.StartupPath + "\\Data\\";
         }
         /// <summary>
         /// Saves file
@@ -65,23 +66,31 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="filePath">Path to load the file from</param>
         /// <param name="fileName">Name and type of the file</param>
         /// <returns>Returns the contents of the file</returns>
-        private static FileType LoadFile<FileType>(string filePath, string fileName)
+        private static FileType LoadFile<FileType>(string filePath, string fileName, out bool isSuccess)
         {
             if (File.Exists(filePath + fileName + ".bin")) 
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(filePath + fileName + ".bin", FileMode.Open);
-                FileType data = default(FileType);
+                try
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    FileStream stream = new FileStream(filePath + fileName + ".bin", FileMode.Open);
+                    FileType data = default(FileType);
 
-                if (stream.Length != 0)
-                    data = (FileType)formatter.Deserialize(stream);
-                stream.Close();
-
-                return data;
+                    if (stream.Length != 0)
+                        data = (FileType)formatter.Deserialize(stream);
+                    stream.Close();
+                    isSuccess = true;
+                    return data;
+                }
+                catch
+                {
+                    isSuccess = false;
+                    return default(FileType);
+                }
             }
             else 
             {
-                MessageBox.Show("File not found");
+                isSuccess = false;
                 return default(FileType);
             }
         }
@@ -96,7 +105,7 @@ namespace NEALibrarySystem.Data_Structures
 
         public static bool StaffFilesExist()
         {
-            if (File.Exists(filePath + $"\\Staff.bin"))
+            if (File.Exists(FilePath + $"\\Staff.bin"))
                 return true;
             else
                 return false;
@@ -134,7 +143,7 @@ namespace NEALibrarySystem.Data_Structures
                 confirmation.ShowDialog();
                 if (confirmation.DialogResult == DialogResult.Yes) // user chooses to load a backup
                 {
-                    bool isSuccess = Backup.Load();
+                    bool isSuccess = Backup.Restore();
                     if (isSuccess)
                     {
                         try
@@ -157,7 +166,7 @@ namespace NEALibrarySystem.Data_Structures
                     FileHandler.InitialiseFilePath();
                     foreach (string file in _files)
                     {
-                        FileStream f = File.Create(filePath + $"\\{file}.bin");
+                        FileStream f = File.Create(FilePath + $"\\{file}.bin");
                         f.Close();
                     }
                     DataLibrary.ClearData.All();
@@ -191,7 +200,7 @@ namespace NEALibrarySystem.Data_Structures
             // get all missing files
             foreach (string file in _files)
             {
-                if (!File.Exists(filePath + $"\\{file}.bin"))
+                if (!File.Exists(FilePath + $"\\{file}.bin"))
                 {
                     return true;
                 }
@@ -211,15 +220,85 @@ namespace NEALibrarySystem.Data_Structures
             /// <returns>Returns a boolean result of whether the back up was successfully created</returns>
             public static bool Save()
             {
-                return true;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = "c:\\";
+                saveFileDialog.Filter = "Zip Files (.zip)|*.zip|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 2;
+                saveFileDialog.Title = "Save Backup";
+                saveFileDialog.DefaultExt = "zip";
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.FileName = "NEALibrarySystem Backup " + DateTime.Now.ToString().Replace('/','.').Replace(':', '.');
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName= saveFileDialog.FileName + ".zip";
+                    try
+                    {
+                        ZipFile.CreateFromDirectory(FilePath, fileName);
+                        return true;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                }
+                else
+                { 
+                    return false; 
+                }
             }
             /// <summary>
             /// Loads a backup of data into the system
             /// </summary>
             /// <returns>Returns a boolean result of whether the back up was successfully loaded</returns>
-            public static bool Load()
+            public static bool Restore()
             {
-                return true;
+                OpenFileDialog OpenFileDialog = new OpenFileDialog();
+                OpenFileDialog.InitialDirectory = "c:\\";
+                OpenFileDialog.Filter = "Zip Files (.zip)|*.zip";
+                OpenFileDialog.FilterIndex = 2;
+                OpenFileDialog.Title = "Load Backup";
+                OpenFileDialog.DefaultExt = "zip";
+                OpenFileDialog.CheckPathExists = true;
+                OpenFileDialog.RestoreDirectory = true;
+
+                if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = OpenFileDialog.FileName;
+
+                    string tempFilePath = FilePath.Substring(0, FilePath.Length - 5) + "DataTemp\\";
+                    // rename old file directory temporarily
+                    if (Directory.Exists(tempFilePath))
+                        Directory.Delete(tempFilePath, true);
+                    Directory.Move(FilePath, tempFilePath);
+
+                    // extract backup data to new directory
+                    ZipFile.ExtractToDirectory(fileName, FilePath);
+                    if (File.Exists(FilePath + "Staff.bin"))
+                        File.Delete(FilePath + "Staff.bin");
+                    // copy staff file into backup data
+                    File.Copy(tempFilePath + "Staff.bin", FilePath + "Staff.bin");
+
+                    // attempts to load all data
+                    if (Load.All()) // if data loads successfully
+                    {
+                        Directory.Delete(tempFilePath, true); // remove previous data
+                        return true;
+                    }
+                    else // if data loads unsuccessfully
+                    {
+                        // returns to using previous data
+                        if (Directory.Exists(FilePath))
+                            Directory.Delete(FilePath, true);
+                        Directory.Move(tempFilePath, FilePath); 
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         /// <summary>
@@ -288,15 +367,15 @@ namespace NEALibrarySystem.Data_Structures
                     }
                 }
                 // save all saver data into the book files
-                SaveFile(titles.ToArray(), filePath, "Titles");
-                SaveFile(prices.ToArray(), filePath, "Prices");
-                SaveFile(mediaTypes.ToArray(), filePath, "MediaTypes");
-                SaveFile(authors.ToArray(), filePath, "Authors");
-                SaveFile(publishers.ToArray(), filePath, "Publishers");
-                SaveFile(genres.ToArray(), filePath, "Genres");
-                SaveFile(themes.ToArray(), filePath, "Themes");
+                SaveFile(titles.ToArray(), FilePath, "Titles");
+                SaveFile(prices.ToArray(), FilePath, "Prices");
+                SaveFile(mediaTypes.ToArray(), FilePath, "MediaTypes");
+                SaveFile(authors.ToArray(), FilePath, "Authors");
+                SaveFile(publishers.ToArray(), FilePath, "Publishers");
+                SaveFile(genres.ToArray(), FilePath, "Genres");
+                SaveFile(themes.ToArray(), FilePath, "Themes");
 
-                SaveFile(bookSavers, filePath, "Books");
+                SaveFile(bookSavers, FilePath, "Books");
             }
             /// <summary>
             /// Saves the data stored about all members into the member file
@@ -330,7 +409,7 @@ namespace NEALibrarySystem.Data_Structures
                     }
                 }
 
-                SaveFile(memberSavers, filePath, "Members");
+                SaveFile(memberSavers, FilePath, "Members");
             }
             /// <summary>
             /// Saves the data stored about all book copies into the book copy file
@@ -351,7 +430,7 @@ namespace NEALibrarySystem.Data_Structures
                         bookCopySavers[i] = saver;
                     }
                 }
-                SaveFile(bookCopySavers, filePath, "BookCopies");
+                SaveFile(bookCopySavers, FilePath, "BookCopies");
             }
             /// <summary>
             /// Saves the data stored about all circulation copies into the circulation copy file
@@ -374,7 +453,7 @@ namespace NEALibrarySystem.Data_Structures
 
                         circulationCopySavers[i] = saver;
                     }
-                SaveFile(circulationCopySavers, filePath, "CirculationCopies");
+                SaveFile(circulationCopySavers, FilePath, "CirculationCopies");
             }
             /// <summary>
             /// Saves the data stored about all staff into the staff file
@@ -398,7 +477,7 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         staffSavers[i] = saver;
                     }
-                SaveFile(staffSavers, filePath, "Staff");
+                SaveFile(staffSavers, FilePath, "Staff");
             }
             /// <summary>
             /// Saves the data stored about all staff into the staff file
@@ -407,7 +486,7 @@ namespace NEALibrarySystem.Data_Structures
             {
                 SettingsCreator creator = new SettingsCreator();
                 creator.GetCurrentSettings();
-                SaveFile(creator, filePath, "Settings");
+                SaveFile(creator, FilePath, "Settings");
             }
         }
         /// <summary>
@@ -418,29 +497,55 @@ namespace NEALibrarySystem.Data_Structures
             /// <summary>
             /// Loads the data stored in the files
             /// </summary>
-            public static void All()
+            /// <returns>Boolean value of whether data structures were successfully loaded from files</returns>
+            public static bool All()
             {
-                Books();
-                Members();
-                BookCopies(); // book copies rely on books so is loaded after books
-                CirculationCopies();// circulation copies rely on book copies and members so is loaded after them
-                Staff();
+                if(!Books())
+                    return false;
+                if (!Members())
+                    return false;
+                if (!BookCopies()) // book copies rely on books so is loaded after books
+                    return false;
+                if (!CirculationCopies()) // circulation copies rely on book copies and members so is loaded after them
+                    return false;
+                if (!Staff())
+                    return false;
+                if (!Settings())
+                    return false;
+                return true;
             }
             /// <summary>
             /// Loads the book data stored in the files
             /// </summary>
-            public static void Books()
+            public static bool Books()
             {
                 // clears current book data
                 // extracts book data from the files
-                BookSaver[] bookSavers = LoadFile<BookSaver[]>(filePath, "Books");
-                string[] titles = LoadFile<string[]>(filePath, "Titles");
-                double[] prices = LoadFile<double[]>(filePath, "Prices");
-                string[] mediaTypes = LoadFile<string[]>(filePath, "MediaTypes");
-                string[] authors = LoadFile<string[]>(filePath, "Authors");
-                string[] publishers = LoadFile<string[]>(filePath, "Publishers");
-                string[] genres = LoadFile<string[]>(filePath, "Genres");
-                string[] themes = LoadFile<string[]>(filePath, "Themes");
+                bool validFiles;
+                BookSaver[] bookSavers = LoadFile<BookSaver[]>(FilePath, "Books", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] titles = LoadFile<string[]>(FilePath, "Titles", out validFiles);
+                if (!validFiles)
+                    return false;
+                double[] prices = LoadFile<double[]>(FilePath, "Prices", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] mediaTypes = LoadFile<string[]>(FilePath, "MediaTypes", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] authors = LoadFile<string[]>(FilePath, "Authors", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] publishers = LoadFile<string[]>(FilePath, "Publishers", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] genres = LoadFile<string[]>(FilePath, "Genres", out validFiles);
+                if (!validFiles)
+                    return false;
+                string[] themes = LoadFile<string[]>(FilePath, "Themes", out validFiles);
+                if (!validFiles)
+                    return false;
 
                 DataLibrary.ClearData.Book();
                 // creates book files from the extracted book data
@@ -464,13 +569,17 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         DataLibrary.Books.Add(new Book(creator));
                     }
+                return true;
             }
             /// <summary>
             /// Loads the member records stored in the member file
             /// </summary>
-            public static void Members()
+            public static bool Members()
             {
-                MemberSaver[] memberSavers = LoadFile<MemberSaver[]>(filePath, "Members");
+                bool validFiles;
+                MemberSaver[] memberSavers = LoadFile<MemberSaver[]>(FilePath, "Members", out validFiles);
+                if (!validFiles)
+                    return false;
                 DataLibrary.ClearData.Member();
                 if (memberSavers != null)
                 {
@@ -501,25 +610,33 @@ namespace NEALibrarySystem.Data_Structures
                             DataLibrary.Members[i].LinkedMembers.Add(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, linkedMember, SearchAndSort.RefClassAndString)].Reference);
                     }
                 }
+                return true;
             }
             /// <summary>
             /// Loads the book copy records stored in the member file
             /// </summary>
-            public static void BookCopies()
+            public static bool BookCopies()
             {
-                BookCopySaver[] bookCopySavers = LoadFile<BookCopySaver[]>(filePath, "BookCopies");
+                bool validFiles;
+                BookCopySaver[] bookCopySavers = LoadFile<BookCopySaver[]>(FilePath, "BookCopies", out validFiles);
+                if (!validFiles)
+                    return false;
                 DataLibrary.ClearData.BookCopy();
                 if (bookCopySavers != null)
                     foreach (BookCopySaver saver in bookCopySavers)
                         // creates a book copy using the saver's barcode, and the book record found using the saver's ISBN
                         DataLibrary.BookCopies.Add(new BookCopy(saver.Barcode, DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, saver.Isbn, SearchAndSort.RefClassAndString)].Reference));
+                return true;
             }
             /// <summary>
             /// Loads the circulation copy records stored in the member file
             /// </summary>
-            public static void CirculationCopies()
+            public static bool CirculationCopies()
             {
-                CirculationCopySaver[] circulationCopySavers = LoadFile<CirculationCopySaver[]>(filePath, "CirculationCopies");
+                bool validFiles;
+                CirculationCopySaver[] circulationCopySavers = LoadFile<CirculationCopySaver[]>(FilePath, "CirculationCopies", out validFiles);
+                if (!validFiles)
+                    return false;
                 DataLibrary.ClearData.CirculationCopy();
                 if (circulationCopySavers != null)
                     foreach (CirculationCopySaver saver in circulationCopySavers)
@@ -536,12 +653,16 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                     }
+                return true;
             }
 
-            public static void Staff()
+            public static bool Staff()
             {
+                bool validFiles;
                 DataLibrary.ClearData.Staff();
-                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(filePath, "Staff");
+                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(FilePath, "Staff", out validFiles);
+                if (!validFiles)
+                    return false;
                 if (staffSavers != null)
                     foreach (StaffSaver saver in staffSavers)
                     {
@@ -557,11 +678,16 @@ namespace NEALibrarySystem.Data_Structures
                         };
                         DataLibrary.StaffList.Add(new Staff(creator));
                     }
+                return true;
             }
-            public static void Settings() 
+            public static bool Settings() 
             {
-                SettingsCreator creator = LoadFile<SettingsCreator>(filePath, "Settings");
+                bool validFiles;
+                SettingsCreator creator = LoadFile<SettingsCreator>(FilePath, "Settings", out validFiles);
+                if (!validFiles)
+                    return false;
                 creator.SetStoredSettings();
+                return true;
             }
         }
         /// <summary>

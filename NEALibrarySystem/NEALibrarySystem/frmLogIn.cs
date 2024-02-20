@@ -24,7 +24,7 @@ namespace NEALibrarySystem
             if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN))
             {
                 int staffIndex = IsValidCredentials();
-                if (staffIndex != -1)
+                if (staffIndex != -1 )
                 {
                     // opens the mains system, hides the log in form
                     frmMainSystem = new FrmMainSystem(DataLibrary.StaffUsernames[staffIndex].Reference);

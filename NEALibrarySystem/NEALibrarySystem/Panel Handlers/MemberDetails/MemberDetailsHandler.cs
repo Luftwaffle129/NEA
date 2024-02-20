@@ -80,7 +80,7 @@ namespace NEALibrarySystem
                 _objects.PostCode.Clear();
                 _objects.JoinDate.Clear();
                 _objects.Circulations.Items.Clear();
-                _objects.LateFees.Clear();
+                _objects.LateFees.Text = "0.00";
             }
             else
             {
@@ -118,10 +118,11 @@ namespace NEALibrarySystem
                 if (_circulationList.Count > 0)
                     foreach (CirculationCopy copy in _circulationList)
                     total += CirculationCopy.GetLateFees(copy.DueDate.Value);
+                _objects.LateFees.Text = DataFormatter.DoubleToPrice(total);
             }
         }
         /// <summary>
-        /// Saves
+        /// Saves inputted member details into the member record
         /// </summary>
         public void Save()
         {
