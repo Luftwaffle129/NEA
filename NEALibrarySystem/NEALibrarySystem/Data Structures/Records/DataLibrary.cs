@@ -782,7 +782,21 @@ namespace NEALibrarySystem.Data_Structures
         #region Overdue books
         public static void SendOverdueEmails()
         {
-
+            int index = 0;
+            while (CirculationDueDates[index].Value > DateTime.Today)
+            {
+                CirculationCopy copy = CirculationDueDates[index].Reference;
+                if (copy.EmailSent == false)
+                {
+                    bool isLoaned = copy.Type.Value == CirculationType.Loaned ? true : false;
+                    string subject = isLoaned ? "Your book loan is overdue" : "Your reservation has expired";
+                    string content = isLoaned ?
+                        $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is oevrdue. A late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
+                        : $"Your reservation for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" has expired";
+                    EmailHandler.Send(copy.Member.EmailAddress, subject, content);
+                    copy.EmailSent = true;
+                }
+            } 
         }
         #endregion
     }

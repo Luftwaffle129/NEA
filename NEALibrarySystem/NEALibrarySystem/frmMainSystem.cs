@@ -901,6 +901,13 @@ namespace NEALibrarySystem
             _backupHandler.LoadBackup();
         }
         #endregion
+        #region timer
+        private void tmrOverdue_Tick(object sender, EventArgs e)
+        {
+            DataLibrary.SendOverdueEmails();
+        }
+        #endregion
+
         private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
         {
 
@@ -967,9 +974,5 @@ namespace NEALibrarySystem
         }
 
         #endregion
-        private void tmrOverdue_Tick(object sender, EventArgs e)
-        {
-
-        }
     }
 }
