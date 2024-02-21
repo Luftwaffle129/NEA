@@ -779,5 +779,11 @@ namespace NEALibrarySystem.Data_Structures
             }
         }
         #endregion
+        #region Overdue books
+        public static void SendOverdueEmails()
+        {
+
+        }
+        #endregion
     }
 }

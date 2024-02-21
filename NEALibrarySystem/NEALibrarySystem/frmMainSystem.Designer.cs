@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnBooks = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnStaff = new System.Windows.Forms.Button();
@@ -273,6 +274,7 @@
             this.lblCircDetailsBooks = new System.Windows.Forms.Label();
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
+            this.tmrOverdue = new System.Windows.Forms.Timer(this.components);
             this.pnlMemberDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaffDetails.SuspendLayout();
@@ -3180,6 +3182,11 @@
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
             // 
+            // tmrOverdue
+            // 
+            this.tmrOverdue.Interval = 3600000;
+            this.tmrOverdue.Tick += new System.EventHandler(this.tmrOverdue_Tick);
+            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3492,5 +3499,6 @@
         private System.Windows.Forms.Label lblSettingsCirculationDueDate;
         private System.Windows.Forms.NumericUpDown numSettingsCirculationLateFee;
         private System.Windows.Forms.ComboBox cmbSettingsCirculationMemberType;
+        private System.Windows.Forms.Timer tmrOverdue;
     }
 }
