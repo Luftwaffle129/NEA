@@ -27,7 +27,7 @@ namespace NEALibrarySystem
             if (_codeSentTime.AddMinutes(5) > DateTime.Now)
             {
 
-                if (_codeSubmitTime.AddSeconds(1) > DateTime.Now)
+                if (_codeSubmitTime.AddSeconds(1) <= DateTime.Now)
                 {
                     _codeSubmitTime = DateTime.Now;
                     if (txtVerificationCode.Text == _verificationCode)

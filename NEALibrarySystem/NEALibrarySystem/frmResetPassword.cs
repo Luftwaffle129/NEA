@@ -28,6 +28,7 @@ namespace NEALibrarySystem
                 if (txtConfirmPassword.Text == txtPassword.Text)
                 {
                     _staff.Password = txtPassword.Text;
+                    FileHandler.Save.Staff();
                     MessageBox.Show("Password changed");
                     this.Close();
                 }
