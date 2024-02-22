@@ -12,13 +12,10 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
     /// </summary>
     public class SettingsObjects
     {
-        public TextBox GmailUsername;
-        public TextBox GmailPassword;
-        public TextBox GmailKey;
         public NumericUpDown BarcodeBookCopy;
         public NumericUpDown BarcodeMember;
         public NumericUpDown CirculationLateFee;
-        public ComboBox CirculationType;
+        public ComboBox CirculationCirculationType;
         public ComboBox CirculationMemberType;
         public NumericUpDown CirculationTimeLength;
     }

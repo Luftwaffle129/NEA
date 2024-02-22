@@ -10,6 +10,7 @@ using NEALibrarySystem.ListViewHandlers.SearchList;
 using NEALibrarySystem.Panel_Handlers.StaffHandler;
 using NEALibrarySystem.Panel_Handlers.StaffDetails;
 using NEALibrarySystem.Panel_Handlers.BackupHandler;
+using NEALibrarySystem.Panel_Handlers.Settings;
 
 namespace NEALibrarySystem
 {
@@ -21,7 +22,6 @@ namespace NEALibrarySystem
         {
             Main = this;
             InitializeComponent();
-            _testData.GenerateTestParameters();
             InitializePanels();
             InitializeSubTabs();
             NavigatorOpenBookTab();
@@ -59,6 +59,7 @@ namespace NEALibrarySystem
         private MemberDetailsHandler _memberDetailsHandler;
         private StaffDetailsHandler _StaffDetailsHandler;
         private BackupHandler _backupHandler;
+        private SettingsHandler _settingsHandler;
         // declares class used for generating test data
         TestData _testData = new TestData();
         // declares variables used to store a selected record. Used in opening the details panel of the selected item in the search list view to store the selecetd record
@@ -95,6 +96,7 @@ namespace NEALibrarySystem
             InitialiseMemberDetails();
             InitialiseStaffDetails();
             InitialiseBackup();
+            InitialiseSettings();
         }
         /// <summary>
         /// Populates the sub tab array with the sub tab button references
@@ -268,7 +270,9 @@ namespace NEALibrarySystem
             };
             _memberDetailsHandler = new MemberDetailsHandler(memberDetailsObjects);
         }
-
+        /// <summary>
+        /// Initialises the staff detail panel handler with the necessary objects
+        /// </summary>
         private void InitialiseStaffDetails() 
         {
             StaffDetailsObjects staffDetailsObjects = new StaffDetailsObjects()
@@ -282,10 +286,28 @@ namespace NEALibrarySystem
             };
             _StaffDetailsHandler = new StaffDetailsHandler(staffDetailsObjects);
         }
-
+        /// <summary>
+        /// Initialises the backup panel handler with the necessary objects
+        /// </summary>
         private void InitialiseBackup() 
         {
             _backupHandler = new BackupHandler(lblLastBackupDate);
+        }
+        /// <summary>
+        /// Initialises the settings panel handler with the necessary objects
+        /// </summary>
+        private void InitialiseSettings()
+        {
+            SettingsObjects settingsObjects = new SettingsObjects()
+            {
+                BarcodeBookCopy = numSettingsBarcodeBookCopy,
+                BarcodeMember = numSettingsBarcodeMember,
+                CirculationCirculationType = cmbSettingsCirculationType,
+                CirculationMemberType = cmbSettingsCirculationMemberType,
+                CirculationTimeLength = numSettingsCirculationDueDateValue,
+                CirculationLateFee = numSettingsCirculationLateFee,
+            };
+            _settingsHandler = new SettingsHandler(settingsObjects);
         }
         #endregion
         #region opening panels and tabs
@@ -573,6 +595,7 @@ namespace NEALibrarySystem
         {
             FileHandler.Save.All();
             frmLogIn.Main.Visible = true;
+            frmLogIn.Main.ClearPassword();
         }
         private void pctIcon_Click(object sender, EventArgs e)
         {
@@ -681,7 +704,8 @@ namespace NEALibrarySystem
         }
         private void pnlSetting_VisibleChanged(object sender, EventArgs e)
         {
-
+            if (pnlSettings.Visible)
+                _settingsHandler.Load();
         }
         private void pnlStaff_VisibleChanged(object sender, EventArgs e)
         {
@@ -901,6 +925,28 @@ namespace NEALibrarySystem
             _backupHandler.LoadBackup();
         }
         #endregion
+        #region settings panel
+        private void btnSettingSave_Click(object sender, EventArgs e)
+        {
+            _settingsHandler.Save();
+        }
+        private void cmbSettingsCirculationMemberType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settingsHandler.UpdateCirculationMemberType();
+        }
+        private void cmbSettingsCirculationType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settingsHandler.UpdateCirculationType();
+        }
+        private void numSettingsCirculationDueDateValue_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsHandler.SetCirculationTimePeriod();
+        }
+        private void btnSettingCancel_Click(object sender, EventArgs e)
+        {
+            _settingsHandler.Load();
+        }
+        #endregion
         #region timer
         private void tmrOverdue_Tick(object sender, EventArgs e)
         {
@@ -912,47 +958,14 @@ namespace NEALibrarySystem
         {
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void label5_Click(object sender, EventArgs e)
         {
 
         }
-
         private void grpSettingsCirculation_Enter(object sender, EventArgs e)
         {
 
         }
-
-        private void txtSettingsGmailPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown11_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown8_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown9_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void numSettingsBarcodeMember_ValueChanged(object sender, EventArgs e)
         {
 
@@ -963,15 +976,6 @@ namespace NEALibrarySystem
 
         }
 
-        private void txtSettingsGmailKey_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown10_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         #endregion
     }

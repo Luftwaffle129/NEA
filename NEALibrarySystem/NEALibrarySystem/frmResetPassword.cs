@@ -29,7 +29,7 @@ namespace NEALibrarySystem
                 {
                     _staff.Password = txtPassword.Text;
                     MessageBox.Show("Password changed");
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -44,7 +44,7 @@ namespace NEALibrarySystem
 
         private void frmResetPassword_FormClosed(object sender, FormClosedEventArgs e)
         {
-            frmLogIn.Main.Show();
+            frmLogIn.Main.Visible = true;
         }
     }
 }

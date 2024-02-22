@@ -202,7 +202,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         public void GenerateTestData()
         {
-
+            GenerateTestParameters();
             DataLibrary.ClearData.All();
             GenerateBooks();
             GenerateMembers();

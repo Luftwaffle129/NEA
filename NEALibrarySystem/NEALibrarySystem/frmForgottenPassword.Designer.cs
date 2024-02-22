@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtEMail = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtVerificationCode = new System.Windows.Forms.TextBox();
             this.lblEMail = new System.Windows.Forms.Label();
             this.lblVerificationcode = new System.Windows.Forms.Label();
@@ -37,13 +37,13 @@
             this.lblForgottenPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtEMail
+            // txtEmail
             // 
-            this.txtEMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEMail.Location = new System.Drawing.Point(66, 49);
-            this.txtEMail.Name = "txtEMail";
-            this.txtEMail.Size = new System.Drawing.Size(228, 20);
-            this.txtEMail.TabIndex = 5;
+            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmail.Location = new System.Drawing.Point(66, 49);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(228, 20);
+            this.txtEmail.TabIndex = 5;
             // 
             // txtVerificationCode
             // 
@@ -84,6 +84,7 @@
             this.btnSendVerificationCode.TabIndex = 7;
             this.btnSendVerificationCode.Text = "Send Verification Code";
             this.btnSendVerificationCode.UseVisualStyleBackColor = false;
+            this.btnSendVerificationCode.Click += new System.EventHandler(this.btnSendVerificationCode_Click);
             // 
             // btnSubmitVerificationcode
             // 
@@ -108,7 +109,6 @@
             this.lblForgottenPassword.TabIndex = 11;
             this.lblForgottenPassword.Text = "Forgotten Password";
             this.lblForgottenPassword.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblForgottenPassword.Click += new System.EventHandler(this.lblForgottenPassword_Click);
             // 
             // frmForgottenPassword
             // 
@@ -121,13 +121,14 @@
             this.Controls.Add(this.lblVerificationcode);
             this.Controls.Add(this.lblEMail);
             this.Controls.Add(this.txtVerificationCode);
-            this.Controls.Add(this.txtEMail);
+            this.Controls.Add(this.txtEmail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(338, 241);
             this.MinimumSize = new System.Drawing.Size(338, 241);
             this.Name = "frmForgottenPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ForgottenPassword";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmForgottenPassword_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,7 +136,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtEMail;
+        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtVerificationCode;
         private System.Windows.Forms.Label lblEMail;
         private System.Windows.Forms.Label lblVerificationcode;

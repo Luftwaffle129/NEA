@@ -21,34 +21,31 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
             _objects = objects;
 
             // initial combobox settings
-            _objects.CirculationType.Items.Clear();
-            _objects.CirculationType.Items.Add("Loans");
-            _objects.CirculationType.Items.Add("Reservations");
-            _objects.CirculationType.Text = "Loans";
+            _objects.CirculationCirculationType.Items.Clear();
+            _objects.CirculationCirculationType.Items.Add("Loans");
+            _objects.CirculationCirculationType.Items.Add("Reservations");
 
             _objects.CirculationMemberType.Items.Clear();
-            _objects.CirculationType.Items.Add(MemberType.Adult.ToString());
-            _objects.CirculationType.Items.Add(MemberType.Child.ToString());
-            _objects.CirculationType.Items.Add(MemberType.Elderly.ToString());
-            _objects.CirculationType.Items.Add(MemberType.Deliverer.ToString());
-            _objects.CirculationType.Text = MemberType.Adult.ToString();
+            _objects.CirculationMemberType.Items.Add(MemberType.Adult.ToString());
+            _objects.CirculationMemberType.Items.Add(MemberType.Child.ToString());
+            _objects.CirculationMemberType.Items.Add(MemberType.Elderly.ToString());
+            _objects.CirculationMemberType.Items.Add(MemberType.Deliverer.ToString());;
         }
         public void Load()
         {
             settingsCreator.GetCurrentSettings();
-            _objects.GmailUsername.Text = settingsCreator.GmailUsername;
-            _objects.GmailPassword.Text = settingsCreator.GmailPassword;
-            _objects.GmailKey.Text = settingsCreator.GmailKey;
             _objects.BarcodeBookCopy.Value = settingsCreator.BookCopyBarcodeLength;
             _objects.BarcodeMember.Value = settingsCreator.MemberBarcodeLength;
             _circulationType = 0;
             _circulationMemberType = 0;
-            UpdateCirculationTimePeriod();
+            _objects.CirculationCirculationType.Text = "Loans";
+            _objects.CirculationMemberType.Text = MemberType.Adult.ToString();
+            _objects.CirculationLateFee.Value = Convert.ToDecimal(settingsCreator.LateFeePerDay);
         }
         public void UpdateCirculationType()
         {
 
-            if (_objects.CirculationType.Text == "Loans")
+            if (_objects.CirculationCirculationType.Text == "Loans")
                 _circulationType = 0;
             else
                 _circulationType = 1;
@@ -61,7 +58,11 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
         }
         public void UpdateCirculationTimePeriod()
         {
-            _objects.CirculationTimeLength.Value = settingsCreator.Durations[_circulationType, _circulationMemberType];
+            try
+            {
+                _objects.CirculationTimeLength.Value = settingsCreator.Durations[_circulationType, _circulationMemberType];
+            }
+            catch { }
         }
         public void SetCirculationTimePeriod()
         {
@@ -69,7 +70,10 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
         }
         public void Save()
         {
-
+            settingsCreator.BookCopyBarcodeLength = Convert.ToInt32(_objects.BarcodeBookCopy.Value);
+            settingsCreator.MemberBarcodeLength = Convert.ToInt32(_objects.BarcodeMember.Value);
+            settingsCreator.LateFeePerDay = Convert.ToDouble(_objects.CirculationLateFee.Value);
+            settingsCreator.SetStoredSettings();
         }
     }
 }

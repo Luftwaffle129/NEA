@@ -9,10 +9,6 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
     [System.Serializable]
     public class SettingsCreator
     {
-        public string GmailUsername;
-        public string GmailEmail;
-        public string GmailPassword;
-        public string GmailKey;
         public int MemberBarcodeLength;
         public int BookCopyBarcodeLength;
         public DateTime LastBackup;
@@ -26,9 +22,6 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
         public double LateFeePerDay { get; set; }
         public void GetCurrentSettings()
         {
-            GmailUsername = Settings.GmailUsername;
-            GmailPassword = Settings.GmailPassword;
-            GmailKey = Settings.GmailKey;
             MemberBarcodeLength = Settings.MemberBarcodeLength;
             BookCopyBarcodeLength = Settings.BookCopyBarcodeLength;
             LateFeePerDay = Settings.LateFeePerDay;
@@ -41,9 +34,6 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
         }
         public void SetStoredSettings()
         {
-            Settings.GmailUsername = GmailUsername;
-            Settings.GmailPassword = GmailPassword;
-            Settings.GmailKey = GmailKey;
             Settings.MemberBarcodeLength = MemberBarcodeLength;
             Settings.BookCopyBarcodeLength = BookCopyBarcodeLength;
             Settings.LateFeePerDay = LateFeePerDay;

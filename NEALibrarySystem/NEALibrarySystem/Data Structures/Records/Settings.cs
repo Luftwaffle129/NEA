@@ -9,9 +9,6 @@ namespace NEALibrarySystem.Data_Structures
     public static class Settings
     {
         public const int ISBNLENGTH = 13; 
-        public static string GmailUsername { get; set; }
-        public static string GmailPassword { get; set; }
-        public static string GmailKey { get; set; }
         public static int MemberBarcodeLength { get; set; }
         public static int BookCopyBarcodeLength { get; set; }
         public static DateTime LastBackup { get; set; }

@@ -7,10 +7,15 @@ namespace NEALibrarySystem
     public partial class frmLogIn : Form
     {
         private const int ATTEMPTCOOLDOWN = 1; // minimum time between attempts in seconds
-
+        //main system
         public static frmLogIn Main;
         FrmMainSystem frmMainSystem;
+
+        // password recovery
         frmForgottenPassword frmForgottenPassword;
+        frmResetPassword frmResetPassword;
+        public Staff ForgottenPasswordStaff;
+
         DateTime previousAttempt = DateTime.MinValue;
         public frmLogIn()
         {
@@ -66,6 +71,16 @@ namespace NEALibrarySystem
             }
             else
                 return -1;
+        }
+        public void ClearPassword()
+        {
+            txtPassword.Text = "";
+        }
+        public void ResetPassword()
+        {
+            frmResetPassword = new frmResetPassword(ForgottenPasswordStaff);
+            frmResetPassword.Show();
+            this.Hide();
         }
     }
 }

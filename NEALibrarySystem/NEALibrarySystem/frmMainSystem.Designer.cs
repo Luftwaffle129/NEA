@@ -133,7 +133,7 @@
             this.grpSettingsCirculation = new System.Windows.Forms.GroupBox();
             this.cmbSettingsCirculationMemberType = new System.Windows.Forms.ComboBox();
             this.lblSettingsCirculationDueDateValue = new System.Windows.Forms.Label();
-            this.cmbSettingsCirculationDueDateType = new System.Windows.Forms.ComboBox();
+            this.cmbSettingsCirculationType = new System.Windows.Forms.ComboBox();
             this.numSettingsCirculationDueDateValue = new System.Windows.Forms.NumericUpDown();
             this.lblSettingsCirculationDueDateType = new System.Windows.Forms.Label();
             this.lblSettingsCirculationMemberType = new System.Windows.Forms.Label();
@@ -142,17 +142,9 @@
             this.numSettingsCirculationLateFee = new System.Windows.Forms.NumericUpDown();
             this.grpSettingsBarcode = new System.Windows.Forms.GroupBox();
             this.numSettingsBarcodeMember = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.grpSettingsGmail = new System.Windows.Forms.GroupBox();
-            this.lblSettingsGmailUsername = new System.Windows.Forms.Label();
-            this.lblSettingsGmailPassword = new System.Windows.Forms.Label();
-            this.txtSettingsGmailPassword = new System.Windows.Forms.TextBox();
-            this.txtSettingsGmailUsername = new System.Windows.Forms.TextBox();
-            this.txtSettingsGmailKey = new System.Windows.Forms.TextBox();
-            this.lblSettingGmailKey = new System.Windows.Forms.Label();
-            this.btnSettingsGmailKey = new System.Windows.Forms.Button();
+            this.lblSettingsBarcodeBookCopy = new System.Windows.Forms.Label();
+            this.lblSettingsBarcodeMember = new System.Windows.Forms.Label();
+            this.numSettingsBarcodeBookCopy = new System.Windows.Forms.NumericUpDown();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.pnlReturn = new System.Windows.Forms.Panel();
@@ -285,8 +277,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSettingsCirculationLateFee)).BeginInit();
             this.grpSettingsBarcode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeMember)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.grpSettingsGmail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeBookCopy)).BeginInit();
             this.pnlReturn.SuspendLayout();
             this.pnlBookDetails.SuspendLayout();
             this.grpBooksBookStatus.SuspendLayout();
@@ -342,7 +333,7 @@
             this.btnStaff.Location = new System.Drawing.Point(0, 375);
             this.btnStaff.Name = "btnStaff";
             this.btnStaff.Size = new System.Drawing.Size(150, 75);
-            this.btnStaff.TabIndex = 4;
+            this.btnStaff.TabIndex = 3;
             this.btnStaff.Text = "STAFF";
             this.btnStaff.UseVisualStyleBackColor = false;
             this.btnStaff.Click += new System.EventHandler(this.btnStaff_Click);
@@ -357,7 +348,7 @@
             this.btnBackups.Location = new System.Drawing.Point(0, 450);
             this.btnBackups.Name = "btnBackups";
             this.btnBackups.Size = new System.Drawing.Size(150, 75);
-            this.btnBackups.TabIndex = 6;
+            this.btnBackups.TabIndex = 4;
             this.btnBackups.Text = "BACKUPS";
             this.btnBackups.UseVisualStyleBackColor = false;
             this.btnBackups.Click += new System.EventHandler(this.btnBackups_Click);
@@ -372,7 +363,7 @@
             this.btnSettings.Location = new System.Drawing.Point(0, 525);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(150, 75);
-            this.btnSettings.TabIndex = 8;
+            this.btnSettings.TabIndex = 5;
             this.btnSettings.Text = "SETTINGS";
             this.btnSettings.UseVisualStyleBackColor = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
@@ -387,7 +378,7 @@
             this.btnLogOut.Location = new System.Drawing.Point(0, 1005);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(150, 75);
-            this.btnLogOut.TabIndex = 9;
+            this.btnLogOut.TabIndex = 6;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -403,7 +394,7 @@
             this.btnSubTab1.Location = new System.Drawing.Point(0, 0);
             this.btnSubTab1.Name = "btnSubTab1";
             this.btnSubTab1.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab1.TabIndex = 10;
+            this.btnSubTab1.TabIndex = 0;
             this.btnSubTab1.Text = "Option 1";
             this.btnSubTab1.UseVisualStyleBackColor = false;
             this.btnSubTab1.Click += new System.EventHandler(this.btnSubTab1_Click);
@@ -419,7 +410,7 @@
             this.btnSubTab2.Location = new System.Drawing.Point(150, 0);
             this.btnSubTab2.Name = "btnSubTab2";
             this.btnSubTab2.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab2.TabIndex = 11;
+            this.btnSubTab2.TabIndex = 1;
             this.btnSubTab2.Text = "Option 2";
             this.btnSubTab2.UseVisualStyleBackColor = false;
             this.btnSubTab2.Click += new System.EventHandler(this.btnSubTab2_Click);
@@ -435,7 +426,7 @@
             this.btnSubTab3.Location = new System.Drawing.Point(300, 0);
             this.btnSubTab3.Name = "btnSubTab3";
             this.btnSubTab3.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab3.TabIndex = 12;
+            this.btnSubTab3.TabIndex = 2;
             this.btnSubTab3.Text = "Option 3";
             this.btnSubTab3.UseVisualStyleBackColor = false;
             this.btnSubTab3.Click += new System.EventHandler(this.btnSubTab3_Click);
@@ -451,23 +442,25 @@
             this.btnSubTab4.Location = new System.Drawing.Point(450, 0);
             this.btnSubTab4.Name = "btnSubTab4";
             this.btnSubTab4.Size = new System.Drawing.Size(150, 100);
-            this.btnSubTab4.TabIndex = 13;
+            this.btnSubTab4.TabIndex = 3;
             this.btnSubTab4.Text = "Option 4";
             this.btnSubTab4.UseVisualStyleBackColor = false;
             this.btnSubTab4.Click += new System.EventHandler(this.btnSubTab4_Click);
             // 
             // dtpReservePickUpByDate
             // 
+            this.dtpReservePickUpByDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpReservePickUpByDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpReservePickUpByDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpReservePickUpByDate.Location = new System.Drawing.Point(249, 870);
             this.dtpReservePickUpByDate.Name = "dtpReservePickUpByDate";
             this.dtpReservePickUpByDate.Size = new System.Drawing.Size(212, 38);
-            this.dtpReservePickUpByDate.TabIndex = 15;
+            this.dtpReservePickUpByDate.TabIndex = 4;
             this.dtpReservePickUpByDate.Value = new System.DateTime(2023, 6, 29, 0, 0, 0, 0);
             // 
             // lblReserveSetDueDate
             // 
+            this.lblReserveSetDueDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblReserveSetDueDate.AutoSize = true;
             this.lblReserveSetDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReserveSetDueDate.Location = new System.Drawing.Point(15, 873);
@@ -530,6 +523,7 @@
             this.txtMemberLateFees.ReadOnly = true;
             this.txtMemberLateFees.Size = new System.Drawing.Size(156, 38);
             this.txtMemberLateFees.TabIndex = 79;
+            this.txtMemberLateFees.TabStop = false;
             // 
             // lblMemberDetailsLateFees
             // 
@@ -552,7 +546,7 @@
             this.cmbMemberType.Location = new System.Drawing.Point(255, 287);
             this.cmbMemberType.Name = "cmbMemberType";
             this.cmbMemberType.Size = new System.Drawing.Size(1159, 39);
-            this.cmbMemberType.TabIndex = 77;
+            this.cmbMemberType.TabIndex = 4;
             // 
             // lsvMemberCirculations
             // 
@@ -562,7 +556,7 @@
             this.lsvMemberCirculations.Location = new System.Drawing.Point(1461, 81);
             this.lsvMemberCirculations.Name = "lsvMemberCirculations";
             this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 724);
-            this.lsvMemberCirculations.TabIndex = 1;
+            this.lsvMemberCirculations.TabIndex = 13;
             this.lsvMemberCirculations.UseCompatibleStateImageBehavior = false;
             // 
             // label3
@@ -585,7 +579,7 @@
             this.dtpMemberDateOfBirth.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
             this.dtpMemberDateOfBirth.Name = "dtpMemberDateOfBirth";
             this.dtpMemberDateOfBirth.Size = new System.Drawing.Size(212, 38);
-            this.dtpMemberDateOfBirth.TabIndex = 75;
+            this.dtpMemberDateOfBirth.TabIndex = 3;
             this.dtpMemberDateOfBirth.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
             // 
             // txtMemberJoinDate
@@ -598,6 +592,7 @@
             this.txtMemberJoinDate.ReadOnly = true;
             this.txtMemberJoinDate.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberJoinDate.TabIndex = 74;
+            this.txtMemberJoinDate.TabStop = false;
             // 
             // lblMemberJoinDate
             // 
@@ -617,7 +612,7 @@
             this.txtMemberPostcode.Location = new System.Drawing.Point(255, 767);
             this.txtMemberPostcode.Name = "txtMemberPostcode";
             this.txtMemberPostcode.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberPostcode.TabIndex = 72;
+            this.txtMemberPostcode.TabIndex = 12;
             // 
             // txtMemberCounty
             // 
@@ -627,7 +622,7 @@
             this.txtMemberCounty.Location = new System.Drawing.Point(255, 707);
             this.txtMemberCounty.Name = "txtMemberCounty";
             this.txtMemberCounty.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberCounty.TabIndex = 70;
+            this.txtMemberCounty.TabIndex = 11;
             // 
             // lblMemberPostcode
             // 
@@ -657,7 +652,7 @@
             this.txtMemberAddress1.Location = new System.Drawing.Point(255, 527);
             this.txtMemberAddress1.Name = "txtMemberAddress1";
             this.txtMemberAddress1.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberAddress1.TabIndex = 67;
+            this.txtMemberAddress1.TabIndex = 8;
             // 
             // lblMemberTownCity
             // 
@@ -678,7 +673,7 @@
             this.btnMemberCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnMemberCancel.Name = "btnMemberCancel";
             this.btnMemberCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnMemberCancel.TabIndex = 1;
+            this.btnMemberCancel.TabIndex = 15;
             this.btnMemberCancel.Text = "Cancel";
             this.btnMemberCancel.UseVisualStyleBackColor = false;
             this.btnMemberCancel.Click += new System.EventHandler(this.btnMemberCancel_Click);
@@ -691,7 +686,7 @@
             this.txtMemberBarcode.Location = new System.Drawing.Point(255, 47);
             this.txtMemberBarcode.Name = "txtMemberBarcode";
             this.txtMemberBarcode.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberBarcode.TabIndex = 65;
+            this.txtMemberBarcode.TabIndex = 0;
             // 
             // btnMemberSave
             // 
@@ -702,7 +697,7 @@
             this.btnMemberSave.Location = new System.Drawing.Point(1518, 924);
             this.btnMemberSave.Name = "btnMemberSave";
             this.btnMemberSave.Size = new System.Drawing.Size(120, 50);
-            this.btnMemberSave.TabIndex = 0;
+            this.btnMemberSave.TabIndex = 14;
             this.btnMemberSave.Text = "Save";
             this.btnMemberSave.UseVisualStyleBackColor = false;
             this.btnMemberSave.Click += new System.EventHandler(this.btnMemberSave_Click);
@@ -725,7 +720,7 @@
             this.txtMemberLinkedMembers.Location = new System.Drawing.Point(255, 347);
             this.txtMemberLinkedMembers.Name = "txtMemberLinkedMembers";
             this.txtMemberLinkedMembers.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberLinkedMembers.TabIndex = 63;
+            this.txtMemberLinkedMembers.TabIndex = 5;
             // 
             // txtMemberFirstName
             // 
@@ -735,7 +730,7 @@
             this.txtMemberFirstName.Location = new System.Drawing.Point(255, 107);
             this.txtMemberFirstName.Name = "txtMemberFirstName";
             this.txtMemberFirstName.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberFirstName.TabIndex = 44;
+            this.txtMemberFirstName.TabIndex = 1;
             // 
             // lblMemberAddress2
             // 
@@ -755,7 +750,7 @@
             this.txtMemberTownCity.Location = new System.Drawing.Point(255, 647);
             this.txtMemberTownCity.Name = "txtMemberTownCity";
             this.txtMemberTownCity.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberTownCity.TabIndex = 60;
+            this.txtMemberTownCity.TabIndex = 10;
             // 
             // txtMemberAddress2
             // 
@@ -765,7 +760,7 @@
             this.txtMemberAddress2.Location = new System.Drawing.Point(255, 587);
             this.txtMemberAddress2.Name = "txtMemberAddress2";
             this.txtMemberAddress2.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberAddress2.TabIndex = 59;
+            this.txtMemberAddress2.TabIndex = 9;
             // 
             // lblMemberSurname
             // 
@@ -805,7 +800,7 @@
             this.txtMemberEmailAddress.Location = new System.Drawing.Point(255, 407);
             this.txtMemberEmailAddress.Name = "txtMemberEmailAddress";
             this.txtMemberEmailAddress.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberEmailAddress.TabIndex = 57;
+            this.txtMemberEmailAddress.TabIndex = 6;
             // 
             // txtMemberPhoneNumber
             // 
@@ -815,7 +810,7 @@
             this.txtMemberPhoneNumber.Location = new System.Drawing.Point(255, 467);
             this.txtMemberPhoneNumber.Name = "txtMemberPhoneNumber";
             this.txtMemberPhoneNumber.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberPhoneNumber.TabIndex = 58;
+            this.txtMemberPhoneNumber.TabIndex = 7;
             // 
             // lblMemberDateOfBirth
             // 
@@ -865,7 +860,7 @@
             this.txtMemberSurname.Location = new System.Drawing.Point(255, 167);
             this.txtMemberSurname.Name = "txtMemberSurname";
             this.txtMemberSurname.Size = new System.Drawing.Size(1159, 38);
-            this.txtMemberSurname.TabIndex = 56;
+            this.txtMemberSurname.TabIndex = 2;
             // 
             // lblMemberPhoneNumber
             // 
@@ -910,7 +905,7 @@
             this.btnSearchDelete.Location = new System.Drawing.Point(834, 125);
             this.btnSearchDelete.Name = "btnSearchDelete";
             this.btnSearchDelete.Size = new System.Drawing.Size(216, 39);
-            this.btnSearchDelete.TabIndex = 41;
+            this.btnSearchDelete.TabIndex = 9;
             this.btnSearchDelete.Text = "Delete Selected";
             this.btnSearchDelete.UseVisualStyleBackColor = false;
             this.btnSearchDelete.Click += new System.EventHandler(this.btnSearchDelete_Click);
@@ -933,7 +928,7 @@
             this.cmbSearchField.Location = new System.Drawing.Point(10, 33);
             this.cmbSearchField.Name = "cmbSearchField";
             this.cmbSearchField.Size = new System.Drawing.Size(236, 28);
-            this.cmbSearchField.TabIndex = 39;
+            this.cmbSearchField.TabIndex = 1;
             // 
             // lsvSearchItems
             // 
@@ -948,7 +943,7 @@
             this.lsvSearchItems.Location = new System.Drawing.Point(10, 170);
             this.lsvSearchItems.Name = "lsvSearchItems";
             this.lsvSearchItems.Size = new System.Drawing.Size(1750, 800);
-            this.lsvSearchItems.TabIndex = 38;
+            this.lsvSearchItems.TabIndex = 8;
             this.lsvSearchItems.UseCompatibleStateImageBehavior = false;
             this.lsvSearchItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvSearchItems_ColumnClick);
             this.lsvSearchItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsvSearchItems_MouseDoubleClick);
@@ -977,7 +972,7 @@
             this.txtFilter2.Location = new System.Drawing.Point(504, 87);
             this.txtFilter2.Name = "txtFilter2";
             this.txtFilter2.Size = new System.Drawing.Size(216, 26);
-            this.txtFilter2.TabIndex = 19;
+            this.txtFilter2.TabIndex = 4;
             // 
             // txtSearchBox
             // 
@@ -985,7 +980,7 @@
             this.txtSearchBox.Location = new System.Drawing.Point(10, 87);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(236, 26);
-            this.txtSearchBox.TabIndex = 7;
+            this.txtSearchBox.TabIndex = 0;
             // 
             // txtFilter1
             // 
@@ -993,7 +988,7 @@
             this.txtFilter1.Location = new System.Drawing.Point(265, 87);
             this.txtFilter1.Name = "txtFilter1";
             this.txtFilter1.Size = new System.Drawing.Size(216, 26);
-            this.txtFilter1.TabIndex = 20;
+            this.txtFilter1.TabIndex = 2;
             // 
             // btnSearch
             // 
@@ -1003,7 +998,7 @@
             this.btnSearch.Location = new System.Drawing.Point(10, 125);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(236, 39);
-            this.btnSearch.TabIndex = 28;
+            this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearchSearch_Click);
@@ -1016,7 +1011,7 @@
             this.btnresetFilters.Location = new System.Drawing.Point(504, 125);
             this.btnresetFilters.Name = "btnresetFilters";
             this.btnresetFilters.Size = new System.Drawing.Size(216, 39);
-            this.btnresetFilters.TabIndex = 27;
+            this.btnresetFilters.TabIndex = 7;
             this.btnresetFilters.Text = "Reset Filters";
             this.btnresetFilters.UseVisualStyleBackColor = false;
             this.btnresetFilters.Click += new System.EventHandler(this.btnSearchResetFilters_Click);
@@ -1049,7 +1044,7 @@
             this.cmbFilter2.Location = new System.Drawing.Point(504, 33);
             this.cmbFilter2.Name = "cmbFilter2";
             this.cmbFilter2.Size = new System.Drawing.Size(216, 28);
-            this.cmbFilter2.TabIndex = 23;
+            this.cmbFilter2.TabIndex = 5;
             // 
             // cmbFilter1
             // 
@@ -1059,10 +1054,13 @@
             this.cmbFilter1.Location = new System.Drawing.Point(265, 33);
             this.cmbFilter1.Name = "cmbFilter1";
             this.cmbFilter1.Size = new System.Drawing.Size(216, 28);
-            this.cmbFilter1.TabIndex = 24;
+            this.cmbFilter1.TabIndex = 3;
             // 
             // pnlStaffDetails
             // 
+            this.pnlStaffDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlStaffDetails.Controls.Add(this.txtStaffFirstName);
             this.pnlStaffDetails.Controls.Add(this.lblStaffFirstName);
             this.pnlStaffDetails.Controls.Add(this.txtStaffSurname);
@@ -1086,11 +1084,13 @@
             // 
             // txtStaffFirstName
             // 
+            this.txtStaffFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStaffFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffFirstName.Location = new System.Drawing.Point(255, 107);
             this.txtStaffFirstName.Name = "txtStaffFirstName";
             this.txtStaffFirstName.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffFirstName.TabIndex = 121;
+            this.txtStaffFirstName.TabIndex = 0;
             // 
             // lblStaffFirstName
             // 
@@ -1104,11 +1104,13 @@
             // 
             // txtStaffSurname
             // 
+            this.txtStaffSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStaffSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffSurname.Location = new System.Drawing.Point(255, 167);
             this.txtStaffSurname.Name = "txtStaffSurname";
             this.txtStaffSurname.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffSurname.TabIndex = 119;
+            this.txtStaffSurname.TabIndex = 1;
             // 
             // lblStaffSurname
             // 
@@ -1122,11 +1124,13 @@
             // 
             // txtStaffEmailAddress
             // 
+            this.txtStaffEmailAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStaffEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffEmailAddress.Location = new System.Drawing.Point(255, 347);
             this.txtStaffEmailAddress.Name = "txtStaffEmailAddress";
             this.txtStaffEmailAddress.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffEmailAddress.TabIndex = 117;
+            this.txtStaffEmailAddress.TabIndex = 5;
             // 
             // lblStaffAccessLevel
             // 
@@ -1140,21 +1144,25 @@
             // 
             // cmbStaffAccessLevel
             // 
+            this.cmbStaffAccessLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStaffAccessLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStaffAccessLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStaffAccessLevel.FormattingEnabled = true;
             this.cmbStaffAccessLevel.Location = new System.Drawing.Point(255, 407);
             this.cmbStaffAccessLevel.Name = "cmbStaffAccessLevel";
             this.cmbStaffAccessLevel.Size = new System.Drawing.Size(1229, 39);
-            this.cmbStaffAccessLevel.TabIndex = 115;
+            this.cmbStaffAccessLevel.TabIndex = 6;
             // 
             // txtStaffUsername
             // 
+            this.txtStaffUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStaffUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffUsername.Location = new System.Drawing.Point(255, 227);
             this.txtStaffUsername.Name = "txtStaffUsername";
             this.txtStaffUsername.Size = new System.Drawing.Size(1230, 38);
-            this.txtStaffUsername.TabIndex = 114;
+            this.txtStaffUsername.TabIndex = 2;
             // 
             // lblStaffUsername
             // 
@@ -1168,13 +1176,14 @@
             // 
             // btnStaffPasswordVisibility
             // 
+            this.btnStaffPasswordVisibility.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStaffPasswordVisibility.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffPasswordVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffPasswordVisibility.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffPasswordVisibility.Location = new System.Drawing.Point(1235, 287);
             this.btnStaffPasswordVisibility.Name = "btnStaffPasswordVisibility";
             this.btnStaffPasswordVisibility.Size = new System.Drawing.Size(249, 38);
-            this.btnStaffPasswordVisibility.TabIndex = 110;
+            this.btnStaffPasswordVisibility.TabIndex = 4;
             this.btnStaffPasswordVisibility.Text = "Show/Hide";
             this.btnStaffPasswordVisibility.UseVisualStyleBackColor = false;
             this.btnStaffPasswordVisibility.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnStaffPasswordVisibility_MouseDown);
@@ -1192,11 +1201,13 @@
             // 
             // txtStaffPassword
             // 
+            this.txtStaffPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStaffPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffPassword.Location = new System.Drawing.Point(255, 287);
             this.txtStaffPassword.Name = "txtStaffPassword";
             this.txtStaffPassword.Size = new System.Drawing.Size(974, 38);
-            this.txtStaffPassword.TabIndex = 107;
+            this.txtStaffPassword.TabIndex = 3;
             this.txtStaffPassword.UseSystemPasswordChar = true;
             // 
             // lblStaffPassword
@@ -1211,26 +1222,28 @@
             // 
             // btnStaffCancel
             // 
+            this.btnStaffCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStaffCancel.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnStaffCancel.Name = "btnStaffCancel";
             this.btnStaffCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnStaffCancel.TabIndex = 1;
+            this.btnStaffCancel.TabIndex = 8;
             this.btnStaffCancel.Text = "Cancel";
             this.btnStaffCancel.UseVisualStyleBackColor = false;
             this.btnStaffCancel.Click += new System.EventHandler(this.btnStaffCancel_Click);
             // 
             // btnStaffSave
             // 
+            this.btnStaffSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStaffSave.BackColor = System.Drawing.Color.LightGray;
             this.btnStaffSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaffSave.Location = new System.Drawing.Point(1518, 924);
             this.btnStaffSave.Name = "btnStaffSave";
             this.btnStaffSave.Size = new System.Drawing.Size(120, 50);
-            this.btnStaffSave.TabIndex = 0;
+            this.btnStaffSave.TabIndex = 7;
             this.btnStaffSave.Text = "Save";
             this.btnStaffSave.UseVisualStyleBackColor = false;
             this.btnStaffSave.Click += new System.EventHandler(this.btnStaffSave_Click);
@@ -1274,7 +1287,7 @@
             this.btnLoanDelete.Location = new System.Drawing.Point(1278, 870);
             this.btnLoanDelete.Name = "btnLoanDelete";
             this.btnLoanDelete.Size = new System.Drawing.Size(212, 38);
-            this.btnLoanDelete.TabIndex = 33;
+            this.btnLoanDelete.TabIndex = 3;
             this.btnLoanDelete.Text = "Delete";
             this.btnLoanDelete.UseVisualStyleBackColor = false;
             this.btnLoanDelete.Click += new System.EventHandler(this.btnLoanDelete_Click);
@@ -1308,7 +1321,8 @@
             this.txtLoanMemberName.Name = "txtLoanMemberName";
             this.txtLoanMemberName.ReadOnly = true;
             this.txtLoanMemberName.Size = new System.Drawing.Size(1241, 38);
-            this.txtLoanMemberName.TabIndex = 13;
+            this.txtLoanMemberName.TabIndex = 1;
+            this.txtLoanMemberName.TabStop = false;
             // 
             // txtLoanEnterBarcode
             // 
@@ -1318,7 +1332,7 @@
             this.txtLoanEnterBarcode.Location = new System.Drawing.Point(249, 287);
             this.txtLoanEnterBarcode.Name = "txtLoanEnterBarcode";
             this.txtLoanEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtLoanEnterBarcode.TabIndex = 32;
+            this.txtLoanEnterBarcode.TabIndex = 1;
             this.txtLoanEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtLoanEnterBarcode_PreviewKeyDown);
             // 
             // lblLoanLateFees
@@ -1339,6 +1353,7 @@
             this.txtLoanLateFees.ReadOnly = true;
             this.txtLoanLateFees.Size = new System.Drawing.Size(212, 38);
             this.txtLoanLateFees.TabIndex = 30;
+            this.txtLoanLateFees.TabStop = false;
             // 
             // dtpLoanReturnDate
             // 
@@ -1350,7 +1365,7 @@
             this.dtpLoanReturnDate.MinDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
             this.dtpLoanReturnDate.Name = "dtpLoanReturnDate";
             this.dtpLoanReturnDate.Size = new System.Drawing.Size(212, 38);
-            this.dtpLoanReturnDate.TabIndex = 23;
+            this.dtpLoanReturnDate.TabIndex = 4;
             this.dtpLoanReturnDate.Value = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
             // 
             // lblLoanSetDueDate
@@ -1372,6 +1387,7 @@
             this.txtLoanOverdue.ReadOnly = true;
             this.txtLoanOverdue.Size = new System.Drawing.Size(212, 38);
             this.txtLoanOverdue.TabIndex = 21;
+            this.txtLoanOverdue.TabStop = false;
             // 
             // lblLoanOverdueBooks
             // 
@@ -1401,6 +1417,7 @@
             this.txtLoanLoans.ReadOnly = true;
             this.txtLoanLoans.Size = new System.Drawing.Size(212, 38);
             this.txtLoanLoans.TabIndex = 17;
+            this.txtLoanLoans.TabStop = false;
             // 
             // lblLoanCurrentMemberLoans
             // 
@@ -1420,7 +1437,7 @@
             this.txtLoanMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtLoanMemberBarcode.Name = "txtLoanMemberBarcode";
             this.txtLoanMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtLoanMemberBarcode.TabIndex = 15;
+            this.txtLoanMemberBarcode.TabIndex = 0;
             this.txtLoanMemberBarcode.TextChanged += new System.EventHandler(this.txtLoanMemberBarcode_TextChanged);
             // 
             // lblLoanMemberBarcode
@@ -1443,7 +1460,7 @@
             this.lsvLoanSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvLoanSelectedBooks.Name = "lsvLoanSelectedBooks";
             this.lsvLoanSelectedBooks.Size = new System.Drawing.Size(1241, 501);
-            this.lsvLoanSelectedBooks.TabIndex = 19;
+            this.lsvLoanSelectedBooks.TabIndex = 2;
             this.lsvLoanSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
             // btnLoanSave
@@ -1455,7 +1472,7 @@
             this.btnLoanSave.Location = new System.Drawing.Point(1518, 924);
             this.btnLoanSave.Name = "btnLoanSave";
             this.btnLoanSave.Size = new System.Drawing.Size(120, 50);
-            this.btnLoanSave.TabIndex = 13;
+            this.btnLoanSave.TabIndex = 5;
             this.btnLoanSave.Text = "Save";
             this.btnLoanSave.UseVisualStyleBackColor = false;
             this.btnLoanSave.Click += new System.EventHandler(this.btnLoanSave_Click);
@@ -1469,7 +1486,7 @@
             this.btnLoanCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnLoanCancel.Name = "btnLoanCancel";
             this.btnLoanCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnLoanCancel.TabIndex = 14;
+            this.btnLoanCancel.TabIndex = 6;
             this.btnLoanCancel.Text = "Cancel";
             this.btnLoanCancel.UseVisualStyleBackColor = false;
             this.btnLoanCancel.Click += new System.EventHandler(this.btnLoanCancel_Click);
@@ -1481,7 +1498,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSettings.Controls.Add(this.grpSettingsCirculation);
             this.pnlSettings.Controls.Add(this.grpSettingsBarcode);
-            this.pnlSettings.Controls.Add(this.grpSettingsGmail);
             this.pnlSettings.Controls.Add(this.btnSettingCancel);
             this.pnlSettings.Controls.Add(this.btnSettingSave);
             this.pnlSettings.Location = new System.Drawing.Point(150, 100);
@@ -1494,7 +1510,7 @@
             // 
             this.grpSettingsCirculation.Controls.Add(this.cmbSettingsCirculationMemberType);
             this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDateValue);
-            this.grpSettingsCirculation.Controls.Add(this.cmbSettingsCirculationDueDateType);
+            this.grpSettingsCirculation.Controls.Add(this.cmbSettingsCirculationType);
             this.grpSettingsCirculation.Controls.Add(this.numSettingsCirculationDueDateValue);
             this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDateType);
             this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationMemberType);
@@ -1502,9 +1518,9 @@
             this.grpSettingsCirculation.Controls.Add(this.lblSettingsCirculationDueDate);
             this.grpSettingsCirculation.Controls.Add(this.numSettingsCirculationLateFee);
             this.grpSettingsCirculation.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSettingsCirculation.Location = new System.Drawing.Point(12, 433);
+            this.grpSettingsCirculation.Location = new System.Drawing.Point(6, 191);
             this.grpSettingsCirculation.Name = "grpSettingsCirculation";
-            this.grpSettingsCirculation.Size = new System.Drawing.Size(665, 342);
+            this.grpSettingsCirculation.Size = new System.Drawing.Size(769, 342);
             this.grpSettingsCirculation.TabIndex = 80;
             this.grpSettingsCirculation.TabStop = false;
             this.grpSettingsCirculation.Text = "Circulation";
@@ -1514,10 +1530,11 @@
             // 
             this.cmbSettingsCirculationMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSettingsCirculationMemberType.FormattingEnabled = true;
-            this.cmbSettingsCirculationMemberType.Location = new System.Drawing.Point(253, 222);
+            this.cmbSettingsCirculationMemberType.Location = new System.Drawing.Point(294, 222);
             this.cmbSettingsCirculationMemberType.Name = "cmbSettingsCirculationMemberType";
-            this.cmbSettingsCirculationMemberType.Size = new System.Drawing.Size(399, 39);
-            this.cmbSettingsCirculationMemberType.TabIndex = 90;
+            this.cmbSettingsCirculationMemberType.Size = new System.Drawing.Size(462, 39);
+            this.cmbSettingsCirculationMemberType.TabIndex = 4;
+            this.cmbSettingsCirculationMemberType.SelectedIndexChanged += new System.EventHandler(this.cmbSettingsCirculationMemberType_SelectedIndexChanged);
             // 
             // lblSettingsCirculationDueDateValue
             // 
@@ -1530,24 +1547,39 @@
             this.lblSettingsCirculationDueDateValue.TabIndex = 85;
             this.lblSettingsCirculationDueDateValue.Text = "Time Length (days):";
             // 
-            // cmbSettingsCirculationDueDateType
+            // cmbSettingsCirculationType
             // 
-            this.cmbSettingsCirculationDueDateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSettingsCirculationDueDateType.FormattingEnabled = true;
-            this.cmbSettingsCirculationDueDateType.Location = new System.Drawing.Point(253, 163);
-            this.cmbSettingsCirculationDueDateType.Name = "cmbSettingsCirculationDueDateType";
-            this.cmbSettingsCirculationDueDateType.Size = new System.Drawing.Size(399, 39);
-            this.cmbSettingsCirculationDueDateType.TabIndex = 89;
-            this.cmbSettingsCirculationDueDateType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbSettingsCirculationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSettingsCirculationType.FormattingEnabled = true;
+            this.cmbSettingsCirculationType.Location = new System.Drawing.Point(294, 163);
+            this.cmbSettingsCirculationType.Name = "cmbSettingsCirculationType";
+            this.cmbSettingsCirculationType.Size = new System.Drawing.Size(462, 39);
+            this.cmbSettingsCirculationType.TabIndex = 3;
+            this.cmbSettingsCirculationType.SelectedIndexChanged += new System.EventHandler(this.cmbSettingsCirculationType_SelectedIndexChanged);
             // 
             // numSettingsCirculationDueDateValue
             // 
             this.numSettingsCirculationDueDateValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numSettingsCirculationDueDateValue.Location = new System.Drawing.Point(253, 283);
+            this.numSettingsCirculationDueDateValue.Location = new System.Drawing.Point(294, 283);
+            this.numSettingsCirculationDueDateValue.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.numSettingsCirculationDueDateValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numSettingsCirculationDueDateValue.Name = "numSettingsCirculationDueDateValue";
-            this.numSettingsCirculationDueDateValue.Size = new System.Drawing.Size(399, 38);
-            this.numSettingsCirculationDueDateValue.TabIndex = 86;
-            this.numSettingsCirculationDueDateValue.ValueChanged += new System.EventHandler(this.numericUpDown11_ValueChanged);
+            this.numSettingsCirculationDueDateValue.Size = new System.Drawing.Size(462, 38);
+            this.numSettingsCirculationDueDateValue.TabIndex = 5;
+            this.numSettingsCirculationDueDateValue.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSettingsCirculationDueDateValue.ValueChanged += new System.EventHandler(this.numSettingsCirculationDueDateValue_ValueChanged);
             // 
             // lblSettingsCirculationDueDateType
             // 
@@ -1594,22 +1626,33 @@
             // 
             // numSettingsCirculationLateFee
             // 
+            this.numSettingsCirculationLateFee.DecimalPlaces = 2;
             this.numSettingsCirculationLateFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numSettingsCirculationLateFee.Location = new System.Drawing.Point(253, 43);
+            this.numSettingsCirculationLateFee.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numSettingsCirculationLateFee.Location = new System.Drawing.Point(294, 43);
+            this.numSettingsCirculationLateFee.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numSettingsCirculationLateFee.Name = "numSettingsCirculationLateFee";
-            this.numSettingsCirculationLateFee.Size = new System.Drawing.Size(399, 38);
-            this.numSettingsCirculationLateFee.TabIndex = 78;
+            this.numSettingsCirculationLateFee.Size = new System.Drawing.Size(462, 38);
+            this.numSettingsCirculationLateFee.TabIndex = 2;
             // 
             // grpSettingsBarcode
             // 
             this.grpSettingsBarcode.Controls.Add(this.numSettingsBarcodeMember);
-            this.grpSettingsBarcode.Controls.Add(this.label1);
-            this.grpSettingsBarcode.Controls.Add(this.label2);
-            this.grpSettingsBarcode.Controls.Add(this.numericUpDown1);
+            this.grpSettingsBarcode.Controls.Add(this.lblSettingsBarcodeBookCopy);
+            this.grpSettingsBarcode.Controls.Add(this.lblSettingsBarcodeMember);
+            this.grpSettingsBarcode.Controls.Add(this.numSettingsBarcodeBookCopy);
             this.grpSettingsBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSettingsBarcode.Location = new System.Drawing.Point(12, 253);
+            this.grpSettingsBarcode.Location = new System.Drawing.Point(6, 7);
             this.grpSettingsBarcode.Name = "grpSettingsBarcode";
-            this.grpSettingsBarcode.Size = new System.Drawing.Size(665, 166);
+            this.grpSettingsBarcode.Size = new System.Drawing.Size(769, 166);
             this.grpSettingsBarcode.TabIndex = 79;
             this.grpSettingsBarcode.TabStop = false;
             this.grpSettingsBarcode.Text = "Barcode Lengths";
@@ -1617,127 +1660,71 @@
             // numSettingsBarcodeMember
             // 
             this.numSettingsBarcodeMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numSettingsBarcodeMember.Location = new System.Drawing.Point(253, 103);
+            this.numSettingsBarcodeMember.Location = new System.Drawing.Point(294, 103);
+            this.numSettingsBarcodeMember.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numSettingsBarcodeMember.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             this.numSettingsBarcodeMember.Name = "numSettingsBarcodeMember";
-            this.numSettingsBarcodeMember.Size = new System.Drawing.Size(399, 38);
-            this.numSettingsBarcodeMember.TabIndex = 79;
+            this.numSettingsBarcodeMember.Size = new System.Drawing.Size(462, 38);
+            this.numSettingsBarcodeMember.TabIndex = 1;
+            this.numSettingsBarcodeMember.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             this.numSettingsBarcodeMember.ValueChanged += new System.EventHandler(this.numSettingsBarcodeMember_ValueChanged);
             // 
-            // label1
+            // lblSettingsBarcodeBookCopy
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 46);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(155, 31);
-            this.label1.TabIndex = 78;
-            this.label1.Text = "Book Copy:";
+            this.lblSettingsBarcodeBookCopy.AutoSize = true;
+            this.lblSettingsBarcodeBookCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsBarcodeBookCopy.Location = new System.Drawing.Point(15, 46);
+            this.lblSettingsBarcodeBookCopy.Name = "lblSettingsBarcodeBookCopy";
+            this.lblSettingsBarcodeBookCopy.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblSettingsBarcodeBookCopy.Size = new System.Drawing.Size(155, 31);
+            this.lblSettingsBarcodeBookCopy.TabIndex = 78;
+            this.lblSettingsBarcodeBookCopy.Text = "Book Copy:";
             // 
-            // label2
+            // lblSettingsBarcodeMember
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 31);
-            this.label2.TabIndex = 77;
-            this.label2.Text = "Member:";
+            this.lblSettingsBarcodeMember.AutoSize = true;
+            this.lblSettingsBarcodeMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsBarcodeMember.Location = new System.Drawing.Point(15, 106);
+            this.lblSettingsBarcodeMember.Name = "lblSettingsBarcodeMember";
+            this.lblSettingsBarcodeMember.Size = new System.Drawing.Size(120, 31);
+            this.lblSettingsBarcodeMember.TabIndex = 77;
+            this.lblSettingsBarcodeMember.Text = "Member:";
             // 
-            // numericUpDown1
+            // numSettingsBarcodeBookCopy
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(253, 43);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(399, 38);
-            this.numericUpDown1.TabIndex = 78;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // grpSettingsGmail
-            // 
-            this.grpSettingsGmail.Controls.Add(this.lblSettingsGmailUsername);
-            this.grpSettingsGmail.Controls.Add(this.lblSettingsGmailPassword);
-            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailPassword);
-            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailUsername);
-            this.grpSettingsGmail.Controls.Add(this.txtSettingsGmailKey);
-            this.grpSettingsGmail.Controls.Add(this.lblSettingGmailKey);
-            this.grpSettingsGmail.Controls.Add(this.btnSettingsGmailKey);
-            this.grpSettingsGmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpSettingsGmail.Location = new System.Drawing.Point(12, 13);
-            this.grpSettingsGmail.Name = "grpSettingsGmail";
-            this.grpSettingsGmail.Size = new System.Drawing.Size(665, 226);
-            this.grpSettingsGmail.TabIndex = 75;
-            this.grpSettingsGmail.TabStop = false;
-            this.grpSettingsGmail.Text = "Gmail";
-            // 
-            // lblSettingsGmailUsername
-            // 
-            this.lblSettingsGmailUsername.AutoSize = true;
-            this.lblSettingsGmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettingsGmailUsername.Location = new System.Drawing.Point(15, 46);
-            this.lblSettingsGmailUsername.Name = "lblSettingsGmailUsername";
-            this.lblSettingsGmailUsername.Size = new System.Drawing.Size(147, 31);
-            this.lblSettingsGmailUsername.TabIndex = 78;
-            this.lblSettingsGmailUsername.Text = "Username:";
-            // 
-            // lblSettingsGmailPassword
-            // 
-            this.lblSettingsGmailPassword.AutoSize = true;
-            this.lblSettingsGmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettingsGmailPassword.Location = new System.Drawing.Point(15, 106);
-            this.lblSettingsGmailPassword.Name = "lblSettingsGmailPassword";
-            this.lblSettingsGmailPassword.Size = new System.Drawing.Size(142, 31);
-            this.lblSettingsGmailPassword.TabIndex = 77;
-            this.lblSettingsGmailPassword.Text = "Password:";
-            // 
-            // txtSettingsGmailPassword
-            // 
-            this.txtSettingsGmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSettingsGmailPassword.Location = new System.Drawing.Point(253, 103);
-            this.txtSettingsGmailPassword.Name = "txtSettingsGmailPassword";
-            this.txtSettingsGmailPassword.Size = new System.Drawing.Size(399, 38);
-            this.txtSettingsGmailPassword.TabIndex = 76;
-            this.txtSettingsGmailPassword.TextChanged += new System.EventHandler(this.txtSettingsGmailPassword_TextChanged);
-            // 
-            // txtSettingsGmailUsername
-            // 
-            this.txtSettingsGmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSettingsGmailUsername.Location = new System.Drawing.Point(253, 43);
-            this.txtSettingsGmailUsername.Name = "txtSettingsGmailUsername";
-            this.txtSettingsGmailUsername.Size = new System.Drawing.Size(399, 38);
-            this.txtSettingsGmailUsername.TabIndex = 75;
-            this.txtSettingsGmailUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // txtSettingsGmailKey
-            // 
-            this.txtSettingsGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSettingsGmailKey.Location = new System.Drawing.Point(253, 162);
-            this.txtSettingsGmailKey.Name = "txtSettingsGmailKey";
-            this.txtSettingsGmailKey.Size = new System.Drawing.Size(273, 38);
-            this.txtSettingsGmailKey.TabIndex = 73;
-            this.txtSettingsGmailKey.TextChanged += new System.EventHandler(this.txtSettingsGmailKey_TextChanged);
-            // 
-            // lblSettingGmailKey
-            // 
-            this.lblSettingGmailKey.AutoSize = true;
-            this.lblSettingGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettingGmailKey.Location = new System.Drawing.Point(15, 166);
-            this.lblSettingGmailKey.Name = "lblSettingGmailKey";
-            this.lblSettingGmailKey.Size = new System.Drawing.Size(69, 31);
-            this.lblSettingGmailKey.TabIndex = 72;
-            this.lblSettingGmailKey.Text = "Key:";
-            // 
-            // btnSettingsGmailKey
-            // 
-            this.btnSettingsGmailKey.BackColor = System.Drawing.Color.LightGray;
-            this.btnSettingsGmailKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingsGmailKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettingsGmailKey.Location = new System.Drawing.Point(532, 162);
-            this.btnSettingsGmailKey.Name = "btnSettingsGmailKey";
-            this.btnSettingsGmailKey.Size = new System.Drawing.Size(120, 38);
-            this.btnSettingsGmailKey.TabIndex = 74;
-            this.btnSettingsGmailKey.Text = "Show/Hide";
-            this.btnSettingsGmailKey.UseVisualStyleBackColor = false;
+            this.numSettingsBarcodeBookCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSettingsBarcodeBookCopy.Location = new System.Drawing.Point(294, 43);
+            this.numSettingsBarcodeBookCopy.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numSettingsBarcodeBookCopy.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numSettingsBarcodeBookCopy.Name = "numSettingsBarcodeBookCopy";
+            this.numSettingsBarcodeBookCopy.Size = new System.Drawing.Size(462, 38);
+            this.numSettingsBarcodeBookCopy.TabIndex = 0;
+            this.numSettingsBarcodeBookCopy.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numSettingsBarcodeBookCopy.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // btnSettingCancel
             // 
@@ -1748,9 +1735,10 @@
             this.btnSettingCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnSettingCancel.Name = "btnSettingCancel";
             this.btnSettingCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnSettingCancel.TabIndex = 1;
+            this.btnSettingCancel.TabIndex = 7;
             this.btnSettingCancel.Text = "Cancel";
             this.btnSettingCancel.UseVisualStyleBackColor = false;
+            this.btnSettingCancel.Click += new System.EventHandler(this.btnSettingCancel_Click);
             // 
             // btnSettingSave
             // 
@@ -1761,9 +1749,10 @@
             this.btnSettingSave.Location = new System.Drawing.Point(1518, 924);
             this.btnSettingSave.Name = "btnSettingSave";
             this.btnSettingSave.Size = new System.Drawing.Size(120, 50);
-            this.btnSettingSave.TabIndex = 0;
+            this.btnSettingSave.TabIndex = 6;
             this.btnSettingSave.Text = "Save";
             this.btnSettingSave.UseVisualStyleBackColor = false;
+            this.btnSettingSave.Click += new System.EventHandler(this.btnSettingSave_Click);
             // 
             // pnlReturn
             // 
@@ -1790,7 +1779,7 @@
             this.pnlReturn.Location = new System.Drawing.Point(150, 100);
             this.pnlReturn.Name = "pnlReturn";
             this.pnlReturn.Size = new System.Drawing.Size(1770, 980);
-            this.pnlReturn.TabIndex = 52;
+            this.pnlReturn.TabIndex = 19;
             this.pnlReturn.VisibleChanged += new System.EventHandler(this.pnlCheckIn_VisibleChanged);
             // 
             // btnReturnDelete
@@ -1802,7 +1791,7 @@
             this.btnReturnDelete.Location = new System.Drawing.Point(1278, 870);
             this.btnReturnDelete.Name = "btnReturnDelete";
             this.btnReturnDelete.Size = new System.Drawing.Size(212, 38);
-            this.btnReturnDelete.TabIndex = 34;
+            this.btnReturnDelete.TabIndex = 3;
             this.btnReturnDelete.Text = "Delete";
             this.btnReturnDelete.UseVisualStyleBackColor = false;
             this.btnReturnDelete.Click += new System.EventHandler(this.btnReturnDelete_Click);
@@ -1825,7 +1814,7 @@
             this.txtReturnEnterBarcode.Location = new System.Drawing.Point(249, 287);
             this.txtReturnEnterBarcode.Name = "txtReturnEnterBarcode";
             this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtReturnEnterBarcode.TabIndex = 30;
+            this.txtReturnEnterBarcode.TabIndex = 1;
             this.txtReturnEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReturnEnterBarcode_PreviewKeyDown);
             // 
             // lblReturnLateFees
@@ -1846,6 +1835,7 @@
             this.txtReturnOverdue.ReadOnly = true;
             this.txtReturnOverdue.Size = new System.Drawing.Size(212, 38);
             this.txtReturnOverdue.TabIndex = 26;
+            this.txtReturnOverdue.TabStop = false;
             // 
             // lblReturnOverdue
             // 
@@ -1867,7 +1857,7 @@
             this.lsvReturnSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvReturnSelectedBooks.Name = "lsvReturnSelectedBooks";
             this.lsvReturnSelectedBooks.Size = new System.Drawing.Size(1241, 501);
-            this.lsvReturnSelectedBooks.TabIndex = 24;
+            this.lsvReturnSelectedBooks.TabIndex = 2;
             this.lsvReturnSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
             // lblReturnSelectedBooks
@@ -1888,6 +1878,7 @@
             this.txtReturnLoans.ReadOnly = true;
             this.txtReturnLoans.Size = new System.Drawing.Size(212, 38);
             this.txtReturnLoans.TabIndex = 22;
+            this.txtReturnLoans.TabStop = false;
             // 
             // lblReturnLoans
             // 
@@ -1907,7 +1898,7 @@
             this.txtReturnMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtReturnMemberBarcode.Name = "txtReturnMemberBarcode";
             this.txtReturnMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtReturnMemberBarcode.TabIndex = 20;
+            this.txtReturnMemberBarcode.TabIndex = 0;
             this.txtReturnMemberBarcode.TextChanged += new System.EventHandler(this.txtReturnMemberBarcode_TextChanged);
             // 
             // lblReturnMemberBarcode
@@ -1930,6 +1921,7 @@
             this.txtReturnMemberName.ReadOnly = true;
             this.txtReturnMemberName.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnMemberName.TabIndex = 18;
+            this.txtReturnMemberName.TabStop = false;
             // 
             // lblReturnMemberName
             // 
@@ -1950,7 +1942,7 @@
             this.btnReturnCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnReturnCancel.Name = "btnReturnCancel";
             this.btnReturnCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnReturnCancel.TabIndex = 14;
+            this.btnReturnCancel.TabIndex = 5;
             this.btnReturnCancel.Text = "Cancel";
             this.btnReturnCancel.UseVisualStyleBackColor = false;
             this.btnReturnCancel.Click += new System.EventHandler(this.btnReturnCancel_Click);
@@ -1963,6 +1955,7 @@
             this.txtReturnLateFees.ReadOnly = true;
             this.txtReturnLateFees.Size = new System.Drawing.Size(212, 38);
             this.txtReturnLateFees.TabIndex = 28;
+            this.txtReturnLateFees.TabStop = false;
             // 
             // btnReturnSave
             // 
@@ -1973,7 +1966,7 @@
             this.btnReturnSave.Location = new System.Drawing.Point(1518, 924);
             this.btnReturnSave.Name = "btnReturnSave";
             this.btnReturnSave.Size = new System.Drawing.Size(120, 50);
-            this.btnReturnSave.TabIndex = 13;
+            this.btnReturnSave.TabIndex = 4;
             this.btnReturnSave.Text = "Save";
             this.btnReturnSave.UseVisualStyleBackColor = false;
             this.btnReturnSave.Click += new System.EventHandler(this.btnReturnSave_Click);
@@ -2003,7 +1996,7 @@
             this.btnBookSave.Location = new System.Drawing.Point(1518, 924);
             this.btnBookSave.Name = "btnBookSave";
             this.btnBookSave.Size = new System.Drawing.Size(120, 50);
-            this.btnBookSave.TabIndex = 0;
+            this.btnBookSave.TabIndex = 3;
             this.btnBookSave.Text = "Save";
             this.btnBookSave.UseVisualStyleBackColor = false;
             this.btnBookSave.Click += new System.EventHandler(this.btnBookSave_Click);
@@ -2017,7 +2010,7 @@
             this.btnBookCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnBookCancel.Name = "btnBookCancel";
             this.btnBookCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnBookCancel.TabIndex = 1;
+            this.btnBookCancel.TabIndex = 4;
             this.btnBookCancel.Text = "Cancel";
             this.btnBookCancel.UseVisualStyleBackColor = false;
             this.btnBookCancel.Click += new System.EventHandler(this.btnBookCancel_Click);
@@ -2035,7 +2028,7 @@
             this.grpBooksBookStatus.Location = new System.Drawing.Point(1437, 700);
             this.grpBooksBookStatus.Name = "grpBooksBookStatus";
             this.grpBooksBookStatus.Size = new System.Drawing.Size(327, 208);
-            this.grpBooksBookStatus.TabIndex = 45;
+            this.grpBooksBookStatus.TabIndex = 2;
             this.grpBooksBookStatus.TabStop = false;
             this.grpBooksBookStatus.Text = "Book Status";
             // 
@@ -2047,6 +2040,7 @@
             this.txtBookLoaned.ReadOnly = true;
             this.txtBookLoaned.Size = new System.Drawing.Size(89, 38);
             this.txtBookLoaned.TabIndex = 49;
+            this.txtBookLoaned.TabStop = false;
             // 
             // lblBooksInStock
             // 
@@ -2066,6 +2060,7 @@
             this.txtBooksReserved.ReadOnly = true;
             this.txtBooksReserved.Size = new System.Drawing.Size(89, 38);
             this.txtBooksReserved.TabIndex = 48;
+            this.txtBooksReserved.TabStop = false;
             // 
             // txtBooksInStock
             // 
@@ -2075,6 +2070,7 @@
             this.txtBooksInStock.ReadOnly = true;
             this.txtBooksInStock.Size = new System.Drawing.Size(89, 38);
             this.txtBooksInStock.TabIndex = 44;
+            this.txtBooksInStock.TabStop = false;
             // 
             // lblBooksLoaned
             // 
@@ -2127,7 +2123,7 @@
             this.grpBookDetails.Location = new System.Drawing.Point(6, 22);
             this.grpBookDetails.Name = "grpBookDetails";
             this.grpBookDetails.Size = new System.Drawing.Size(1425, 936);
-            this.grpBookDetails.TabIndex = 44;
+            this.grpBookDetails.TabIndex = 0;
             this.grpBookDetails.TabStop = false;
             this.grpBookDetails.Text = "Book Details";
             // 
@@ -2139,7 +2135,7 @@
             this.txtBookPrice.Location = new System.Drawing.Point(211, 876);
             this.txtBookPrice.Name = "txtBookPrice";
             this.txtBookPrice.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookPrice.TabIndex = 41;
+            this.txtBookPrice.TabIndex = 10;
             // 
             // txtBookDescription
             // 
@@ -2151,7 +2147,7 @@
             this.txtBookDescription.Multiline = true;
             this.txtBookDescription.Name = "txtBookDescription";
             this.txtBookDescription.Size = new System.Drawing.Size(1197, 278);
-            this.txtBookDescription.TabIndex = 20;
+            this.txtBookDescription.TabIndex = 9;
             // 
             // txtBookThemes
             // 
@@ -2161,7 +2157,7 @@
             this.txtBookThemes.Location = new System.Drawing.Point(211, 517);
             this.txtBookThemes.Name = "txtBookThemes";
             this.txtBookThemes.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookThemes.TabIndex = 19;
+            this.txtBookThemes.TabIndex = 8;
             // 
             // txtBookGenres
             // 
@@ -2171,7 +2167,7 @@
             this.txtBookGenres.Location = new System.Drawing.Point(211, 457);
             this.txtBookGenres.Name = "txtBookGenres";
             this.txtBookGenres.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookGenres.TabIndex = 18;
+            this.txtBookGenres.TabIndex = 7;
             // 
             // txtBookPublisher
             // 
@@ -2181,7 +2177,7 @@
             this.txtBookPublisher.Location = new System.Drawing.Point(211, 397);
             this.txtBookPublisher.Name = "txtBookPublisher";
             this.txtBookPublisher.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookPublisher.TabIndex = 17;
+            this.txtBookPublisher.TabIndex = 6;
             // 
             // txtBookAuthor
             // 
@@ -2191,7 +2187,7 @@
             this.txtBookAuthor.Location = new System.Drawing.Point(211, 337);
             this.txtBookAuthor.Name = "txtBookAuthor";
             this.txtBookAuthor.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookAuthor.TabIndex = 16;
+            this.txtBookAuthor.TabIndex = 5;
             // 
             // txtBookMediaType
             // 
@@ -2201,7 +2197,7 @@
             this.txtBookMediaType.Location = new System.Drawing.Point(211, 277);
             this.txtBookMediaType.Name = "txtBookMediaType";
             this.txtBookMediaType.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookMediaType.TabIndex = 15;
+            this.txtBookMediaType.TabIndex = 4;
             // 
             // txtBookISBN
             // 
@@ -2211,7 +2207,7 @@
             this.txtBookISBN.Location = new System.Drawing.Point(211, 217);
             this.txtBookISBN.Name = "txtBookISBN";
             this.txtBookISBN.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookISBN.TabIndex = 14;
+            this.txtBookISBN.TabIndex = 3;
             // 
             // txtBookSeriesNumber
             // 
@@ -2221,7 +2217,7 @@
             this.txtBookSeriesNumber.Location = new System.Drawing.Point(211, 157);
             this.txtBookSeriesNumber.Name = "txtBookSeriesNumber";
             this.txtBookSeriesNumber.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookSeriesNumber.TabIndex = 13;
+            this.txtBookSeriesNumber.TabIndex = 2;
             // 
             // txtBookSeriesTitle
             // 
@@ -2231,7 +2227,7 @@
             this.txtBookSeriesTitle.Location = new System.Drawing.Point(211, 97);
             this.txtBookSeriesTitle.Name = "txtBookSeriesTitle";
             this.txtBookSeriesTitle.Size = new System.Drawing.Size(1197, 38);
-            this.txtBookSeriesTitle.TabIndex = 12;
+            this.txtBookSeriesTitle.TabIndex = 1;
             // 
             // lblBookPrice
             // 
@@ -2365,7 +2361,7 @@
             this.grpBookCopyDetails.Location = new System.Drawing.Point(1437, 22);
             this.grpBookCopyDetails.Name = "grpBookCopyDetails";
             this.grpBookCopyDetails.Size = new System.Drawing.Size(327, 672);
-            this.grpBookCopyDetails.TabIndex = 43;
+            this.grpBookCopyDetails.TabIndex = 1;
             this.grpBookCopyDetails.TabStop = false;
             this.grpBookCopyDetails.Text = "Copies";
             // 
@@ -2379,7 +2375,7 @@
             this.btnBookDeleteCopies.Location = new System.Drawing.Point(171, 622);
             this.btnBookDeleteCopies.Name = "btnBookDeleteCopies";
             this.btnBookDeleteCopies.Size = new System.Drawing.Size(150, 41);
-            this.btnBookDeleteCopies.TabIndex = 47;
+            this.btnBookDeleteCopies.TabIndex = 2;
             this.btnBookDeleteCopies.Text = "Delete copies";
             this.btnBookDeleteCopies.UseVisualStyleBackColor = false;
             this.btnBookDeleteCopies.Click += new System.EventHandler(this.btnBookDeleteCopies_Click);
@@ -2394,7 +2390,7 @@
             this.btnBookAddCopies.Location = new System.Drawing.Point(6, 622);
             this.btnBookAddCopies.Name = "btnBookAddCopies";
             this.btnBookAddCopies.Size = new System.Drawing.Size(150, 41);
-            this.btnBookAddCopies.TabIndex = 46;
+            this.btnBookAddCopies.TabIndex = 0;
             this.btnBookAddCopies.Text = "Add copies";
             this.btnBookAddCopies.UseVisualStyleBackColor = false;
             this.btnBookAddCopies.Click += new System.EventHandler(this.btnBookAddCopies_Click);
@@ -2409,11 +2405,14 @@
             this.lsvBookCopyDetails.Location = new System.Drawing.Point(6, 37);
             this.lsvBookCopyDetails.Name = "lsvBookCopyDetails";
             this.lsvBookCopyDetails.Size = new System.Drawing.Size(315, 582);
-            this.lsvBookCopyDetails.TabIndex = 0;
+            this.lsvBookCopyDetails.TabIndex = 1;
             this.lsvBookCopyDetails.UseCompatibleStateImageBehavior = false;
             // 
             // pnlBackup
             // 
+            this.pnlBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBackup.Controls.Add(this.lblLastBackupDate);
             this.pnlBackup.Controls.Add(this.btnRestoreBackup);
             this.pnlBackup.Controls.Add(this.btnCreateBackup);
@@ -2425,6 +2424,7 @@
             // 
             // lblLastBackupDate
             // 
+            this.lblLastBackupDate.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblLastBackupDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastBackupDate.Location = new System.Drawing.Point(735, 351);
             this.lblLastBackupDate.Name = "lblLastBackupDate";
@@ -2435,6 +2435,7 @@
             // 
             // btnRestoreBackup
             // 
+            this.btnRestoreBackup.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnRestoreBackup.BackColor = System.Drawing.Color.LightGray;
             this.btnRestoreBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestoreBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2448,6 +2449,7 @@
             // 
             // btnCreateBackup
             // 
+            this.btnCreateBackup.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCreateBackup.BackColor = System.Drawing.Color.LightGray;
             this.btnCreateBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2488,7 +2490,7 @@
             this.pnlMainTabs.Location = new System.Drawing.Point(0, 0);
             this.pnlMainTabs.Name = "pnlMainTabs";
             this.pnlMainTabs.Size = new System.Drawing.Size(150, 1080);
-            this.pnlMainTabs.TabIndex = 31;
+            this.pnlMainTabs.TabIndex = 1;
             this.pnlMainTabs.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainTabs_Paint);
             // 
             // btnCirculation
@@ -2502,7 +2504,7 @@
             this.btnCirculation.Location = new System.Drawing.Point(0, 150);
             this.btnCirculation.Name = "btnCirculation";
             this.btnCirculation.Size = new System.Drawing.Size(150, 75);
-            this.btnCirculation.TabIndex = 10;
+            this.btnCirculation.TabIndex = 0;
             this.btnCirculation.Text = "CIRCULATION";
             this.btnCirculation.UseVisualStyleBackColor = false;
             this.btnCirculation.Click += new System.EventHandler(this.btnCirculation_Click);
@@ -2521,7 +2523,7 @@
             this.pnlSubTabs.Name = "pnlSubTabs";
             this.pnlSubTabs.Padding = new System.Windows.Forms.Padding(150, 0, 0, 0);
             this.pnlSubTabs.Size = new System.Drawing.Size(1770, 100);
-            this.pnlSubTabs.TabIndex = 31;
+            this.pnlSubTabs.TabIndex = 0;
             // 
             // pnlSell
             // 
@@ -2562,7 +2564,7 @@
             this.btnSellDelete.Location = new System.Drawing.Point(1278, 870);
             this.btnSellDelete.Name = "btnSellDelete";
             this.btnSellDelete.Size = new System.Drawing.Size(212, 38);
-            this.btnSellDelete.TabIndex = 34;
+            this.btnSellDelete.TabIndex = 3;
             this.btnSellDelete.Text = "Delete";
             this.btnSellDelete.UseVisualStyleBackColor = false;
             this.btnSellDelete.Click += new System.EventHandler(this.btnSellDelete_Click);
@@ -2587,6 +2589,7 @@
             this.txtSellPrice.ReadOnly = true;
             this.txtSellPrice.Size = new System.Drawing.Size(212, 38);
             this.txtSellPrice.TabIndex = 32;
+            this.txtSellPrice.TabStop = false;
             // 
             // lblSellEnterBarcodes
             // 
@@ -2606,7 +2609,7 @@
             this.txtSellEnterBarcode.Location = new System.Drawing.Point(249, 287);
             this.txtSellEnterBarcode.Name = "txtSellEnterBarcode";
             this.txtSellEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtSellEnterBarcode.TabIndex = 30;
+            this.txtSellEnterBarcode.TabIndex = 1;
             this.txtSellEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSellEnterBarcode_PreviewKeyDown);
             // 
             // lblSellLateFees
@@ -2627,6 +2630,7 @@
             this.txtSellLateFees.ReadOnly = true;
             this.txtSellLateFees.Size = new System.Drawing.Size(212, 38);
             this.txtSellLateFees.TabIndex = 28;
+            this.txtSellLateFees.TabStop = false;
             // 
             // txtSellOverdue
             // 
@@ -2636,6 +2640,7 @@
             this.txtSellOverdue.ReadOnly = true;
             this.txtSellOverdue.Size = new System.Drawing.Size(212, 38);
             this.txtSellOverdue.TabIndex = 26;
+            this.txtSellOverdue.TabStop = false;
             // 
             // lblSellOverdue
             // 
@@ -2665,6 +2670,7 @@
             this.txtSellLoans.ReadOnly = true;
             this.txtSellLoans.Size = new System.Drawing.Size(212, 38);
             this.txtSellLoans.TabIndex = 22;
+            this.txtSellLoans.TabStop = false;
             // 
             // lblSellLoans
             // 
@@ -2684,7 +2690,7 @@
             this.txtSellMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtSellMemberBarcode.Name = "txtSellMemberBarcode";
             this.txtSellMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtSellMemberBarcode.TabIndex = 20;
+            this.txtSellMemberBarcode.TabIndex = 0;
             this.txtSellMemberBarcode.TextChanged += new System.EventHandler(this.txtSellMemberBarcode_TextChanged);
             // 
             // lblSellMemberBarcode
@@ -2707,6 +2713,7 @@
             this.txtSellMemberName.ReadOnly = true;
             this.txtSellMemberName.Size = new System.Drawing.Size(1241, 38);
             this.txtSellMemberName.TabIndex = 18;
+            this.txtSellMemberName.TabStop = false;
             // 
             // lblSellMemberName
             // 
@@ -2728,7 +2735,7 @@
             this.lsvSellSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvSellSelectedBooks.Name = "lsvSellSelectedBooks";
             this.lsvSellSelectedBooks.Size = new System.Drawing.Size(1241, 501);
-            this.lsvSellSelectedBooks.TabIndex = 24;
+            this.lsvSellSelectedBooks.TabIndex = 2;
             this.lsvSellSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
             // btnSellSave
@@ -2740,7 +2747,7 @@
             this.btnSellSave.Location = new System.Drawing.Point(1518, 924);
             this.btnSellSave.Name = "btnSellSave";
             this.btnSellSave.Size = new System.Drawing.Size(120, 50);
-            this.btnSellSave.TabIndex = 13;
+            this.btnSellSave.TabIndex = 4;
             this.btnSellSave.Text = "Save";
             this.btnSellSave.UseVisualStyleBackColor = false;
             this.btnSellSave.Click += new System.EventHandler(this.btnSellSave_Click);
@@ -2754,7 +2761,7 @@
             this.btnSellCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnSellCancel.Name = "btnSellCancel";
             this.btnSellCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnSellCancel.TabIndex = 14;
+            this.btnSellCancel.TabIndex = 5;
             this.btnSellCancel.Text = "Cancel";
             this.btnSellCancel.UseVisualStyleBackColor = false;
             this.btnSellCancel.Click += new System.EventHandler(this.btnSellCancel_Click);
@@ -2798,7 +2805,7 @@
             this.btnReserveDelete.Location = new System.Drawing.Point(1278, 870);
             this.btnReserveDelete.Name = "btnReserveDelete";
             this.btnReserveDelete.Size = new System.Drawing.Size(212, 38);
-            this.btnReserveDelete.TabIndex = 34;
+            this.btnReserveDelete.TabIndex = 3;
             this.btnReserveDelete.Text = "Delete";
             this.btnReserveDelete.UseVisualStyleBackColor = false;
             this.btnReserveDelete.Click += new System.EventHandler(this.btnReserveDelete_Click);
@@ -2831,7 +2838,7 @@
             this.txtReserveEnterBarcode.Location = new System.Drawing.Point(249, 287);
             this.txtReserveEnterBarcode.Name = "txtReserveEnterBarcode";
             this.txtReserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtReserveEnterBarcode.TabIndex = 30;
+            this.txtReserveEnterBarcode.TabIndex = 1;
             this.txtReserveEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReserveEnterBarcode_PreviewKeyDown);
             // 
             // txtReserveOverdue
@@ -2863,7 +2870,7 @@
             this.lsvReserveSelectedBooks.Location = new System.Drawing.Point(249, 347);
             this.lsvReserveSelectedBooks.Name = "lsvReserveSelectedBooks";
             this.lsvReserveSelectedBooks.Size = new System.Drawing.Size(1241, 501);
-            this.lsvReserveSelectedBooks.TabIndex = 24;
+            this.lsvReserveSelectedBooks.TabIndex = 2;
             this.lsvReserveSelectedBooks.UseCompatibleStateImageBehavior = false;
             // 
             // lblReserveSelectedBooks
@@ -2903,7 +2910,7 @@
             this.txtReserveMemberBarcode.Location = new System.Drawing.Point(249, 47);
             this.txtReserveMemberBarcode.Name = "txtReserveMemberBarcode";
             this.txtReserveMemberBarcode.Size = new System.Drawing.Size(1241, 38);
-            this.txtReserveMemberBarcode.TabIndex = 20;
+            this.txtReserveMemberBarcode.TabIndex = 0;
             this.txtReserveMemberBarcode.TextChanged += new System.EventHandler(this.txtReserveMemberBarcode_TextChanged);
             // 
             // lblReserveMemberBarcode
@@ -2946,7 +2953,7 @@
             this.btnReserveCancel.Location = new System.Drawing.Point(1644, 924);
             this.btnReserveCancel.Name = "btnReserveCancel";
             this.btnReserveCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnReserveCancel.TabIndex = 14;
+            this.btnReserveCancel.TabIndex = 6;
             this.btnReserveCancel.Text = "Cancel";
             this.btnReserveCancel.UseVisualStyleBackColor = false;
             this.btnReserveCancel.Click += new System.EventHandler(this.btnReserveCancel_Click);
@@ -2969,7 +2976,7 @@
             this.btnReserveSave.Location = new System.Drawing.Point(1518, 924);
             this.btnReserveSave.Name = "btnReserveSave";
             this.btnReserveSave.Size = new System.Drawing.Size(120, 50);
-            this.btnReserveSave.TabIndex = 13;
+            this.btnReserveSave.TabIndex = 5;
             this.btnReserveSave.Text = "Save";
             this.btnReserveSave.UseVisualStyleBackColor = false;
             this.btnReserveSave.Click += new System.EventHandler(this.btnReserveSave_Click);
@@ -3011,7 +3018,7 @@
             this.btnCircDetailsDelete.Location = new System.Drawing.Point(1392, 924);
             this.btnCircDetailsDelete.Name = "btnCircDetailsDelete";
             this.btnCircDetailsDelete.Size = new System.Drawing.Size(120, 50);
-            this.btnCircDetailsDelete.TabIndex = 74;
+            this.btnCircDetailsDelete.TabIndex = 3;
             this.btnCircDetailsDelete.Text = "Delete";
             this.btnCircDetailsDelete.UseVisualStyleBackColor = false;
             this.btnCircDetailsDelete.Click += new System.EventHandler(this.btnCircDetailsDelete_Click);
@@ -3034,6 +3041,7 @@
             this.txtCircDetailsId.ReadOnly = true;
             this.txtCircDetailsId.Size = new System.Drawing.Size(495, 38);
             this.txtCircDetailsId.TabIndex = 72;
+            this.txtCircDetailsId.TabStop = false;
             // 
             // dtpCircDetailsDueDate
             // 
@@ -3041,7 +3049,7 @@
             this.dtpCircDetailsDueDate.Location = new System.Drawing.Point(255, 347);
             this.dtpCircDetailsDueDate.Name = "dtpCircDetailsDueDate";
             this.dtpCircDetailsDueDate.Size = new System.Drawing.Size(495, 38);
-            this.dtpCircDetailsDueDate.TabIndex = 71;
+            this.dtpCircDetailsDueDate.TabIndex = 0;
             // 
             // btnCircDetailsSave
             // 
@@ -3052,7 +3060,7 @@
             this.btnCircDetailsSave.Location = new System.Drawing.Point(1518, 924);
             this.btnCircDetailsSave.Name = "btnCircDetailsSave";
             this.btnCircDetailsSave.Size = new System.Drawing.Size(120, 50);
-            this.btnCircDetailsSave.TabIndex = 70;
+            this.btnCircDetailsSave.TabIndex = 1;
             this.btnCircDetailsSave.Text = "Save";
             this.btnCircDetailsSave.UseVisualStyleBackColor = false;
             this.btnCircDetailsSave.Click += new System.EventHandler(this.btnCircDetailsSave_Click);
@@ -3066,6 +3074,7 @@
             this.lsvCircDetailsBookData.Name = "lsvCircDetailsBookData";
             this.lsvCircDetailsBookData.Size = new System.Drawing.Size(1159, 100);
             this.lsvCircDetailsBookData.TabIndex = 69;
+            this.lsvCircDetailsBookData.TabStop = false;
             this.lsvCircDetailsBookData.UseCompatibleStateImageBehavior = false;
             // 
             // btnCircDetailsBack
@@ -3077,7 +3086,7 @@
             this.btnCircDetailsBack.Location = new System.Drawing.Point(1644, 924);
             this.btnCircDetailsBack.Name = "btnCircDetailsBack";
             this.btnCircDetailsBack.Size = new System.Drawing.Size(120, 50);
-            this.btnCircDetailsBack.TabIndex = 1;
+            this.btnCircDetailsBack.TabIndex = 2;
             this.btnCircDetailsBack.Text = "Back";
             this.btnCircDetailsBack.UseVisualStyleBackColor = false;
             this.btnCircDetailsBack.Click += new System.EventHandler(this.btnCircDetailsBack_Click);
@@ -3090,6 +3099,7 @@
             this.txtCircDetailsType.ReadOnly = true;
             this.txtCircDetailsType.Size = new System.Drawing.Size(495, 38);
             this.txtCircDetailsType.TabIndex = 65;
+            this.txtCircDetailsType.TabStop = false;
             // 
             // lblCircDetailsMemberBarode
             // 
@@ -3111,6 +3121,7 @@
             this.txtCircDetailsMemberBarcode.ReadOnly = true;
             this.txtCircDetailsMemberBarcode.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberBarcode.TabIndex = 44;
+            this.txtCircDetailsMemberBarcode.TabStop = false;
             // 
             // txtCircDetailsDate
             // 
@@ -3120,6 +3131,7 @@
             this.txtCircDetailsDate.ReadOnly = true;
             this.txtCircDetailsDate.Size = new System.Drawing.Size(495, 38);
             this.txtCircDetailsDate.TabIndex = 61;
+            this.txtCircDetailsDate.TabStop = false;
             // 
             // lblCircDetailsMemberName
             // 
@@ -3181,6 +3193,7 @@
             this.txtCircDetailsMemberName.ReadOnly = true;
             this.txtCircDetailsMemberName.Size = new System.Drawing.Size(1159, 38);
             this.txtCircDetailsMemberName.TabIndex = 56;
+            this.txtCircDetailsMemberName.TabStop = false;
             // 
             // tmrOverdue
             // 
@@ -3193,17 +3206,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlBookDetails);
+            this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlBackup);
-            this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlStaffDetails);
             this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlCirculationDetails);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlReserve);
-            this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSell);
+            this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlLoan);
+            this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlSubTabs);
             this.Controls.Add(this.pnlMainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -3228,9 +3241,7 @@
             this.grpSettingsBarcode.ResumeLayout(false);
             this.grpSettingsBarcode.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeMember)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.grpSettingsGmail.ResumeLayout(false);
-            this.grpSettingsGmail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSettingsBarcodeBookCopy)).EndInit();
             this.pnlReturn.ResumeLayout(false);
             this.pnlReturn.PerformLayout();
             this.pnlBookDetails.ResumeLayout(false);
@@ -3333,9 +3344,6 @@
         private System.Windows.Forms.Button btnLoanSave;
         private System.Windows.Forms.Button btnLoanCancel;
         private System.Windows.Forms.Panel pnlSettings;
-        private System.Windows.Forms.Button btnSettingsGmailKey;
-        private System.Windows.Forms.TextBox txtSettingsGmailKey;
-        private System.Windows.Forms.Label lblSettingGmailKey;
         private System.Windows.Forms.Button btnSettingCancel;
         private System.Windows.Forms.Button btnSettingSave;
         private System.Windows.Forms.TextBox txtReturnLateFees;
@@ -3479,16 +3487,11 @@
         private System.Windows.Forms.Label lblStaffFirstName;
         private System.Windows.Forms.TextBox txtStaffSurname;
         private System.Windows.Forms.Label lblStaffSurname;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.GroupBox grpSettingsGmail;
-        private System.Windows.Forms.ComboBox cmbSettingsCirculationDueDateType;
-        private System.Windows.Forms.TextBox txtSettingsGmailPassword;
-        private System.Windows.Forms.TextBox txtSettingsGmailUsername;
-        private System.Windows.Forms.Label lblSettingsGmailUsername;
-        private System.Windows.Forms.Label lblSettingsGmailPassword;
+        private System.Windows.Forms.NumericUpDown numSettingsBarcodeBookCopy;
+        private System.Windows.Forms.ComboBox cmbSettingsCirculationType;
         private System.Windows.Forms.GroupBox grpSettingsBarcode;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSettingsBarcodeBookCopy;
+        private System.Windows.Forms.Label lblSettingsBarcodeMember;
         private System.Windows.Forms.NumericUpDown numSettingsBarcodeMember;
         private System.Windows.Forms.GroupBox grpSettingsCirculation;
         private System.Windows.Forms.Label lblSettingsCirculationDueDateValue;
