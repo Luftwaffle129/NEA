@@ -87,12 +87,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>string of the date in YYYY/MM/DD HH/MM/SSformat</returns>
         public static string GetDateAndTime(DateTime dateTime)
         {
-            string year = dateTime.Year.ToString();
-            string month = dateTime.Month.ToString();
-            month = month.Length == 1 ? "0" + month : month;
-            string day = dateTime.Day.ToString();
-            day = day.Length == 1 ? "0" + day : day;
-            return $"{year}/{month}/{day} {dateTime.TimeOfDay}";
+            return $"{IntToString(dateTime.Year, 2)}/{IntToString(dateTime.Month, 2)}/{IntToString(dateTime.Day, 2)} {IntToString(dateTime.Hour, 2)}:{IntToString(dateTime.Minute, 2)}:{IntToString(dateTime.Second, 2)}";
         }
         /// <summary>
         /// Splits the string into elements in a list using the separator
