@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +10,13 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using System.Xml.Linq;
+using System.CodeDom.Compiler;
+using NEALibrarySystem.Properties;
+using static NEALibrarySystem.EmailHandler;
+using System.Runtime.InteropServices.ComTypes;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace NEALibrarySystem
 {
@@ -23,6 +30,7 @@ namespace NEALibrarySystem
             var data = Encoding.UTF8.GetBytes(input);
             return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_").Replace("=", "");
         }
+
         /// <summary>
         /// Sends emails
         /// </summary>
@@ -33,11 +41,14 @@ namespace NEALibrarySystem
         {
             UserCredential credential;
             //read your credentials file
-            using (FileStream stream = new FileStream(Application.StartupPath + @"/credentials.json", FileMode.Open, FileAccess.Read))
+
+            var assembly = Assembly.GetExecutingAssembly();
+            
+            using (var stream = assembly.GetManifestResourceStream("NEALibrarySystem.Resources.credentials.json"))
             {
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 path = Path.Combine(path, ".credentials/gmail-dotnet-quickstart.json");
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
             }
 
             string message = $"To: {receiver}\r\nSubject: {subject}\r\nContent-Type: text/html;charset=utf-8\r\n\r\n<h1>{content}</h1>";

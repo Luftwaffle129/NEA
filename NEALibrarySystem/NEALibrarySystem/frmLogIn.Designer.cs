@@ -123,6 +123,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(338, 241);
             this.MinimumSize = new System.Drawing.Size(338, 241);
             this.Name = "frmLogIn";

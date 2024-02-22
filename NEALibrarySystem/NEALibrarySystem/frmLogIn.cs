@@ -1,5 +1,6 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -53,7 +54,7 @@ namespace NEALibrarySystem
             frmForgottenPassword.Show();
             this.Hide();
         }
-        private int IsValidCredentials()
+        private int IsValidCredentials() // Jacob was here
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
