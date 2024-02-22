@@ -154,6 +154,11 @@
     </Compile>
     <Compile Include="Panel Handlers\BookDetails\BookDetailsHandler.cs" />
     <Compile Include="ListViewHandlers\SearchList\SearchHandler.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SearchAndSort.cs" />
     <Compile Include="Panel Handlers\Circulation\SellHandler.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
@@ -179,14 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -202,30 +202,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\61-612417_open-book-icon-symbol-vector-silhouette-of-open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\983470-200.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\30-300784_welcome-to-the-team-users-icon-png.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\30-300784_welcome-to-the-team-users-icon-png1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\61-612417_open-book-icon-symbol-vector-silhouette-of-open1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\img_377192.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\15640410c0522cc793c6a4b671fde516.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Resources\backup.png" />
+    <EmbeddedResource Include="Resources\book.png" />
+    <EmbeddedResource Include="Resources\circulation.jpg" />
+    <EmbeddedResource Include="Resources\members.png" />
+    <EmbeddedResource Include="Resources\settings.jpg" />
+    <EmbeddedResource Include="Resources\staff.png" />
     <Content Include="ToDoList.txt" />
   </ItemGroup>
   <ItemGroup />

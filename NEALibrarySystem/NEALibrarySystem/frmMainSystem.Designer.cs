@@ -42,11 +42,8 @@
             this.dtpReservePickUpByDate = new System.Windows.Forms.DateTimePicker();
             this.lblReserveSetDueDate = new System.Windows.Forms.Label();
             this.pnlMemberDetails = new System.Windows.Forms.Panel();
-            this.txtMemberLateFees = new System.Windows.Forms.TextBox();
-            this.lblMemberDetailsLateFees = new System.Windows.Forms.Label();
+            this.pnlMemberDetailsDetails = new System.Windows.Forms.Panel();
             this.cmbMemberType = new System.Windows.Forms.ComboBox();
-            this.lsvMemberCirculations = new System.Windows.Forms.ListView();
-            this.lblMemberCirculations = new System.Windows.Forms.Label();
             this.dtpMemberDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.txtMemberJoinDate = new System.Windows.Forms.TextBox();
             this.lblMemberJoinDate = new System.Windows.Forms.Label();
@@ -56,9 +53,7 @@
             this.lblLinkedMembers = new System.Windows.Forms.Label();
             this.txtMemberAddress1 = new System.Windows.Forms.TextBox();
             this.lblMemberTownCity = new System.Windows.Forms.Label();
-            this.btnMemberCancel = new System.Windows.Forms.Button();
             this.txtMemberBarcode = new System.Windows.Forms.TextBox();
-            this.btnMemberSave = new System.Windows.Forms.Button();
             this.lblMemberFirstName = new System.Windows.Forms.Label();
             this.txtMemberLinkedMembers = new System.Windows.Forms.TextBox();
             this.txtMemberFirstName = new System.Windows.Forms.TextBox();
@@ -76,6 +71,12 @@
             this.lblMemberBarcode = new System.Windows.Forms.Label();
             this.txtMemberSurname = new System.Windows.Forms.TextBox();
             this.lblMemberPhoneNumber = new System.Windows.Forms.Label();
+            this.txtMemberLateFees = new System.Windows.Forms.TextBox();
+            this.lblMemberDetailsLateFees = new System.Windows.Forms.Label();
+            this.lsvMemberCirculations = new System.Windows.Forms.ListView();
+            this.lblMemberCirculations = new System.Windows.Forms.Label();
+            this.btnMemberCancel = new System.Windows.Forms.Button();
+            this.btnMemberSave = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.btnSearchDelete = new System.Windows.Forms.Button();
             this.lblSearchField = new System.Windows.Forms.Label();
@@ -175,6 +176,30 @@
             this.txtBooksInStock = new System.Windows.Forms.TextBox();
             this.lblBooksLoaned = new System.Windows.Forms.Label();
             this.lblBooksReserved = new System.Windows.Forms.Label();
+            this.grpBookDetails = new System.Windows.Forms.GroupBox();
+            this.pnlBookDetailsDetails = new System.Windows.Forms.Panel();
+            this.txtBookPrice = new System.Windows.Forms.TextBox();
+            this.txtBookDescription = new System.Windows.Forms.TextBox();
+            this.txtBookThemes = new System.Windows.Forms.TextBox();
+            this.txtBookGenres = new System.Windows.Forms.TextBox();
+            this.txtBookPublisher = new System.Windows.Forms.TextBox();
+            this.txtBookAuthor = new System.Windows.Forms.TextBox();
+            this.txtBookMediaType = new System.Windows.Forms.TextBox();
+            this.txtBookISBN = new System.Windows.Forms.TextBox();
+            this.txtBookSeriesNumber = new System.Windows.Forms.TextBox();
+            this.txtBookSeriesTitle = new System.Windows.Forms.TextBox();
+            this.lblBookPrice = new System.Windows.Forms.Label();
+            this.lblBookDescription = new System.Windows.Forms.Label();
+            this.lblBookThemes = new System.Windows.Forms.Label();
+            this.lblBookGenres = new System.Windows.Forms.Label();
+            this.lblBookPublisher = new System.Windows.Forms.Label();
+            this.lblBookSeriesNumber = new System.Windows.Forms.Label();
+            this.lblBookTitleSeries = new System.Windows.Forms.Label();
+            this.lblBookMediaType = new System.Windows.Forms.Label();
+            this.lblBookAuthor = new System.Windows.Forms.Label();
+            this.lblBookISBN = new System.Windows.Forms.Label();
+            this.lblBookTitle = new System.Windows.Forms.Label();
+            this.txtBookTitle = new System.Windows.Forms.TextBox();
             this.grpBookCopyDetails = new System.Windows.Forms.GroupBox();
             this.btnBookDeleteCopies = new System.Windows.Forms.Button();
             this.btnBookAddCopies = new System.Windows.Forms.Button();
@@ -244,32 +269,8 @@
             this.lblTCircDetailsType = new System.Windows.Forms.Label();
             this.txtCircDetailsMemberName = new System.Windows.Forms.TextBox();
             this.tmrOverdue = new System.Windows.Forms.Timer(this.components);
-            this.txtBookTitle = new System.Windows.Forms.TextBox();
-            this.lblBookTitle = new System.Windows.Forms.Label();
-            this.lblBookISBN = new System.Windows.Forms.Label();
-            this.lblBookAuthor = new System.Windows.Forms.Label();
-            this.lblBookMediaType = new System.Windows.Forms.Label();
-            this.lblBookTitleSeries = new System.Windows.Forms.Label();
-            this.lblBookSeriesNumber = new System.Windows.Forms.Label();
-            this.lblBookPublisher = new System.Windows.Forms.Label();
-            this.lblBookGenres = new System.Windows.Forms.Label();
-            this.lblBookThemes = new System.Windows.Forms.Label();
-            this.lblBookDescription = new System.Windows.Forms.Label();
-            this.lblBookPrice = new System.Windows.Forms.Label();
-            this.txtBookSeriesTitle = new System.Windows.Forms.TextBox();
-            this.txtBookSeriesNumber = new System.Windows.Forms.TextBox();
-            this.txtBookISBN = new System.Windows.Forms.TextBox();
-            this.txtBookMediaType = new System.Windows.Forms.TextBox();
-            this.txtBookAuthor = new System.Windows.Forms.TextBox();
-            this.txtBookPublisher = new System.Windows.Forms.TextBox();
-            this.txtBookGenres = new System.Windows.Forms.TextBox();
-            this.txtBookThemes = new System.Windows.Forms.TextBox();
-            this.txtBookDescription = new System.Windows.Forms.TextBox();
-            this.txtBookPrice = new System.Windows.Forms.TextBox();
-            this.grpBookDetails = new System.Windows.Forms.GroupBox();
-            this.pnlBookDetailsDetails = new System.Windows.Forms.Panel();
-            this.pnlMemberDetailsDetails = new System.Windows.Forms.Panel();
             this.pnlMemberDetails.SuspendLayout();
+            this.pnlMemberDetailsDetails.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStaffDetails.SuspendLayout();
             this.pnlLoan.SuspendLayout();
@@ -283,6 +284,8 @@
             this.pnlReturn.SuspendLayout();
             this.pnlBookDetails.SuspendLayout();
             this.grpBooksBookStatus.SuspendLayout();
+            this.grpBookDetails.SuspendLayout();
+            this.pnlBookDetailsDetails.SuspendLayout();
             this.grpBookCopyDetails.SuspendLayout();
             this.pnlBackup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).BeginInit();
@@ -291,9 +294,6 @@
             this.pnlSell.SuspendLayout();
             this.pnlReserve.SuspendLayout();
             this.pnlCirculationDetails.SuspendLayout();
-            this.grpBookDetails.SuspendLayout();
-            this.pnlBookDetailsDetails.SuspendLayout();
-            this.pnlMemberDetailsDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBooks
@@ -491,27 +491,44 @@
             this.pnlMemberDetails.TabIndex = 54;
             this.pnlMemberDetails.VisibleChanged += new System.EventHandler(this.pnlMemberDetails_VisibleChanged);
             // 
-            // txtMemberLateFees
+            // pnlMemberDetailsDetails
             // 
-            this.txtMemberLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMemberLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberLateFees.Location = new System.Drawing.Point(1608, 827);
-            this.txtMemberLateFees.Name = "txtMemberLateFees";
-            this.txtMemberLateFees.ReadOnly = true;
-            this.txtMemberLateFees.Size = new System.Drawing.Size(156, 38);
-            this.txtMemberLateFees.TabIndex = 79;
-            this.txtMemberLateFees.TabStop = false;
-            // 
-            // lblMemberDetailsLateFees
-            // 
-            this.lblMemberDetailsLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMemberDetailsLateFees.AutoSize = true;
-            this.lblMemberDetailsLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberDetailsLateFees.Location = new System.Drawing.Point(1456, 830);
-            this.lblMemberDetailsLateFees.Name = "lblMemberDetailsLateFees";
-            this.lblMemberDetailsLateFees.Size = new System.Drawing.Size(143, 31);
-            this.lblMemberDetailsLateFees.TabIndex = 78;
-            this.lblMemberDetailsLateFees.Text = "Late Fees:";
+            this.pnlMemberDetailsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlMemberDetailsDetails.AutoScroll = true;
+            this.pnlMemberDetailsDetails.Controls.Add(this.cmbMemberType);
+            this.pnlMemberDetailsDetails.Controls.Add(this.dtpMemberDateOfBirth);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberJoinDate);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberJoinDate);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberPostcode);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberCounty);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberPostcode);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblLinkedMembers);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberAddress1);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberTownCity);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberBarcode);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberFirstName);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberLinkedMembers);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberFirstName);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberAddress2);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberTownCity);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberAddress2);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberSurname);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberCounty);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberAddress1);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberEmailAddress);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberPhoneNumber);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberDateOfBirth);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberCustomerType);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberEmailAddress);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberBarcode);
+            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberSurname);
+            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberPhoneNumber);
+            this.pnlMemberDetailsDetails.Location = new System.Drawing.Point(6, 15);
+            this.pnlMemberDetailsDetails.Name = "pnlMemberDetailsDetails";
+            this.pnlMemberDetailsDetails.Size = new System.Drawing.Size(1431, 959);
+            this.pnlMemberDetailsDetails.TabIndex = 80;
             // 
             // cmbMemberType
             // 
@@ -524,28 +541,6 @@
             this.cmbMemberType.Name = "cmbMemberType";
             this.cmbMemberType.Size = new System.Drawing.Size(1159, 39);
             this.cmbMemberType.TabIndex = 4;
-            // 
-            // lsvMemberCirculations
-            // 
-            this.lsvMemberCirculations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsvMemberCirculations.HideSelection = false;
-            this.lsvMemberCirculations.Location = new System.Drawing.Point(1461, 81);
-            this.lsvMemberCirculations.Name = "lsvMemberCirculations";
-            this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 724);
-            this.lsvMemberCirculations.TabIndex = 13;
-            this.lsvMemberCirculations.UseCompatibleStateImageBehavior = false;
-            // 
-            // lblMemberCirculations
-            // 
-            this.lblMemberCirculations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMemberCirculations.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.lblMemberCirculations.Location = new System.Drawing.Point(1455, 47);
-            this.lblMemberCirculations.Name = "lblMemberCirculations";
-            this.lblMemberCirculations.Size = new System.Drawing.Size(303, 38);
-            this.lblMemberCirculations.TabIndex = 76;
-            this.lblMemberCirculations.Text = "Loaned and Reserved:";
-            this.lblMemberCirculations.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // dtpMemberDateOfBirth
             // 
@@ -641,20 +636,6 @@
             this.lblMemberTownCity.TabIndex = 66;
             this.lblMemberTownCity.Text = "Town/City:";
             // 
-            // btnMemberCancel
-            // 
-            this.btnMemberCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMemberCancel.BackColor = System.Drawing.Color.LightGray;
-            this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMemberCancel.Location = new System.Drawing.Point(1644, 924);
-            this.btnMemberCancel.Name = "btnMemberCancel";
-            this.btnMemberCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnMemberCancel.TabIndex = 15;
-            this.btnMemberCancel.Text = "Cancel";
-            this.btnMemberCancel.UseVisualStyleBackColor = false;
-            this.btnMemberCancel.Click += new System.EventHandler(this.btnMemberCancel_Click);
-            // 
             // txtMemberBarcode
             // 
             this.txtMemberBarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -664,20 +645,6 @@
             this.txtMemberBarcode.Name = "txtMemberBarcode";
             this.txtMemberBarcode.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberBarcode.TabIndex = 0;
-            // 
-            // btnMemberSave
-            // 
-            this.btnMemberSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMemberSave.BackColor = System.Drawing.Color.LightGray;
-            this.btnMemberSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMemberSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMemberSave.Location = new System.Drawing.Point(1518, 924);
-            this.btnMemberSave.Name = "btnMemberSave";
-            this.btnMemberSave.Size = new System.Drawing.Size(120, 50);
-            this.btnMemberSave.TabIndex = 14;
-            this.btnMemberSave.Text = "Save";
-            this.btnMemberSave.UseVisualStyleBackColor = false;
-            this.btnMemberSave.Click += new System.EventHandler(this.btnMemberSave_Click);
             // 
             // lblMemberFirstName
             // 
@@ -848,6 +815,78 @@
             this.lblMemberPhoneNumber.Size = new System.Drawing.Size(198, 31);
             this.lblMemberPhoneNumber.TabIndex = 54;
             this.lblMemberPhoneNumber.Text = "Phone number:";
+            // 
+            // txtMemberLateFees
+            // 
+            this.txtMemberLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMemberLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberLateFees.Location = new System.Drawing.Point(1608, 827);
+            this.txtMemberLateFees.Name = "txtMemberLateFees";
+            this.txtMemberLateFees.ReadOnly = true;
+            this.txtMemberLateFees.Size = new System.Drawing.Size(156, 38);
+            this.txtMemberLateFees.TabIndex = 79;
+            this.txtMemberLateFees.TabStop = false;
+            // 
+            // lblMemberDetailsLateFees
+            // 
+            this.lblMemberDetailsLateFees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMemberDetailsLateFees.AutoSize = true;
+            this.lblMemberDetailsLateFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberDetailsLateFees.Location = new System.Drawing.Point(1456, 830);
+            this.lblMemberDetailsLateFees.Name = "lblMemberDetailsLateFees";
+            this.lblMemberDetailsLateFees.Size = new System.Drawing.Size(143, 31);
+            this.lblMemberDetailsLateFees.TabIndex = 78;
+            this.lblMemberDetailsLateFees.Text = "Late Fees:";
+            // 
+            // lsvMemberCirculations
+            // 
+            this.lsvMemberCirculations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvMemberCirculations.HideSelection = false;
+            this.lsvMemberCirculations.Location = new System.Drawing.Point(1461, 81);
+            this.lsvMemberCirculations.Name = "lsvMemberCirculations";
+            this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 724);
+            this.lsvMemberCirculations.TabIndex = 13;
+            this.lsvMemberCirculations.UseCompatibleStateImageBehavior = false;
+            // 
+            // lblMemberCirculations
+            // 
+            this.lblMemberCirculations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMemberCirculations.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.lblMemberCirculations.Location = new System.Drawing.Point(1455, 47);
+            this.lblMemberCirculations.Name = "lblMemberCirculations";
+            this.lblMemberCirculations.Size = new System.Drawing.Size(303, 38);
+            this.lblMemberCirculations.TabIndex = 76;
+            this.lblMemberCirculations.Text = "Loaned and Reserved:";
+            this.lblMemberCirculations.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnMemberCancel
+            // 
+            this.btnMemberCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMemberCancel.BackColor = System.Drawing.Color.LightGray;
+            this.btnMemberCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMemberCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMemberCancel.Location = new System.Drawing.Point(1644, 924);
+            this.btnMemberCancel.Name = "btnMemberCancel";
+            this.btnMemberCancel.Size = new System.Drawing.Size(120, 50);
+            this.btnMemberCancel.TabIndex = 15;
+            this.btnMemberCancel.Text = "Cancel";
+            this.btnMemberCancel.UseVisualStyleBackColor = false;
+            this.btnMemberCancel.Click += new System.EventHandler(this.btnMemberCancel_Click);
+            // 
+            // btnMemberSave
+            // 
+            this.btnMemberSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMemberSave.BackColor = System.Drawing.Color.LightGray;
+            this.btnMemberSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMemberSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMemberSave.Location = new System.Drawing.Point(1518, 924);
+            this.btnMemberSave.Name = "btnMemberSave";
+            this.btnMemberSave.Size = new System.Drawing.Size(120, 50);
+            this.btnMemberSave.TabIndex = 14;
+            this.btnMemberSave.Text = "Save";
+            this.btnMemberSave.UseVisualStyleBackColor = false;
+            this.btnMemberSave.Click += new System.EventHandler(this.btnMemberSave_Click);
             // 
             // pnlSearch
             // 
@@ -2069,6 +2108,274 @@
             this.lblBooksReserved.TabIndex = 46;
             this.lblBooksReserved.Text = "Reserved:";
             // 
+            // grpBookDetails
+            // 
+            this.grpBookDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBookDetails.Controls.Add(this.pnlBookDetailsDetails);
+            this.grpBookDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpBookDetails.Location = new System.Drawing.Point(6, 22);
+            this.grpBookDetails.Name = "grpBookDetails";
+            this.grpBookDetails.Size = new System.Drawing.Size(1425, 936);
+            this.grpBookDetails.TabIndex = 0;
+            this.grpBookDetails.TabStop = false;
+            this.grpBookDetails.Text = "Book Details";
+            // 
+            // pnlBookDetailsDetails
+            // 
+            this.pnlBookDetailsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBookDetailsDetails.AutoScroll = true;
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookPrice);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookDescription);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookThemes);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookGenres);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookPublisher);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookAuthor);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookMediaType);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookISBN);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookSeriesNumber);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookSeriesTitle);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookPrice);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookDescription);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookThemes);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookGenres);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookPublisher);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookSeriesNumber);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookTitleSeries);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookMediaType);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookAuthor);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookISBN);
+            this.pnlBookDetailsDetails.Controls.Add(this.lblBookTitle);
+            this.pnlBookDetailsDetails.Controls.Add(this.txtBookTitle);
+            this.pnlBookDetailsDetails.Location = new System.Drawing.Point(3, 34);
+            this.pnlBookDetailsDetails.Name = "pnlBookDetailsDetails";
+            this.pnlBookDetailsDetails.Size = new System.Drawing.Size(1416, 890);
+            this.pnlBookDetailsDetails.TabIndex = 12;
+            // 
+            // txtBookPrice
+            // 
+            this.txtBookPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookPrice.Location = new System.Drawing.Point(208, 826);
+            this.txtBookPrice.Name = "txtBookPrice";
+            this.txtBookPrice.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookPrice.TabIndex = 10;
+            // 
+            // txtBookDescription
+            // 
+            this.txtBookDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookDescription.Location = new System.Drawing.Point(208, 543);
+            this.txtBookDescription.Multiline = true;
+            this.txtBookDescription.Name = "txtBookDescription";
+            this.txtBookDescription.Size = new System.Drawing.Size(1190, 262);
+            this.txtBookDescription.TabIndex = 9;
+            // 
+            // txtBookThemes
+            // 
+            this.txtBookThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookThemes.Location = new System.Drawing.Point(208, 483);
+            this.txtBookThemes.Name = "txtBookThemes";
+            this.txtBookThemes.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookThemes.TabIndex = 8;
+            // 
+            // txtBookGenres
+            // 
+            this.txtBookGenres.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookGenres.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookGenres.Location = new System.Drawing.Point(208, 423);
+            this.txtBookGenres.Name = "txtBookGenres";
+            this.txtBookGenres.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookGenres.TabIndex = 7;
+            // 
+            // txtBookPublisher
+            // 
+            this.txtBookPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookPublisher.Location = new System.Drawing.Point(208, 363);
+            this.txtBookPublisher.Name = "txtBookPublisher";
+            this.txtBookPublisher.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookPublisher.TabIndex = 6;
+            // 
+            // txtBookAuthor
+            // 
+            this.txtBookAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookAuthor.Location = new System.Drawing.Point(208, 303);
+            this.txtBookAuthor.Name = "txtBookAuthor";
+            this.txtBookAuthor.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookAuthor.TabIndex = 5;
+            // 
+            // txtBookMediaType
+            // 
+            this.txtBookMediaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookMediaType.Location = new System.Drawing.Point(208, 243);
+            this.txtBookMediaType.Name = "txtBookMediaType";
+            this.txtBookMediaType.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookMediaType.TabIndex = 4;
+            // 
+            // txtBookISBN
+            // 
+            this.txtBookISBN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookISBN.Location = new System.Drawing.Point(208, 183);
+            this.txtBookISBN.Name = "txtBookISBN";
+            this.txtBookISBN.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookISBN.TabIndex = 3;
+            // 
+            // txtBookSeriesNumber
+            // 
+            this.txtBookSeriesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookSeriesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookSeriesNumber.Location = new System.Drawing.Point(208, 123);
+            this.txtBookSeriesNumber.Name = "txtBookSeriesNumber";
+            this.txtBookSeriesNumber.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookSeriesNumber.TabIndex = 2;
+            // 
+            // txtBookSeriesTitle
+            // 
+            this.txtBookSeriesTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookSeriesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookSeriesTitle.Location = new System.Drawing.Point(208, 63);
+            this.txtBookSeriesTitle.Name = "txtBookSeriesTitle";
+            this.txtBookSeriesTitle.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookSeriesTitle.TabIndex = 1;
+            // 
+            // lblBookPrice
+            // 
+            this.lblBookPrice.AutoSize = true;
+            this.lblBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookPrice.Location = new System.Drawing.Point(7, 829);
+            this.lblBookPrice.Name = "lblBookPrice";
+            this.lblBookPrice.Size = new System.Drawing.Size(84, 31);
+            this.lblBookPrice.TabIndex = 11;
+            this.lblBookPrice.Text = "Price:";
+            // 
+            // lblBookDescription
+            // 
+            this.lblBookDescription.AutoSize = true;
+            this.lblBookDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookDescription.Location = new System.Drawing.Point(7, 546);
+            this.lblBookDescription.Name = "lblBookDescription";
+            this.lblBookDescription.Size = new System.Drawing.Size(159, 31);
+            this.lblBookDescription.TabIndex = 10;
+            this.lblBookDescription.Text = "Description:";
+            // 
+            // lblBookThemes
+            // 
+            this.lblBookThemes.AutoSize = true;
+            this.lblBookThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookThemes.Location = new System.Drawing.Point(7, 486);
+            this.lblBookThemes.Name = "lblBookThemes";
+            this.lblBookThemes.Size = new System.Drawing.Size(120, 31);
+            this.lblBookThemes.TabIndex = 9;
+            this.lblBookThemes.Text = "Themes:";
+            // 
+            // lblBookGenres
+            // 
+            this.lblBookGenres.AutoSize = true;
+            this.lblBookGenres.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookGenres.Location = new System.Drawing.Point(7, 426);
+            this.lblBookGenres.Name = "lblBookGenres";
+            this.lblBookGenres.Size = new System.Drawing.Size(111, 31);
+            this.lblBookGenres.TabIndex = 8;
+            this.lblBookGenres.Text = "Genres:";
+            // 
+            // lblBookPublisher
+            // 
+            this.lblBookPublisher.AutoSize = true;
+            this.lblBookPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookPublisher.Location = new System.Drawing.Point(7, 366);
+            this.lblBookPublisher.Name = "lblBookPublisher";
+            this.lblBookPublisher.Size = new System.Drawing.Size(135, 31);
+            this.lblBookPublisher.TabIndex = 7;
+            this.lblBookPublisher.Text = "Publisher:";
+            // 
+            // lblBookSeriesNumber
+            // 
+            this.lblBookSeriesNumber.AutoSize = true;
+            this.lblBookSeriesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookSeriesNumber.Location = new System.Drawing.Point(7, 126);
+            this.lblBookSeriesNumber.Name = "lblBookSeriesNumber";
+            this.lblBookSeriesNumber.Size = new System.Drawing.Size(197, 31);
+            this.lblBookSeriesNumber.TabIndex = 6;
+            this.lblBookSeriesNumber.Text = "Series number:";
+            // 
+            // lblBookTitleSeries
+            // 
+            this.lblBookTitleSeries.AutoSize = true;
+            this.lblBookTitleSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookTitleSeries.Location = new System.Drawing.Point(7, 66);
+            this.lblBookTitleSeries.Name = "lblBookTitleSeries";
+            this.lblBookTitleSeries.Size = new System.Drawing.Size(149, 31);
+            this.lblBookTitleSeries.TabIndex = 5;
+            this.lblBookTitleSeries.Text = "Series title:";
+            // 
+            // lblBookMediaType
+            // 
+            this.lblBookMediaType.AutoSize = true;
+            this.lblBookMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookMediaType.Location = new System.Drawing.Point(7, 246);
+            this.lblBookMediaType.Name = "lblBookMediaType";
+            this.lblBookMediaType.Size = new System.Drawing.Size(154, 31);
+            this.lblBookMediaType.TabIndex = 4;
+            this.lblBookMediaType.Text = "Media type:";
+            // 
+            // lblBookAuthor
+            // 
+            this.lblBookAuthor.AutoSize = true;
+            this.lblBookAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookAuthor.Location = new System.Drawing.Point(7, 306);
+            this.lblBookAuthor.Name = "lblBookAuthor";
+            this.lblBookAuthor.Size = new System.Drawing.Size(102, 31);
+            this.lblBookAuthor.TabIndex = 3;
+            this.lblBookAuthor.Text = "Author:";
+            // 
+            // lblBookISBN
+            // 
+            this.lblBookISBN.AutoSize = true;
+            this.lblBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookISBN.Location = new System.Drawing.Point(7, 186);
+            this.lblBookISBN.Name = "lblBookISBN";
+            this.lblBookISBN.Size = new System.Drawing.Size(184, 31);
+            this.lblBookISBN.TabIndex = 2;
+            this.lblBookISBN.Text = "ISBN number:";
+            // 
+            // lblBookTitle
+            // 
+            this.lblBookTitle.AutoSize = true;
+            this.lblBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookTitle.Location = new System.Drawing.Point(7, 6);
+            this.lblBookTitle.Name = "lblBookTitle";
+            this.lblBookTitle.Size = new System.Drawing.Size(74, 31);
+            this.lblBookTitle.TabIndex = 1;
+            this.lblBookTitle.Text = "Title:";
+            // 
+            // txtBookTitle
+            // 
+            this.txtBookTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookTitle.Location = new System.Drawing.Point(208, 3);
+            this.txtBookTitle.Name = "txtBookTitle";
+            this.txtBookTitle.Size = new System.Drawing.Size(1190, 38);
+            this.txtBookTitle.TabIndex = 0;
+            // 
             // grpBookCopyDetails
             // 
             this.grpBookCopyDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2187,6 +2494,7 @@
             this.pctIcon.BackColor = System.Drawing.Color.White;
             this.pctIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pctIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pctIcon.InitialImage = null;
             this.pctIcon.Location = new System.Drawing.Point(0, 0);
             this.pctIcon.Name = "pctIcon";
             this.pctIcon.Size = new System.Drawing.Size(150, 150);
@@ -2919,313 +3227,6 @@
             this.tmrOverdue.Interval = 3600000;
             this.tmrOverdue.Tick += new System.EventHandler(this.tmrOverdue_Tick);
             // 
-            // txtBookTitle
-            // 
-            this.txtBookTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookTitle.Location = new System.Drawing.Point(208, 3);
-            this.txtBookTitle.Name = "txtBookTitle";
-            this.txtBookTitle.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookTitle.TabIndex = 0;
-            // 
-            // lblBookTitle
-            // 
-            this.lblBookTitle.AutoSize = true;
-            this.lblBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookTitle.Location = new System.Drawing.Point(7, 6);
-            this.lblBookTitle.Name = "lblBookTitle";
-            this.lblBookTitle.Size = new System.Drawing.Size(74, 31);
-            this.lblBookTitle.TabIndex = 1;
-            this.lblBookTitle.Text = "Title:";
-            // 
-            // lblBookISBN
-            // 
-            this.lblBookISBN.AutoSize = true;
-            this.lblBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookISBN.Location = new System.Drawing.Point(7, 186);
-            this.lblBookISBN.Name = "lblBookISBN";
-            this.lblBookISBN.Size = new System.Drawing.Size(184, 31);
-            this.lblBookISBN.TabIndex = 2;
-            this.lblBookISBN.Text = "ISBN number:";
-            // 
-            // lblBookAuthor
-            // 
-            this.lblBookAuthor.AutoSize = true;
-            this.lblBookAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookAuthor.Location = new System.Drawing.Point(7, 306);
-            this.lblBookAuthor.Name = "lblBookAuthor";
-            this.lblBookAuthor.Size = new System.Drawing.Size(102, 31);
-            this.lblBookAuthor.TabIndex = 3;
-            this.lblBookAuthor.Text = "Author:";
-            // 
-            // lblBookMediaType
-            // 
-            this.lblBookMediaType.AutoSize = true;
-            this.lblBookMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookMediaType.Location = new System.Drawing.Point(7, 246);
-            this.lblBookMediaType.Name = "lblBookMediaType";
-            this.lblBookMediaType.Size = new System.Drawing.Size(154, 31);
-            this.lblBookMediaType.TabIndex = 4;
-            this.lblBookMediaType.Text = "Media type:";
-            // 
-            // lblBookTitleSeries
-            // 
-            this.lblBookTitleSeries.AutoSize = true;
-            this.lblBookTitleSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookTitleSeries.Location = new System.Drawing.Point(7, 66);
-            this.lblBookTitleSeries.Name = "lblBookTitleSeries";
-            this.lblBookTitleSeries.Size = new System.Drawing.Size(149, 31);
-            this.lblBookTitleSeries.TabIndex = 5;
-            this.lblBookTitleSeries.Text = "Series title:";
-            // 
-            // lblBookSeriesNumber
-            // 
-            this.lblBookSeriesNumber.AutoSize = true;
-            this.lblBookSeriesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookSeriesNumber.Location = new System.Drawing.Point(7, 126);
-            this.lblBookSeriesNumber.Name = "lblBookSeriesNumber";
-            this.lblBookSeriesNumber.Size = new System.Drawing.Size(197, 31);
-            this.lblBookSeriesNumber.TabIndex = 6;
-            this.lblBookSeriesNumber.Text = "Series number:";
-            // 
-            // lblBookPublisher
-            // 
-            this.lblBookPublisher.AutoSize = true;
-            this.lblBookPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookPublisher.Location = new System.Drawing.Point(7, 366);
-            this.lblBookPublisher.Name = "lblBookPublisher";
-            this.lblBookPublisher.Size = new System.Drawing.Size(135, 31);
-            this.lblBookPublisher.TabIndex = 7;
-            this.lblBookPublisher.Text = "Publisher:";
-            // 
-            // lblBookGenres
-            // 
-            this.lblBookGenres.AutoSize = true;
-            this.lblBookGenres.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookGenres.Location = new System.Drawing.Point(7, 426);
-            this.lblBookGenres.Name = "lblBookGenres";
-            this.lblBookGenres.Size = new System.Drawing.Size(111, 31);
-            this.lblBookGenres.TabIndex = 8;
-            this.lblBookGenres.Text = "Genres:";
-            // 
-            // lblBookThemes
-            // 
-            this.lblBookThemes.AutoSize = true;
-            this.lblBookThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookThemes.Location = new System.Drawing.Point(7, 486);
-            this.lblBookThemes.Name = "lblBookThemes";
-            this.lblBookThemes.Size = new System.Drawing.Size(120, 31);
-            this.lblBookThemes.TabIndex = 9;
-            this.lblBookThemes.Text = "Themes:";
-            // 
-            // lblBookDescription
-            // 
-            this.lblBookDescription.AutoSize = true;
-            this.lblBookDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookDescription.Location = new System.Drawing.Point(7, 546);
-            this.lblBookDescription.Name = "lblBookDescription";
-            this.lblBookDescription.Size = new System.Drawing.Size(159, 31);
-            this.lblBookDescription.TabIndex = 10;
-            this.lblBookDescription.Text = "Description:";
-            // 
-            // lblBookPrice
-            // 
-            this.lblBookPrice.AutoSize = true;
-            this.lblBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBookPrice.Location = new System.Drawing.Point(7, 829);
-            this.lblBookPrice.Name = "lblBookPrice";
-            this.lblBookPrice.Size = new System.Drawing.Size(84, 31);
-            this.lblBookPrice.TabIndex = 11;
-            this.lblBookPrice.Text = "Price:";
-            // 
-            // txtBookSeriesTitle
-            // 
-            this.txtBookSeriesTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookSeriesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookSeriesTitle.Location = new System.Drawing.Point(208, 63);
-            this.txtBookSeriesTitle.Name = "txtBookSeriesTitle";
-            this.txtBookSeriesTitle.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookSeriesTitle.TabIndex = 1;
-            // 
-            // txtBookSeriesNumber
-            // 
-            this.txtBookSeriesNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookSeriesNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookSeriesNumber.Location = new System.Drawing.Point(208, 123);
-            this.txtBookSeriesNumber.Name = "txtBookSeriesNumber";
-            this.txtBookSeriesNumber.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookSeriesNumber.TabIndex = 2;
-            // 
-            // txtBookISBN
-            // 
-            this.txtBookISBN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookISBN.Location = new System.Drawing.Point(208, 183);
-            this.txtBookISBN.Name = "txtBookISBN";
-            this.txtBookISBN.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookISBN.TabIndex = 3;
-            // 
-            // txtBookMediaType
-            // 
-            this.txtBookMediaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookMediaType.Location = new System.Drawing.Point(208, 243);
-            this.txtBookMediaType.Name = "txtBookMediaType";
-            this.txtBookMediaType.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookMediaType.TabIndex = 4;
-            // 
-            // txtBookAuthor
-            // 
-            this.txtBookAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookAuthor.Location = new System.Drawing.Point(208, 303);
-            this.txtBookAuthor.Name = "txtBookAuthor";
-            this.txtBookAuthor.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookAuthor.TabIndex = 5;
-            // 
-            // txtBookPublisher
-            // 
-            this.txtBookPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookPublisher.Location = new System.Drawing.Point(208, 363);
-            this.txtBookPublisher.Name = "txtBookPublisher";
-            this.txtBookPublisher.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookPublisher.TabIndex = 6;
-            // 
-            // txtBookGenres
-            // 
-            this.txtBookGenres.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookGenres.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookGenres.Location = new System.Drawing.Point(208, 423);
-            this.txtBookGenres.Name = "txtBookGenres";
-            this.txtBookGenres.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookGenres.TabIndex = 7;
-            // 
-            // txtBookThemes
-            // 
-            this.txtBookThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookThemes.Location = new System.Drawing.Point(208, 483);
-            this.txtBookThemes.Name = "txtBookThemes";
-            this.txtBookThemes.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookThemes.TabIndex = 8;
-            // 
-            // txtBookDescription
-            // 
-            this.txtBookDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookDescription.Location = new System.Drawing.Point(208, 543);
-            this.txtBookDescription.Multiline = true;
-            this.txtBookDescription.Name = "txtBookDescription";
-            this.txtBookDescription.Size = new System.Drawing.Size(1190, 262);
-            this.txtBookDescription.TabIndex = 9;
-            // 
-            // txtBookPrice
-            // 
-            this.txtBookPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookPrice.Location = new System.Drawing.Point(208, 826);
-            this.txtBookPrice.Name = "txtBookPrice";
-            this.txtBookPrice.Size = new System.Drawing.Size(1190, 38);
-            this.txtBookPrice.TabIndex = 10;
-            // 
-            // grpBookDetails
-            // 
-            this.grpBookDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBookDetails.Controls.Add(this.pnlBookDetailsDetails);
-            this.grpBookDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpBookDetails.Location = new System.Drawing.Point(6, 22);
-            this.grpBookDetails.Name = "grpBookDetails";
-            this.grpBookDetails.Size = new System.Drawing.Size(1425, 936);
-            this.grpBookDetails.TabIndex = 0;
-            this.grpBookDetails.TabStop = false;
-            this.grpBookDetails.Text = "Book Details";
-            // 
-            // pnlBookDetailsDetails
-            // 
-            this.pnlBookDetailsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlBookDetailsDetails.AutoScroll = true;
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookPrice);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookDescription);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookThemes);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookGenres);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookPublisher);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookAuthor);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookMediaType);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookISBN);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookSeriesNumber);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookSeriesTitle);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookPrice);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookDescription);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookThemes);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookGenres);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookPublisher);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookSeriesNumber);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookTitleSeries);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookMediaType);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookAuthor);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookISBN);
-            this.pnlBookDetailsDetails.Controls.Add(this.lblBookTitle);
-            this.pnlBookDetailsDetails.Controls.Add(this.txtBookTitle);
-            this.pnlBookDetailsDetails.Location = new System.Drawing.Point(3, 34);
-            this.pnlBookDetailsDetails.Name = "pnlBookDetailsDetails";
-            this.pnlBookDetailsDetails.Size = new System.Drawing.Size(1416, 890);
-            this.pnlBookDetailsDetails.TabIndex = 12;
-            // 
-            // pnlMemberDetailsDetails
-            // 
-            this.pnlMemberDetailsDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlMemberDetailsDetails.AutoScroll = true;
-            this.pnlMemberDetailsDetails.Controls.Add(this.cmbMemberType);
-            this.pnlMemberDetailsDetails.Controls.Add(this.dtpMemberDateOfBirth);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberJoinDate);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberJoinDate);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberPostcode);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberCounty);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberPostcode);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblLinkedMembers);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberAddress1);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberTownCity);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberBarcode);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberFirstName);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberLinkedMembers);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberFirstName);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberAddress2);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberTownCity);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberAddress2);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberSurname);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberCounty);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberAddress1);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberEmailAddress);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberPhoneNumber);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberDateOfBirth);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberCustomerType);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberEmailAddress);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberBarcode);
-            this.pnlMemberDetailsDetails.Controls.Add(this.txtMemberSurname);
-            this.pnlMemberDetailsDetails.Controls.Add(this.lblMemberPhoneNumber);
-            this.pnlMemberDetailsDetails.Location = new System.Drawing.Point(6, 15);
-            this.pnlMemberDetailsDetails.Name = "pnlMemberDetailsDetails";
-            this.pnlMemberDetailsDetails.Size = new System.Drawing.Size(1431, 959);
-            this.pnlMemberDetailsDetails.TabIndex = 80;
-            // 
             // FrmMainSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3253,6 +3254,8 @@
             this.Load += new System.EventHandler(this.frmMainSystem_Load);
             this.pnlMemberDetails.ResumeLayout(false);
             this.pnlMemberDetails.PerformLayout();
+            this.pnlMemberDetailsDetails.ResumeLayout(false);
+            this.pnlMemberDetailsDetails.PerformLayout();
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
             this.pnlStaffDetails.ResumeLayout(false);
@@ -3273,6 +3276,9 @@
             this.pnlBookDetails.ResumeLayout(false);
             this.grpBooksBookStatus.ResumeLayout(false);
             this.grpBooksBookStatus.PerformLayout();
+            this.grpBookDetails.ResumeLayout(false);
+            this.pnlBookDetailsDetails.ResumeLayout(false);
+            this.pnlBookDetailsDetails.PerformLayout();
             this.grpBookCopyDetails.ResumeLayout(false);
             this.pnlBackup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctIcon)).EndInit();
@@ -3284,11 +3290,6 @@
             this.pnlReserve.PerformLayout();
             this.pnlCirculationDetails.ResumeLayout(false);
             this.pnlCirculationDetails.PerformLayout();
-            this.grpBookDetails.ResumeLayout(false);
-            this.pnlBookDetailsDetails.ResumeLayout(false);
-            this.pnlBookDetailsDetails.PerformLayout();
-            this.pnlMemberDetailsDetails.ResumeLayout(false);
-            this.pnlMemberDetailsDetails.PerformLayout();
             this.ResumeLayout(false);
 
         }

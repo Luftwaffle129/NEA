@@ -42,6 +42,32 @@ namespace NEALibrarySystem
                 btnStaffSave.Visible = true;
             }
         }
+        #region feature icon
+        private void UpdateImageIcon()
+        {
+            switch (CurrentFeature)
+            {
+                case DataLibrary.Feature.Book:
+                    pctIcon.BackgroundImage = Properties.Resources.book;
+                    break;
+                case DataLibrary.Feature.Circulation:
+                    pctIcon.BackgroundImage = Properties.Resources.circulation;
+                    break;
+                case DataLibrary.Feature.Member:
+                    pctIcon.BackgroundImage = Properties.Resources.members;
+                    break;
+                case DataLibrary.Feature.Staff:
+                    pctIcon.BackgroundImage = Properties.Resources.staff;
+                    break;
+                case DataLibrary.Feature.Backups:
+                    pctIcon.BackgroundImage = Properties.Resources.backup;
+                    break;
+                case DataLibrary.Feature.Settings:
+                    pctIcon.BackgroundImage = Properties.Resources.settings;
+                    break;
+            }
+        }
+        #endregion
         #region Navigator
         private Panel[][] _panels; // a 2-dimensional jagged array containing references to the panels. Represents the layout of the system
         private Button[] _subTabs; // array containing references to the sub tab buttons
@@ -353,6 +379,8 @@ namespace NEALibrarySystem
 
             NavigatorCloseAllPanels();
             pnlLoan.Visible = true;
+
+            UpdateImageIcon();
         }
         /// <summary>
         /// Opens the book feature
@@ -373,6 +401,8 @@ namespace NEALibrarySystem
             NavigatorSetupSubTabs(tabs);
 
             NavigatorOpenSearchViewTab();
+
+            UpdateImageIcon();
         }
         /// <summary>
         /// Opens the member feature
@@ -391,8 +421,9 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
 
-            NavigatorCloseAllPanels();
             NavigatorOpenSearchViewTab();
+
+            UpdateImageIcon();
         }
         /// <summary>
         /// Opens the staff feature
@@ -418,6 +449,8 @@ namespace NEALibrarySystem
 
             NavigatorCloseAllPanels();
             pnlSearch.Visible = true;
+
+            UpdateImageIcon();
         }
         /// <summary>
         /// Opens the backup feature
@@ -433,6 +466,8 @@ namespace NEALibrarySystem
 
             NavigatorCloseAllPanels();
             pnlBackup.Visible = true;
+
+            UpdateImageIcon();
         }
         /// <summary>
         /// Opens the settings feature
@@ -448,6 +483,8 @@ namespace NEALibrarySystem
 
             NavigatorCloseAllPanels();
             pnlSettings.Visible = true;
+
+            UpdateImageIcon();
         }
 
         /// <summary>

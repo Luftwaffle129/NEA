@@ -63,9 +63,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _15640410c0522cc793c6a4b671fde516 {
+        internal static System.Drawing.Bitmap backup {
             get {
-                object obj = ResourceManager.GetObject("15640410c0522cc793c6a4b671fde516", resourceCulture);
+                object obj = ResourceManager.GetObject("backup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _30_300784_welcome_to_the_team_users_icon_png {
+        internal static System.Drawing.Bitmap book {
             get {
-                object obj = ResourceManager.GetObject("30-300784_welcome-to-the-team-users-icon-png", resourceCulture);
+                object obj = ResourceManager.GetObject("book", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _30_300784_welcome_to_the_team_users_icon_png1 {
+        internal static System.Drawing.Bitmap circulation {
             get {
-                object obj = ResourceManager.GetObject("30-300784_welcome-to-the-team-users-icon-png1", resourceCulture);
+                object obj = ResourceManager.GetObject("circulation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _61_612417_open_book_icon_symbol_vector_silhouette_of_open {
+        internal static System.Drawing.Bitmap members {
             get {
-                object obj = ResourceManager.GetObject("61-612417_open-book-icon-symbol-vector-silhouette-of-open", resourceCulture);
+                object obj = ResourceManager.GetObject("members", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _61_612417_open_book_icon_symbol_vector_silhouette_of_open1 {
+        internal static System.Drawing.Bitmap settings {
             get {
-                object obj = ResourceManager.GetObject("61-612417_open-book-icon-symbol-vector-silhouette-of-open1", resourceCulture);
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,29 +113,9 @@ namespace NEALibrarySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _983470_200 {
+        internal static System.Drawing.Bitmap staff {
             get {
-                object obj = ResourceManager.GetObject("983470-200", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap images {
-            get {
-                object obj = ResourceManager.GetObject("images", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap img_377192 {
-            get {
-                object obj = ResourceManager.GetObject("img_377192", resourceCulture);
+                object obj = ResourceManager.GetObject("staff", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
