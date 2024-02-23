@@ -737,7 +737,7 @@ namespace NEALibrarySystem
         private void pnlBackup_VisibleChanged(object sender, EventArgs e)
         {
             if (pnlBackup.Visible)
-                _backupHandler.UpdateLastBackupDate();
+                _backupHandler.Load();
         }
         private void pnlSetting_VisibleChanged(object sender, EventArgs e)
         {
