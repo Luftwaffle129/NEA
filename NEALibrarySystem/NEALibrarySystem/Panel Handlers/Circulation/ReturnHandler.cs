@@ -22,6 +22,7 @@ namespace NEALibrarySystem.Panel_Handlers.BookCheckIn
             CirculationManager.ResetFields();
             CirculationManager.BookCopyList.Clear();
             CirculationManager.SelectedMember = null;
+            CirculationManager.UpdateListView();
         }
         /// <summary>
         /// Returns the books if possible, else outputs an error to the user

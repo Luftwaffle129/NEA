@@ -62,5 +62,32 @@ namespace NEALibrarySystem.ListViewHandlers
                 }
             }
         }
+        /// <summary>
+        /// Resizes the column so that the text displayed is not cut off, except if the column length is longer than 200 pixels
+        /// </summary>
+        /// <param name="listView">List view to resize the column headers of</param>
+        public static void ResizeColumnHeaders(ref ListView listView)
+        {
+            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize); // auto resize for the column header length
+            int[] columnWidths = new int[listView.Columns.Count];               // place the column widths into an array
+            for (int i = 0; i < columnWidths.Length; i++)
+            {
+                columnWidths[i] = listView.Columns[i].Width;
+            }
+            // auto resize for the column content length
+            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            for (int i = 0; i < columnWidths.Length; i++) // for each column
+            {
+                if (listView.Columns[i].Width > 200) // if column is bigger than 200 pixels, reduce width to 200 pixels
+                {
+                    listView.Columns[i].Width = 200;
+                }
+                else if (columnWidths[i] > listView.Columns[i].Width) // if the header width is bigger than the column width, set width size to the header.
+                {
+                    listView.Columns[i].Width = columnWidths[i];
+                }
+            }
+        }
     }
 }

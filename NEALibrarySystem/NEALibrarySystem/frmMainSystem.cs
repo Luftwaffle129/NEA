@@ -11,13 +11,15 @@ using NEALibrarySystem.Panel_Handlers.StaffHandler;
 using NEALibrarySystem.Panel_Handlers.StaffDetails;
 using NEALibrarySystem.Panel_Handlers.BackupHandler;
 using NEALibrarySystem.Panel_Handlers.Settings;
+using System.Drawing;
+using System.Reflection;
+using System.Linq;
 
 namespace NEALibrarySystem
 {
     public partial class FrmMainSystem : Form
     {
         public static FrmMainSystem Main;
-
         public FrmMainSystem(Staff staff)
         {
             Main = this;
@@ -41,6 +43,7 @@ namespace NEALibrarySystem
                 btnBackups.Visible = true;
                 btnStaffSave.Visible = true;
             }
+            this.WindowState = FormWindowState.Maximized;
         }
         #region feature icon
         private void UpdateImageIcon()
@@ -73,6 +76,9 @@ namespace NEALibrarySystem
         private Button[] _subTabs; // array containing references to the sub tab buttons
         public DataLibrary.Feature CurrentFeature = DataLibrary.Feature.None; // stores the current feature in use
         public DataLibrary.SearchFeature SearchFeature = DataLibrary.SearchFeature.Book; // stores the current search feature in use
+
+        private Color _unselectedColor = SystemColors.ControlLight;
+        private Color _selectedColor = Color.Turquoise;
 
         // declares handlers used to control each panel
         private SearchHandler _searchHandler;
@@ -235,6 +241,7 @@ namespace NEALibrarySystem
             BookDetailsObjects bookDetailsObjects = new BookDetailsObjects()
             {
                 CopyDetails = lsvBookCopyDetails,
+                BookCopyStatus = grpBookBookCopyStatus,
                 InStock = txtBooksInStock,
                 Reserved = txtBooksReserved,
                 Loaned = txtBookLoaned,
@@ -376,7 +383,7 @@ namespace NEALibrarySystem
                 "Reserve",
             };
             NavigatorSetupSubTabs(tabs);
-
+            ColorMainTabs();
             NavigatorCloseAllPanels();
             pnlLoan.Visible = true;
 
@@ -399,7 +406,9 @@ namespace NEALibrarySystem
                 "View Circulated Books"
             };
             NavigatorSetupSubTabs(tabs);
-
+            ColorMainTabs();
+            ColorSubTabsUnselected();
+            _subTabs[0].BackColor = _selectedColor;
             NavigatorOpenSearchViewTab();
 
             UpdateImageIcon();
@@ -420,7 +429,9 @@ namespace NEALibrarySystem
                 "Add Member"
             };
             NavigatorSetupSubTabs(tabs);
-
+            ColorMainTabs();
+            ColorSubTabsUnselected();
+            _subTabs[0].BackColor = _selectedColor;
             NavigatorOpenSearchViewTab();
 
             UpdateImageIcon();
@@ -441,6 +452,9 @@ namespace NEALibrarySystem
                 "Add Staff"
             };
             NavigatorSetupSubTabs(tabs);
+            ColorMainTabs();
+            ColorSubTabsUnselected();
+            _subTabs[0].BackColor = _selectedColor;
 
             if (!DataLibrary.CurrentUser.IsAdministrator)
             {
@@ -463,6 +477,7 @@ namespace NEALibrarySystem
             CurrentFeature = DataLibrary.Feature.Backups;
             string[] tabs = new string[0];
             NavigatorSetupSubTabs(tabs);
+            ColorMainTabs();
 
             NavigatorCloseAllPanels();
             pnlBackup.Visible = true;
@@ -480,6 +495,7 @@ namespace NEALibrarySystem
             CurrentFeature = DataLibrary.Feature.Settings;
             string[] tabs = new string[0];
             NavigatorSetupSubTabs(tabs);
+            ColorMainTabs();
 
             NavigatorCloseAllPanels();
             pnlSettings.Visible = true;
@@ -558,6 +574,43 @@ namespace NEALibrarySystem
 
             }
         }
+        /// <summary>
+        /// Gives a highlighted color background to the selected feature's background
+        /// </summary>
+        private void ColorMainTabs()
+        {
+            // set all buttons to unselected colors
+            btnBooks.BackColor = _unselectedColor;
+            btnMembers.BackColor = _unselectedColor;
+            btnCirculation.BackColor = _unselectedColor;
+            btnStaff.BackColor = _unselectedColor;
+            btnBackups.BackColor = _unselectedColor;
+            btnSettings.BackColor = _unselectedColor;
+
+            // set the current feature's button to the selected color
+            switch (CurrentFeature)
+            {
+                case DataLibrary.Feature.Staff:
+                    btnStaff.BackColor = _selectedColor;
+                    break;
+                case DataLibrary.Feature.Book: 
+                    btnBooks.BackColor = _selectedColor;
+                    break;
+                case DataLibrary.Feature.Member:
+                    btnMembers.BackColor = _selectedColor;
+                    break;
+                case DataLibrary.Feature.Circulation: 
+                    btnCirculation.BackColor = _selectedColor; 
+                    break;
+                case DataLibrary.Feature.Settings:
+                    btnSettings.BackColor = _selectedColor;
+                    break;
+                case DataLibrary.Feature.Backups:
+                    btnBackups.BackColor = _selectedColor;
+                    break;
+
+            }
+        }
         #endregion
         #region sub tab handling
         /// <summary>
@@ -610,16 +663,24 @@ namespace NEALibrarySystem
                 SearchFeature = DataLibrary.SearchFeature.Book;
             else if (CurrentFeature == DataLibrary.Feature.Book && index == 2) // if opening the search panel for circulations
                 SearchFeature = DataLibrary.SearchFeature.Circulation;
+            // color the selected subtab
+            _subTabs[index].BackColor = _selectedColor;
             //open the panel
             _panels[(int)CurrentFeature][index].Visible = true;
+            ColorSubTabsUnselected();
+            _subTabs[index].BackColor = _selectedColor;
         }
         #endregion
         /// <summary>
-        /// Used to change the picture box icon to match the current feature
+        /// Sets the background color of all subtabs to the unselected color
         /// </summary>
-        private void ChangeIcon()
+        private void ColorSubTabsUnselected()
         {
-
+            // set all buttons to unselected colors
+            foreach (Button subTab in _subTabs)
+            {
+                subTab.BackColor = _unselectedColor;
+            }
         }
         #endregion
         #region events
@@ -772,6 +833,20 @@ namespace NEALibrarySystem
         {
             _bookDetailsHandler.DeleteBookCopies();
         }
+        private void txtBookISBN_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtBookSeriesNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtBookPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyPriceKeyPress(e);
+        }
         #endregion
         #region circulation details panel
         private void btnCircDetailsSave_Click(object sender, EventArgs e)
@@ -795,6 +870,20 @@ namespace NEALibrarySystem
         private void btnMemberCancel_Click(object sender, EventArgs e)
         {
             _memberDetailsHandler.Cancel();
+        }
+        private void txtMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtMemberPhoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtMemberLinkedMembers_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.LinkedMemberKeyPress(e);
         }
         #endregion
         #region loan handler panel
@@ -821,6 +910,15 @@ namespace NEALibrarySystem
         {
             _loanHandler.MemberBarcodeUpdated();
         }
+        private void txtLoanEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtLoanMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
         #endregion
         #region return handler panel
         private void txtReturnMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -845,6 +943,14 @@ namespace NEALibrarySystem
         private void btnReturnCancel_Click(object sender, EventArgs e)
         {
             _returnHandler.Load();
+        }
+        private void txtReturnEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+        private void txtReturnMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
         }
         #endregion
         #region sell handler panel
@@ -871,6 +977,15 @@ namespace NEALibrarySystem
         {
             _sellHandler.MemberBarcodeUpdated();
         }
+        private void txtSellMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtSellEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
         #endregion
         #region reserve handler panel
         private void txtReserveMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -895,6 +1010,15 @@ namespace NEALibrarySystem
         private void btnReserveCancel_Click(object sender, EventArgs e)
         {
             _reserveHandler.Load();
+        }
+        private void txtReserveMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
+        }
+
+        private void txtReserveEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            DataFormatter.OnlyNumberKeyPress(e);
         }
         #endregion
         #region search handler panel
@@ -1015,5 +1139,14 @@ namespace NEALibrarySystem
 
 
         #endregion
+
+        private void txtBookISBN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void txtBookPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

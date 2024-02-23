@@ -26,6 +26,7 @@ namespace NEALibrarySystem
             CirculationManager.BookCopyList.Clear();
             CirculationManager.SelectedMember = null;
             _totalPrice.Text = "0.00";
+            CirculationManager.UpdateListView();
         }
         /// <summary>
         /// Attempts to sell the book copies if possible. if not possible, output an error

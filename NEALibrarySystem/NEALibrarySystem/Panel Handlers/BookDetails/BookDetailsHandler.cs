@@ -44,6 +44,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Description.Text = _bookData.Description;
                 _objects.Price.Text = DataFormatter.DoubleToPrice(_bookData.Price.Value);
                 _isNewRecord = false;
+                _objects.BookCopyStatus.Visible = true;
             }
             else // if book is null, set input fields to be empty
             {
@@ -60,6 +61,7 @@ namespace NEALibrarySystem.PanelHandlers
                 _objects.Description.Clear();
                 _objects.Price.Clear();
                 _isNewRecord = true;
+                _objects.BookCopyStatus.Visible = false;
             }
             InitialiseCopyDetails();
             LoadCopyDetails();
@@ -116,7 +118,7 @@ namespace NEALibrarySystem.PanelHandlers
                 };
                 _objects.CopyDetails.Items.Add(new ListViewItem(data));
             }
-            _objects.CopyDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            ListViewHandler.ResizeColumnHeaders(ref _objects.CopyDetails);
             DisplayBookCopyStatuses();
         }
         /// <summary>

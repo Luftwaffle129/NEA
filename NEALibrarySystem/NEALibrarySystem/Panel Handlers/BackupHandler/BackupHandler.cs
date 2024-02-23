@@ -29,7 +29,10 @@ namespace NEALibrarySystem.Panel_Handlers.BackupHandler
             if (frmConfirmation.DialogResult == DialogResult.Yes)
             {
                 if (FileHandler.Backup.Save())
+                {
                     MessageBox.Show("Back up created");
+                    Load();
+                }
                 else
                     MessageBox.Show("Back up failed");
             }

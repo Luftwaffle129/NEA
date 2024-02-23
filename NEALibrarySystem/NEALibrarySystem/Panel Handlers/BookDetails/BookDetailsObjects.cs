@@ -7,6 +7,7 @@ namespace NEALibrarySystem.PanelHandlers
     public class BookDetailsObjects
     {
         // book details
+        public GroupBox BookCopyStatus;
         public ListView CopyDetails;
         public TextBox InStock;
         public TextBox Reserved;

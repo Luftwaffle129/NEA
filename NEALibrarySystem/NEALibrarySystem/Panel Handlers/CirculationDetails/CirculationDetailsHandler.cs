@@ -77,7 +77,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             };
             _objects.BookCopy.Items.Clear();
             _objects.BookCopy.Items.Add(new ListViewItem(data));
-            _objects.BookCopy.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            ListViewHandler.ResizeColumnHeaders(ref _objects.BookCopy);
         }
         /// <summary>
         /// Deletes the circulation copy after the user confirms that the want to delete the record

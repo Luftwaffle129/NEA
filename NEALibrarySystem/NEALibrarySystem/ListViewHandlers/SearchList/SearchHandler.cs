@@ -342,7 +342,7 @@ namespace NEALibrarySystem.SearchList
                     ListViewItem row = new ListViewItem(data);
                     _objects.ItemViewer.Items.Add(row);
                 }
-                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                ListViewHandler.ResizeColumnHeaders(ref _objects.ItemViewer);
             }
         }
         /// <summary>
@@ -370,7 +370,7 @@ namespace NEALibrarySystem.SearchList
                     ListViewItem row = new ListViewItem(data);
                     _objects.ItemViewer.Items.Add(row);
                 }
-                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                ListViewHandler.ResizeColumnHeaders(ref _objects.ItemViewer);
             }            
         }
         /// <summary>
@@ -399,7 +399,7 @@ namespace NEALibrarySystem.SearchList
                     ListViewItem row = new ListViewItem(data);
                     _objects.ItemViewer.Items.Add(row);
                 }
-                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                ListViewHandler.ResizeColumnHeaders(ref _objects.ItemViewer);
             }
         }
         /// <summary>
@@ -422,7 +422,7 @@ namespace NEALibrarySystem.SearchList
                     ListViewItem row = new ListViewItem(data);
                     _objects.ItemViewer.Items.Add(row);
                 }
-                _objects.ItemViewer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                ListViewHandler.ResizeColumnHeaders(ref _objects.ItemViewer);
             }
         }
         #endregion

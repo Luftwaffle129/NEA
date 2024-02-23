@@ -111,6 +111,7 @@ namespace NEALibrarySystem
                         };
                         _objects.Circulations.Items.Add(new ListViewItem(data));
                     }
+                    ListViewHandler.ResizeColumnHeaders(ref _objects.Circulations);
                 }
 
                 // get total late fees

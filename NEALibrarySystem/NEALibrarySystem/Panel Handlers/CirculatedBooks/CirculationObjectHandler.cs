@@ -201,7 +201,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                 ListViewItem row = new ListViewItem(data);
                 _selectedBooks.Items.Add(row);
             }
-            _selectedBooks.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            ListViewHandler.ResizeColumnHeaders(ref _selectedBooks);
         }
         /// <summary>
         /// removes the checked items from the list view of selected books

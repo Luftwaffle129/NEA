@@ -12,6 +12,9 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class TestData
     {
+        private const int BOOKNUM = 10;
+        private const int MEMBERNUM = 10;
+
         private Random rand = new Random();
         // realistic test data for creating records
         private string[] _firstNames =
@@ -228,7 +231,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         private void GenerateBooks()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < BOOKNUM; i++)
             {
                 BookCreator bookCreator = new BookCreator();
                 bookCreator.Title = _titles[rand.Next(0, _titles.Length)]; // get random realistic title
@@ -322,7 +325,7 @@ namespace NEALibrarySystem.Data_Structures
         /// </summary>
         private void GenerateMembers()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < MEMBERNUM; i++)
             {
                 MemberCreator memberCreator = new MemberCreator();
                 // generate a unique barcode

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -10,6 +13,70 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class DataFormatter
     {
+        public static Keys[] NUMBERKEYS = new Keys[] 
+        {
+            Keys.D0,
+            Keys.D1,
+            Keys.D2,        
+            Keys.D3,
+            Keys.D4,
+            Keys.D5,
+            Keys.D6,
+            Keys.D7,
+            Keys.D8,
+            Keys.D9,
+            Keys.NumPad0,
+            Keys.NumPad1,
+            Keys.NumPad2,
+            Keys.NumPad3,
+            Keys.NumPad4,
+            Keys.NumPad5,
+            Keys.NumPad6,
+            Keys.NumPad7,
+            Keys.NumPad8,
+            Keys.NumPad9
+        };
+        public static Keys[] ACTIONKEYS = new Keys[]
+        {
+            Keys.Back,
+            Keys.Delete,
+            Keys.Left,
+            Keys.Right,
+            Keys.Enter
+        };
+        /// <summary>
+        /// Only allow for numbers to be pressed on key presses
+        /// </summary>
+        /// <param name="e"></param>
+        public static void OnlyNumberKeyPress(KeyEventArgs e)
+        {
+            if (!(NUMBERKEYS.Contains(e.KeyCode) || ACTIONKEYS.Contains(e.KeyCode)))
+            { 
+                e.SuppressKeyPress = true; 
+            }
+        }
+        /// <summary>
+        /// Only allow for numbers and period to be pressed on key presses
+        /// </summary>
+        /// <param name="e"></param>
+        public static void OnlyPriceKeyPress(KeyEventArgs e)
+        {
+            if (!(NUMBERKEYS.Contains(e.KeyCode) || e.KeyCode == Keys.OemPeriod || ACTIONKEYS.Contains(e.KeyCode)))
+            { 
+                e.SuppressKeyPress = true; 
+            }
+        }
+        /// <summary>
+        /// Only allow for numbers, commas and spaces to be pressed on key presses
+        /// </summary>
+        /// <param name="e"></param>
+        public static void LinkedMemberKeyPress(KeyEventArgs e)
+        {
+            if (!(NUMBERKEYS.Contains(e.KeyCode) || e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Oemcomma || e.KeyCode == Keys.Space || ACTIONKEYS.Contains(e.KeyCode)))
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
         /// <summary>
         /// Converts a list of reference classes' values to a string with a ", " separating each item
         /// </summary>

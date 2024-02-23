@@ -135,6 +135,7 @@ namespace NEALibrarySystem.Data_Structures
 
         private static void HandleInvalidFiles()
         {
+            CreateDataDirectory();
             bool resolved = false;
             do
             {
@@ -197,6 +198,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>Boolean value of whether the necessary data files exist</returns>
         public static bool MissingDataFiles()
         {
+            CreateDataDirectory();
             // get all missing files
             foreach (string file in _files)
             {
