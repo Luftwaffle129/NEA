@@ -107,12 +107,6 @@
     <Compile Include="frmAddBookCopies.Designer.cs">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCustomTransaction.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCustomTransaction.Designer.cs">
-      <DependentUpon>frmCustomTransaction.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,9 +157,6 @@
     <Compile Include="Panel Handlers\Circulation\SellHandler.cs" />
     <EmbeddedResource Include="frmAddBookCopies.resx">
       <DependentUpon>frmAddBookCopies.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmCustomTransaction.resx">
-      <DependentUpon>frmCustomTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfirmation.resx">
       <DependentUpon>frmConfirmation.cs</DependentUpon>
