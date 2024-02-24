@@ -174,12 +174,12 @@ namespace NEALibrarySystem.Data_Structures
             set { _memberFirstNames = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
-        #region surname
-        private static List<ReferenceClass<string, Member>> _surnames = new List<ReferenceClass<string, Member>>();
-        public static List<ReferenceClass<string, Member>> Surnames
+        #region member surname
+        private static List<ReferenceClass<string, Member>> _memberSurnames = new List<ReferenceClass<string, Member>>();
+        public static List<ReferenceClass<string, Member>> MemberSurnames
         {
-            get { return _surnames; }
-            set { _surnames = value ?? new List<ReferenceClass<string, Member>>(); }
+            get { return _memberSurnames; }
+            set { _memberSurnames = value ?? new List<ReferenceClass<string, Member>>(); }
         }
         #endregion
         #region member type
@@ -550,7 +550,7 @@ namespace NEALibrarySystem.Data_Structures
         {
             MemberBarcodes = ModifyReferenceClass(MemberBarcodes, member, member.Barcode, out member.Barcode, newMemberInfo.Barcode, TwoRefClassMembers);
             MemberFirstNames = ModifyReferenceClass(MemberFirstNames, member, member.FirstName, out member.FirstName, newMemberInfo.FirstName, TwoRefClassMembers);
-            Surnames = ModifyReferenceClass(Surnames, member, member.Surname, out member.Surname, newMemberInfo.Surname,  TwoRefClassMembers);
+            MemberSurnames = ModifyReferenceClass(MemberSurnames, member, member.Surname, out member.Surname, newMemberInfo.Surname,  TwoRefClassMembers);
             MemberTypes = ModifyReferenceClass(MemberTypes, member, member.Type, out member.Type, (MemberType)DataFormatter.StringToEnum<MemberType>(newMemberInfo.Type), TwoRefClassMembers);
             member.DateOfBirth = newMemberInfo.DateOfBirth;
             member.EmailAddress = newMemberInfo.EmailAddress;
@@ -645,7 +645,7 @@ namespace NEALibrarySystem.Data_Structures
             // delete reference classes
             MemberBarcodes = DeleteReferenceClass(MemberBarcodes, member.Barcode, TwoRefClassMembers);
             MemberFirstNames = DeleteReferenceClass(MemberFirstNames, member.FirstName, TwoRefClassMembers);
-            Surnames = DeleteReferenceClass(Surnames, member.Surname, TwoRefClassMembers);
+            MemberSurnames = DeleteReferenceClass(MemberSurnames, member.Surname, TwoRefClassMembers);
             MemberTypes = DeleteReferenceClass(MemberTypes, member.Type, TwoRefClassMembers);
             foreach (Member linkedMember in member.LinkedMembers)
             {
@@ -744,7 +744,7 @@ namespace NEALibrarySystem.Data_Structures
                 _members.Clear();
                 _memberBarcodes.Clear();
                 _memberFirstNames.Clear();
-                _surnames.Clear();
+                _memberSurnames.Clear();
                 _memberTypes.Clear();
             }
             /// <summary>
@@ -783,7 +783,8 @@ namespace NEALibrarySystem.Data_Structures
         public static void SendOverdueEmails()
         {
             int index = 0;
-            while (CirculationDueDates[index].Value > DateTime.Today)
+            List<CirculationCopy> toUnreserve = new List<CirculationCopy>();
+            while (CirculationDueDates[index].Value > DateTime.Today && index < CirculationDueDates.Count)
             {
                 CirculationCopy copy = CirculationDueDates[index].Reference;
                 if (copy.EmailSent == false)
@@ -791,12 +792,24 @@ namespace NEALibrarySystem.Data_Structures
                     bool isLoaned = copy.Type.Value == CirculationType.Loaned ? true : false;
                     string subject = isLoaned ? "Your book loan is overdue" : "Your reservation has expired";
                     string content = isLoaned ?
-                        $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is oevrdue. A late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
+                        $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is overdue. A late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
                         : $"Your reservation for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" has expired";
                     EmailHandler.Send(copy.Member.EmailAddress, subject, content);
                     copy.EmailSent = true;
                 }
-            } 
+                if (copy.Type.Value == CirculationType.Reserved)
+                {
+                    toUnreserve.Add(copy);
+                }
+                index++;
+            }
+            if (toUnreserve.Count > 0)
+            {
+                foreach (CirculationCopy copy in toUnreserve)
+                {
+                    DeleteCirculationCopy(copy);
+                }
+            }
         }
         #endregion
     }
