@@ -462,13 +462,13 @@ namespace NEALibrarySystem.Data_Structures
             /// </summary>
             public static void Staff()
             {
-                StaffSaver[] staffSavers = new StaffSaver[DataLibrary.StaffList.Count];
+                StaffCreator[] staffSavers = new StaffCreator[DataLibrary.StaffList.Count];
                 if (DataLibrary.StaffList.Count > 0)
                     for (int i = 0; i < DataLibrary.StaffList.Count; i++)
                     {
                         Staff staff = DataLibrary.StaffList[i];
                         // translate staff record into the saver format and add it to the array of savers
-                        StaffSaver saver = new StaffSaver()
+                        StaffCreator saver = new StaffCreator()
                         {
                             FirstName = staff.FirstName.Value,
                             Surname = staff.Surname.Value,
@@ -664,11 +664,11 @@ namespace NEALibrarySystem.Data_Structures
             {
                 bool validFiles;
                 DataLibrary.ClearData.Staff();
-                StaffSaver[] staffSavers = LoadFile<StaffSaver[]>(FilePath, "Staff", out validFiles);
+                StaffCreator[] staffSavers = LoadFile<StaffCreator[]>(FilePath, "Staff", out validFiles);
                 if (!validFiles)
                     return false;
                 if (staffSavers != null)
-                    foreach (StaffSaver saver in staffSavers)
+                    foreach (StaffCreator saver in staffSavers)
                     {
                         // create a circulation copy using the data in the saver
                         StaffCreator creator = new StaffCreator()

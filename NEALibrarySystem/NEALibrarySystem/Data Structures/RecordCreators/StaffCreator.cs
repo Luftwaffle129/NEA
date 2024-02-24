@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Data_Structures.RecordCreators
 {
+    [System.Serializable]
     public class StaffCreator
     {
         public string FirstName { get; set; }

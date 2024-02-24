@@ -37,26 +37,34 @@ namespace NEALibrarySystem
         /// <param name="receiver">Email to send to</param>
         /// <param name="subject">Title of email</param>
         /// <param name="content">Contents of email</param>
-        public static void Send(string receiver, string subject, string content)
+        public static void Send(string receiver, string subject, string content, bool canErrorMessage = false)
         {
-            UserCredential credential;
-            //read your credentials file
-
-            var assembly = Assembly.GetExecutingAssembly();
-            
-            using (var stream = assembly.GetManifestResourceStream("NEALibrarySystem.Resources.credentials.json"))
+            try
             {
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                path = Path.Combine(path, ".credentials/gmail-dotnet-quickstart.json");
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
-            }
+                UserCredential credential;
+                //read your credentials file
 
-            string message = $"To: {receiver}\r\nSubject: {subject}\r\nContent-Type: text/html;charset=utf-8\r\n\r\n<h1>{content}</h1>";
-            //call your gmail service
-            var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = ApplicationName });
-            var msg = new Google.Apis.Gmail.v1.Data.Message();
-            msg.Raw = Base64UrlEncode(message.ToString());
-            service.Users.Messages.Send(msg, "me").Execute();
+                var assembly = Assembly.GetExecutingAssembly();
+
+                using (var stream = assembly.GetManifestResourceStream("NEALibrarySystem.Resources.credentials.json"))
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    path = Path.Combine(path, ".credentials/gmail-dotnet-quickstart.json");
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
+                }
+
+                string message = $"To: {receiver}\r\nSubject: {subject}\r\nContent-Type: text/html;charset=utf-8\r\n\r\n<h1>{content}</h1>";
+                //call your gmail service
+                var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = ApplicationName });
+                var msg = new Google.Apis.Gmail.v1.Data.Message();
+                msg.Raw = Base64UrlEncode(message.ToString());
+                service.Users.Messages.Send(msg, "me").Execute();
+            }
+            catch
+            {
+                if (canErrorMessage)
+                    MessageBox.Show("Error: cannot send emails");
+            }
         }
     }
 }

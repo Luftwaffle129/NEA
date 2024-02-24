@@ -65,7 +65,7 @@ namespace NEALibrarySystem
                         {
                             _verificationCode += rand.Next(0, 10).ToString();
                         }
-                        EmailHandler.Send(DataLibrary.StaffEmails[index].Value, "Library System Verification Code", $"Your verification code used to reset your password is: {_verificationCode}");
+                        EmailHandler.Send(DataLibrary.StaffEmails[index].Value, "Library System Verification Code", $"Your verification code used to reset your password is: {_verificationCode}", true);
                         _codeSentTime = DateTime.Now;
                         MessageBox.Show("Verification code sent");
                     }
