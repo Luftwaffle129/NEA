@@ -1,6 +1,7 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using NEALibrarySystem.ListViewHandlers;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
@@ -84,7 +85,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
         /// </summary>
         public void Delete()
         {
-            frmConfirmation confirmation = new frmConfirmation("Do you want to delete this circulation record?");
+            frmConfirmation confirmation = new frmConfirmation("Do you want to delete this circulation record?", Color.Red, SystemColors.ControlLight);
             confirmation.ShowDialog();
             if (confirmation.DialogResult == DialogResult.Yes)
             {

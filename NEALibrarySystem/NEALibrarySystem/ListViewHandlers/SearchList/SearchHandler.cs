@@ -3,6 +3,7 @@ using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using static NEALibrarySystem.Data_Structures.DataLibrary;
 
@@ -209,9 +210,9 @@ namespace NEALibrarySystem.SearchList
                 }
                 // output the confirmation message
                 if (_objects.ItemViewer.CheckedItems.Count == 1)
-                    confirmation = new frmConfirmation($"Do you want do delete 1 {itemType} and its connections?");
+                    confirmation = new frmConfirmation($"Do you want do delete 1 {itemType} and its connections?", Color.Red, SystemColors.ControlLight);
                 else
-                    confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType} and their connections?");
+                    confirmation = new frmConfirmation($"Do you want do delete {_objects.ItemViewer.CheckedItems.Count} {itemType} and their connections?", Color.Red, SystemColors.ControlLight);
                 confirmation.ShowDialog();
 
                 // if user confirms deletion of selected records, delete each record that was checked

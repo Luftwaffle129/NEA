@@ -42,7 +42,7 @@
             this.btnCancel.Location = new System.Drawing.Point(145, 390);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 50);
-            this.btnCancel.TabIndex = 18;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -55,7 +55,7 @@
             this.btnSave.Location = new System.Drawing.Point(15, 390);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 50);
-            this.btnSave.TabIndex = 17;
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Add";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -75,7 +75,7 @@
             this.txtBarcodes.Multiline = true;
             this.txtBarcodes.Name = "txtBarcodes";
             this.txtBarcodes.Size = new System.Drawing.Size(250, 333);
-            this.txtBarcodes.TabIndex = 20;
+            this.txtBarcodes.TabIndex = 0;
             // 
             // frmAddBookCopies
             // 
