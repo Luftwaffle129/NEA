@@ -53,7 +53,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
         /// <summary>
         /// Set the fields to display the properties of the circulation copy
         /// </summary>
-        /// <param name="circCopy">circulation copy to be modified</param>
+        /// <param name="circCopy">Circulation copy to be modified</param>
         public void Load(CirculationCopy circCopy)
         {
             _circCopy = circCopy;

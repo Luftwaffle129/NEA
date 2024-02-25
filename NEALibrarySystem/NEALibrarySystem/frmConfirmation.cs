@@ -6,7 +6,13 @@ namespace NEALibrarySystem
 {
     public partial class frmConfirmation : Form
     {
-        public frmConfirmation(string message, string yesText = "Yes", string cancelText = "Cancel") // Used to initialise the form with the appropiate message
+        /// <summary>
+        /// Initialises the form with the appropiate message
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        /// <param name="yesText">Text inside of the "Yes" button</param>
+        /// <param name="cancelText">Text inside of the "Cancel" button</param>
+        public frmConfirmation(string message, string yesText = "Yes", string cancelText = "Cancel")
         {
             InitializeComponent();
             lblOutput.Text = message;
@@ -14,6 +20,14 @@ namespace NEALibrarySystem
             btnYes.Text = yesText;
             btnCancel.Text = cancelText;
         }
+        /// <summary>
+        /// Initialises the form with the appropiate message and with the provided button colors
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        /// <param name="yesColor">Color of the "Yes" button</param>
+        /// <param name="cancelColor">Color of the "Yes" button</param>
+        /// <param name="yesText">Text inside of the "Yes" button</param>
+        /// <param name="cancelText">Text inside of the "Cancel" button</param>
         public frmConfirmation(string message, Color yesColor, Color cancelColor, string yesText = "Yes", string cancelText = "Cancel") // Used to initialise the form with the appropiate message
         {
             InitializeComponent();

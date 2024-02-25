@@ -1,25 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
-using System.Xml.Linq;
-using System.CodeDom.Compiler;
-using NEALibrarySystem.Properties;
-using static NEALibrarySystem.EmailHandler;
-using System.Runtime.InteropServices.ComTypes;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace NEALibrarySystem
 {
+    /// <summary>
+    /// Used to send emails via the Gmail API
+    /// </summary>
     public static class EmailHandler
     {
         static string[] Scopes = { GmailService.Scope.GmailSend };
@@ -34,18 +28,18 @@ namespace NEALibrarySystem
         /// <summary>
         /// Sends emails
         /// </summary>
-        /// <param name="receiver">Email to send to</param>
+        /// <param name="receiver">Email address to send to</param>
         /// <param name="subject">Title of email</param>
         /// <param name="content">Contents of email</param>
+        /// <param name="canErrorMessage">Whether error message is displayed if something goes wrong</param>
         public static void Send(string receiver, string subject, string content, bool canErrorMessage = false)
         {
             try
             {
                 UserCredential credential;
+
                 //read your credentials file
-
                 var assembly = Assembly.GetExecutingAssembly();
-
                 using (var stream = assembly.GetManifestResourceStream("NEALibrarySystem.Resources.credentials.json"))
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);

@@ -10,12 +10,15 @@ using System.Threading.Tasks;
 
 namespace NEALibrarySystem.Panel_Handlers.Settings
 {
+    /// <summary>
+    /// Used to handle the methods used in processes in the settings panel in the main form
+    /// </summary>
     public class SettingsHandler
     {
         private SettingsObjects _objects;
         private SettingsCreator settingsCreator = new SettingsCreator();
-        private int _circulationType;
-        private int _circulationMemberType;
+        private int _circulationType;       // index of the circulation type due date being edited in the settings panel
+        private int _circulationMemberType; // index of the member type due date being edited in the settings panel
         public SettingsHandler(SettingsObjects objects) 
         {
             _objects = objects;
@@ -31,6 +34,9 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
             _objects.CirculationMemberType.Items.Add(MemberType.Elderly.ToString());
             _objects.CirculationMemberType.Items.Add(MemberType.Deliverer.ToString());;
         }
+        /// <summary>
+        /// Sets up the input fields with the current settings data
+        /// </summary>
         public void Load()
         {
             settingsCreator.GetCurrentSettings();
@@ -42,6 +48,9 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
             _objects.CirculationMemberType.Text = MemberType.Adult.ToString();
             _objects.CirculationLateFee.Value = Convert.ToDecimal(settingsCreator.LateFeePerDay);
         }
+        /// <summary>
+        /// Updates which circulation type due date is being edited
+        /// </summary>
         public void UpdateCirculationType()
         {
 
@@ -51,23 +60,35 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
                 _circulationType = 1;
             UpdateCirculationTimePeriod();
         }
+        /// <summary>
+        /// Updates which member type due date is being edited
+        /// </summary>
         public void UpdateCirculationMemberType()
         {
             _circulationMemberType = DataFormatter.StringToEnum<MemberType>(_objects.CirculationMemberType.Text);
             UpdateCirculationTimePeriod();
         }
+        /// <summary>
+        /// Updates the due date time period that is currently selected to the stored value
+        /// </summary>
         public void UpdateCirculationTimePeriod()
         {
-            try
+            try // try catch to stop errors on loading the panel
             {
                 _objects.CirculationTimeLength.Value = settingsCreator.Durations[_circulationType, _circulationMemberType];
             }
             catch { }
         }
+        /// <summary>
+        /// Updates the stored value of the due date time period that is currently selected to inputted value
+        /// </summary>
         public void SetCirculationTimePeriod()
         {
             settingsCreator.Durations[_circulationType, _circulationMemberType] = Convert.ToInt32(_objects.CirculationTimeLength.Value);
         }
+        /// <summary>
+        /// Saves the inputted settings data
+        /// </summary>
         public void Save()
         {
             settingsCreator.BookCopyBarcodeLength = Convert.ToInt32(_objects.BarcodeBookCopy.Value);

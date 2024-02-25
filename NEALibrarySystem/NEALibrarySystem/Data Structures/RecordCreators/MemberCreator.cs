@@ -28,14 +28,14 @@ namespace NEALibrarySystem.Data_Structures.Records
         /// <summary>
         /// Validates the data stored in this class
         /// </summary>
-        /// <param name="invalidList">List of invalid data</param>
+        /// <param name="/invalidList">List of invalid data</param>
         /// <param name="original">Original member record</param>
         /// <returns>Boolean result of whether the data is valid</returns>
         public bool Validate(out List<string> invalidList, Member original = null)
         {
             invalidList = new List<string>();
             // barcode - check if it is unique and correct length and contains only digits. If modifying a record, allow creator barcode to be equal to the old barcode
-            if (!(Barcode.Length == Settings.MemberBarcodeLength && Regex.IsMatch(Barcode, @"^[0-9]*$")))
+            if (!(Barcode.Length == Settings.MemberBarcodeLength && Regex.IsMatch(Barcode, @"^[0-9]*$"))) // contains only digits
                 invalidList.Add("Barcode");
             else
             {
@@ -67,13 +67,13 @@ namespace NEALibrarySystem.Data_Structures.Records
             if (!DataFormatter.IsValidEmail(EmailAddress))
                 invalidList.Add("Email Address");
             // phone number - contains the correct characters and correct number of digits
-            int digits = Regex.Matches(PhoneNumber, @"[0-9]").Count;
-            if (!( Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$") && (digits == 10 || digits == 11) ))
+            int digits = Regex.Matches(PhoneNumber, @"[0-9]").Count; // gets the number of digits in the phone number
+            if (!( Regex.IsMatch(PhoneNumber, @"^\+*[0-9\- ]*$") && (digits == 10 || digits == 11) )) // checks that the phone number contains a valid number of digits. Regex: start with a + 0 or more times, then digits 0-9 or a hyphen zero or more times
                 invalidList.Add("Phone Number");
             // Address 1 - not empty
             if (FirstName.Length == 0)
                 invalidList.Add("Address 1");
-            // address 2 doesnt have any validation as it may not be required
+            // address 2 doesn't have any validation as it may not be required
             // Town/City - not empty
             if (TownCity.Length == 0)
                 invalidList.Add("Town/City");
@@ -81,13 +81,13 @@ namespace NEALibrarySystem.Data_Structures.Records
             if (County.Length == 0)
                 invalidList.Add("County");
             // Postcode - correct format
-            if (!Regex.IsMatch(Postcode, @"^[a-zA-Z]{1,2}[0-9][0-9a-zA-Z]? [0-9]{1}[a-zA-Z]{2}$"))
+            if (!Regex.IsMatch(Postcode, @"^[a-zA-Z]{1,2}[0-9][0-9a-zA-Z]? [0-9]{1}[a-zA-Z]{2}$")) // Regex: starts with 1 or 2 letters, then a digit once, then a digit or letter 0 or 1 times, then a space, then a digit once, then two letters
                 invalidList.Add("Postcode");
             // linked members - correct length and is an existing member barcode
             if (!ValidateLinkedMembers())
                 invalidList.Add("Linked Members");
 
-            return invalidList.Count > 0 ? false : true;
+            return invalidList.Count == 0;
         }
         /// <summary>
         /// Checks that all linked member barcodes are unique, the correct length, contain only digits, and match an existing member's barcode

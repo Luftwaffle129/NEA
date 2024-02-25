@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace NEALibrarySystem.Data_Structures
 {
     /// <summary>
-    /// stores the information about a book
+    /// Stores the information about a book
     /// </summary>
     public class Book
     {
@@ -22,6 +22,7 @@ namespace NEALibrarySystem.Data_Structures
         public List<ReferenceClass<string, Book>> Themes = new List<ReferenceClass<string, Book>>();
 
         public List<BookCopy> BookCopies = new List<BookCopy>(); // used to relate the book to book copies
+        #region Constructors
         public Book() { }
         /// <summary>
         /// Creates a new book record from the data in a BookCreator class
@@ -32,8 +33,10 @@ namespace NEALibrarySystem.Data_Structures
             // set the attributes that are not referenced
             SeriesNumber = Convert.ToInt32(bookInfo.SeriesNumber);
             Description = bookInfo.Description;
+
             // set the referenced attributes
             int index = 0; // index that the reference class is inserted into
+            // ISBN reference class is first as it is required for setting the other reference classes
             DataLibrary.Isbns = DataLibrary.CreateReferenceClass(DataLibrary.Isbns, this, bookInfo.Isbn, SearchAndSort.TwoRefClassBooks, out index);
             Isbn = DataLibrary.Isbns[index];
             DataLibrary.Titles = DataLibrary.CreateReferenceClass(DataLibrary.Titles, this, bookInfo.Title,SearchAndSort.TwoRefClassBooks, out index);
@@ -48,6 +51,7 @@ namespace NEALibrarySystem.Data_Structures
             Author = DataLibrary.Authors[index];
             DataLibrary.Publishers = DataLibrary.CreateReferenceClass(DataLibrary.Publishers, this, bookInfo.Publisher, SearchAndSort.TwoRefClassBooks, out index);
             Publisher = DataLibrary.Publishers[index];
+
             if (bookInfo.Genres.Count > 0)
                 foreach (string genre in bookInfo.Genres)
                 {
@@ -61,5 +65,6 @@ namespace NEALibrarySystem.Data_Structures
                     Themes.Add(DataLibrary.Themes[index]);
                 }
         }
+        #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace NEALibrarySystem.Data_Structures
 {
     /// <summary>
-    /// Stores smallest item with a reference index
+    /// Used to store the smallest item with a reference index. Used in broad searches
     /// </summary>
     public class SmallestItem<T> where T : class
     {

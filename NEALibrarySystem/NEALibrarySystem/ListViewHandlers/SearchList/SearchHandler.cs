@@ -3,6 +3,7 @@ using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,16 +17,16 @@ namespace NEALibrarySystem.SearchList
     public class SearchHandler
     {
         public SearchObjects Objects;
-        public ListViewSorting Sorting;
+        public ListViewSortingData ListViewSortingData;
 
         // arrays used to store each features' column headers
         private static string[] _memberColumns;
-        public static string[] BookColumns; //public so that circulation details panel can display a book in the same format as the search panel
-        private static string[] CirculationCopyColumns;
+        public static string[] BookColumns;                 //public so that circulation details panel can display a book in the same format as the search panel
+        private static string[] _circulationCopyColumns;
         private static string[] _staffColumns;
         public SearchHandler(SearchObjects objects)
         {
-            Sorting = new ListViewSorting();
+            ListViewSortingData = new ListViewSortingData();
             Objects = objects;
             // list view properties
             Objects.ItemViewer.View = View.Details;
@@ -57,7 +58,7 @@ namespace NEALibrarySystem.SearchList
                 "Genres",
                 "Themes"
             };
-            CirculationCopyColumns = new string[]
+            _circulationCopyColumns = new string[]
             {
                 "ID",
                 "Barcode",
@@ -83,26 +84,26 @@ namespace NEALibrarySystem.SearchList
         public void SetUpSearchTab()
         {
             // sets initial sorting method
-            Sorting.SortedDescending = false;
-            Sorting.CurrentColumn = 1;
+            ListViewSortingData.SortedDescending = false;
+            ListViewSortingData.CurrentColumn = 1;
             // opens the search view tab to the currently selected search feature
             switch (FrmMainSystem.Main.SearchFeature)
             {
                 case SearchFeature.Book:
                     ToBook();
-                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref Sorting, ListViewHandler.ColourListViewNormal);
+                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                     break;
                 case SearchFeature.Circulation:
                     ToCirculation();
-                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref Sorting, ListViewHandler.ColourListViewOverdue);
+                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref ListViewSortingData, ListViewHandler.ColourListViewOverdue);
                     break;
                 case SearchFeature.Member:
                     ToMember();
-                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref Sorting, ListViewHandler.ColourListViewNormal);
+                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                     break;
                 case SearchFeature.Staff:
                     ToStaff();
-                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref Sorting, ListViewHandler.ColourListViewNormal);
+                    ListViewHandler.SortListView(ref Objects.ItemViewer, 0, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                     break;
             }
 
@@ -168,7 +169,7 @@ namespace NEALibrarySystem.SearchList
                     columns = BookColumns;
                     break;
                 case DataLibrary.SearchFeature.Circulation:
-                    columns = CirculationCopyColumns;
+                    columns = _circulationCopyColumns;
                     break;
                 case DataLibrary.SearchFeature.Staff:
                     columns = _staffColumns;
@@ -231,8 +232,8 @@ namespace NEALibrarySystem.SearchList
                                 DataLibrary.DeleteMember(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
                             }
                             UpdateListView(DataLibrary.Members);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case DataLibrary.SearchFeature.Book:
                             foreach (ListViewItem item in Objects.ItemViewer.CheckedItems)
@@ -240,8 +241,8 @@ namespace NEALibrarySystem.SearchList
                                 DataLibrary.DeleteBook(DataLibrary.Isbns[SearchAndSort.Binary(DataLibrary.Isbns, item.SubItems[0].Text, SearchAndSort.RefClassAndString)].Reference);
                             }
                             UpdateListView(DataLibrary.Books);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case DataLibrary.SearchFeature.Circulation:
                             foreach (ListViewItem item in Objects.ItemViewer.CheckedItems)
@@ -249,8 +250,8 @@ namespace NEALibrarySystem.SearchList
                                 DataLibrary.DeleteCirculationCopy(DataLibrary.CirculationIds[SearchAndSort.Binary(DataLibrary.CirculationIds, Convert.ToInt32(item.SubItems[0].Text), SearchAndSort.RefClassAndInteger)].Reference);
                             }
                             UpdateListView(DataLibrary.CirculationCopies);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewOverdue);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewOverdue);
                             break;
                         case DataLibrary.SearchFeature.Staff:
                             bool invalidStaff = false;
@@ -268,8 +269,8 @@ namespace NEALibrarySystem.SearchList
                                     DataLibrary.DeleteStaff(DataLibrary.StaffUsernames[SearchAndSort.Binary(DataLibrary.StaffUsernames, item.SubItems[2].Text, SearchAndSort.RefClassAndString)].Reference);
                                 }
                                 UpdateListView(DataLibrary.StaffList);
-                                Sorting.SortedDescending = !Sorting.SortedDescending;
-                                ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                                ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                                ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             }
                             else
                             {
@@ -298,7 +299,7 @@ namespace NEALibrarySystem.SearchList
                     columns = BookColumns;
                     break;
                 case SearchFeature.Circulation:
-                    columns = CirculationCopyColumns;
+                    columns = _circulationCopyColumns;
                     break;
                 case SearchFeature.Staff:
                     columns = _staffColumns;
@@ -456,23 +457,23 @@ namespace NEALibrarySystem.SearchList
                     {
                         case SearchFeature.Member:
                             UpdateListView(DataLibrary.Members);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case SearchFeature.Book:
                             UpdateListView(DataLibrary.Books);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case SearchFeature.Circulation:
                             UpdateListView(DataLibrary.CirculationCopies);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewOverdue);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewOverdue);
                             break;
                         case SearchFeature.Staff:
                             UpdateListView(DataLibrary.StaffList);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                     }
                     break;
@@ -541,8 +542,8 @@ namespace NEALibrarySystem.SearchList
                                 }
                             }
                             UpdateListView(members);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case SearchFeature.Book:
                             List<Book> books = DataLibrary.Books;
@@ -632,8 +633,8 @@ namespace NEALibrarySystem.SearchList
 
                             }
                             UpdateListView(books);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                         case SearchFeature.Circulation:
                             List<CirculationCopy> circulationCopies = DataLibrary.CirculationCopies;
@@ -649,7 +650,7 @@ namespace NEALibrarySystem.SearchList
                                          * Sort the list
                                          * Apply the filter to get the new filtered list of records
                                          */
-                                        if (searchInputs[i].Category.Text == CirculationCopyColumns[0])
+                                        if (searchInputs[i].Category.Text == _circulationCopyColumns[0])
                                         {
 
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
@@ -658,7 +659,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies);
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[1])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -666,7 +667,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[2])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[2])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -674,7 +675,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[3])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[3])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -682,7 +683,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[4])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[4])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -690,7 +691,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[5])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[5])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -698,7 +699,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[6])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[6])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -706,7 +707,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoRefClassCircCopies);
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[7])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[7])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -714,7 +715,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, CirculationCopy>, ReferenceClass<string, CirculationCopy>>(referenceClasses, SearchAndSort.TwoUpperRefClassCircCopies); 
                                             circulationCopies = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[8])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[8])
                                         {
                                             List<ReferenceClass<string, CirculationCopy>> referenceClasses = new List<ReferenceClass<string, CirculationCopy>>();
                                             foreach (CirculationCopy circulationCopy in circulationCopies)
@@ -730,8 +731,8 @@ namespace NEALibrarySystem.SearchList
                                 }
                             }
                             UpdateListView(circulationCopies);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewOverdue);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewOverdue);
                             break;
                         case SearchFeature.Staff:
                             List<Staff> staffList = DataLibrary.StaffList;
@@ -747,7 +748,7 @@ namespace NEALibrarySystem.SearchList
                                          * Sort the list
                                          * Apply the filter to get the new filtered list of records
                                          */
-                                        if (searchInputs[i].Category.Text == CirculationCopyColumns[0])
+                                        if (searchInputs[i].Category.Text == _circulationCopyColumns[0])
                                         {
 
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
@@ -756,7 +757,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
                                             staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[1])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
                                         {
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
                                             foreach (Staff staff in staffList)
@@ -764,7 +765,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
                                             staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == CirculationCopyColumns[1])
+                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
                                         {
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
                                             foreach (Staff staff in staffList)
@@ -780,8 +781,8 @@ namespace NEALibrarySystem.SearchList
                                 }
                             }
                             UpdateListView(staffList);
-                            Sorting.SortedDescending = !Sorting.SortedDescending;
-                            ListViewHandler.SortListView(ref Objects.ItemViewer, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+                            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending;
+                            ListViewHandler.SortListView(ref Objects.ItemViewer, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
                             break;
                     }
                     break;
@@ -825,34 +826,31 @@ namespace NEALibrarySystem.SearchList
         private bool IsCategoryValid(ComboBox category)
         {
             if (category.Text != "")
+            {
+                string[] columns = new string[0];
                 // check that the category matches a column of the current selected searchFeature. If it does not, return not valid, else return valid
                 switch (FrmMainSystem.Main.SearchFeature)
                 {
                     case SearchFeature.Member:
-                        bool contains = false;
-                        foreach (string column in _memberColumns)
-                            if (column == category.Text)
-                                contains = true;
-                        if (!contains)
-                            return false;
+                        columns = _memberColumns;
                         break;
                     case SearchFeature.Book:
-                        contains = false;
-                        foreach (string column in BookColumns)
-                            if (column == category.Text)
-                                contains = true;
-                        if (!contains)
-                            return false;
+                        columns = BookColumns;
                         break;
                     case SearchFeature.Circulation:
-                        contains = false;
-                        foreach (string column in CirculationCopyColumns)
-                            if (column == category.Text)
-                                contains = true;
-                        if (!contains)
-                            return false;
+                        columns = _circulationCopyColumns;
+                        break;
+                    case SearchFeature.Staff: 
+                        columns = _staffColumns; 
                         break;
                 }
+                bool contains = false;
+                foreach (string column in columns)
+                    if (column == category.Text)
+                        contains = true;
+                if (!contains)
+                    return false;
+            }
             return true;
         }
         /// <summary>
@@ -996,7 +994,7 @@ namespace NEALibrarySystem.SearchList
         /// <returns>List of circulation copies that match the search term</returns>
         private List<CirculationCopy> CirculationSearch(string searchItem, List<CirculationCopy> circulationCopies)
         {
-            List<ReferenceClass<string, CirculationCopy>>[] attributeRefClasses = new List<ReferenceClass<string, CirculationCopy>>[CirculationCopyColumns.Length]; // stores lists of reference classes of the inputted circulation copies
+            List<ReferenceClass<string, CirculationCopy>>[] attributeRefClasses = new List<ReferenceClass<string, CirculationCopy>>[_circulationCopyColumns.Length]; // stores lists of reference classes of the inputted circulation copies
             List<List<CirculationCopy>> validCirculationCopies = new List<List<CirculationCopy>>(); // stores the list of circulation copies that pass the filter for each property
 
             if (circulationCopies.Count > 0)

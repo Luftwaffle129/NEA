@@ -14,13 +14,13 @@ namespace NEALibrarySystem
     {
         // objects
         public MemberDetailsObjects Objects;
-        public ListViewSorting Sorting;
+        public ListViewSortingData ListViewSortingData;
         // member record being modified
         private Member _memberData = null;
         private List<CirculationCopy> _circulationList = new List<CirculationCopy>(); // contains the list of circulation copies related to the member
         public MemberDetailsHandler(MemberDetailsObjects memberDetailsObjects)
         {
-            Sorting = new ListViewSorting();
+            ListViewSortingData = new ListViewSortingData();
             Objects = memberDetailsObjects;
 
             // add the possible member types to the member type combo box 

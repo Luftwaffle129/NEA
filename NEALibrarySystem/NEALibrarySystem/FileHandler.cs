@@ -11,14 +11,12 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Data_Structures
 {
-    // default file path: Application.StartupPath + "\\data\\"
-
     /// <summary>
-    /// Saves and loads files
+    /// Saves, loads and handles backups of files
     /// </summary>
     public static class FileHandler
     {
-        public static string FilePath;
+        public static string FilePath; // default file path: Application.StartupPath + "\\data\\"
 
         private static string[] _files =
         {
@@ -102,15 +100,6 @@ namespace NEALibrarySystem.Data_Structures
             if (!Directory.Exists(Application.StartupPath + "\\Data"))
                 Directory.CreateDirectory(Application.StartupPath + "\\Data");
         }
-
-        public static bool StaffFilesExist()
-        {
-            if (File.Exists(FilePath + $"\\Staff.bin"))
-                return true;
-            else
-                return false;
-        }
-
         /// <summary>
         /// Loads all data into the system, loads from back up or creates new files of initial load fails.
         /// </summary>
@@ -124,7 +113,7 @@ namespace NEALibrarySystem.Data_Structures
             {
                 try
                 {
-                    FileHandler.Load.All();
+                    Load.All();
                 }
                 catch
                 {
@@ -132,7 +121,9 @@ namespace NEALibrarySystem.Data_Structures
                 }
             }
         }
-
+        /// <summary>
+        /// Check for invalid files. If files aer invalid, load from backup or create new files
+        /// </summary>
         private static void HandleInvalidFiles()
         {
             CreateDataDirectory();
@@ -222,6 +213,7 @@ namespace NEALibrarySystem.Data_Structures
             /// <returns>Returns a boolean result of whether the back up was successfully created</returns>
             public static bool Save()
             {
+                // open a save file dialog form to get the location to save the files
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.InitialDirectory = "c:\\";
                 saveFileDialog.Filter = "Zip Files (.zip)|*.zip|All files (*.*)|*.*";
@@ -256,6 +248,7 @@ namespace NEALibrarySystem.Data_Structures
             /// <returns>Returns a boolean result of whether the back up was successfully loaded</returns>
             public static bool Restore()
             {
+                // open a open file dialog form to get the location of the backup to load
                 OpenFileDialog OpenFileDialog = new OpenFileDialog();
                 OpenFileDialog.InitialDirectory = "c:\\";
                 OpenFileDialog.Filter = "Zip Files (.zip)|*.zip";
@@ -275,11 +268,12 @@ namespace NEALibrarySystem.Data_Structures
                         Directory.Delete(tempFilePath, true);
                     Directory.Move(FilePath, tempFilePath);
 
-                    // extract backup data to new directory
+                    // extract backup data to data directory
                     ZipFile.ExtractToDirectory(fileName, FilePath);
+                    // if staff file exists in the loaded back up, delete it
                     if (File.Exists(FilePath + "Staff.bin"))
                         File.Delete(FilePath + "Staff.bin");
-                    // copy staff file into backup data
+                    // copy old staff file into backup data
                     File.Copy(tempFilePath + "Staff.bin", FilePath + "Staff.bin");
 
                     // attempts to load all data
@@ -290,7 +284,7 @@ namespace NEALibrarySystem.Data_Structures
                     }
                     else // if data loads unsuccessfully
                     {
-                        // returns to using previous data
+                        // delete the loaded backup and replace it with the old data
                         if (Directory.Exists(FilePath))
                             Directory.Delete(FilePath, true);
                         Directory.Move(tempFilePath, FilePath); 
@@ -325,7 +319,7 @@ namespace NEALibrarySystem.Data_Structures
             /// </summary>
             public static void Books()
             {
-                // place the unique values for each property for all books into their respective lists
+                // get the unique values for each property for all books and place them into their respective lists
                 List<string> titles = GetUniqueItems(DataLibrary.Titles, SearchAndSort.TwoStrings);
                 List<double> prices = GetUniqueItems(DataLibrary.Prices, SearchAndSort.TwoDoubles);
                 List<string> mediaTypes = GetUniqueItems(DataLibrary.MediaTypes, SearchAndSort.TwoStrings);
@@ -452,7 +446,7 @@ namespace NEALibrarySystem.Data_Structures
                         saver.MemberBarcode = circulationCopy.Member.Barcode.Value;
                         saver.DueDate = circulationCopy.DueDate.Value;
                         saver.Date = circulationCopy.Date.Value;
-
+                        saver.EmailSent = circulationCopy.EmailSent;
                         circulationCopySavers[i] = saver;
                     }
                 SaveFile(circulationCopySavers, FilePath, "CirculationCopies");
@@ -652,6 +646,7 @@ namespace NEALibrarySystem.Data_Structures
                             Member = DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, saver.MemberBarcode, SearchAndSort.RefClassAndString)].Reference,
                             DueDate = saver.DueDate,
                             Date = saver.Date, // date is specified as it is loading an active circulation that was created in the past
+                            EmailSent = saver.EmailSent,
                         };
                         DataLibrary.CirculationCopies.Add(new CirculationCopy(creator));
                     }

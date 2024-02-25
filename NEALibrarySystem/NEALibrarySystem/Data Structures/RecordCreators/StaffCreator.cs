@@ -26,17 +26,11 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
         {
             invalidList = new List<string>();
             if (FirstName.Length == 0) // first name cannot be empty
-            {
                 invalidList.Add("First Name");
-            }
             if (FirstName.Length == 0) // surname cannot be empty
-            {
                 invalidList.Add("Surname");
-            }
             if (!DataFormatter.IsValidEmail(EmailAddress) ) // email address must be in the correct format
-            {
                 invalidList.Add("Email Address");
-            }
             else
             {
                 if (original == null) // if creating a new record, username must be unique
@@ -51,9 +45,7 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
                 }
             }
             if (Username.Length == 0) // username cannot be empty
-            {
                 invalidList.Add("Username");
-            }
             else
             {
                 if (original == null) // if creating a new record, username must be unique
@@ -68,11 +60,8 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
                 }
             }
             if (Password.Length < 4) // password must be at least 4 characters long
-            {
                 invalidList.Add("Password Too Short");
-
-            }
-            return invalidList.Count > 0 ? false : true;
+            return invalidList.Count == 0;
         }
     }
 }

@@ -12,15 +12,13 @@ using NEALibrarySystem.Panel_Handlers.StaffDetails;
 using NEALibrarySystem.Panel_Handlers.BackupHandler;
 using NEALibrarySystem.Panel_Handlers.Settings;
 using System.Drawing;
-using System.Reflection;
-using System.Linq;
 using NEALibrarySystem.ListViewHandlers;
 
 namespace NEALibrarySystem
 {
     public partial class FrmMainSystem : Form
     {
-        public static FrmMainSystem Main;
+        public static FrmMainSystem Main; // used to let other class reference the form
         public FrmMainSystem(Staff staff)
         {
             Main = this;
@@ -44,9 +42,12 @@ namespace NEALibrarySystem
                 btnBackups.Visible = true;
                 btnStaffSave.Visible = true;
             }
-            this.WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Maximized;
         }
         #region feature icon
+        /// <summary>
+        /// Updates the feature image icon to the current feature
+        /// </summary>
         private void UpdateImageIcon()
         {
             switch (CurrentFeature)
@@ -93,8 +94,10 @@ namespace NEALibrarySystem
         private StaffDetailsHandler _StaffDetailsHandler;
         private BackupHandler _backupHandler;
         private SettingsHandler _settingsHandler;
+
         // declares class used for generating test data
         TestData _testData = new TestData();
+
         // declares variables used to store a selected record. Used in opening the details panel of the selected item in the search list view to store the selecetd record
         private Book _selectedBook;
         private CirculationCopy _selectedCircCopy;
@@ -104,7 +107,7 @@ namespace NEALibrarySystem
         #region initialisation
         /// <summary>
         /// Initialises all features and their panels
-        /// initialises panel jagged array used for navigation
+        /// Initialises panel jagged array used for navigation
         /// </summary>
         public void InitializePanels()
         {
@@ -408,7 +411,7 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
             ColorMainTabs();
-            ColorSubTabsUnselected();
+            ColorSubTabsToUnselected();
             _subTabs[0].BackColor = _selectedColor;
             NavigatorOpenSearchViewTab();
 
@@ -431,7 +434,7 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
             ColorMainTabs();
-            ColorSubTabsUnselected();
+            ColorSubTabsToUnselected();
             _subTabs[0].BackColor = _selectedColor;
             NavigatorOpenSearchViewTab();
 
@@ -454,7 +457,7 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
             ColorMainTabs();
-            ColorSubTabsUnselected();
+            ColorSubTabsToUnselected();
             _subTabs[0].BackColor = _selectedColor;
 
             if (!DataLibrary.CurrentUser.IsAdministrator)
@@ -668,14 +671,14 @@ namespace NEALibrarySystem
             _subTabs[index].BackColor = _selectedColor;
             //open the panel
             _panels[(int)CurrentFeature][index].Visible = true;
-            ColorSubTabsUnselected();
+            ColorSubTabsToUnselected();
             _subTabs[index].BackColor = _selectedColor;
         }
         #endregion
         /// <summary>
         /// Sets the background color of all subtabs to the unselected color
         /// </summary>
-        private void ColorSubTabsUnselected()
+        private void ColorSubTabsToUnselected()
         {
             // set all buttons to unselected colors
             foreach (Button subTab in _subTabs)
@@ -789,13 +792,6 @@ namespace NEALibrarySystem
             if (pnlMemberDetails.Visible)
                 _memberDetailsHandler.Load(_selectedMember);
         }
-        private void pnlStatistics_VisibleChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void pnlDelete_VisibleChanged(object sender, EventArgs e)
-        {
-        }
         private void pnlBackup_VisibleChanged(object sender, EventArgs e)
         {
             if (pnlBackup.Visible)
@@ -836,7 +832,7 @@ namespace NEALibrarySystem
         }
         private void lsvBookCopyDetails_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _bookDetailsHandler.Objects.CopyDetails, e.Column, ref _bookDetailsHandler.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _bookDetailsHandler.Objects.CopyDetails, e.Column, ref _bookDetailsHandler.ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         #endregion
         #region circulation details panel
@@ -864,7 +860,7 @@ namespace NEALibrarySystem
         }
         private void lsvMemberCirculations_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _memberDetailsHandler.Objects.Circulations, e.Column, ref _memberDetailsHandler.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _memberDetailsHandler.Objects.Circulations, e.Column, ref _memberDetailsHandler.ListViewSortingData, ListViewHandler.ColourListViewNormal);
 
         }
         #endregion
@@ -894,7 +890,7 @@ namespace NEALibrarySystem
         }
         private void lsvLoanSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _loanHandler.CirculationManager.SelectedBooks, e.Column, ref _loanHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _loanHandler.CirculationManager.SelectedBooks, e.Column, ref _loanHandler.CirculationManager.ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         #endregion
         #region return handler panel
@@ -923,8 +919,7 @@ namespace NEALibrarySystem
         }
         private void lsvReturnSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _returnHandler.CirculationManager.SelectedBooks, e.Column, ref _returnHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
-
+            ListViewHandler.SortListView(ref _returnHandler.CirculationManager.SelectedBooks, e.Column, ref _returnHandler.CirculationManager.ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         #endregion
         #region sell handler panel
@@ -953,7 +948,7 @@ namespace NEALibrarySystem
         }
         private void lsvSellSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _sellHandler.CirculationManager.SelectedBooks, e.Column, ref _sellHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _sellHandler.CirculationManager.SelectedBooks, e.Column, ref _sellHandler.CirculationManager.ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         #endregion
         #region reserve handler panel
@@ -982,7 +977,7 @@ namespace NEALibrarySystem
         }
         private void lsvReserveSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _reserveHandler.CirculationManager.SelectedBooks, e.Column, ref _reserveHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _reserveHandler.CirculationManager.SelectedBooks, e.Column, ref _reserveHandler.CirculationManager.ListViewSortingData, ListViewHandler.ColourListViewNormal);
 
         }
         #endregion
@@ -1010,7 +1005,7 @@ namespace NEALibrarySystem
         }
         private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewHandler.SortListView(ref _searchHandler.Objects.ItemViewer, e.Column, ref _searchHandler.Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.SortListView(ref _searchHandler.Objects.ItemViewer, e.Column, ref _searchHandler.ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         private void btnSearchSearch_Click(object sender, EventArgs e)
         {
@@ -1080,84 +1075,5 @@ namespace NEALibrarySystem
         }
         #endregion
         #endregion
-
-        private void txtBookISBN_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void txtBookPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void txtReserveMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtSellMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtSellEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtReserveEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtReturnEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtReturnMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtLoanEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtLoanMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtMemberPhoneNumber_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtMemberLinkedMembers_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void txtBookISBN_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtBookSeriesNumber_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void txtBookPrice_KeyDown(object sender, KeyEventArgs e)
-        {
-        }
-        private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void grpSettingsCirculation_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void numSettingsBarcodeMember_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

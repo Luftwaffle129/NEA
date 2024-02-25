@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -13,37 +9,6 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public static class DataFormatter
     {
-        public static Keys[] NUMBERKEYS = new Keys[] 
-        {
-            Keys.D0,
-            Keys.D1,
-            Keys.D2,        
-            Keys.D3,
-            Keys.D4,
-            Keys.D5,
-            Keys.D6,
-            Keys.D7,
-            Keys.D8,
-            Keys.D9,
-            Keys.NumPad0,
-            Keys.NumPad1,
-            Keys.NumPad2,
-            Keys.NumPad3,
-            Keys.NumPad4,
-            Keys.NumPad5,
-            Keys.NumPad6,
-            Keys.NumPad7,
-            Keys.NumPad8,
-            Keys.NumPad9
-        };
-        public static Keys[] ACTIONKEYS = new Keys[]
-        {
-            Keys.Back,
-            Keys.Delete,
-            Keys.Left,
-            Keys.Right,
-            Keys.Enter
-        };
         /// <summary>
         /// Converts a list of reference classes' values to a string with a ", " separating each item
         /// </summary>
@@ -217,16 +182,6 @@ namespace NEALibrarySystem.Data_Structures
             return list;
         }
         /// <summary>
-        /// Checks if text contains the subtext regardless of upper or lowercase characters
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="subtext">Text that may be contained in the other</param>
-        /// <returns>True if text does contain subtext, false if otherwise</returns>
-        public static bool Contains(string text, string subtext)
-        {
-            return text.ToUpper().Contains(subtext.ToUpper());
-        }
-        /// <summary>
         /// Convers an integer to a string of a specific length by adding 0s to the front until it matches the required length
         /// </summary>
         /// <param name="num">Integer input</param>
@@ -257,10 +212,14 @@ namespace NEALibrarySystem.Data_Structures
             }
             return price;
         }
-
+        /// <summary>
+        /// Validates the inputted email
+        /// </summary>
+        /// <param name="email">Email address</param>
+        /// <returns>Boolean value of whether the email address is valid</returns>
         public static bool IsValidEmail(string email)
         {
-            return Regex.IsMatch(email, @"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return Regex.IsMatch(email, @"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$"); // starts with at least 1 word character / hyphen / period, then an @, then (word character / hyphen at least once, then a period) at least once, then 2 to 4 word characters / hyphens
         }
     }
 }

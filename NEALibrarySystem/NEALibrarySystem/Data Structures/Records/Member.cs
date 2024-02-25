@@ -35,7 +35,10 @@ namespace NEALibrarySystem.Data_Structures
             get { return _circulations; }
             set { _circulations = value ?? new List<CirculationCopy>(); }    
         }
-
+        /// <summary>
+        /// Initialises a member record with the data in a member creator
+        /// </summary>
+        /// <param name="memberInfo"></param>
         public Member(MemberCreator memberInfo)
         {
             JoinDate = DateTime.Today;

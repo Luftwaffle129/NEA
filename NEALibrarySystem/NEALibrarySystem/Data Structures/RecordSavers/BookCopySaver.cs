@@ -6,7 +6,7 @@
     /// </summary>
     public class BookCopySaver
     {
-        public string Barcode;
-        public string Isbn;
+        public string Barcode;  // stores the barcode of the book copy
+        public string Isbn;     // stores the ISBN of the book record that the book copy is from
     }
 }

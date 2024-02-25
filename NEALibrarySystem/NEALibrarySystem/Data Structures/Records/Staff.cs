@@ -2,6 +2,9 @@
 
 namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Stores the information of a staff record
+    /// </summary>
     public class Staff
     {
         public ReferenceClass<string, Staff> FirstName;
@@ -13,6 +16,9 @@ namespace NEALibrarySystem.Data_Structures
 
         // constructors
         public Staff() { }
+        /// <summary>
+        /// Initialises a staff record with the data in the staff creator
+        /// </summary>
         public Staff(StaffCreator creator)
         {
             Password = creator.Password;

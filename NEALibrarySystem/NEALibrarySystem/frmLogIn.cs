@@ -1,6 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -27,7 +26,7 @@ namespace NEALibrarySystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN))
+            if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN)) // if the cooldown period between log in attempts is over
             {
                 int staffIndex = IsValidCredentials();
                 if (staffIndex != -1 )
@@ -54,14 +53,18 @@ namespace NEALibrarySystem
             frmForgottenPassword.Show();
             this.Hide();
         }
-        private int IsValidCredentials() // Jacob was here
+        /// <summary>
+        /// Checks if the inputted username and password match a staff record
+        /// </summary>
+        /// <returns>Index of staff record if a match, else -1</returns>
+        private int IsValidCredentials()
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-            int usernameIndex = SearchAndSort.Binary(DataLibrary.StaffUsernames, username, SearchAndSort.RefClassAndString);
+            int usernameIndex = SearchAndSort.Binary(DataLibrary.StaffUsernames, username, SearchAndSort.RefClassAndString); // attempt to find staff record wit the inputted username
 
-            if (usernameIndex != -1)
+            if (usernameIndex != -1) // if staff record was found
             {
                 if (password == DataLibrary.StaffUsernames[usernameIndex].Reference.Password)
                 {
@@ -73,10 +76,12 @@ namespace NEALibrarySystem
             else
                 return -1;
         }
+        // clears the password field
         public void ClearPassword()
         {
             txtPassword.Text = "";
         }
+        // opens the reset password form with the staff record whom is having their password changed
         public void ResetPassword()
         {
             frmResetPassword = new frmResetPassword(ForgottenPasswordStaff);

@@ -17,7 +17,7 @@ namespace NEALibrarySystem
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.barcodes = DataFormatter.SplitString(txtBarcodes.Text, "\r\n").ToArray();
+            barcodes = DataFormatter.SplitString(txtBarcodes.Text, "\r\n").ToArray();
             if (ValidBookCopyBarcodes())
             {
                 this.DialogResult = DialogResult.OK;

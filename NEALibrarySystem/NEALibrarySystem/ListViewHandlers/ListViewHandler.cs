@@ -11,10 +11,12 @@ namespace NEALibrarySystem.ListViewHandlers
     /// </summary>
     public static class ListViewHandler
     {
+        // colours for the item rows in a list view
         private static Color _normalColorBright = SystemColors.ControlLightLight;
         private static Color _normalColorDark = SystemColors.ControlLight;
-        private static Color _warningColorBright = Color.FromArgb(0xFF,0x43,0x43);
-        private static Color _warningColorDark = Color.FromArgb(0xFF, 0x00, 0x00);
+        private static Color _warningColorBright = Color.FromArgb(0xFF,0x43,0x43); // Light red
+        private static Color _warningColorDark = Color.FromArgb(0xFF, 0x00, 0x00); // Red
+
         /// <summary>
         /// Sets the inputted columns into the listview
         /// </summary>
@@ -111,7 +113,7 @@ namespace NEALibrarySystem.ListViewHandlers
         /// <param name="column">Column to sort by</param>
         /// <param name="currentColumn">Previous column sorted by</param>
         /// <param name="descending">Whether the column is currently in descending order</param>
-        public static void SortListView(ref ListView listView, int column, ref ListViewSorting listViewSorting, ColourListView colourListView)
+        public static void SortListView(ref ListView listView, int column, ref ListViewSortingData listViewSorting, ColourListView colourListView)
         {
             if (listViewSorting.CurrentColumn == column) // if the current column selected is the same as the current column being sorted by
                 listViewSorting.SortedDescending = !listViewSorting.SortedDescending; // inverts the boolean variable _inverted sort

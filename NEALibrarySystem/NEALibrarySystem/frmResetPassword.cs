@@ -13,7 +13,7 @@ namespace NEALibrarySystem
 {
     public partial class frmResetPassword : Form
     {
-        Staff _staff;
+        Staff _staff; // staff record which is having its password changed
         public frmResetPassword(Staff staff)
         {
             InitializeComponent();

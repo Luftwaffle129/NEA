@@ -14,5 +14,6 @@ namespace NEALibrarySystem.Data_Structures.Records
         public string MemberBarcode;
         public DateTime DueDate;
         public DateTime Date;
+        public bool EmailSent;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using NEALibrarySystem.Data_Structures;
-using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -22,21 +21,21 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         private TextBox _enterBarcodes; // Textbox used to enter book copy barcodes in order to select books
 
         // Variables
-        private bool _priceNeeded; // used to toggle whether a price column is needed in the list view
-        private List<BookCopy> _bookCopyList = new List<BookCopy>(); // book copies involved in the transaction
+        private bool _priceNeeded; // Used to toggle whether a price column is needed in the list view
+        private List<BookCopy> _bookCopyList = new List<BookCopy>(); // Book copies involved in the transaction
         public List<BookCopy> BookCopyList
         {
             get { return _bookCopyList; }
             set { _bookCopyList = value ?? new List<BookCopy>(); }
         }
         public Member SelectedMember; // member who the books are being circulated for
-        public ListViewSorting Sorting;
+        public ListViewSortingData ListViewSortingData;
         /// <summary>
-        /// Initialises ciruclation objects
+        /// Initialises circulation objects
         /// </summary>
         public CirculationObjectHandler(TextBox memberBarcode, TextBox memberName, TextBox loans, TextBox overdue, TextBox lateFees, TextBox enterBarcode, ListView selectedBooks, bool priceNeeded)
         {
-            Sorting = new ListViewSorting();
+            ListViewSortingData = new ListViewSortingData();
             // set up listview
             SelectedBooks = selectedBooks;
             _memberBarcode = memberBarcode;
@@ -71,8 +70,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _enterBarcodes.Text = "";
         }
         /// <summary>
-        /// Displays the member name, current loans, number of overdue books and the total of the late fees
-        /// of the member barcode inputted in a member is found
+        /// Displays the member name, current loans, number of overdue books and the total of the late fees of the member barcode inputted in a member is found
         /// </summary>
         public void UpdateMemberDetails()
         {
@@ -124,7 +122,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _lateFees.Text = lateFees.ToString();
         }
         /// <summary>
-        /// Sets up the list view
+        /// Sets up the list view properties
         /// </summary>
         /// <param name="PriceNeeded">Determines if the price of the books are displayed in the listview</param>
         private void InitialiseListView(bool PriceNeeded)
@@ -204,11 +202,11 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                 SelectedBooks.Items.Add(row);
             }
             ListViewHandler.ResizeColumnHeaders(ref SelectedBooks);
-            Sorting.SortedDescending = !Sorting.SortedDescending;
-            ListViewHandler.SortListView(ref SelectedBooks, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending; // this is so that the sort order is in the same direction as before the list was updated
+            ListViewHandler.SortListView(ref SelectedBooks, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
         }
         /// <summary>
-        /// removes the checked items from the list view of selected books
+        /// Removes the checked items from the list view of selected books
         /// </summary>
         public void DeleteCheckedBookCopies()
         {

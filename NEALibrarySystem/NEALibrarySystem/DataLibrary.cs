@@ -7,13 +7,13 @@ using static NEALibrarySystem.SearchAndSort;
 namespace NEALibrarySystem.Data_Structures
 {
     /// <summary>
-    /// Stores the records and methods to access their data
+    /// Stores the lists of records, methods used to handle the records, methods used to circulate books, methods to clear data, and methods used to send emails to users regarding overdue circulations
     /// </summary>
     public static class DataLibrary
     {
-        public static Staff CurrentUser = new Staff();
+        public static Staff CurrentUser = new Staff(); // record of staff member currently logged into the system
         #region data structures
-        // contains the lists of data stored by the program
+        // contains the lists of records and attributes stored by the program
         #region staffList
         private static List<Staff> _staffList = new List<Staff>();
         public static List<Staff> StaffList
@@ -263,9 +263,9 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Creates a loan of each book copy to the provided member if the inputted data is valid
         /// </summary>
-        /// <param name="member">member loaning the books</param>
-        /// <param name="bookCopies">book copies being loaned</param>
-        /// <param name="returnDate">date that the books should be returned</param>
+        /// <param name="member">Member loaning the books</param>
+        /// <param name="bookCopies">Book copies being loaned</param>
+        /// <param name="returnDate">Date that the books should be returned</param>
         /// <returns>Any errors that occured befored the books could be loaned</returns>
         public static CirculationError Loan(Member member, List<BookCopy> bookCopies, DateTime returnDate)
         {
@@ -476,7 +476,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <param name="record">Reference class to add</param>
         /// <param name="compare">Comparison method</param>
         /// <returns>The updated list</returns>
-        public static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare, out int index) where F : class
+        private static List<ReferenceClass<T, F>> AddReferenceClass<T, F>(List<ReferenceClass<T, F>> itemList, ReferenceClass<T, F> record, Compare<ReferenceClass<T, F>, ReferenceClass<T, F>> compare, out int index) where F : class
         {
             index = SearchAndSort.BinaryInsert(itemList, record, compare);
             itemList.Insert(index, record);
@@ -485,8 +485,8 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Creates a new book copy and adds it to the list of book copies
         /// </summary>
-        /// <param name="barcode">barcode of the new book copy</param>
-        /// <param name="book">book of the new book copy</param>    
+        /// <param name="barcode">Barcode of the new book copy</param>
+        /// <param name="book">Book of the new book copy</param>    
         public static void CreateBookCopy(string barcode, Book book)
         {
             BookCopies.Add(new BookCopy(barcode, book));
@@ -658,7 +658,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <summary>
         /// Deletes the specified book copy and the references to it
         /// </summary>
-        /// <param name="bookCopy">book copy to delete</param>
+        /// <param name="bookCopy">Book copy to delete</param>
         public static void DeleteBookCopy(BookCopy bookCopy)
         {
             // delete book copy relation
@@ -780,6 +780,9 @@ namespace NEALibrarySystem.Data_Structures
         }
         #endregion
         #region Overdue books
+        /// <summary>
+        /// Send overdue emails if the circulation copy is overdue, and the email has not been sent yet
+        /// </summary>
         public static void SendOverdueEmails()
         {
             int index = 0;
@@ -788,9 +791,8 @@ namespace NEALibrarySystem.Data_Structures
                 CirculationCopy copy = CirculationDueDates[index].Reference;
                 if (copy.EmailSent == false)
                 {
-                    bool isLoaned = copy.Type.Value == CirculationType.Loaned ? true : false;
-                    string subject = isLoaned ? "Your book loan is overdue" : "Your reservation has expired";
-                    string content = isLoaned ?
+                    string subject = copy.Type.Value == CirculationType.Loaned ? "Your book loan is overdue" : "Your reservation has expired";
+                    string content = copy.Type.Value == CirculationType.Loaned ?
                         $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is overdue. A late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
                         : $"Your reservation for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" has expired";
                     EmailHandler.Send(copy.Member.EmailAddress, subject, content);

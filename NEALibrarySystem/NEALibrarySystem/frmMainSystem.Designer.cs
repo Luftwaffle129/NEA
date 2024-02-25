@@ -645,7 +645,6 @@
             this.txtMemberBarcode.Name = "txtMemberBarcode";
             this.txtMemberBarcode.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberBarcode.TabIndex = 0;
-            this.txtMemberBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMemberBarcode_KeyDown);
             // 
             // lblMemberFirstName
             // 
@@ -666,7 +665,6 @@
             this.txtMemberLinkedMembers.Name = "txtMemberLinkedMembers";
             this.txtMemberLinkedMembers.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberLinkedMembers.TabIndex = 5;
-            this.txtMemberLinkedMembers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMemberLinkedMembers_KeyDown);
             // 
             // txtMemberFirstName
             // 
@@ -757,7 +755,6 @@
             this.txtMemberPhoneNumber.Name = "txtMemberPhoneNumber";
             this.txtMemberPhoneNumber.Size = new System.Drawing.Size(1159, 38);
             this.txtMemberPhoneNumber.TabIndex = 7;
-            this.txtMemberPhoneNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMemberPhoneNumber_KeyDown);
             // 
             // lblMemberDateOfBirth
             // 
@@ -1353,7 +1350,6 @@
             this.txtLoanEnterBarcode.Name = "txtLoanEnterBarcode";
             this.txtLoanEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtLoanEnterBarcode.TabIndex = 1;
-            this.txtLoanEnterBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLoanEnterBarcode_KeyDown);
             this.txtLoanEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtLoanEnterBarcode_PreviewKeyDown);
             // 
             // lblLoanLateFees
@@ -1460,7 +1456,6 @@
             this.txtLoanMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtLoanMemberBarcode.TabIndex = 0;
             this.txtLoanMemberBarcode.TextChanged += new System.EventHandler(this.txtLoanMemberBarcode_TextChanged);
-            this.txtLoanMemberBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLoanMemberBarcode_KeyDown);
             // 
             // lblLoanMemberBarcode
             // 
@@ -1547,7 +1542,6 @@
             this.grpSettingsCirculation.TabIndex = 80;
             this.grpSettingsCirculation.TabStop = false;
             this.grpSettingsCirculation.Text = "Circulation";
-            this.grpSettingsCirculation.Enter += new System.EventHandler(this.grpSettingsCirculation_Enter);
             // 
             // cmbSettingsCirculationMemberType
             // 
@@ -1645,7 +1639,6 @@
             this.lblSettingsCirculationDueDate.Size = new System.Drawing.Size(358, 31);
             this.lblSettingsCirculationDueDate.TabIndex = 77;
             this.lblSettingsCirculationDueDate.Text = "Circulation due date lengths:";
-            this.lblSettingsCirculationDueDate.Click += new System.EventHandler(this.label5_Click);
             // 
             // numSettingsCirculationLateFee
             // 
@@ -1702,7 +1695,6 @@
             0,
             0,
             0});
-            this.numSettingsBarcodeMember.ValueChanged += new System.EventHandler(this.numSettingsBarcodeMember_ValueChanged);
             // 
             // lblSettingsBarcodeBookCopy
             // 
@@ -1747,7 +1739,6 @@
             0,
             0,
             0});
-            this.numSettingsBarcodeBookCopy.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // btnSettingCancel
             // 
@@ -1838,7 +1829,6 @@
             this.txtReturnEnterBarcode.Name = "txtReturnEnterBarcode";
             this.txtReturnEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnEnterBarcode.TabIndex = 1;
-            this.txtReturnEnterBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReturnEnterBarcode_KeyDown);
             this.txtReturnEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReturnEnterBarcode_PreviewKeyDown);
             // 
             // lblReturnLateFees
@@ -1925,7 +1915,6 @@
             this.txtReturnMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReturnMemberBarcode.TabIndex = 0;
             this.txtReturnMemberBarcode.TextChanged += new System.EventHandler(this.txtReturnMemberBarcode_TextChanged);
-            this.txtReturnMemberBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReturnMemberBarcode_KeyDown);
             // 
             // lblReturnMemberBarcode
             // 
@@ -2174,8 +2163,6 @@
             this.txtBookPrice.Name = "txtBookPrice";
             this.txtBookPrice.Size = new System.Drawing.Size(1190, 38);
             this.txtBookPrice.TabIndex = 10;
-            this.txtBookPrice.TextChanged += new System.EventHandler(this.txtBookPrice_TextChanged);
-            this.txtBookPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookPrice_KeyDown);
             // 
             // txtBookDescription
             // 
@@ -2247,8 +2234,6 @@
             this.txtBookISBN.Name = "txtBookISBN";
             this.txtBookISBN.Size = new System.Drawing.Size(1190, 38);
             this.txtBookISBN.TabIndex = 3;
-            this.txtBookISBN.TextChanged += new System.EventHandler(this.txtBookISBN_TextChanged);
-            this.txtBookISBN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookISBN_KeyDown);
             // 
             // txtBookSeriesNumber
             // 
@@ -2259,7 +2244,6 @@
             this.txtBookSeriesNumber.Name = "txtBookSeriesNumber";
             this.txtBookSeriesNumber.Size = new System.Drawing.Size(1190, 38);
             this.txtBookSeriesNumber.TabIndex = 2;
-            this.txtBookSeriesNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookSeriesNumber_KeyDown);
             // 
             // txtBookSeriesTitle
             // 
@@ -2534,7 +2518,6 @@
             this.pnlMainTabs.Name = "pnlMainTabs";
             this.pnlMainTabs.Size = new System.Drawing.Size(150, 1080);
             this.pnlMainTabs.TabIndex = 1;
-            this.pnlMainTabs.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainTabs_Paint);
             // 
             // btnCirculation
             // 
@@ -2653,7 +2636,6 @@
             this.txtSellEnterBarcode.Name = "txtSellEnterBarcode";
             this.txtSellEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtSellEnterBarcode.TabIndex = 1;
-            this.txtSellEnterBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSellEnterBarcode_KeyDown);
             this.txtSellEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSellEnterBarcode_PreviewKeyDown);
             // 
             // lblSellLateFees
@@ -2736,7 +2718,6 @@
             this.txtSellMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtSellMemberBarcode.TabIndex = 0;
             this.txtSellMemberBarcode.TextChanged += new System.EventHandler(this.txtSellMemberBarcode_TextChanged);
-            this.txtSellMemberBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSellMemberBarcode_KeyDown);
             // 
             // lblSellMemberBarcode
             // 
@@ -2885,8 +2866,6 @@
             this.txtReserveEnterBarcode.Name = "txtReserveEnterBarcode";
             this.txtReserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReserveEnterBarcode.TabIndex = 1;
-            this.txtReserveEnterBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReserveEnterBarcode_KeyDown);
-            this.txtReserveEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReserveEnterBarcode_PreviewKeyDown);
             // 
             // txtReserveOverdue
             // 
@@ -2960,7 +2939,6 @@
             this.txtReserveMemberBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReserveMemberBarcode.TabIndex = 0;
             this.txtReserveMemberBarcode.TextChanged += new System.EventHandler(this.txtReserveMemberBarcode_TextChanged);
-            this.txtReserveMemberBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReserveMemberBarcode_KeyDown);
             // 
             // lblReserveMemberBarcode
             // 
@@ -3118,6 +3096,7 @@
             // 
             this.lsvCircDetailsBookData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvCircDetailsBookData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCircDetailsBookData.HideSelection = false;
             this.lsvCircDetailsBookData.Location = new System.Drawing.Point(255, 407);
             this.lsvCircDetailsBookData.Name = "lsvCircDetailsBookData";

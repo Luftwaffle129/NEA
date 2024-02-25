@@ -1,12 +1,5 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -16,7 +9,7 @@ namespace NEALibrarySystem
         private string _verificationCode;
         private DateTime _codeSentTime = DateTime.MinValue;
         private DateTime _codeSubmitTime = DateTime.MinValue;
-        private Staff _staff;
+        private Staff _staff; // record of the staff member that the inputted email address belongs to
         public frmForgottenPassword()
         {
             InitializeComponent();
@@ -24,10 +17,11 @@ namespace NEALibrarySystem
         }
         private void btnSubmitVerificationcode_Click(object sender, EventArgs e)
         {
-            if (_codeSentTime.AddMinutes(5) > DateTime.Now)
+            // if user entered the correct verification code within the time constraints, move onto the reset password process
+            if (_codeSentTime.AddMinutes(5) > DateTime.Now) // if the code has expired
             {
 
-                if (_codeSubmitTime.AddSeconds(1) <= DateTime.Now)
+                if (_codeSubmitTime.AddSeconds(1) <= DateTime.Now) // if the user pressed the submit button too fast
                 {
                     _codeSubmitTime = DateTime.Now;
                     if (txtVerificationCode.Text == _verificationCode)
@@ -48,16 +42,16 @@ namespace NEALibrarySystem
                 MessageBox.Show("Code expired. Send a new code.");
             }
         }
-
         private void btnSendVerificationCode_Click(object sender, EventArgs e)
         {
+            // sends a verification code email to the inputted email address if the email address belonmgs to a member
             if (DataFormatter.IsValidEmail(txtEmail.Text))
             {
-                int index = SearchAndSort.Binary(DataLibrary.StaffEmails, txtEmail.Text, SearchAndSort.RefClassAndString);
+                int index = SearchAndSort.Binary(DataLibrary.StaffEmails, txtEmail.Text, SearchAndSort.RefClassAndString); // attempts to find a staff record with the inputted email address
                 if (index != -1)
                 {
                     _staff = DataLibrary.StaffEmails[index].Reference;
-                    if (_codeSentTime.AddSeconds(30) < DateTime.Now)
+                    if (_codeSentTime.AddSeconds(30) < DateTime.Now) // if email was sent less than 30 seconds ago
                     {
                         Random rand = new Random();
                         _verificationCode = "";
@@ -78,16 +72,15 @@ namespace NEALibrarySystem
             else
                 MessageBox.Show("Invalid email");
         }
-
         private void frmForgottenPassword_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (frmLogIn.Main.ForgottenPasswordStaff == null)
+            if (frmLogIn.Main.ForgottenPasswordStaff != null) // if verification code was sent and the valid verificaion code was submitted
             {
-                frmLogIn.Main.Visible = true;
+                frmLogIn.Main.ResetPassword();
             }
             else
             {
-                frmLogIn.Main.ResetPassword();
+                frmLogIn.Main.Visible = true;
             }
         }
     }

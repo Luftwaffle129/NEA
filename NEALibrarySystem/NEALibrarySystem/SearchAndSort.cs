@@ -2,10 +2,6 @@
 using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
@@ -280,35 +276,11 @@ namespace NEALibrarySystem
             int minimumLength = text1.Length < text2.Length ? text1.Length : text2.Length;
             for (int i = 0; i < minimumLength; i++)
             {
-                if (Convert.ToInt32(text1[i]) > Convert.ToInt32(text2[i]))
+                if (Convert.ToInt32(text1[i]) > Convert.ToInt32(text2[i])) // compare character codes
                 {
                     return Greatest.Left;
                 }
-                else if (Convert.ToInt32(text1[i]) < Convert.ToInt32(text2[i]))
-                {
-                    return Greatest.Right;
-                }
-            }
-            return (text2.Length > text1.Length) ? Greatest.Right : Greatest.Left; // returns the longest item as the largest
-        }
-        /// <summary>
-        /// Compares two string values without case sensitivity
-        /// </summary>
-        /// <returns>Enum indicating the greater item</returns>
-        public static Greatest TwoUpperStrings(string text1, string text2)
-        {
-            text1 = text1.ToUpper();
-            text2 = text2.ToUpper();
-            if (text1 == text2)
-                return Greatest.Equal;
-            int minimumLength = text1.Length < text2.Length ? text1.Length : text2.Length;
-            for (int i = 0; i < minimumLength; i++)
-            {
-                if (Convert.ToInt32(text1[i]) > Convert.ToInt32(text2[i]))
-                {
-                    return Greatest.Left;
-                }
-                else if (Convert.ToInt32(text1[i]) < Convert.ToInt32(text2[i]))
+                else if (Convert.ToInt32(text1[i]) < Convert.ToInt32(text2[i])) // compare character codes
                 {
                     return Greatest.Right;
                 }
@@ -396,14 +368,6 @@ namespace NEALibrarySystem
         public static Greatest RefClassAndInteger<F>(ReferenceClass<int, F> referenceClass, int integer) where F : class
         {
             return TwoIntegers(referenceClass.Value, integer);
-        }
-        /// <summary>
-        /// Compares a reference class with a dateTime value, and a dateTime
-        /// </summary>
-        /// <returns>Enum indicating the greater item</returns>
-        public static Greatest RefClassAndDate<F>(ReferenceClass<DateTime, F> reference, DateTime date) where F : class
-        {
-            return TwoDates(reference.Value, date);
         }
         /// <summary>
         /// Compares two reference classes with string values and book references

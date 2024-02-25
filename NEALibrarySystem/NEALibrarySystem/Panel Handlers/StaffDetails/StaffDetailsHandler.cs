@@ -10,17 +10,23 @@ using System.Windows.Forms;
 
 namespace NEALibrarySystem.Panel_Handlers.StaffHandler
 {
+    /// <summary>
+    /// Used to handle the methods used in processes in the staff details panel in the main form
+    /// </summary>
     public class StaffDetailsHandler
     {
         private StaffDetailsObjects _objects = new StaffDetailsObjects();
-        private Staff _staffData;
+        private Staff _staffData;       // staff record being modified. null if creating a staff record
         public StaffDetailsHandler(StaffDetailsObjects objects) 
         {
             _objects = objects;
             _objects.AccessLevel.Items.Add("Staff");
             _objects.AccessLevel.Items.Add("Administrator");
         }
-
+        /// <summary>
+        /// Loads the staff details into the input boxes if creating a record, empties the input fields if creating a new staff record
+        /// </summary>
+        /// <param name="staff"></param>
         public void Load(Staff staff = null)
         {
             _staffData = staff;
@@ -43,6 +49,9 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
                 _objects.AccessLevel.Text = staff.IsAdministrator ? "Administrator" : "Staff";
             }
         }
+        /// <summary>
+        /// Saves the inputted staff details into a modified or created staff record
+        /// </summary>
         public void Save()
         {
             StaffCreator creator = new StaffCreator();
@@ -53,7 +62,7 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
             creator.EmailAddress = _objects.Email.Text;
             creator.IsAdministrator = _objects.AccessLevel.Text == "Staff" ? false : true;
             List<string> errors;
-            if (creator.Validate(out errors, _staffData))
+            if (creator.Validate(out errors, _staffData)) // if inputted data is valid
             {
                 if (_staffData == null) // if a new staff record is being created
                 {
@@ -72,9 +81,15 @@ namespace NEALibrarySystem.Panel_Handlers.StaffHandler
                 MessageBox.Show("Invalid inputs: " + DataFormatter.ListToString(errors));
             }
         }
+        /// <summary>
+        /// Cancels the creation or modificaiton of a staff record. If creating, reset the panel. If modifying, reopen the search panel.
+        /// </summary>
         public void Cancel() 
         {
-            FrmMainSystem.Main.NavigatorOpenSearchViewTab();
+            if (_staffData == null) // if creating a new record
+                Load();
+            else
+                FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
     }
 }

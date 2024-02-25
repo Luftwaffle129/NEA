@@ -7,7 +7,7 @@ namespace NEALibrarySystem.Data_Structures
     /// </summary>
     public class BookCopy
     {
-        public ReferenceClass<string, BookCopy> Barcode { get; set; } // used as the prmary key
+        public ReferenceClass<string, BookCopy> Barcode { get; set; } // used as the primary key
         public Book Book { get; set; } // links the book copy to a book
         public CirculationCopy CirculationCopy { get; set; } // links the book copy to a circulation record
         public BookCopy(string barcode, Book book)
@@ -28,7 +28,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>String representation of the book copy's status</returns>
         public string GetStatus()
         {
-            if (CirculationCopy == null)
+            if (CirculationCopy == null) // if book copy is not circulated
                 return "In Stock";
             else if (CirculationCopy.Type.Value == CirculationType.Reserved)
                 return "Reserved";
@@ -41,7 +41,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>Book copy's circulated member's barcode</returns>
         public string GetMemberBarcode()
         {
-            if (CirculationCopy == null)
+            if (CirculationCopy == null) // if book copy is not circulated
                 return "";
             else
                 return CirculationCopy.Member.Barcode.Value;
@@ -52,7 +52,7 @@ namespace NEALibrarySystem.Data_Structures
         /// <returns>Book copy's circulated due date</returns>
         public string GetDueDate()
         {
-            if (CirculationCopy == null)
+            if (CirculationCopy == null) // if book copy is not circulated
                 return "";
             else
                 return DataFormatter.GetDate(CirculationCopy.DueDate.Value);

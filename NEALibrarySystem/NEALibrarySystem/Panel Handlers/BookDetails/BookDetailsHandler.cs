@@ -8,26 +8,26 @@ using System.Windows.Forms;
 namespace NEALibrarySystem.PanelHandlers
 {
     /// <summary>
-    /// Used to handle processes of the book details panel
+    /// Used to handle processes of the book details panel in the main form
     /// </summary>
     public class BookDetailsHandler
     {
         public BookDetailsObjects Objects;
         private Book _bookData; // if modifying a book record, stores the data of the existing book
-        private List<TempBookCopy> _bookCopyList = new List<TempBookCopy>();
-        public ListViewSorting Sorting;
-        private bool _isNewRecord;
+        private List<TempBookCopy> _bookCopyList = new List<TempBookCopy>(); // list of temporary book copies. Used to make temporary changes to a book record's book copies before saving to allow for discarding the changes
+        public ListViewSortingData ListViewSortingData;
+        private bool _isNewRecord; // whether the book detail panel is being used to create a new book record or modify an existing one
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
-            Sorting = new ListViewSorting();
+            ListViewSortingData = new ListViewSortingData();
             Objects = objs;
             _bookData = new Book();
             InitialiseCopyDetails();
         }
         /// <summary>
-        /// Loads the book details into the input boxes
+        /// Loads the book details into the input boxes if modifying a book. Empties the input fields if creating a new book
         /// </summary>
-        /// <param name="book">book to be modified. null if creating a new book</param>
+        /// <param name="book">Book to be modified. null if creating a new book</param>
         public void Load(Book book = null)
         {
             //book details
@@ -82,11 +82,11 @@ namespace NEALibrarySystem.PanelHandlers
                 {
                     _bookCopyList.Add(new TempBookCopy(barcode));
                 }
+                UpdateBookCopyList();
             }
-            UpdateBookCopyList();
         }
         /// <summary>
-        /// deletes the selected book copies in the list view
+        /// Deletes the selected book copies in the list view
         /// </summary>
         public void DeleteBookCopies()
         {
@@ -101,8 +101,8 @@ namespace NEALibrarySystem.PanelHandlers
                 // delete copies
                 foreach (TempBookCopy copy in deleteCopyList)
                     _bookCopyList.Remove(copy);
+                UpdateBookCopyList();
             }
-            UpdateBookCopyList();
         }
         /// <summary>
         /// Updates book copies shown in the book copy details listview
@@ -120,10 +120,10 @@ namespace NEALibrarySystem.PanelHandlers
                 };
                 Objects.CopyDetails.Items.Add(new ListViewItem(data));
             }
+            DisplayBookCopyStatusTotals();
             ListViewHandler.ResizeColumnHeaders(ref Objects.CopyDetails);
-            DisplayBookCopyStatuses();
-            Sorting.SortedDescending = ! Sorting.SortedDescending;
-            ListViewHandler.SortListView(ref Objects.CopyDetails, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewSortingData.SortedDescending = !ListViewSortingData.SortedDescending; // this is done so that is resorts to the previous sort order
+            ListViewHandler.SortListView(ref Objects.CopyDetails, ListViewSortingData.CurrentColumn, ref ListViewSortingData, ListViewHandler.ColourListViewNormal);
             ListViewHandler.ColourListViewNormal(ref Objects.CopyDetails);
         }
         /// <summary>
@@ -186,8 +186,8 @@ namespace NEALibrarySystem.PanelHandlers
         {
             if (_isNewRecord) // if the panel is being used to create a record
             {
-                BookCreator creator = GetBookInput();
-                if (creator.Validate(out List<string> invalidInputs))
+                BookCreator creator = GetBookInput(); // create a book creator and load the inputted data
+                if (creator.Validate(out List<string> invalidInputs)) // if valid
                 {
                     Book book = new Book(creator);
                     DataLibrary.Books.Add(book);
@@ -205,9 +205,10 @@ namespace NEALibrarySystem.PanelHandlers
             else // else the panel is being used to modify a record
             {
                 // Update old book record
-                BookCreator creator = GetBookInput();
-                if (creator.Validate(out List<string> invalidInputs, _bookData))
+                BookCreator creator = GetBookInput(); // create a book creator and load the inputted data
+                if (creator.Validate(out List<string> invalidInputs, _bookData)) // if valid
                 {
+                    // modify the old book record properties to the new ones
                     DataLibrary.Isbns = DataLibrary.ModifyReferenceClass(DataLibrary.Isbns, _bookData, _bookData.Isbn, out _bookData.Isbn, creator.Isbn, SearchAndSort.TwoRefClassBooks);
                     DataLibrary.Titles = DataLibrary.ModifyReferenceClass(DataLibrary.Titles, _bookData, _bookData.Title, out _bookData.Title, creator.Title, SearchAndSort.TwoRefClassBooks);
                     DataLibrary.SeriesTitles = DataLibrary.ModifyReferenceClass(DataLibrary.SeriesTitles, _bookData, _bookData.SeriesTitle, out _bookData.SeriesTitle, creator.SeriesTitle, SearchAndSort.TwoRefClassBooks);
@@ -219,9 +220,10 @@ namespace NEALibrarySystem.PanelHandlers
                     DataLibrary.Themes = DataLibrary.ModifyReferenceClassList(DataLibrary.Themes, _bookData, _bookData.Themes, out _bookData.Themes, creator.Themes, SearchAndSort.TwoRefClassBooks);
                     _bookData.Description = creator.Description;
                     DataLibrary.Prices = DataLibrary.ModifyReferenceClass(DataLibrary.Prices, _bookData, _bookData.Price, out _bookData.Price, Convert.ToDouble(creator.Price), SearchAndSort.TwoRefClassBooks);
+                    
                     // Delete the removed book copies
                     List<BookCopy> oldBookCopyList = SearchAndSort.QuickSort<BookCopy, BookCopy>(GetCurrentBookCopies(), SearchAndSort.TwoBookCopies); // list of book copies before modifying the record
-                    if (_bookCopyList.Count > 0)
+                    if (_bookCopyList.Count > 0) // if there are any book copies
                     {
                         List<TempBookCopy> unchangedBookCopyList = new List<TempBookCopy>(); // list of book copies in the modified record that were not changed from the old record
                         // Get the unchanged book copies from _BookCopyList
@@ -229,7 +231,7 @@ namespace NEALibrarySystem.PanelHandlers
                             if (copy.BookCopy != null)
                                 unchangedBookCopyList.Add(copy);
                         unchangedBookCopyList = SearchAndSort.QuickSort<TempBookCopy, TempBookCopy>(unchangedBookCopyList, SearchAndSort.TwoTempBookCopies);
-                        // Get the remove the deleted book copies
+                        // Delete the original book copies that have now been removed
                         if (unchangedBookCopyList.Count > 0)
                             foreach (BookCopy copy in oldBookCopyList)
                             {
@@ -240,7 +242,7 @@ namespace NEALibrarySystem.PanelHandlers
                             foreach (BookCopy copy in oldBookCopyList)
                                 DataLibrary.DeleteBookCopy(copy);
                     }
-                    else
+                    else // else delete all book copies
                     {
                         foreach (BookCopy copy in oldBookCopyList)
                             DataLibrary.DeleteBookCopy(copy);
@@ -248,11 +250,12 @@ namespace NEALibrarySystem.PanelHandlers
                     // Add new book copies
                     foreach (TempBookCopy copy in _bookCopyList)
                     {
-                        if (copy.BookCopy == null) // Check if the TempBookCopy is a new copy
+                        if (copy.BookCopy == null) // if the TempBookCopy is a new copy
                         {
                             DataLibrary.CreateBookCopy(copy.Barcode, _bookData);
                         }
                     }
+                    // save all affected data structures
                     FileHandler.Save.Books();
                     FileHandler.Save.BookCopies();
                     FileHandler.Save.CirculationCopies();
@@ -292,8 +295,10 @@ namespace NEALibrarySystem.PanelHandlers
             else
                 FrmMainSystem.Main.NavigatorOpenSearchViewTab();
         }
-
-        public void DisplayBookCopyStatuses()
+        /// <summary>
+        /// Displays the totals of each type of circulation status in the status text boxes
+        /// </summary>
+        public void DisplayBookCopyStatusTotals()
         {
             int inStock = 0;
             int reserved = 0;

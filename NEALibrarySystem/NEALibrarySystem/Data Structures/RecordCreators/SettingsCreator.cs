@@ -20,6 +20,9 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             set { _durations = value ?? new int[2, Member.TypeCount]; }
         }
         public double LateFeePerDay { get; set; }
+        /// <summary>
+        /// Sets the values in this settings creator to be the static Settings values
+        /// </summary>
         public void GetCurrentSettings()
         {
             MemberBarcodeLength = Settings.MemberBarcodeLength;
@@ -32,6 +35,9 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
                 Durations[1, i] = Settings.ReserveDurations[i];
             }
         }
+        /// <summary>
+        /// Sets the values in the static Settings values to be this settings creator's values
+        /// </summary>
         public void SetStoredSettings()
         {
             Settings.MemberBarcodeLength = MemberBarcodeLength;
@@ -44,6 +50,9 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
                 Settings.ReserveDurations[i] = Durations[1, i];
             }
         }
+        /// <summary>
+        /// Sets the values in this class to be equal to the fixed default values
+        /// </summary>
         public void GetDefaultSettings() 
         {
             MemberBarcodeLength = 10;
@@ -51,10 +60,6 @@ namespace NEALibrarySystem.Data_Structures.RecordCreators
             Durations = new int[2, 4] { { 14, 14, 28, 28 }, {14, 14, 28 ,28} };
             LateFeePerDay = 0.05;
             LastBackup = DateTime.MinValue;
-        }
-        public void Validate()
-        {
-
         }
     }
 }

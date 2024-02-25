@@ -10,12 +10,12 @@
         public int SeriesNumber;
         public string Isbn;
         public string Description;  
-        public int Price;
-        public int Title;
-        public int MediaType;
-        public int Author;
-        public int Publisher;
-        public int[] Genres;
-        public int[] Themes;
+        public int Price;       // holds the index of the double stored in the price file
+        public int Title;       // holds the index of the string stored in the title file
+        public int MediaType;   // holds the index of the string stored in the media type file
+        public int Author;      // holds the index of the string stored in the author file
+        public int Publisher;   // holds the index of the string stored in the publisher file
+        public int[] Genres;    // holds the indexes of the strings stored in the genres file
+        public int[] Themes;    // holds the indexes of the strings stored in the genres file
     }
 }
