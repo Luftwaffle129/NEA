@@ -140,7 +140,7 @@ namespace NEALibrarySystem.PanelHandlers
             Objects.CopyDetails.FullRowSelect = true;
             Objects.CopyDetails.GridLines = false;
             Objects.CopyDetails.Sorting = SortOrder.None;
-            Objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            Objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Clickable;
             // add columns
             string[] columns = new string[3]
             {

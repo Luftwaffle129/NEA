@@ -46,7 +46,7 @@ namespace NEALibrarySystem
             Objects.Circulations.FullRowSelect = true;
             Objects.Circulations.GridLines = false;
             Objects.Circulations.Sorting = SortOrder.None;
-            Objects.Circulations.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            Objects.Circulations.HeaderStyle = ColumnHeaderStyle.Clickable;
 
             // add columns
             string[] columns = new string[3]

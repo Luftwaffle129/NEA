@@ -783,7 +783,6 @@ namespace NEALibrarySystem.Data_Structures
         public static void SendOverdueEmails()
         {
             int index = 0;
-            List<CirculationCopy> toUnreserve = new List<CirculationCopy>();
             while (CirculationDueDates[index].Value > DateTime.Today && index < CirculationDueDates.Count)
             {
                 CirculationCopy copy = CirculationDueDates[index].Reference;
@@ -797,18 +796,7 @@ namespace NEALibrarySystem.Data_Structures
                     EmailHandler.Send(copy.Member.EmailAddress, subject, content);
                     copy.EmailSent = true;
                 }
-                if (copy.Type.Value == CirculationType.Reserved)
-                {
-                    toUnreserve.Add(copy);
-                }
                 index++;
-            }
-            if (toUnreserve.Count > 0)
-            {
-                foreach (CirculationCopy copy in toUnreserve)
-                {
-                    DeleteCirculationCopy(copy);
-                }
             }
         }
         #endregion
