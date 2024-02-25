@@ -5,8 +5,8 @@
     /// </summary>
     public class SmallestItem<T> where T : class
     {
-        public T Item; // smallest book
-        public int Index; // column of the smallest book
+        public T Item; // smallest item
+        public int Index; // column of the smallest item
 
         public SmallestItem(T item, int index)
         {

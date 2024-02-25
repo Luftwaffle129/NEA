@@ -9,7 +9,7 @@ namespace NEALibrarySystem.Panel_Handlers.BackupHandler
     /// </summary>
     public class BackupHandler
     {
-        public Label _lastBackupDate; // used to reference the last backup date label in the main form
+        private Label _lastBackupDate; // used to reference the last backup date label in the main form
 
         /// <param name="lastBackupDate">Last backup date label in the settings panel</param>
         public BackupHandler(Label lastBackupDate) 
