@@ -3,8 +3,6 @@ using NEALibrarySystem.ListViewHandlers;
 using NEALibrarySystem.ListViewHandlers.SearchList;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Common;
 using System.Drawing;
 using System.Windows.Forms;
 using static NEALibrarySystem.Data_Structures.DataLibrary;
