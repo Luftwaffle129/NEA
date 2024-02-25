@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NEALibrarySystem.Data_Structures
+﻿namespace NEALibrarySystem.Data_Structures
 {
+    /// <summary>
+    /// Used to hold the sorting information for a list view
+    /// </summary>
     public class ListViewSortingData
     {
         public int CurrentColumn; // index of the currently selected column in the list view
