@@ -45,39 +45,6 @@ namespace NEALibrarySystem.Data_Structures
             Keys.Enter
         };
         /// <summary>
-        /// Only allow for numbers to be pressed on key presses
-        /// </summary>
-        /// <param name="e"></param>
-        public static void OnlyNumberKeyPress(KeyEventArgs e)
-        {
-            if (!(NUMBERKEYS.Contains(e.KeyCode) || ACTIONKEYS.Contains(e.KeyCode)))
-            { 
-                e.SuppressKeyPress = true; 
-            }
-        }
-        /// <summary>
-        /// Only allow for numbers and period to be pressed on key presses
-        /// </summary>
-        /// <param name="e"></param>
-        public static void OnlyPriceKeyPress(KeyEventArgs e)
-        {
-            if (!(NUMBERKEYS.Contains(e.KeyCode) || e.KeyCode == Keys.OemPeriod || ACTIONKEYS.Contains(e.KeyCode)))
-            { 
-                e.SuppressKeyPress = true; 
-            }
-        }
-        /// <summary>
-        /// Only allow for numbers, commas and spaces to be pressed on key presses
-        /// </summary>
-        /// <param name="e"></param>
-        public static void LinkedMemberKeyPress(KeyEventArgs e)
-        {
-            if (!(NUMBERKEYS.Contains(e.KeyCode) || e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Oemcomma || e.KeyCode == Keys.Space || ACTIONKEYS.Contains(e.KeyCode)))
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-        /// <summary>
         /// Converts a list of reference classes' values to a string with a ", " separating each item
         /// </summary>
         /// <typeparam name="T">Reference class value</typeparam>

@@ -833,20 +833,6 @@ namespace NEALibrarySystem
         {
             _bookDetailsHandler.DeleteBookCopies();
         }
-        private void txtBookISBN_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtBookSeriesNumber_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtBookPrice_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyPriceKeyPress(e);
-        }
         #endregion
         #region circulation details panel
         private void btnCircDetailsSave_Click(object sender, EventArgs e)
@@ -870,20 +856,6 @@ namespace NEALibrarySystem
         private void btnMemberCancel_Click(object sender, EventArgs e)
         {
             _memberDetailsHandler.Cancel();
-        }
-        private void txtMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtMemberPhoneNumber_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtMemberLinkedMembers_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.LinkedMemberKeyPress(e);
         }
         #endregion
         #region loan handler panel
@@ -910,15 +882,6 @@ namespace NEALibrarySystem
         {
             _loanHandler.MemberBarcodeUpdated();
         }
-        private void txtLoanEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtLoanMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
         #endregion
         #region return handler panel
         private void txtReturnMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -943,14 +906,6 @@ namespace NEALibrarySystem
         private void btnReturnCancel_Click(object sender, EventArgs e)
         {
             _returnHandler.Load();
-        }
-        private void txtReturnEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-        private void txtReturnMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
         }
         #endregion
         #region sell handler panel
@@ -977,15 +932,6 @@ namespace NEALibrarySystem
         {
             _sellHandler.MemberBarcodeUpdated();
         }
-        private void txtSellMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtSellEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
         #endregion
         #region reserve handler panel
         private void txtReserveMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -1010,15 +956,6 @@ namespace NEALibrarySystem
         private void btnReserveCancel_Click(object sender, EventArgs e)
         {
             _reserveHandler.Load();
-        }
-        private void txtReserveMemberBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
-        }
-
-        private void txtReserveEnterBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataFormatter.OnlyNumberKeyPress(e);
         }
         #endregion
         #region search handler panel
@@ -1147,6 +1084,55 @@ namespace NEALibrarySystem
         private void txtBookPrice_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private void txtReserveMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtSellMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtSellEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtReserveEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtReturnEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtReturnMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtLoanEnterBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtLoanMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtMemberBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtMemberPhoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtMemberLinkedMembers_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void txtBookISBN_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtBookSeriesNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void txtBookPrice_KeyDown(object sender, KeyEventArgs e)
+        {
         }
     }
 }
