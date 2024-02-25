@@ -31,7 +31,7 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
             _objects.BookCopy.CheckBoxes = false;
             _objects.BookCopy.GridLines = false;
             _objects.BookCopy.Sorting = SortOrder.None;
-            _objects.BookCopy.HeaderStyle = ColumnHeaderStyle.Clickable;
+            _objects.BookCopy.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             _objects.BookCopy.Scrollable = true;
 
             // sets columns
