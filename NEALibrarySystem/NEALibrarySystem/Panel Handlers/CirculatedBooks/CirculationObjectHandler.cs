@@ -13,7 +13,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
     public class CirculationObjectHandler
     {
         // Objects
-        private ListView _selectedBooks;
+        public ListView SelectedBooks;
         private TextBox _memberBarcode; // Textbox that the member barcode is entered into
         private TextBox _memberName; // Textbox that the member name is displayed at
         private TextBox _currentLoans; // Textbox that displays the number of current loans the member has
@@ -30,13 +30,15 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             set { _bookCopyList = value ?? new List<BookCopy>(); }
         }
         public Member SelectedMember; // member who the books are being circulated for
+        public ListViewSorting Sorting;
         /// <summary>
         /// Initialises ciruclation objects
         /// </summary>
         public CirculationObjectHandler(TextBox memberBarcode, TextBox memberName, TextBox loans, TextBox overdue, TextBox lateFees, TextBox enterBarcode, ListView selectedBooks, bool priceNeeded)
         {
+            Sorting = new ListViewSorting();
             // set up listview
-            _selectedBooks = selectedBooks;
+            SelectedBooks = selectedBooks;
             _memberBarcode = memberBarcode;
             _memberName = memberName;
             _currentLoans = loans;
@@ -55,7 +57,7 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
             _enterBarcodes.Clear();
             _memberBarcode.Clear();
             ResetMemberDetailFields();
-            _selectedBooks.Items.Clear();
+            SelectedBooks.Items.Clear();
         }
         /// <summary>
         /// Sets member details objects' text properties to be empty for their respective datatypes
@@ -128,16 +130,16 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
         private void InitialiseListView(bool PriceNeeded)
         {
             // sets properties
-            _selectedBooks.View = View.Details;
-            _selectedBooks.LabelEdit = false;
-            _selectedBooks.AllowColumnReorder = false;
-            _selectedBooks.CheckBoxes = true;
-            _selectedBooks.MultiSelect = true;
-            _selectedBooks.FullRowSelect = true;
-            _selectedBooks.GridLines = false;
-            _selectedBooks.Sorting = SortOrder.None;
-            _selectedBooks.HeaderStyle = ColumnHeaderStyle.Clickable;
-            _selectedBooks.Scrollable = true;
+            SelectedBooks.View = View.Details;
+            SelectedBooks.LabelEdit = false;
+            SelectedBooks.AllowColumnReorder = false;
+            SelectedBooks.CheckBoxes = true;
+            SelectedBooks.MultiSelect = true;
+            SelectedBooks.FullRowSelect = true;
+            SelectedBooks.GridLines = false;
+            SelectedBooks.Sorting = SortOrder.None;
+            SelectedBooks.HeaderStyle = ColumnHeaderStyle.Clickable;
+            SelectedBooks.Scrollable = true;
 
             // sets columns
             string[] columns;
@@ -164,14 +166,14 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                     "Due Date",
                     "Member Barcode"
                 };
-            ListViewHandler.SetColumns(columns, ref _selectedBooks);
+            ListViewHandler.SetColumns(columns, ref SelectedBooks);
         }
         /// <summary>
         /// Updates the items in the list view
         /// </summary>
         public void UpdateListView()
         {
-            _selectedBooks.Items.Clear(); // clear the list view items
+            SelectedBooks.Items.Clear(); // clear the list view items
             foreach (BookCopy copy in BookCopyList) // add the book copies into the list
             {
                 string[] data;
@@ -199,18 +201,20 @@ namespace NEALibrarySystem.ListViewHandlers.CirculatedBooks
                         copy.GetMemberBarcode()
                     };
                 ListViewItem row = new ListViewItem(data);
-                _selectedBooks.Items.Add(row);
+                SelectedBooks.Items.Add(row);
             }
-            ListViewHandler.ResizeColumnHeaders(ref _selectedBooks);
+            ListViewHandler.ResizeColumnHeaders(ref SelectedBooks);
+            Sorting.SortedDescending = !Sorting.SortedDescending;
+            ListViewHandler.SortListView(ref SelectedBooks, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
         }
         /// <summary>
         /// removes the checked items from the list view of selected books
         /// </summary>
         public void DeleteCheckedBookCopies()
         {
-            if (_selectedBooks.CheckedItems.Count > 0)
+            if (SelectedBooks.CheckedItems.Count > 0)
             {
-                foreach (ListViewItem item in _selectedBooks.CheckedItems) // for each selected book
+                foreach (ListViewItem item in SelectedBooks.CheckedItems) // for each selected book
                 {
                     bool isDeleted = false;
                     int index = 0;

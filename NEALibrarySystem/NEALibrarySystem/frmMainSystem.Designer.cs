@@ -851,6 +851,7 @@
             this.lsvMemberCirculations.Size = new System.Drawing.Size(303, 724);
             this.lsvMemberCirculations.TabIndex = 13;
             this.lsvMemberCirculations.UseCompatibleStateImageBehavior = false;
+            this.lsvMemberCirculations.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvMemberCirculations_ColumnClick);
             // 
             // lblMemberCirculations
             // 
@@ -1483,6 +1484,7 @@
             this.lsvLoanSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvLoanSelectedBooks.TabIndex = 2;
             this.lsvLoanSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvLoanSelectedBooks.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvLoanSelectedBooks_ColumnClick);
             // 
             // btnLoanSave
             // 
@@ -1881,6 +1883,7 @@
             this.lsvReturnSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvReturnSelectedBooks.TabIndex = 2;
             this.lsvReturnSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvReturnSelectedBooks.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvReturnSelectedBooks_ColumnClick);
             // 
             // lblReturnSelectedBooks
             // 
@@ -2445,6 +2448,7 @@
             this.lsvBookCopyDetails.Size = new System.Drawing.Size(315, 582);
             this.lsvBookCopyDetails.TabIndex = 1;
             this.lsvBookCopyDetails.UseCompatibleStateImageBehavior = false;
+            this.lsvBookCopyDetails.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvBookCopyDetails_ColumnClick);
             // 
             // pnlBackup
             // 
@@ -2778,6 +2782,7 @@
             this.lsvSellSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvSellSelectedBooks.TabIndex = 2;
             this.lsvSellSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvSellSelectedBooks.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvSellSelectedBooks_ColumnClick);
             // 
             // btnSellSave
             // 
@@ -2914,6 +2919,7 @@
             this.lsvReserveSelectedBooks.Size = new System.Drawing.Size(1241, 501);
             this.lsvReserveSelectedBooks.TabIndex = 2;
             this.lsvReserveSelectedBooks.UseCompatibleStateImageBehavior = false;
+            this.lsvReserveSelectedBooks.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvReserveSelectedBooks_ColumnClick);
             // 
             // lblReserveSelectedBooks
             // 
@@ -3249,17 +3255,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlLoan);
+            this.Controls.Add(this.pnlSell);
+            this.Controls.Add(this.pnlReserve);
+            this.Controls.Add(this.pnlReturn);
+            this.Controls.Add(this.pnlMemberDetails);
+            this.Controls.Add(this.pnlBookDetails);
             this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlStaffDetails);
             this.Controls.Add(this.pnlCirculationDetails);
-            this.Controls.Add(this.pnlMemberDetails);
-            this.Controls.Add(this.pnlBookDetails);
-            this.Controls.Add(this.pnlReturn);
-            this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlBackup);
             this.Controls.Add(this.pnlSearch);
-            this.Controls.Add(this.pnlSell);
-            this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlSubTabs);
             this.Controls.Add(this.pnlMainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

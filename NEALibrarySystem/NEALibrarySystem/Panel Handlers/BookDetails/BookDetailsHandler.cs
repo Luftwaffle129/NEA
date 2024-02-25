@@ -12,13 +12,15 @@ namespace NEALibrarySystem.PanelHandlers
     /// </summary>
     public class BookDetailsHandler
     {
-        private BookDetailsObjects _objects;
+        public BookDetailsObjects Objects;
         private Book _bookData; // if modifying a book record, stores the data of the existing book
         private List<TempBookCopy> _bookCopyList = new List<TempBookCopy>();
+        public ListViewSorting Sorting;
         private bool _isNewRecord;
         public BookDetailsHandler(BookDetailsObjects objs) 
         {
-            _objects = objs;
+            Sorting = new ListViewSorting();
+            Objects = objs;
             _bookData = new Book();
             InitialiseCopyDetails();
         }
@@ -32,36 +34,36 @@ namespace NEALibrarySystem.PanelHandlers
             if (book != null) // if book is not null, fill input fields with the existing book data
             {
                 _bookData = book;
-                _objects.Title.Text = _bookData.Title.Value;
-                _objects.SeriesTitle.Text = _bookData.SeriesTitle.Value;
-                _objects.SeriesNumber.Text = _bookData.SeriesNumber.ToString();
-                _objects.Isbn.Text = _bookData.Isbn.Value;
-                _objects.MediaType.Text = _bookData.MediaType.Value;
-                _objects.Author.Text = _bookData.Author.Value;
-                _objects.Publisher.Text = _bookData.Publisher.Value;
-                _objects.Genres.Text = DataFormatter.ListToString(_bookData.Genres);
-                _objects.Themes.Text = DataFormatter.ListToString(_bookData.Themes);
-                _objects.Description.Text = _bookData.Description;
-                _objects.Price.Text = DataFormatter.DoubleToPrice(_bookData.Price.Value);
+                Objects.Title.Text = _bookData.Title.Value;
+                Objects.SeriesTitle.Text = _bookData.SeriesTitle.Value;
+                Objects.SeriesNumber.Text = _bookData.SeriesNumber.ToString();
+                Objects.Isbn.Text = _bookData.Isbn.Value;
+                Objects.MediaType.Text = _bookData.MediaType.Value;
+                Objects.Author.Text = _bookData.Author.Value;
+                Objects.Publisher.Text = _bookData.Publisher.Value;
+                Objects.Genres.Text = DataFormatter.ListToString(_bookData.Genres);
+                Objects.Themes.Text = DataFormatter.ListToString(_bookData.Themes);
+                Objects.Description.Text = _bookData.Description;
+                Objects.Price.Text = DataFormatter.DoubleToPrice(_bookData.Price.Value);
                 _isNewRecord = false;
-                _objects.BookCopyStatus.Visible = true;
+                Objects.BookCopyStatus.Visible = true;
             }
             else // if book is null, set input fields to be empty
             {
                 _bookData = new Book();
-                _objects.Title.Clear();
-                _objects.SeriesTitle.Clear();
-                _objects.SeriesNumber.Clear();
-                _objects.Isbn.Clear();
-                _objects.MediaType.Clear();
-                _objects.Author.Clear();
-                _objects.Publisher.Clear();
-                _objects.Genres.Clear();
-                _objects.Themes.Clear();
-                _objects.Description.Clear();
-                _objects.Price.Clear();
+                Objects.Title.Clear();
+                Objects.SeriesTitle.Clear();
+                Objects.SeriesNumber.Clear();
+                Objects.Isbn.Clear();
+                Objects.MediaType.Clear();
+                Objects.Author.Clear();
+                Objects.Publisher.Clear();
+                Objects.Genres.Clear();
+                Objects.Themes.Clear();
+                Objects.Description.Clear();
+                Objects.Price.Clear();
                 _isNewRecord = true;
-                _objects.BookCopyStatus.Visible = false;
+                Objects.BookCopyStatus.Visible = false;
             }
             InitialiseCopyDetails();
             LoadCopyDetails();
@@ -88,11 +90,11 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         public void DeleteBookCopies()
         {
-            if (_objects.CopyDetails.CheckedItems.Count > 0)
+            if (Objects.CopyDetails.CheckedItems.Count > 0)
             {
                 // find which copies to delete
                 List<TempBookCopy> deleteCopyList = new List<TempBookCopy>();
-                foreach (ListViewItem item in _objects.CopyDetails.CheckedItems)
+                foreach (ListViewItem item in Objects.CopyDetails.CheckedItems)
                     foreach (TempBookCopy copy in _bookCopyList)
                         if (item.SubItems[0].Text == copy.Barcode)
                             deleteCopyList.Add(copy);
@@ -107,7 +109,7 @@ namespace NEALibrarySystem.PanelHandlers
         /// </summary>
         private void UpdateBookCopyList()
         {
-            _objects.CopyDetails.Items.Clear();
+            Objects.CopyDetails.Items.Clear();
             foreach (TempBookCopy bookCopy in _bookCopyList)
             {
                 string[] data =
@@ -116,26 +118,29 @@ namespace NEALibrarySystem.PanelHandlers
                 bookCopy.Status,
                 bookCopy.DueDate
                 };
-                _objects.CopyDetails.Items.Add(new ListViewItem(data));
+                Objects.CopyDetails.Items.Add(new ListViewItem(data));
             }
-            ListViewHandler.ResizeColumnHeaders(ref _objects.CopyDetails);
+            ListViewHandler.ResizeColumnHeaders(ref Objects.CopyDetails);
             DisplayBookCopyStatuses();
+            Sorting.SortedDescending = ! Sorting.SortedDescending;
+            ListViewHandler.SortListView(ref Objects.CopyDetails, Sorting.CurrentColumn, ref Sorting, ListViewHandler.ColourListViewNormal);
+            ListViewHandler.ColourListViewNormal(ref Objects.CopyDetails);
         }
         /// <summary>
         /// Initialises the list view used to display book copies
         /// </summary>
         private void InitialiseCopyDetails()
         {
-            _objects.CopyDetails.Clear();
-            _objects.CopyDetails.View = View.Details;
-            _objects.CopyDetails.LabelEdit = false;
-            _objects.CopyDetails.AllowColumnReorder = false;
-            _objects.CopyDetails.CheckBoxes = true;
-            _objects.CopyDetails.MultiSelect = true;
-            _objects.CopyDetails.FullRowSelect = true;
-            _objects.CopyDetails.GridLines = false;
-            _objects.CopyDetails.Sorting = SortOrder.None;
-            _objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            Objects.CopyDetails.Clear();
+            Objects.CopyDetails.View = View.Details;
+            Objects.CopyDetails.LabelEdit = false;
+            Objects.CopyDetails.AllowColumnReorder = false;
+            Objects.CopyDetails.CheckBoxes = true;
+            Objects.CopyDetails.MultiSelect = true;
+            Objects.CopyDetails.FullRowSelect = true;
+            Objects.CopyDetails.GridLines = false;
+            Objects.CopyDetails.Sorting = SortOrder.None;
+            Objects.CopyDetails.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             // add columns
             string[] columns = new string[3]
             {
@@ -143,7 +148,7 @@ namespace NEALibrarySystem.PanelHandlers
                 "Status",
                 "Due Date"
             };
-            ListViewHandler.SetColumns(columns, ref _objects.CopyDetails);
+            ListViewHandler.SetColumns(columns, ref Objects.CopyDetails);
         }
         /// <summary>
         /// Loads the copy details of the book details being modified into the bookcopy list view. list view is left empty if creating a new book
@@ -264,17 +269,17 @@ namespace NEALibrarySystem.PanelHandlers
         private BookCreator GetBookInput() 
         {
             BookCreator temp = new BookCreator();
-            temp.Isbn = _objects.Isbn.Text;
-            temp.Title = _objects.Title.Text;
-            temp.SeriesTitle = _objects.SeriesTitle.Text;
-            temp.SeriesNumber = _objects.SeriesNumber.Text;
-            temp.MediaType = _objects.MediaType.Text;
-            temp.Author = _objects.Author.Text;
-            temp.Publisher = _objects.Publisher.Text;
-            temp.Genres = DataFormatter.SplitString(_objects.Genres.Text, ", ");
-            temp.Themes = DataFormatter.SplitString(_objects.Themes.Text, ", ");
-            temp.Description = _objects.Description.Text;
-            temp.Price = _objects.Price.Text;
+            temp.Isbn = Objects.Isbn.Text;
+            temp.Title = Objects.Title.Text;
+            temp.SeriesTitle = Objects.SeriesTitle.Text;
+            temp.SeriesNumber = Objects.SeriesNumber.Text;
+            temp.MediaType = Objects.MediaType.Text;
+            temp.Author = Objects.Author.Text;
+            temp.Publisher = Objects.Publisher.Text;
+            temp.Genres = DataFormatter.SplitString(Objects.Genres.Text, ", ");
+            temp.Themes = DataFormatter.SplitString(Objects.Themes.Text, ", ");
+            temp.Description = Objects.Description.Text;
+            temp.Price = Objects.Price.Text;
             return temp;
         }
         /// <summary>
@@ -308,9 +313,9 @@ namespace NEALibrarySystem.PanelHandlers
                         break;
                 }
             }
-            _objects.InStock.Text = inStock.ToString();
-            _objects.Reserved.Text = reserved.ToString();
-            _objects.Loaned.Text = loaned.ToString();
+            Objects.InStock.Text = inStock.ToString();
+            Objects.Reserved.Text = reserved.ToString();
+            Objects.Loaned.Text = loaned.ToString();
         }
     }
 }

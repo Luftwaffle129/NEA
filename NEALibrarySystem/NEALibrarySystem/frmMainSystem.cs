@@ -14,6 +14,7 @@ using NEALibrarySystem.Panel_Handlers.Settings;
 using System.Drawing;
 using System.Reflection;
 using System.Linq;
+using NEALibrarySystem.ListViewHandlers;
 
 namespace NEALibrarySystem
 {
@@ -833,6 +834,10 @@ namespace NEALibrarySystem
         {
             _bookDetailsHandler.DeleteBookCopies();
         }
+        private void lsvBookCopyDetails_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _bookDetailsHandler.Objects.CopyDetails, e.Column, ref _bookDetailsHandler.Sorting, ListViewHandler.ColourListViewNormal);
+        }
         #endregion
         #region circulation details panel
         private void btnCircDetailsSave_Click(object sender, EventArgs e)
@@ -856,6 +861,11 @@ namespace NEALibrarySystem
         private void btnMemberCancel_Click(object sender, EventArgs e)
         {
             _memberDetailsHandler.Cancel();
+        }
+        private void lsvMemberCirculations_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _memberDetailsHandler.Objects.Circulations, e.Column, ref _memberDetailsHandler.Sorting, ListViewHandler.ColourListViewNormal);
+
         }
         #endregion
         #region loan handler panel
@@ -882,6 +892,10 @@ namespace NEALibrarySystem
         {
             _loanHandler.MemberBarcodeUpdated();
         }
+        private void lsvLoanSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _loanHandler.CirculationManager.SelectedBooks, e.Column, ref _loanHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+        }
         #endregion
         #region return handler panel
         private void txtReturnMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -906,6 +920,11 @@ namespace NEALibrarySystem
         private void btnReturnCancel_Click(object sender, EventArgs e)
         {
             _returnHandler.Load();
+        }
+        private void lsvReturnSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _returnHandler.CirculationManager.SelectedBooks, e.Column, ref _returnHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+
         }
         #endregion
         #region sell handler panel
@@ -932,6 +951,10 @@ namespace NEALibrarySystem
         {
             _sellHandler.MemberBarcodeUpdated();
         }
+        private void lsvSellSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _sellHandler.CirculationManager.SelectedBooks, e.Column, ref _sellHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+        }
         #endregion
         #region reserve handler panel
         private void txtReserveMemberBarcode_TextChanged(object sender, EventArgs e)
@@ -956,6 +979,11 @@ namespace NEALibrarySystem
         private void btnReserveCancel_Click(object sender, EventArgs e)
         {
             _reserveHandler.Load();
+        }
+        private void lsvReserveSelectedBooks_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewHandler.SortListView(ref _reserveHandler.CirculationManager.SelectedBooks, e.Column, ref _reserveHandler.CirculationManager.Sorting, ListViewHandler.ColourListViewNormal);
+
         }
         #endregion
         #region search handler panel
@@ -982,7 +1010,7 @@ namespace NEALibrarySystem
         }
         private void lsvSearchItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            _searchHandler.SortListView(e.Column);
+            ListViewHandler.SortListView(ref _searchHandler.Objects.ItemViewer, e.Column, ref _searchHandler.Sorting, ListViewHandler.ColourListViewNormal);
         }
         private void btnSearchSearch_Click(object sender, EventArgs e)
         {
@@ -1051,30 +1079,6 @@ namespace NEALibrarySystem
             DataLibrary.SendOverdueEmails();
         }
         #endregion
-
-        private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void grpSettingsCirculation_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void numSettingsBarcodeMember_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         #endregion
 
         private void txtBookISBN_TextChanged(object sender, EventArgs e)
@@ -1133,6 +1137,27 @@ namespace NEALibrarySystem
 
         private void txtBookPrice_KeyDown(object sender, KeyEventArgs e)
         {
+        }
+        private void pnlMainTabs_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void grpSettingsCirculation_Enter(object sender, EventArgs e)
+        {
+
+        }
+        private void numSettingsBarcodeMember_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

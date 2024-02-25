@@ -13,20 +13,22 @@ namespace NEALibrarySystem
     public class MemberDetailsHandler
     {
         // objects
-        public MemberDetailsObjects _objects;
+        public MemberDetailsObjects Objects;
+        public ListViewSorting Sorting;
         // member record being modified
         private Member _memberData = null;
         private List<CirculationCopy> _circulationList = new List<CirculationCopy>(); // contains the list of circulation copies related to the member
         public MemberDetailsHandler(MemberDetailsObjects memberDetailsObjects)
         {
-            _objects = memberDetailsObjects;
+            Sorting = new ListViewSorting();
+            Objects = memberDetailsObjects;
 
             // add the possible member types to the member type combo box 
             for (int i = 0; i < Member.TypeCount; i++)
-                _objects.MemberType.Items.Add(((MemberType)i).ToString());
+                Objects.MemberType.Items.Add(((MemberType)i).ToString());
             // sets dateTime restrictions for the age
-            _objects.DateOfBirth.MaxDate = DateTime.Today.AddDays(-1);
-            _objects.DateOfBirth.MinDate = DateTime.Today.AddYears(-130);
+            Objects.DateOfBirth.MaxDate = DateTime.Today.AddDays(-1);
+            Objects.DateOfBirth.MinDate = DateTime.Today.AddYears(-130);
 
             InitialiseCirculations();
         }
@@ -35,16 +37,16 @@ namespace NEALibrarySystem
         /// </summary>
         private void InitialiseCirculations()
         {
-            _objects.Circulations.Clear();
-            _objects.Circulations.View = View.Details;
-            _objects.Circulations.LabelEdit = false;
-            _objects.Circulations.AllowColumnReorder = false;
-            _objects.Circulations.CheckBoxes = false;
-            _objects.Circulations.MultiSelect = true;
-            _objects.Circulations.FullRowSelect = true;
-            _objects.Circulations.GridLines = false;
-            _objects.Circulations.Sorting = SortOrder.None;
-            _objects.Circulations.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            Objects.Circulations.Clear();
+            Objects.Circulations.View = View.Details;
+            Objects.Circulations.LabelEdit = false;
+            Objects.Circulations.AllowColumnReorder = false;
+            Objects.Circulations.CheckBoxes = false;
+            Objects.Circulations.MultiSelect = true;
+            Objects.Circulations.FullRowSelect = true;
+            Objects.Circulations.GridLines = false;
+            Objects.Circulations.Sorting = SortOrder.None;
+            Objects.Circulations.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
             // add columns
             string[] columns = new string[3]
@@ -53,7 +55,7 @@ namespace NEALibrarySystem
                 "Status",
                 "Due Date"
             };
-            ListViewHandler.SetColumns(columns, ref _objects.Circulations);
+            ListViewHandler.SetColumns(columns, ref Objects.Circulations);
         }
         /// <summary>
         /// Sets up the objects of the member panel
@@ -62,42 +64,42 @@ namespace NEALibrarySystem
         public void Load(Member member = null)
         {
             _memberData = member;
-            _objects.Circulations.Items.Clear();
+            Objects.Circulations.Items.Clear();
             if (member == null)
             {
-                _objects.Barcode.Clear();
-                _objects.FirstName.Clear();
-                _objects.Surname.Clear();
-                _objects.MemberType.Text = MemberType.Adult.ToString();
-                _objects.DateOfBirth.Value = _objects.DateOfBirth.MaxDate;
-                _objects.LinkedMembers.Clear();
-                _objects.EmailAddress.Clear();
-                _objects.PhoneNumber.Clear();
-                _objects.Address1.Clear();
-                _objects.Address2.Clear();
-                _objects.TownCity.Clear();
-                _objects.County.Clear();
-                _objects.PostCode.Clear();
-                _objects.JoinDate.Clear();
-                _objects.Circulations.Items.Clear();
-                _objects.LateFees.Text = "0.00";
+                Objects.Barcode.Clear();
+                Objects.FirstName.Clear();
+                Objects.Surname.Clear();
+                Objects.MemberType.Text = MemberType.Adult.ToString();
+                Objects.DateOfBirth.Value = Objects.DateOfBirth.MaxDate;
+                Objects.LinkedMembers.Clear();
+                Objects.EmailAddress.Clear();
+                Objects.PhoneNumber.Clear();
+                Objects.Address1.Clear();
+                Objects.Address2.Clear();
+                Objects.TownCity.Clear();
+                Objects.County.Clear();
+                Objects.PostCode.Clear();
+                Objects.JoinDate.Clear();
+                Objects.Circulations.Items.Clear();
+                Objects.LateFees.Text = "0.00";
             }
             else
             {
-                _objects.Barcode.Text = member.Barcode.Value;
-                _objects.FirstName.Text = member.FirstName.Value;
-                _objects.Surname.Text = member.Surname.Value;
-                _objects.MemberType.Text = member.Type.Value.ToString();
-                _objects.DateOfBirth.Value = member.DateOfBirth;
-                _objects.LinkedMembers.Text = DataFormatter.ListToString(member.LinkedMembers);
-                _objects.EmailAddress.Text = member.EmailAddress;
-                _objects.PhoneNumber.Text = member.PhoneNumber;
-                _objects.Address1.Text = member.Address1;
-                _objects.Address2.Text = member.Address2;
-                _objects.TownCity.Text = member.TownCity;
-                _objects.County.Text = member.County;
-                _objects.PostCode.Text = member.Postcode;
-                _objects.JoinDate.Text = DataFormatter.GetDate(member.JoinDate);
+                Objects.Barcode.Text = member.Barcode.Value;
+                Objects.FirstName.Text = member.FirstName.Value;
+                Objects.Surname.Text = member.Surname.Value;
+                Objects.MemberType.Text = member.Type.Value.ToString();
+                Objects.DateOfBirth.Value = member.DateOfBirth;
+                Objects.LinkedMembers.Text = DataFormatter.ListToString(member.LinkedMembers);
+                Objects.EmailAddress.Text = member.EmailAddress;
+                Objects.PhoneNumber.Text = member.PhoneNumber;
+                Objects.Address1.Text = member.Address1;
+                Objects.Address2.Text = member.Address2;
+                Objects.TownCity.Text = member.TownCity;
+                Objects.County.Text = member.County;
+                Objects.PostCode.Text = member.Postcode;
+                Objects.JoinDate.Text = DataFormatter.GetDate(member.JoinDate);
                 // Get the member's loaned and reserved books
                 if (_memberData.Circulations.Count > 0)
                 {
@@ -109,9 +111,10 @@ namespace NEALibrarySystem
                             circulationCopy.Type.Value.ToString(),
                             DataFormatter.GetDate(circulationCopy.Date.Value)
                         };
-                        _objects.Circulations.Items.Add(new ListViewItem(data));
+                        Objects.Circulations.Items.Add(new ListViewItem(data));
                     }
-                    ListViewHandler.ResizeColumnHeaders(ref _objects.Circulations);
+                    ListViewHandler.ResizeColumnHeaders(ref Objects.Circulations);
+                    ListViewHandler.ColourListViewNormal(ref Objects.Circulations);
                 }
 
                 // get total late fees
@@ -119,7 +122,7 @@ namespace NEALibrarySystem
                 if (_circulationList.Count > 0)
                     foreach (CirculationCopy copy in _circulationList)
                     total += CirculationCopy.GetLateFees(copy.DueDate.Value);
-                _objects.LateFees.Text = DataFormatter.DoubleToPrice(total);
+                Objects.LateFees.Text = DataFormatter.DoubleToPrice(total);
             }
         }
         /// <summary>
@@ -129,19 +132,19 @@ namespace NEALibrarySystem
         {
             // Gets member inputs
             MemberCreator memberCreator = new MemberCreator();
-            memberCreator.Barcode = _objects.Barcode.Text;
-            memberCreator.FirstName = _objects.FirstName.Text;
-            memberCreator.Surname = _objects.Surname.Text;
-            memberCreator.DateOfBirth = _objects.DateOfBirth.Value;
-            memberCreator.Type = _objects.MemberType.Text;
-            memberCreator.LinkedMembers = DataFormatter.SplitString(_objects.LinkedMembers.Text, ", ");
-            memberCreator.EmailAddress = _objects.EmailAddress.Text;
-            memberCreator.PhoneNumber = _objects.PhoneNumber.Text;
-            memberCreator.Address1 = _objects.Address1.Text;
-            memberCreator.Address2 = _objects.Address2.Text;
-            memberCreator.TownCity = _objects.TownCity.Text;
-            memberCreator.County = _objects.County.Text;
-            memberCreator.Postcode = _objects.PostCode.Text;
+            memberCreator.Barcode = Objects.Barcode.Text;
+            memberCreator.FirstName = Objects.FirstName.Text;
+            memberCreator.Surname = Objects.Surname.Text;
+            memberCreator.DateOfBirth = Objects.DateOfBirth.Value;
+            memberCreator.Type = Objects.MemberType.Text;
+            memberCreator.LinkedMembers = DataFormatter.SplitString(Objects.LinkedMembers.Text, ", ");
+            memberCreator.EmailAddress = Objects.EmailAddress.Text;
+            memberCreator.PhoneNumber = Objects.PhoneNumber.Text;
+            memberCreator.Address1 = Objects.Address1.Text;
+            memberCreator.Address2 = Objects.Address2.Text;
+            memberCreator.TownCity = Objects.TownCity.Text;
+            memberCreator.County = Objects.County.Text;
+            memberCreator.Postcode = Objects.PostCode.Text;
             if (memberCreator.Validate(out List<string> errors, _memberData)) // check in inputes are valid
             {
                 if (_memberData == null) // if creating a new record, add the new record to the list of members
