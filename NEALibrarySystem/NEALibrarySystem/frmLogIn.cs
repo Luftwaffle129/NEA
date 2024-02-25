@@ -12,21 +12,23 @@ namespace NEALibrarySystem
         FrmMainSystem frmMainSystem;
 
         // password recovery
-        frmForgottenPassword frmForgottenPassword;
-        frmResetPassword frmResetPassword;
+        public frmForgottenPassword frmForgottenPassword;
+        public frmResetPassword frmResetPassword;
         public Staff ForgottenPasswordStaff;
 
-        DateTime previousAttempt = DateTime.MinValue;
+        private DateTime _previousAttempt = DateTime.MinValue;
         public frmLogIn()
         {
             InitializeComponent();
             Main = this;
             FileHandler.HandleStartUp();
+
+            //EmailHandler.Send("keontrinh1515@gmail.com", "Your book loan is overdue", $"Your loan for the book \"The Great Gatsby Part Two\" is overdue. A daily late fee of £0.05 will incur until the book is returned");
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (DateTime.Now - previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN)) // if the cooldown period between log in attempts is over
+            if (DateTime.Now - _previousAttempt > TimeSpan.FromSeconds(ATTEMPTCOOLDOWN)) // if the cooldown period between log in attempts is over
             {
                 int staffIndex = IsValidCredentials();
                 if (staffIndex != -1 )

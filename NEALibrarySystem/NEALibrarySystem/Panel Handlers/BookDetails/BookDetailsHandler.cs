@@ -78,7 +78,7 @@ namespace NEALibrarySystem.PanelHandlers
             frmAddBookCopies.ShowDialog();
             if (frmAddBookCopies.DialogResult == DialogResult.OK)
             {
-                foreach(string barcode in frmAddBookCopies.barcodes)
+                foreach(string barcode in frmAddBookCopies.Barcodes)
                 {
                     _bookCopyList.Add(new TempBookCopy(barcode));
                 }

@@ -1,19 +1,12 @@
 ﻿using NEALibrarySystem.Data_Structures;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NEALibrarySystem
 {
     public partial class frmResetPassword : Form
     {
-        Staff _staff; // staff record which is having its password changed
+        private Staff _staff; // staff record which is having its password changed
         public frmResetPassword(Staff staff)
         {
             InitializeComponent();

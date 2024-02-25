@@ -793,7 +793,7 @@ namespace NEALibrarySystem.Data_Structures
                 {
                     string subject = copy.Type.Value == CirculationType.Loaned ? "Your book loan is overdue" : "Your reservation has expired";
                     string content = copy.Type.Value == CirculationType.Loaned ?
-                        $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is overdue. A late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
+                        $"Your loan for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" is overdue. A daily late fee of £{Settings.LateFeePerDay} will incur until the book is returned"
                         : $"Your reservation for the book \"{copy.BookCopy.Book.Title.Value} {copy.BookCopy.Book.SeriesTitle.Value}\" has expired";
                     EmailHandler.Send(copy.Member.EmailAddress, subject, content);
                     copy.EmailSent = true;

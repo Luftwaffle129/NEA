@@ -11,13 +11,13 @@ namespace NEALibrarySystem
         {
             InitializeComponent();
         }
-        public string[] barcodes;
+        public string[] Barcodes;
         /// <summary>
         /// Returns the list of barcodes and and closes the form
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            barcodes = DataFormatter.SplitString(txtBarcodes.Text, "\r\n").ToArray();
+            Barcodes = DataFormatter.SplitString(txtBarcodes.Text, "\r\n").ToArray();
             if (ValidBookCopyBarcodes())
             {
                 this.DialogResult = DialogResult.OK;
@@ -40,15 +40,15 @@ namespace NEALibrarySystem
         /// <returns>Boolean result of whether the barcodes are valid</returns>
         private bool ValidBookCopyBarcodes()
         {
-            if (barcodes.Length > 0)
+            if (Barcodes.Length > 0)
             {
-                for (int i = 0; i < barcodes.Length; i++)
+                for (int i = 0; i < Barcodes.Length; i++)
                 {
                     // check if barcode is the correct length and contains the correct characters
-                    if (!(barcodes[i].Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(barcodes[i], @"^[0-9]*$")))
+                    if (!(Barcodes[i].Length == Settings.BookCopyBarcodeLength && Regex.IsMatch(Barcodes[i], @"^[0-9]*$")))
                         return false;
                     // check that barcode is not already used
-                    if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, barcodes[i], SearchAndSort.RefClassAndString) != -1)
+                    if (SearchAndSort.Binary(DataLibrary.BookCopyBarcodes, Barcodes[i], SearchAndSort.RefClassAndString) != -1)
                         return false;
                 }
                 return true;
