@@ -271,12 +271,15 @@ namespace NEALibrarySystem.Data_Structures
                     // extract backup data to data directory
                     ZipFile.ExtractToDirectory(fileName, FilePath);
                     // if staff file exists in the loaded back up, replace it with the current staff file
-                    if (File.Exists(FilePath + "Staff.bin") && File.Exists(tempFilePath + "Staff.bin"))
-                    aDMIN
-                        File.Delete(FilePath + "Staff.bin");
+                    if (File.Exists(tempFilePath + "Staff.bin"))
+                    {
+                        if (File.Exists(FilePath + "Staff.bin"))
+                        {
+                            File.Delete(FilePath + "Staff.bin");
+                        }
                         // copy old staff file into backup data
                         File.Copy(tempFilePath + "Staff.bin", FilePath + "Staff.bin");
-                    } 
+                    }
 
                     // attempts to load all data
                     if (Load.All()) // if data loads successfully
