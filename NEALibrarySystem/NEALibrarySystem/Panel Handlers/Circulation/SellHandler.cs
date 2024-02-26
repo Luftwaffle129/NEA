@@ -11,7 +11,7 @@ namespace NEALibrarySystem
     {
         // Objects of the sell panel
         public CirculationObjectHandler CirculationManager;
-        public TextBox _totalPrice;
+        private TextBox _totalPrice;
         public SellHandler(CirculationObjectHandler circulationObjectHandler, TextBox totalPrice)
         {
             CirculationManager = circulationObjectHandler;

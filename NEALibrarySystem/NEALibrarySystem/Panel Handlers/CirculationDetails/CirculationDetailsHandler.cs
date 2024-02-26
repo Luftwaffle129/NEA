@@ -12,8 +12,8 @@ namespace NEALibrarySystem.Panel_Handlers.CirculationDetails
     public class CirculationDetailsHandler
     {
         // objects of the circulation details panel
-        public CirculationDetailsObjects _objects;
-        public CirculationCopy _circCopy; // record being modified
+        private CirculationDetailsObjects _objects;
+        private CirculationCopy _circCopy; // record being modified
         public CirculationDetailsHandler(CirculationDetailsObjects objects)
         {
             _objects = objects;

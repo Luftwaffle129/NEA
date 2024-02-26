@@ -16,7 +16,7 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
     public class SettingsHandler
     {
         private SettingsObjects _objects;
-        private SettingsCreator settingsCreator = new SettingsCreator();
+        private SettingsCreator _settingsCreator = new SettingsCreator();
         private int _circulationType;       // index of the circulation type due date being edited in the settings panel
         private int _circulationMemberType; // index of the member type due date being edited in the settings panel
         public SettingsHandler(SettingsObjects objects) 
@@ -39,14 +39,14 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
         /// </summary>
         public void Load()
         {
-            settingsCreator.GetCurrentSettings();
-            _objects.BarcodeBookCopy.Value = settingsCreator.BookCopyBarcodeLength;
-            _objects.BarcodeMember.Value = settingsCreator.MemberBarcodeLength;
+            _settingsCreator.GetCurrentSettings();
+            _objects.BarcodeBookCopy.Value = _settingsCreator.BookCopyBarcodeLength;
+            _objects.BarcodeMember.Value = _settingsCreator.MemberBarcodeLength;
             _circulationType = 0;
             _circulationMemberType = 0;
             _objects.CirculationCirculationType.Text = "Loans";
             _objects.CirculationMemberType.Text = MemberType.Adult.ToString();
-            _objects.CirculationLateFee.Value = Convert.ToDecimal(settingsCreator.LateFeePerDay);
+            _objects.CirculationLateFee.Value = Convert.ToDecimal(_settingsCreator.LateFeePerDay);
         }
         /// <summary>
         /// Updates which circulation type due date is being edited
@@ -75,7 +75,7 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
         {
             try // try catch to stop errors on loading the panel
             {
-                _objects.CirculationTimeLength.Value = settingsCreator.Durations[_circulationType, _circulationMemberType];
+                _objects.CirculationTimeLength.Value = _settingsCreator.Durations[_circulationType, _circulationMemberType];
             }
             catch { }
         }
@@ -84,17 +84,17 @@ namespace NEALibrarySystem.Panel_Handlers.Settings
         /// </summary>
         public void SetCirculationTimePeriod()
         {
-            settingsCreator.Durations[_circulationType, _circulationMemberType] = Convert.ToInt32(_objects.CirculationTimeLength.Value);
+            _settingsCreator.Durations[_circulationType, _circulationMemberType] = Convert.ToInt32(_objects.CirculationTimeLength.Value);
         }
         /// <summary>
         /// Saves the inputted settings data
         /// </summary>
         public void Save()
         {
-            settingsCreator.BookCopyBarcodeLength = Convert.ToInt32(_objects.BarcodeBookCopy.Value);
-            settingsCreator.MemberBarcodeLength = Convert.ToInt32(_objects.BarcodeMember.Value);
-            settingsCreator.LateFeePerDay = Convert.ToDouble(_objects.CirculationLateFee.Value);
-            settingsCreator.SetStoredSettings();
+            _settingsCreator.BookCopyBarcodeLength = Convert.ToInt32(_objects.BarcodeBookCopy.Value);
+            _settingsCreator.MemberBarcodeLength = Convert.ToInt32(_objects.BarcodeMember.Value);
+            _settingsCreator.LateFeePerDay = Convert.ToDouble(_objects.CirculationLateFee.Value);
+            _settingsCreator.SetStoredSettings();
         }
     }
 }
