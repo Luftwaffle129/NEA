@@ -16,8 +16,8 @@ namespace NEALibrarySystem
     /// </summary>
     public static class EmailHandler
     {
-        static string[] Scopes = { GmailService.Scope.GmailSend };
-        static string ApplicationName = "NEALibrarySystem";
+        private static string[] _scopes = { GmailService.Scope.GmailSend };
+        private static string _applicationName = "NEALibrarySystem";
 
         static string Base64UrlEncode(string input)
         {
@@ -44,12 +44,12 @@ namespace NEALibrarySystem
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                     path = Path.Combine(path, ".credentials/gmail-dotnet-quickstart.json");
-                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, _scopes, "user", CancellationToken.None, new FileDataStore(path, true)).Result;
                 }
 
                 string message = $"To: {receiver}\r\nSubject: {subject}\r\nContent-Type: text/html;charset=utf-8\r\n\r\n<h1>{content}</h1>";
                 //call your gmail service
-                var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = ApplicationName });
+                var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = _applicationName });
                 var msg = new Google.Apis.Gmail.v1.Data.Message();
                 msg.Raw = Base64UrlEncode(message.ToString());
                 service.Users.Messages.Send(msg, "me").Execute();

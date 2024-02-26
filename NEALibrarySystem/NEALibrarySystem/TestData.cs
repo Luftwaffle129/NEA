@@ -1,9 +1,7 @@
-﻿using Microsoft.Win32;
-using NEALibrarySystem.Data_Structures.RecordCreators;
+﻿using NEALibrarySystem.Data_Structures.RecordCreators;
 using NEALibrarySystem.Data_Structures.Records;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace NEALibrarySystem.Data_Structures
 {
@@ -15,7 +13,7 @@ namespace NEALibrarySystem.Data_Structures
         private const int BOOKNUM = 10;
         private const int MEMBERNUM = 10;
 
-        private Random rand = new Random();
+        private Random rand = new Random(); // class for randomly generating numbers
         // realistic test data for creating records
         private string[] _firstNames =
         {
