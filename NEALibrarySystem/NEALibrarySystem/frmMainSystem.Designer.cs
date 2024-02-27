@@ -2866,6 +2866,7 @@
             this.txtReserveEnterBarcode.Name = "txtReserveEnterBarcode";
             this.txtReserveEnterBarcode.Size = new System.Drawing.Size(1241, 38);
             this.txtReserveEnterBarcode.TabIndex = 1;
+            this.txtReserveEnterBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtReserveEnterBarcode_PreviewKeyDown);
             // 
             // txtReserveOverdue
             // 
@@ -3234,9 +3235,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlLoan);
             this.Controls.Add(this.pnlSell);
-            this.Controls.Add(this.pnlReserve);
             this.Controls.Add(this.pnlReturn);
             this.Controls.Add(this.pnlMemberDetails);
             this.Controls.Add(this.pnlBookDetails);

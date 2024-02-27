@@ -197,7 +197,7 @@ namespace NEALibrarySystem
                 txtReturnLateFees,
                 txtReturnEnterBarcode,
                 lsvReturnSelectedBooks,
-                true
+                false
             );
             _returnHandler = new ReturnHandler(circulationObjectHandler);
         }
@@ -388,6 +388,7 @@ namespace NEALibrarySystem
             };
             NavigatorSetupSubTabs(tabs);
             ColorMainTabs();
+            ColorSubTabsToUnselected();
             NavigatorCloseAllPanels();
             pnlLoan.Visible = true;
 
@@ -1074,6 +1075,7 @@ namespace NEALibrarySystem
             DataLibrary.SendOverdueEmails();
         }
         #endregion
+
         #endregion
     }
 }

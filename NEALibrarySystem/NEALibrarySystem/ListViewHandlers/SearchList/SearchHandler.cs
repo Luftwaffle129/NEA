@@ -746,7 +746,7 @@ namespace NEALibrarySystem.SearchList
                                          * Sort the list
                                          * Apply the filter to get the new filtered list of records
                                          */
-                                        if (searchInputs[i].Category.Text == _circulationCopyColumns[0])
+                                        if (searchInputs[i].Category.Text == _staffColumns[0])
                                         {
 
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
@@ -755,7 +755,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
                                             staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
+                                        else if (searchInputs[i].Category.Text == _staffColumns[1])
                                         {
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
                                             foreach (Staff staff in staffList)
@@ -763,7 +763,7 @@ namespace NEALibrarySystem.SearchList
                                             referenceClasses = SearchAndSort.QuickSort<ReferenceClass<string, Staff>, ReferenceClass<string, Staff>>(referenceClasses, SearchAndSort.TwoUpperRefClassStaff);
                                             staffList = ApplyFilter(referenceClasses, searchInputs[i].SearchTerm.Text, SearchAndSort.UpperRefClassStartsWithString);
                                         }
-                                        else if (searchInputs[i].Category.Text == _circulationCopyColumns[1])
+                                        else if (searchInputs[i].Category.Text == _staffColumns[2])
                                         {
                                             List<ReferenceClass<string, Staff>> referenceClasses = new List<ReferenceClass<string, Staff>>();
                                             foreach (Staff staff in staffList)

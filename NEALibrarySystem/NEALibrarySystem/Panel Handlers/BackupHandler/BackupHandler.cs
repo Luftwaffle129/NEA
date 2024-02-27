@@ -38,6 +38,7 @@ namespace NEALibrarySystem.Panel_Handlers.BackupHandler
                 if (FileHandler.Backup.Save())
                 {
                     MessageBox.Show("Back up created");
+                    Data_Structures.Settings.LastBackup = DateTime.Now;
                     Load(); // reset date of last back up created
                 }
                 else
