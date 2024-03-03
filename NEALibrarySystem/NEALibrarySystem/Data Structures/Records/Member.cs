@@ -63,7 +63,7 @@ namespace NEALibrarySystem.Data_Structures
             Type = DataLibrary.MemberTypes[index];
             if (memberInfo.LinkedMembers.Count > 0)
                 foreach (string memberLink in memberInfo.LinkedMembers)
-                    LinkedMembers.Add(DataLibrary.MemberBarcodes[SearchAndSort.Binary(DataLibrary.MemberBarcodes, memberLink, SearchAndSort.RefClassAndString)].Reference);
+                    AddMemberLink(memberLink);
         }
         /// <summary>
         /// Adds a member link to _linkedMembers attribute if it does not already exist in the list

@@ -34,13 +34,13 @@ namespace NEALibrarySystem
             {
                 btnSettings.Visible = false;
                 btnBackups.Visible = false;
-                btnStaffSave.Visible = false;
+                btnStaff.Visible = false;
             }
             else
             {
                 btnSettings.Visible = true;
                 btnBackups.Visible = true;
-                btnStaffSave.Visible = true;
+                btnStaff.Visible = true;
             }
             WindowState = FormWindowState.Maximized;
         }
@@ -702,7 +702,7 @@ namespace NEALibrarySystem
         }
         private void pctIcon_Click(object sender, EventArgs e)
         {
-            _testData.GenerateTestData();
+            // _testData.GenerateTestData();
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
